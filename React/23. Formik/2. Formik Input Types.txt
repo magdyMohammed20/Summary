@@ -1,0 +1,40 @@
+(1) Specify Input Type
+-----------------------
+
+==> Email
+----------
+	<Field name='name' type='email'/>
+
+==> Select ['component' Here Used Instead Of 'type']
+----------
+
+	<Field name='sel' component='select'>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+        </Field>
+
+==> CheckBox
+------------
+
+	<Field type='checkbox' name='active'/>
+
+
+
+
+==> Radio
+----------
+
+	<Field type='radio' name='rad' value='1'/>
+        <Field type='radio' name='rad' value='2'/>
+        <Field type='radio' name='rad' value='3'/>
+
+
+
+
+////////////////// Notes ///////////////////////////
+'email' , 'select' , 'active' , 'rad' Above Is Come From 'initialValues'
+ Attribute That Setted Inside 'Formik' Element And Have '' As Initial Value
+But 'active' Has [true Or False] As Initial Value
+////////////////// Notes //////////////////////////

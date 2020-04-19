@@ -1,0 +1,1 @@
+Import Style File By Using [import './magdy.css']

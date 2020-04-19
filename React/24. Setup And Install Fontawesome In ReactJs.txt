@@ -1,0 +1,17 @@
+(1) Install Fontawesome By Write [npm install --save font-awesome] In CMD
+
+(2) Import Fontawesome Css File In [index.js] 
+-----------------------------------------------
+
+	import 'font-awesome/css/font-awesome.min.css';
+
+	Or
+
+	import '../node_modules/font-awesome/css/font-awesome.min.css'; 
+
+
+
+(3) Now I Can Use The Fontawesome Icons
+-----------------------------------------
+
+	<i className="fa fa-spinner fa-spin">no spinner but why</i>

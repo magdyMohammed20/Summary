@@ -1,0 +1,37 @@
+(1) export
+--------------
+==> You Can Write [export] More Than 1 Time In The File
+
+==> First Way
+-------------
+	magdy.js
+	---------
+	export const x = 10
+
+	// Call x In Another File
+	import {x} from 'magdy.js'
+
+
+==> Second Way
+---------------
+
+	magdy.js
+	---------
+	export const x = 10
+
+	// Call x In Another File With Another Name
+	import {x as xyz} from 'magdy.js'
+
+
+
+
+(2) export default
+---------------------
+==> Is Written In The File Only 1 Time
+
+	magdy.js
+	---------
+	export default const x = 10
+
+	// Call x In Another File
+	import x from 'magdy.js'

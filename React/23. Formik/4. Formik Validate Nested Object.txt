@@ -1,0 +1,62 @@
+import React, { Component } from 'react';
+import {Formik , Field , ErrorMessage} from 'formik' // ErrorMessage Imported Form Display Validation Output
+import * as Yup from 'yup'
+
+class Blog extends Component {
+    state = {
+        values:[]
+    }
+    submit = (values) =>{
+        this.setState({
+            values
+        })
+
+    }
+
+    form = props =>{
+        return (
+            <form onSubmit={props.handleSubmit}>
+                <Field name='social.facebook'/>
+                <span style={{color: 'red'}}>
+                    <ErrorMessage name='social.facebook'/>
+                </span>
+
+                <Field name='social.yahoo'/>
+                <span style={{color: 'red'}}>
+                    <ErrorMessage name='social.yahoo'/>
+                </span>
+
+                <button type='submit'>Submit</button>
+            </form>
+        )
+        
+    }
+
+    schema = () =>{
+        const schema1 = Yup.object().shape({
+
+            // For Validate The Nested Object Fields
+            social:Yup.object().shape({
+                facebook: Yup.string().required('Sorry Facebook Is Required'), // For Customize Error Message You Can Write The Message Inside required()
+                yahoo: Yup.string().required('Sorry Yahoo Is Required') // For Customize Error Message You Can Write The Message Inside required()
+            })
+        })
+
+        return schema1
+    }
+
+    render() {
+        return (
+            <div>
+                <Formik 
+                    initialValues = {{social:{facebook:'' , yahoo:''}}} 
+                    onSubmit = {this.submit} 
+                    render = {this.form}
+                    validationSchema= {this.schema}
+                />
+            </div>
+        );
+    }
+}
+
+export default Blog;

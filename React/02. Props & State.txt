@@ -1,0 +1,15 @@
+(1) Props
+------------
+==> Stands For [Properties]
+==> Like Html Attribute [name='Value']
+==> Passed From Parent Component To Child Component
+==> Is Immutable [Can't Change It's Value]
+==> Similar To Function Parameter
+
+(2) State
+-----------
+==> Js Object That Holds Data About Component
+==> Is Mutable And Can Change It's Value By Using setState() Function
+==> Similar To Variables That Declared Within The Function
+==> Is Private Only For Current Component
+

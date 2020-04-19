@@ -1,0 +1,8 @@
+(1) Write [npm i bootstrap] In CMD
+
+(2) Import Bootstrap Css File In [App.js] File
+-----------------------------------------------
+
+	import 'bootstrap/dist/css/bootstrap.min.css';
+
+
