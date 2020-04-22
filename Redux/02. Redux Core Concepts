@@ -1,7 +1,7 @@
 (1) The Three Core Concepts Of Redux
 -----------------------------------
 => Store: Is Object That Holds State Of Application
-=> Action: Is Object That Describes What Happened
+=> Action: Is Object That Describes What Happened And Should Contains Type Property
 => Reducer: Is Function That Connect Store With Action
             And Takes 2 Parameters [Current State , Action]
             And Based On Action Type Will Return New State Object
