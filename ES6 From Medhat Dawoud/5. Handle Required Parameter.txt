@@ -1,0 +1,11 @@
+// Handle Required Parameters 
+function isRequired(param){
+    throw param + ' Is Required'
+}
+
+function print(name=isRequired('name')){
+    return name
+}
+
+console.log(print('Magdy')) 
+console.log(print()) // name Is Required
