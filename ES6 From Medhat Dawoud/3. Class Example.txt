@@ -1,0 +1,29 @@
+class parent{
+    constructor(){
+        this.car = 'Tesla'
+    }
+}
+
+class magdy extends parent{
+    constructor(){
+        super() // For Extend The 'parent' Constructor
+    }
+
+    getName(){
+        console.log(this.car)
+    }
+
+    set setCar (carType) {
+        this.car = carType
+    }
+
+    get getCar(){
+        return 'My Car Type Is ' + this.car
+    }
+}
+
+const p = new magdy()
+
+p.getName() // Tesla
+p.setCar = 'Toyota'
+console.log(p.getCar) // My Car Type Is Toyota
