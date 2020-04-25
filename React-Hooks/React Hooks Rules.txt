@@ -1,0 +1,5 @@
+(1) Only Call Hooks At The Top Level Of The Functional Component
+
+(2) Don't Call Hooks Inside Loops , Conditions Or Nested Functions
+
+(3) Only Call Hooks From React Functions Not Js Functions
