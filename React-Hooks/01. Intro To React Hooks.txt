@@ -1,0 +1,17 @@
+(1) What Is Hooks
+------------------
+==> New Feature Addition In React v16.8 Which Allow You To Use React Features Without Having To Write A Class
+    [EX: Write State Component Without Have To Create Class Component]
+
+(2) React Hooks Doesn't Work Inside Classes But Your Application Can Contains Classes And Functional 	     	 Components With Hooks
+
+
+(3) Why React Hooks
+----------------------
+==> In Class You Have To Understand How 'this' Keyword Work And 'this' In Js Is Different From Any Other Language
+==> Remember To Bind Event Handlers In Class Components
+==> Class Don't Minify Very Well And Make Hot Reloading Very Unreliable
+==> There Is No Way To Reuse Stateful Component Logic
+==> in Class Component The Related Code Isn't Orgnized In One Place
+    [EX: When Fetch The Data You Set The Code In componentDidMount And componentDidUpdate]
+==> Beacuse Of Class Stateful Logic Can't Break Components Into Smaller Ones 
