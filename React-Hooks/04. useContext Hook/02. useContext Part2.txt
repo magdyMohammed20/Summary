@@ -1,0 +1,115 @@
+(1) Passing Data From 'App.js' To 'CompA.js' (Single Data Passing)
+-------------------------------------------------------------------
+
+	App.js
+	--------
+
+	import React,{createContext} from 'react';
+	import CompA from './Components/CompA'
+
+	// Create The Context And Export It
+	export const userContext = createContext()
+
+	function App() {
+
+	  return (
+	    <div className="App">
+
+	      {/*Use Provider Of The Context And Pass Value To Component A*/}
+	      <userContext.Provider value={'Magdy Mohammed'}>
+		<CompA/>
+	      </userContext.Provider>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+	CompA.js
+	---------
+
+	import React from 'react';
+	import {userContext} from '../App' // Import userContext from 'App'
+
+	const CompA = () => {
+	    return (
+		<div>
+		    {/* Use Consumer For Access The Passed Value From App.js */}
+		    <userContext.Consumer>
+		    {
+		        userA => {
+		        return <div>Hellow My Name Is {userA}</div>
+		        }
+		    }
+		    </userContext.Consumer>
+		</div>
+	    );
+	};
+
+	export default CompA;
+
+
+(2) Passing Data From 'App.js' To 'CompA.js' (Multiple Data Passing)
+--------------------------------------------------------------------
+
+	App.js
+	---------
+
+	import React,{createContext} from 'react';
+	import CompA from './Components/CompA'
+
+	// Create The Context And Export It
+	export const userContext = createContext()
+	export const ageContext = createContext()
+
+	function App() {
+
+	  return (
+	    <div className="App">
+
+	      {/*Use Provider Of The Context And Pass Value To Component A*/}
+	      <userContext.Provider value={'Magdy Mohammed'}>
+		<ageContext.Provider value={20}>
+		  <CompA/>
+		</ageContext.Provider>
+	      </userContext.Provider>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+
+	CompA.js
+	---------
+
+	import React from 'react';
+	import {userContext,ageContext} from '../App' // Import userContext from 'App'
+
+	const CompA = () => {
+	    return (
+		<div>
+		    {/* Use Consumer For Access The Passed Value From App.js */}
+		    <userContext.Consumer>
+		    {
+		        userA => {
+		        return (
+		            <ageContext.Consumer>
+		                {
+		                    age => {
+		                        return <div>Hellow My Name Is {userA} And Age Is {age}</div>
+		                    }
+		                }
+		            </ageContext.Consumer>
+		        )
+		        }
+		    }
+		    </userContext.Consumer>
+		</div>
+	    );
+	};
+
+	export default CompA;
+
