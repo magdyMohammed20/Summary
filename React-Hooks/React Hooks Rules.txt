@@ -15,3 +15,5 @@
 
 ==> setState: Can Accept Primptive Value Or Object Or Array And When Change The State It Will Replace The New Changes With Old State 
 
+
+(7) You Can Write 'useEffect' Hook Method More Than 1 Time For Organize The Code
