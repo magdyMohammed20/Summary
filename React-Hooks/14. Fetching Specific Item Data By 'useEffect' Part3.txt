@@ -1,0 +1,35 @@
+import React,{useState,useEffect} from 'react';
+import axios from 'axios'
+
+const Fetch = () => {
+    // Fetch Specific Item Data When Click On Button
+    const [posts,setPosts] = useState([]) // The Selected Post
+    const [id , setPostId] = useState(1) // The Selected Post Id
+    const [buttonId , setButtonId] = useState(id)
+
+    useEffect(()=>{
+        axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(response=> setPosts(response.data) )
+    },[buttonId]) // Fetching Data Depends On Value Of Id When Clicking On The Button
+
+    const handleClick = () =>{
+        setButtonId(id)
+    }
+
+    return (
+
+        <div>
+            <input type='text' value={id} onChange={e=>setPostId(e.target.value)}/>
+            <button onClick={()=>handleClick()}>Change</button>
+            <div>
+                <h1>{posts.title}</h1>
+                <p>{posts.body}</p>
+            </div>
+
+        </div>
+
+
+    );
+};
+
+export default Fetch;
