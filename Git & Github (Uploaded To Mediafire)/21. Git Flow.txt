@@ -5,7 +5,7 @@
 ==> Click Enter Untill Finish
 ==> git branch // You Will Note That Is New Branch Created Called 'develop'
 
-(2) Create Feature Branch From 'develop' Branch
+(2) How To Use Step By Step
 ------------------------------------------------
 ==> git flow feature start Feature_Name [EX: git flow feature staet add-styles]
 ==> After Creating 'add-styles' Branch You Will Note That a New Branch Called 'feature/add-styles' Created And Be Active And You Can Change 'feature' Word With Another Word
