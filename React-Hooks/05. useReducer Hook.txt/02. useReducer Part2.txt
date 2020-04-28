@@ -1,38 +1,81 @@
-import React , {useReducer} from 'react'; // Import 'useReducer'
+(1) First Example Of 'useReducer'
+------------------------------------
+
+	import React , {useReducer} from 'react'; // Import 'useReducer'
 
 
-const initialState = 0 // Create Initial State
+	const initialState = 0 // Create Initial State
 
-// Create Reducer Function That Takes 2 Args , Current State And Action
-const reducer = (state , action) =>{
-    switch(action){
-        case 'increment':
-            return state + 1
+	// Create Reducer Function That Takes 2 Args , Current State And Action
+	const reducer = (state , action) =>{
+	    switch(action){
+		case 'increment':
+		    return state + 1
 
-        case 'decrement':
-            return state - 1
+		case 'decrement':
+		    return state - 1
 
-        case 'reset':
-            return state - state
+		case 'reset':
+		    return state - state
 
-        default: return state
-    }
-}
+		default: return state
+	    }
+	}
 
-const CompA = () => {
-    // Create 'userReducer' Hook That Takes 2 Args , Reducer And Initial State
-    // And Returns The New State And Dispatch Action
-    const [count , dispatch] = useReducer(reducer , initialState)
+	const CompA = () => {
+	    // Create 'userReducer' Hook That Takes 2 Args , Reducer And Initial State
+	    // And Returns The New State And Dispatch Action
+	    const [count , dispatch] = useReducer(reducer , initialState)
 
-    return (
-        <div>
-            {/* Display New State And Dispatch The Created Actions */}
-            Counter: {count}
-            <button onClick={()=> dispatch('increment')}>+</button>
-            <button onClick={()=> dispatch('decrement')}>-</button>
-            <button onClick={()=> dispatch('reset')}>[]</button>
-        </div>
-    );
-};
+	    return (
+		<div>
+		    {/* Display New State And Dispatch The Created Actions */}
+		    Counter: {count}
+		    <button onClick={()=> dispatch('increment')}>+</button>
+		    <button onClick={()=> dispatch('decrement')}>-</button>
+		    <button onClick={()=> dispatch('reset')}>[]</button>
+		</div>
+	    );
+	};
 
-export default CompA;
+	export default CompA;
+
+
+
+(2) Second Example Of 'useReducer'
+------------------------------------
+
+
+	import React , {useReducer} from 'react';
+
+	const intialState = {counter: 0}
+
+	const reducer = (state , action) => {
+	    switch(action){
+		case 'increment':
+		    return {counter: state.counter + 1}
+		    
+		case 'decrement':
+		    return {counter: state.counter - 1}
+
+		case 'reset':
+		    return {counter: 0}
+
+		default: return {counter: state.counter }
+	    }
+	}
+	const CompA = () => {
+
+	    const [newState , dispatch] = useReducer(reducer , intialState)
+	    return (
+		<div>
+		    {newState.counter}
+		    <button onClick={()=> dispatch('increment')}>+</button>
+		    <button onClick={()=> dispatch('decrement')}>-</button>
+		    <button onClick={()=> dispatch('reset')}>0</button>
+		</div>
+	    );
+	};
+
+	export default CompA;
+
