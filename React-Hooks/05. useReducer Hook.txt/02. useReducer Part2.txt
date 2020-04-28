@@ -1,4 +1,4 @@
-(1) First Example Of 'useReducer'
+(1) First Example Of 'useReducer' (Use The State As Variable)
 ------------------------------------
 
 	import React , {useReducer} from 'react'; // Import 'useReducer'
@@ -42,7 +42,7 @@
 
 
 
-(2) Second Example Of 'useReducer'
+(2) Second Example Of 'useReducer' (Use The State As Object)
 ------------------------------------
 
 
@@ -80,7 +80,7 @@
 	export default CompA;
 
 
-(3) Third Example Of 'usereducer'
+(3) Third Example Of 'usereducer' (Passing Value To Action)
 ---------------------------------
 
 	import React , {useReducer} from 'react';
@@ -121,7 +121,7 @@
 
 
 
-(4) Fourth Example Of 'useReducer'
+(4) Fourth Example Of 'useReducer' (Saving The Another State Variables)
 -------------------------------------
 
 	import React , {useReducer} from 'react';
@@ -160,3 +160,63 @@
 	};
 
 	export default CompA;
+
+
+
+(5) Fifth Example Of 'useReducer' (Multi State Variables)
+----------------------------------
+
+	import React , {useReducer} from 'react';
+
+	const intialState = {counter1: 0 , counter2: 0}
+
+	// Use Spread Operator For Save 'Counter2' When 'Counter1' Changed
+	const reducer = (state , action) => {
+	    switch(action.type){
+		// For Counter1
+		case 'increment':
+		    return {...state , counter1: state.counter1 + action.value}
+		    
+		// For Counter1
+		case 'decrement':
+		    return {...state , counter1: state.counter1 - action.value}
+
+		// For Counter2
+		case 'increment2':
+		    return {...state , counter2: state.counter2 + action.value}
+		    
+		case 'decrement2':
+		    return {...state , counter2: state.counter2 - action.value}
+
+		case 'reset':
+		    return {counter1: 0 , counter2: 0}
+
+		default: return state
+	    }
+	}
+	const CompA = () => {
+
+	    const [newState , dispatch] = useReducer(reducer , intialState)
+	    return (
+		<div>
+		    Counter1: {newState.counter1}<br/>
+		    Counter2: {newState.counter2} <br/>
+
+		    {/* For Counter1 */}
+		    <button onClick={()=> dispatch({type: 'increment' , value: 1})}>Counter1 + 1</button>
+		    <button onClick={()=> dispatch({type: 'decrement' , value: 1})}>Counter1 - 1</button>
+		    <button onClick={()=> dispatch({type: 'increment' , value: 5})}>Counter1 + 5</button>
+		    <button onClick={()=> dispatch({type: 'decrement' , value: 5})}>Counter1 - 5</button>
+
+		    {/* For Counter2 */}
+		    <button onClick={()=> dispatch({type: 'increment2' , value: 1})}>Counter2 + 1</button>
+		    <button onClick={()=> dispatch({type: 'decrement2' , value: 1})}>Counter2 - 1</button>
+		    <button onClick={()=> dispatch({type: 'increment2' , value: 5})}>Counter2 + 5</button>
+		    <button onClick={()=> dispatch({type: 'decrement2' , value: 5})}>Counter2 - 5</button>
+		    <button onClick={()=> dispatch({type: 'reset'})}>0</button>
+		</div>
+	    );
+	};
+
+	export default CompA;
+
