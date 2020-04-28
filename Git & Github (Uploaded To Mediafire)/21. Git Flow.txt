@@ -1,0 +1,18 @@
+(1) Install Git Flow In Linux
+--------------------------------
+==> sudo su // For Get Permission To Do Anything
+==> git flow init
+==> Click Enter Untill Finish
+==> git branch // You Will Note That Is New Branch Created Called 'develop'
+
+(2) Create Feature Branch From 'develop' Branch
+------------------------------------------------
+==> git flow feature start Feature_Name [EX: git flow feature staet add-styles]
+==> After Creating 'add-styles' Branch You Will Note That a New Branch Called 'feature/add-styles' Created And Be Active And You Can Change 'feature' Word With Another Word
+==> Create New File In 'feature/add-styles' Branch [EX: touch style.css] Then Add It By [git add .] Then Commit By [git commit -m "Add Style File"] 
+==> Then Will Merge The 'feature/add-styles' With 'develop' By Write [git flow feature finish add-styles]
+    Note That This Command Will Merge And Delete 'add-styles' Branch
+==> Then Create Release Branch [git flow release start 0.1] And You Will Note That A New Branch Called 'release/0.1' Created And Be Active 
+==> Then Mirge 'release' Branch With 'master' Branch [git flow release finish 0.1]
+    And Now Can Push To Repo [git push]
+
