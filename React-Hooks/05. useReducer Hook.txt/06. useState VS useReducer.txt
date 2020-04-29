@@ -1,0 +1,25 @@
+(1) When To Use 'useState' And 'useReducer'
+------------------------------------------------
+
+_______________________________________________________________________________________________
+Scenario			useState                               useReducer
+_______________________________________________________________________________________________
+
+Type Of State                  Number , String , Boolean		Object , Array
+-----------------------------------------------------------------------------------------------
+Number Of State Transition     One Or Two 				Too Many
+-----------------------------------------------------------------------------------------------
+Related State Transition       No					Yes
+-----------------------------------------------------------------------------------------------
+Business Logic                 No Business Logic			Complex Business Logic
+-----------------------------------------------------------------------------------------------
+Local VS Global State	       Local					Global
+
+
+
+
+Note: [Number Of State Transition] : Is How Many Variables That Want To Change In The State
+
+Note: [Related State Transition] : in [05. useReducer And useState] When Fetch The Data With 'useReducer' There Are A Lot Of Variables Related To Transitions But 'useState' Not
+
+Note: [Business Logic] : When Updating The State 
