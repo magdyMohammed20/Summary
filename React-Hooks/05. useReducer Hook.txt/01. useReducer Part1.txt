@@ -1,6 +1,6 @@
 (1) What's useReducer
 ----------------------
-==> Is Hook That Used For State Management 
+==> Is Hook That Used For Local State Management 
 ==> Is Alternative To 'useState'
 
 
