@@ -152,6 +152,7 @@
 (4) useCallback Hook [Will Solve Problem Of Re-render Completely]
 ----------------------------
 ==> Is Hook That Returns Memoized Version Of The Callback Function That Only Changes If One Of The Dependencies Has Changed
+==> Memoization Used When There Are Function That Takes Same Input And Return Same Output So We Want To Prevent The Re-Rendering For Best Performance
 
 (5) Why useCallback
 -------------------
