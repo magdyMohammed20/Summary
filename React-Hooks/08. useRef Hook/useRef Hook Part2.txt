@@ -1,0 +1,59 @@
+(1) This Code Will Produce Error As 'interval' Variable Not Visible For Button Action
+-------------------------------------------------------------------------------------
+
+	import React, { useState, useEffect } from 'react';
+
+	const CompA = () => {
+
+	    const [timer, setTimer] = useState(0)
+
+	    useEffect(() => {
+
+		let interval = setInterval(() => {
+		    setTimer(prevTimer => prevTimer + 1)
+		}, 1000)
+
+	    }, [])
+	    return (
+		<div>
+		    <div>
+		        Counter: {timer}
+			{/* interval Not Visible For Button Action */}
+		        <button onClick={() => clearInterval(interval)}>Clear</button>
+		    </div>
+		</div>
+	    );
+	};
+
+
+
+	export default CompA;
+
+
+(2) 'useRef' Solve The Problem Of (1)
+--------------------------------------
+
+	import React, { useState, useEffect, useRef } from 'react';
+
+	const CompA = () => {
+
+	    const [timer, setTimer] = useState(0)
+	    let interval = useRef()
+	    useEffect(() => {
+
+		interval.current = setInterval(() => {
+		    setTimer(prevTimer => prevTimer + 1)
+		}, 1000)
+
+	    }, [])
+	    return (
+		<div>
+		    <div>
+		        Counter: {timer}
+		        <button onClick={() => clearInterval(interval.current)}>Clear</button>
+		    </div>
+		</div>
+	    );
+	};
+
+	export default CompA;
