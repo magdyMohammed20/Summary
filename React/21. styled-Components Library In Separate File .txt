@@ -47,3 +47,19 @@
 		<NavbarLink>
 			.....
 		</NavbarLink>
+
+
+
+// Note (If There Are 2 Elements Share Same Style)
+---------------------------------------------------
+
+	export const HomeContent = styled.div`
+	    top: 50%;
+	    left: 50%;
+	    transform: translate(-50%, -50%);
+	`
+	
+	// Here 'AboutContent' Extends 'HomeContent' Properities
+	export const AboutContent = styled(HomeContent)`
+	    color: red;
+	`
