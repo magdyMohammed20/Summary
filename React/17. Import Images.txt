@@ -10,3 +10,10 @@
 	<div>
 		<img src={firstImage}/>
 	</div>
+
+(3) Import Image From 'public' Folder In The Style Inside Any Component
+-------------------------------------------------------------------------
+
+	// Note That images Is Folder Inside 'public' Folder	
+	bacground-image: url('images/Home/home-bg.jpg');
+
