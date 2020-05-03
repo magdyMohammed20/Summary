@@ -25,6 +25,25 @@
 		.......
 	</divStyle>
 
-	
 
+// Note (If Want To Style React Router Element With styled-components Library)
+--------------------------------------------------------------------------------
 
+	styled.js
+	-----------
+
+		import styled from 'styled-components'
+		import { NavLink } from 'react-router-dom'
+
+		export const NavbarLink = styled(NavLink)`
+		    color: #FFF !important
+		`
+
+	App.js
+	-----------
+
+		import { NavbarLink } from './style'
+
+		<NavbarLink>
+			.....
+		</NavbarLink>
