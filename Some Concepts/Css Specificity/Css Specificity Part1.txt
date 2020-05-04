@@ -1,0 +1,78 @@
+(1) Normal Style Arrangement Example
+-------------------------------------
+
+	html
+	-----
+
+		<div>
+		  <h1 id='heading'>1</h1>
+		  <p>Lorem</p>
+		  <button>Click</button>
+		</div>
+
+
+	css (Here h1 Color Will Be red As Css Specificity)
+	-----
+
+	h1#heading{
+	  color: red
+	}
+
+	h1{
+	  color: green
+	}
+
+
+
+(2) Css Specificity Arrangement
+---------------------------------
+
+=> (Inline styles  [<p style=''></p>]) => (ID) => (Class Or PseudoClasses[:hover :active :visitied :link] Or 
+    Attribute Selector [href='']) => (Element [div,ul,p....] Or Pseudo-Elements)
+
+
+(3) Calculate Css Specificity Of (ul li.active)
+--------------------------------------------------
+==> Calculating Depending On (2)
+==> Inline styles = 0 , ID = 0 , Class = 1 , Element = 2 Then Total = 12
+==> So The Css Specificity Of (ul li.active) Equal To 12
+
+
+(4) Another Example For Calculate Css Specificity
+-------------------------------------------------
+
+	/* Css Specificity = 111 So This Style Will Be Evaluated*/
+	.container h1#heading{
+	  color: blue
+	}
+
+
+	/*Css Specificity = 11*/
+	.container h1{
+	  color: red
+	}
+
+
+
+(5) If Css Specificity Is Equal The Last Selectors In The File Will Be Evaluated
+-------------------------------------------------------------------------------------------
+
+	/* Inline styles = 0 , ID = 0 , Class = 1 , Element = 2 Then Total = 12 */
+	ul li.active{color: red}
+
+	/* Inline styles = 0 , ID = 0 , Class = 1 , Element = 2 Then Total = 12 But This Style Will Evaluated*/
+	ul li.even{color: blue}
+
+
+(6) Claculate Css Specificity Of [#footer *:not(#nav) li]
+--------------------------------------------------------------
+==> Note: :not() Not Calculated As PsuedoClass But I Calculate It's Content That's Will Be #nav
+
+==> /* Inline styles = 0 , ID = 2 , Class = 0 , Element = 1 Then Total = 201 */
+
+
+
+(7) Claculate Css Specificity Of [ul li li:first-line]
+--------------------------------------------------------------
+==> Note : [:first-line And :first-letter] Called Pseudo Elements
+==> /* Inline styles = 0 , ID = 0 , Class = 0 , Element = 4 Then Total = 4 */
