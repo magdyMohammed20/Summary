@@ -65,3 +65,35 @@
 	.list__item--firstItem{
 	  color: green
 	}
+
+
+
+(3) How To Use BEM With Sass
+------------------------------
+
+
+	Html 
+	------
+		
+	      <ul class="list">
+		<li class="list__item list__item--firstItem">List Item</li>
+		<li class="list__item list__item--secondItem">List Item</li>
+		<li class="list__item list__item--lastItem">List Item</li>
+	      </ul>
+
+
+	Sass
+	------
+
+	.list{
+	  list-style: none;
+
+	  &__item{
+		color: red
+	  }
+
+	  &__item--secondItem{
+		color: blue
+	  }
+	}
+		
