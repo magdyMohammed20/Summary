@@ -1,0 +1,89 @@
+(1) <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+(2) display icons by using a class attribute with the prefix fas followed by the the icon's name.
+----------------------------------------------------------------
+
+        <i class='fas fa-clock'></i>
+
+(3) The s in fas stands for solid, and some icons also have a regular mode, specified by using the prefix far
+---------------------------------------------------------------------------
+
+        fas ==> 's'[Solid]
+        far ==> 'r'[Regular]
+        fal ==> 'l'[Light]
+        fab ==> 'b'[Brands]
+
+(4) Font Awesome is designed to be used with inline elements. The <i> and <span> elements are widely used for icons
+
+(5) Sizing Icons
+------------------
+
+    [fa-xs] [fa-sm] [fa-lg] [fa-1x] [fa-2x] [fa-3x] [fa-4x] [fa-5x] [fa-6x] [fa-7x] [fa-8x]
+    [fa-9x] [fa-10x]
+
+    <i class='fas fa-clock fa-5x'></i>
+
+
+(6) List Icons [fa-ul and fa-li classes are used to replace default bullets in unordered lists.]
+--------------------------------------------------
+
+    <ul class='fa-ul'>
+        <li>
+            <span class='fa-li'>
+                <i class='fas fa-check-square'></li>
+            </span> First Item
+        </li>
+    </ul>
+
+(7) Animated Icons[fa-spin class gets any icon to rotate and the fa-pulse class gets any icon to rotate with 8 steps]
+-------------------
+
+        <i class='fas fa-clock fa-spin'></i>
+
+        <i class='fas fa-clock fa-pulse'></i>
+
+(8) Rotated and Flipped Icons [fa-rotate-* and fa-flip-* classes are used to rotate and flip icons.]
+------------------------------
+
+        // Rotate 270 degree
+        <i class="fas fa-clock fa-7x fa-rotate-270"></i>
+
+        // Flib Horizontal
+        <i class='fas fa-clock fa-7x fa-flip-horizontal'></i>
+
+        // Flib Horizontal
+        <i class='fas fa-clock fa-7x fa-flip-vertical'></i>
+
+(9) Stacked Icons
+------------------------------
+==> To stack multiple icons, use the fa-stack class on the parent, the fa-stack-1x class for the regularly sized icon, and fa-stack-2x for the larger icon.
+
+==> The fa-inverse class can be used as an alternative icon color. You can also add larger icon classes to the parent to further control the sizing.
+
+        <span class="fa-stack">
+            <i class="fas fa-clock fa-stack-5x"></i>
+            <i class="fas fa-check-square fa-stack-5x"></i>
+            <i class="fas fa-check-square fa-stack-5x fa-inverse"></i>
+        </span>
+
+
+(10) Fixed Width Icons [fa-fw] [بيخلي جميع الايقونات بحجم متساوي]
+------------------------------
+
+        <div>
+            <i class="fas fa-arrows-alt-v fa-fw"></i>First
+        </div>
+        
+        <div>
+            <i class="fab fa-bluetooth-b fa-fw"></i>First
+        </div>
+
+(11) Bordered and Pulled Icons
+-------------------------------
+==> fa-border, fa-pull-right or fa-pull-left classes are used for for pull quotes or article icons.
+
+        <i class="fas fa-quote-left fa-5x fa-border fa-pull-right"></i>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+        <i class="fas fa-quote-left fa-5x fa-border fa-pull-left"></i>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
