@@ -1,0 +1,31 @@
+/*
+The every function returns a boolean. If all elements in the array pass the test,
+true will be returned. If one of the elements in the array fails the test, false
+will be returned.
+*/
+var arr = [1,2,3,4,5,6,7,8]
+var arr2 = [4,5,6]
+
+const passTest = num =>{
+  return num > 3
+}
+
+console.log(arr.every(passTest)) // False [As Not All Array Elements Pass The Condition]
+
+console.log(arr2.every(passTest)) // true [As All Array Elements Pass The Condition]
+
+
+/////////// Some ///////////////////
+/*
+The some function almost works exactly the same as the every function. 
+There’s only one major difference: the some function tests whether at
+least one element in the array passes the test implemented
+*/
+
+var arr3 = [1,2,3]
+var arr4 = [1,2,3,4]
+
+
+console.log(arr3.some(passTest)) // False [As Not All Array Elements Pass The Condition]
+
+console.log(arr4.some(passTest)) // True [As At Least 1 Element Of Array '4' Pass The Test]

@@ -1,0 +1,57 @@
+/*
+        /////////////// One /////////////////
+        // Add Element At Start And End Of Array 
+        let arr1 = [1,2,3,4]
+        arr1 = [0 , ...arr1 , 5]
+        console.log(arr1) // [0, 1, 2, 3, 4, 5]
+
+
+        ///////////// Two ///////////////////
+        // Private Function Variable
+        function privateVar(){
+            var x = 10;
+            return function(){
+                return x
+            }
+        }
+        console.log(privateVar()) // ƒ (){ return x }
+
+
+        ////////////// Third ////////////
+        // Whats Output?
+        var num = 4;
+        function outer(){
+            var num=2;
+            function inner(){
+                num++;
+                var num=3;
+                console.log(num);
+            }
+
+            inner();
+        }
+
+        outer(); // 3
+
+        //////////////// Four ////////////////////
+        console.log(typeof typeof 1) // string
+
+
+        //////////////// Five ////////////////
+        // Problem
+        var obj1 = {_name:'magdy',fun: function(){ return this._name }};
+
+        var v1 = obj1.fun;
+
+        console.log(v1()) // undefined
+
+
+
+        // Solution
+        var obj2 = {_name:'magdy',fun: function(){ return this._name }};
+
+        var v2 = obj2.fun.bind(obj2);
+
+        console.log(v2()) // magdy
+
+*/

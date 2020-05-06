@@ -1,0 +1,9 @@
+/* Comma Here Called [Comma Operator] And Will Return The Last Value That Between () */
+let n = ((x=5),(x=2),(x=3))
+
+console.log(n)
+
+
+/*
+console.log( ((a=7)) ) // (a=7) Will Return The 7
+*/

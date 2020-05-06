@@ -1,0 +1,43 @@
+(1) [this] Keyword With Normal Function
+----------------------------------------
+
+// [This] With Normal Function Will Represent The Object That Used Or Call The Function
+let x = function(){
+    console.log(this);
+}
+
+// Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+window.onload = x;
+
+// <button id="magdy">Click</button>
+document.getElementById('magdy').onclick = x;
+
+(2) [this] Keyword With Arrow Function
+----------------------------------------
+==> Arrow Function Not Has [this] Scope But Take The Whole Context
+
+        // [This] With Arrow Function Will Always Represent The Public Enclosed Parent
+        // دايما بتدل علي الحاجة اللي بتحتوي كل الحجات اللي موجودة
+        let x = () => console.log(this);
+
+        // Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+        window.onload = x;
+
+        // Window {parent: Window, opener: null, top: Window, length: 0, frames: Window, …}
+        document.getElementById('magdy').onclick = x;
+
+
+Arrow EX
+---------
+--> Arrow Here Will Represent The Object That Represent magdy() Function
+
+	function magdy(){
+            let x = ()=>{
+                // <button id="magdy">Click</button>
+                console.log(this);
+            }
+
+            x()
+        }
+
+        document.getElementById('magdy').onclick = magdy;

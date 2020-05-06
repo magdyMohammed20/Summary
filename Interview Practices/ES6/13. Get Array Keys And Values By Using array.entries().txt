@@ -1,0 +1,19 @@
+let arr = [1,2,3]
+
+// Return Key And Value By Using array.entries()
+for(var x of arr.entries()){
+  console.log(x) // [0,1] [1,2] [2,3]
+}
+
+
+EX:
+--------------
+
+
+// Check If Value Is Equal To The Index
+let arr = [0,1,3]
+
+for(var x of arr.entries()){
+  if(x[0] == x[1]) console.log('Yes Equal')
+  else console.log('Not')
+}

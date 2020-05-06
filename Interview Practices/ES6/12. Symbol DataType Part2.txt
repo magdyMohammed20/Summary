@@ -1,0 +1,20 @@
+// Symbol.for(key) 
+            // searches for existing symbols in a runtime-wide symbol registry with the given
+            // key and returns it if found. Otherwise a new symbol gets created in 
+            //the global symbol registry with this key.
+            const sym1 = Symbol.for('Magdy');
+            const sym2 = Symbol.for('Magdy');
+
+            console.log(sym1 == sym2) // true
+
+            // Get Key Of Specific Symbol
+            const sym3 = Symbol.for('Ali');
+            console.log(Symbol.keyFor(sym3)) // Ali
+
+            // If I Want To Print Symbol In alert You Should Convert It To String
+            const sym4 = Symbol('Hellow');
+            //alert(sym4) //  Cannot convert a Symbol value to a string
+            //alert(sym4.toString()) // Symbol(Hellow)
+
+            // Print Symbol Description
+            console.log(sym4.description) // Hellow

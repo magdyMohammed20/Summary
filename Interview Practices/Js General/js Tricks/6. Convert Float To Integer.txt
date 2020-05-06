@@ -1,0 +1,7 @@
+// Convert Float To Integer Using '|'
+console.log(20.4 | 0) // 20
+console.log(20.7 | 0) // 20
+
+// Convert Float To Integer Using '~~'
+console.log(~~20.4) // 20
+console.log(~~20.9) // 20

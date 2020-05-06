@@ -1,0 +1,8 @@
+
+        // First Way By Using Array.from()
+        let arr = Array.from({length: 5}, num => Math.random())
+        console.log(arr)
+
+        // Second Way By Using new Array() And fill() Method
+        let arr2 = new Array(5).fill().map(num => Math.random());
+        console.log(arr2)

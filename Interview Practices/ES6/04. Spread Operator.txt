@@ -1,0 +1,46 @@
+(1) 
+
+	// Spread Used For Concate Arrays
+        let arr = [1,2,3,4];
+        let arr2 = [5,6];
+        let all = [...arr,...arr2];
+
+        console.log(all) // [1, 2, 3, 4, 5, 6]
+
+(2)
+
+	// Used To Expand Array Elements In Function Arguments
+        function magdy (x,y,z){
+            console.log(x+y+z);
+        }
+
+        var arr = [1,2,3];
+
+        magdy(...arr); // 6
+
+(3)
+
+	// Old Way For To Expand Array Elements In Function Arguments (ES5)
+        function magdy (x,y,z){
+            console.log(x+y+z);
+        }
+        var arr = [1,2,3];
+        magdy.apply(null , arr); // 6
+
+(4) Problem And Solution Of Copy
+----------------------------------
+
+	// Copy Problem Here one Will Affected By push()
+        var one = [1,2,3];
+        var two = one;
+        two.push(10);
+        console.log(one); // [1, 2, 3, 10]
+        console.log(two); // [1, 2, 3, 10]
+    
+
+        // Solution Using Spread Operator
+        var one = [1,2,3];
+        var two = [...one];
+        two.push(10);
+        console.log(one); // [1, 2, 3]
+        console.log(two); // [1, 2, 3, 10]

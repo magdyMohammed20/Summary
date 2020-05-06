@@ -1,0 +1,10 @@
+let str = 'Deified';
+
+// Convert String To Array Then Reverse Array And Rejoin It As String Again And Convert It To LowerCase Letter So Output Will Be   'deified'
+let rev = str.split("").reverse().join("").toLowerCase();
+
+if(str.toLowerCase() == rev){
+    console.log('Yes Plaindrome');
+}else{
+    console.log('No Plaindrome');
+}

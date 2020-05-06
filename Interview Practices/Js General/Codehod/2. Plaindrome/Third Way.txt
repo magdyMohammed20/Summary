@@ -1,0 +1,9 @@
+let str = 'Deified';
+// Convert String To Array Using Array.from()
+let rev = Array.from(str).reverse().join("").toLocaleLowerCase();
+
+if(str.toLocaleLowerCase() == rev){
+    console.log('Yes Plaindrome');
+}else{
+    console.log('No Plaindrome');
+}

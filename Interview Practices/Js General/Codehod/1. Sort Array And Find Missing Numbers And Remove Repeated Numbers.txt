@@ -1,0 +1,38 @@
+var arr = [5,4,3,1,2,5,50];
+        var d = []; 
+
+        // Remove Duplicated
+        for(var x = 0; x< arr.length; x++){
+            if(arr[0] == arr[x + 1]){
+                arr.splice(x+1,1)
+            }
+        }
+
+        // Sort Array
+        arr.sort((a,b)=>a-b);
+
+        
+        for(var x = 0 ;x< arr.length; x++){
+
+            // If Element Not Last Member Of Array
+            if(x < arr.length-1){
+                var f = arr[x]; // Current Number Of Array
+                var s = arr[x + 1]; // Next Number Of Current Number Of Array
+
+                var diff = s - f;
+
+                // If Differntial Greater Than 1
+                // Find The Missing Numbers And Push It In The Array
+                if(diff > 1){
+                    
+                    for(var y = arr[x] + 1 ; y < arr[x+1]; y++){
+                       arr.push(y);
+                    }
+                }
+                
+            }
+            
+        }
+        
+        arr.sort((a,b)=>a-b);
+        console.log(arr)

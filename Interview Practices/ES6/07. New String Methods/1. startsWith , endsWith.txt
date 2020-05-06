@@ -1,0 +1,34 @@
+(1) startsWith()
+-----------------
+==> Check If String Starts With Specific Character Or String
+
+           let start = "Hellow Magdy";
+           console.log(start.startsWith('Hellow')) // True
+           console.log(start.startsWith('Magdy')) // false
+
+           // You Can Pass Parameters To startsWith(SearchString , StartPosition)
+           console.log(start.startsWith('Hellow',1)) // false
+           console.log(start.startsWith('Magdy',6)) // false
+           console.log(start.startsWith('Magdy',7)) // true
+
+           // If startsWith() Has No Parameters Will Return False
+           console.log(start.startsWith()) // false
+
+
+
+
+(2) endsWith()
+-----------------
+==> Check If String Ends With Specific Character Or String
+    
+           let start = "Hellow Magdy";
+           console.log(start.endsWith('Hellow')) // false
+           console.log(start.endsWith('Magdy')) // true
+           
+           // You Can Pass Parameters To endsWith(SearchString , String Length)
+           // 7 Means I Will Slice First 7 Characters Of String And Check If This 7 Characters Ends With 'Hellow' Or Not
+           console.log(start.endsWith('Hellow',7)) // false
+           console.log(start.endsWith('Hellow',6)) // true
+           
+           // If endsWith() Has No Parameters Will Return False
+           console.log(start.endsWith()) // false

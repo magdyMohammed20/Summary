@@ -1,0 +1,23 @@
+Includes
+--------- 
+==>For Check If String That Include Specific Word Or Character
+         
+Syntax => includes(Searched_String , Start_Position)
+       
+            let str = 'Hellow Magdy';
+
+            console.log(str.includes()); // False
+            console.log(str.includes('Magdy')) // True
+            console.log(str.includes('ss')) // False
+            console.log(str.includes('Hellow' , 0)) // True
+            console.log(str.includes('Hellow' , 1)) // False
+
+Repeat
+-------
+==> For Repeat String With Specific Number Of Counts
+Syntax => repeat(Count)
+         
+	    let str = 'Hellow Magdy';
+	    console.log(str.repeat()) // Empty String
+            console.log(str.repeat(1)) // Hellow Magdy
+            console.log(str.repeat(2)) // Hellow MagdyHellow Magdy

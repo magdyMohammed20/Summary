@@ -1,0 +1,8 @@
+// Unary Plus (+) Used To Convert The Value That Can Be Converted To Number To Number
+console.log(+"1") // 1
+console.log(+"10"+20) // 30
+console.log(+true) // 1
+console.log(+false) // 0
+console.log(+"")
+console.log(+"hello") // NaN
+console.log(+1) // 1

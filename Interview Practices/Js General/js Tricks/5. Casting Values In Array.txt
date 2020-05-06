@@ -1,0 +1,10 @@
+var x = ['1' , '2' , '3']
+
+// Convert Array Elements To Integers
+var Integers = x.map(Number)
+console.log(Integers) // [1,2,3]
+
+var y = ['0' , undefined , 0 , '1']
+// Convert Array Elements To Booleans
+var Bools = y.map(Boolean)
+console.log(Bools) // [true,false,false,true]

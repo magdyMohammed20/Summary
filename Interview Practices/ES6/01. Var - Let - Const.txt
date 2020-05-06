@@ -1,0 +1,44 @@
+var
+    - Function Scope
+    - Can Be Redeclare
+    - Can Reassign Value
+    - No TDZ (Use Variable Before Declare It Is Normal)
+    - Establish Properties Inside Window Object (window.x Has Value) As var Is Global
+    - Read And Write 
+let
+    - Block Scope
+    - Can't Be Redeclare
+    - Can Reassign Value
+    - Has TDZ (Use Variable Before Declare It Is Error)
+    - Not Establish Properties Inside Window Object (window.x Is Undefined) As Let Not Global
+    - Read And Write 
+const
+    - Block Scope
+    - Can't Be Redeclare
+    - Can't Reassign Value
+    - Has TDZ (Use Variable Before Declare It Is Error)
+    - Not Establish Properties Inside Window Object (window.x Is Undefined) As const Not Global
+    - Read Only
+    - Can Change Const Object Property Values 
+    ------------------
+
+        const x = {
+                name: "Magdy",
+                age:20
+        };
+
+        console.log(x); // {name: "Magdy", age: 20}
+            x.name = 'Mohammed';
+        console.log(x); // {name: "Mohammed", age: 20}
+
+    - Use Object.freeze() For Prevent To Edit Object Constant Values
+    ----------------------
+
+        const x = { name: "Magdy", age:20 };
+
+        Object.freeze(x);
+
+        x.name = 'Mohammed';
+        x.age = 40;
+
+        console.log(x); // {name: "Magdy", age: 20}

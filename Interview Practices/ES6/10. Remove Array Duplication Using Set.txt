@@ -1,0 +1,8 @@
+// Remove Duplicated Elements From Array 
+
+            let arr = [1,2,3,4,4,2,3]
+            let set = new Set(arr); // Put Array In Set For Remove Duplicated Elements
+            let noDup = [...set] // Use Spread Operators To Convert Set To Array
+
+            console.log(set); // Set(4) {1, 2, 3, 4}
+            console.log(noDup) // [1, 2, 3, 4]
