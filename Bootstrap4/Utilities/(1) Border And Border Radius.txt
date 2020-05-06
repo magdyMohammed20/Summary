@@ -1,0 +1,90 @@
+(1) Give Border For All Sides
+------------------------------
+
+    <div class="border"></div>
+    
+(2) Give Border Top
+------------------------------
+    
+    <div class="border-top"></div>
+    
+(3) Give Border Right
+------------------------------
+
+    <div class="border-right"></div>
+    
+(4) Give Border Bottom
+------------------------------
+
+    <div class="border-bottom"></div>
+    
+(5) Give Border Left
+------------------------------
+
+    <div class="border-left"></div>
+    
+(6) No Border
+-------------------------------
+
+    <div class="border-0"></div>
+    
+(7) No Border Top
+-------------------------------
+    
+    <div class="border-top-0"></div>
+    
+(8) No Border Right
+-------------------------------
+    
+    <div class="border-right-0"></div>    
+    
+(9) No Border Bottom
+-------------------------------
+    
+    <div class="border-bottom-0"></div>  
+    
+(10) No Border Left
+-------------------------------
+    
+    <div class="border-left-0"></div>
+    
+(11) Change Border Color
+--------------------------------
+
+    <div class="border border-danger"></div>
+    <div class="border border-primary"></div>
+    <div class="border border-info"></div>
+    <div class="border border-secondary"></div>
+    <div class="border border-success"></div>
+    <div class="border border-warning"></div>
+    <div class="border border-light"></div>
+    <div class="border border-dark"></div>
+    <div class="border border-white"></div>
+    
+(12) Border Radius
+-----------------------------------
+
+    <div class="rounded"></div>         // border-radius = 0.25rem
+    
+    <div class="rounded-top"></div>     // border-top-right-radius = 0.25rem
+                                           border-top-left-radius = 0.25rem
+    
+    <div class="rounded-right"></div>   // border-top-right-radius = 0.25rem
+                                           border-bottom-right-radius = 0.25rem
+                                   
+    <div class="rounded-bottom"></div>  // border-bottom-right-radius = 0.25rem
+                                           border-bottom-left-radius = 0.25rem 
+                                          
+    <div class="rounded-left"></div>    // border-top-left-radius = 0.25rem
+                                           border-bottom-left-radius = 0.25rem                                      
+    <div class='rounded-circle'></div>  // border-radius = 50%                                    
+    <div class="rounded-pill"></div>    // border-radius = 50rem
+    
+    <div class="rounded-0"></div>    // border-radius = 0
+    
+(13) Border Radius Sizes
+-------------------------
+
+    <div class="rounded-sm"></div>    // border-radius = 0.2rem
+    
+    <div class="rounded-lg"></div>    // border-radius = 0.3rem

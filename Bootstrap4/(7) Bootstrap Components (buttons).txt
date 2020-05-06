@@ -1,0 +1,39 @@
+(1) Button Types
+-----------------------------
+
+primary - secondary - success - warning - danger - info - dark - light - link
+
+(2) How To Write
+-----------------------------
+
+    <button class='btn btn-primary'>Click</button>
+
+(3) Outline Buttons
+-----------------------------
+// Make Button With Transparent Background And Border
+
+    <button class="btn btn-outline-primary">Click</button>
+    
+(4) Larger Button
+-----------------
+// [btn-lg] Class: Give Little Padding For Button And Increase Font-size
+
+    <button class="btn btn-primary btn-lg">Click</button>
+    
+(5) Small Button
+-----------------
+// [btn-sm] Class : Give Small Padding For Button And Small Font-size
+
+    <button class="btn btn-primary btn-sm">Click</button>
+    
+(6) Block Button
+------------------
+// [btn-block] Class : Give [display: block] And [width : 100%] For Button
+
+    <button class="btn btn-primary btn-block">Click</button>
+    
+(7) Active Button
+-------------------
+// [active] Class : To Show Button Is Clicked
+
+    <button class="btn btn-primary active">Click</button>
