@@ -99,7 +99,53 @@
 	// Write %c Before The Message And In The Other Console.log() Argument Write The Style You Want
 	console.log('%c This Is Colored Message' , 'font-size:50px;color: red')
 
+
+
+
 	// Multiple Messages With Different Colors
 	console.log('%c Blue Message %c Red Message' , 'color: blue' , 'color: red')
 
 
+
+(10) info Method
+-----------------
+==> Display Info Message For User [Some Browsers Put [i] Sign Beside The Message]
+
+	console.log('This Some Useful Info')
+
+
+(11) debug Method
+-------------------
+==> Used For Debug The Message
+
+	console.debug('Debug This Message')
+
+
+
+(12) trace Method
+-------------------
+==> Here Use [console.trace] For Follow The Code
+
+
+	    function func1(){
+	      console.trace()
+	      return 'Hellow am Func1'
+	    }
+
+	    function func2(){
+	      func1()
+	    }
+
+	    const x = func2()
+
+	    console.log(x)
+	    /*
+		    // anonymous: Is The Root
+		    // The Remaining Output Means That func2 Call func1
+		    
+		  console.trace
+		    func1 @ index.html:19
+		    func2 @ index.html:24
+		    (anonymous) @ index.html:27
+
+	    */
