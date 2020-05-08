@@ -1,0 +1,41 @@
+(1) Create Global Style On React App
+------------------------------------
+
+==> Create [styled] Folder In [src] Folder Then Create File Called [index.js] Inside [styled] Folder That Contains The Global Style
+
+	src/styled/index.js
+	-------------------
+
+	import { createGlobalStyle } from 'styled-components'
+
+	const GlobalStyle = createGlobalStyle`
+	    *{
+		padding: 0; 
+		margin: 0;
+		box-sizing: border-box
+	    }
+	`
+
+	export default GlobalStyle
+
+
+==> Import The Global Style Inside The [index.js] That In [src] Folder
+---------------------------------------------------------------------
+
+
+	src/index.js
+	-------------
+
+	import React from 'react';
+	import ReactDOM from 'react-dom';
+	import App from './App';
+	import GlobalStyle from '../src/styled/index'
+
+	ReactDOM.render(
+	  <>
+	    <GlobalStyle />
+	    <App />
+	  </>,
+	  document.getElementById('root')
+	);
+
