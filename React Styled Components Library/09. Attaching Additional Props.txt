@@ -1,0 +1,23 @@
+(1) Adding Props To The Styled Component
+-----------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+	// Set Attributes For The Styled Component
+	const Anchor = styled.a.attrs(props => ({
+	  target: '_blank',
+	}))`
+	  color: ${props => props.color}
+	`
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Anchor color='red'>Link</Anchor>
+	    </div>
+	  );
+	}
+
+	export default App;
+
