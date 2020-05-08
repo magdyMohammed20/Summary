@@ -1,0 +1,23 @@
+(1) If Want To Set Default Value Or Pass Props To The Styled Component
+-----------------------------------------------------------------------
+
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+	// If The Element Contains 'color' Prop Will Set It's Value To Color Property
+	// Else Will Set 'red' As Default Value For The Color Prop
+	const InputColor = styled.input`
+	  color: ${props => props.color || 'red'}
+	`
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <InputColor type='text' />
+	      <InputColor type='text' color='blue' />
+	    </div>
+	  );
+	}
+
+	export default App;
