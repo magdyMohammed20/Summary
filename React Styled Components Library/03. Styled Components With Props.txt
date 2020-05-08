@@ -1,0 +1,74 @@
+(1) You Can Send Props To The Styled Component And Depends On It Can Perform Any Style
+----------------------------------------------------------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+	// Depending On The Props If 'primary' The Button Will Be Blue Else Will Be Red
+	const MainBtn = styled.button`
+	  background-color: ${props => props.primary ? 'blue' : 'red'};
+	  color: #FFF;
+	  border: 0;
+	  padding: 7px;
+	  transition: all .5s linear
+	`
+	function App() {
+	  return (
+	    <div className="App">
+	      <MainBtn>Red</MainBtn>
+	      <MainBtn primary>Blue</MainBtn>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+(2) If The Element Has Specific Props It Will Give It Some Styles
+--------------------------------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+	 
+	const Div = styled.div`
+	  background-color: #EEE;
+	  padding: 7px;
+
+	  ${
+		  props => props.primary ? ` font-size: 30px; color: green; ` : ''
+	  }
+
+	`
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div primary>Red</Div>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+(3) If The Element Has 'padding10' Props It Will Give It padding : 10px
+---------------------------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+
+	const Div = styled.div`
+	  background-color: #EEE;
+	  padding: ${({ padding10 }) => padding10 && '10px'};
+	`
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div padding10>Red</Div>
+	    </div>
+	  );
+	}
+
+	export default App;
+
