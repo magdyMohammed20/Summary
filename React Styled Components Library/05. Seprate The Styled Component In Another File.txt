@@ -1,0 +1,40 @@
+(1) You Can Set The Style Components In Seprate File And Call Any Style In Any File Or Component
+-------------------------------------------------------------------------------------------------
+
+==> Create [Styled] Folder In [src] Folder Then Create [index.js] In [Styled] Folder And Call The Styled Components From [index.js] And Use It Inside [App.js]
+
+
+	index.js
+	------------
+
+	import styled from 'styled-components'
+
+	// Must Export All Styled Components
+	export const Div = styled.div`
+	    border: 1px solid #DDD;
+	    background-color: #EEE;
+	    padding: 20px;
+	`
+
+	// Must Export All Styled Components
+	export const Paragraph = styled.p`
+	    color: red
+	`
+
+
+	App.js
+	---------
+
+	import React from 'react';
+	import { Div, Paragraph } from './styled/index' // Call The Styled Components
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div>This Is Div</Div>
+	      <Paragraph>This P</Paragraph>
+	    </div>
+	  );
+	}
+
+	export default App;
