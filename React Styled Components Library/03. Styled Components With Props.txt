@@ -72,3 +72,40 @@
 
 	export default App;
 
+
+
+(4) Take Action Depending On The Props Value [Depending On 'page' Prop Value Will Set The Direction]
+-----------------------------------------------------------------------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+
+	export const Div = styled.div`
+	    border: 1px solid #DDD;
+	    background-color: #EEE;
+	    padding: 20px;
+	    display: flex;
+
+	    ${
+		  ({ page }) => {
+		    if (page === 'start') {
+		      return `justify-content: start`
+		    } else if (page === 'end') {
+		      return `justify-content: end`
+		    } else {
+		      return `justify-content: center`
+		    }
+		  }
+	    }
+	`
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div page='end'>This Is Div</Div>
+	    </div>
+	  );
+	}
+
+	export default App;
