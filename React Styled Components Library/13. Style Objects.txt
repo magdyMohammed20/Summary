@@ -1,0 +1,24 @@
+(1) Style The Element With Object
+----------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components';
+
+	// Set The Styled Component Style As An Object
+	const Div = styled.div({
+	  backgroundColor: 'red',
+	  width: '200px',
+	  height: '200px',
+	  border: '2px solid green'
+
+	})
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div>This Is Div</Div>
+	    </div>
+	  );
+	}
+
+	export default App;
