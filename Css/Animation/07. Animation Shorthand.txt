@@ -1,7 +1,7 @@
 (1) Animation Shorthand Syntax
 ------------------------------
 
-	animation: animation-name | animation-duration | animation-timig-function | animation-delay | animation-iteration-count |animation-direction
+	animation: name | duration | timig-function | delay | iteration-count | direction | fill-mode | play-state
 
 
 (2) Animation shorthand Example
