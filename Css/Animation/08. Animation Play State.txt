@@ -1,0 +1,29 @@
+(1) What's animation-play-state
+--------------------------------
+==> Property That Run Or Stop The Animation
+
+
+(2) animation-play-state Values
+-------------------------------
+==> paused
+==> running [Default value]
+
+(3) animation-play-state Example
+---------------------------------
+
+	/* Animation Code */
+	@keyframes ChangeBackColor {
+	  from   {background-color:blue; left:0px; top:0px;}
+	  to  {background-color:red; left:200px; top:0px;}
+	}
+
+	/* This Animation Not Working As play State Is Paused */
+	.parent{
+	  width: 50px;
+	  height: 50px;
+	  background-color: rgb(12, 138, 197);
+	  border-radius: 100%;
+	  position: relative;
+	  animation: ChangeBackColor 3s linear 2s infinite reverse;
+	  animation-play-state: paused;
+	}
