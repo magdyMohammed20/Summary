@@ -65,3 +65,26 @@
     			)
  
   	}
+
+
+(7) How To Get Router URL Parameters (EX: /project/1) We Want To Extract The Id [1]
+-------------------------------------------------------------------------------------
+
+
+	import React from 'react'
+	// Import useParams
+	import { useParams } from 'react-router-dom' 
+	export default function ProjectDetails() {
+	    // Get Routing Id
+	    const { id } = useParams()
+	    return (
+		<div className="project-details">
+		    <div className="card">
+		        <div className="card-body">
+		            <h3 className="card-title">{id}</h3>
+		            <p className="card-text">lorem20</p>
+		        </div>
+		    </div>
+		</div>
+	    )
+	}
