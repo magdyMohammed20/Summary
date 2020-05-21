@@ -1,0 +1,49 @@
+(1) If Want To Export Collection Of Features Together Instead Of Writing 'export' In front Of Each Feature 
+-----------------------------------------------------------------------------------------------------------
+
+	index.html
+	---------
+
+	<!DOCTYPE html>
+	<html lang="en" dir="ltr">
+
+	<head>
+	  <meta charset="utf-8">
+	  <title>Fetch Data</title>
+	  <link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+
+	  <script type="module" src="./index.js">
+	  </script>
+	</body>
+
+	</html>
+
+
+	index.js
+	---------
+
+	import { sum, sub } from './calc.js'
+
+	let sum2Nums = sum(20, 30)
+	let sub2Nums = sub(30, 20)
+
+	console.log(sum2Nums)
+	console.log(sub2Nums)
+
+
+	calc.js
+	--------
+
+	const sum = (a, b) => {
+	    return a + b
+	}
+
+	const sub = (a, b) => {
+	    return a - b
+	}
+
+	export { sum, sub } // Here Export All Features Together
+
