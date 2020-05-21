@@ -1,0 +1,93 @@
+(1) JavaScript modules provide a special keyword called 'default' with export to specify only one thing to export from a file , we can export both Named Export and Default Export from a single file but, we shouldn't mix them
+
+
+(2) First Way Of Using Default Export [Import The Exported Feature Without Curley Braces]
+--------------------------------------
+
+	index.html
+	-----------
+
+	<!DOCTYPE html>
+	<html lang="en" dir="ltr">
+
+	<head>
+	  <meta charset="utf-8">
+	  <title>Fetch Data</title>
+	  <link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+
+	  <!-- Note Here Should Write type="module" -->
+	  <script type="module" src="./index.js">
+	  </script>
+	</body>
+
+	</html>
+
+
+	index.js
+	---------
+
+	import sum from './calc.js'
+
+	let sum2Nums = sum(20, 30)
+
+	console.log(sum2Nums)
+
+
+	calc.js
+	--------
+
+	const sum = (a, b) => {
+	    return a + b
+	}
+
+	export default sum
+
+
+
+(3) Second Way Of Using Default Export [Import The Exported Feature Using default as syntax]
+--------------------------------------
+
+	index.html
+	-----------
+
+	<!DOCTYPE html>
+	<html lang="en" dir="ltr">
+
+	<head>
+	  <meta charset="utf-8">
+	  <title>Fetch Data</title>
+	  <link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+
+	  <!-- Note Here Should Write type="module" -->
+	  <script type="module" src="./index.js">
+	  </script>
+	</body>
+
+	</html>
+
+
+	index.js
+	---------
+
+	import { default as add } from './calc.js' // Note Here
+
+	let sum2Nums = add(20, 30)
+
+	console.log(sum2Nums)
+
+
+
+	calc.js
+	--------
+
+	const sum = (a, b) => {
+	    return a + b
+	}
+
+	export default sum
