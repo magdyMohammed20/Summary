@@ -12,3 +12,23 @@
 ---------------------------------------------------
 ==> [npm init --yes] Or [npm init -y]
 
+
+(4) Set Default Values For package.json Before Creating It
+-----------------------------------------------------------
+==> npm config set init-author-name "Magdy Mohammed"  // Set Package.json Default Author Name
+==> npm set init-license "MIT" // Set Package.json Default License Name
+==> npm init -y
+
+(5) Get Default Values Of Package.json
+---------------------------------------
+==> npm config get init-author-name // Get Package.json Default Author Name
+==> npm get init-license  // Get Package.json Default License Name
+    OR
+    npm config get init-license
+    
+(6) Delete Default Values
+--------------------------
+==> npm config delete init-license // Delete Package.json License Value
+==> npm config delete init-author-name // Delete Package.json Author Name Value
+==> npm init -y // For Creating The Package.json And Check If Values Is Deleted
+
