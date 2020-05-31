@@ -1,0 +1,14 @@
+(1) package.json File Included In The Project And Has 2 Benefits
+----------------------------------------------------------------
+==> Let's You Manage The Dependencies Of The Project
+==> Helps To Add Script That Help With Intial Build Of Project
+
+(2) Create [package.json] File
+-------------------------------
+==> npm init
+==> Hit Enter For Every Thing 
+
+(3) Create [package.json] Without Asking Questions
+---------------------------------------------------
+==> [npm init --yes] Or [npm init -y]
+
