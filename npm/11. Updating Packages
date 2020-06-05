@@ -1,0 +1,34 @@
+(1) Update Packages To Latest Version (Syntax)
+----------------------------------------------
+
+==> npm update Package_Name --save // Update Package.json Dependencies
+-----------------------------------------------------------------------
+EX: npm update gulp --save
+
+
+==> npm update Package_Name // Update Package Globally
+------------------------------------------------------
+EX: npm update gulp
+
+
+==> npm update --dev --save-dev // Update All Develpoment Dependencies
+
+
+==> npm update // Update All Package.json Packages [Dependencies And devDependencies]
+
+
+==> npm update -g // Update All Global Packages 
+
+
+==> npm update -g Package_Name // Update Specific Package Globally
+------------------------------------------------------------------
+EX: npm update -g gulp
+
+
+==> npm install npm@latest -g // Update NPM Globally 
+
+
+
+
+
+
