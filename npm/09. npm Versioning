@@ -1,0 +1,20 @@
+(1) When Install Specific Package By npm The Last Version Of This Package Downloaded
+
+(2) Installing Specific Package Version (Syntax)
+------------------------------------------------
+==> npm install Package_Name@Package_Version --save
+==> npm install Package_Name@Package_Version 
+
+EX:
+-----
+==> npm install node-sass@4.14.0 --save
+
+
+(3) Installing Latest Patch Version
+-----------------------------------
+==> npm install node-sass@4.14 --save // Installing Last Version Of 4.14 [May Be Can 4.14.6 Or 4.14.7 And So On]
+
+
+(4) Installing Major Package Version With Latest Patch Version
+--------------------------------------------------------------
+==> npm install node-sass@4 --save // Installing Last Version Of 4 [May Be Can 4.14.6 Or 4.14.7 And So On]
