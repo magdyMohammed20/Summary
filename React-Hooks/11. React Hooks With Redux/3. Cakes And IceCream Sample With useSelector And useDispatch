@@ -1,0 +1,141 @@
+
+// Cake Redux
+
+// Cake Action Types
+export const BUY_CAKE = 'BUY_CAKE'
+
+// Cake Action Creators
+import { BUY_CAKE } from './ActionTypes'
+
+export const buy_cake = () => {
+    return {
+        type: BUY_CAKE
+    }
+}
+
+// Cake Reducer
+import { BUY_CAKE } from './ActionTypes'
+
+const initialState = {
+    numOfCakes: 10
+}
+
+const cakeReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case BUY_CAKE:
+            return {
+                ...state,
+                numOfCakes: state.numOfCakes === 0 ? 0 : state.numOfCakes - 1
+            }
+
+        default: return state
+    }
+}
+
+export default cakeReducer
+
+
+
+// IceCream Redux
+
+// IceCream Action Types
+export const BUY_ICE = "BUY_ICE"
+
+// IceCream Action Creators
+import { BUY_ICE } from './ActionTypes'
+
+export const buy_ice = _ => {
+    return {
+        type: BUY_ICE
+    }
+}
+
+
+// IceCream Reducer
+import { BUY_ICE } from './ActionTypes'
+
+const initialState = {
+    numOfIce: 9
+}
+
+const iceReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case BUY_ICE:
+            return {
+                ...state,
+                numOfIce: state.numOfIce === 0 ? 0 : state.numOfIce - 1
+            }
+
+        default: return state
+    }
+}
+
+export default iceReducer
+
+
+// IceCream And Cakes Store 
+import cakeReducer from './Redux/Reducer'
+import iceReducer from './icecream/Reducer'
+import { createStore, combineReducers } from 'redux'
+
+const allReducers = combineReducers({
+    cake: cakeReducer,
+    ice: iceReducer
+})
+
+const Store = createStore(allReducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+
+export default Store
+
+
+
+
+// IceCream And Cakes Component
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { buy_cake } from '../Redux/ActionCreators'
+import { buy_ice } from '../icecream/ActionCreators'
+
+function CakesAndIce() {
+
+    // Note Here As We Use 2 Reducers We Named Him With Different Names Called 'cake' And 'ice'
+    const numOfCakes = useSelector(state => state.cake.numOfCakes)
+    const numOfIce = useSelector(state => state.ice.numOfIce)
+
+    const dispatch = useDispatch()
+
+    return (
+        <div>
+            <h1>Number Of Cakes Is : {numOfCakes}</h1>
+            <h1>Number Of Ice Is : {numOfIce}</h1>
+            <button onClick={() => dispatch(buy_cake())}>Buy Cake</button>
+            <button onClick={() => dispatch(buy_ice())}>Buy Cake</button>
+        </div>
+    )
+
+}
+
+export default CakesAndIce
+
+
+
+// App.js
+import React from 'react';
+import './App.css';
+import { Provider } from 'react-redux'
+import Store from './Redux/Store'
+import CakesAndIce from './Components/CakesAndIce'
+
+function App(props) {
+  return (
+    <div className="App">
+      <Provider store={Store}>
+        <CakesAndIce />
+      </Provider>
+    </div>
+
+  );
+}
+
+export default App;
+
