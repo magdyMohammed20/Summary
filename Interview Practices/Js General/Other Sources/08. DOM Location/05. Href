@@ -1,0 +1,32 @@
+(1) href
+----------
+==> sets or returns the entire URL of the current page.
+
+
+EX: Get The Href Of [http://www.example.com/test.htm#part2]
+-----
+
+	window.location.href  // "http://www.example.com/test.htm#part2"
+	
+	Or 
+	
+	location.href  // "http://www.example.com/test.htm#part2"
+	
+
+EX: Set The Href Of [http://www.example.com/test.htm#part2]
+-----
+	// absolute URL : points to another web site
+	window.location.href = "https://www.google.com"  // https://www.google.com/
+	
+	// relative URL : points to a file within a web site 
+	window.location.href = "index2.html"  // file:///home/magdy/Desktop/js-practice/index2.html
+	
+	// anchor URL : points to an anchor within a page
+	window.location.href = "#top"  // http://www.example.com/test.htm#top
+	
+	// new protocol : specifies a different protocol
+	window.location.href = "file://host/path/example.txt"  // file://host/path/example.txt
+	
+	
+	
+	
