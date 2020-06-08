@@ -1,0 +1,32 @@
+(1) Path Name
+--------------
+==> sets or returns the pathname of a URL
+
+
+EX: Get Path Name Of [http://www.example.com/test.htm#top]
+-----
+
+	window.location.pathname // /test.htm
+	
+	Or
+	
+	location.pathname // /test.htm
+	
+
+
+EX: Set Path Name Of [http://www.example.com/test.htm#top]
+----
+
+	window.location.pathname = "/mego.html"  // http://www.example.com/mego.html#top
+	
+	Or
+	
+	window.location.pathname = "mego.html"  // http://www.example.com/mego.html#top
+	
+	Or 
+	
+	location.pathname = "/mego.html"  // http://www.example.com/mego.html#top
+	
+	Or
+	
+	location.pathname = "mego.html"  // http://www.example.com/mego.html#top
