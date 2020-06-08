@@ -1,0 +1,25 @@
+(1) Language
+-------------
+==> returns the language version of the browser.
+
+
+EX
+----
+
+	window.navigator.language // en-US
+	
+	Or
+	
+	navigator.language // en-US
+	
+
+==> For IE10 and earlier versions, you can use the browserLanguage property
+
+EX
+---
+
+	window.navigator.browserLanguage
+	
+	Or
+	
+	navigator.browserLanguage
