@@ -1,0 +1,26 @@
+(1) Port
+---------
+==> sets or returns the port number the server uses for a URL
+
+==> If the port number is not specified in the URL (or if it is the scheme's default port - like 80, or 443), some browsers will display 0 or nothing
+
+EX: Get Port Of (localhost:3000)
+-----
+
+	window.location.port  // "3000"
+	
+	Or
+	
+	location.port // "3000"
+	
+	
+EX: Set Port To 5000
+-----
+
+	window.location.port = "5000" // http://localhost:5000/ 
+	window.location.port = 5000 // http://localhost:5000/ 
+	
+	Or
+	
+	location.port = "5000" // http://localhost:5000/
+	location.port = 5000 // http://localhost:5000/
