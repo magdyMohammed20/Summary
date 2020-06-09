@@ -1,0 +1,17 @@
+(1) Opener
+-----------
+==> returns a reference to the window that created the window.
+
+==> When opening a window with the window.open() method, you can use this property from the destination window to return details of the source (parent) window.
+
+==> window.opener.close() will close the source (parent) window.
+
+
+EX
+-----
+
+	document.getElementById('btn').onclick = () => {
+	    var win = window.open("", "mego", "width=200,height=100")
+	    win.document.write(win.name)
+	    win.opener.document.write('Parent Here...') // Write "Parent Here In Parent Window Document"
+	}
