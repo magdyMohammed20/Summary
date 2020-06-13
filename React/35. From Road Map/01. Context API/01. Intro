@@ -8,12 +8,16 @@
         A                      B                         C
         
                                |                         |
-                          
-                               D                         F
+                               
+                               D                         E
+                                                         
+                                                         |
+                                                         
+                                                         F
 
 (2) If The [App Component] Contains 'userName' And I Want To Access 'userName' Inside A , D , F Components
     With Traditional Way We Will Send 'userName' As Props To A Directly , Send 'userName' To B As Props
-    Then Send 'userName' From B To D As Props , Send 'userName' As Props To C Then Pass 'userName' From C To F As Props But Context Solve This Problems
+    Then Send 'userName' From B To D As Props , Send 'userName' As Props To C Then Pass 'userName' From C To E As Props Then Pass 'userName' From E To F As Props But Context Solve This Problems
     
 
 (3) Context API Provides Way To Pass Data Through The Component Tree Without Having To Pass Props Down Manually At Every Level
