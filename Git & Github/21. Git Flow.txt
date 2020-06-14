@@ -7,7 +7,7 @@
 
 (2) How To Use Step By Step
 ------------------------------------------------
-==> git flow feature start Feature_Name [EX: git flow feature staet add-styles]
+==> git flow feature start Feature_Name [EX: git flow feature start add-styles] 
 ==> After Creating 'add-styles' Branch You Will Note That a New Branch Called 'feature/add-styles' Created And Be Active And You Can Change 'feature' Word With Another Word
 ==> Create New File In 'feature/add-styles' Branch [EX: touch style.css] Then Add It By [git add .] Then Commit By [git commit -m "Add Style File"] 
 ==> Then Will Merge The 'feature/add-styles' With 'develop' By Write [git flow feature finish add-styles]
