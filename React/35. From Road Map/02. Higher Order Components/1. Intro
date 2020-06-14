@@ -111,6 +111,6 @@
 
 
 ---------------------------------------------------------------------------------------------
-Note: The Problem Is Counter.js And Counter2.js Components Have The Same Functionality Of Increment Without Reusable The Code
+Note: The Problem Is Counter.js And Counter2.js Components Have The Same Functionality Of Increment Without Reusable The Code And Without Sharing Counter Value
 ---------------------------------------------------------------------------------------------
 
