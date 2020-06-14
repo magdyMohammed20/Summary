@@ -1,0 +1,116 @@
+(1) If I Have More A Lot Of Components That Make The Same Functionality
+------------------------------------------------------------------------
+
+
+==> First Component [Creating Counter When Click On Button]
+--------------------
+
+
+		Counter.js
+		-----------
+		
+		import React, { Component } from 'react'
+
+		export default class Counter extends Component {
+
+		    state = {
+			counter: 0
+		    }
+
+		    increment = () => {
+			this.setState(prevState => {
+			    return {
+				counter: prevState.counter + 1
+			    }
+			})
+		    }
+
+		    render() {
+			const { counter } = this.state
+			return (
+			    <div>
+				<button onClick={this.increment}>Click {counter} Times</button>
+			    </div>
+			)
+		    }
+		}
+		
+		
+		
+		App.js
+		--------
+
+		import React from 'react';
+		import './App.css';
+		import Counter from './Components/Counter'
+		function App() {
+		  return (
+		    <div className="App">
+		      <Counter />
+		    </div>
+
+		  );
+		}
+
+		export default App;
+		
+		
+==> Second Component [Create Counter When Hover On Element]
+---------------------
+
+
+	Counter2.js
+	------------
+	
+	import React, { Component } from 'react'
+
+	export default class Counter2 extends Component {
+	    state = {
+		counter: 0
+	    }
+
+	    increment = () => {
+		this.setState(prevState => {
+		    return {
+		        counter: prevState.counter + 1
+		    }
+		})
+	    }
+
+	    render() {
+		const { counter } = this.state
+		return (
+		    <div>
+		        <h1 onMouseEnter={this.increment}>Hover {counter} Times</h1>
+		    </div>
+		)
+	    }
+	}
+	
+	
+	App.js
+	--------
+	
+	import React from 'react';
+	import './App.css';
+	import Counter from './Components/Counter'
+	import Counter2 from './Components/Counter2'
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Counter />
+	      <Counter2 />
+	    </div>
+
+	  );
+	}
+
+	export default App;
+
+
+
+---------------------------------------------------------------------------------------------
+Note: The Problem Is Counter.js And Counter2.js Components Have The Same Functionality Of Increment Without Reusable The Code
+---------------------------------------------------------------------------------------------
+
