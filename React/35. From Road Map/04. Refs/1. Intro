@@ -1,0 +1,92 @@
+(1) Refs
+-----------
+==> provide a way to access DOM nodes or React elements created in the render method.
+
+
+(2) Refs Types
+--------------
+
+==> Normal Refs
+----------------
+
+
+	import React, { Component, createRef } from 'react';
+	import './App.css';
+	class App extends Component {
+
+	  constructor(props) {
+	    super(props)
+	    this.inputRef = createRef()
+	  }
+
+	  componentDidMount() {
+	    this.inputRef.current.focus() // Focus On The Input When Page Load
+	    console.log(this.inputRef.current) // Get The Element Itself
+	  }
+
+	  getInputValue = () => {
+	    console.log(this.inputRef.current.value) // Get Input Value When Click On The Button
+	  }
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<input type="text" ref={this.inputRef} />
+		<button onClick={this.getInputValue}>Get Value</button>
+	      </div>
+
+	    );
+	  }
+	}
+
+	export default App;
+	
+	
+	
+	
+==> Callback Refs [Without Using createRef]
+-----------------
+
+
+	import React, { Component } from 'react';
+	import './App.css';
+	class App extends Component {
+
+	  constructor(props) {
+	    super(props)
+	    // Creating The Ref With 'null' As Intial Value
+	    this.cbRef = null
+
+	    // Creating The Ref Method Function To Assign The Element To Ref
+	    this.setcbRef = element => {
+	      this.cbRef = element
+	    }
+
+	  }
+
+	  componentDidMount() {
+	    console.log(this.cbRef) // Get The Element Itself Without 'current' Property
+
+	    // Focus On The Element When Page Load
+	    if (this.cbRef) {
+	      this.cbRef.focus()
+	    }
+	  }
+
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<input type="text" ref={this.setcbRef} />
+	      </div>
+
+	    );
+	  }
+	}
+
+	export default App;
+
+
+
