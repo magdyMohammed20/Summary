@@ -1,0 +1,328 @@
+(1) Error Handling Phase Methods
+--------------------------------
+==> static getDerivedStateFromError() : Used To Render A Fallback UI After An Error Is Thrown 
+==> componentDidCatch() : Used To Log The Error Information
+
+
+(2) Error Boundaries
+--------------------
+==> A JavaScript error in a part of the UI shouldn’t break the whole app. To solve this problem for React users, React 16 introduces a new concept of an “error boundary”
+
+==> Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them
+
+
+EX: [Whole App Crashed If I Pass 'Joker' To The Component And I Don't Want It To Crash]
+----
+
+	ErrorBoundaries.js
+	------------------
+	
+	import React from 'react'
+
+	function ErrorBoundaries({ hero }) {
+	
+	    // Throw Error Of hero Is Joker
+	    if (hero === "Joker") {
+		throw new Error('Not Allowed')
+	    }
+	    return (
+		<div>
+		    {hero}
+		</div>
+	    )
+	}
+
+	export default ErrorBoundaries
+
+
+	App.js
+	------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import ErrorBoundaries from './Components/ErrorBoundaries'
+
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<ErrorBoundaries hero="SuperMan" />
+		{/* Here The Whole App Is Crashed And I Don't Want This To Occur */}
+		<ErrorBoundaries hero="Joker" />
+	      </div>
+
+	    );
+	  }
+	}
+
+	export default App;
+
+
+EX (If Want To Prevent The Whole Application Crash)
+----	
+	
+	Hero.js
+	-------
+	
+	import React from 'react'
+
+	function Hero({ hero }) {
+
+	    if (hero === "Joker") {
+		throw new Error('Not Allowed')
+	    }
+	    return (
+		<div>
+		    {hero}
+		</div>
+	    )
+	}
+
+	export default Hero
+	
+	
+	ErrorBoundaries.js
+	------------------
+	
+	import React, { Component } from 'react'
+
+	class ErrorBoundaries extends Component {
+	    state = {
+		hasError: false
+	    }
+
+	   // Will Make The Component An Error Boundary
+	    static getDerivedStateFromError(error) {
+		return {
+		    hasError: true
+		}
+	    }
+
+	    render() {
+		if (this.state.hasError) {
+		    return <h1>Error Occured</h1>
+		}
+
+		return this.props.children
+	    }
+	}
+
+	export default ErrorBoundaries
+	
+	
+	App.js [But Here If One Of Hero Components Is Crashed The Other Hero Components Will Crashed Too]
+	-------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import Hero from './Components/Hero'
+	import ErrorBoundaries from './Components/ErrorBoundaries'
+
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<ErrorBoundaries>
+		  <Hero hero="SuperMan" />
+		  {/* Here The Whole App Is Crashed And I Don't Want This To Occur */}
+		  <Hero hero="Joker" />
+		</ErrorBoundaries>
+	      </div>
+
+	    );
+	  }
+	}
+
+	export default App;
+
+
+EX [To Solve Problem Of If 1 Component Crashed The Other Will Crashed Too]
+----
+==> Wrap Each 'Hero' Component With 'ErrorBoundaries' Component
+
+	
+	Hero.js
+	-------
+	
+	import React from 'react'
+
+	function Hero({ hero }) {
+
+	    if (hero === "Joker") {
+		throw new Error('Not Allowed')
+	    }
+	    return (
+		<div>
+		    {hero}
+		</div>
+	    )
+	}
+
+	export default Hero
+	
+	
+	ErrorBoundaries.js
+	------------------
+	
+	import React, { Component } from 'react'
+
+	class ErrorBoundaries extends Component {
+	    state = {
+		hasError: false
+	    }
+
+	   // Will Make The Component An Error Boundary
+	    static getDerivedStateFromError(error) {
+		return {
+		    hasError: true
+		}
+	    }
+
+	    render() {
+		if (this.state.hasError) {
+		    return <h1>Error Occured</h1>
+		}
+
+		return this.props.children
+	    }
+	}
+
+	export default ErrorBoundaries
+	
+	
+	App.js [But Here If One Of Hero Components Is Crashed The Other Hero Components Will Crashed Too]
+	-------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import Hero from './Components/Hero'
+	import ErrorBoundaries from './Components/ErrorBoundaries'
+
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		 <ErrorBoundaries>
+		   <Hero hero="SuperMan" />
+		 </ErrorBoundaries>
+		 
+		{/* Here Only This Component Produce Error And Whole App Will Not Crashed*/}
+		 <ErrorBoundaries>
+		   <Hero hero="Joker" />
+		</ErrorBoundaries>
+	      </div>
+
+	    );
+	  }
+	}
+
+	export default App;
+	
+	
+	
+EX ['componentDidCatch' For Print The ErrorBoundary In The Console]
+-----
+
+
+	Hero.js
+	-------
+	
+	import React from 'react'
+
+	function Hero({ hero }) {
+
+	    if (hero === "Joker") {
+		throw new Error('Not Allowed The Hero To Be Joker')
+	    }
+	    return (
+		<div>
+		    {hero}
+		</div>
+	    )
+	}
+
+	export default Hero
+	
+	
+	
+	ErrorBoundaries.js
+	-------------------
+	
+	import React, { Component } from 'react'
+
+	class ErrorBoundaries extends Component {
+	    state = {
+		hasError: false
+	    }
+
+	    static getDerivedStateFromError(error) {
+		return {
+		    hasError: true
+		}
+	    }
+
+	    // Used To Log The Error ' Not Allowed The Hero To Be Joker' That In 'Hero.js' In The Console
+	    componentDidCatch(error) {
+		console.log(error)
+	    }
+	    render() {
+		if (this.state.hasError) {
+		    return <h1>Error Occured</h1>
+		}
+
+		return this.props.children
+	    }
+	}
+
+	export default ErrorBoundaries
+
+
+
+	App.js
+	-------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import Hero from './Components/Hero'
+	import ErrorBoundaries from './Components/ErrorBoundaries'
+
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      
+	      <div className="App">
+		
+		<ErrorBoundaries>
+		  <Hero hero="SuperMan" />
+		</ErrorBoundaries>
+		
+		{/* Here The Whole App Is Crashed And I Don't Want This To Occur */}
+		<ErrorBoundaries>
+		  <Hero hero="Joker" />
+		</ErrorBoundaries>
+	      
+	      </div >
+
+	    );
+	  }
+	}
+
+	export default App;
+
+
+
+--------------------------------------------------------------------
+Notes
+--------------------------------------------------------------------
+==> Error boundaries do not catch errors for Event handlers 
+==> Error boundaries do not catch errors for Asynchronous code (e.g. setTimeout or requestAnimationFrame callbacks)
+==> Server side rendering
+==> Errors thrown in the error boundary itself (rather than its children)
