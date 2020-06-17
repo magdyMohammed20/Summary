@@ -25,7 +25,8 @@
       margin: 100px auto
     }
 
-    section::after {
+    section::after,
+    section::before {
       content: '';
       position: absolute;
       width: calc(100% + 10px);
@@ -36,6 +37,10 @@
       z-index: -1;
       background-size: 400%;
       animation: shadow 20s linear infinite;
+    }
+
+    section::before {
+      filter: blur(30px)
     }
 
     @keyframes shadow {
