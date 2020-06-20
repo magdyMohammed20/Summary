@@ -1,0 +1,132 @@
+(1) Visited Fields 
+-------------------
+==> For Check If Inputs I Focus On It Or Not
+
+
+
+EX 
+----
+
+
+	Form.js
+	--------
+	
+	import React from 'react'
+	import './Form.css'
+	import { useFormik } from 'formik'
+
+	export default function Form() {
+
+	    const data = useFormik({
+		initialValues: {
+		    name: '',
+		    email: '',
+		    channel: ''
+		},
+		onSubmit: val => {
+		    console.log(`Name Is `, `${val.name}`)
+		    console.log(`Email Is `, `${val.email}`)
+		    console.log(`Channel Is `, `${val.channel}`)
+		},
+		validate: values => {
+		    let errors = {}
+
+		    if (!values.name) {
+		        errors.name = 'Name Is Required'
+		    }
+
+		    if (!values.email) {
+		        errors.email = 'Email Is Required'
+		    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+		        errors.email = 'Email Is Not Valid'
+		    }
+
+		    if (!values.channel) {
+		        errors.channel = 'Channel Is Required'
+		    }
+
+		    return errors
+		}
+	    })
+
+	    // Use 'touched' Property To Display The Visited Inputs
+	    // Will Return Object Contains The Inputs Names And Have 'True' Values 
+	    console.log(data.touched)
+	    
+	    return (
+		<div>
+		    <form onSubmit={data.handleSubmit}>
+		        <div>
+		            <label htmlFor="name">Name</label>
+		            {/* Use handleBlur Inside The Input */}
+		            <input
+		                type="text"
+		                name="name"
+		                id="name"
+		                onChange={data.handleChange}
+		                onBlur={data.handleBlur}
+		                value={data.values.name}
+		            />
+		            <div style={{ color: 'red' }}>
+		                {data.errors.name ? data.errors.name : null}
+		            </div>
+		        </div>
+		        <div>
+		            <label htmlFor="email">Email</label>
+		            {/* Use handleBlur Inside The Input */}
+		            <input
+		                type="email"
+		                name="email"
+		                id="email"
+		                onChange={data.handleChange}
+		                onBlur={data.handleBlur}
+		                value={data.values.email}
+		            />
+		            <div style={{ color: 'red' }}>
+		                {data.errors.email ? data.errors.email : null}
+		            </div>
+		        </div>
+		        <div>
+		            <label htmlFor="channel">Channel</label>
+		            {/* Use handleBlur Inside The Input */}
+		            <input
+		                type="text"
+		                name="channel"
+		                id="channel"
+		                onChange={data.handleChange}
+		                onBlur={data.handleBlur}
+		                value={data.values.channel}
+		            />
+		            <div style={{ color: 'red' }}>
+		                {data.errors.channel ? data.errors.channel : null}
+		            </div>
+		        </div>
+		        <button type="submit">Submit</button>
+		    </form>
+		</div>
+	    )
+	}
+ 
+ 
+ 
+ 	App.js
+ 	--------
+ 	
+ 	import React, { Component } from 'react';
+	import './App.css';
+	import Form from './Components/Form'
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<Form />
+	      </div >
+
+	    );
+	  }
+	}
+
+	export default App;
+
