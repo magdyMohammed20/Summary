@@ -128,3 +128,29 @@ EX
 	Promise.race([firstName(), lastName()]).then(msg => {
 	    console.log(msg) // My First Name Is Magdy
 	}).catch(error => console.log(error))
+	
+	
+	
+EX [If All Promises Rejected With Promise.all() Or Promise.race() The Returned Result Is Result Of The First Rejected Promise Result]
+----
+
+	let firstName = function () {
+	    return new Promise((resolve, reject) => {
+		setTimeout(() => {
+		    reject('My First Name Is Magdy')
+		}, 4000)
+	    })
+	}
+
+
+	let lastName = function () {
+	    return new Promise((resolve, reject) => {
+		setTimeout(() => {
+		    reject('My Last Name Is Mohammed')
+		}, 3000)
+	    })
+	}
+
+	Promise.race([firstName(), lastName()]).then(msg => {
+	    console.log(msg) //My Last Name Is Mohammed
+	}).catch(error => console.log(error))
