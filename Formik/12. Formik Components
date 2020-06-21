@@ -1,0 +1,142 @@
+(1) Formik Components
+-----------------------
+==> In The Previous File We Reduce The Boilerplate Code But We Still Passing Input Name To It So If Want To Save Us Even More Time We Will Use Formik Components That Implicitily Use React Context To Make It Easier
+
+
+
+(2) Formik Components Types
+----------------------------
+==> Formik
+==> Form
+==> Field
+==> ErrorMessage
+
+
+
+(3) Formik Component
+---------------------
+==> is a component that helps you with building forms. It uses a render props pattern
+
+
+(4) Form Component
+-------------------
+==> is a small wrapper around an HTML <form> element that automatically hooks into Formik's handleSubmit and handleReset
+
+
+(5) Field Component
+--------------------
+==> will automagically hook up inputs to Formik. It uses the name attribute to match up with Formik state. <Field /> will default to an HTML <input /> element
+
+
+(6) ErrorMessage Component
+---------------------------
+==> Is a component that renders the error message of a given field if that field has been visited And Error Exist
+
+
+
+EX (Use All Formik Components)
+-------------------------------
+
+
+	Form.js
+	---------
+	
+	import React from 'react'
+	import './Form.css'
+	// First Step Is Import 'Formik' Component (Formik Component)
+	// First Step Is Import 'Form' Component (Form Component)
+	// First Step Is Import 'Field' Component (Field Component)
+	// First Step Is Import 'ErrorMessage' Component (ErrorMessage Component)
+	import { Formik, Form, Field, ErrorMessage } from 'formik'
+	import * as Yup from 'yup'
+
+	let initialValues = { name: '', email: '', channel: '' }
+
+	let onSubmit = val => {
+	    console.log(`Name Is `, `${val.name}`)
+	    console.log(`Email Is `, `${val.email}`)
+	    console.log(`Channel Is `, `${val.channel}`)
+	}
+
+
+	let validationSchema = Yup.object({
+	    name: Yup.string().required('Name Is Required'),
+	    email: Yup.string().email('Invalid Email Format').required('Email Is Required'),
+	    channel: Yup.string().required('Channel Is Required')
+	})
+	export default function FormikForm() {
+	    // Second Step Is Delete 'useFormik' Hook And Wrap Form With Formik Tag That Takes Properties As 'useFormik' (Formik Component)
+	    // Second Step Is Replace 'form' Tag 'Form' Component (Form Component)
+	    // Third Step Is Delete 'onSubmit' Property From 'Form' Component As Formik Handle Submit Automatically(Form Component)
+	    // Second Step Is Replace Each Input Tag With 'Field' Component And Remove 'getFieldProps' From 'Field' Properties (Field Component)
+	    // Second Step Is Replace 'data.touched.name && data.errors.name' That Prosuce Form Errors With 'ErrorMessage' Component And Pass 'Field' name To It (ErrorMessage Component)
+	    return (
+		<Formik
+		    initialValues={initialValues}
+		    onSubmit={onSubmit}
+		    validationSchema={validationSchema}
+		>
+		    <Form>
+		        <div>
+		            <label htmlFor="name">Name</label>
+		            <Field
+		                type="text"
+		                name="name"
+		                id="name"
+		            />
+		            <div style={{ color: 'red' }}>
+		                <ErrorMessage name="name" />
+		            </div>
+		        </div>
+		        <div>
+		            <label htmlFor="email">Email</label>
+		            <Field
+		                type="email"
+		                name="email"
+		                id="email"
+		            />
+		            <div style={{ color: 'red' }}>
+		                <ErrorMessage name="email" />
+		            </div>
+		        </div>
+		        <div>
+		            <label htmlFor="channel">Channel</label>
+		            <Field
+		                type="text"
+		                name="channel"
+		                id="channel"
+		            />
+		            <div style={{ color: 'red' }}>
+		                <ErrorMessage name="channel" />
+		            </div>
+		        </div>
+		        <button type="submit">Submit</button>
+		    </Form>
+		</Formik>
+	    )
+	}
+
+
+
+
+	App.js
+	--------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import FormikForm from './Components/Form'
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<FormikForm />
+	      </div >
+
+	    );
+	  }
+	}
+
+	export default App;
+
