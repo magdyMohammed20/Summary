@@ -1,0 +1,105 @@
+(1) Install Yup Library In React Project
+------------------------------------------
+==> npm i yup
+
+
+(2) Write Yup Validation Schema Object
+------------------------------------------
+==> Yup Object Contains The Rules Of Each Form Field
+
+
+(3) Steps Of Creating Validation With Yup
+------------------------------------------
+==> Import Yup Library
+==> Create Validation Schema Object
+==> Pass Validation Schema Object To 'useFormik' Hook
+
+
+EX
+-----
+
+
+	Form.js
+	---------
+	
+	import React from 'react'
+	import './Form.css'
+	import { useFormik } from 'formik'
+	import * as Yup from 'yup' // Import Yup Library
+
+	let initialValues = { name: '', email: '', channel: '' }
+
+	let onSubmit = val => {
+	    console.log(`Name Is `, `${val.name}`)
+	    console.log(`Email Is `, `${val.email}`)
+	    console.log(`Channel Is `, `${val.channel}`)
+	}
+
+
+	// Create Yup Object Schema
+	let validationSchema = Yup.object({
+	    name: Yup.string().required('Name Is Required'),
+	    email: Yup.string().email('Invalid Email Format').required('Email Is Required'),
+	    channel: Yup.string().required('Channel Is Required')
+	})
+	export default function Form() {
+
+	    // Pass Yup Object Schema To 'useFormik'
+	    const data = useFormik({
+		initialValues,
+		onSubmit,
+		validationSchema
+	    })
+
+
+	    return (
+		<div>
+		    <form onSubmit={data.handleSubmit}>
+		        <div>
+		            <label htmlFor="name">Name</label>
+
+		            <input
+		                type="text"
+		                name="name"
+		                id="name"
+		                onChange={data.handleChange}
+		                onBlur={data.handleBlur}
+		                value={data.values.name}
+		            />
+		            <div style={{ color: 'red' }}>
+		                {data.touched.name && data.errors.name ? data.errors.name : null}
+		            </div>
+		        </div>
+		        <div>
+		            <label htmlFor="email">Email</label>
+		            <input
+		                type="email"
+		                name="email"
+		                id="email"
+		                onChange={data.handleChange}
+		                onBlur={data.handleBlur}
+		                value={data.values.email}
+		            />
+		            <div style={{ color: 'red' }}>
+		                {data.touched.email && data.errors.email ? data.errors.email : null}
+		            </div>
+		        </div>
+		        <div>
+		            <label htmlFor="channel">Channel</label>
+		            <input
+		                type="text"
+		                name="channel"
+		                id="channel"
+		                onChange={data.handleChange}
+		                onBlur={data.handleBlur}
+		                value={data.values.channel}
+		            />
+		            <div style={{ color: 'red' }}>
+		                {data.touched.channel && data.errors.channel ? data.errors.channel : null}
+		            </div>
+		        </div>
+		        <button type="submit">Submit</button>
+		    </form>
+		</div>
+	    )
+	}
