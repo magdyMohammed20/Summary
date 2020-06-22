@@ -1,0 +1,16 @@
+(1) You Can Specify Field Input Type By Using 'as' prop
+--------------------------------------------------------
+==> 'as' Value Can Be input Or textarea Or select Or Custom React Component And Default Value Is input
+
+==> <Field as="textarea" name="comment" id="comment" />
+
+
+
+(2) Select Box With Formik
+---------------------------
+
+    <Field as="select" name="sport" id="sport" style={{ width: '100%' }}>
+        <option value="Football">Football</option>
+        <option value="Basketball">Basketball</option>
+        <option value="Voleyball">Voleyball</option>
+    </Field>
