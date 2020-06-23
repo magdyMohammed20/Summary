@@ -96,3 +96,104 @@ EX (Enable User To Add More And More Phone Numbers)
 
 	export default App;
 
+
+
+
+(2) FieldArray With Validation
+-------------------------------
+
+
+	Form.js
+	--------
+	
+	import React from 'react'
+	import './Form.css'
+	// First Step Is Import 'FieldArray'
+	import { Formik, Form, Field, FieldArray, ErrorMessage } from 'formik'
+	import * as Yup from 'yup'
+	let initialValues = {
+	    phone: [''] // Second Step Is Create Array With Available Initial Values
+	}
+
+	let onSubmit = val => {
+	    console.log(`Phone Numbers Is `, `${val.phone}`)
+	}
+
+
+	let validationSchema = Yup.object().shape({
+	    phone: Yup.array().of(
+		Yup.string().required('Please Enter All Phones')
+	    )
+	})
+	export default function FormikForm() {
+
+	    return (
+		<Formik
+		    initialValues={initialValues}
+		    onSubmit={onSubmit}
+		    validationSchema={validationSchema}
+		>
+		    <Form>
+		        <div>
+		            <label>First Number</label>
+		            {/* Third Step Is Create FieldArray With Name Equal To The Created Array */}
+		            {/* Fourth Step Is Create Function Inside FieldArray That Have props That Is Object As Argument And Contains A lot Of Properties And Methods*/}
+		            <FieldArray name="phone">
+
+		                {props => {
+		                    const { push, remove, form } = props;
+		                    const { values } = form
+		                    const { phone } = values
+
+		                    return (
+		                        <div>
+		                            {
+		                                phone.map((phoneNumber, index) => {
+		                                    return (
+		                                        <div key={index}>
+		                                            <Field name={`phone[${index}]`} />
+		                                            <button onClick={() => push('')}>+</button>
+		                                            {
+		                                                index > 0 && <button onClick={() => remove(index)}>-</button>
+		                                            }
+		                                            <ErrorMessage name={`phone[${index}]`} />
+		                                        </div>
+		                                    )
+		                                })
+		                            }
+		                        </div>
+		                    )
+		                }
+		                }
+		            </FieldArray>
+		        </div>
+
+		        <button type="submit">Submit</button>
+		    </Form>
+		</Formik>
+	    )
+	}
+	
+	
+	
+	
+	App.js
+	--------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import FormikForm from './Components/Form'
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<FormikForm />
+	      </div >
+
+	    );
+	  }
+	}
+
+	export default App;
