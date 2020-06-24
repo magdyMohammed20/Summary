@@ -392,3 +392,399 @@
 
 	export default App;
 
+
+
+
+(4) Second Scenario [Disable Submit Button While Submission In Progress And After Submission Too]
+------------------
+==> We Will Create Function Inside 'formik' Component That Takes 'formik' Object As Argument And This Contains Property Called 'isSubmitting' Is Read Only And It's Value Is 'false' If Not Submit The Form And 'true' If Form Submitted
+
+
+
+	Form.js
+	---------
+	
+	import React from 'react'
+	import './Form.css'
+	import { Formik, Form, Field, ErrorMessage, FastField } from 'formik'
+	import * as Yup from 'yup'
+
+	let initialValues = { name: '', email: '', channel: '', address: '' }
+
+	let onSubmit = val => {
+	    console.log(`Name Is `, `${val.name}`)
+	    console.log(`Email Is `, `${val.email}`)
+	    console.log(`Channel Is `, `${val.channel}`)
+	    console.log(`Address Is `, `${val.address}`)
+	}
+
+
+	let validationSchema = Yup.object({
+	    name: Yup.string().required('Name Is Required'),
+	    email: Yup.string().email('Invalid Email Format').required('Email Is Required'),
+	    channel: Yup.string().required('Channel Is Required'),
+	    address: Yup.string().required('Address Is Required')
+	})
+	export default function FormikForm() {
+	    return (
+		<Formik
+		    initialValues={initialValues}
+		    onSubmit={onSubmit}
+		    validationSchema={validationSchema}
+		>
+		    {
+		        formik => {
+		            console.log(formik)
+		            return (
+		                <Form>
+		                    <div>
+		                        <label htmlFor="name">Name</label>
+		                        <Field
+		                            type="text"
+		                            name="name"
+		                            id="name"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="name" />
+		                        </div>
+		                    </div>
+		                    <div>
+		                        <label htmlFor="email">Email</label>
+		                        <Field
+		                            type="email"
+		                            name="email"
+		                            id="email"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="email" />
+		                        </div>
+		                    </div>
+		                    <div>
+		                        <label htmlFor="channel">Channel</label>
+		                        <Field
+		                            type="text"
+		                            name="channel"
+		                            id="channel"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="channel" />
+		                        </div>
+		                    </div>
+
+		                    <div>
+		                        <label htmlFor='address'>address</label>
+		                        <FastField name='address'>
+		                            {
+
+		                                (props) => {
+
+		                                    const { field, form, meta } = props
+		                                    return (
+		                                        <div style={{ color: 'red' }}>
+		                                            <input id='address' {...field} />
+		                                            {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+		                                        </div>
+		                                    )
+		                                }
+		                            }
+		                        </FastField>
+		                    </div>
+
+		                    <button type="submit" disabled={formik.isSubmitting} style={{ cursor: !formik.isValid ? 'not-allowed' : 'pointer' }}>Submit</button>
+		                </Form>
+		            )
+		        }
+		    }
+		</Formik>
+	    )
+	}
+	
+	
+	
+	App.js
+	--------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import FormikForm from './Components/Form'
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<FormikForm />
+	      </div >
+
+	    );
+	  }
+	}
+
+	export default App;
+
+
+
+
+(4) Second Scenario [Disable Submit Button While Submission In Progress But Enable It After Submission]
+------------------
+==> 'onSubmit' Function Can Takes Another Argument For Example Called It With 'onSubmitProps' And Have Some Properties And Methods So We Will Use 'setSubmitting' Mwthod That Inside 'onSubmitProps' To Enable Submit Button After Submission
+
+
+
+	Form.js
+	---------
+	
+	import React from 'react'
+	import './Form.css'
+	import { Formik, Form, Field, ErrorMessage, FastField } from 'formik'
+	import * as Yup from 'yup'
+
+	let initialValues = { name: '', email: '', channel: '', address: '' }
+
+	let onSubmit = (val, onSubmitProps) => {
+	    console.log(`Name Is `, `${val.name}`)
+	    console.log(`Email Is `, `${val.email}`)
+	    console.log(`Channel Is `, `${val.channel}`)
+	    console.log(`Address Is `, `${val.address}`)
+
+	    // Enable Submit Button After Submission
+	    console.log(onSubmitProps)
+	    onSubmitProps.setSubmitting(false)
+	}
+
+
+	let validationSchema = Yup.object({
+	    name: Yup.string().required('Name Is Required'),
+	    email: Yup.string().email('Invalid Email Format').required('Email Is Required'),
+	    channel: Yup.string().required('Channel Is Required'),
+	    address: Yup.string().required('Address Is Required')
+	})
+	export default function FormikForm() {
+	    return (
+		<Formik
+		    initialValues={initialValues}
+		    onSubmit={onSubmit}
+		    validationSchema={validationSchema}
+		>
+		    {
+		        formik => {
+		            console.log(formik)
+		            return (
+		                <Form>
+		                    <div>
+		                        <label htmlFor="name">Name</label>
+		                        <Field
+		                            type="text"
+		                            name="name"
+		                            id="name"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="name" />
+		                        </div>
+		                    </div>
+		                    <div>
+		                        <label htmlFor="email">Email</label>
+		                        <Field
+		                            type="email"
+		                            name="email"
+		                            id="email"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="email" />
+		                        </div>
+		                    </div>
+		                    <div>
+		                        <label htmlFor="channel">Channel</label>
+		                        <Field
+		                            type="text"
+		                            name="channel"
+		                            id="channel"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="channel" />
+		                        </div>
+		                    </div>
+
+		                    <div>
+		                        <label htmlFor='address'>address</label>
+		                        <FastField name='address'>
+		                            {
+
+		                                (props) => {
+
+		                                    const { field, form, meta } = props
+		                                    return (
+		                                        <div style={{ color: 'red' }}>
+		                                            <input id='address' {...field} />
+		                                            {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+		                                        </div>
+		                                    )
+		                                }
+		                            }
+		                        </FastField>
+		                    </div>
+
+		                    <button type="submit" disabled={formik.isSubmitting} style={{ cursor: !formik.isValid ? 'not-allowed' : 'pointer' }}>Submit</button>
+		                </Form>
+		            )
+		        }
+		    }
+		</Formik>
+	    )
+	}
+		
+	
+	
+	
+	
+	App.js
+	--------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import FormikForm from './Components/Form'
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<FormikForm />
+	      </div >
+
+	    );
+	  }
+	}
+
+	export default App;
+	
+	
+	
+(5) Merge Both Scenarios
+-------------------------
+==> !formik.isValid || formik.isSubmitting Merge The 2 Scenarios
+
+
+	Form.js
+	-----------
+	
+	import React from 'react'
+	import './Form.css'
+	import { Formik, Form, Field, ErrorMessage, FastField } from 'formik'
+	import * as Yup from 'yup'
+
+	let initialValues = { name: '', email: '', channel: '', address: '' }
+
+	let onSubmit = (val, onSubmitProps) => {
+	    console.log(`Name Is `, `${val.name}`)
+	    console.log(`Email Is `, `${val.email}`)
+	    console.log(`Channel Is `, `${val.channel}`)
+	    console.log(`Address Is `, `${val.address}`)
+
+	    // Enable Submit Button After Submission
+	    onSubmitProps.setSubmitting(false)
+	}
+
+
+	let validationSchema = Yup.object({
+	    name: Yup.string().required('Name Is Required'),
+	    email: Yup.string().email('Invalid Email Format').required('Email Is Required'),
+	    channel: Yup.string().required('Channel Is Required'),
+	    address: Yup.string().required('Address Is Required')
+	})
+	export default function FormikForm() {
+	    return (
+		<Formik
+		    initialValues={initialValues}
+		    onSubmit={onSubmit}
+		    validationSchema={validationSchema}
+		>
+		    {
+		        formik => {
+		            console.log(formik)
+		            return (
+		                <Form>
+		                    <div>
+		                        <label htmlFor="name">Name</label>
+		                        <Field
+		                            type="text"
+		                            name="name"
+		                            id="name"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="name" />
+		                        </div>
+		                    </div>
+		                    <div>
+		                        <label htmlFor="email">Email</label>
+		                        <Field
+		                            type="email"
+		                            name="email"
+		                            id="email"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="email" />
+		                        </div>
+		                    </div>
+		                    <div>
+		                        <label htmlFor="channel">Channel</label>
+		                        <Field
+		                            type="text"
+		                            name="channel"
+		                            id="channel"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="channel" />
+		                        </div>
+		                    </div>
+
+		                    <div>
+		                        <label htmlFor='address'>address</label>
+		                        <FastField name='address'>
+		                            {
+
+		                                (props) => {
+
+		                                    const { field, form, meta } = props
+		                                    return (
+		                                        <div style={{ color: 'red' }}>
+		                                            <input id='address' {...field} />
+		                                            {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+		                                        </div>
+		                                    )
+		                                }
+		                            }
+		                        </FastField>
+		                    </div>
+
+		                    <button type="submit" disabled={!formik.isValid || formik.isSubmitting} style={{ cursor: !formik.isValid ? 'not-allowed' : 'pointer' }}>Submit</button>
+		                </Form>
+		            )
+		        }
+		    }
+		</Formik>
+	    )
+	}
+		
+		
+		
+	App.js
+	--------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import FormikForm from './Components/Form'
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<FormikForm />
+	      </div >
+
+	    );
+	  }
+	}
+
+	export default App;
