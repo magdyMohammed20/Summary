@@ -1,0 +1,113 @@
+(1) There Are 2 Scenarios To Reset Form Data
+----------------------------------------------
+==> By Using Reset Button [Add This Button Beside Submit Button (<button type="reset">Reset</button>)]
+
+==> Reset Form Data After Form Submission Completed By Using 'onSubmitProps' [Parameter Of 'onSubmit' Function]
+-----------------------------------------------------------------------------------------------------------------
+
+
+	Form.js
+	--------
+	
+	import React from 'react'
+	import './Form.css'
+	import { Formik, Form, Field, ErrorMessage } from 'formik'
+	import * as Yup from 'yup'
+
+	let initialValues = { name: '', email: '', channel: '' }
+
+	let onSubmit = (val, onSubmitProps) => {
+	    console.log(`Name Is `, `${val.name}`)
+	    console.log(`Email Is `, `${val.email}`)
+	    console.log(`Channel Is `, `${val.channel}`)
+	    
+	    // Calling 'setSubmitting' And 'resetForm'
+	    onSubmitProps.setSubmitting(false)
+	    onSubmitProps.resetForm()
+	}
+
+
+	let validationSchema = Yup.object({
+	    name: Yup.string().required('Name Is Required'),
+	    email: Yup.string().email('Invalid Email Format').required('Email Is Required'),
+	    channel: Yup.string().required('Channel Is Required')
+	})
+	export default function FormikForm() {
+
+
+	    return (
+		<Formik
+		    initialValues={initialValues}
+		    onSubmit={onSubmit}
+		    validationSchema={validationSchema}
+		    enableReinitialize
+		>
+		    {
+		        formik => {
+		            return (
+		                <Form>
+		                    <div>
+		                        <label htmlFor="name">Name</label>
+		                        <Field
+		                            type="text"
+		                            name="name"
+		                            id="name"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="name" />
+		                        </div>
+		                    </div>
+		                    <div>
+		                        <label htmlFor="email">Email</label>
+		                        <Field
+		                            type="email"
+		                            name="email"
+		                            id="email"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="email" />
+		                        </div>
+		                    </div>
+		                    <div>
+		                        <label htmlFor="channel">Channel</label>
+		                        <Field
+		                            type="text"
+		                            name="channel"
+		                            id="channel"
+		                        />
+		                        <div style={{ color: 'red' }}>
+		                            <ErrorMessage name="channel" />
+		                        </div>
+		                    </div>
+		                    <button type="submit">Submit</button>
+		                </Form>
+		            )
+		        }
+		    }
+		</Formik>
+	    )
+	}
+	
+	
+	
+	App.js
+	--------
+	
+	import React, { Component } from 'react';
+	import './App.css';
+	import FormikForm from './Components/Form'
+	class App extends Component {
+
+	  render() {
+
+	    return (
+	      <div className="App">
+		<FormikForm />
+	      </div >
+
+	    );
+	  }
+	}
+
+	export default App;
+
