@@ -1,0 +1,6 @@
+(1) Install Express Generator Globally
+---------------------------------------
+==> Write [npm install express-generator -g] In CMD
+
+
+(2) After Installing Express Generator You Can Create Project Folder By Using [express nodeProject] Instead Of Using [npm init] And After The Project Created You Note That The Project Has Many Files And Folders
