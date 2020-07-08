@@ -1,0 +1,22 @@
+(1) Figure
+-----------
+
+    <figure class="figure">
+      <img src="./gulp.png" class="figure-img img-fluid" />
+      <figcaption class="figure-caption">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis,
+        sit.
+      </figcaption>
+    </figure>
+    
+    
+(2) Align Figure Caption Using Text Utilities
+----------------------------------------------
+
+    <figure class="figure">
+      <img src="./gulp.png" class="figure-img img-fluid" />
+      <figcaption class="figure-caption text-right">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis,
+        sit.
+      </figcaption>
+    </figure>
