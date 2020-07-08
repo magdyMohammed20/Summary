@@ -1,0 +1,208 @@
+(1) Columns
+------------
+==> Learn how to modify columns with a handful of options for alignment, ordering, and offsetting thanks to our flexbox grid system. Plus, see how to use column classes to manage widths of non-grid elements.
+
+
+(2) Vertical alignment [for .row parent]
+-----------------------------------------
+
+    <div class="container">
+      <div class="row align-items-start">
+	<div class="col bg-primary">Col1</div>
+	<div class="col bg-danger">Col2</div>
+	<div class="col bg-success">Col3</div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col bg-primary">Col1</div>
+        <div class="col bg-danger">Col2</div>
+        <div class="col bg-success">Col3</div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row align-items-end">
+        <div class="col bg-primary">Col1</div>
+        <div class="col bg-danger">Col2</div>
+        <div class="col bg-success">Col3</div>
+      </div>
+    </div>
+    
+    
+(3) Vertical Self alignment [for .row childrens]
+-------------------------------------------------
+
+    <div class="container">
+      <div class="row">
+        <div class="col bg-primary align-self-start">Col1</div>
+        <div class="col bg-danger align-self-center">Col2</div>
+        <div class="col bg-success align-self-end">Col3</div>
+      </div>
+    </div>
+    
+    
+(4) Horizontal Alignment [for .row parent]
+-----------------------------------------
+
+    <div class="container">
+      <div class="row justify-content-start">
+        <div class="col-3 bg-primary">Col1</div>
+        <div class="col-3 bg-danger">Col2</div>
+        <div class="col-3 bg-success">Col3</div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-3 bg-primary">Col1</div>
+        <div class="col-3 bg-danger">Col2</div>
+        <div class="col-3 bg-success">Col3</div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-3 bg-primary">Col1</div>
+        <div class="col-3 bg-danger">Col2</div>
+        <div class="col-3 bg-success">Col3</div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row justify-content-around">
+        <div class="col-3 bg-primary">Col1</div>
+        <div class="col-3 bg-danger">Col2</div>
+        <div class="col-3 bg-success">Col3</div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row justify-content-between">
+        <div class="col-3 bg-primary">Col1</div>
+        <div class="col-3 bg-danger">Col2</div>
+        <div class="col-3 bg-success">Col3</div>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row justify-content-evenly">
+        <div class="col-3 bg-primary">Col1</div>
+        <div class="col-3 bg-danger">Col2</div>
+        <div class="col-3 bg-success">Col3</div>
+      </div>
+    </div>
+    
+    
+(5) Column breaks
+------------------
+
+    <div class="container">
+      <div class="row">
+        <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
+        <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
+        <!-- Force next columns to break to new line at md breakpoint and up -->
+        <div class="w-100 d-none d-md-block"></div>
+        <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
+        <div class="col-6 col-sm-4">.col-6 .col-sm-4</div>
+      </div>
+    </div>
+    
+    
+(6) Order classes [from 1 to 5]
+-------------------------------
+
+    <div class="container">
+      <div class="row">
+        <div class="col order-3">col-1</div>
+        <div class="col order-1">col-2</div>
+        <div class="col order-2">col-3</div>
+      </div>
+    </div>
+    
+    
+    <div class="container">
+      <div class="row">
+        <div class="col order-last">col-1</div>
+        <div class="col order-first">col-2</div>
+        <div class="col order-2">col-3</div>
+      </div>
+    </div>
+
+
+(7) Offset ( offset-[0-12]] Or [offset-[sm|md|lg|xl|xxl]-[0-12] )
+------------
+
+    <div class="container">
+      <div class="row">
+        <div class="col-2 offset-3">col-1</div>
+        <div class="col-3">col-2</div>
+        <div class="col-4">col-3</div>
+      </div>
+    </div>
+    
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-2 offset-lg-3 bg-primary">col-1</div>
+        <div class="col-3">col-2</div>
+        <div class="col-4">col-3</div>
+      </div>
+    </div>
+    
+    
+(8) Margin utilities ([mr|ml]-auto) Or ([ml|mr]-[sm|md|lg|xl|xxl]-auto)
+---------------------
+
+    <div class="container">
+      <div class="row">
+        <div class="col-2 ml-auto bg-primary">col-1</div>
+        <div class="col-3">col-2</div>
+        <div class="col-4">col-3</div>
+      </div>
+    </div>
+    
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-2 mr-auto bg-primary">col-1</div>
+        <div class="col-3">col-2</div>
+        <div class="col-4">col-3</div>
+      </div>
+    </div>
+    
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-2 mr-md-auto bg-primary">col-1</div>
+        <div class="col-3">col-2</div>
+        <div class="col-4">col-3</div>
+      </div>
+    </div>
+    
+    
+(9) clearfix
+-------------
+
+    <div class="clearfix">
+      <img src="./gulp.png" class="col-6 ml-3 float-right" />
+
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro numquam,
+        amet quidem temporibus incidunt soluta quibusdam maiores? Quae
+        consequatur suscipit itaque fuga placeat, ratione nihil, blanditiis
+        deleniti harum commodi nulla esse et, vero laborum dolor! Aperiam eos
+        autem, exercitationem hic doloribus quod ab iure pariatur quaerat
+        doloremque in aliquid tempora!
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
+        deserunt quo sequi mollitia, molestias laborum asperiores minima magni
+        nesciunt quia, cumque eveniet consectetur, enim nihil eligendi fugiat
+        expedita illum consequatur! Debitis eveniet ratione sed sint distinctio,
+        porro aperiam aspernatur illum suscipit nihil nulla tenetur incidunt
+        culpa vel? Distinctio, cupiditate consectetur.
+      </p>
+    </div>
