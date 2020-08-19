@@ -1,0 +1,27 @@
+(1) FormikControl Component
+-----------------------------
+==> Is A Component That Decide Which Form Element Should Be Rendered
+
+(2) Code
+-----------
+
+	FormikControl.js
+	-----------------
+
+	import React from 'react'
+
+	function FormikControl(props) {
+    		const {control} = props
+
+    		switch(control){
+        		case 'input' : 
+        		case 'textarea':
+        		case 'select' : 
+        		case 'radio':
+        		case 'checkbox':
+        		case 'date':
+       			default: return null
+    		}
+	}
+
+	export default FormikControl
