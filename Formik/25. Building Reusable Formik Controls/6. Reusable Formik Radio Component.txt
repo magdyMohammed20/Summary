@@ -72,7 +72,7 @@
 
 
 
-    // Handle Select Validation In [FormikContainer.js]
+    // Handle Radio Validation In [FormikContainer.js]
     import React from 'react'
     import {Formik , Form} from 'formik'
     import * as Yup from 'yup'
