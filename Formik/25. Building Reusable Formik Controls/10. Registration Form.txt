@@ -6,7 +6,6 @@
     import {Formik , Form} from 'formik'
     import * as Yup from 'yup'
     import FormControl from './FormikControl'
-    import TextError from './Textarea'
     import FormikControl from './FormikControl'
 
     function RegistrationForm() {
