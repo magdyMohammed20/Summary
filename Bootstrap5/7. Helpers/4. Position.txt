@@ -1,0 +1,39 @@
+(1) Fixed top
+---------------
+
+    <body style='height: 2000px'>
+      <div class="bg-info fixed-top">
+        Nav
+      </div>
+    </body>
+
+
+(2) Fixed bottom
+------------------
+
+    <body style='height: 2000px'>
+      <div class="bg-info fixed-bottom">
+        Nav
+      </div>
+    </body>
+
+
+(3) Sticky top
+----------------
+
+    <body style='height: 2000px'>  
+      <div class="bg-info sticky-top">
+        Nav
+      </div>
+    </body>
+
+
+(4) Responsive sticky top
+---------------------------
+
+    <body style='height: 2000px'>
+      <div class="sticky-sm-top">Stick to the top on viewports sized SM (small) or wider</div>
+      <div class="sticky-md-top">Stick to the top on viewports sized MD (medium) or wider</div>
+      <div class="sticky-lg-top">Stick to the top on viewports sized LG (large) or wider</div>
+      <div class="sticky-xl-top">Stick to the top on viewports sized XL (extra-large) or wider</div>
+    </body>
