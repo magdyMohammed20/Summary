@@ -1,0 +1,17 @@
+(1) .box-border Is [box-sizing: border-box]
+---------------------------------------------
+
+    <div class='box-border'>...</div>
+
+
+(2) .box-content Is [box-sizing: content-box]
+------------------------------------------------
+
+    <div class='box-content'>...</div>
+
+
+(3) Box Sizing Responsive [Size{sm | md | lg | xl} : {box-border | box-content}]
+----------------------------
+
+    <div class='lg:box-border'>...</div>
+    <div class='lg:box-content'>...</div>    
