@@ -1,0 +1,27 @@
+(1) Container And It's Breakpoints
+------------------------------------
+==> container    (width: 100%)
+==> container-sm (max-width: 640px)
+==> container-md (max-width: 768px)
+==> container-lg (max-width: 1024px)
+==> container-xl (max-width: 1280px)
+
+(2) Note that unlike containers you might have used in other frameworks, Tailwind's container does not center itself automatically and does not have any built-in horizontal padding.
+
+(3) Center Container
+----------------------
+
+  <div class='container mx-auto'>...</div>
+
+(4) Add Padding To Container [ px-{size} ]
+--------------------------------------------
+
+  <div class='container mx-auto px-3'>...</div>
+
+(5) Container Responsive variants
+-----------------------------------
+==> Start Set Container And Center It In Large Screen
+
+  <div class="lg:container lg:mx-auto">
+    Magdy
+  </div>
