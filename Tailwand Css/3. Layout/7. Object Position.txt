@@ -1,0 +1,47 @@
+(1) Object Position
+---------------------
+==> Utilities for controlling how a replaced element's content should be positioned within its container.
+
+Class                       Properties
+-----------------------------------------------------------
+.object-bottom	            object-position: bottom;
+.object-center	            object-position: center;
+.object-left	            object-position: left;
+.object-left-bottom	        object-position: left bottom;
+.object-left-top	        object-position: left top;
+.object-right	            object-position: right;
+.object-right-bottom	    object-position: right bottom;
+.object-right-top	        object-position: right top;
+.object-top	                object-position: top;
+
+
+(2) Samples
+---------------
+
+    <div class="flex">
+        <img class="object-none object-left-top bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+        <img class="object-none object-top bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+        <img class="object-none object-right-top bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+        <img class="object-none object-left bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+        <img class="object-none object-center bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+        <img class="object-none object-right bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+        <img class="object-none object-left-bottom bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+        <img class="object-none object-bottom bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+        <img class="object-none object-right-bottom bg-gray-400 w-24 h-24"
+            src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
+    </div>
+
+
+(3) Responsive Object Position
+---------------------------------
+
+  <img class="object-none sm:object-top md:object-right lg:object-bottom xl:object-lef bg-gray-400 w-24 h-24"
+    src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=64&h=64&q=80">
