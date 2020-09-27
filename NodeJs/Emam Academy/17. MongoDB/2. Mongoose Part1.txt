@@ -1,0 +1,69 @@
+(1) First Create New NodeJs Project [express nodeJs-MongoDB --pug] Then Install Node Modules [npm install] Then Run The Project [nodemon]
+
+(2) Install 'Mongoose' In The Project [npm i mongoose --save]
+
+(3) Inside [app.js] File Follow The Steps To Connect To MongoDB
+------------------------------------------------------------------
+==> Step1: Create Mongoose Object
+==> Step2: Set This Options For Prevent Warnings
+==> Step3: Connect To MongoDB Before Createing The Routing Or After Creating express() Object
+
+    
+    app.js
+    --------
+
+    var createError = require('http-errors');
+    var express = require('express');
+    var path = require('path');
+    var cookieParser = require('cookie-parser');
+    var logger = require('morgan');
+
+    /* Step1: Create Mongoose Object */
+    var mongoose = require('mongoose');
+
+    var indexRouter = require('./routes/index');
+    var usersRouter = require('./routes/users');
+
+    var app = express();
+
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'pug');
+
+    app.use(logger('dev'));
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: false }));
+    app.use(cookieParser());
+    app.use(express.static(path.join(__dirname, 'public')));
+
+    /* Step2: Set This Options For Prevent Warnings  */
+    mongoose.set('useNewUrlParser', true); // Set This For Allow To Set Connected Link As String
+    mongoose.set('useUnifiedTopology', true); // Set This For Solve 'Monitoring engine is deprecated' Warning
+
+    /* Step3: Connect To MongoDB Before Createing The Routing */
+    mongoose.connect('mongodb://localhost/test_mongo', (err) => {
+    if (err) {
+        console.log('Fail To Connect To Mongo DB')
+    } else {
+        console.log('Connected To Mongo DB Successfully')
+    }
+    })
+    app.use('/', indexRouter);
+    app.use('/users', usersRouter);
+
+    // catch 404 and forward to error handler
+    app.use(function (req, res, next) {
+    next(createError(404));
+    });
+
+    // error handler
+    app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
+    });
+
+    module.exports = app;
