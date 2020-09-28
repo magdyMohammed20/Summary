@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  .container
+    .row
+      div.col-3
+        .card.border
+          .card-header Form
+          .card-body
+            form(action='/insert' method='POST')
+              div
+                  input(type="text" class="form-control" placeholder="User Name" name='userName' required)
+                  input(type="email" class="form-control my-3" placeholder="User Email" name='userEmail' required)
+                  button(type='submit' class='btn btn-success') Insert
+          
+      div.col-3
+        .card.border
+          .card-header Form
+          .card-body
+            form(action='/getusers' method='GET')
+              div.text-center
+                  button(type='submit' class='btn btn-info') Get Users
+                  
+      div.col-3
+        .card.border
+          .card-header Form
+          .card-body
+            form(action='/update' method='POST')
+              div
+                  input(type="text" class="form-control" placeholder="User Id" name='id' required)
+                  input(type="text" class="form-control my-3" placeholder="User Name" name='new_user_name' required)
+                  input(type="email" class="form-control mb-3" placeholder="User Email" name='new_user_email' required)
+                  button(type='submit' class='btn btn-dark') Update
+                  
+      //- Step1: Create Delete Form Inside [index.pug]
+      div.col-3
+        .card.border
+          .card-header Form
+          .card-body
+            form(action='/delete' method='POST')
+              div
+                  input(type="text" class="form-control" placeholder="Enter Id" name='id' required)
+                  button(type='submit' class='btn btn-danger mt-2') Delete
+    .row.mt-4
+      //- List All Data Here
+      if items
+        each val in items
+          div.col-3
+            div.p-1
+              .card
+                .card-body
+                  h5.cart-title #{val.userName}
+                  .card-text 
+                    p #{val.userEmail}
+                    p #{val.id}
+                  button.btn.btn-primary Show
