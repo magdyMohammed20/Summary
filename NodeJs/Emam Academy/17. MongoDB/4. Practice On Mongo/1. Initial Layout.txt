@@ -1,0 +1,40 @@
+(1) Create Node Project Normally And Install Bootstrap And Jquery In The Project 
+
+(2) Create Basic Layout Inside [index.pug]
+-------------------------------------------
+
+extends layout
+
+block content
+  .container
+    .row
+      div.col-3
+        .card.border
+          .card-header Form
+          .card-body
+            form(action='/insert' method='POST')
+              div
+                  input(type="text" class="form-control" placeholder="User Name" name='userName' required)
+                  input(type="email" class="form-control my-3" placeholder="User Email" name='userEmail' required)
+                  button(type='submit' class='btn btn-success') Submit
+          
+      div.col-3
+        .card
+          .card-body
+            h4.cart-title Title
+            .card-text Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, cupiditate.
+            button.btn.btn-primary Show
+
+      div.col-3
+        .card
+          .card-body
+            h4.cart-title Title
+            .card-text Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, cupiditate.
+            button.btn.btn-primary Show
+
+      div.col-3
+        .card
+          .card-body
+            h4.cart-title Title
+            .card-text Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempora, cupiditate.
+            button.btn.btn-primary Show
