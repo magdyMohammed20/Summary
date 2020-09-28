@@ -1,0 +1,43 @@
+(1) Flex Wrap
+----------------
+==> Utilities for controlling how flex items wrap.
+
+Class                   Properties
+--------------------------------------------------
+.flex-wrap	            flex-wrap: wrap;
+.flex-wrap-reverse	    flex-wrap: wrap-reverse;
+.flex-no-wrap	        flex-wrap: nowrap;
+
+==> Use .flex-no-wrap to prevent flex items from wrapping, causing inflexible items to overflow the container if necessary:
+
+
+(2) Samples
+-----------
+
+  <div class="flex flex-no-wrap">
+    <div class="bg-gray-400 w-64 mx-2 p-3 flex-none">1</div>
+    <div class="bg-gray-400 w-64 mx-2 p-3 flex-none">2</div>
+    <div class="bg-gray-400 w-64 mx-2 p-3 flex-none">3</div>
+  </div>
+
+  <div class="flex flex-wrap">
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">1</div>
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">2</div>
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">3</div>
+  </div>
+
+  <div class="flex flex-wrap-reverse">
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">1</div>
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">2</div>
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">3</div>
+  </div>
+
+
+(3) Responsive Flex Wrap
+---------------------------
+
+  <div class="flex flex-wrap sm:flex-no-wrap md:flex-wrap-reverse lg:flex-wrap xl:flex-no-wrap">
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">1</div>
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">2</div>
+    <div class="bg-gray-400 w-64 mx-2 p-3 my-2">3</div>
+  </div>
