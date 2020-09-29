@@ -1,0 +1,30 @@
+(1) Justify Content
+---------------------
+==> Utilities for controlling how flex and grid items are positioned along a container's main axis.
+
+Class               Properties
+------------------------------------------------------
+.justify-start	    justify-content: flex-start;
+.justify-end	    justify-content: flex-end;
+.justify-center	    justify-content: center;
+.justify-between	justify-content: space-between;
+.justify-around	    justify-content: space-around;
+.justify-evenly	    justify-content: space-evenly;
+
+
+(2) Samples
+-------------
+
+  <div class="flex justify-end h-64">
+    <div class="bg-gray-700 w-64 mr-3">1</div>
+    <div class="bg-gray-700 w-64">2</div>
+  </div>
+
+
+(3) Responsive Justify Content
+--------------------------------
+
+  <div class="flex justify-start sm:justify-center md:justify-end lg:justify-between xl:justify-around h-64">
+    <div class="bg-gray-700 w-64 mr-3">1</div>
+    <div class="bg-gray-700 w-64">2</div>
+  </div>
