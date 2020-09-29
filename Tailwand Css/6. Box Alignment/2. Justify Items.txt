@@ -1,0 +1,50 @@
+(1) Justify Items
+------------------
+==> Utilities for controlling how grid items are aligned along their inline axis.
+
+Class                   Properties
+---------------------------------------------------
+.justify-items-auto	    justify-items: auto;
+.justify-items-start	justify-items: start;
+.justify-items-end	    justify-items: end;
+.justify-items-center	justify-items: center;
+.justify-items-stretch	justify-items: stretch;
+
+==> Use justify-items-auto to justify grid items automatically on their inline axis
+==> Use justify-items-start to justify grid items against the start of their inline axis
+==> Use justify-items-end to justify grid items against the end of their inline axis
+==> Use justify-items-center to justify grid items along their inline axis
+==> Use justify-items-stretch to stretch items along their inline axis
+==> 
+
+(2) Samples
+---------------
+
+  <div class="grid grid-cols-3 gap-3 justify-items-auto">
+    <div class="bg-gray-700">1</div>
+    <div class="bg-gray-700">2</div>
+    <div class="bg-gray-700">3</div>
+    <div class="bg-gray-700">4</div>
+    <div class="bg-gray-700">5</div>
+    <div class="bg-gray-700">6</div>
+    <div class="bg-gray-700">7</div>
+    <div class="bg-gray-700">8</div>
+    <div class="bg-gray-700">9</div>
+  </div>
+
+
+(3) Responsive Justify Items
+-------------------------------
+
+  <div
+    class="grid grid-cols-3 gap-3 justify-items-start sm:justify-items-center md:justify-items-end lg:justify-items-stretch h-48">
+    <div class="bg-gray-700 p-3">1</div>
+    <div class="bg-gray-700 p-3">2</div>
+    <div class="bg-gray-700 p-3">3</div>
+    <div class="bg-gray-700 p-3">4</div>
+    <div class="bg-gray-700 p-3">5</div>
+    <div class="bg-gray-700 p-3">6</div>
+    <div class="bg-gray-700 p-3">7</div>
+    <div class="bg-gray-700 p-3">8</div>
+    <div class="bg-gray-700 p-3">9</div>
+  </div>
