@@ -1,0 +1,15 @@
+(1) Margin
+-------------
+==> Utilities for controlling an element's margin.
+
+(2) Margin Classes
+--------------------
+https://tailwindcss.com/docs/margin
+
+
+(3) Responsive Margin 
+----------------------
+
+    <div class="bg-gray-400 ...">
+        <span class="mt-8 sm:mr-6 md:mb-4 lg:ml-2 xl:m-0 bg-yellow-200">Target</span>
+    </div>
