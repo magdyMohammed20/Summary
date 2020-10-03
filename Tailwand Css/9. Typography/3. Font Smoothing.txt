@@ -1,0 +1,27 @@
+(1) Font Smoothing
+--------------------
+==> Utilities for controlling the font smoothing of an element.
+
+Class          Properties
+-------------------------------------------------------------
+.antialiased	           -webkit-font-smoothing: antialiased;
+                         -moz-osx-font-smoothing: grayscale;
+
+.subpixel-antialiased	   -webkit-font-smoothing: auto;
+                         -moz-osx-font-smoothing: auto;
+
+
+(2) Samples
+-------------
+
+    <p class="subpixel-antialiased">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, sed?
+    </p>
+
+
+(3) Responsive Font Smoothing
+-------------------------------
+
+    <p class="antialiased sm:subpixel-antialiased md:antialiased lg:subpixel-antialiased xl:antialiased ...">
+      The quick brown fox jumped over the lazy dog.
+    </p>
