@@ -1,0 +1,38 @@
+(1) List Style Type
+--------------------------
+==> Utilities for controlling the bullet/number style of a list.
+
+Class                 Properties
+-------------------------------------------------------------
+.list-none	          list-style-type: none;
+.list-disc	          list-style-type: disc;
+.list-decimal	        list-style-type: decimal;
+
+(2) Samples
+-------------
+
+  <ul class="list-none">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <ul class="list-disc">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <ul class="list-decimal">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+
+
+(3) Responsive List Style Type
+------------------------------
+
+  <ul class="list-none sm:list-disc md:list-decimal">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
