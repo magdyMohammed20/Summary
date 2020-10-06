@@ -1,0 +1,26 @@
+(1) Border Color
+-----------------------
+==> Utilities for controlling the color of an element's borders.
+
+
+Class                                               Properties
+---------------------------------------------------------------------------
+.border-transparent	                                border-color: transparent;	
+.border-current	                                    border-color: currentColor;	
+.border-black	                                    border-color: #000;	
+.border-white	                                    border-color: #fff;
+.border-color{pink|gray|orange}-degree{100 => 900}
+
+
+(2) Samples
+-------------
+
+    <div class="h-64 w-64 bg-gray-400 border border-red-500"></div>
+
+
+(3) Responsive Border Width
+------------------------------------
+
+    <button class="border border-blue-500 sm:border-green-500 md:border-indigo-500 lg:border-red-500 xl:border-black ...">
+        Button
+    </button>
