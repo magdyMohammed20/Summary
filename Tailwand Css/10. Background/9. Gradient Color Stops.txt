@@ -1,0 +1,35 @@
+(1) Gradient Color Stops
+-------------------------
+==> Utilities for controlling the color stops in background gradients.
+
+
+Class                                   Properties
+---------------------------------------------------------------------------
+.from-transparent	                    --gradient-from-color: transparent;	
+.from-current	                        --gradient-from-color: currentColor;	
+.from-black	                            --gradient-from-color: #000;	
+.from-white	                            --gradient-from-color: #fff;
+.from-{gray|pink|orange|teal}-{100 => 900}
+
+.via-transparent	                    --gradient-via-color: transparent;	
+.via-current	                        --gradient-via-color: currentColor;	
+.via-black	                            --gradient-via-color: #000;	
+.via-white	                            --gradient-via-color: #fff;
+.via-{gray|pink|orange|teal}-{100 => 900}
+
+.to-transparent	                        --gradient-to-color: transparent;	
+.to-current	                            --gradient-to-color: currentColor;	
+.to-black	                            --gradient-to-color: #000;	
+.to-white	                            --gradient-to-color: #fff;
+.to-{gray|pink|orange|teal}-{100 => 900}
+
+(2) Samples
+-------------
+
+  <div class="h-64 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"></div>
+
+
+(3) Responsive Color Stops
+------------------------------------
+
+    <div class="bg-gradient-to-r from-purple-400 md:from-orange-500"></div>
