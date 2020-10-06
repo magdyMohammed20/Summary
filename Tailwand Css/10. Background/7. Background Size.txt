@@ -1,0 +1,21 @@
+(1) Background Size
+-------------------------
+==> Utilities for controlling the background size of an element's background image.
+
+
+Class               Properties
+-------------------------------------------------------------
+.bg-auto	        background-size: auto;
+.bg-cover	        background-size: cover;
+.bg-contain	        background-size: contain;
+
+(2) Samples
+-------------
+
+  <div class="bg-auto bg-center"></div>
+
+
+(3) Responsive Background Size
+------------------------------------
+
+    <div class="bg-auto sm:bg-cover md:bg-contain lg:bg-auto xl:bg-cover"></div>
