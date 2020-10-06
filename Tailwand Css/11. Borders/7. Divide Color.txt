@@ -1,0 +1,32 @@
+(1) Divide Color
+-----------------------
+==> Utilities for controlling the border color between elements.
+
+
+Class           Properties
+-------------------------------------------------------------------------------
+.divide-transparent 	                            border-color: transparent;	
+.divide-current 	                                border-color: currentColor;	
+.divide-black	                                    border-color: #000;	
+.divide-white 	                                    border-color: #fff;
+.divide-color{red|blue|pink}-degree{100 => 900}
+
+
+(2) Samples
+-------------
+
+    <div class="divide-y divide-blue-300">
+        <div class="text-center py-2">1</div>
+        <div class="text-center py-2">2</div>
+        <div class="text-center py-2">3</div>
+    </div>
+
+
+(3) Responsive Divide Color
+------------------------------
+
+    <div class="divide-teal-400 sm:divide-pink-400 md:divide-orange-400 lg:divide-green-400 xl:divide-red-400 divide-y">
+        <div class="text-center py-2">1</div>
+        <div class="text-center py-2">2</div>
+        <div class="text-center py-2">3</div>
+    </div>
