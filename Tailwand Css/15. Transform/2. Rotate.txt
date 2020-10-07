@@ -1,0 +1,29 @@
+(1) Rotate
+--------------
+==> Utilities for rotating elements with transform.
+
+Class
+---------------------------------------------
+.rotate-0
+.rotate-45	
+.rotate-90	
+.rotate-180	
+.-rotate-180
+.-rotate-90	
+.-rotate-45	
+
+(2) Samples
+-------------
+
+      <div class="w-64 h-64 bg-gray-400 mx-auto mt-3 transform transition duration-500 ease-in hover:rotate-180"></div>
+
+(3) Resposive Rotate
+---------------------
+.{sm|md|lg|xl}:{rotate | -rotate}-{0|45|90|180}
+
+
+(4) Change Rotate When Hover In Spacific Screen
+--------------------------------------------------
+
+  <div class="w-64 h-64 bg-gray-400 mx-auto mt-3 transform transition duration-500 ease-in hover:rotate-180 lg:hover:rotate-45">
+  </div>
