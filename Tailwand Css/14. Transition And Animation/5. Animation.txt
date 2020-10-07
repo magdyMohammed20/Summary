@@ -1,0 +1,21 @@
+(1) Animation
+------------------
+==> Utilities for animating elements with CSS animations.
+
+Class       
+---------------------
+.animate-none
+.animate-spin
+.animate-ping
+.animate-pulse
+.animate-bounce
+
+
+(2) Samples
+-------------
+
+  <div class="absolute w-full h-full bg-gray-900">
+    <div class="w-full h-full flex justify-center items-center">
+      <div class="w-4 h-4 bg-gray-400 animate-bounce rounded-full"></div>
+    </div>
+  </div>
