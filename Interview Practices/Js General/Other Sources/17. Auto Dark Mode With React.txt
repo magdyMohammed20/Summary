@@ -1,0 +1,314 @@
+(1) First Way (Prefers Color Scheme)
+--------------------------------------
+==> This Way Will Set The Theme Depending On OS Current Theme
+
+
+==> Steps : When Create Css File Use Variables To Set All Elements Colors And Use Prefers Color Scheme Media To Change The Theme When User Change OS Theme
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+	Css File
+	-----------
+
+  :root {
+      --dark-body: #fff;
+      --title-color: #222;
+      --text-color: #444;
+      --btn-primary: #61dafb;
+      --btn-danger: #e74c3c;
+  }
+
+  @media (prefers-color-scheme) {
+    /* Main Theme Is Light When Change Os Theme Will Convert Site To Dark */
+    :root {
+      --dark-body: #222;
+      --title-color: #eee;
+      --text-color: #8c8c8c;
+    }
+  }
+
+  body {
+    background-color: var(--dark-body);
+  }
+
+  .App {
+    text-align: center;
+  }
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  .App h1 {
+    color: var(--title-color);
+  }
+
+  .App p {
+    color: var(--text-color);
+  }
+
+  button {
+    border: 0;
+    padding: 13px 20px;
+    margin: 0 10px;
+    color: #fff;
+  }
+
+  .App .btn-primary {
+    background-color: var(--btn-primary);
+  }
+
+  .App .btn-danger {
+    background-color: var(--btn-danger);
+  }
+
+
+(2) Second Way (Let User Select The Theme Using Toggle Button)
+----------------------------------------------------------------
+
+  App.js
+  --------
+
+  import React , {useEffect} from 'react';
+  import logo from './logo.svg';
+  import './App.css';
+
+  function App() {
+
+    useEffect(() => {
+      let theme = localStorage.getItem('theme');
+
+      if(theme === 'dark') lightMode();
+    }, [])
+
+    // Function For Enable Dark Mode
+    const darkMode = () => {
+        document.getElementById('toggle').innerHTML = '🌞';
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme' , 'light');
+    }
+
+    const lightMode = () => {
+        document.getElementById('toggle').innerHTML = '🌙';
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme' , 'dark');
+    }
+
+    const toggleTheme = () => {
+      let theme = localStorage.getItem('theme');
+
+      if(theme == 'dark'){
+        darkMode()
+      }else{
+        lightMode()
+      }
+    }
+
+    return (
+      <div className="App">
+        <button className='toggle-theme-btn' id='toggle' onClick={toggleTheme}><span role='img' aria-label='theme'>🌞</span></button>
+        <img src={logo} alt='react-logo' className='App-logo'/>
+        <h1>Front End Developer With React</h1>
+        <p>
+        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
+        </p>
+        <div>
+          <button className='btn-primary'>Primary</button>
+          <button className='btn-danger'>Danger</button>
+        </div>
+      </div>
+    );
+  }
+
+  export default App;
+
+
+  App.css
+  --------
+
+  :root {
+    /* Main Theme Is Dark When Change Os Theme Will Convert Site To Light */
+    --dark-body: #fff;
+    --title-color: #222;
+    --text-color: #444;
+    --btn-primary: #61dafb;
+    --btn-danger: #e74c3c;
+  }
+
+  body {
+    background-color: var(--dark-body);
+  }
+
+  .dark-mode {
+    --dark-body: #222;
+    --title-color: #eee;
+    --text-color: #8c8c8c;
+  }
+
+  .toggle-theme-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    font-size: 1.5em;
+  }
+
+  .App {
+    text-align: center;
+  }
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  .App h1 {
+    color: var(--title-color);
+  }
+
+  .App p {
+    color: var(--text-color);
+  }
+
+  button {
+    border: 0;
+    padding: 13px 20px;
+    margin: 0 10px;
+    color: #fff;
+  }
+
+  .App .btn-primary {
+    background-color: var(--btn-primary);
+  }
+
+  .App .btn-danger {
+    background-color: var(--btn-danger);
+  }
+
+
+(2) Third Way (Merge The 2 Ways)
+------------------------------------
+
+  App.js
+  --------
+
+  import React , {useEffect} from 'react';
+  import logo from './logo.svg';
+  import './App.css';
+
+  function App() {
+    // When App Start Detect Os Theme
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(e => e.matches ?  darkMode() : lightMode())
+    
+    useEffect(() => {
+
+      // When App Start Get Theme Value And If Dark Set Dark Theme
+      let theme = localStorage.getItem('theme');
+
+      if(theme === 'dark') lightMode();
+    }, [])
+
+    // Function For Enable Dark Mode
+    const darkMode = () => {
+        document.getElementById('toggle').innerHTML = '🌙';
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme' , 'light');
+    }
+
+    const lightMode = () => {
+        document.getElementById('toggle').innerHTML = '🌞';
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme' , 'dark');
+    }
+
+    const toggleTheme = () => {
+      let theme = localStorage.getItem('theme');
+
+      if(theme == 'dark'){
+        darkMode()
+      }else{
+        lightMode()
+      }
+    }
+
+    return (
+      <div className="App">
+        <button className='toggle-theme-btn' id='toggle' onClick={toggleTheme}><span role='img' aria-label='theme'>🌞</span></button>
+        <img src={logo} alt='react-logo' className='App-logo'/>
+        <h1>Front End Developer With React</h1>
+        <p>
+        Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.
+        </p>
+        <div>
+          <button className='btn-primary'>Primary</button>
+          <button className='btn-danger'>Danger</button>
+        </div>
+      </div>
+    );
+  }
+
+  export default App;
+
+
+  App.css
+  ---------
+
+  :root {
+    /* Main Theme Is Dark When Change Os Theme Will Convert Site To Light */
+    --dark-body: #fff;
+    --title-color: #222;
+    --text-color: #444;
+    --btn-primary: #61dafb;
+    --btn-danger: #e74c3c;
+  }
+
+  body {
+    background-color: var(--dark-body);
+  }
+
+  .dark-mode {
+    --dark-body: #222;
+    --title-color: #eee;
+    --text-color: #8c8c8c;
+  }
+
+  .toggle-theme-btn {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    font-size: 1.5em;
+  }
+
+  .App {
+    text-align: center;
+  }
+
+  .App-logo {
+    height: 40vmin;
+    pointer-events: none;
+  }
+
+  .App h1 {
+    color: var(--title-color);
+  }
+
+  .App p {
+    color: var(--text-color);
+  }
+
+  button {
+    border: 0;
+    padding: 13px 20px;
+    margin: 0 10px;
+    color: #fff;
+  }
+
+  .App .btn-primary {
+    background-color: var(--btn-primary);
+  }
+
+  .App .btn-danger {
+    background-color: var(--btn-danger);
+  }
+
