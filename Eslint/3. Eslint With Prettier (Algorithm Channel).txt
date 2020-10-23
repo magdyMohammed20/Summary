@@ -1,0 +1,88 @@
+(1) Linting
+--------------
+==> Type Of Code Analysis That Aims To Find Common Errors
+
+(2) Formatting
+----------------
+==> Is Concerned About How Code Looks And Allow Developers To Set The Code Style
+
+
+(3) Eslint
+------------
+==> Is Tool For Find And Fix Problems In Js Code
+==> Can Integrates With Editors
+==> Used For Linting[Find And Fix Problems] And Formatting [Code Style]
+
+
+(4) Prettier
+-------------
+==> Is Tool For Eanble Developer To Set Code Format
+==> Support Many Languages
+==> Can Integrates With Editors
+
+
+(5) In VScode Install 'Prettier' And 'Eslint' Extension
+
+
+(6) Use Eslint
+----------------
+==> Install Global [npm i -g eslint]
+==> Install Local In Your Project [npm i eslint -D] (Note: If Package.json Not Found Should Write [npm init -y] Before)
+==> Create Eslint Configuration File (.eslintrc) [eslint --init] And Answer The Questions
+
+(7) After Install Eslint You Note That (.eslintrc) Created And Extends All Rules From Eslint Docs ("extends": "eslint:recommended")
+
+
+(8) Controlling Eslint Rules
+-------------------------------
+==> If Want To Disable Specific Eslint Rule (Declare Variable Without Use It Not Produce Any Problem)
+    
+    "no-unused-vars" : "off"
+
+    Or
+
+    "no-unused-vars" : 0
+
+
+==> If Want To Produce Warning On Specific Rule (Declare Variable Without Use It Produce Warning)
+
+    "no-unused-vars" : 1
+
+    Or
+
+    "no-unused-vars" : "warn"
+
+==> If Want To Produce Error On Specific Rule (Declare Variable Without Use It Produce Error)
+
+    "no-unused-vars" : 2
+
+    Or
+
+    "no-unused-vars" : "error"
+
+
+(9) Display Eslint Errors In CMD [eslint ./src]
+
+(10) Can Fix Or Disable Errors Using Bulb Icon In VScode And Choose Any Option That You Want
+     Or Can Run [eslint ./src --fix] For Enable Eslint To Fix The Common Js Problems
+
+
+(11) Use Prettier
+-------------------
+==> Install Prettier Global [npm i -g prettier]
+==> Install Prettier Local [npm i prettier -D]
+==> See Prettier Options [prettier -h]
+==> Create Prettier Configuration File And Call It To [.prettierrc]
+
+==> Write Configuration Inside [.prettierrc] File
+
+    {
+        "singleQuote": false, /* Use Double Quotes Instead Of Single Quotes */
+        "semi": true, /* Must Use Semi Colon*/
+    }
+
+==> For Fix All Code Style Problems With Prettier In VScode Focus On Page And Write Click Then Select 'Format Document' And Select 'Prettier Formatter' Will Fix All Problems Depending On [.prettierrc] File
+
+==> But Prettier May Conflict With Eslint So We Must Integrates 'Eslint' With 'Prettier' By Write [yarn add -D eslint-config-prettier] In CMD For Prevent 'Eslint' From Code Formatting And [yarn add -D eslint-plugin-prettier] For Allow Eslint To Run Prettier Then Write ("plugins":"prettier") After "rules" In [.eslintrc] File Then Write ("prettier/prettier":"error") In "rules" Object In [.eslintrc] File For Consider All Code Style Problems As Error And Can Write It As Warning ("prettier/prettier":"warn")
+
+==> Now When Save Any File In The Project It Will Formatted Automatic Depending On Code Styles That Written In [.prettierrc] File And Can Run [eslint ./src] For Show All Code Style Errors
