@@ -1,0 +1,35 @@
+(1) Use 'echo' Or 'print' When Print Something
+-------------------------------------
+
+    <?php 
+        echo 'Hellow World';
+        echo "Hellow World";
+        print 'Hellow World';
+        print "Hellow World";
+    ?>
+
+
+(2) Print Multiline String With 'echo'
+---------------------------------------
+
+    <?php
+    
+        echo "
+            <h1> Heading </h1>
+            <p> This Is P </p>
+        ";
+
+    ?>
+
+
+(3) Can't Set Single,Double Quotes Inside Single,Double Quotes Or Using Escape Character
+-----------------------------------------------------------------------------------------
+
+    <?php 
+        echo "Hellow 'magdy'"; // Valid
+        echo 'Hellow "magdy"'; // Valid
+        echo "Hellow "magdy""; // Invalid
+        echo 'Hellow 'magdy''; // Invalid
+        echo "Hellow \"magdy\""; // valid
+        echo 'Hellow \'magdy\''; // valid
+    ?>
