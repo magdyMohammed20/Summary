@@ -1,0 +1,45 @@
+(1) Variables Must Declared At Top Level Of Document
+
+(2) Declaring Variable
+--------------------------
+
+    <?php 
+        // name Is Variable
+        $name = 'Magdy';
+    ?>
+
+
+(3) Using Variables
+---------------------
+
+    <?php 
+        $name = 'Magdy';
+        $age = 20;
+        $title = 'Profile';
+
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title><?php echo $title; ?></title>
+    </head>
+    <body>
+        Your Name Is <?php echo $name . '<br>'; ?>
+        Your Age Is <?php echo $age . '<br>'; ?>
+    </body>
+    </html>
+
+
+(4) Variables Naming Rules
+-----------------------------
+==> For Define Variable Must Use $ And Write Variable Name [EX: $name]
+==> Variable Name Can't Start With Number [EX: $3name]
+==> Variable Name Can Start With 1 Or More Underscore [EX: $_name , $__name , ...]
+==> Variable Name Must Start With Lowercase Or Uppercase Character [EX: $name , $Name]
+==> Variable name can only contain alpha-numeric characters and underscores (A-z, 0-9, and _ )
+==> Variable Name Can't Contains Space [$first name]
+==> If Variable Name Has Multi Words Can Use Underscore Or Camelcase [EX: $firstName , $first_name]
+==> Variable Name Can't Be Reserved Word [EX: $this]
+==> Variable Name are case-sensitive ($age and $AGE are two different variables)
