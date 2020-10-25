@@ -1,8 +1,0 @@
-// PlaceHolder For Object Elements 
-
-            let x = {name: 'Magdy' , age:20}
-            let{name:theName , age:theAge , city:theCity = 'Cairo'} = x;
-
-            console.log(theName); // Magdy
-            console.log(theAge); // 20
-            console.log(theCity); // Cairo

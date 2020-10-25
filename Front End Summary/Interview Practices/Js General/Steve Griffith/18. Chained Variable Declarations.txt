@@ -1,0 +1,17 @@
+(function magdy(){
+    var x = 10
+    var x1 = x2 = 30
+})();
+
+
+(function magdy2(){
+    let y = 10
+    let y1 = y2 = 40
+})();
+
+console.log(global.x)  // 10
+console.log(global.x1) // undefined
+console.log(global.x2) // 30
+console.log(global.y)  // 2
+console.log(global.y1) // undefined
+console.log(global.y2) // 40

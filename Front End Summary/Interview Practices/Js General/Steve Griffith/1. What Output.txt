@@ -1,0 +1,19 @@
+// What Output Of The Following Code ?
+
+        console.log('a') // 1
+        
+        let t1 = setTimeout(function(){
+            console.log('b') // 3
+        },1)
+
+        let t2 = setTimeout(function(){
+            console.log('c') // 5
+        },10)
+
+        let t3 = setTimeout(function(){
+            console.log('d') // 4
+        },0)
+
+        console.log('e') // 2
+
+        // Final Output : a e b d c

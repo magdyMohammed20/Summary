@@ -1,0 +1,124 @@
+(1) How To Make Card
+------------------------
+
+        <div class="card" style="width: 18rem;">
+            <img src="images/image.png" class='card-img-top'/>
+            <div class="card-body">
+                <h5 class="card-title">This Item</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt quis et necessitatibus facilis, rem distinctio.</p>
+                <button class="btn btn-primary">Show Details</button>
+            </div>
+        </div>
+        
+(2) Card Title , Text , Links
+-------------------------------
+
+    <div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        <p class="card-text">
+            Some quick example text to build on the card title and make up the bulk of the card's content.
+        </p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+    
+(3) List Group Or Flush List Group [Like aside]
+----------------------------------
+
+    <div class="card" style="width: 18rem">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Item 1</li>
+            <li class="list-group-item">Item 1</li>
+            <li class="list-group-item">Item 1</li>
+            <li class="list-group-item">Item 1</li>
+        </ul>    
+    </div>
+    
+(4) List Group Or Flush List Group With Header[Like aside]
+----------------------------------    
+
+    <div class="card" style="width: 18rem">
+       <div class="card-header">Heading</div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Item 1</li>
+            <li class="list-group-item">Item 1</li>
+            <li class="list-group-item">Item 1</li>
+            <li class="list-group-item">Item 1</li>
+        </ul>    
+    </div>
+    
+(5) Card Kitchen Sink
+---------------------
+
+    <div class="card" style="width: 18rem;">
+        <img src="images/image.png" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Cras justo odio</li>
+            <li class="list-group-item">Dapibus ac facilisis in</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+        </div>
+    </div>
+    
+(6) Header And Footer
+----------------------
+
+    <div class="card">
+      <div class="card-header">
+        Featured
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    
+(7) Quotes
+----------------------
+
+    <div class="card">
+      <div class="card-header">
+        Quote
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+          <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+    
+(8) Navigation Tabs
+------------------------
+
+    <div class="card text-center">
+      <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Active</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          </li>
+        </ul>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Special title treatment</h5>
+        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>

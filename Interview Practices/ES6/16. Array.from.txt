@@ -1,5 +1,0 @@
-let x = Array.from ([1,2,3] , (val,index) =>{
-  return val > 2
-})
-
-console.log(x) // false false true

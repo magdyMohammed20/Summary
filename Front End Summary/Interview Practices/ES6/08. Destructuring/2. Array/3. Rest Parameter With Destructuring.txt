@@ -1,0 +1,7 @@
+	    
+	    let food = ['Burger' , 'Pizza' , 'Banana' , 'Apple'];
+            // If I Member Only The First 2 Items And Need To Know The Rest Items Too
+            let[fo1 , fo2 , ...other] = food
+
+            // Food Is Burger , Pizza , Banana,Apple
+            console.log(`Food Is ${fo1} , ${fo2} , ${other}`)

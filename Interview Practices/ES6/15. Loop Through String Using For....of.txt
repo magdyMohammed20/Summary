@@ -1,5 +1,0 @@
-let str = 'abc'
-
-for(var x of str){
-  console.log(x) // a b c
-}

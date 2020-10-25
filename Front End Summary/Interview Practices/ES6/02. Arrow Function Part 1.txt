@@ -1,0 +1,9 @@
+// If Function Has No Parameters Put _ Or ()
+// Parameters Called Identifier And Statements After Arrow Called Expression
+   let x = _ =>{
+       console.log('x');
+   };
+
+   let y = () =>{
+       console.log('y');
+   };
