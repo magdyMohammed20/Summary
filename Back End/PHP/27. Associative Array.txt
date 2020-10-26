@@ -1,0 +1,85 @@
+(1) Associative Array
+-----------------------
+==> Syntax
+
+    array(
+        key1 => Value1, // Key Can Be String Or Integer Only
+        Key2 => Value2, // Value Can Be Any Type Of Data
+        .....
+    )
+
+==> If Key Repeated It Takes The Last Key And It's Value And Delete The Repeated
+
+EX (Access Elements)
+---
+
+    <?php 
+            
+        $langs = array(
+            "html" => "50%",
+            "css"  => "70%",
+            "js"   => "30%"
+        );
+
+        echo $langs['html']; // 50%
+    ?>
+
+
+EX (Loop Through Array)
+---
+
+    <?php 
+            
+        $langs = array(
+            "html" => "50%",
+            "css"  => "70%",
+            "js"   => "30%"
+        );
+
+        foreach($langs as $lang){
+            echo $lang . '<br>'; // 50% 70% 30%
+        }
+    ?>
+
+    <?php 
+            
+        $langs = array(
+            "html" => "50%",
+            "css"  => "70%",
+            "js"   => "30%"
+        );
+
+        foreach($langs as $lang => $percentage){
+            echo $lang.' => '. $percentage . '<br>'; // 50% 70% 30%
+        }
+    ?>
+
+
+EX(Add Elements To Array)
+---
+
+    <?php 
+            
+        $langs = array(
+            "html" => "50%",
+            "css"  => "70%",
+            "js"   => "30%"
+        );
+
+        $langs[] = '50%'; // Set Index From 0 And So On...
+
+        print_r($langs); // Array ( [html] => 50% [css] => 70% [js] => 30% [0] => 50% )
+    ?>
+
+    <?php 
+            
+        $langs = array(
+            "html" => "50%",
+            "css"  => "70%",
+            "js"   => "30%"
+        );
+
+        $langs['jQuery'] = '50%';
+
+        print_r($langs); // Array ( [html] => 50% [css] => 70% [js] => 30% [jQuery] => 50% )
+    ?>
