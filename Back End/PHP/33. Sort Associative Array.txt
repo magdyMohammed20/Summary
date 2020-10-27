@@ -1,0 +1,113 @@
+(1) asort() Method
+----------------------
+==> Sort Values Of Associative Array Keys Alphapitically
+
+==> Syntax
+
+    asort(Array_Name , Sorting_Type[Optional])
+
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            'html' => '80%',
+            'css' => '70%',
+            'js' => '50%'
+        );
+
+        print_r($langs); // Array ( [html] => 80% [css] => 70% [js] => 50% )
+        
+        asort($langs);
+        echo '<br><br>';
+        print_r($langs); // Array ( [js] => 50% [css] => 70% [html] => 80% )
+
+        
+    ?>
+
+(2) arsort() Method
+----------------------
+==> Reverse The Result Of asort()
+
+==> Syntax
+
+    arsort(Array_Name , Sorting_Type[Optional])
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            'html' => '60%',
+            'css' => '80%',
+            'js' => '50%'
+        );
+
+        print_r($langs); // Array ( [html] => 60% [css] => 80% [js] => 50% )
+        arsort($langs);
+        echo '<br><br>';
+        print_r($langs); // Array ( [css] => 80% [html] => 60% [js] => 50% )
+
+        
+    ?>
+
+
+(3) ksort() Method
+----------------------
+==> Sort Keys Of Associative Array Alphapitically
+
+==> Syntax
+
+    ksort(Array_Name , Sorting_Type[Optional])
+
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            'html' => '80%',
+            'css' => '70%',
+            'js' => '90%'
+        );
+
+        print_r($langs); // Array ( [html] => 80% [css] => 70% [js] => 90% )
+        ksort($langs);
+        echo '<br><br>';
+        print_r($langs); // Array ( [css] => 70% [html] => 80% [js] => 90% )
+
+        
+    ?>
+
+
+(4) krsort() Method
+----------------------
+==> Reverse Result Of ksort() Method
+
+==> Syntax
+
+    krsort(Array_Name , Sorting_Type[Optional])
+
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            'html' => '80%',
+            'css' => '70%',
+            'js' => '90%'
+        );
+
+        print_r($langs); // Array ( [html] => 80% [css] => 70% [js] => 90% )
+        krsort($langs);
+        echo '<br><br>';
+        print_r($langs); // Array ( [js] => 90% [html] => 80% [css] => 70% )
+
+        
+    ?>
