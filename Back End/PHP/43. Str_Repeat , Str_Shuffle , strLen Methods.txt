@@ -1,0 +1,61 @@
+(1) str_repeat() Method
+------------------------
+==> Used To Repeat String With Number Of Times
+
+==> Syntax
+
+    str_repeat(String[Required] , Repeat[Required])
+
+EX
+---
+
+    <?php 
+            $str = 'Magdy';
+
+            $repeat = str_repeat($str , 10);
+
+            // Repeat 'Magdy' 10 Times
+            echo $repeat; // MagdyMagdyMagdyMagdyMagdyMagdyMagdyMagdyMagdyMagdy
+    ?>
+
+
+(2) str_shuffle() Method
+------------------------
+==> Used To Re-Ordering String After Each Page Reload
+
+==> Syntax
+
+    str_shuffle(String)
+
+
+EX
+---
+
+    <?php 
+            $str = 'Magdy Mohammed';
+
+            $shuffle = str_shuffle($str);
+
+            // Change String Letters Order After Each Page Reload
+            echo $shuffle;
+    ?>
+
+
+(3) strlen() Method
+------------------------
+==> Used To Get String Length
+
+==> Syntax
+
+    strlen(String)
+
+EX
+---
+
+    <?php 
+            $str = 'Magdy Mohammed';
+
+            $len = strlen($str);
+
+            echo $len; // 14
+    ?>
