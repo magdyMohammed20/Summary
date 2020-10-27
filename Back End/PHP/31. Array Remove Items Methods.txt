@@ -1,0 +1,57 @@
+(1) array_pop() Method
+------------------------
+==> Remove Last Item From Array
+
+==> Syntax
+
+    array_pop(Array_Name)
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            10,
+            20,
+            30,
+            40
+        );
+
+        print_r($langs); // Array ( [0] => 10 [1] => 20 [2] => 30 [3] => 40 )
+        echo 'Last Element Of Array Is ' . array_pop($langs) . '<br>'; // Last Element Of Array Is 40
+        echo '<br><br>';
+        print_r($langs); // Array ( [0] => 10 [1] => 20 [2] => 30 )
+
+        
+    ?>
+
+
+(2) array_shift() Method
+-------------------------
+==> Remove First Item From Array
+
+==> Syntax
+
+    array_pop(Array_Name)
+
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            10,
+            20,
+            30,
+            40
+        );
+
+        print_r($langs); // Array ( [0] => 10 [1] => 20 [2] => 30 [3] => 40 )
+        echo 'First Element Of Array Is ' . array_shift($langs) . '<br>'; // First Element Of Array Is 10
+        echo '<br><br>';
+        print_r($langs); // Array ( [0] => 20 [1] => 30 [2] => 40 )
+
+        
+    ?>
