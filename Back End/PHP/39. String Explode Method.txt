@@ -1,0 +1,54 @@
+(1) explode() Method
+---------------------
+==> Used To Convert String To Array
+
+==> Syntax
+
+    explode(Separator[Mandatory] , String[Mandatory] , Limit[Optional])
+
+==> [Limit] Can Be Positive Or Negative Number Or Zero
+
+
+EX
+---
+
+    <?php 
+
+        $str = "magdy mohammed abd el-hamid";
+
+        $arr = explode(" " , $str); 
+
+        print_r($arr); // Array ( [0] => magdy [1] => mohammed [2] => abd [3] => el-hamid )
+    
+    ?>
+
+
+EX (explode With Limit)
+---
+
+    <?php 
+
+        $str = "magdy mohammed abd el-hamid";
+
+        // Convert String To Array With 1 Element That Is Full String 
+        print_r(explode(" " , $str , 1)); // Array ( [0] => magdy mohammed abd el-hamid )
+
+        // Convert String To Array With 1 Element That Is Full String 
+        print_r(explode(" " , $str , 0)); // Array ( [0] => magdy mohammed abd el-hamid )
+
+        // Convert String To Array With 2 Elements By Slice From The First Space Only 
+        print_r(explode(" " , $str , 2)); // Array ( [0] => magdy [1] => mohammed abd el-hamid )
+
+        // Convert String To Array With 3 Elements By Slice From The First And Second Space Only 
+        print_r(explode(" " , $str , 3)); // Array ( [0] => magdy [1] => mohammed [2] => abd el-hamid )
+
+        // Convert String To Array But Remove The Last Element
+        print_r(explode(" " , $str , -1)); // Array ( [0] => magdy [1] => mohammed )
+
+        // Convert String To Array By Slice From Spaces But Remove The Last 2 Elements
+        print_r(explode(" " , $str , -2)); // Array ( [0] => magdy [1] => mohammed )
+
+        // Convert String To Array By Slice From Spaces But Remove The Last 3 Elements
+        print_r(explode(" " , $str , -3)); // Array ( [0] => magdy )
+    
+    ?>
