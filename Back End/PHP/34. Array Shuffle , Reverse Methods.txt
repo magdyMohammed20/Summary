@@ -1,0 +1,101 @@
+(1) array_reverse() Method
+----------------------------
+==> Method Used To Reverse Array Elements
+
+==> Syntax
+
+    array_reverse(Array_Name , Preserve[Optional])
+
+==> Preserve Option Used To Save Index After Reverse Or [Used To Reverse Indexes And It's Values]
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            'html',
+            'css',
+            'js'
+        );
+
+        print_r($langs); // Array ( [0] => html [1] => css [2] => js )
+        
+        $reversed_array = array_reverse($langs);
+        echo '<br><br>';
+        print_r($reversed_array); // Array ( [0] => js [1] => css [2] => html )
+
+        
+    ?>
+
+
+EX (Preserve Default Value Is False) 
+---
+
+    <?php 
+
+        $langs = array(
+            'html',
+            'css',
+            'js'
+        );
+
+        print_r($langs); // Array ( [0] => html [1] => css [2] => js )
+        
+        $reversed_array = array_reverse($langs , false);
+        echo '<br><br>';
+        print_r($reversed_array); // Array ( [0] => js [1] => css [2] => html )
+
+        
+    ?>
+
+
+EX (Preserve With true Value)
+---
+
+    <?php 
+
+        $langs = array(
+            'html',
+            'css',
+            'js'
+        );
+
+        print_r($langs); // Array ( [0] => html [1] => css [2] => js )
+        
+        $reversed_array = array_reverse($langs , true);
+        echo '<br><br>';
+        print_r($reversed_array); // Array ( [2] => js [1] => css [0] => html )
+
+        
+    ?>
+
+
+(2) shuffle() Method
+----------------------------
+==> Method Used To Re-Ordering Array Elements After Each Reload Of The Page
+
+==> Syntax
+
+    shuffle(Array_Name)
+
+
+EX
+----
+
+    <?php 
+
+        $langs = array(
+            'html',
+            'css',
+            'js'
+        );
+
+        print_r($langs); // Array ( [0] => html [1] => css [2] => js )
+        
+        shuffle($langs);
+        echo '<br><br>';
+        print_r($langs); // Different Order After Each Reload Of The Page
+
+        
+    ?>
