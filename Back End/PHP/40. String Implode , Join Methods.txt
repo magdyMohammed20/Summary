@@ -1,0 +1,50 @@
+(1) Convert Array To String Methods
+------------------------------------
+==> implode() Method
+==> join() Method
+
+==> Note : implode() And join() Do The Are Same
+
+(2) implode() Method
+---------------------
+==> Used To Convert Array To String
+
+==> Syntax
+
+    implode(Separator[Optional] , Array_Name)
+
+==> Separator Is Optional But If You Want To Ignore It Set It To ""
+
+
+EX
+---
+
+    <?php 
+
+        $arr = array('Magdy' , 'Mohammed' , 'Fadel');
+
+        echo 'Our Employess Are ' . implode(" , " , $arr); // Our Employess Are Magdy , Mohammed , Fadel
+    
+    ?>
+
+
+(3) join() Method
+---------------------
+==> Used To Convert Array To String
+
+==> Syntax
+
+    join(Separator[Optional] , Array_Name)
+
+==> Separator Is Optional But If You Want To Ignore It Set It To ""
+
+EX
+---
+
+    <?php 
+
+        $arr = array('Magdy' , 'Mohammed' , 'Fadel');
+
+        echo 'Our Employess Are ' . join(" , " , $arr); // Our Employess Are Magdy , Mohammed , Fadel
+    
+    ?>
