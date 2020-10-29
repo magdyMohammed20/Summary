@@ -1,0 +1,42 @@
+(1) file_put_contents() Method
+--------------------------------
+==> Used To Put Content Inside File
+
+==> Syntax
+
+    file_put_contents(File , Data , Mode , Context)
+
+==> [Mode] Can Be [FILE_APPEND , LOCK_EX , FILE_USE_INCLUDE_PATH]
+
+
+EX
+---
+
+    <?php 
+        // Create File Called 'magdy.txt' And Set 'Hellow From Php' Inside It
+        file_put_contents('magdy.txt' , 'Hellow From Php');
+    ?> 
+
+
+EX (Append Text To File)
+---
+
+    <?php 
+        file_put_contents('magdy.txt' , 'Hellow From Php' , FILE_APPEND);
+    ?> 
+
+
+EX (For Allow 1 User To Write In File At A Time)
+---
+
+    <?php 
+        file_put_contents('magdy.txt' , 'Hellow From Php' , LOCK_EX);
+    ?> 
+
+
+EX (Set Multi Mode)
+---
+
+    <?php 
+        file_put_contents('magdy.txt' , 'Hellow From Php' , LOCK_EX | FILE_APPEND);
+    ?> 
