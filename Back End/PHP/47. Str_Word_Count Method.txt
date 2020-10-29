@@ -1,0 +1,82 @@
+(1) str_word_count() Method
+----------------------------
+==> Used To Count Number Of Words In String
+
+==> Syntax
+
+    str_word_count(String[Required] , Format[Optional] , CharList[Optional])
+
+==> [Format] Has 3 Values 0 or 1 or 2 , 0 Is Default , If Set To 1 It Return Each Word In String As Array Element And Indexes Start From 0 To Greater , If Set To 2 Return Each Word In String As Array Element And Each Array Element Index Is It's Index In The String
+==> str_word_count() Don't Calculate Symbols As Word But We Enable Count By Using [CharList]
+
+EX
+---
+
+    <?php 
+            
+        $str = "I Love Php So Much";
+
+        $count = str_word_count($str);
+
+        echo $count; // 5
+        
+    ?> 
+
+
+EX [Symbols Not Count As Word]
+---
+
+    <?php 
+            
+        $str = "I Love Php So & @ # Much";
+
+        $count = str_word_count($str);
+
+        echo $count; // 5
+        
+    ?>  
+
+
+EX [Format = 1]
+---
+
+    <?php 
+            
+        $str = "I Love Php So Much";
+
+        $arr = str_word_count($str , 1);
+
+        // Return Each Word In String As Array Element
+        print_r($arr); // Array ( [0] => I [1] => Love [2] => Php [3] => So [4] => Much )
+        
+    ?> 
+
+
+EX [Format = 2]
+---
+
+    <?php 
+            
+        $str = "I Love Php So Much";
+
+        $arr = str_word_count($str , 2);
+
+        // I Index In String = 0 , Love Index In String = 2 ......
+        print_r($arr); // Array ( [0] => I [2] => Love [7] => Php [11] => So [14] => Much )
+        
+    ?> 
+
+
+EX [Using CharList For Enable Count Symbols]
+---
+
+    <?php 
+            
+        $str = "I Love Php # So & Much";
+
+        $arr = str_word_count($str , 0 , "&#");
+
+        // Count The # And & As Words
+        print_r($arr); // 7
+        
+    ?>  
