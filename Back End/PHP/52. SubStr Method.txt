@@ -1,0 +1,74 @@
+(1) substr() Method
+---------------------
+==> Subtract String From String
+
+==> Syntax
+
+    substr(String[Required] , Start[Required] , Length Or Steps[Optional])
+
+
+EX
+---
+
+    <?php 
+
+        $str = 'I Love Php , Js , Ruby';
+        $sub = substr($str , 7);
+
+        // Subtract String From $str That Start From Index 7 To Last Of String
+        echo $sub; // Php , Js , Ruby
+
+    ?>  
+
+
+EX (Set Length Or Steps)
+---
+
+    <?php 
+
+        $str = 'I Love Php , Js , Ruby';
+        $sub = substr($str , 7 , 8);
+
+        // Slice 8 Characters After Index 7
+        echo $sub; // Php , Js
+
+    ?>  
+
+
+EX (Start Can Be Negative Without Set End)
+---
+
+    <?php 
+
+        $str = 'I Love Php , Js , Ruby';
+        $sub = substr($str , -15 );
+
+        echo $sub; // Php , Js , Ruby
+
+    ?>  
+
+
+EX (Start Can Be Negative With Set End)
+---
+
+    <?php 
+
+        $str = 'I Love Php , Js , Ruby';
+        $sub = substr($str , -15 , 15);
+
+        echo $sub; // Php , Js , Ruby
+
+    ?> 
+
+
+EX (Start And Length Can Be Negative)
+---
+
+    <?php 
+
+        $str = 'I Love Php , Js , Ruby';
+        $sub = substr($str , -15 , -5);
+
+        echo $sub; // Php , Js ,
+
+    ?>
