@@ -1,0 +1,94 @@
+(1) switch()
+---------------
+
+==> Syntax (Single Case)
+
+    switch(Expression){
+
+        case:
+            //Code
+            break;
+
+        case:
+            //Code
+            break;
+
+        default:
+            //Code
+    }
+
+
+==> Syntax (Multi Cases)
+
+    switch(Expression){
+
+        case:
+        case:
+            //Code
+            break;
+
+        case:
+        case:
+            //Code
+            break;
+
+        default:
+            //Code
+    }
+
+
+EX (Single Case)
+---
+
+    <?php 
+        
+        $salary = 2000;
+
+        switch($salary){
+
+            case 1000:
+                echo 'Low';
+                break;
+
+            case 2000:
+                echo 'Mid';
+                break;
+
+            case 3000:
+                echo 'High';
+                break;
+
+            default:
+                echo 'UnKnown';
+        }
+    ?> 
+
+
+EX (Multi Cases)
+---
+
+    <?php 
+        
+        $salary = 500;
+
+        switch($salary){
+
+            case 1000:
+            case 500:
+                echo 'Low';
+                break;
+
+            case 2000:
+            case 3000:
+                echo 'Mid';
+                break;
+
+            case 4000:
+            case 5000:
+                echo 'High';
+                break;
+
+            default:
+                echo 'UnKnown';
+        }
+    ?> 
