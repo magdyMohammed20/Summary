@@ -1,0 +1,60 @@
+(1) mkdir() Method
+--------------------
+==> Used To Create New Folder
+
+==> Syntax
+
+    mkdir(Folder_Name)
+
+EX
+---
+
+    <?php 
+        // Create Folder In Project Folder Called 'magdy'
+        mkdir('magdy');
+    ?>  
+
+
+(2) rmdir() Method
+--------------------
+==> Used To Remove Folder
+
+==> Syntax
+
+    rmdir(Folder_Name)
+
+EX
+---
+
+    <?php 
+
+        // Remove Folder Called 'magdy'
+        rmdir('magdy');
+
+    ?>  
+
+
+(3) isdir() Method
+-------------------
+==> Used To Check If Folder Exists
+
+==> Syntax
+
+    isdir(Folder_Name)
+
+
+EX
+---
+
+    <?php 
+
+        // If Folder Exist Remove It Else Create It 
+        if(is_dir('magdy')){
+            // Remove Folder Called 'magdy'
+            rmdir('magdy');
+        }else{
+            echo 'Folder Not Exists But We Create It Now';
+            mkdir('magdy');
+        }
+
+    ?>  
