@@ -1,0 +1,26 @@
+(1) fopen() Method
+-------------------
+==> Used To Handle File To Be Ready For Read And Write
+
+==> Syntax
+
+    fopen(filename Or URL[Required] , Mode[Required] , Include_Path[Optional] , Context[Optional])
+
+
+EX
+---
+
+    <?php 
+
+        // Handle File To Be Ready For 
+        // 'r'  : (Read Only) Starting Read File From Start [File Must Be Exist]
+        // 'r+' : (Read And) Write Starting Read , Write File From Start [File Must Be Exist]
+        // 'w'  : (Write Only) Starting Write File From Start And Clear File Content [If File Not Exists It Create It]
+        // 'w+' : (Read And Write) Starting Read , Write File From Start And Clear File Content [If File Not Exists It Create It]
+        // 'a'  : (Write Only) Starting Write File From End And Not Clear File Content  [If File Not Exists It Create It]
+        // 'a+' : (Read And Write) Starting Read , Write File From End And Not Clear File Content  [If File Not Exists It Create It]
+        // 'x'  : (Write Only) Write And Create New File And If File Exists It Produce Error
+        // 'x+' : (Write And Read) Write , Read And Create New File And If File Exists It Produce Error
+        $open = fopen('magdy.txt' , 'r+');
+        
+    ?> 
