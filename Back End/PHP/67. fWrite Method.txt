@@ -23,3 +23,19 @@ EX
         $write = fwrite($handle , 'This Is New Word');
         
     ?>
+
+
+EX (Set Length)
+---
+
+    <?php 
+        
+        // Handle File To Be Ready For 
+        $handle = fopen('magdy.txt' , 'a+');
+    
+        // Write 2 Bytes From 'Magdy' Inside 'magdy.txt'
+        fwrite($handle , 'Magdy' , 2);
+
+        // Original File: 
+        // File After Write: Ma
+    ?> 
