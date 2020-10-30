@@ -1,0 +1,25 @@
+(1) fwrite() Method
+---------------------
+==> Used To Write Content In File
+
+==> Syntax
+
+    fwrite(Handle[Required] , String[Required] , Length[Optional])
+
+
+EX
+---
+
+    <?php 
+        
+        // Handle File To Be Ready For 
+        $handle = fopen('magdy.txt' , 'r+');
+        
+        // Read All Bytes From 'magdy.txt' File
+        $read = fread($handle , filesize('magdy.txt'));
+        echo 'Original File Content Is: ' . $read . '<br>'; // Print 'magdy.txt' Content
+        
+        // Write "This Is New Word" At Last Of "magdy.txt"
+        $write = fwrite($handle , 'This Is New Word');
+        
+    ?>
