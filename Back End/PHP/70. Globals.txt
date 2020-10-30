@@ -1,0 +1,63 @@
+(1) Globals
+-------------
+==> Is Array Used To Store Globals Variables To Use It Anywhere
+
+
+EX (Normal Case)
+---
+
+    <?php 
+
+        function magdy(){
+            $name = 'Magdy';
+        }
+
+        echo $name; // Error: Undefined variable
+    ?> 
+
+
+EX (Use $GLOBALS)
+---
+
+    <?php 
+
+        $name = 'Magdy';
+        function magdy(){
+            
+            echo $GLOBALS['name'];
+        }
+
+        magdy(); // Magdy
+    ?> 
+
+
+EX (Use $GLOBALS)
+---
+
+    <?php 
+
+        function magdy(){
+            $GLOBALS['name'] = 'Magdy';
+        }
+
+        magdy(); // Must Call Here
+
+        echo $name; // Magdy
+    ?> 
+
+
+EX (Use $GLOBALS)
+---
+
+    <?php 
+
+        $name = 'Magdy';
+        function magdy(){
+            $name = 'Mohammed';
+            echo 'Local Name Is ' . $name .'<br>'; // Local Name Is Mohammed
+            echo 'Global Name Is ' . $GLOBALS['name'] .'<br>'; // Global Name Is Magdy
+        }
+
+        magdy();
+
+    ?> 
