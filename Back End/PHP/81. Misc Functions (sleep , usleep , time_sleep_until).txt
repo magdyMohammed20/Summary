@@ -1,0 +1,97 @@
+(1) sleep() Function
+----------------------
+==> Used To Stop The Execution Of Code That After sleep() Call By Number Of Seconds
+
+==> Syntax
+-----------
+
+    sleep(Seconds)
+
+
+EX
+---
+
+    <?php
+        
+        $name = 'Magdy';
+
+        sleep(5); // Page Will Reload With 5 Seconds Then Print The Name
+
+        echo $name;
+    ?>
+
+EX
+---
+
+    <?php
+        
+        function chkFile(){
+            if(file_exists('magdy.txt')){
+                echo 'Yes File Founded';
+            }else{
+                sleep(5);
+                chkFile();
+            }
+        }
+
+        // Will Check If File Exist
+        // If Exist Will Print Message
+        // Else Will Reload For 5 Seconds Then Call The Function Again
+        // If I Create The File While Page Reloaded It Will Print The Message
+        chkFile()
+    ?>
+
+
+(2) usleep() Function
+----------------------
+==> Used To Stop The Execution Of Code That After usleep() Call By Number Of MicroSeconds
+
+==> Syntax
+-----------
+
+    // 1000000 MicroSeconds = 1 Second 
+    sleep(MicroSeconds)
+
+EX
+---
+
+    <?php
+        
+        $name = 'Magdy';
+
+        usleep(2000000); // Page Will Reload With 2 Seconds Then Print The Name
+
+        echo $name;
+    ?>
+
+
+(3) time_sleep_until() Function
+--------------------------------
+==> Used To Stop The Execution Of Code That After time_sleep_until() Call By Number Of Seconds And Can Accept Time Stamp
+
+==> Syntax
+-----------
+
+    time_sleep_until(TIMESTAMP)
+
+
+EX
+---
+
+    <?php
+        
+        function chkFile(){
+            if(file_exists('magdy.txt')){
+                echo 'Yes File Founded';
+            }else{
+                time_sleep_until(time() + 5);
+                chkFile();
+            }
+        }
+
+        // Will Check If File Exist
+        // If Exist Will Print Message
+        // Else Will Reload For 5 Seconds From Current Exextion Time Then Call The Function Again
+        // If I Create The File While Page Reloaded It Will Print The Message
+        chkFile()
+    ?>
