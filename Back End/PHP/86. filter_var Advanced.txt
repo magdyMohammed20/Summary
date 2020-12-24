@@ -1,0 +1,100 @@
+(1) Adding More Options To filter_var()
+---------------------------------------
+==> filter_var Options Is Array
+
+EX
+---
+
+    index.php
+    ----------
+
+    <form action='chk.php' method='POST'>
+        <input type='text' name='test'/>
+        <input type='submit' value='Send'/>
+    </form>
+
+
+    chk.php
+    --------
+
+    <?php
+
+        // Create Filter Options As Multidiminisional Array
+        $opt = array(
+            'options' => array(
+                'min_range' => 1,
+                'max_range' => 200
+            )
+        );
+
+        // Pass Filter Options To filter_var()
+        $out = filter_var($_POST['test'] , FILTER_VALIDATE_INT , $opt);
+
+        if($out){
+            echo 'Yes Output Is Integer And In Range';
+        }else{
+            echo 'No Output May Be Not Integer Or Not In Range';
+        }
+    ?>
+
+EX
+---
+
+    index.php
+    ----------
+
+    <form action='chk.php' method='POST'>
+        <input type='text' name='test'/>
+        <input type='submit' value='Send'/>
+    </form>
+
+
+    chk.php
+    --------
+
+    <?php
+
+        // Create Filter Options As Multidiminisional Array
+        // Options Array Can Accept 'flags'
+        $opt = array(
+            'options' => array(),
+            'flags' => FILTER_FLAG_IPV4
+        );
+
+        // Pass Filter Options To filter_var()
+        $out = filter_var($_POST['test'] , FILTER_VALIDATE_IP , $opt);
+
+        if($out){
+            echo 'Yes Output Is Valid Ipv4';
+        }else{
+            echo 'No Output Is Not Valid Ipv4';
+        }
+    ?>
+
+
+EX
+---
+
+    index.php
+    ----------
+
+    <form action='chk.php' method='POST'>
+        <input type='text' name='test'/>
+        <input type='submit' value='Send'/>
+    </form>
+
+
+    chk.php
+    --------
+
+    <?php
+
+        // If filter_type Has Flag You Can Pass The Flag Directly Without Use Array
+        $out = filter_var($_POST['test'] , FILTER_VALIDATE_IP , FILTER_FLAG_IPV4);
+
+        if($out){
+            echo 'Yes Output Is Valid Ipv4';
+        }else{
+            echo 'No Output Is Not Valid Ipv4';
+        }
+    ?>
