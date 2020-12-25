@@ -1,0 +1,153 @@
+(1) Final Keyword
+-------------------
+==> If I Have 2 Classes And Second Class Extends The First Class And Second Class Has Same Function I First Class And I Want Second Class Inherit This Function Without Change It
+
+
+EX (Sample Without 'Final' Keyword)
+---
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            public $memory = '3GB';
+            public $inch = '6inch';
+            public $space = '32GB';
+            
+            public function changeSpec($mem , $in , $space){
+                $this->memory = $mem;
+                $this->inch = $in;
+                $this->space = $space;
+            }
+
+            
+            public function sayHellow($n){
+                $this->name = $n;
+                echo 'Welcome To ' . $n . '<br><br>';
+            }
+
+        }
+
+        // Create Class Called "sonyDevice"
+        // This Class Has Same Properties Of 'appleDevice' But '$camera' Is Additional
+        class sonyDevice extends appleDevice{
+
+            public $camera = '25MB';
+
+            
+            public function sayHellow($n){
+                $this->name = $n;
+                echo 'Welcome ' . $n . '<br><br>';
+            }
+
+        }
+
+        // Note : When Redefine sayHellow() Inside 'sony' Class We Remove 'To' Word And We Want To Prevent This Edit     
+        // So We Will Use 'final' Keyword
+        $iPhone6Plus = new appleDevice();
+        $iPhone6Plus->sayHellow('iPhone 6 Plus'); // Welcome To iPhone 6 Plus
+
+        $sony = new sonyDevice();
+        $sony->sayHellow('Sony'); // Welcome Sony
+        
+        
+
+    ?>
+
+
+EX (Sample With 'Final' Keyword)
+---
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            public $memory = '3GB';
+            public $inch = '6inch';
+            public $space = '32GB';
+            
+            public function changeSpec($mem , $in , $space){
+                $this->memory = $mem;
+                $this->inch = $in;
+                $this->space = $space;
+            }
+
+            
+            final public function sayHellow($n){
+                $this->name = $n;
+                echo 'Welcome To ' . $n . '<br><br>';
+            }
+
+        }
+
+        // Create Class Called "sonyDevice"
+        // This Class Has Same Properties Of 'appleDevice' But '$camera' Is Additional
+        // Note: We Remove 'sayHellow' Method From Here As It Defined With 'Final' Keyword In The Super Class
+        class sonyDevice extends appleDevice{
+
+            public $camera = '25MB';
+
+        }
+
+        // Note : When Redefine sayHellow() Inside 'sony' Class We Remove 'To' Word And We Want To Prevent This Edit     
+        // So We Will Use 'final' Keyword
+        $iPhone6Plus = new appleDevice();
+        $iPhone6Plus->sayHellow('iPhone 6 Plus'); // Welcome To iPhone 6 Plus
+
+        $sony = new sonyDevice();
+        $sony->sayHellow('Sony'); // Welcome To Sony
+        
+        
+
+    ?>
+
+
+(2) We Can Use 'Final' Keyword With The Class And It Will Make The Class Not Extendable
+-----------------------------------------------------------------------------------------
+==> In Following Sample 'sonyDevice' Can't Extend 'appleDevice' As It Defined As Final Class
+
+EX
+---
+
+    <?php
+
+        // This Class Not Extendable
+        final class appleDevice{
+
+            public $memory = '3GB';
+            public $inch = '6inch';
+            public $space = '32GB';
+            
+            public function changeSpec($mem , $in , $space){
+                $this->memory = $mem;
+                $this->inch = $in;
+                $this->space = $space;
+            }
+
+            
+            final public function sayHellow($n){
+                $this->name = $n;
+                echo 'Welcome To ' . $n . '<br><br>';
+            }
+
+        }
+
+
+        // Fatal error: Class sonyDevice may not inherit from final class (appleDevice) in C:\Xampp\htdocs\php_Elzero\index.php on line 29
+        class sonyDevice extends appleDevice{
+
+            public $camera = '25MB';
+
+        }
+
+        $iPhone6Plus = new appleDevice();
+        $iPhone6Plus->sayHellow('iPhone 6 Plus');
+
+        $sony = new sonyDevice();
+        $sony->sayHellow('Sony');
+        
+        
+
+    ?>
