@@ -1,0 +1,115 @@
+(1) Define Constant Property Inside The Class
+----------------------------------------------
+==> :: => Called (Scope Resolution Operator) And Used To Access Constant Properties
+
+
+EX
+---
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            // Define Class Properties (You Can Use 'var' Instead Of 'public')
+            public $memory;
+            public $inch;
+            public $space;
+            public $ownerName;
+
+            // Define Constant Property
+            const OWNERNAME = 5;
+
+            public function checkOwner(){
+                // Use 'self' Keyword And [::] That Called (Scope Resolution Operator) To Access The Constant Properties
+                if(strlen($this->ownerName) < self::OWNERNAME){
+                    echo 'Sorry Owner Name Can\'t Be Less Than 5 Characters';
+                }else{
+                    echo 'Owner Name Set Success';
+                }
+            }
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        // Set Class Properties Values
+        $iPhone6Plus->memory = '2GB';
+        $iPhone6Plus->inch = '6Inch';
+        $iPhone6Plus->space = '32GB';
+        $iPhone6Plus->ownerName = 'Magdy';
+
+        // Call Class Method
+        $iPhone6Plus->checkOwner(); // Owner Name Set Success
+    ?>
+
+
+(2) Access Constant Property Outside The Class
+-----------------------------------------------
+
+==> First Way (Print Through Class Name)
+-----------------------------------------
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            // Define Class Properties (You Can Use 'var' Instead Of 'public')
+            public $memory;
+            public $inch;
+            public $space;
+            public $ownerName;
+
+            // Define Constant Property
+            const OWNERNAME = 5;
+
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        // Set Class Properties Values
+        $iPhone6Plus->memory = '2GB';
+        $iPhone6Plus->inch = '6Inch';
+        $iPhone6Plus->space = '32GB';
+        $iPhone6Plus->ownerName = 'Magdy';
+
+        // Access Constant Property Outside The Class
+        echo appleDevice::OWNERNAME; // 5
+
+    ?>
+
+
+==> Second Way (Print Through Object Name)
+-------------------------------------------
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            // Define Class Properties (You Can Use 'var' Instead Of 'public')
+            public $memory;
+            public $inch;
+            public $space;
+            public $ownerName;
+
+            // Define Constant Property
+            const OWNERNAME = 5;
+
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        // Set Class Properties Values
+        $iPhone6Plus->memory = '2GB';
+        $iPhone6Plus->inch = '6Inch';
+        $iPhone6Plus->space = '32GB';
+        $iPhone6Plus->ownerName = 'Magdy';
+
+        // Access Constant Property Outside The Class
+        echo $iPhone6Plus::OWNERNAME; // 5
+
+    ?>
