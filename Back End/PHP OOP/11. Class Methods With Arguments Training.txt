@@ -1,0 +1,70 @@
+(1) Class Method With Arguments
+---------------------------------
+
+EX
+---
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            // Define Class Properties (You Can Use 'var' Instead Of 'public')
+            public $memory;
+            public $inch;
+            public $space;
+
+            public function changeSpec($mem){
+                $this->memory = $mem;
+            }
+        
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        // Set Class Properties Values
+        $iPhone6Plus->inch = '6Inch';
+        $iPhone6Plus->space = '32GB';
+        $iPhone6Plus->ownerName = 'Magdy';
+        
+        // Pass Class Properties Value Through Method
+        $iPhone6Plus->changeSpec("4GB");
+
+        echo '<pre>';
+        var_dump($iPhone6Plus); // object(appleDevice)#1 (4) { ["memory"]=> string(3) "4GB" ["inch"]=> string(5) "6Inch" ["space"]=> string(4) "32GB" ["ownerName"]=> string(5) "Magdy" }
+        echo '</pre>';
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            // Define Class Properties (You Can Use 'var' Instead Of 'public')
+            public $memory;
+            public $inch;
+            public $space;
+
+            public function changeSpec($mem , $in , $space){
+                $this->memory = $mem;
+                $this->inch = $in;
+                $this->space = $space;
+            }
+        
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+
+        // Pass Class Properties Values Through Method
+        $iPhone6Plus->changeSpec("4GB" , "6Inch" , "32GB");
+
+        echo '<pre>';
+        var_dump($iPhone6Plus); // object(appleDevice)#1 (4) { ["memory"]=> string(3) "4GB" ["inch"]=> string(5) "6Inch" ["space"]=> string(4) "32GB" }
+        echo '</pre>';
+    ?>
