@@ -1,0 +1,108 @@
+(1) Inheritance
+----------------
+==> If I Have 2 Classes And Have Same Properties But 1 Class Has Additional Properties And I Want To Prevent Code Repetation
+
+EX
+---
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            public $memory = '3GB';
+            public $inch = '6inch';
+            public $space = '32GB';
+            
+            public function changeSpec($mem , $in , $space){
+                $this->memory = $mem;
+                $this->inch = $in;
+                $this->space = $space;
+            }
+
+        }
+
+        // Create Class Called "sonyDevice"
+        // This Class Has Same Properties Of 'appleDevice' But '$camera' Is Additional
+        class sonyDevice extends appleDevice{
+
+            public $camera = '25MB';
+
+
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        // Create Object From "sonyDevice" Class
+        $sony = new sonyDevice();
+
+        
+        echo '<pre>';
+        print_r($sony); // sonyDevice Object ([camera] => 25MB [memory] => 3GB [inch] => 6inch [space] => 32GB)
+        echo '</pre>';
+
+        echo '<br><br>';
+        
+
+        echo '<pre>';
+        print_r($iPhone6Plus); // appleDevice Object ( [memory] => 3GB [inch] => 6inch [space] => 32GB )
+        echo '</pre>';
+    ?>
+
+
+EX (If Want To Edit The Extended Function From 'appleDevice' You Can Create New Function With New Name And Additional Properties)
+----------------------------------------------------------------------------------------------------------------------------------
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            public $memory = '3GB';
+            public $inch = '6inch';
+            public $space = '32GB';
+            
+            public function changeSpec($mem , $in , $space){
+                $this->memory = $mem;
+                $this->inch = $in;
+                $this->space = $space;
+            }
+
+        }
+
+        // Create Class Called "sonyDevice"
+        // This Class Has Same Properties Of 'appleDevice' But '$camera' Is Additional
+        class sonyDevice extends appleDevice{
+
+            public $camera = '25MB';
+
+            // If Want To Edit The Extended Function From 'appleDevice' You Can Create New Function With New Name And Additional Properties
+            public function changeSpecs($mem , $in , $space , $cam){
+                $this->memory = $mem;
+                $this->inch = $in;
+                $this->space = $space;
+                $this->camera = $cam;
+            }
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        // Create Object From "sonyDevice" Class
+        $sony = new sonyDevice();
+
+        $sony->changeSpecs('4GB' , '6inch' , '32GB' , '25MB');
+        
+        echo '<pre>';
+        print_r($sony); // sonyDevice Object ( [camera] => 25MB [memory] => 4GB [inch] => 6inch [space] => 32GB )
+        
+        echo '</pre>';
+
+        echo '<br><br>';
+        
+
+        echo '<pre>';
+        print_r($iPhone6Plus); // appleDevice Object ( [memory] => 3GB [inch] => 6inch [space] => 32GB )
+        echo '</pre>';
+    ?>
