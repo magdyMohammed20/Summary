@@ -1,0 +1,12 @@
+(1) Why OOP
+------------
+==> Add More Security To The Code
+==> More Dynamic For Code (EX: Like Include Navbar In 1 File And Can Call It Anywhere)
+==> More Clean (Oragnaize Structure Of The App)
+
+
+(2) What I Need To Learn Before PHP OOP
+----------------------------------------
+==> Advanced Php
+==> Text Editor Like (VScode , Sublime , Netbeans)
+==> Server With Xampp
