@@ -1,0 +1,17 @@
+(1) Create Class And Object
+----------------------------
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        echo '<pre>';
+        var_dump($iPhone6Plus); // object(appleDevice)#1 (0) {}
+        echo '</pre>';
+    ?>
