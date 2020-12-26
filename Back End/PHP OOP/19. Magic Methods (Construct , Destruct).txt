@@ -1,0 +1,82 @@
+(1) Magic Methods
+------------------
+==> Method With Spaecial Name Start With Double Underscore [__]
+
+(2) construct
+--------------
+==> Is Magic Method That Executed When Start Creating The Object From The Class
+==> Construct Can Be Inherited
+==> Can Pass Parameters To Construct
+
+EX
+---
+
+    <?php
+
+        class phone{
+
+            public $name;
+
+            public function __construct(){
+                echo 'Starting Creating Object Now' . '<br>';
+            }
+
+            public function sayHellow(){
+                echo 'Hellow From The Class';
+            }
+        }
+
+        // Construct Called When Creating New Object From The Class
+        $iPhone = new phone(); // Starting Creating Object Now
+        $iPhone->sayHellow(); // Hellow From The Class
+
+    ?>
+
+
+EX (Construct Can Be Inherited)
+---
+
+    <?php
+
+        class phone{
+
+            public $name;
+
+            public function __construct(){
+                echo 'Starting Creating Object Now' . '<br>';
+            }
+
+            public function sayHellow(){
+                echo 'Hellow From The Class';
+            }
+        }
+
+        // 'sony' Class Will Inherit All Properties , Methods And Construct Of 'phone' Class
+        class Sony extends phone{}
+
+        $sony = new Sony(); // Starting Creating Object Now
+        $sony->sayHellow(); // Hellow From The Class
+
+    ?>
+
+
+EX (Can Pass Parameters To Construct)
+---
+
+    <?php
+
+        class phone{
+
+            public function __construct($n){
+                echo 'Hellow '. $n . '<br>';
+            }
+        }
+
+        // Can Pass Construct Arguments While Creating Object From The Class
+        $iPhone = new phone('Magdy'); // Hellow Magdy
+        
+    ?>
+
+(3) destruct
+--------------
+==> Is Magic Method That Executed When Object Destroyed
