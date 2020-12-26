@@ -1,0 +1,96 @@
+(1) Conflicts Between Traits
+-------------------------------
+
+EX (Error: Both Of Traits Contains Method With Same Name)
+---
+
+    <?php
+
+        trait feature1{
+            public function sayHellow(){
+                echo 'Hellow From feature1 <br>'; 
+            }
+        }
+
+        trait feature2{
+            public function sayHellow(){
+                echo 'Hellow From feature2 <br>'; 
+            }
+        }
+
+        class Phone{
+            use feature1 , feature2;
+        }
+
+
+        $phone = new Phone();
+    
+        // feature1 , feature2 Are Traits That Have Method With Same Name And This Is Called 'collisions'
+        $phone->sayHellow(); // Fatal error: Trait method sayHellow has not been applied, because there are collisions with other trait methods on Phone
+    ?>
+
+
+EX (Solve Problem Of collisions)
+---
+
+    <?php
+
+        trait feature1{
+            public function sayHellow(){
+                echo 'Hellow From feature1 <br>'; 
+            }
+        }
+
+        trait feature2{
+            public function sayHellow(){
+                echo 'Hellow From feature2 <br>'; 
+            }
+        }
+
+        class Phone{
+            use feature1 , feature2{
+                // Make The Class Use The Function That Inside 'feature2' Instead Of The Function That Inside 'feature1'
+                // Syntax: Trait_Name :: Method_Name insteadof Other_Trait_Name
+                feature2::sayHellow insteadof feature1;
+            }
+        }
+
+
+        $phone = new Phone();
+    
+        $phone->sayHellow(); // Hellow From feature2
+    ?>
+
+
+EX (In Above Sample We Don't Have Access To sayHellow() That In feature1 And Want To Solve This Problem By Using 'as' Alias)
+---
+
+    <?php
+
+        trait feature1{
+            public function sayHellow(){
+                echo 'Hellow From feature1 <br>'; 
+            }
+        }
+
+        trait feature2{
+            public function sayHellow(){
+                echo 'Hellow From feature2 <br>'; 
+            }
+        }
+
+        class Phone{
+            use feature1 , feature2{
+                // Give Alias For sayHellow Method That Inside 'feature1'
+                feature1::sayHellow as aliasedFeat;
+                
+                feature2::sayHellow insteadof feature1;
+            }
+        }
+
+
+        $phone = new Phone();
+    
+        $phone->sayHellow(); // Hellow From feature2
+        $phone->aliasedFeat(); // Hellow From feature1
+    ?>
