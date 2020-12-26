@@ -1,0 +1,95 @@
+(1) Static Keyword
+-------------------
+==> Static Properties/Methods Used To Access Properties And Methods In A Global Scope
+==> Declaring Class Properties Or Methods As Static Makes Them Accessible Without Needing An Instantiation Of The Class (Creating Object From The Class)
+
+
+EX (Access Non Static Class Property)
+---
+
+    <?php
+
+        class Main{
+
+            public $name = 'Magdy';
+            public $email;
+            
+            public function sayHellow(){
+                return 'Hellow';
+            }
+            
+        }
+
+        echo Main::$name; // Fatal error: Access to undeclared static property: Main::$name in C:\Xampp\htdocs\php_Elzero\index.php on line 14
+    ?>
+
+
+EX (Access Static Class Property)
+---
+
+    <?php
+
+        class Main{
+
+            public static $name = 'Magdy';
+            public $email;
+            
+            public function sayHellow(){
+                return 'Hellow';
+            }
+            
+        }
+
+        echo Main::$name; // Magdy
+    ?>
+
+
+(2) [$this] Has No Meaning Inside Static Method 
+------------------------------------------------
+
+    <?php
+
+        class Main{
+            public $name;
+            public function sayHellow(){
+                $this->name = 'Magdy'; // Fatal error: Using $this when not in object context in C:\Xampp\htdocs\php_Elzero\index.php on line 6
+                return 'Hellow';
+            }
+            
+        }
+
+        echo Main::sayHellow();
+    ?>
+
+
+(3) If Create An Object From The Class You Can't Use The Static Properties Outside The Class
+----------------------------------------------------------------------------------------------
+
+    <?php
+
+        class Main{
+            public static $name = 'Magdy';
+        }
+
+        $child = new Main();
+
+        echo $child->name; // Notice: Undefined property: Main::$name
+    ?>
+
+
+(4) If Create An Object From The Class You Can Use The Static Methods Outside The Class
+----------------------------------------------------------------------------------------------
+
+    <?php
+
+        class Main{
+            public static $name;
+            
+            public static function sayHellow(){
+                return 'Hellow';
+            }
+        }
+
+        $child = new Main();
+        echo $child->sayHellow(); // Hellow
+    ?>
