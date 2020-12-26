@@ -1,0 +1,78 @@
+(1) Call Method [__call]
+-------------------------
+==> Is Magic Method That Called When Invoking Function Not Accessable Or Not Founded
+==> Accept 2 Parameters (method_name , parameters)
+
+
+EX (Method Not Founded In The Class)
+---
+
+    <?php
+
+        class phone{
+
+            public $name;
+
+            public function __call($method , $params){
+                echo 'Sorry "' . $method . '" Not Founded Or Not Accessable';
+            }
+        }
+
+        $iPhone = new phone();
+
+        $iPhone->sayHellow(); // Sorry "sayHellow" Not Founded Or Not Accessable
+        
+    ?>
+
+
+EX (Method Not Accessable [private])
+---
+
+    <?php
+
+        class phone{
+
+            public $name;
+
+            // 'sayHellow' Exist But It Not Accessable
+            private function sayHellow(){
+
+            }
+            
+            public function __call($method , $params){
+                echo 'Sorry "' . $method . '" Not Founded Or Not Accessable';
+            }
+        }
+
+        $iPhone = new phone();
+
+        $iPhone->sayHellow(); // Sorry "sayHellow" Not Founded Or Not Accessable
+        
+    ?>
+
+
+EX (Printing Parameters)
+---
+
+    <?php
+
+        class phone{
+
+            public $name;
+
+            // 'sayHellow' Exist But It Not Accessable
+            private function sayHellow(){
+
+            }
+            
+            public function __call($method , $params){
+                echo 'Sorry "' . $method . '" Not Founded Or Not Accessable <br>';
+                print_r($params);
+            }
+        }
+
+        $iPhone = new phone();
+
+        $iPhone->sayHellow('f'); // Sorry "sayHellow" Not Founded Or Not Accessable
+                                // Array ( [0] => f )
+    ?>
