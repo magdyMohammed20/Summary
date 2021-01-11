@@ -1,0 +1,7 @@
+(1) Mysql Date And Time
+-------------------------
+==> DATE      : YYYY:MM:DD   (EX: 20000305 Is [2000-03-05]) (Minimum: 1000-01-01 , Maximum: 9999-12-31)
+==> DATETIME  : YYYY:MM:DD HH:Mi:SS
+==> TIMESTAMP : YYYY:MM:DD HH:Mi:SS
+==> TIME      : HH:Mi:SS
+==> YEAR      : YYYY Or YY
