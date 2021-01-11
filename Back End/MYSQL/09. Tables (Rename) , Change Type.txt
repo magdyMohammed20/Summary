@@ -1,0 +1,12 @@
+(1) Rename Table
+------------------
+
+    RENAME TABLE magdy1 TO magdy2; // Change Table Name From 'magdy1' To 'magdy2'
+
+    RENAME TABLE magdy1 TO magdy2 , magdy3 TO magdy4; /* Rename Multi Tables */
+
+
+(2) Change Table Storage Engine
+--------------------------------
+
+    ALTER TABLE magdy1 ENGINE = MYISAM;
