@@ -1,0 +1,10 @@
+(1) What's MYSQL
+------------------
+==> Relational DB That Popular For Web Application
+==> MYSQL Owned By Oracle
+==> MYSQL Is Free
+==> MYSQL Is Open Source
+==> MYSQL Is Easy To Use
+==> MYSQL Use SQL Standard
+==> MYSQL Is Relational Database Management System [RDBMS]
+==> MYSQL Used In More Websites [Facebook , Google , Wikipidea] 
