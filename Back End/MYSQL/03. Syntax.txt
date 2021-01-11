@@ -1,0 +1,13 @@
+(1) MYSQL Authentication By Default Has No Password If Want To Set It Open [Xampp] Folder And Open [config.inc] File
+
+(2) If Want To Login To MYSQL By Using Password Write [mysql -u root -p] Then Enter The Password
+
+(3) Create Database
+---------------------
+==> Write [CREATE DATABASE first_db] In CMD Or Inside phpmyadmin
+==> Write [CREATE DATABASE IF NOT EXISTS first_db] For Prevent Error If Database Already Exist
+
+(4) Delete Database
+----------------------
+==> Write [DROP DATABASE first_db] In CMD Or Inside phpmyadmin
+==> Write [DROP DATABASE IF EXISTS first_db] For Prevent Error If Database Not Exist
