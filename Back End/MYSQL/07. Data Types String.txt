@@ -1,0 +1,30 @@
+(1) Mysql String Data Types
+----------------------------
+
+==> CHAR (Character) 
+---------------------
+--> Store Fixed Value (Max_Characters: 255)
+--> Faster Than VARCHAR As Use Static Memory
+
+==> VARCHAR(Variable Character) 
+--------------------------------
+--> Store Variable Value (Max_Characters[v5.0.3]: 255 , Max_Characters[v5.0.3+]: 65.535)
+--> Slower Than CHAR As Use Dynamic Memory
+
+==> TEXT
+---------
+--> Store String (EX: Comments , Articles)
+--> Deal And Compared Depend On Charset
+
+==> TINYTEXT
+==> MEDIUMTEXT
+==> LONGTEXT
+
+==> BLOB (Binary Large Object)
+---------
+--> Used To Store Images And Files As Binary
+--> Deal And Compared Depend On Numeric Value Of The Bytes
+--> Has No Charset
+
+==> ENUM : Give User Specific Value(s) And Can Select Only 1 Value And Can't Write Another Option Outside The Specified Values
+==> SET  : Give User Specific Value(s) And Can Select Multi Values And Can't Write Another Option(s) Outside The Specified Values
