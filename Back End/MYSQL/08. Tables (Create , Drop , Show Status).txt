@@ -1,0 +1,40 @@
+(1) Create Table
+------------------
+
+EX
+---
+
+    CREATE TABLE employees (
+        id INT(11),
+        name VARCHAR(50),
+        email VARCHAR(50)
+    );
+
+
+(2) Get Info About The Table 
+-----------------------------
+
+EX (This Statements Get Same Result)
+---
+
+    DESCRIBE employees;
+    
+    Or
+
+    SHOW COLUMNS FROM employees;
+
+    Or
+
+    SHOW FIELDS FROM employees;
+
+
+EX
+---
+
+    SHOW TABLE STATUS
+
+
+(3) Get The Code Statements That Table Created By It
+------------------------------------------------------
+
+    SHOW CREATE TABLE employees; /* CREATE TABLE `employees` (`id` int(11) DEFAULT ... */
