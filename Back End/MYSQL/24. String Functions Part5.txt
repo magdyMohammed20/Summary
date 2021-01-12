@@ -1,0 +1,22 @@
+(1) String Functions
+---------------------
+==> CONCAT : Used To Concatenate Strings
+==> CONCAT_WS: Used To Concatenate Strings With Separator
+
+(2) CONCAT() Syntax
+--------------------
+==> CONCAT(String1 , String2 , String3,...)
+
+EX: SELECT CONCAT(first_name,' ', second_name,' ', family_name) AS FullName FROM users;
+
+
+(3) CONCAT_WS() Syntax
+-----------------------
+==> CONCAT_WS(Separator , String1 , String2 , ....)
+
+EX: SELECT CONCAT_WS(' ', first_name, second_name, family_name) AS FullName FROM users;
+
+
+(4) Merge CONCAT() And CONCAT_WS()
+-----------------------------------
+==> SELECT CONCAT_WS('-', CONCAT(first_name , ' '), CONCAT(' ' , second_name ,' '), CONCAT(' ' , family_name)) AS FullName FROM users;
