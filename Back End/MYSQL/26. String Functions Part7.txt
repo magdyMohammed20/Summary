@@ -1,0 +1,37 @@
+(1) String Functions
+-----------------------
+==> TRIM  : Used To Remove Specific Characters Or/And Spaces From Any Side Of The String
+==> LTRIM : Used To Remove Spaces From Left Side Of String
+==> RTRIM : Used To Remove Spaces From Right Side Of String
+
+
+(2) TRIM() Syntax
+------------------
+==> TRIM(
+        Methods[ Leading | Trailing | Both[Default] ](Optional) 
+        [Remove String [Default Is Space]](Optional) 
+        [String] (Mandatory)
+    )
+
+
+EX: SELECT text , TRIM(text) from test; /* Remove Spaces From Both Sides Of String */
+EX: SELECT text , TRIM(LEADING FROM text) from test; /* Remove Spaces From Begining Of String */
+EX: SELECT text , TRIM(TRAILING FROM text) from test; /* Remove Spaces From End Of String */
+EX: SELECT text , TRIM(BOTH FROM text) from test; /* Remove Spaces From Both Sides Of String */
+EX: SELECT text , TRIM(BOTH 'Sa' FROM text) from test /* Remove 'Sa' From Both Sides Of String */
+EX: SELECT text , TRIM(LEADING 'Sa' FROM text) from test /* Remove 'Sa' From Begining Of String */
+EX: SELECT text , TRIM(TRAILING 'Sa' FROM text) from test /* Remove 'Sa' From End Of String */
+
+
+(3) LTRIM() Syntax
+-------------------
+==> LTRIM(String)
+
+EX: SELECT text , LTRIM(text) FROM test;
+
+
+(4) RTRIM() Syntax
+-------------------
+==> RTRIM(String)
+
+EX: SELECT text , RTRIM(text) FROM test;
