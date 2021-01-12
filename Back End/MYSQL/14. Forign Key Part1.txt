@@ -1,0 +1,25 @@
+(1) Foreign Key
+----------------
+==> Is Key That Used In Relationships Between Tables
+
+EX
+---
+
+    /* Create clients Table */
+    CREATE TABLE clients(
+        id INT NOT NULL,
+        username VARCHAR(50) UNIQUE,
+        email VARCHAR(255) UNIQUE,
+        PRIMARY KEY(id)
+    ) ENGINE=InnoDB; /* As InnoDB Supports Foreign Key */
+
+
+    /* Create Orders Table And Foreign Key */
+    CREATE TABLE orders(
+        order_id INT NOT NULL,
+        order_name VARCHAR(50),
+        order_price VARCHAR(255),
+        client_id INT NOT NULL,
+        PRIMARY KEY(order_id),
+        FOREIGN KEY(client_id) REFERENCES clients(id)
+    ) ENGINE=InnoDB;
