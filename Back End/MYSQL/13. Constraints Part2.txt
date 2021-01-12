@@ -1,0 +1,38 @@
+(1) Primary Key
+----------------
+==> Same As Unique As Don't Accept Repeated Values In Same Column But Don't Accept [NULL] Value
+==> Only 1 Column In The Table Can Be Primary Key But Unique Can Assigned To More Than 1 Field
+
+
+EX (First Way Of Create Field As Primary Key)
+---
+
+    CREATE TABLE classes(
+        id INT NOT NULL PRIMARY KEY,
+        name VARCHAR(50) NOT NULL
+    );
+
+
+EX (Second Way Of Create Field As Primary Key)
+---
+
+    CREATE TABLE teachers(
+        id INT NOT NULL,
+        name VARCHAR(50),
+        PRIMARY KEY(id)
+    );
+
+
+EX (Add PRIMARY KEY Constraint To Existing Field)
+---
+==> ALTER TABLE employees ADD PRIMARY KEY(id);
+
+
+EX (Remove Primary Key Constraint From The Table)
+---
+==> ALTER TABLE employees DROP PRIMARY KEY;
+
+
+EX (Show The Primary Key And Unique Fields Of Table)
+---
+==> SHOW INDEXES FROM teachers;
