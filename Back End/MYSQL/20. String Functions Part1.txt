@@ -1,0 +1,32 @@
+(1) String Functions
+----------------------
+==> LEFT: Get Speific Number Of Characters From The Given String From Left Direction
+==> RIGHT: Get Speific Number Of Characters From The Given String From Right Direction
+==> MID: Get Speific Number Of Characters From The Given String From Specific Position
+
+(2) LEFT() Syntax
+------------------
+==> LEFT(String , Length)
+
+EX
+---
+    SELECT LEFT(text, 3) FROM test; /* Get First 3 Characters From Left From 'text' Column */
+
+
+(3) RIGHT() Syntax
+--------------------
+==> RIGHT(String , Length)
+
+EX
+---
+    SELECT RIGHT(text, 3) FROM test; /* Get First 3 Characters From Right From 'text' Column */
+
+
+(4) MID() Syntax
+--------------------
+==> MID(String[Mandatory] , Position[Mandatory] , Number_Of_Characters[Optional])
+
+EX
+---
+    SELECT MID(text, 3) FROM test;  /* Start Slice Part Of String From The Third Character */
+    SELECT MID(text, 3 , 2) FROM test;  /* Start Slice Part Of String From The Third Character And Get 2 Characters Only*/
