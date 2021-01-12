@@ -1,0 +1,38 @@
+(1) Forign Key Relationships
+------------------------------
+==> One To Many
+==> One To One
+==> Many To Many
+
+
+(2) Many To Many
+-----------------
+==> Users Can Share In Multi Shops And Shops Can Have Multi Users
+
+EX
+---
+
+    CREATE TABLE shop(
+        
+        id INT NOT NULL PRIMARY KEY,
+        name VARCHAR(255)
+
+    ) ENGINE=INNODB;
+
+
+    /* Create Table That Connect Between 'shop' Table And 'clients' Table */
+    CREATE TABLE shopMember(
+        shop_id INT NOT NULL,
+        client_id INT NOT NULL,
+        PRIMARY KEY(shop_id , client_id),
+        
+        CONSTRAINT cons_shop 
+            FOREIGN KEY(shop_id) REFERENCES shop(id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE,
+        
+        CONSTRAINT cons_clients
+            FOREIGN KEY(client_id) REFERENCES clients(id)
+            ON UPDATE CASCADE
+            ON DELETE CASCADE
+    ) ENGINE=INNODB;
