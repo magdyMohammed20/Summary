@@ -1,0 +1,27 @@
+(1) Add New Field In Table And At End Of Table
+-----------------------------------------------
+==> ALTER TABLE employees ADD salary VARCHAR(255); 
+
+(2) Add New Field In Table In Specific Position
+------------------------------------------------
+==> ALTER TABLE emps ADD address VARCHAR(255) AFTER name; /* Add 'address' Field After 'name' Field */
+
+(3) Add New Field At First Of Table 
+--------------------------------------
+==> ALTER TABLE emps ADD a1 VARCHAR(255) FIRST;
+
+(4) Remove Field From Table
+----------------------------
+==> ALTER TABLE emps DROP a1;
+
+(5) Change Position Of Specific Field
+---------------------------------------
+==> ALTER TABLE emps CHANGE address address VARCHAR(255) AFTER salary; // Move 'address' Field After 'salary' Field
+
+(6) Change DataType Of Field
+------------------------------
+==> ALTER TABLE emps CHANGE salary salary INT; /* Change Type Of 'salary' Field To Integer */
+
+Or
+
+==> ALTER TABLE emps MODIFY salary INT; /* Change Type Of 'salary' Field To Integer */
