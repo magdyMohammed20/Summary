@@ -1,4 +1,4 @@
-(1) Numeric Functions
+(1) Date Functions
 ----------------------
 ==> CURTIME() Or CURRENT_TIME() Or CURRENT_TIME : Get Current Time 
 ==> CURDATE() Or CURRENT_DATE() Or CURRENT_DATE : Get Current Date

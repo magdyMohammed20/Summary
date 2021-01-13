@@ -1,4 +1,4 @@
-(1) Numeric Functions
+(1) Date Functions
 -----------------------
 ==> DAYNAME(Date)    : Get Day Name Of Specific Date
 ==> DAYOFMONTH(Date) Or DAY() : Get Day Number Of Month

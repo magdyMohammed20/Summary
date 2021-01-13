@@ -1,4 +1,4 @@
-(1) Numeric Functions
+(1) Date Functions
 ----------------------
 ==> MONTH(Date)     : Get Month Number Of Date
 ==> MONTHNAME(Date) : Get Month Name Of Date
