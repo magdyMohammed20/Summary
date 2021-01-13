@@ -1,0 +1,16 @@
+(1) Information Functions
+----------------------------
+==> USER() : Get User And Host Name Of DB Connection
+==> VERSION() : Get Name And Version Of DBMS
+==> CHARSET() : Get Character Set 
+==> DATABASE() : Get Name Of Current Working DB
+==> CONNECTION_ID() : Get DBMS Connection Id That Changed With Each Execution
+
+EX: SELECT USER(); /* root@localhost */
+EX: SELECT VERSION(); /* 10.1.13-MariaDB */
+EX: SELECT CHARSET(USER()); /* utf8 */
+EX: SELECT CHARSET(CONVERT(USER() USING latin1)); /* CHARSET Contains Convert Function */
+EX: SELECT CHARSET(CONVERT(USER() USING latin1)) AS Converted; /* Alias With CHARSET */
+EX: SELECT CHARSET(CONVERT(USER() USING latin1)) Converted; /* Alias With CHARSET */
+EX: SELECT DATABASE(); /* shop */
+EX: SELECT CONNECTION_ID();
