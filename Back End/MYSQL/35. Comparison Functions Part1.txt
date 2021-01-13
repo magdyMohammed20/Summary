@@ -1,0 +1,23 @@
+(1) Comparison Functions
+--------------------------
+==> BETWEEN AND
+==> NOT BETWEEN AND
+
+(2) [BETWEEN AND] Syntax
+--------------------------
+
+==> BETWEEN Expr AND Expr
+
+EX: SELECT * FROM test WHERE number BETWEEN 10 AND 15;
+EX: UPDATE test SET number = POW(number , 2) WHERE number BETWEEN 16 AND 20;
+EX: SELECT * FROM test WHERE regDate BETWEEN '2020-02-01' AND '2020-06-01';
+EX: SELECT * FROM test WHERE regDate BETWEEN DATE_SUB(CURDATE() , INTERVAL 10 MONTH) AND CURDATE(); /* Get Results Of Last 10 Months Ago */
+
+(3) [NOT BETWEEN AND] Syntax
+--------------------------
+
+==> NOT BETWEEN Expr AND Expr
+
+EX: SELECT * FROM test WHERE number NOT BETWEEN 10 AND 15;
+EX: UPDATE test SET number = POW(number , 2) WHERE number NOT BETWEEN 16 AND 20;
+EX: SELECT * FROM test WHERE regDate NOT BETWEEN '2020-02-01' AND '2020-06-01';
