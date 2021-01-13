@@ -1,0 +1,18 @@
+(1) String Functions
+---------------------
+==> LPAD : Get Specific Number Of Characters From Left Side Of String But Add The 'PaddedString' On Left Side Of String
+==> RPAD : Get Specific Number Of Characters From Left Side Of String But Add The 'PaddedString' On Right Side Of String
+
+(2) LPAD() Syntax
+-------------------
+==> LPAD(String , Length , PaddedString)
+
+EX: SELECT text , LPAD(text , 3 , '') FROM test; /* Get First 3 Characters From Left Side Of String */
+EX: SELECT text , LPAD(text , 8 , '@') FROM test; /* Get First 8 Characters From Left Side Of String But If String Length Less Than 8 Characters It Will Append '@' On Left Side To Reach To 8 Characters */
+
+(3) RPAD() Syntax
+-------------------
+==> RPAD(String , Length , PaddedString)
+
+EX: SELECT text , RPAD(text , 3 , '') FROM test; /* Get First 3 Characters From Left Side Of String */
+EX: SELECT text , RPAD(text , 8 , '@') FROM test; /* Get First 8 Characters From Left Side Of String But If String Length Less Than 8 Characters It Will Append '@' On Right Side To Reach To 8 Characters */
