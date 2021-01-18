@@ -35,7 +35,7 @@ index.html
                 <i class="fas fa-envelope fa-fw position-relative fa-sm"></i>
                 <input type="text" name="phone" class="form-control my-3" placeholder="Enter Your Phone" />
                 <i class="fas fa-phone fa-fw position-relative fa-sm"></i>
-                <textarea class="form-control" name='message my-3' placeholder="Enter Your Message"></textarea>
+                <textarea class="form-control my-t" name='message' placeholder="Enter Your Message"></textarea>
                 <input type="submit" value='Send Message' class="btn btn-success mt-3 shadow-sm" />
                 <i class="fas fa-paper-plane fa-fw position-relative send d-block float-none text-white fa-sm"></i>
             </form>
