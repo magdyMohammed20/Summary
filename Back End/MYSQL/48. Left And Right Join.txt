@@ -1,0 +1,30 @@
+(1) Right And Left Join
+------------------------
+==> If There Are 2 Tables Connected Using Forign Key And There Are Some Of Rows Has No Relationship So This Rows Will Not Be In The Result But We Need To Get It In The Results
+
+EX:
+---
+    /* Select Rows That Have Relationship From users And langs And Select Rows That [Not Have Relationship From users Table Too (Left Table Is: users)] */
+    SELECT users.user_name , langs.lang_name 
+    FROM 
+        `users`
+    
+    LEFT JOIN 
+        `langs`
+    
+    ON 
+        langs.lang_id = users.lang_id;
+
+
+EX:
+---
+    /* Select Rows That Have Relationship From users And langs And Select Rows That [Not Have Relationship From langs Table Too (Right Table Is: langs)] */
+    SELECT users.user_name , langs.lang_name 
+    FROM 
+        `users`
+    
+    RIGHT JOIN 
+        `langs`
+    
+    ON 
+        langs.lang_id = users.lang_id;
