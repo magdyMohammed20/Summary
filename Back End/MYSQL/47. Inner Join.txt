@@ -1,0 +1,24 @@
+(1) Inner Join
+----------------
+==> Values In Table That Matches With Values In Another Table
+
+Syntax:
+--------
+
+    SELECT Columns
+    FROM Table1
+    INNER JOIN Table2
+    ON Condition
+    
+EX:
+---
+
+    SELECT users.user_name , langs.lang_name 
+    FROM 
+        `users`
+    
+    INNER JOIN 
+        `langs`
+    
+    ON 
+        langs.lang_id = users.lang_id;
