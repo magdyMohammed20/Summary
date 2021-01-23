@@ -1,0 +1,29 @@
+(1) Split Pages Using Get Request
+----------------------------------
+==> [Categories] Page Has [Manage | Edit | Update | Delete | Add | Insert]
+
+==> Steps
+-----------
+--> Inside [dashboard] Folder Create [page.php] File That Contains This Code
+
+    dashboard\page.php
+    --------------------
+
+    <?php
+
+        // Fetch $do From [http://localhost/ecommerce/dashboard/page.php?do=Add]
+        // If $do Exist Fetch It's Value Else Set It To 'manage'
+        $do = isset($_GET['do']) ? $_GET['do'] : 'manage';
+
+
+        // If $do Is 'manage' Display Manage Content
+        if($do == 'manage'){
+            echo 'Welcome In Manage Page';
+            echo '<a href="?do=Add">Add New Category</a>';
+        }elseif($do == 'add'){
+            echo 'Welcome In Add Page';
+        }else{
+            echo 'Sorry Page Not Found';
+        }
+
+    ?>
