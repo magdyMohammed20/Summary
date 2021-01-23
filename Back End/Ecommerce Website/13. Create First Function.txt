@@ -1,0 +1,98 @@
+(1) Create getTitle() Function
+--------------------------------
+
+==> Inside [functions] Folder That Inside [dashboard] Folder Create 'functions.php' File
+
+
+    dashboard/includes/functions/functions.php
+    --------------------------------------------
+
+    <?php
+
+        // Function For Set Title Of Page
+        function getTitle(){
+            global $pageTitle;
+            // If Page Contains $pageTitle Variable Print It's Value As Title For Page
+            if(isset($pageTitle)){
+                echo $pageTitle;
+            }else{
+                echo 'Default';
+            }
+        }
+        
+    ?>
+
+
+==> Import 'functions.php' Inside 'init.php'
+
+    init.php
+    ---------
+
+    <?php
+        // Include DB Connection Code 
+        include 'connect.php';
+
+        // Templates Path
+        $tpl = 'includes/templates/';
+        // Css Path
+        $css = 'layout/css/';
+        // Js Path
+        $js = 'layout/js/';
+        // Functions Path
+        $func = 'includes/functions/';
+
+        include $func . "functions.php";
+        include $tpl . "header.php";
+
+        // If Page Contains $noNav Variable It Doesn't Include Navbar In It
+        if(!isset($noNav)){
+            include $tpl . "navbar.php";
+        }
+        
+    ?>
+
+
+==> Set $pageTitle Variable Inside Existing Pages [dashboard.php , index.php]
+
+    dashboard.php
+    --------------
+
+    <style>
+        body{
+            background: none !important;
+        }
+    </style>
+    <?php
+        // Must Start Session Before Anything 
+        session_start();
+        $pageTitle = 'Dashboard Page';
+        
+        // If User Comming From Entering Login Data Correctly
+        // Else Redirect To Login Page Again
+        if(isset($_SESSION['username'])){
+            include 'init.php';
+
+            include $tpl . 'footer.php';
+        }else{
+            header('Location: index.php');
+            exit();
+        }
+    ?>
+
+
+==> Call getTitle() Method Inside <title> Tag In 'header.php' File
+
+    header.php
+    -----------
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset='UTF-8'/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <title><?php getTitle(); ?></title>
+            <link rel='stylesheet' href='<?php echo $css;?>bootstrap.min.css'/> 
+            <link rel='stylesheet' href='<?php echo $css;?>all.min.css'/> 
+            <link rel='stylesheet' href='<?php echo $css;?>backend.css'/> 
+        </head>
+        <body>
