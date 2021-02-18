@@ -1,0 +1,88 @@
+(1) Create Redirect Function For Redirect User If Any Error Occur
+--------------------------------------------------------------------
+==> Inside 'functions.php' That Inside 'dashboard' Folder Create The Function
+==> Inside 'members.php' Call The Function When User Access Pages Directly
+
+
+
+    functions.php
+    --------------
+
+    // Redirect Function
+    function redirectHome($errMsg , $seconds = 3){
+        echo '<div class="alert alert-danger">'.$errMsg.'</div>';
+
+        echo '<div class="alert alert-info"> You Will Redirected To Home Page After ' .$seconds. ' Seconds</div>';
+        
+        header("refresh:$seconds;url=index.php");
+        
+        exit();
+    }
+
+
+    members.php [Redirect User To Home Page If Access Insert Page Directly]
+    --------------
+
+        elseif($do == 'insert'){
+            
+            echo "<div class='container mt-5'>";
+            // If User Coming Through POST Request Fetch Data
+            // Then Insert It To DB
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                
+                $username  = $_POST['username'];
+                $userpass  = sha1($_POST['pass']);
+                $fullname  = $_POST['fullname'];
+                $useremail = $_POST['email'];
+
+                // Validate Updated Data
+                $formErrors = array();
+                if(empty($username)){
+                    $formErrors[] = "User Name Can't Be <strong>Empty</strong>";
+                }
+                if(strlen($username) < 4){
+                    $formErrors[] = "User Name Can't Less Than <strong>4 Characters</strong>";
+                }
+                // Check For Non Hashed Pass As The Hashed  Pass Has A Value
+                if(empty($_POST['pass'])){
+                    $formErrors[] = "User Password Can't Be <strong>Empty</strong>";
+                }
+                if(empty($fullname)){
+                    $formErrors[] = "Full Name Can't Be <strong>Empty</strong>";
+                }
+                if(empty($useremail)){
+                    $formErrors[] = "User Email Can't Be <strong>Empty</strong>";
+                }
+
+                // If There Are Errors Display It
+                // Else Update The Data
+                foreach($formErrors as $error){
+                    echo '<div class="alert alert-danger w-75 mx-auto mt-3">' . $error .'</div>';
+                }
+
+                // If There Is No Errors Insert The Data To DB
+                if(empty($formErrors)){
+                    $stmt = $connect->prepare("
+                        INSERT INTO 
+                        users(user_name , password , email , full_name)
+                        VALUES(:zuser , :zpass , :zemail , :zname);     
+                    ");
+
+                    $stmt->execute(array(
+                        "zuser"  => $username , 
+                        "zpass"  => $userpass , 
+                        "zemail" => $useremail , 
+                        "zname"  => $fullname)
+                    );
+
+                    echo "<div class='alert alert-success w-75 mx-auto mt-4'>". $stmt->rowCount() . " Member Added Successfully". "</div>";
+                }            
+            }else{
+                $errMsg = "Sorry You Can't Access This Page Directly";
+                // Redirect User To Home Page After 5 Seconds If Access Insert Page Direct
+                redirectHome($errMsg , 5);
+            }
+
+            echo "</div>";
+       
+        }
