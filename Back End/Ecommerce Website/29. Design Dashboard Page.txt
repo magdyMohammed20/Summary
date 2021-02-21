@@ -1,0 +1,88 @@
+(1) Design Basic Dashboard Page Structure
+-------------------------------------------
+
+    dashboard.php
+    ---------------
+
+    <style>
+        body{
+            background: none !important;
+        }
+    </style>
+    <?php
+        // Must Start Session Before Anything 
+        session_start();
+        $pageTitle = 'Dashboard Page';
+
+        // If User Comming From Entering Login Data Correctly
+        // Else Redirect To Login Page Again
+        if(isset($_SESSION['username'])){
+            include 'init.php';
+        ?>
+
+            <div class='dashboard-stats container mt-5'>
+                <h1>Dashboard</h1>
+                <div class='row'>
+                    <div class='col-3'>
+                        <div class='stat text-center p-3'>
+                            Total Members
+                            <span>200</span>
+                        </div>
+                    </div>
+                    <div class='col-3'>
+                        <div class='stat text-center p-3'>
+                            Pending Members
+                            <span>20</span>
+                        </div>
+                    </div>
+                    <div class='col-3'>
+                        <div class='stat text-center p-3'>
+                            Total Items
+                            <span>210</span>
+                        </div>
+                    </div>
+                    <div class='col-3'>
+                        <div class='stat text-center p-3'>
+                            Total Comments
+                            <span>230</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='container mt-4'>
+                <div class='row'>
+                    <div class='col-6'>
+                        <div class="card latest-users">
+                            <div class="card-header">
+                                <i class="fas fa-users"></i>
+                                Latest Registered Users
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class='col-6'>
+                        <div class="card latest-items">
+                            <div class="card-header">
+                                <i class="fas fa-sitemap"></i>
+                                Latest Items
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Cras justo odio</li>
+                                <li class="list-group-item">Dapibus ac facilisis in</li>
+                                <li class="list-group-item">Vestibulum at eros</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php
+            include $tpl . 'footer.php';
+        }else{
+            header('Location: index.php');
+            exit();
+        }
+    ?>
