@@ -1,0 +1,52 @@
+(1) Create Activate Member Link And Show Pending Members Link
+----------------------------------------------------------------
+==> Create Activate Button Link Inside The Table In 'members.php'
+==> Create Go To Pending Members Table Link Inside 'dashboard.php'
+==> Manage How To Get Pedning Members Only Inside Members Table In 'members.php'
+
+
+    members.php
+    ------------
+
+        <td>
+            <a href="?do=edit&userid=<?php echo $member['id'];?>" class="btn btn-primary">Edit <i class="fas fa-pen ml-1"></i></a>
+            <a href="?do=delete&userid=<?php echo $member['id'];?>" class="btn btn-danger confirm-delete mx-1">Delete<i class="fas fa-trash ml-1"></i></a>
+            <?php
+                if($member['reg_status'] == 0){
+                    echo '<a href="?do=activate" class="btn btn-info text-white">Activate<i class="fas fa-check ml-1"></i></a>';
+                }
+            ?>
+        </td>
+
+
+    dashboard.php
+    --------------
+
+    <div class='col-3'>
+        <div class='stat pending-m text-center p-3 text-white rounded'>
+            Pending Members
+            <span class='font-weight-bold'>20</span>
+            <a href="members.php?do=manage&pending=yes" class="w-100 h-100"></a>
+        </div>
+    </div>
+
+
+    members.php
+    ------------
+
+    if($do == 'manage'){ 
+            
+        // For Diff Between Showing All Members And Pending Members
+        $query = '';
+
+        if(isset($_GET['pending']) && $_GET['pending'] == 'yes'){
+            $query = "AND reg_status=0";
+        }
+
+        
+        // Select All Users Except Admin
+        $stmt = $connect->prepare("SELECT * FROM users WHERE group_id = 0 $query");
+        $stmt->execute();
+        $row = $stmt->fetchAll();
+
+    ?>
