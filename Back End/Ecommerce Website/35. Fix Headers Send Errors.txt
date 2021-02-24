@@ -1,0 +1,19 @@
+(1) Fix Headers Sent Errors
+-----------------------------
+==> Write ob_start() At Start Of File And ob_end_flush() At End Of File
+==> 'ob' Means 'Output Buffering' : Means That Buffer[Store] All Outputs Of The Page Except Headers Errors
+
+
+EX:
+---
+
+    dashboard.php
+    ----------------
+
+        ob_start();
+        session_start();
+        .
+        .
+        .
+        .
+        ob_end_flush()
