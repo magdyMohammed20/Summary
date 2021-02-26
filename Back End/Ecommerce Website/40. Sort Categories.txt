@@ -1,0 +1,35 @@
+(1) Sort Categories Inside Manage Categories Page
+---------------------------------------------------
+==> Create Sorting Conditions
+==> Create Sorting Links
+
+EX
+---
+
+    categories.php
+    ---------------
+
+        if($do == 'manage'){ 
+
+            $sort = "ASC";
+
+            $sort_arr = array('ASC' , 'DESC');
+
+            if(isset($_GET['sort']) && in_array($_GET['sort'] , $sort_arr)){
+                $sort = $_GET['sort'];
+            }
+
+            // Select All Categories
+            $stmt = $connect->prepare("SELECT * FROM categories ORDER BY ordering $sort");
+            $stmt->execute();
+            $cats = $stmt->fetchAll();
+
+
+    categories.php
+    ---------------
+
+        <div class="col-12 d-flex justify-content-end my-3">
+            <span class="font-weight-bold">Oredring</span>
+            <a href="?sort=ASC" class="btn ml-2 mr-1 <?php if($sort == 'ASC') echo 'btn-success'; else echo 'btn-primary'; ?>"><i class="fas fa-long-arrow-alt-up"></i></a>
+            <a href="?sort=DESC" class="btn <?php if($sort == 'DESC') echo 'btn-success'; else echo 'btn-danger'; ?>"><i class="fas fa-long-arrow-alt-down"></i></a>
+        </div>
