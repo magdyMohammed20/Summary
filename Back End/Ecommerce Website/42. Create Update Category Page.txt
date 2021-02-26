@@ -1,0 +1,40 @@
+(1) Create Update Category Page
+---------------------------------
+
+    categories.php
+    ---------------
+
+        elseif($do == 'update'){
+            echo "<div class='container mt-5'>";
+            // If User Coming Through POST Request Fetch Changed Data
+            // Then Update It
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                $id        = $_POST['catId'];
+                $catName  = $_POST['catName'];
+                $catDesc  = $_POST['catDesc'];
+                $ordering = $_POST['ordering'];
+                $visible  = $_POST['visible'];
+                $commenting  = $_POST['commenting'];
+                $ads = $_POST['ads'];
+
+                
+                $stmt = $connect->prepare("
+                    UPDATE categories 
+                    SET name=? , description=?, ordering=?, visibility=? , allow_comment=? , allow_ads=?
+                    WHERE id = ?    
+                ");
+
+                $stmt->execute(array($catName , $catDesc , $ordering , $visible , $commenting , $ads , $id));
+                
+                $msg = "<div class='alert alert-success mt-4'>". $stmt->rowCount() . " Record Updated</div>";
+
+                // Redirect User To Previous Page Within 5 Seconds
+                redirectHome($msg ,'back', 5);
+                           
+            }else{
+                $errMsg = "<div class='alert alert-danger mt-4'>Sorry You Can't Access This Page Directly</div>";
+                redirectHome($errMsg ,'back', 5);
+            }
+
+            echo "</div>";
+        }
