@@ -1,0 +1,95 @@
+(1) Create Edit Categories Page
+---------------------------------
+==> Edit 'Edit Button' Link Inside Manage Categories Page
+==> Create Edit Category Form
+
+
+    categories.php
+    ---------------
+
+        echo "<div class='controls d-flex justify-content-end'>";
+                echo "<a href='?do=edit&catid=". $cat["id"] ."' class='btn btn-primary'><i class='fas fa-pen'></i></a>";
+                echo "<a href='#' class='btn btn-danger ml-1'><i class='fas fa-trash'></i></a>";
+        echo "</div>";
+
+
+
+    categories.php
+    --------------
+
+        elseif($do == 'edit'){
+        
+            // Fetch 'catid' From Page Link
+            $catId = $_GET['catid'];
+            // Check For 'userid' In The Link
+            $id = isset($catId) && is_numeric($catId) ? intval($catId) : 0;
+            // Select User Depending On 'userid'
+            $stmt = $connect->prepare("SELECT * FROM categories WHERE id=?");
+            $stmt->execute(array($id));
+            $row = $stmt->fetch();
+            $count = $stmt->rowCount();
+            
+            // If 'userid' Exist In DB
+            if($count > 0){
+            ?>
+
+            <div class="container mt-5">
+                <h2>Edit Category</h2>
+                <form class="mt-4" action="?do=update" method="POST">
+                    <input type="hidden" name="catId" value=<?php echo $row['id'];?> />
+                    <div class="row">
+                        <div class="form-group col-12 ">
+                            <label for="catName" class="font-weight-bold">Category Name</label>
+                            <input type="text" name='catName' class="form-control" id="catName" autocomplete="off" required="required" placeholder="Enter Category Name" value="<?php echo $row['name']; ?>">
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <label for="catDesc" class="font-weight-bold">Category Description</label>
+                            <input type="text" name='catDesc' class="form-control" id="catDesc" required="required" placeholder="Enter Category Description" value="<?php echo $row['description']; ?>">
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <label for="ordering" class="font-weight-bold">Ordering</label>
+                            <input type="text" name='ordering' class="form-control" id="ordering" required="required" placeholder="Enter Category Ordering" value="<?php echo $row['ordering']; ?>">
+                        </div>
+                        <div class="form-group col-12 col-md-4">
+                            <label class="font-weight-bold">Visibility</label>
+                            <div>
+                                <input type='radio' value='0' name="visible" id="vis-yes" <?php if($row['visibility'] == 0) echo "checked"; ?>/>
+                                <label for="vis-yes">Yes</label>
+                                <input type='radio' value='1' name="visible" id="vis-no" <?php if($row['visibility'] == 1) echo "checked"; ?> />
+                                <label for="vis-no">No</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-md-4">
+                            <label class="font-weight-bold">Commenting</label>
+                            <div>
+                                <input type='radio' value='0' name="commenting" id="com-yes" <?php if($row['allow_comment'] == 0) echo "checked"; ?>/>
+                                <label for="com-yes">Yes</label>
+                                <input type='radio' value='1' name="commenting" id="com-no" <?php if($row['allow_comment'] == 1) echo "checked"; ?> />
+                                <label for="com-no">No</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-md-4">
+                            <label class="font-weight-bold">Allow Ads</label>
+                            <div>
+                                <input type='radio' value='0' name="ads" id="ads-yes" <?php if($row['allow_ads'] == 0) echo "checked"; ?>/>
+                                <label for="ads-yes">Yes</label>
+                                <input type='radio' value='1' name="ads" id="ads-no" <?php if($row['allow_ads'] == 1) echo "checked"; ?> />
+                                <label for="ads-no">No</label>
+                            </div>
+                        </div>
+                        <div class="form-group col-12">
+                            <input type="submit" value="Save" class="btn btn-success px-5 py-2 mt-2"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <?php                
+            }else{
+                $errMsg = "<div class='alert alert-danger'>There Is No Such Id</div>";
+                echo '<div class="container mt-4">';
+                redirectHome($errMsg ,null, 5);
+                echo '</div>';
+            }
+
+    }
