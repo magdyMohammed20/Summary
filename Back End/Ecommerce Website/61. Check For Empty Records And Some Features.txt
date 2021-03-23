@@ -1,0 +1,37 @@
+(1) Some features
+-------------------
+==> Display Number Of Comments Inside dashboard
+
+    dashboard.php
+    ---------------
+
+        <span class='font-weight-bold'><?php echo getTotal('id' , 'comments'); ?></span>
+
+
+
+==> Display Message In Dashboard If There Is No Items Or users In DB (And Make This Condition Inside Comments , Items , Members Pages)
+
+    dashboard.php
+    --------------
+
+        if(!empty($latestItems)){
+            foreach($latestItems as $item){
+                echo '<li class="list-group-item d-flex justify-content-between align-items-center">';
+                
+                echo $item['name'];
+
+                echo '<div>';
+                    if($item['approve'] == 0){
+                        echo '<a href="items.php?do=approve&itemid='. $item['id'] .'"class="btn btn-info text-white mr-2">Approve<i class="fas fa-check ml-1"></i></a>';
+                    }
+
+                    echo '<a href="items.php?do=edit&itemid=' . $item["id"] . '" class="btn btn-primary">
+                    Edit <i class="fas fa-pen ml-1"></i></a>';
+                echo '</div>';
+                
+                echo '</li>';
+            }
+        }else{
+            echo "<div class='p-2 text-danger'>Sorry There Is No Items Founded</div>";
+        }
+
