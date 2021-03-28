@@ -1,0 +1,19 @@
+(1) Css Blend Mode
+----------------------
+==> For Use background-color With background-image
+
+    body{
+        background-image: url(./photo.png);
+        background-size:cover;
+        background-color: #F50;
+        background-blend-mode: overlay;
+    }
+
+(2) Clip Path
+---------------
+
+    .element{
+        height: 100vh;
+        background-color: green;
+        clip-path: polygon(0 0, 100% 0%, 100% 49%, 62% 69%, 0 100%);
+    }
