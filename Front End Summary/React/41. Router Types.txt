@@ -1,0 +1,58 @@
+(1) Router Types
+------------------
+==> BrowserRouter (localhost:3000/home)
+==> HashRouter (localhost:3000/#/home)
+==> MemoryRouter (localhost:3000/)
+
+(2) HashRouter With React (http://localhost:3000/#/pagetwo , http://localhost:3000/#/)
+---------------------------
+
+    import {HashRouter , Route} from 'react-router-dom'
+
+    const pageone = () => {
+        return <div>Page One</div>
+    }
+
+    const pagetwo = () => {
+        return <div>Page Two</div>
+    }
+
+    function App() {
+        return (
+            <div className="App">
+                <HashRouter>
+                    <Route path="/" exact component={pageone} />
+                    <Route path="/pagetwo" component={pagetwo} />
+                </HashRouter>      
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) MemoryRouter With React
+---------------------------
+
+    import {MemoryRouter , Route} from 'react-router-dom'
+
+    const pageone = () => {
+        return <div>Page One</div>
+    }
+
+    const pagetwo = () => {
+        return <div>Page Two</div>
+    }
+
+    function App() {
+        return (
+            <div className="App">
+                <MemoryRouter>
+                    <Route path="/" exact component={pageone} />
+                    <Route path="/pagetwo" component={pagetwo} />
+                </MemoryRouter>      
+            </div>
+        );
+    }
+
+    export default App;
