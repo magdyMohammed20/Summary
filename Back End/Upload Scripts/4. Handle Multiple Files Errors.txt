@@ -1,7 +1,7 @@
 (1) Handle Multiple Files errors
 ---------------------------------
 
-        <?php
+    <?php
 
         if($_SERVER['REQUEST_METHOD'] === "POST"){
 
@@ -24,7 +24,7 @@
                 $errors = array();
 
                 if($file_error[$i] === 4){
-                    $errors[] = $files_name[$i] . "There Is No Files To Upload";
+                    echo "There Is No Files To Upload";
                 }
 
                 else{
@@ -37,15 +37,16 @@
                     if($file_size[$i] > 80000){
                         $errors[] = $files_name[$i] . " Size Is To Big";
                     }
-                }
+                    
 
-                if(empty($errors)){
-                    // Upload File Using move_uploaded_file() That Takes Temporary Location And Destination Location Of Uploaded File
-                    move_uploaded_file($temp_loc[$i] , $_SERVER["DOCUMENT_ROOT"] . '\elzero_file_upload\up\\' . $files_name[$i]);
-                }else{
+                    if(empty($errors)){
+                        // Upload File Using move_uploaded_file() That Takes Temporary Location And Destination Location Of Uploaded File
+                        move_uploaded_file($temp_loc[$i] , $_SERVER["DOCUMENT_ROOT"] . '\elzero_file_upload\up\\' . $files_name[$i]);
+                    }else{
 
-                    foreach($errors as $error){
-                        echo $error . '<br>';
+                        foreach($errors as $error){
+                            echo $error . '<br>';
+                        }
                     }
                 }
                 
