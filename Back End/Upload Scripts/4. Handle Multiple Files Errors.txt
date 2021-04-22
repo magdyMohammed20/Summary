@@ -1,0 +1,56 @@
+(1) Handle Multiple Files errors
+---------------------------------
+
+    <?php
+
+        if($_SERVER['REQUEST_METHOD'] === "POST"){
+
+            $extensions = array(
+                'jpg',
+                'jpeg',
+                'gif'
+            );
+            
+
+            // Get Image File Name And Temporary Location
+            $files_name = $_FILES['files']['name'];
+            $temp_loc = $_FILES['files']['tmp_name'];
+            $file_size = $_FILES['files']['size'];
+            $file_error = $_FILES['files']['error'];
+
+            // Loop Through Files To Upload It 
+            for($i = 0; $i < count($files_name) ; $i++){
+                
+                $errors = array();
+
+                // Check For File Uploaded Extension
+                if(! in_array(end(explode('.' , $files_name[$i])) , $extensions)){
+                    $errors[] = $files_name[$i] . " Extension Must Be jpg , jpeg Or gif";
+                }
+                
+                // Check For File Uploaded Size
+                if($file_size[$i] > 80000){
+                    $errors[] = $files_name[$i] . " Size Is To Big";
+                }
+                
+
+                if(empty($errors)){
+                    // Upload File Using move_uploaded_file() That Takes Temporary Location And Destination Location Of Uploaded File
+                    move_uploaded_file($temp_loc[$i] , $_SERVER["DOCUMENT_ROOT"] . '\elzero_file_upload\up\\' . $files_name[$i]);
+                }else{
+
+                    foreach($errors as $error){
+                        echo $error . '<br>';
+                    }
+                }
+                
+            }
+            
+        }
+
+    ?>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        <input type="file" name="files[]" multiple="multiple"/>
+        <input type="submit" value="uplodad"/>
+    </form>
