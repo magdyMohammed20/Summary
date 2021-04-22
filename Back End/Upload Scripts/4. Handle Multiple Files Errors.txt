@@ -1,7 +1,7 @@
 (1) Handle Multiple Files errors
 ---------------------------------
 
-    <?php
+        <?php
 
         if($_SERVER['REQUEST_METHOD'] === "POST"){
 
@@ -23,16 +23,21 @@
                 
                 $errors = array();
 
-                // Check For File Uploaded Extension
-                if(! in_array(end(explode('.' , $files_name[$i])) , $extensions)){
-                    $errors[] = $files_name[$i] . " Extension Must Be jpg , jpeg Or gif";
+                if($file_error[$i] === 4){
+                    $errors[] = $files_name[$i] . "There Is No Files To Upload";
                 }
-                
-                // Check For File Uploaded Size
-                if($file_size[$i] > 80000){
-                    $errors[] = $files_name[$i] . " Size Is To Big";
+
+                else{
+                    // Check For File Uploaded Extension
+                    if(! in_array(end(explode('.' , $files_name[$i])) , $extensions)){
+                        $errors[] = $files_name[$i] . " Extension Must Be jpg , jpeg Or gif";
+                    }
+                    
+                    // Check For File Uploaded Size
+                    if($file_size[$i] > 80000){
+                        $errors[] = $files_name[$i] . " Size Is To Big";
+                    }
                 }
-                
 
                 if(empty($errors)){
                     // Upload File Using move_uploaded_file() That Takes Temporary Location And Destination Location Of Uploaded File
