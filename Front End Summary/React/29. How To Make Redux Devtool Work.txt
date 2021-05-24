@@ -2,3 +2,6 @@
 ------------------------------------------------------------
 
 	const store = createStore(Reducer ,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+	
+	
+(2) If Use Redux Devtool And Want To Don't Clear Actions When Reload The Page You Can Enter To Debug Session Using [localhost:3000/?debug_session=absdefwf3]
