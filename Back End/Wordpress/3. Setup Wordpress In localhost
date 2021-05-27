@@ -1,0 +1,8 @@
+(1) Setup Wordpress On Localhost
+----------------------------------
+==> Setup Xampp And Start [Apache , MySql]
+==> Download Wordpress From [wordpress.org]
+==> Take [wordpress] Folder After Extract And Set It In [htdocs] Folder
+==> Then Run It In The Browser [localhost/wordpress] And Follow Instructions
+==> When Prompt You To Enter [dbName , username , password , host] You Must Open Phpmyadmin And Create Database With Name That Give You
+==> Enter username and pass of wordpress [username : magdy , password : @Bfci5555@]
