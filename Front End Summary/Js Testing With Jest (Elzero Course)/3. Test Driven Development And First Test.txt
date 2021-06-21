@@ -1,0 +1,49 @@
+(1) Testing Rules
+-------------------
+==> Get Function To Test
+==> Give Input To Function
+==> Define What Is The Output
+==> Check For Output
+
+(2) Test Driven Development (TDD)
+----------------------------------
+==> Think About What Your Code Will Do
+==> Write The Code 
+==> Test The Code 
+
+(3) First Test
+--------------
+==> Create Js Or Ts File In Your Project [EX: say.js]
+==> Create Testing File Beside The Created Js Or Ts File [say.test.js]
+==> For Run The Test Write [npm test] In CMD After Write The Following Code
+
+    say.js
+    -------
+
+    function sayHellow(){
+        return `Hellow World`;
+    }
+
+    module.exports = sayHellow;
+
+
+    say.test.js 
+    ------------
+
+    const sayHellow = require('./say');
+
+    test("Welcome Message" , () => {
+        expect(sayHellow()).toBe("Hellow World")
+    });
+
+
+(4) If Want To Repeat Writing Of [npm test] You Must Add ['jest --watchAll'] To (Package.json)
+
+    Package.json
+    --------------
+
+      "scripts": {
+        "test": "jest --watchAll"
+      }
+
+(5) Jest By Default Search For [__test__] Folder That Contains All Tests Files You Can Create This Folder And Move [say.test.js] In It 
