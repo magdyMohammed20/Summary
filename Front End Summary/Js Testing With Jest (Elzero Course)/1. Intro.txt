@@ -1,0 +1,31 @@
+(1) What Is Testing
+---------------------
+==> Software Testing Method That Break Your Software To Pieces
+
+==> Unit Testing Can Be For 1 Method
+==> Unit Testing Can Be Whole Class In OOP
+==> Unit Testing Can Be The Whole Module
+==> Unit Testing Can Be For Whole Procedure
+
+(2) Unit
+---------
+==> The Smallest Testable Part Of Any Software
+
+(3) Famous Testing Frameworks
+-------------------------------
+==> Jest (From Facebook)
+==> Mocha
+==> Jasmine 
+==> Karma
+
+(4) Why Testing
+----------------
+==> Quality Of Code & Design
+==> Find Issues & Bugs Early
+==> Functionality Documentation (Write Sequence Of Expected Results)
+
+(5) Types Of Testing
+---------------------
+==> Integration (Test All Modules That Works Together)
+==> End To End Tests (Test Application As Normal User [Clicks - Scrolls ....])
+==> Unit Test (Test Each Unit Of App)
