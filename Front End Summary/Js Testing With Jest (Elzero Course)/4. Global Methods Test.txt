@@ -1,0 +1,33 @@
+(1) test() Or it() Syntax
+--------------------------
+==> test(name , Function , timeout)
+==> it(name , Function , timeout)
+
+
+EX
+---
+
+    say.js
+    -------
+
+    function add(num1 , num2){
+        return num1 + (num2 || null);
+    }
+
+    module.exports = add;
+
+
+    say.test.js
+    ------------
+
+    const add = require('../say');
+
+    // Test Passed
+    test("Add Method" , () => {
+        expect(add(4 , 6)).toBe(10)
+    });
+
+    // Test Passed
+    test("Get Number" , () => {
+        expect(add(10)).toBe(10)
+    })
