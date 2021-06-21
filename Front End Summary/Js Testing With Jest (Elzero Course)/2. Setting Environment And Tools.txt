@@ -1,0 +1,9 @@
+(1) Steps
+------------
+==> Create Project Folder (Ex: Jest)
+==> Ensure That Install (NodeJs)
+==> Run Command (npm init) And Give [Name , Vesion , Description] And Can Escape Others
+==> You Note That [Package.json] Created 
+==> Install [Jest] In Your Project Using [npm i jest --save-dev]
+==> Inside [Package.json] Change Value Of 'test' Property To 'jest'
+==> In VScode Ensure That Install [jest , Live-Server] Extensions
