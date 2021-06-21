@@ -1,0 +1,78 @@
+(1) Describe() Method
+-----------------------
+==> A Method That Describe What Tests Do
+
+(2) Describe() Syntax
+-----------------------
+==> describe(name , Function)
+
+
+EX
+---
+
+    say.js
+    -------
+
+    function add(...numbers){
+        return numbers.reduce((tot , num) => tot + num);
+    }
+
+    module.exports = add;
+
+
+    say.test.js
+    -------------
+
+    const add1 = require('../say');
+
+    // Use Describe For Describe Job Of Some Tests
+    describe("Test Sum Of Numbers" , () => {
+        // Test1
+        test("Add Method1" , () => {
+            expect(add1(4 , 6)).toBe(10)
+        });
+
+        // Test2
+        test("Get Number2" , () => {
+            expect(add1(10)).toBe(10)
+        })
+
+        // Test3
+        test("Get Number3" , () => {
+            expect(add1(10 , 20 , 40 , 30)).toBe(100)
+        })
+    })
+
+
+EX (Nested Describe)
+---
+
+    say.test.js
+    ------------
+
+    const add1 = require('../say');
+
+    // Use Describe For Describe Job Of Some Tests
+    describe("Test Sum Of Numbers" , () => {
+
+        // First Nested Describe
+        describe("Sending 1 Or 2 Parameters" , () => {
+            // Test1
+            test("Add Method1" , () => {
+                expect(add1(4 , 6)).toBe(10)
+            });
+
+            // Test2
+            test("Get Number2" , () => {
+                expect(add1(10)).toBe(10)
+            })
+        })
+
+        // Second Nested Describe
+        describe("Sending More Than 2 Parameters" , () => {
+            // Test3
+            test("Get Number3" , () => {
+                expect(add1(10 , 20 , 40 , 30)).toBe(100)
+            })
+        })
+    })
