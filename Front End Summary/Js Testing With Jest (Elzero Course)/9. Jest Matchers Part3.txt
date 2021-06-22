@@ -1,0 +1,54 @@
+(1) toBeUndefined() Matcher
+----------------------------
+
+    say.test.js
+    ------------
+
+    test("Check Undefined" , () => {
+        let a = 10;
+
+        expect(a).toBeUndefined();
+    });
+
+
+(2) toMatch() Matcher
+----------------------
+==> Check With Regular Expression
+
+    say.test.js
+    -------------
+
+    test("Check Regex" , () => {
+        let str = "Hellow Magdy";
+        // Check If str Contains 'Magdy'
+        expect(str).toMatch(/Magdy/);
+    });
+
+(3) toHaveProperty() Matcher
+-----------------------------
+==> Check If Object Contains Specific Property Or Specific Value
+
+    say.test.js (Check Property Exist)
+    ------------
+
+    test("Check Exist" , () => {
+        let obj = {
+            name: 'Magdy',
+            age: 20
+        };
+
+        expect(obj).toHaveProperty('age');
+    });
+
+
+    say.test.js (Check Property Exist And Check Value) 
+    ------------
+
+    test("Check Falsy" , () => {
+        let obj = {
+            name: 'Magdy',
+            age: 20
+        };
+
+        expect(obj).toHaveProperty('age' , 21);
+    });
