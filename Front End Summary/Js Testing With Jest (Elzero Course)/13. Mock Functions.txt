@@ -1,0 +1,70 @@
+(1) Mock Functions
+---------------------
+==> Test Behavior Of The Functions
+
+EX
+---
+
+    say.test.js
+    -------------
+
+    test('Moke' , () => {
+        const moker = jest.fn(name => `Hellow ${name}`);
+        expect(moker("Magdy")).toBe("Hellow Magdy");
+        // If moker Called At Least 1 Time It Passed 
+        // Else It Fails
+        expect(moker).toHaveBeenCalled();
+    })
+
+
+EX
+---
+
+    say.test.js
+    ------------
+
+    test('Moke' , () => {
+        const moker = jest.fn(name => `Hellow ${name}`);
+        expect(moker("Magdy")).toBe("Hellow Magdy");
+        expect(moker("Hossam")).toBe("Hellow Hossam");
+
+        // If Call moker Function 2 Times It Pass
+        // Else It Fails
+        expect(moker).toHaveBeenCalledTimes(2);
+    })
+
+
+EX
+---
+
+    say.test.js
+    ------------
+
+    test('Moke' , () => {
+        const moker = jest.fn(name => `Hellow ${name}`);
+        expect(moker("Magdy")).toBe("Hellow Magdy");
+        expect(moker("Hossam")).toBe("Hellow Hossam");
+        expect(moker("Eman")).toBe("Hellow Eman");
+
+        // If Call moker And Pass 'Eman' As Argument It Pass
+        // Else It Fails
+        expect(moker).toHaveBeenCalledWith('Eman');
+    })
+
+
+EX
+---
+
+    say.test.js
+    ------------
+
+    test('Moke' , () => {
+        const moker = jest.fn(name => `Hellow ${name}`);
+        expect(moker("Magdy")).toBe("Hellow Magdy");
+        expect(moker("Hossam")).toBe("Hellow Hossam");
+        expect(moker("Eman")).toBe("Hellow Eman");
+
+        // If Last Call Of moker Function With 'Eman' Argument It Pass
+        // Else It Fails
+        expect(moker).toHaveBeenLastCalledWith('Eman');
+    })
