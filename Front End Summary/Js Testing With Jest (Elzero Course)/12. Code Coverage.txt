@@ -1,0 +1,21 @@
+(1) Code Coverage
+------------------
+==> Used To Give Report Of Things That Tested And Not Tested
+
+
+(2) 2 Ways For Run Code Coverage
+----------------------------------
+==> Write [npm test -- --coverage] In CMD
+
+==> If Want To Run Code Coverage After Each Save Files Using [npm test] Add This Line To [Package.json] File
+
+    "jest":{
+        "collectCoverage" : true
+    }
+
+==> If Want To Generates Coverage Files With Html
+
+    "jest":{
+        "collectCoverage" : true,
+        "coverageReporters" : ["html"]
+    }
