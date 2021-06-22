@@ -1,0 +1,31 @@
+(1) Coverage Directory
+------------------------
+==> In [Package.json] File You Can Specify Coverage Directory By Adding This Code
+
+    "jest":{
+        "collectCoverage" : true,
+        "coverageReporters" : ["html"],
+        "coverageDirectory" : "reports" /* Create Folder Called 'reports' For Code Coverage */
+    }
+
+
+(2) If Want Coverage To Find Specific Files Only
+-------------------------------------------------
+
+  "jest":{
+        "collectCoverage" : true,
+        "coverageReporters" : ["html"],
+        "coverageDirectory" : "reports",
+        "collectCoverageFrom" : ["**/*.{js,ts,jsx}"]
+    }
+
+(3) If Want To Skip Coverage Of Specific Files Or Folders
+-----------------------------------------------------------
+
+  "jest":{
+        "collectCoverage" : true,
+        "coverageReporters" : ["html"],
+        "coverageDirectory" : "reports",
+        "collectCoverageFrom" : ["**/*.{js,ts,jsx}"],
+        "coveragePathIgnorePatterns" : ["/node_modules"] // By Default 'node_modules' Ignored By Jest
+    }
