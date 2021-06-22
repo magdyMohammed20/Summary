@@ -1,0 +1,68 @@
+(1) Expect Anything
+--------------------
+==> Expect Anything Except [Null , Undefined]
+==> Except Anything Used With [toEqual] Matcher
+
+
+EX
+----
+
+    say.test.js
+    --------------
+
+    test('Expect Anything' , () => {
+        // Test Passed
+        expect(100).toEqual(expect.anything());
+    })
+
+    test('Expect Anything' , () => {
+        // Test Not Passed
+        expect(NULL).toEqual(expect.anything());
+    })
+
+    test('Expect Anything' , () => {
+        // Test Not Passed
+        expect(undefined).toEqual(expect.anything());
+    })
+
+
+(2) Expect Any
+----------------
+==> Expect Any Constructor 
+
+EX
+---
+
+    say.test.js
+    ------------
+
+    test('Expect Any' , () => {
+        // Test Passed
+        // 100 Can Created From Number Constructor
+        expect(100).toEqual(expect.any(Number));
+    })
+
+    test('Expect Any' , () => {
+        // Test Passed
+        // 'Magdy' Can Created From String Constructor
+        expect('Magdy').toEqual(expect.any(String));
+    })
+
+
+(3) Array Containing
+-----------------------
+==> Check If Array Contains Specific Values
+
+EX
+---
+
+    say.test.js
+    ------------
+
+    test('Expect Array Containing' , () => {
+        let arr = [1,2,3,4,5];
+
+        // Test Passed
+        // Check If Array Contains 1 And 2
+        expect(arr).toEqual(expect.arrayContaining([1,2]));
+    })
