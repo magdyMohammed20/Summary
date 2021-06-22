@@ -1,0 +1,29 @@
+(1) Create Your Own Matcher
+-----------------------------
+
+    say.test.js
+    ------------
+
+    // Use extend To Create Own Matcher
+    expect.extend({
+        toLarge(receive , target){
+            const passed = receive > target;
+
+            if(passed){
+                return{
+                    message: () => `Expected ${receive} To Be Larger Than ${target}`,
+                    pass: true
+                }
+            }else{
+                return{
+                    message: () => `Error: Test Failed ${receive} To Be Not Larger Than ${target}`,
+                    pass: false
+                }
+            }
+        }
+    })
+
+
+    test('Check Large' , () => {
+        expect(100).toLarge(7);
+    })
