@@ -1,0 +1,125 @@
+(1) only
+---------
+==> Used To Run Only 1 Test And Skip Other Tests
+==> You Can Use [only] With More Than 1 Test
+
+EX
+---
+
+    const add1 = require('../say');
+
+    // Use Describe For Describe Job Of Some Tests
+    describe("Test Sum Of Numbers" , () => {
+
+        // First Nested Describe
+        describe("Sending 1 Or 2 Parameters" , () => {
+            // This Test Will Executed
+            test.only("Add Method1" , () => {
+                expect(add1(4 , 6)).toBe(10)
+            });
+
+            // This Test Will Executed
+            test.only("Get Number2" , () => {
+                expect(add1(10)).toBe(10)
+            })
+        })
+
+        // Second Nested Describe
+        describe("Sending More Than 2 Parameters" , () => {
+            // This Test Will Skipped
+            test("Get Number3" , () => {
+                expect(add1(10 , 20 , 40 , 30)).toBe(100)
+            })
+        })
+    })
+
+
+(2) Can Use [only] With Describe
+----------------------------------
+
+    const add1 = require('../say');
+
+    // Use Describe For Describe Job Of Some Tests
+    describe("Test Sum Of Numbers" , () => {
+
+        // First Nested Describe
+        // This Describe Not Executed
+        describe("Sending 1 Or 2 Parameters" , () => {
+            test("Add Method1" , () => {
+                expect(add1(4 , 6)).toBe(10)
+            });
+
+            test("Get Number2" , () => {
+                expect(add1(10)).toBe(10)
+            })
+        })
+
+        // Second Nested Describe
+        // This Describe Executed
+        describe.only("Sending More Than 2 Parameters" , () => {
+            test("Get Number3" , () => {
+                expect(add1(10 , 20 , 40 , 30)).toBe(100)
+            })
+        })
+    })
+
+(3) Skip
+----------
+==> Used To Skip Test
+
+EX
+----
+
+    const add1 = require('../say');
+
+    // Use Describe For Describe Job Of Some Tests
+    describe("Test Sum Of Numbers" , () => {
+
+        // First Nested Describe
+        // This Test Not Executed
+        describe("Sending 1 Or 2 Parameters" , () => {
+            test.skip("Add Method1" , () => {
+                expect(add1(4 , 6)).toBe(10)
+            });
+
+            test("Get Number2" , () => {
+                expect(add1(10)).toBe(10)
+            })
+        })
+
+        // Second Nested Describe
+        describe("Sending More Than 2 Parameters" , () => {
+            test("Get Number3" , () => {
+                expect(add1(10 , 20 , 40 , 30)).toBe(100)
+            })
+        })
+    })
+
+
+EX (Skip With Describe)
+---
+
+    const add1 = require('../say');
+
+    // Use Describe For Describe Job Of Some Tests
+    describe("Test Sum Of Numbers" , () => {
+
+        // First Nested Describe
+        // This Describe Not Executed
+        describe.skip("Sending 1 Or 2 Parameters" , () => {
+            test("Add Method1" , () => {
+                expect(add1(4 , 6)).toBe(10)
+            });
+
+            test("Get Number2" , () => {
+                expect(add1(10)).toBe(10)
+            })
+        })
+
+        // Second Nested Describe
+        describe("Sending More Than 2 Parameters" , () => {
+            test("Get Number3" , () => {
+                expect(add1(10 , 20 , 40 , 30)).toBe(100)
+            })
+        })
+    })
