@@ -1,0 +1,80 @@
+(1) Mathcers
+---------------
+==> Is Helpers Method Within Jest
+==> toBe() Is Matchers
+
+EX
+---
+
+    say.js
+    -------
+
+    const data = [1,2,3,4,5,6];
+    module.exports = data;
+
+    say.test.js
+    ------------
+
+    const data = require('../say');
+
+    test("Check Array Length" , () => {
+        expect(data.length).toBe(6);
+    });
+
+
+(2) toHaveLength() Matcher
+---------------------------
+==> Check Length Of Strings Or Arrays
+
+    say.js
+    -------
+
+    const data = [1,2,3,4,5,6];
+    module.exports = data;
+
+
+    say.test.js
+    ------------
+
+    const data = require('../say');
+
+    test("Check Array Length" , () => {
+        expect(data).toHaveLength(6);
+    });
+
+(3) toContain() Matcher
+---------------------------
+==> Check If Array Or String Contains Specific Value
+
+    say.js
+    -------
+
+    const data = [1,2,3,4,5,6];
+    module.exports = data;
+
+    say.test.js
+    ------------
+
+    const data = require('../say');
+
+    test("Check Array Length" , () => {
+        expect(data).toContain(1);
+    });
+
+(4) [not] Matcher
+---------------------------
+==> Check If Array Or String Not Contains Specific Value
+
+    say.js
+    -------
+    const data = [1,2,3,4,5,6];
+    module.exports = data;
+
+    say.test.js
+    ------------
+
+    const data = require('../say');
+
+    test("Check Array Length" , () => {
+        expect(data).not.toContain(10);
+    });
