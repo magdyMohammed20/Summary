@@ -1,0 +1,10 @@
+(1) Context API And Redux
+---------------------------
+
+==> Redux
+    - Distributes Data To Various Components
+    - Centralize Data In Store
+    - Provide Mechanism For Changing Data In Store 
+
+==> Context
+    - Distributes Data To Various Components
