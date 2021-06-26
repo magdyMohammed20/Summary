@@ -1,0 +1,33 @@
+(1) Notify From Windows With Test Result
+------------------------------------------
+==> Install Jest Globally (npm i jest --global)
+==> Run This Command (jest sum --notify) For Run Test Of [sum.js] File And Notify Me With Result
+
+
+(2) toBe() Vs toBeCloseTo()
+-----------------------------
+
+    test("Using ToBe" , () => {
+        // Test Failed 
+        // Received : 0.3000000000004
+        // Expected : 0.3
+        expect(0.1 + 0.2).toBe(0.3);
+    })
+
+    test("Using toBeCloseTo" , () => {
+        // Test Passed
+        expect(0.1 + 0.2).toBeCloseTo(0.3);
+    })
+
+
+(3) toThrow() Matcher
+----------------------
+
+    function throwError(){
+        throw new Error("This Is Error");
+    }
+
+    test("Using toBeCloseTo" , () => {
+        // Test Passed As 'throwError' Function Already Produce Error
+        expect(throwError).toThrow();
+    })
