@@ -1,0 +1,93 @@
+(1) Writing Story Within Story [Nesting]
+------------------------------------------
+
+    Button.js
+    -----------
+
+    import React from 'react'
+    import './Button.css'
+
+    function Button(props) {
+        const {variant = 'primary' , children , ...rest} = props;
+
+        return (
+            <button className={`button ${variant}`} {...rest}>
+                {children}
+            </button>
+        )
+    }
+
+    export default Button
+
+
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+
+    export default{
+        title : 'Components/Button', // Is Mandatory 
+        component: Button,   
+    }
+
+    export const Primary = () => <Button variant = 'primary'>Primary</Button>
+    export const Secondary = () => <Button variant = 'secondary'>secondary</Button>
+    export const Success = () => <Button variant = 'success'>success</Button>
+    export const Danger = () => <Button variant = 'danger'>danger</Button>
+
+
+
+    Input.js
+    ---------
+
+    import React from 'react'
+    import './Input.css'
+
+    function Input(props) {
+        const {size='medium' , ...rest} = props;
+        
+        return (
+            <input className={`input ${size}`} {...rest}/>
+        )
+    }
+
+    export default Input
+
+
+
+    Input.stories.js
+    ------------------
+
+    import React from 'react'
+    import Input from "./Input.js";
+
+    export default{
+        title: 'Components/Input',
+        component: Input
+    }
+
+    export const Small = () => <Input size='small'/>
+    export const Medium = () => <Input size='medium'/>
+    export const Large = () => <Input size='large'/>
+
+
+    Nested.stories.js
+    ------------------
+
+    import React from 'react'
+    import {Primary} from '../Button/Button.stories'
+    import {Large} from '../Input/Input.stories'
+
+    export default{
+        title: 'form/sub'
+    }
+
+    // Nested Stories
+    export const primarySub = () => (
+        <>
+            <Large/>
+            <Primary/>
+        </>
+    )
