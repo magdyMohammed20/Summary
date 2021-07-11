@@ -10,3 +10,8 @@
 (2) For Run StoryBook 
 -----------------------
 ==> [npm run storybook] Or [yarn storybook]
+
+
+(3) Another Way To Install StoryBook
+--------------------------------------
+==> npm -p @storybook/cli sb init
