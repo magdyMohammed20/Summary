@@ -1,0 +1,8 @@
+(1) What And Why Storybook
+----------------------------
+==> Development Environment And Playground For UI Components
+==> Create Components Independently 
+==> ShowCase Those Components Interactively In An Isolated Development Environment
+==> When Work As Team It Give Ability To View Different Components That Have Already Been Developed
+==> When Work As Team It Give Ability To Visually ShowCase Those Components To Your Stakeholders For Feedback
+==> Dynamically Change Props 
