@@ -1,0 +1,79 @@
+(1) Using Args For Listing Stories
+------------------------------------
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+
+    export default{
+        title : 'Components/Button', // Is Mandatory 
+        component: Button,   
+    }
+
+    /*  
+        //// Old Way /////
+        export const Primary = () => <Button variant = 'primary'>Primary</Button>
+        export const Secondary = () => <Button variant = 'secondary'>secondary</Button>
+        export const Success = () => <Button variant = 'success'>success</Button>
+        export const Danger = () => <Button variant = 'danger'>danger</Button>
+    */
+
+    /////// New Way //////
+    const Template = args => <Button {...args}/>
+
+    export const PrimaryA = Template.bind({})
+    PrimaryA.args = {
+        variant : 'primary',
+        children : 'Primary Args'
+    }
+
+    export const SecondaryA = Template.bind({})
+    SecondaryA.args = {
+        variant : 'secondary',
+        children : 'Secondary Args'
+    }
+
+    export const SuccessA = Template.bind({})
+    SuccessA.args = {
+        variant : 'success',
+        children : 'Success Args'
+    }
+
+    export const DangerA = Template.bind({})
+    DangerA.args = {
+        variant : 'danger',
+        children : 'Danger Args'
+    }
+
+
+(2) Args Give You Ability To Extend Between Components
+-------------------------------------------------------
+
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+
+    export default{
+        title : 'Components/Button', // Is Mandatory 
+        component: Button,   
+    }
+
+    const Template = args => <Button {...args}/>
+
+    export const DangerA = Template.bind({})
+    DangerA.args = {
+        variant : 'danger',
+        children : 'Danger Args'
+    }
+
+    // Extends DangerA
+    export const DangerC = Template.bind({})
+    DangerC.args = {
+        ...DangerA.args,
+        children : 'Long Danger'
+    }
