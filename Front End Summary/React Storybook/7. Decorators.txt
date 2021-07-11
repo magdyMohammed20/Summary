@@ -1,0 +1,149 @@
+(1) Decorators
+------------------
+==> Is Component That Wrap A Story [EX: If Want To Center Stories]
+
+==> Create Folder Called 'Center' Having 2 Files 'Center.js' And 'Center.css'
+==> Use 'Center.js' Component With Any Story
+
+
+EX:
+----
+
+    Center.js
+    ----------
+
+    import React from 'react'
+    import './Center.css'
+
+    function Center(props) {
+        return (
+            <div className='center'>
+                {props.children}
+            </div>
+        )
+    }
+
+    export default Center
+
+
+    Center.css
+    -----------
+
+    .center{
+        display: flex;
+        justify-content: center;
+    }
+
+    Button.js
+    ----------
+
+    import React from 'react'
+    import './Button.css'
+
+    function Button(props) {
+        const {variant = 'primary' , children , ...rest} = props;
+
+        return (
+            <button className={`button ${variant}`} {...rest}>
+                {children}
+            </button>
+        )
+    }
+
+    export default Button
+
+
+    Button.css
+    -----------
+
+    button{
+        border: none;
+        text-align: center;
+        color: #FFF;
+        padding: 15px 32px;
+        font-size: 16px;
+        border-radius: 100px;
+        cursor: pointer;
+    }
+
+    .primary{background-color: #008CBA;}
+    .secondary{background-color: #e7e7e7; color: black;}
+    .success{background-color: #4CAF50;}
+    .danger{background-color: #F44336;}
+
+
+
+    Button.stories.js
+    -----------------
+    import React from 'react'
+    import Button from './Button'
+    import Center from '../Center/Center' // Element That Wrap The Stories
+
+    export default{
+        title : 'Components/Button',
+        component: Button,   
+    }
+
+    // Wrap All Stories With <Center> Component
+    export const Primary = () => <Center><Button variant = 'primary'>Primary</Button></Center>
+    export const Secondary = () => <Center><Button variant = 'secondary'>secondary</Button></Center>
+    export const Success = () => <Center><Button variant = 'success'>success</Button></Center>
+    export const Danger = () => <Center><Button variant = 'danger'>danger</Button></Center>
+
+
+(2) Another Way To Include Decorators Without Repeat The Wraper Component With Each Story
+-------------------------------------------------------------------------------------------
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+    import Center from '../Center/Center'
+
+    export default{
+        title : 'Components/Button', 
+        component: Button,
+        decorators: [story => <Center>{story()}</Center>] // Look Here
+    }
+
+
+    export const Primary = () => <Button variant = 'primary'>Primary</Button>
+    export const Secondary = () => <Button variant = 'secondary'>secondary</Button>
+    export const Success = () => <Button variant = 'success'>success</Button>
+    export const Danger = () => <Button variant = 'danger'>danger</Button>
+
+
+(3) Global Decorators [Will Make All Stories In Center]
+----------------------------------------------------------
+
+==> Inside '.storybook' Folder Create 'preview.js' File
+==> And For Example Button Stories Will Be As That 
+==> At Last Must Restart Server 'yarn storybook'
+
+    preview.js
+    ------------
+
+    import React from 'react'
+    import {addDecorator} from '@storybook/react'
+    import Center from '../src/Components/Center/Center'
+
+    addDecorator(story => <Center>{story()}</Center>)
+
+
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+    export default{
+        title : 'Components/Button', 
+        component: Button
+    }
+
+
+    export const Primary = () => <Button variant = 'primary'>Primary</Button>
+    export const Secondary = () => <Button variant = 'secondary'>secondary</Button>
+    export const Success = () => <Button variant = 'success'>success</Button>
+    export const Danger = () => <Button variant = 'danger'>danger</Button>
