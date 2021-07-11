@@ -1,0 +1,65 @@
+(1) Steps To Write stories
+---------------------------
+==> Create 'Components' Folder Inside 'src' Folder
+==> Create 'Button' Folder Inside 'Components' Folder
+==> Create 3 Files Inside 'Button' Folder [Button.js , Button.css , Button.stories.js]
+
+EX
+---
+
+    Button.js
+    ----------
+
+    import React from 'react'
+    import './Button.css'
+
+    function Button(props) {
+        const {variant = 'primary' , children , ...rest} = props;
+
+        return (
+            <button className={`button ${variant}`} {...rest}>
+                {children}
+            </button>
+        )
+    }
+
+    export default Button
+
+
+    Button.css
+    ----------
+
+    button{
+        border: none;
+        text-align: center;
+        color: #FFF;
+        padding: 15px 32px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    .primary{background-color: #008CBA;}
+    .secondary{background-color: #e7e7e7; color: black;}
+    .success{background-color: #4CAF50;}
+    .danger{background-color: #F44336;}
+
+
+    Button.stories.js
+    -------------------
+
+    import React from 'react'
+    import Button from './Button'
+
+    export default{
+        title : 'Button', // Is Mandatory 
+        component: Button,   
+    }
+
+    export const primary = () => <Button variant = 'primary'>Primary</Button>
+    export const secondary = () => <Button variant = 'secondary'>secondary</Button>
+    export const success = () => <Button variant = 'success'>success</Button>
+    export const danger = () => <Button variant = 'danger'>danger</Button>
+
+
+==> Run [yarn storybook] Or [npm run storybook]
