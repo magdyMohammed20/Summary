@@ -1,0 +1,12 @@
+(1) Install Story Book In React App
+-------------------------------------
+==> Install Storybook CLI Globally : npm i -g @storybook/cli
+==> npx sb init
+
+==> After Install There Are A New Folder Called 'storybook' Created In The Project And Have 2 Files 'Main.js' And 'Preview.js'
+    And New Folder Called 'stories' Created In 'src' Folder That Contains All Components
+
+
+(2) For Run StoryBook 
+-----------------------
+==> [npm run storybook] Or [yarn storybook]
