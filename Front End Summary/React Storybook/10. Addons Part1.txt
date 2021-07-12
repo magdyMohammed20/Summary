@@ -1,0 +1,218 @@
+(1) Controls Addon
+--------------------
+==> Can Add Textbox To Control Stories
+
+EX
+----
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+
+    export default{
+        title : 'Components/Button',
+        component: Button,
+        // Look Here
+        argTypes: {
+            variantColor: {control: 'text'},
+            children: {control: 'text'}
+        }  
+    }
+
+
+    const Template = args => <Button {...args}/>
+
+    export const PrimaryA = Template.bind({})
+    PrimaryA.args = {
+        variantColor : 'primary',
+        children : 'Primary Args'
+    }
+
+    Button.js
+    -----------
+
+    import React from 'react'
+    import './Button.css'
+
+    function Button(props) {
+        const {variant = 'primary' , children , ...rest} = props;
+
+        return (
+            <button className={`button ${variant}`} {...rest}>
+                {children}
+            </button>
+        )
+    }
+
+    export default Button
+
+
+
+    Button.css
+    ------------
+
+    .primary{
+        background-color: blue;
+        color: #FFF
+    }
+
+
+(2) Actions Addon
+--------------------
+==> Can Test And See Actions Of Stories
+
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+
+    export default{
+        title : 'Components/Button',
+        component: Button,
+        
+        argTypes: {
+            variantColor: {control: 'text'},
+            children: {control: 'text'},
+            onClick: {action: 'Clicked'}  // Look Here
+        }  
+    }
+
+
+    const Template = args => <Button {...args}/>
+
+    export const PrimaryA = Template.bind({})
+    PrimaryA.args = {
+        variantColor : 'primary',
+        children : 'Primary Args'
+    }
+
+
+(3) Docs Addon
+---------------
+==> For Showing All Stories Elements
+
+
+(4) Viewport Addon
+--------------------
+==> Test Stories In Different Screen Width
+==> Add "@storybook/addon-viewport" To 'addons' Object In 'main.js' File
+
+    main.js
+    --------
+
+    "addons": [
+        "@storybook/addon-links",
+        "@storybook/addon-essentials",
+        "@storybook/preset-create-react-app",
+        "@storybook/addon-viewport"
+    ]
+
+ 
+(5) Actions Handler 
+-----------------------
+
+EX
+---
+
+    Button.js
+    ----------
+
+    import React from 'react'
+    import './Button.css'
+
+    function Button(props) {
+        const {variant = 'primary' , children , ...rest} = props;
+
+        return (
+            <button className={`button ${variant}`} {...rest}>
+                {children}
+            </button>
+        )
+    }
+
+    export default Button
+
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+    import {action , actions} from '@storybook/addon-actions'
+    export default{
+        title : 'Components/Button',
+        component: Button,
+    }
+
+
+    export const Primary = () => <Button variant = 'primary' onClick={action('Click Handler')}>Primary</Button>
+    export const Secondary = () => <Button variant = 'primary' {...actions('onClick' , 'onMouseOver')}>Primary</Button>
+
+
+(6) Console Addon 
+-----------------------
+==> Used To Logged Output Instead Of Browser Console
+==> Install It : yarn add -D @storybook/addon-console
+==> Import It In 'preview.js' File
+==> Log Any Statement Inside 'Button.stories.js'
+
+EX
+---
+
+    preview.js
+    ------------
+
+    import "@storybook/addon-console"
+
+    export const parameters = {
+        actions: { argTypesRegex: "^on[A-Z].*" },
+        controls: {
+            matchers: {
+            color: /(background|color)$/i,
+            date: /Date$/,
+            },
+        },
+    }
+
+
+    Button.stories.js
+    ------------------
+
+    import React from 'react'
+    import Button from './Button'
+    export default{
+        title : 'Components/Button',
+        component: Button,
+    }
+
+
+    export const Primary = () => <Button variant = 'primary' onClick={() => console.log('Hellow')}>Primary</Button>
+
+
+
+EX (Identify Which Logged Action Comes From ? )
+----
+==> Only Modify 'preview.js' With This Code
+
+
+    preview.js
+    ------------
+
+    import {withConsole} from "@storybook/addon-console"
+    import {addDecorator} from '@storybook/react'
+
+    export const parameters = {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+        matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+        },
+    },
+    }
+
+    addDecorator((storyFn , context) => withConsole()(storyFn)(context))
