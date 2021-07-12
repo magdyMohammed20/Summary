@@ -1,0 +1,80 @@
+(1) a11y Addon
+---------------
+==> Test component compliance with web accessibility standards
+==> Install : yarn add -D @storybook/addon-a11y
+
+==> Add It To 'main.js' In 'addon' Object
+-------------------------------------------
+
+  "addons": [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/preset-create-react-app",
+    "@storybook/addon-viewport",
+    "@storybook/addon-knobs",
+    "@storybook/addon-a11y"
+  ]
+
+
+==> Add It To 'Preview.js' File
+---------------------------------
+
+    import {addDecorator} from '@storybook/react'
+    import {withA11y} from '@storybook/addon-a11y'
+
+    export const parameters = {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+        matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+        },
+    },
+    }
+
+    // Pass It To Decorator
+    addDecorator(withA11y)
+
+
+==> Button.stories.js 
+-----------------------
+
+    import React from 'react'
+    import Button from './Button'
+    import {text , boolean} from '@storybook/addon-knobs'
+
+    export default{
+        title : 'Components/Button',
+        component: Button,
+    }
+
+
+    export const Primary = () => (
+        
+        <Button disabled={boolean('Disabled' , false)}>
+            {text('Label' , 'Button')}
+        </Button>
+
+    )
+
+
+==> Button.js 
+---------------
+
+    import React from 'react'
+    import './Button.css'
+
+    function Button(props) {
+        const {variant = 'primary' , children , ...rest} = props;
+
+        return (
+            <button className={`button ${variant}`} {...rest}>
+                {children}
+            </button>
+        )
+    }
+
+    export default Button
+
+
+==> After Run You Note That 'Accessiblity' Tab Added That Tells You With All Issues And Passed
