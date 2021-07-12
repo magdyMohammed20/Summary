@@ -1,0 +1,4 @@
+(1) Buiding Storybook As Static Page To Host In Any Host
+---------------------------------------------------------
+==> Run [yarn build-storybook]
+==> You Will Note That A New Folder Called 'storybook.static' Create Beside 'src' Folder
