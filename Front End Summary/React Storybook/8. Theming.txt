@@ -1,0 +1,43 @@
+(1) Theming
+-------------
+==> Install 'Chakra UI' Lib In React Project [yarn add @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^4]
+==> Now You Can Use Components Of 'Chakra UI' In Storybook
+==> Only You Will Create Stories File As Css File And Component Already 'Chakra UI' Provide It
+
+
+==> Create 'ChakraButton' Folder That Contains 'ChakraButton.stories.js' File
+==> It Produce Error As Must Use 'ThemeProvide' , 'Theme' , 'CssReset' That We Will Create It In 'Preview.js' File Within 'Decorator'
+==> You Can Import 'Box' Component From Chakra Lib To Add Some Margin To Elements In Storybook
+
+EX
+---
+
+    ChakraButton.stories.js
+    -------------------------
+
+    import React from 'react'
+    import {Button} from '@chakra-ui/core'
+
+    export default{
+        title: 'Chakra Button',
+        component: Button
+    }
+
+    export const Success = () => <Button variantColor='green'>Success</Button>
+
+    export const danger = () => <Button variantColor = 'red'>Danger</Button>
+
+
+    Preview.js
+    ------------
+
+    import React from 'react'
+    import {ThemeProvider , theme , CssReset , Box} from '@chakra-ui/core'
+
+    addDecorator(story => 
+        <ThemeProvider Theme={theme}><CssReset/>
+            <Box m='4'>
+                {story()}
+            </Box>
+        </ThemeProvider>
+    )
