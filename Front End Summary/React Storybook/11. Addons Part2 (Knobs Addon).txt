@@ -1,0 +1,76 @@
+(1) Knobs Addon
+----------------
+==> Used To Edit Props Dynamically Using Storybook UI
+==> Install It : yarn add -D @Storybook/addon-knobs
+
+==> Add It Inside 'main.js' In 'addons' Object
+------------------------------------------------
+
+  "addons": [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/preset-create-react-app",
+    "@storybook/addon-viewport",
+    "@storybook/addon-knobs"
+  ]
+
+
+==> Add It Inside 'preview.js' File
+----------------------------------------
+
+    import {addDecorator} from '@storybook/react'
+    import {withKnobs} from '@storybook/addon-knobs'
+
+    export const parameters = {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    controls: {
+        matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+        },
+    },
+    }
+
+    // Pass It To Decorator
+    addDecorator(withKnobs)
+
+
+==> Button.js component
+--------------------------
+
+    import React from 'react'
+    import './Button.css'
+
+    function Button(props) {
+        const {variant = 'primary' , children , ...rest} = props;
+
+        return (
+            <button className={`button ${variant}`} {...rest}>
+                {children}
+            </button>
+        )
+    }
+
+    export default Button
+
+
+==> Add It Inside 'Button.stories.js'
+----------------------------------------
+
+    import React from 'react'
+    import Button from './Button'
+    import {text , boolean} from '@storybook/addon-knobs'
+
+    export default{
+        title : 'Components/Button',
+        component: Button,
+    }
+
+
+    export const Primary = () => (
+        
+        <Button disabled={boolean('Disabled' , false)}>
+            {text('Label' , 'Button')}
+        </Button>
+
+    )
