@@ -1,0 +1,17 @@
+(1) React Render Phases
+------------------------
+==> Render Phase  
+==> Commit Phase
+
+
+(2) Render Phase
+-----------------
+==> React Starting From Root To Leaf Components
+==> React Use [createElement()] To Convert JSX Component To React Elements
+==> React Elements : Is 'Js Objects' That Describes The Structure Of UI
+
+
+(3) Commit Phase
+-----------------
+==> Once Jsx Converted To React Elements Is Done To Entire Of Component Tree All React Elements Moved To Commit Phase
+==> In This Phase React Elements Is Applied To DOM Using 'reactDOM' Package
