@@ -1,0 +1,98 @@
+(1) Form Control
+-----------------
+==> Give textual form controls like <input>s and <textarea>s an upgrade with custom styles, sizing, focus states, and more.
+
+
+(2) Form Control Sample
+------------------------
+
+    <div class="p-4">
+      <label for="formControl" class="form-label">
+        Name
+      </label>
+      <input type="text" class="form-control" id="formControl" />
+    </div>
+    
+    
+(2) Form Control Sizing [form-control-sm , form-control-lg]
+------------------------
+
+    <div class="p-4">
+      <label for="formControl" class="form-label">Name</label>
+      <input type="text" class="form-control" id="formControl" />
+    </div>
+    <div class="p-4">
+      <label for="formControl" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control form-control-sm"
+        id="formControl"
+      />
+    </div>
+    <div class="p-4">
+      <label for="formControl" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control form-control-lg"
+        id="formControl"
+      />
+    </div>
+    
+    
+(3) Readonly Form Control
+--------------------------
+
+    <div class="p-4">
+      <label for="formControl" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        value="Magdy Mohammed"
+        id="formControl"
+        readonly
+      />
+    </div>
+    
+    
+(4) Form Control Readonly plain text
+-------------------------------------
+
+    <div class="p-4">
+      <label for="formControl" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control-plaintext"
+        value="Magdy Mohammed"
+        id="formControl"
+      />
+    </div>
+    
+    
+(5) Form Control Color
+------------------------
+
+      <input
+        type="color"
+        class="form-control form-control-color"
+        id="formControl"
+      />
+      
+(6) Datalists
+-----------------
+==> Datalists allow you to create a group of <option>s that can be accessed (and autocompleted) from within an <input>. These are similar to <select> elements.
+
+
+    <div class="p-4">
+      <input
+        class="form-control"
+        list="datalistOptions"
+        placeholder="Type to search..."
+      />
+      <datalist id="datalistOptions">
+        <option value="San Francisco"> </option>
+        <option value="New York"> </option>
+        <option value="Seattle"> </option>
+        <option value="Los Angeles"> </option>
+        <option value="Chicago"> </option>
+      </datalist>
+    </div>

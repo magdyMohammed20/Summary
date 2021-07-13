@@ -1,0 +1,27 @@
+(1) Appearance
+---------------------
+==> Utilities for suppressing native form control styling.
+
+Class               Property
+---------------------------------------------
+.appearance-none	appearance: none;
+
+
+(2) Samples
+-------------
+
+  <select class="appearance-none">
+    <option>Yes</option>
+    <option>No</option>
+    <option>Maybe</option>
+  </select>
+
+
+(3) Resposive Appearance
+--------------------------------
+
+    <select class="md:appearance-none">
+        <option>Yes</option>
+        <option>No</option>
+        <option>Maybe</option>
+    </select>

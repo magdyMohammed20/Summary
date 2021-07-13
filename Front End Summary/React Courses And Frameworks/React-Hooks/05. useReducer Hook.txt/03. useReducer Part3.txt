@@ -1,0 +1,59 @@
+(1) Create Multiple Reducers
+-------------------------------------------------------------------------
+
+
+	import React, { useReducer } from 'react';
+
+	// Actions
+	const INCREMENT = 'increment',
+	    DECREMENT = 'decrement',
+	    RESET = 'reset'
+
+	// Create Initial State
+	const initialState = { counter: 0 };
+
+	const reducer = (state, action) => {
+	    switch (action) {
+		case INCREMENT:
+		    return { counter: state.counter + 1 }
+
+		case DECREMENT:
+		    return { counter: state.counter - 1 }
+
+		case RESET:
+		    return { counter: 0 }
+
+		default: return state
+	    }
+	}
+
+	const CompA = () => {
+
+	    // For First Counter
+	    const [newState, dispatch] = useReducer(reducer, initialState)
+
+	    // For Second Counter
+	    const [newState2, dispatch2] = useReducer(reducer, initialState)
+
+	    return (
+		<div>
+
+		    {/* Here There Are 2 Different Counters */}
+		    <div>
+		        <h1>First Counter {newState.counter}</h1>
+		        <button onClick={() => dispatch('increment')}> +1 </button>
+		        <button onClick={() => dispatch('decrement')}> -1 </button>
+		        <button onClick={() => dispatch('reset')}> 0 </button>
+		    </div>
+
+		    <div>
+		        <h1>Second Counter {newState2.counter}</h1>
+		        <button onClick={() => dispatch2('increment')}> +1 </button>
+		        <button onClick={() => dispatch2('decrement')}> -1 </button>
+		        <button onClick={() => dispatch2('reset')}> 0 </button>
+		    </div>
+		</div>
+	    );
+	};
+
+	export default CompA;

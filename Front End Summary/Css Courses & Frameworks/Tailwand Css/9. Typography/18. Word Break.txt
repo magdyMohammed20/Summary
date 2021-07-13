@@ -1,0 +1,23 @@
+(1) Word Break
+-----------------
+==> Utilities for controlling word breaks in an element.
+
+Class                    Properties
+-------------------------------------------------------------
+.break-normal	           overflow-wrap: normal;word-break: normal;
+.break-words	           overflow-wrap: break-word;
+.break-all	             word-break: break-all;
+.truncate	               overflow: hidden;text-overflow: ellipsis;white-space: nowrap;
+
+(2) Samples
+-------------
+
+  <p class="truncate">...</p>
+
+
+(3) Responsive Word Break
+------------------------------
+
+  <p class="break-normal sm:break-words md:break-all lg:truncate xl:break-normal ...">
+    ...
+  </p>

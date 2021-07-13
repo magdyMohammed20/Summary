@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+
+  body {
+    background-color: #0c002b
+  }
+
+  a {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FF0;
+    text-transform: uppercase;
+    font-size: 2em;
+    text-decoration: none;
+    letter-spacing: 4px;
+    background-color: #000;
+    width: 200px;
+    text-align: center;
+    border-radius: 60px;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  a:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #FFF;
+    border-radius: 60px;
+    z-index: -1;
+    transform-origin: right;
+    transform: scaleX(0);
+    transition: transform .5s;
+  }
+
+  a:hover:before {
+    transform-origin: left;
+    transform: scaleX(1);
+    background-color: #FFF;
+  }
+
+  a:hover {
+    color: #0c002b;
+  }
+</style>
+
+<body>
+
+  <a href="#">
+    Button
+  </a>
+</body>
+
+</html>

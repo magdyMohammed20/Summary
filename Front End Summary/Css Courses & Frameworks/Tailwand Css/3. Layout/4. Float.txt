@@ -1,0 +1,30 @@
+(1) Float Classes
+-------------------
+
+Class           Properties
+------------------------------
+.float-right	float: right;
+
+.float-left	    float: left;
+
+.float-none	    float: none;
+
+.clearfix	    &::after { content: ""; display: table; clear: both; }
+
+
+(2) Sample
+------------
+
+    <div class="magdy">
+      <div class="float-left">1</div>
+      <div class="float-right">2</div>
+      <div class="float-none">3</div>
+    </div>
+
+
+(3) Responsive Float
+----------------------
+
+    <div class="magdy">
+      <div class="float-left sm:float-right md:float-none lg:float-left xl:float-right">1</div>
+    </div>

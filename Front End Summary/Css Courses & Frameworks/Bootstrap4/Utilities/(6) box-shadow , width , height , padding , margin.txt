@@ -1,0 +1,54 @@
+(1) box-shadow
+---------------
+==> shadow-none     // box-shadow : none
+==> shadow-sm       // Small Shadow With rgba Color
+==> shadow          // Regular Shadow With rgba Color
+==> shadow-lg       // Large Shadow With rgba Color
+
+(2) Sizing Or Width
+--------------------
+==> w-25    // width : 25%
+==> w-50    // width : 50%
+==> w-75    // width : 75%
+==> w-100   // width : 100%
+==> w-auto  // width : auto
+
+(3) Sizing Or Height
+---------------------
+==> h-25    // height : 25%
+==> h-50    // height : 50%
+==> h-75    // height : 75%
+==> h-100   // height : 100%
+==> h-auto  // height : auto
+
+(4) max-width
+---------------------
+==> mw-100  // max-width : 100%
+
+(5) max-height
+---------------------
+==> mh-100  // max-height : 100%
+
+(6) padding
+---------------------
+==> p-5     // padding For All Sides
+==> pt-0    // padding-top : 0
+==> pr-1    // padding-right
+==> pb-2    // padding-bottom
+==> pl-3    // padding-left
+==> px-5    // padding-left And padding-right
+==> px-md-5 // padding-left And padding-right In Medium Screens
+==> py-5    // padding-top And padding-bottom
+
+(7) margin
+---------------------
+==> m-4     // margin For All Sidesmargin
+==> mt-0    // margin-top : 0
+==> mr-1    // margin-right
+==> mb-2    // margin-bottom
+==> ml-3    // margin-left
+==> m-auto  // margin : auto
+==> mx-auto // margin In x Axis Is auto
+==> ml-n5   // margin-left : -5rem
+==> mx-md-5 // margin In x Axis Is auto In Medium Screen
+==> my-5    // margin-top And margin-bottom

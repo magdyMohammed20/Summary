@@ -1,0 +1,66 @@
+(1) Create Click Event
+------------------------
+
+	App.js
+	-------
+
+	const print = () =>{
+		console.log('Hellow React')
+	}
+
+
+	<button onClick={this.print}>
+		Click
+	</button>
+
+
+(2) Print Something From Component State
+-----------------------------------------
+
+	class Child extends Component{
+	
+		state={
+			name: 'Magdy'
+		}
+
+		print(){
+			console.log(this.state.name)
+		}	
+
+		render(){
+			return(
+				<div>
+				  <button onClick={this.print.bind(this)}>
+				    Click
+				  </button>
+				</div>
+			)
+		}
+
+	}
+
+(3) Convert Print Function That In (2) To Arrow Function To Remove [bind] Keyword
+---------------------------------------------------------------------------------
+
+
+	class Child extends Component{
+	
+		state={
+			name: 'Magdy'
+		}
+
+  		print = () =>{
+    			console.log(this.state.name)
+  		}	
+
+		render(){
+			return(
+				<div>
+				  <button onClick={this.print}>
+				    Click
+				  </button>
+				</div>
+			)
+		}
+
+	}

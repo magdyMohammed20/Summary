@@ -1,0 +1,177 @@
+(1) Using 'Chakra UI' Library With Formik
+--------------------------------------------
+==> Install 'chakra UI' By Write [npm install @chakra-ui/core @emotion/core @emotion/styled emotion-theming] In CMD
+
+(2) How To Connect 'Formik' With 'Chakra UI' 
+-------------------------------------------------
+
+    // Use 'Theme' And 'ThemeProvider' In [App.js]
+    import React from 'react';
+    import './App.css';
+    import CourseEnrollement from './components/CourseEnrollement';
+    import {theme , ThemeProvider} from '@chakra-ui/core'
+    function App() {
+    return (
+        <ThemeProvider theme={theme}>
+        <div className="App">
+            <CourseEnrollement/>
+        </div>
+        </ThemeProvider>
+    );
+    }
+
+    export default App;
+
+
+    // Create 'ChakraInput.js' Component
+    import React from 'react'
+    import {Field} from 'formik'
+    import {Input , FormControl , FormLabel , FormErrorMessage} from '@chakra-ui/core'
+
+    function ChakraInput(props) {
+        const {label , name , ...rest} = props
+        return (
+            <Field name={name}>
+                {
+                    ({field , form}) => {
+                        return <FormControl isInvalid={form.errors[name] && form.touched[name]}>
+                            <FormLabel htmlFor={name}>
+                                {label}
+                            </FormLabel>
+                            <Input id={name} {...rest} {...field}/>
+                            <FormErrorMessage>
+                                {
+                                    form.errors[name]
+                                }
+                            </FormErrorMessage>
+                        </FormControl>
+                    }
+                }
+            </Field>
+        )
+    }
+
+    export default ChakraInput
+
+
+    // Handle 'chakrainput' In 'FormikControl.js'
+    import React from 'react'
+    import Input from './Input'
+    import Textarea from './Textarea'
+    import Select from './Select'
+    import Radio from './Radio'
+    import Checkbox from './Checkbox'
+    import DatePicker from './DatePicker'
+    import ChakraInput from './ChakraInput'
+
+    function FormikControl(props) {
+        const {control , ...rest} = props
+
+        switch(control){
+            case 'input' : 
+                return <Input {...rest}/>
+            case 'textarea':
+                return <Textarea {...rest}/>
+            case 'select' : 
+                return <Select {...rest}/>
+            case 'radio':
+                return <Radio {...rest}/>
+            case 'checkbox':
+                return <Checkbox {...rest}/>
+            case 'date':
+                return <DatePicker {...rest}/>
+            case 'chakrainput':
+                return <ChakraInput {...rest}/>
+            default: return null
+        }
+    }
+
+    export default FormikControl
+
+
+
+
+    // Use 'chakrainput' Instead Of 'input' In control Attribute [CourseEnrollement.js]
+    import React from 'react'
+    import {Formik , Form} from 'formik'
+    import * as Yup from 'yup'
+    import FormikControl from './FormikControl'
+
+    function CourseEnrollement() {
+        const selectOptions = [
+            {key : 'Select An Option' , value: ''},
+            {key : 'React' , value: 'react'},
+            {key : 'Vue' , value: 'vue'},
+            {key : 'Angular' , value: 'angular'}
+        ]
+
+        const checkboxOptions = [
+            {key : 'Html' , value: 'html'},
+            {key : 'Css' , value: 'css'},
+            {key : 'Js' , value: 'js'}
+        ]
+
+        const initialValues = {
+            email : '',
+            bio: '',
+            course: '',
+            skills: [],
+            courseDate: null
+        }
+
+        const validationSchema = Yup.object({
+            email: Yup.string().email('Enter Valid Email').required('Email Required'),
+            bio: Yup.string().required('Bio Required'),
+            course: Yup.string().required('Course Required'),
+            courseDate: Yup.date().required('Date Required').nullable()
+        })
+
+        const onSubmit = values => {
+            console.log('Form Data Is ' , values)
+        }
+
+        return (
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                {
+                    formik => {
+                        return <Form>
+                            <FormikControl
+                                control= 'chakrainput'
+                                type='email'
+                                label='Email'
+                                name='email'
+                            />
+                            <FormikControl
+                                control= 'textarea'
+                                label='Bio'
+                                name='bio'
+                            />
+                            <FormikControl
+                                control= 'select'
+                                label='Course'
+                                name='course'
+                                options={selectOptions}
+                            />
+                            <FormikControl
+                                control= 'checkbox'
+                                label='Skills'
+                                name='skills'
+                                options={checkboxOptions}
+                            />
+                            <FormikControl
+                                control= 'date'
+                                label='Date'
+                                name='courseDate'
+                            />
+                            <button type='submit' disabled={!formik.isValid}>
+                                Submit
+                            </button>
+                        </Form>
+                        
+                    }
+                }
+            </Formik>
+        )
+    }
+
+    export default CourseEnrollement

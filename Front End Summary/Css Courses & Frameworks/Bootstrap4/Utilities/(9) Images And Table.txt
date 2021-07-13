@@ -1,0 +1,82 @@
+(1) Images
+------------
+==> img-fluid       // width : 100% , height: auto
+==> img-thumbnail   // padding , border-radius , border
+
+(2) Table
+------------
+==> table // Give width : 100%; color , border-collpase , margin-bottom
+==> table-dark // background-color , color
+
+    <table class="table table-dark">
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Age</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Magdy Mohammed</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Magdy Mohammed</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Magdy Mohammed</td>
+            <td>20</td>
+        </tr>
+    </table>
+    
+(3) Table Head Options
+-----------------------
+==> thead-dark : Give The All th Dark Background And White Color
+
+
+    <table class="table">
+        <tr class="thead-dark">
+            <th>#</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </table>
+
+==> thead-light : Give The All th White Background And Dark Color
+
+    <table class="table">
+        <tr class="thead-light">
+            <th>#</th>
+            <th>Name</th>
+            <th>Age</th>
+        </tr>
+    </table>
+    
+(4) Striped Table
+--------------------------
+==> Give Each 2 Rows Specific Background
+
+    <table class="table table-dark table-striped">
+        <tr>
+            <td>#</td>
+            <td>Name</td>
+            <td>Age</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Magdy Mohammed</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Magdy Mohammed</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Magdy Mohammed</td>
+            <td>20</td>
+        </tr>
+    </table>

@@ -1,9 +1,0 @@
-(1) useCallback
-------------------
-==> Caches The Provided Function Instance Itself 
-==> Use To Cache A Function
-
-(2) useMemo
-------------------
-==> Invokes The Provided Function And Caches It's Result
-==> Use To Cache Function Result

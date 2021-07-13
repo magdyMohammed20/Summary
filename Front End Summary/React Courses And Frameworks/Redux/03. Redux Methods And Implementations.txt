@@ -1,0 +1,49 @@
+// Build Action Creator
+const Buy_Cake = 'BUY'
+
+// Action Creator [Function Returns Action]
+function ActionCreator(){
+  return {
+    type: Buy_Cake,
+    data: 'Buying Cakes'
+  }
+}
+
+// Reducer [Function That Accepts 2 Parameters (prevState , Action) And Returns The New State]
+
+// PrevState
+const initialState = {
+  numOfCakes: 10
+}
+
+// Create Reducer
+const reducer = (state = initialState , Action) => {
+    switch(Action.type){
+      case Buy_Cake:
+        return {
+          ...state,
+          numOfCakes: state.numOfCakes - 1
+        }
+        
+      default: return state
+    }
+}
+
+// Create Store And Connect Reducer With The Store
+const store = Redux.createStore(reducer)
+
+
+// Use getState For Get The State Of Store
+console.log(store.getState())
+
+
+// Subscribe For Print The New State After Updated
+const unsubscribe = store.subscribe(()=>{console.log('Updated State' , store.getState())})
+
+// Excute Buy Cake Action
+store.dispatch(ActionCreator())
+store.dispatch(ActionCreator())
+store.dispatch(ActionCreator())
+unsubscribe()
+
+// Note That Redux Has 3 Important Methods [getState , dispatch , subscribe]

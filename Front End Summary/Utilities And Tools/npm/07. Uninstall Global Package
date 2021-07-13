@@ -1,0 +1,15 @@
+(1) Uninstalling Global Package (Syntax)
+----------------------------------------
+==> npm uninstall Package_Name -g
+
+
+EX:
+-----
+==> npm uninstall moment -g
+
+
+(2) Uninstall Aliases [Can Use remove Or rm Or un Instead Of uninstall]
+----------------------
+==> npm remove moment
+==> npm rm moment
+==> npm un moment

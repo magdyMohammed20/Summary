@@ -1,0 +1,25 @@
+(1) User Select
+-----------------
+==> Utilities for controlling whether the user can select text in an element.
+
+Class               Property
+---------------------------------------------
+.select-none	    user-select: none;
+.select-text	    user-select: text;
+.select-all	        user-select: all;
+.select-auto	    user-select: auto;
+
+
+(2) Samples
+-------------
+
+    <div class="select-none ...">
+        This text is not selectable
+    </div>
+
+(3) Resposive User Select
+---------------------------
+
+  <div class="select-none md:select-all">
+    This text is not selectable
+  </div>

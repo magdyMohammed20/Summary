@@ -1,7 +1,0 @@
-(1) If Want Label To Refer To The Input Use 'htmlFor' Instead Of 'for'
-----------------------------------------------------------------------
-
-	<div className="form-group">
-          <label htmlFor="pass">Password</label>
-          <input type="password" onChange={this.handleChange} className="form-control" id="pass" placeholder="Password" />
-        </div>

@@ -1,0 +1,22 @@
+(1) Whitespace
+-----------------
+==> Utilities for controlling an element's white-space property.
+
+Class                    Properties
+-------------------------------------------------------------
+.whitespace-normal	     white-space: normal;
+.whitespace-no-wrap	     white-space: nowrap;
+.whitespace-pre	         white-space: pre;
+.whitespace-pre-line	   white-space: pre-line;
+.whitespace-pre-wrap	   white-space: pre-wrap;
+
+(2) Samples
+-------------
+
+  <div class="whitespace-normal">...</div>
+
+
+(3) Responsive Whitespace
+------------------------------
+
+  <div class="whitespace-normal sm:whitespace-no-wrap md:whitespace-pre lg:whitespace-pre-line xl:whitespace-pre-wrap ...">...</div>

@@ -1,0 +1,25 @@
+(1) When Download Project Github And This Project Has [package.json] File You Should Run [npm install] Command for install All Latest Versions Of Packages That The Project Depends On It And Listed In [Package.json] Dependencies Locally In The Downloaded Project
+
+
+(2) Versions In Package.json [EX: "node-sass": "^4.14.0" ]
+-----------------------------
+==> [4]  Called major version
+    [14] Called minor version
+    [0]  Called patch version
+    
+==> MAJOR version: when you make incompatible API changes,
+==> MINOR version: when you add functionality in a backwards-compatible manner, and
+==> PATCH version: when you make backwards-compatible bug fixes.
+
+
+
+(3) Dependences Version In Package.json Ways
+--------------------------------------------
+
+==> [^4.16.1] : If The Project On Github And It's Dependencies Written As It Is When Another Developer Download The Project And Run [npm install] Command It Will Set The 4 And Change 16 And 1 Only With Latest Version Of 4
+
+==> [~4.16.1] : If The Project On Github And It's Dependencies Written As It Is When Another Developer Download The Project And Run [npm install] Command It Will Set The 4 And 16 And Change 1 Only With Latest Version Of 4.16
+
+==> [4.16.1] : If The Project On Github And It's Dependencies Written As It Is When Another Developer Download The Project And Run [npm install] The [4.16.1] Version Installed As It's Is Without Updating Or Download Higher Version
+
+==> [*] : catches any version number for the place that it represents. For example a dependency with a version of * would equate to any version that was greater than or equal to 0.0.0, while 1.* would allow versions greater than or equal to 1.0.0 and less than 2.0.0

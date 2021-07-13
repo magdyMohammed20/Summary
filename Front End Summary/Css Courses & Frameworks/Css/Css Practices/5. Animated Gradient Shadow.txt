@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #000
+    }
+
+    section {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      background-color: #3e3a3a;
+      margin: 100px auto
+    }
+
+    section::after,
+    section::before {
+      content: '';
+      position: absolute;
+      width: calc(100% + 10px);
+      height: calc(100% + 10px);
+      top: -5px;
+      left: -5px;
+      background: linear-gradient(45deg, #F50, #00F, #F00, #F0F, #0F0);
+      z-index: -1;
+      background-size: 400%;
+      animation: shadow 20s linear infinite;
+    }
+
+    section::before {
+      filter: blur(30px)
+    }
+
+    @keyframes shadow {
+      0% {
+        background-position: 0 0;
+      }
+
+      50% {
+        background-position: 400% 0;
+      }
+
+      100% {
+        background-position: 0 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+
+  </section>
+</body>
+
+</html>

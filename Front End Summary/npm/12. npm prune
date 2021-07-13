@@ -1,4 +1,0 @@
-(1) If Installed Packages In The Project But After That I Remove It From Package.json And Want To Delete It From The Project Folders Too  
---------------------------------------------------------------------------------------------------------------------
-==> npm list --depth 0 // Note That Packages Has "extraneous" Word Beside It
-==> npm prune // Delete All Not Required Packages From [node_modules] Folder That Not Listed In [Package.json] File

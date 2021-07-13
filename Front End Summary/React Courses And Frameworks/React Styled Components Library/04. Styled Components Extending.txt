@@ -1,0 +1,56 @@
+(1) The Styled Elements Can Extends Each Other
+-------------------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+	const DivStyle = styled.div`
+	  padding: 10px;
+	  border: 2px solid #DDD;
+	`;
+
+	// Will Extends The 'DivStyle' All Styles Properties But Here The Parent And Child Styled Elements Will Be div Tag
+	const Div = styled(DivStyle)`
+	  background-color: #EEE;
+	  color: red;
+	`;
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div>Red</Div>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+
+(2) The Styled Elements Can Extends Each Other
+-------------------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+	const DivStyle = styled.div`
+	  padding: 10px;
+	  border: 2px solid #DDD;
+	`;
+
+	// If Want To Set Another Tag Name For The Child Element You Should Use 'as' Keyword When Call It
+	const Section = styled(DivStyle)`
+	  background-color: #EEE;
+	  color: red;
+	`;
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Section as='section'>Red</Section>
+	    </div>
+	  );
+	}
+
+	export default App;
+

@@ -1,0 +1,27 @@
+(1) Node_modules
+-------------------
+==> Contains All Packages That The Project Need It
+
+(2) public/index.html
+---------------------
+==> All Project Elements Rendered In The Element That Have [id='root']
+
+(3) manifest.json
+-----------------
+==> Contains Some Info About The Project
+
+(4) .gitignore 
+----------------
+==> For Prevent The Folders Like [node_modules] From Uploading To Github When Use Github In The Project
+
+(5) package.json
+-----------------
+==> Any Helpers That I Install It In The Project Will Be In This File [EX: Redux]
+
+(6) src/index.js
+---------------
+==> Is The Entry Point When Run The Project
+
+(7) App.js
+-----------
+==> I Will Write React Code And Call Components In It

@@ -1,0 +1,19 @@
+(1) Only Call Hooks At The Top Level Of The Functional Component
+
+(2) Don't Call Hooks Inside Loops , Conditions Or Nested Functions
+
+(3) Only Call Hooks From React Functions Not Js Functions
+
+(4) In Class Component The State Always An Object But When Use 'useState' Hook The State Doesn't Have To Be An Object
+
+(5) 'useState' Hook Returns Array With 2 Elements The First Is Current Value Of State And Second Element Is State Setter Function
+
+
+(6) Different Between 'state' In Class Component And 'useState' In React Hooks That Is
+--------------------------------------------------------------------------------------
+==> state: Is An Object Only And When Change The State It Will Merge The New Changes With Old State
+
+==> setState: Can Accept Primptive Value Or Object Or Array And When Change The State It Will Replace The New Changes With Old State 
+
+
+(7) You Can Write 'useEffect' Hook Method More Than 1 Time For Organize The Code

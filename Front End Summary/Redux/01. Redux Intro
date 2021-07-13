@@ -1,8 +1,0 @@
-(1) Redux
-----------
-==> Predictable State Container For Javascript Apps
-
-(2) React Redux Connect Between [React] And Redux
----------------------------------------------------
-
-  React  <---->  React Redux   <---->   Redux

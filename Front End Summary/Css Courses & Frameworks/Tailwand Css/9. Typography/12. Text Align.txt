@@ -1,0 +1,23 @@
+(1) Text Align
+-----------------
+==> Utilities for controlling the alignment of text.
+
+Class                 Properties
+-------------------------------------------------------------
+.text-left	          text-align: left;
+.text-center	        text-align: center;
+.text-right	          text-align: right;
+.text-justify	        text-align: justify;
+
+(2) Samples
+-------------
+
+  <div class="text-center">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, quae.
+  </div>
+
+
+(3) Responsive Text Align
+------------------------------
+
+  <p class="text-left sm:text-center md:text-right lg:text-justify xl:text-center ...">Lorem ipsum dolor sit amet ...</p>

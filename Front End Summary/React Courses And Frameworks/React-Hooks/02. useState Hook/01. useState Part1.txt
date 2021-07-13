@@ -1,0 +1,20 @@
+(1) useState : Allows To Use State With Functional Components
+
+(2) Counter Example By Using 'useState'
+----------------------------------------
+
+	import React , {useState} from 'react'; // Import useState
+
+	function App() {
+	  // 0 : Is Initial Value Of 'count'
+	  // setCount : Is The Incremented Function
+	  const [count , setCount] = useState(0)
+	  return (
+	    <div className="App">
+	      {/* Call The 'setCount' To Increment The 'count'*/}
+	      <button onClick={()=> setCount(count + 1)}>Count: {count}</button>
+	    </div>
+	  );
+	}
+
+	export default App;

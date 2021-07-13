@@ -1,0 +1,162 @@
+(1) Can Set Default Value For The Context If The Component Not Have <Provider> As Parent
+--------------------------------------------------------------------------------------
+
+	userContext.js
+	---------------
+	
+	import { createContext } from 'react'
+
+	// 'Mego' Is Default Value
+	const userContext = createContext('Mego')
+
+	const Provider = userContext.Provider
+	const Consumer = userContext.Consumer
+
+	export { Provider, Consumer }
+	
+	
+	
+	App.js
+	-------
+	
+	import React from 'react';
+	import './App.css';
+	import A from './Components/A'
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <A />
+	    </div>
+
+	  );
+	}
+
+	export default App;
+	
+	
+	A.js
+	-----
+	
+	import React from 'react'
+	import B from './B'
+	export default function A() {
+	    return (
+		<div>
+		    A: <B />
+		</div>
+	    )
+	}
+	
+	
+	B.js [nickName Here Is The Default Value That Setted In userContext.js File]
+	-----
+	
+	import React from 'react'
+	import { Consumer } from './userContext'
+
+	export default function B() {
+	    return (
+		<div>
+		    <Consumer>
+		        {
+		            (nickName) => {
+		                return <div>{nickName}</div>
+		            }
+		        }
+		    </Consumer>
+		</div>
+	    )
+	}
+
+
+(2) Passing Data Without Consumer And Provider In Class Component Only
+-----------------------------------------------------------------------
+
+
+	userContext.js
+	--------------
+	
+	import { createContext } from 'react'
+
+	const userContext = createContext('Hellow')
+
+	export default userContext  // Must Export 'userContext' Here
+		
+		
+	
+	A.js
+	------
+	
+	import React from 'react'
+	import B from './B'
+	export default function A() {
+	    return (
+		<div>
+		    A: <B />
+		</div>
+	    )
+	}
+		
+	
+	B.js [Must Be Class Component As Function Component Not Support 'contextType']
+	------
+	
+	import React, { Component } from 'react'
+	import userContext from './userContext'
+
+	export default class B extends Component {
+	    render() {
+		return (
+		    <div>
+		        B: { this.context}
+		    </div >
+		)
+	    }
+	}
+
+	B.contextType = userContext  // User 'contextType' For Access The Value
+	
+	-----------------------
+	Or [Use static Instead]
+	-----------------------
+	
+	B.js 
+	------
+	
+	import React, { Component } from 'react'
+	import userContext from './userContext'
+
+	export default class B extends Component {
+	    static contextType = userContext
+
+	    render() {
+		return (
+		    <div>
+		        B: { this.context}
+		    </div >
+		)
+	    }
+	}
+
+	
+	
+	
+	App.js
+	-------
+	
+	import React from 'react';
+	import './App.css';
+	import A from './Components/A'
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <A />
+	    </div>
+
+	  );
+	}
+
+	export default App;
+

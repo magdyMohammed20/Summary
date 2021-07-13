@@ -1,0 +1,26 @@
+(1) Background Position
+-------------------------
+==> Utilities for controlling the position of an element's background image.
+
+Class               Properties
+-------------------------------------------------------------
+.bg-bottom	        background-position: bottom;
+.bg-center	        background-position: center;
+.bg-left	        background-position: left;
+.bg-left-bottom	    background-position: left bottom;
+.bg-left-top	    background-position: left top;
+.bg-right	        background-position: right;
+.bg-right-bottom	background-position: right bottom;
+.bg-right-top	    background-position: right top;
+.bg-top	            background-position: top;
+
+(2) Samples
+-------------
+
+  <div class="h-64 w-64 mx-auto mt-4 bg-pink-900 bg-opacity-50 bg-left-bottom"></div>
+
+
+(3) Responsive Background Position
+------------------------------------
+
+    <div class="bg-center sm:bg-top md:bg-right lg:bg-bottom xl:bg-left ..." style="background-image: url(...)"></div>

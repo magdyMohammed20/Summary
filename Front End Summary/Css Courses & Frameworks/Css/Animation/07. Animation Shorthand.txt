@@ -1,0 +1,23 @@
+(1) Animation Shorthand Syntax
+------------------------------
+
+	animation: name | duration | timig-function | delay | iteration-count | direction | fill-mode | play-state
+
+
+(2) Animation shorthand Example
+-------------------------------
+
+	/* Animation Code */
+	@keyframes ChangeBackColor {
+	  from   {background-color:blue; left:0px; top:0px;}
+	  to  {background-color:red; left:200px; top:0px;}
+	}
+
+	.parent{
+	  width: 50px;
+	  height: 50px;
+	  background-color: rgb(12, 138, 197);
+	  border-radius: 100%;
+	  position: relative;
+	  animation: ChangeBackColor 3s linear 2s infinite reverse
+	}

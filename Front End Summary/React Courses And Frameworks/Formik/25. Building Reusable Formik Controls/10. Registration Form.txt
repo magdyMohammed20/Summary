@@ -1,0 +1,194 @@
+(1) Create Registration Form
+-----------------------------
+
+    // Create [RegistrationForm.js] Component
+    import React from 'react'
+    import {Formik , Form} from 'formik'
+    import * as Yup from 'yup'
+    import FormControl from './FormikControl'
+    import FormikControl from './FormikControl'
+
+    function RegistrationForm() {
+
+        let options = [
+            {key : 'phone' , value: 'phonemoc'},
+            {key : 'email' , value: 'emailmoc'}
+        ]
+
+        const initialValues = {
+            email: '',
+            password: '',
+            confirmPassword: '',
+            modeOfContact: '',
+            phone: ''
+        }
+
+        const validationSchema = Yup.object({
+            email: Yup.string().email('Invalid Email Format').required('Please Enter Email'),
+            password: Yup.string().required('Please Enter Password'),
+            confirmPassword: Yup.string().oneOf([Yup.ref('password') , ''] , 'Password Must Match').required('Confirm Password Required'),
+            modeOfContact: Yup.string().required('Required'),
+            phone: Yup.string().when('modeOfContact' , {
+                is: 'phonemoc',
+                then: Yup.string().required('Required')
+            })
+        })
+
+        const onSubmit = values =>{
+            console.log('Data Is ' , values)
+        }
+        return (
+            <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                {
+                    formik => {
+                        return <Form>
+                            <FormikControl
+                                control= 'input'
+                                type='email'
+                                label='Email'
+                                name='email'
+                            />
+                            <FormikControl
+                                control= 'input'
+                                type='password'
+                                label='Password'
+                                name='password'
+                            />
+                            <FormikControl
+                                control= 'input'
+                                type='password'
+                                label='Confirm Password'
+                                name='confirmPassword'
+                            />
+                            <FormikControl
+                                control= 'radio'
+                                label='Mode Of Contact'
+                                name='modeOfContact'
+                                options={options}
+                            />
+                            <FormikControl
+                                control= 'input'
+                                type='input'
+                                label='Phone'
+                                name='phone'
+                            />
+                            <button type='submit' disabled={!formik.isValid}>
+                                Submit
+                            </button>
+                        </Form>
+                    }
+                }
+            </Formik>
+        )
+    }
+
+    export default RegistrationForm
+
+
+	
+    // Handle In [FormikControl.js]
+    import React from 'react'
+    import Input from './Input'
+    import Textarea from './Textarea'
+    import Select from './Select'
+    import Radio from './Radio'
+    import Checkbox from './Checkbox'
+    import DatePicker from './DatePicker'
+
+    function FormikControl(props) {
+        const {control , ...rest} = props
+
+        switch(control){
+            case 'input' : 
+                return <Input {...rest}/>
+            case 'textarea':
+                return <Textarea {...rest}/>
+            case 'select' : 
+                return <Select {...rest}/>
+            case 'radio':
+                return <Radio {...rest}/>
+            case 'checkbox':
+                return <Checkbox {...rest}/>
+            case 'date':
+                return <DatePicker {...rest}/>
+            default: return null
+        }
+    }
+
+    export default FormikControl
+
+
+
+    // Handle In [App.js]
+    import React from 'react';
+    import './App.css';
+    import RegistrationForm from './components/RegistrationForm';
+
+    function App() {
+    return (
+        <div className="App">
+        <RegistrationForm/>
+        </div>
+    );
+    }
+
+    export default App;
+
+
+    // Handle In [Radio.js]
+    import React from 'react'
+    import {Field , ErrorMessage} from 'formik'
+    import TextError from './TextError'
+
+    function Radio(props) {
+        const{label , name , options , ...rest} = props
+
+        return (
+            <div className='form-control'>
+                <label>{label}</label>
+                <Field name={name} {...rest}>
+                    {
+                        ({field}) => {
+                            return options.map(option => {
+                                return (
+                                    <React.Fragment key={option.key}>
+                                        <input 
+                                            type='radio' 
+                                            id={option.value} 
+                                            {...field} 
+                                            value={option.value} 
+                                            checked={field.value === option.value}
+                                        />
+                                        <label htmlFor={option.value}>{option.key}</label>
+
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+                    }
+                </Field>
+                <ErrorMessage name={name} component={TextError}/>
+            </div>
+        )
+    }
+
+    export default Radio
+
+
+    // Handle In [Input.js]
+    import React from 'react'
+    import { Field, ErrorMessage } from 'formik'
+    import TextError from './TextError'
+
+    function Input(props) {
+        const {label , name , ...rest} = props
+        return (
+            <div className='form-control'>
+                <label htmlFor={name}>{name}</label>
+                <Field name={name} id={name} {...rest}/>
+                <ErrorMessage name={name} component={TextError}/>
+            </div>
+        )
+    }
+
+    export default Input

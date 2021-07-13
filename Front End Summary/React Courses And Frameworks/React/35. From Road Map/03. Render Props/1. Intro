@@ -1,0 +1,96 @@
+(1) Render Props Is Another Way Like HOC To Share Functionality Between Components
+
+
+(2) If I Have More A Lot Of Components That Make The Same Functionality
+------------------------------------------------------------------------
+
+
+
+		Counter.js [Creating Counter When Click On Button]
+		-----------
+		
+		import React, { Component } from 'react'
+
+		export default class Counter extends Component {
+
+		    state = {
+			counter: 0
+		    }
+
+		    increment = () => {
+			this.setState(prevState => {
+			    return {
+				counter: prevState.counter + 1
+			    }
+			})
+		    }
+
+		    render() {
+			const { counter } = this.state
+			return (
+			    <div>
+				<button onClick={this.increment}>Click {counter} Times</button>
+			    </div>
+			)
+		    }
+		}
+		
+		
+		
+
+
+	Counter2.js [Create Counter When Hover On Element]
+	------------
+	
+	import React, { Component } from 'react'
+
+	export default class Counter2 extends Component {
+	    state = {
+		counter: 0
+	    }
+
+	    increment = () => {
+		this.setState(prevState => {
+		    return {
+		        counter: prevState.counter + 1
+		    }
+		})
+	    }
+
+	    render() {
+		const { counter } = this.state
+		return (
+		    <div>
+		        <h1 onMouseEnter={this.increment}>Hover {counter} Times</h1>
+		    </div>
+		)
+	    }
+	}
+	
+	
+	App.js
+	--------
+	
+	import React from 'react';
+	import './App.css';
+	import Counter from './Components/Counter'
+	import Counter2 from './Components/Counter2'
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Counter />
+	      <Counter2 />
+	    </div>
+
+	  );
+	}
+
+	export default App;
+
+
+
+---------------------------------------------------------------------------------------------
+Note: The Problem Is Counter.js And Counter2.js Components Have The Same Functionality Of Increment Without Reusable The Code And Without Sharing Counter Value
+---------------------------------------------------------------------------------------------
+

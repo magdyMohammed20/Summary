@@ -1,0 +1,46 @@
+(1) Text Colors Samples
+-------------------------
+
+            <p class="text-primary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, ea.</p>
+            <p class="text-secondary">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, laudantium!</p>
+            <p class="text-info">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor, eaque.</p>
+            <p class="text-danger">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis, quis!</p>
+            <p class="text-success">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+            <p class="text-warning">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+            <p class="text-light">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+            <p class="text-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+            <p class="text-body">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+            <p class="text-muted bg-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+            <p class="text-white bg-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+            <p class="text-black-50">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+            <p class="text-white-50 bg-dark">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, error!</p>
+
+
+(2) Background Colors Samples
+-------------------------------
+
+            <div class="p-3 mb-2 bg-primary text-white">.bg-primary</div>
+            <div class="p-3 mb-2 bg-secondary text-white">.bg-secondary</div>
+            <div class="p-3 mb-2 bg-success text-white">.bg-success</div>
+            <div class="p-3 mb-2 bg-danger text-white">.bg-danger</div>
+            <div class="p-3 mb-2 bg-warning text-dark">.bg-warning</div>
+            <div class="p-3 mb-2 bg-info text-body">.bg-info</div>
+            <div class="p-3 mb-2 bg-light text-dark">.bg-light</div>
+            <div class="p-3 mb-2 bg-dark text-white">.bg-dark</div>
+            <div class="p-3 mb-2 bg-white text-dark">.bg-white</div>
+            <div class="p-3 mb-2 bg-transparent text-dark">.bg-transparent</div>
+
+
+(3) Make Background As Gradient By add '.bg-gradient' Class To bg-primary And So On Classes
+--------------------------------------------------------------------------------------------
+
+            <div class="p-3 mb-2 bg-primary bg-gradient text-white">.bg-primary</div>
+            <div class="p-3 mb-2 bg-secondary bg-gradient text-white">.bg-secondary</div>
+            <div class="p-3 mb-2 bg-success bg-gradient text-white">.bg-success</div>
+            <div class="p-3 mb-2 bg-danger bg-gradient text-white">.bg-danger</div>
+            <div class="p-3 mb-2 bg-warning bg-gradient text-dark">.bg-warning</div>
+            <div class="p-3 mb-2 bg-info bg-gradient text-body">.bg-info</div>
+            <div class="p-3 mb-2 bg-light bg-gradient text-dark">.bg-light</div>
+            <div class="p-3 mb-2 bg-dark bg-gradient text-white">.bg-dark</div>
+            <div class="p-3 mb-2 bg-white bg-gradient text-dark">.bg-white</div>
+            <div class="p-3 mb-2 bg-transparent bg-gradient text-dark">.bg-transparent</div>

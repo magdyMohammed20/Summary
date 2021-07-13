@@ -1,8 +1,0 @@
-(1) Clearfix
--------------
-==> Easily clear floats by adding .clearfix to the parent element
-
-      <div class="bg-info clearfix">
-        <div class="bg-warning" style="float: left;">Span 1</div>
-        <div class="bg-success" style="float: right;">Span 2</div>
-      </div>

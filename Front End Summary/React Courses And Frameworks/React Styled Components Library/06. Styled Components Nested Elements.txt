@@ -1,0 +1,97 @@
+(1) Create Hover For The Styled Element 
+----------------------------------------
+
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+	// Note That Use [&:hover] Inside The Styled Component
+	export const Div = styled.div`
+	    border: 1px solid #DDD;
+	    background-color: #EEE;
+	    padding: 20px;
+
+	    &:hover{
+	      background-color: red;
+	      color: #FFF
+	    }
+	`
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div page='end'>This Is Div</Div>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+
+(2) Style Nested Element That Inside The Styled Component
+----------------------------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+	// Note That Styling The [p] Inside The [Div]
+	export const Div = styled.div`
+	    border: 1px solid #DDD;
+	    background-color: #EEE;
+	    padding: 20px;
+
+	    p{
+	      color: red
+	    }
+	`
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div page='end'>
+		This Is Div
+		<p>This Is P</p>
+	      </Div>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+
+(3) Style More Deeply Nested Elements
+--------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+
+	// Note That Styling The [span] That Inside The [p] That Inside The [div]
+	export const Div = styled.div`
+	    border: 1px solid #DDD;
+	    background-color: #EEE;
+	    padding: 20px;
+
+	    p{
+	      color: red;
+	      
+	      span{
+		color: green
+	      }
+	    }
+	`
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <Div page='end'>
+		This Is Div
+		<p>This Is <span>P</span></p>
+	      </Div>
+	    </div>
+	  );
+	}
+
+	export default App;
+

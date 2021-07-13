@@ -1,0 +1,10 @@
+(1) Custom Hook
+-----------------
+==> Is Js Function Whose Name Starts With 'use'
+==> Can Call Other Hooks If Required
+
+(2) Why Custom Hook ? 
+---------------------
+==> To Share Logic Between 2 Or More Components , Alternative To HOCs(Higher Order Components) And Render Props
+
+ 

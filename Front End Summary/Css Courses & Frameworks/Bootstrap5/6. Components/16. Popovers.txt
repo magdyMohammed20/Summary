@@ -1,0 +1,101 @@
+(1) About Popovers
+--------------------
+==> Popovers rely on the 3rd party library Popper.js for positioning. You must include popper.min.js before bootstrap.js
+    or use bootstrap.bundle.min.js / bootstrap.bundle.js which contains Popper.js in order for popovers to work!
+
+==> Popovers are opt-in for performance reasons, so you must initialize them yourself.
+
+==> Zero-length title and content values will never show a popover.
+
+==> Specify container: 'body' to avoid rendering problems in more complex components 
+    (like our input groups, button groups, etc).
+
+==> Triggering popovers on hidden elements will not work.
+
+==> Popovers for .disabled or disabled elements must be triggered on a wrapper element.
+
+==> When triggered from anchors that wrap across multiple lines, popovers will be centered between the anchors’
+    overall width. Use .text-nowrap on your <a>s to avoid this behavior.
+
+==> Popovers must be hidden before their corresponding elements have been removed from the DOM.
+
+==> Popovers can be triggered thanks to an element inside a shadow DOM.
+
+
+(2) Use Popover
+------------------
+
+==> Enable popovers everywhere
+---------------------------------
+
+	var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'))
+	var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+  		return new bootstrap.Popover(popoverTriggerEl)
+	})
+
+==> Full Popover Code
+----------------------
+
+	<button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
+        <script>
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                    return new bootstrap.Popover(popoverTriggerEl)
+            })
+        </script>
+
+
+(3) Popover Directions [top - left - right - bottom]
+------------------------------------------------------
+
+	  <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="top" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+            Popover on top
+          </button>
+          
+          <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="right" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+            Popover on right
+          </button>
+          
+          <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="bottom" data-content="Vivamus
+          sagittis lacus vel augue laoreet rutrum faucibus.">
+            Popover on bottom
+          </button>
+          
+          <button type="button" class="btn btn-secondary" data-container="body" data-toggle="popover" data-placement="left" data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
+            Popover on left
+          </button>
+
+        <script>
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                    return new bootstrap.Popover(popoverTriggerEl)
+            })
+        </script>
+
+
+(4) Dismiss on next click
+---------------------------
+==> Use the focus trigger to dismiss popovers on the user’s next click of a different element than the toggle element.
+
+        <a tabindex="0" class="btn btn-lg btn-danger" role="button" data-toggle="popover" data-trigger="focus" title="Dismissible popover" data-content="And here's some amazing content. It's very engaging. Right?">Dismissible popover</a>
+        <script>
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                    return new bootstrap.Popover(popoverTriggerEl)
+            })
+        </script>
+
+
+(5) Popover On Disabled elements
+---------------------------------
+
+        <span class="d-inline-block" data-toggle="popover" data-content="Disabled popover">
+            <button class="btn btn-primary" style="pointer-events: none;" type="button" disabled>Disabled button</button>
+          </span>
+        
+        <script>
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+                    return new bootstrap.Popover(popoverTriggerEl)
+            })
+        </script>

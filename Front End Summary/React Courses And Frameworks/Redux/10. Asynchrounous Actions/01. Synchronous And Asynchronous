@@ -1,0 +1,8 @@
+(1) Synchronous Action
+-----------------------
+==> As Soon As An Action Was Dispatched The State Was Immediately Updated
+
+(2) Asynchronous Action
+-----------------------
+==> Wait For Task To Complete Before Dispatching The Action
+==> Asyncchronous API Calls To Fetch Data From An End Point And Use That Data In The Application

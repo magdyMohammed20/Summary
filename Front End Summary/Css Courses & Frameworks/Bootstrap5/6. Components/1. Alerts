@@ -1,0 +1,65 @@
+(1) All Alerts
+-----------------
+
+      <div class="alert alert-primary">A simple dark alert—check it out!</div>
+      <div class="alert alert-secondary">A simple dark alert—check it out!</div>
+      <div class="alert alert-success">A simple dark alert—check it out!</div>
+      <div class="alert alert-danger">A simple dark alert—check it out!</div>
+      <div class="alert alert-warning">A simple dark alert—check it out!</div>
+      <div class="alert alert-info">A simple dark alert—check it out!</div>
+      <div class="alert alert-light">A simple dark alert—check it out!</div>
+      <div class="alert alert-dark">A simple dark alert—check it out!</div>
+      
+      
+(2) Link Color
+---------------
+
+      <div class="alert alert-primary">
+        A simple dark <a href="#" class="alert-link">alert—check</a> it out!
+      </div>
+      <div class="alert alert-secondary">
+        A simple dark <a href="#" class="alert-link">alert—check</a> it out!
+      </div>
+      <div class="alert alert-success">
+        A simple dark <a href="#" class="alert-link">alert—check</a> it out!
+      </div>
+      <div class="alert alert-danger">
+        A simple dark <a href="#" class="alert-link">alert—check</a> it out!
+      </div>
+      <div class="alert alert-warning">
+        A simple dark <a href="#" class="alert-link">alert—check</a> it out!
+      </div>
+      <div class="alert alert-info">
+        A simple dark <a href="#" class="alert-link">alert—check</a> it out!
+      </div>
+      <div class="alert alert-light">
+        A simple dark <a href="#" class="alert-link">alert—check</a> it out!
+      </div>
+      <div class="alert alert-dark">
+        A simple dark <a href="#" class="alert-link">alert—check</a> it out!
+      </div>
+      
+      
+(3) Alert With Additional Content
+-----------------------------------
+
+	<div class="alert alert-success" role="alert">
+	  <h4 class="alert-heading">Well done!</h4>
+	  <p>Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+	  <hr>
+	  <p class="mb-0">Whenever you need to, be sure to use margin utilities to keep things nice and tidy.</p>
+	</div>
+	
+	
+(4) Dismissing Alert
+---------------------
+
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <h4 class="alert-heading">Well done!</h4>
+        <p>
+          Aww yeah, you successfully read this important alert message. This
+        </p>
+        <button class="close" data-dismiss="alert">
+          &times;
+        </button>
+      </div>

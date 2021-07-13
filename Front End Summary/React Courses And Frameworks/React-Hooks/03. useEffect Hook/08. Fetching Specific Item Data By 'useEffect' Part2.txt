@@ -1,0 +1,33 @@
+import React,{useState,useEffect} from 'react';
+import axios from 'axios'
+
+const Fetch = () => {
+
+    const [posts,setPosts] = useState([]) // The Selected Post
+    const [id , setPostId] = useState(1) // The Selected Post Id
+
+    useEffect(()=>{
+        // When Change Post Id From Input Field Will Set The Selected Post Id To Fetch
+
+        axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+        .then(response=> setPosts(response.data) )
+
+    },[id]) // Fetching Data Depends On Change Of 'id' But If Remove It The Fetching Doesn't Affected
+
+    return (
+
+        <div>
+            <input type='text' value={id} onChange={e=>setPostId(e.target.value)} />
+    
+            <div>
+                <h1>{posts.title}</h1>
+                <p>{posts.body}</p>
+            </div>
+
+        </div>
+
+
+    );
+};
+
+export default Fetch;

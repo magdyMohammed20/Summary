@@ -1,8 +1,0 @@
-(1) Installing Packages Globally (Syntax)
------------------------------------------
-==> npm install Package_Name -g
-
-EX:
------
-==> npm install moment -g
-==> After Execute The Command You Will Note That 'moment' Not Found In [Package.json] Or In [node_modules]

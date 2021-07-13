@@ -1,0 +1,6 @@
+==> Prevent Function From Self Calling
+---------------------------------------
+Syntax: ()=> Function Call
+------
+
+<td onClick = {()=>deleteItem()}>Click</td>

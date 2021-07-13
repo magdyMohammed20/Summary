@@ -1,0 +1,43 @@
+(1) What's animation-fill-mode
+-------------------------------
+==> property specifies a style for the target element when the animation is not playing (before it starts, after it ends, or both).
+
+
+(2) animation-fill-mode Values
+------------------------------
+==> none : Default value. Animation will not apply any styles to the element before or after it is executing
+
+==> forwards : The element will retain the style values that is set by the last keyframe (depends on animation-direction and animation-iteration-count)
+
+==> backwards : The element will get the style values that is set by the first keyframe (depends on animation-direction), and retain this during the animation-delay period
+
+==> both : The animation will follow the rules for both forwards and backwards, extending the animation properties in both directions
+
+
+
+(3) animation-fill-mode Example
+--------------------------------
+
+	/* Animation Code */
+	@keyframes ChangeBackColor {
+	  0%   {background-color:red; left:0px; top:0px;}
+	  25%  {background-color:blue; left:200px; top:0px;}
+	  50%  {background-color:green; left:200px; top:200px;}
+	  75%  {background-color:red; left:0px; top:200px;}
+	  100% {background-color:yellow; left:0px; top:0px;}
+	}
+
+	.parent{
+	  width: 50px;
+	  height: 50px;
+	  background-color: rgb(12, 138, 197);
+	  border-radius: 100%;
+	  position: relative;
+	  animation-name: ChangeBackColor;
+	  animation-duration: 10s;
+	  animation-delay: 2s;
+	  animation-iteration-count: infinite;
+	  animation-direction: alternate;
+	  animation-timing-function: ease;
+	  animation-fill-mode: forwards;
+	}

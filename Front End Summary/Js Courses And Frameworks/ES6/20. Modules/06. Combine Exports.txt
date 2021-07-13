@@ -1,0 +1,67 @@
+(1) We can combine the multiple exports from various modules and do a combined export from a single file. This is also called, re-export or aggregating
+
+
+EX
+------
+
+	module3.js
+	----------
+
+	const sum = (a, b) => {
+	    return a + b;
+	};
+
+	const sub = (a, b) => {
+	    return a - b;
+	};
+
+	export { sum, sub }
+
+
+	module2.js
+	-----------
+
+	const sayMyName = () => {
+	    return 'Magdy';
+	};
+
+	export default sayMyName;
+
+
+	combine.js
+	-----------
+
+	export { sum, sub } from './module3.js';
+	export { default as name } from './module2.js';
+
+
+	index.js
+	---------
+
+	import * as combine from './combine.js'
+
+	console.log(combine.sum(10, 20))
+	console.log(combine.sub(10, 5))
+	console.log(combine.name())
+
+
+	index.html
+	-----------
+
+	<!DOCTYPE html>
+	<html lang="en" dir="ltr">
+
+	<head>
+	  <meta charset="utf-8">
+	  <title>Fetch Data</title>
+	  <link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+
+	  <!-- Note Here Should Write type="module" -->
+	  <script type="module" src="./index.js">
+	  </script>
+	</body>
+
+	</html>

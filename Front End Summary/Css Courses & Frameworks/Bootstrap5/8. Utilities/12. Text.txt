@@ -1,0 +1,80 @@
+(1) Text alignment
+--------------------
+
+    <p class="text-left">Left aligned text on all viewport sizes.</p>
+    <p class="text-center">Center aligned text on all viewport sizes.</p>
+    <p class="text-right">Right aligned text on all viewport sizes.</p>
+
+    <p class="text-sm-left">Left aligned text on viewports sized SM (small) or wider.</p>
+    <p class="text-md-left">Left aligned text on viewports sized MD (medium) or wider.</p>
+    <p class="text-lg-left">Left aligned text on viewports sized LG (large) or wider.</p>
+    <p class="text-xl-left">Left aligned text on viewports sized XL (extra-large) or wider.</p>
+
+
+(2) Text wrapping and overflow
+--------------------------------
+
+    <div class="badge bg-primary text-wrap" style="width: 6rem;">
+        This text should wrap.
+    </div>
+
+    <div class="text-nowrap bd-highlight" style="width: 8rem;">
+        This text should overflow the parent.
+    </div>
+
+
+(3) Word Break
+----------------
+
+    <p class="text-break">mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm</p>
+
+
+(4) Text transform
+--------------------
+
+    <p class="text-lowercase">Lowercased text.</p>
+    <p class="text-uppercase">Uppercased text.</p>
+    <p class="text-capitalize">CapiTaliZed text.</p>
+
+
+(5) Font weight and italics
+-----------------------------
+
+    <p class="font-weight-bold">Bold text.</p>
+    <p class="font-weight-bolder">Bolder weight text (relative to the parent element).</p>
+    <p class="font-weight-normal">Normal weight text.</p>
+    <p class="font-weight-light">Light weight text.</p>
+    <p class="font-weight-lighter">Lighter weight text (relative to the parent element).</p>
+    <p class="font-italic">Italic text.</p>
+    <p class="font-normal">Text without font style</p>
+
+
+(6) Line height
+-----------------
+
+    <p class="lh-1">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui. Cras mattis pannenkoek purus sit amet fermentum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum.</p>
+    <p class="lh-sm">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui. Cras mattis pannenkoek purus sit amet fermentum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum.</p>
+    <p class="lh-base">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui. Cras mattis pannenkoek purus sit amet fermentum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum.</p>
+    <p class="lh-lg">Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui. Cras mattis pannenkoek purus sit amet fermentum. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Nullam id dolor id nibh ultricies vehicula ut id elit. Cras mattis consectetur purus sit amet fermentum.</p>
+
+
+(7) Monospace
+----------------
+
+    <p class="font-monospace">This is in monospace</p>
+
+
+(8) Reset color
+----------------
+
+    <p class="text-muted">
+        Muted text with a <a href="#" class="text-reset">reset link</a>.
+    </p>
+
+
+(9) Text decoration
+---------------------
+
+    <p class="text-decoration-underline">This text has a line underneath it.</p>
+    <p class="text-decoration-line-through">This text has a line going through it.</p>
+    <a href="#" class="text-decoration-none">This link has its text decoration removed</a>

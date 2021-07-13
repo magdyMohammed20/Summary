@@ -1,0 +1,11 @@
+(1) Colored Links
+-------------------
+
+      <a href="#" class="link-primary">Link</a>
+      <a href="#" class="link-success">Link</a>
+      <a href="#" class="link-secondary">Link</a>
+      <a href="#" class="link-info">Link</a>
+      <a href="#" class="link-warning">Link</a>
+      <a href="#" class="link-danger">Link</a>
+      <a href="#" class="link-dark">Link</a>
+      <a href="#" class="link-light">Link</a>

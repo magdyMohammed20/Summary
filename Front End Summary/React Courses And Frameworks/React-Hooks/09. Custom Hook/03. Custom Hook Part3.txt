@@ -1,0 +1,140 @@
+(1) Creating Counter Custom Hook
+----------------------------------
+
+==> Creating 'useCounter.js' Hook Inside 'hooks' Folder And Contains This Code
+------------------------------------------------------------------------------
+
+	import { useState } from 'react'
+
+	const useCounter = () => {
+	    const [counter, setCounter] = useState(0)
+
+	    const increment = () => {
+		setCounter(counter + 1)
+	    }
+
+	    const decrement = () => {
+		setCounter(counter - 1)
+	    }
+
+	    const reset = () => {
+		setCounter(0)
+	    }
+
+	    return [counter, increment, decrement, reset]
+	};
+
+	export default useCounter;
+
+
+
+==> Write This Code In [Counter.js]
+----------------------------------
+
+	import React from 'react';
+	import useCounter from '../hooks/useCounter' // Import The Custom Hook
+
+	const Counter = () => {
+
+	    const [counter, increment, decrement, reset] = useCounter() // Fetch The Returned Values From The Custom Hook
+	    return (
+		<div>
+		    Counter: {counter}
+		    <button onClick={increment}>+</button>
+		    <button onClick={decrement}>-</button>
+		    <button onClick={reset}>0</button>
+		</div>
+	    );
+	};
+
+	export default Counter;
+
+
+==> Import [Counter.js] In [App.js]
+-----------------------------------
+
+	import React from 'react';
+	import Counter from './Components/Counter'
+	function App() {
+
+	  return (
+	    <div className="App">
+	      <Counter />
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+
+(2) Passing Parameters To Counter Custom Hook
+----------------------------------------------
+
+
+	useCounter.js
+	-------------
+
+	import { useState } from 'react'
+
+	// Set Args For The Custom Hook And Take Actions Depending On This Values
+	const useCounter = (initialValue = 2, value = 2) => {
+	    const [counter, setCounter] = useState(initialValue)
+
+	    const increment = () => {
+		setCounter(counter + value)
+	    }
+
+	    const decrement = () => {
+		setCounter(counter - value)
+	    }
+
+	    const reset = () => {
+		setCounter(initialValue)
+	    }
+
+	    return [counter, increment, decrement, reset]
+	};
+
+	export default useCounter;
+
+
+	Counter.js
+	--------------
+
+	import React from 'react';
+	import useCounter from '../hooks/useCounter'
+
+	const Counter = () => {
+	    // Passing Parameter For The Custom Hook
+	    const [counter, increment, decrement, reset] = useCounter(0, 5)
+	    return (
+		<div>
+		    Counter: {counter}
+		    <button onClick={increment}>+</button>
+		    <button onClick={decrement}>-</button>
+		    <button onClick={reset}>0</button>
+		</div>
+	    );
+	};
+
+	export default Counter;
+
+
+	App.js
+	---------
+
+	import React from 'react';
+	import Counter from './Components/Counter'
+	function App() {
+
+	  return (
+	    <div className="App">
+	      <Counter />
+	    </div>
+	  );
+	}
+
+	export default App;
+
+	

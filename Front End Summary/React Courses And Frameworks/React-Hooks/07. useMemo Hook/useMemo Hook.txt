@@ -1,0 +1,83 @@
+(1) 2 Counter Example
+----------------------
+
+	import React, { useState } from 'react';
+
+	const CompA = () => {
+
+	    const [count1, setCount1] = useState(0)
+	    const [count2, setCount2] = useState(0)
+
+	    const handleCounter1 = () => {
+		setCount1(count1 + 1)
+	    }
+
+	    const isEven = () => {
+		console.log('Changed') // Note That If I Increment 'count1' Or 'count2' This Function Is Rendered Again And Loop Slows It When Click In The 2 Buttons
+
+		let i = 0
+		while (i < 200000000) i++
+		return count1 % 2 === 0
+	    }
+
+	    const handleCounter2 = () => {
+		setCount2(count2 + 1)
+	    }
+
+	    return (
+		<div>
+		    <div>
+		        {isEven() ? 'Even' : 'Odd'}
+		        <button onClick={handleCounter1}>Count1: {count1}</button>
+		        <button onClick={handleCounter2}>Count2: {count2}</button>
+		    </div>
+		</div>
+	    );
+	};
+
+	export default CompA;
+
+
+
+(2) 'useMemo' Hook
+------------------
+==> will only recompute the memoized value when one of the dependencies has changed. This optimization helps to avoid expensive calculations on every render
+
+
+
+	import React, { useState, useMemo } from 'react';
+
+	const CompA = () => {
+
+	    const [count1, setCount1] = useState(0)
+	    const [count2, setCount2] = useState(0)
+
+	    const count1Memo = useMemo(() => {
+		console.log('Changed') // Note That If I Increment 'count1' This Function Is Rendered Again And Loop Slows It When Click In The 'count1' Button But If Click On 'count2' Button This Function Not Rendered Yet
+
+		let i = 0
+		while (i < 200000000) i++ // For Slows Only
+		return count1 % 2 === 0
+	    }, [count1]) // Accept Dependency Of Value That Want To Call The Function When It's Value Changed
+
+	    const handleCounter1 = () => {
+		setCount1(count1 + 1)
+	    }
+
+	    const handleCounter2 = () => {
+		setCount2(count2 + 1)
+	    }
+
+	    return (
+		<div>
+		    <div>
+		        {count1Memo ? 'Even' : 'Odd'}
+		        <button onClick={handleCounter1}>Count1: {count1}</button>
+		        <button onClick={handleCounter2}>Count2: {count2}</button>
+		    </div>
+		</div>
+	    );
+	};
+
+	export default CompA;
+

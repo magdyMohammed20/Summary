@@ -1,0 +1,30 @@
+if I Have Single File Component And Import It Inside App.js And Want To 
+Set Additional Content  Inside It And Display Content In The Browser We Will Use
+[props.children]
+--------------------------------------------------------------------------- 
+
+	Comp.js
+	-------
+
+// Make Component
+function Comp(props){
+    return(
+        <div>
+            This Is Component
+            <br/>
+            {props.children}
+        </div>
+    )
+}
+
+export default Comp
+
+
+	App.js
+	--------
+
+<Comp>
+    <h1>Heading</h1>
+    <p>Para</p>
+    Hellow It's Me
+</Comp>

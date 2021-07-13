@@ -1,0 +1,117 @@
+(1) Install Logger Middleware In The Project
+----------------------------------------------
+==> npm i redux-logger
+
+
+(2) In [store.js] File Import 'logger' And 'Applymiddleware'
+-------------------------------------------------------------
+==> import {createStore , ApplyMiddleware} from 'redux'
+==> import logger from 'redux-logger'
+
+
+(3) In [store.js] Pass 'applyMiddleware' To 'createStore'
+---------------------------------------------------------
+==> const Store = createStore(CakeReducer, applyMiddleware(logger))
+
+(4) Then If You Click On The Button To Make Action You Note That 'currentState' And 'nextState' And 'Action' Displayed In The Console
+
+
+(5) The Full Example
+----------------------
+
+// Action Types
+export const BUY_CAKE = 'BUY_CAKE'
+
+// Action Creators
+import {BUY_CAKE} from './ActionTypes'
+
+export const Buy_Cake = () =>{
+    return {
+        type: BUY_CAKE
+    }
+}
+
+// Action Reducer
+import {BUY_CAKE} from './ActionTypes'
+
+const initialState = {
+    numOfCakes: 10
+}
+
+const CakeReducer = (state=initialState , Action) => {
+    switch(Action.type){
+        case BUY_CAKE:
+            if(state.numOfCakes > 0){
+                return {
+                    ...state,
+                    numOfCakes: state.numOfCakes - 1
+                }
+            }else{
+                alert('There Is No Cakes To Buy..')
+            }
+
+        default: return state
+    }
+}
+
+export default CakeReducer
+
+
+// index.js
+export {Buy_Cake} from './CakeActions'
+
+
+// Store.js [All Is Here]
+import { createStore, applyMiddleware } from 'redux'
+import logger from 'redux-logger'
+import CakeReducer from './CakeReducer'
+
+const Store = createStore(CakeReducer, applyMiddleware(logger))
+
+export default Store
+
+
+// Cakes.js
+import React from 'react';
+import { Buy_Cake } from '../Redux/index'
+import { useSelector, useDispatch } from 'react-redux'
+
+const Cakes = props => {
+    const numOfCakes = useSelector(state => state.numOfCakes)
+    const dispatch = useDispatch()
+    return (
+        <div>
+            <h1>Current Number Of Cakes: {numOfCakes}</h1>
+            <button onClick={() => dispatch(Buy_Cake())}>Buy Cake</button>
+        </div>
+    );
+};
+
+
+
+export default Cakes;
+
+
+// App.js
+
+import React from 'react';
+import './App.css';
+import {Provider} from 'react-redux'
+import Cakes from './Components/Cakes'
+import Store from './Redux/Store'
+
+function App() {
+  return (
+    <div className="App">
+      <Provider store={Store}>
+        <div>
+          <Cakes/>
+        </div>
+      </Provider>
+    </div>
+  );
+}
+
+export default App;
+
+

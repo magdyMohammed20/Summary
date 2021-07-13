@@ -1,5 +1,0 @@
-(1) git commit --amend
-
-(2) Last Commit Will Opened In Editor Or In Terminal And Can Edit It
-
-(3) git push origin --force // Will Push All Commits Again To Github

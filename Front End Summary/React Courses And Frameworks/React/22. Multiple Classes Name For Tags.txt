@@ -1,0 +1,25 @@
+class App extends Component{
+  state={
+    style: []
+  }
+
+  
+  render(){
+    if(true){
+      this.state.style.push('first')
+    }
+    if(true){
+      this.state.style.push('second')
+    }
+    if(true){
+      this.state.style.push('third')
+    }
+    return(
+      <div className="App">
+        <div className={this.state.style.join(' ')}> 
+  
+        </div>
+      </div>
+    )
+  }
+}

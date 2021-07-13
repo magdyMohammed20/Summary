@@ -1,0 +1,238 @@
+(1) If I Pass Data Between Components And This Data Can Be Updated Like [counter] So You Will Face The Re-Render After Each Change Of The Counter
+
+(2) Counter Example
+-----------------------
+
+	App.js
+	-----------
+
+	import React, { useState } from 'react';
+	import CompA from './Components/CompA'
+	import CompB from './Components/CompB'
+	function App() {
+
+	  const [count, setCount] = useState(0)
+	  const [count2, setCount2] = useState(0)
+
+	  const handleIncrement = () => {
+	    setCount(count + 1)
+	  }
+
+	  // useCallback Accepts A Function And Dependency List
+	  const handleIncrement2 = () => {
+	    setCount2(count2 + 1)
+	  }
+
+	  return (
+	    <div className="App">
+	      <CompA count={count} handClick={handleIncrement} />
+	      <CompB count={count2} handClick={handleIncrement2} />
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+	
+	CompA.js
+	-----------
+
+	import React from 'react';
+
+	const CompA = (props) => {
+	    console.log('Hey I\'m A') // This Statement Will Show You That Component Re-Rendered If count Or count2 Updated
+
+	    return (
+		<div>
+		    Count: {props.count}
+		    <button onClick={props.handClick}>Increment</button>
+		</div>
+	    );
+	};
+
+	export default CompA;
+
+
+
+	CompB.js
+	------------
+
+	import React from 'react';
+
+	const CompB = (props) => {
+	    console.log('Hey I\'m B') // This Statement Will Show You That Component Re-Rendered If count Or count2 Updated
+
+	    return (
+		<div>
+		    Count: {props.count}
+		    <button onClick={props.handClick}>Increment</button>
+		</div>
+	    );
+	};
+
+	export default CompB;
+
+
+(3) Solution Of Re-Render In Counter Example (use React.memo)
+--------------------------------------------------------------
+==> Note That [React.memo] Has No Related With Hooks But It Solve The Problem Of Re-Render
+==> But [React.memo] Don't Solve Problem Of Re-Render Completely
+
+	App.js
+	---------
+
+	import React, { useState } from 'react';
+	import CompA from './Components/CompA'
+	import CompB from './Components/CompB'
+	function App() {
+
+	  const [count, setCount] = useState(0)
+	  const [count2, setCount2] = useState(0)
+
+	  const handleIncrement = () => {
+	    setCount(count + 1)
+	  }
+
+	  // useCallback Accepts A Function And Dependency List
+	  const handleIncrement2 = () => {
+	    setCount2(count2 + 1)
+	  }
+
+	  return (
+	    <div className="App">
+	      <CompA count={count} handClick={handleIncrement} />
+	      <CompB count={count2} handClick={handleIncrement2} />
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+	CompA.js
+	---------
+
+	import React from 'react';
+
+	const CompA = (props) => {
+	    console.log('Hey I\'m A') // This Statement Will Show You That Component Re-Rendered If count Or count2 Updated
+
+	    return (
+		<div>
+		    Count: {props.count}
+		    <button onClick={props.handClick}>Increment</button>
+		</div>
+	    );
+	};
+
+	export default React.memo(CompA); // Note That Wrapping The Export With [React.memo]
+
+
+	CompB.js
+	----------
+
+	import React from 'react';
+
+	const CompB = (props) => {
+	    console.log('Hey I\'m B') // This Statement Will Show You That Component Re-Rendered If count Or count2 Updated
+
+	    return (
+		<div>
+		    Count: {props.count}
+		    <button onClick={props.handClick}>Increment</button>
+		</div>
+	    );
+	};
+
+	export default React.memo(CompB); // Note That Wrapping The Export With [React.memo]
+
+
+
+(4) useCallback Hook [Will Solve Problem Of Re-render Completely]
+----------------------------
+==> Is Hook That Returns Memoized Version Of The Callback Function That Only Changes If One Of The Dependencies Has Changed
+==> Memoization Used When There Are Function That Takes Same Input And Return Same Output So We Want To Prevent The Re-Rendering For Best Performance
+
+(5) Why useCallback
+-------------------
+==> Useful When Passing Callbacks To Optimized Child Components That Rely On Reference Equality To Prevent Unnecessary Renders
+==> Note That [Passing Callbacks] In Counter Example Is Passing [handleIncrement] Method From [App.js] To [CompA.js]
+==> Note That [Optimized Child Components] Refers To [CompA] That Exported Using [React.memo()]
+
+
+(6) How To Use 'useCallback'
+----------------------------
+==> Note That Without Using 'useCallback' If I Increment 'count' Both 'CompA' And 'CompB' Will Be Re-Rendered And If I Increment 'count2' Both 'CompA' And 'CompB' Will Be Re-Rendered And This Is Not required , So The Required Is If I Increment 'count' I Want 'CompA' Re-Rendered Only And If Increment 'count2' I Want 'CompB' Re-Rendered Only
+
+	App.js
+	----------
+
+	import React, { useState, useCallback } from 'react';
+	import CompA from './Components/CompA'
+	import CompB from './Components/CompB'
+	function App() {
+
+	  const [count, setCount] = useState(0)
+	  const [count2, setCount2] = useState(0)
+
+	  // useCallback Accepts A Function And Dependency List
+	  const handleIncrement = useCallback(() => {
+	    setCount(count + 1)
+	  }
+	    , [count])
+
+
+	  // useCallback Accepts A Function And Dependency List
+	  const handleIncrement2 = useCallback(() => {
+	    setCount2(count2 + 1)
+	  }
+	    , [count2])
+	  return (
+	    <div className="App">
+	      <CompA count={count} handClick={handleIncrement} />
+	      <CompB count={count2} handClick={handleIncrement2} />
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+
+	CompA.js
+	------------
+
+	import React from 'react';
+
+	const CompA = (props) => {
+	    console.log('Hey I\'m A')
+
+	    return (
+		<div>
+		    Count: {props.count}
+		    <button onClick={props.handClick}>Increment</button>
+		</div>
+	    );
+	};
+
+	export default React.memo(CompA);	
+
+
+	CompB.js
+	---------
+
+	import React from 'react';
+
+	const CompB = (props) => {
+	    console.log('Hey I\'m B')
+
+	    return (
+		<div>
+		    Count: {props.count}
+		    <button onClick={props.handClick}>Increment</button>
+		</div>
+	    );
+	};
+
+	export default React.memo(CompB);

@@ -1,0 +1,22 @@
+(1) Resize
+-----------------
+==> Utilities for controlling how an element can be resized.
+
+Class               Property
+---------------------------------------------
+.resize-none	    resize: none;
+.resize-y	        resize: vertical;
+.resize-x	        resize: horizontal;
+.resize	            resize: both;
+
+
+(2) Samples
+-------------
+
+    <textarea class="resize border rounded focus:outline-none focus:shadow-outline"></textarea>
+
+
+(3) Resposive Resize
+-----------------------
+
+   <textarea class="resize border rounded focus:outline-none focus:shadow-outline md:resize-x"></textarea>

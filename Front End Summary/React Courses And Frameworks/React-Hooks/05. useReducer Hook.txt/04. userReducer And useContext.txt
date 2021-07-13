@@ -1,0 +1,132 @@
+(1) Use 'useReducer' With 'useContext' For Global State Management
+
+
+(2) Counter Example
+------------------------
+==> I Have Counter In [App.js] And Want To Share It Between All Components (CompA,CompB) And If The Counter Changed In Any Component I Want To Change In Other Components
+
+		       ----------------
+			 App Component
+		       ----------------
+			       |
+			       |
+		------------------------------
+Component         (CompA)            (CompB)    
+		------------------------------
+
+
+(2) Steps To Create The Counter
+-------------------------------
+==> Create 'useReducer' In [App.js]
+==> Create 'createContext' In [App.js] For Use Counter In Other Components 
+==> Passing The Counter Value And Dispatch Actions Through The Provider 
+==> Access The Counter And Reducer Actions In 'CompA' And 'CompB'
+
+
+(3) Counter Example
+--------------------
+
+
+
+	App.js
+	-----------
+
+	import React, { useReducer, createContext } from 'react';
+	import CompA from './Components/CompA'
+	import CompB from './Components/CompB'
+
+	// Create Actions
+	const INCREMENT = 'INCREMENT', DECREMENT = 'DECREMENT', RESET = 'RESET'
+
+	// The Initial State
+	const initialState = { counter: 0 }
+
+	// Reducer
+	const reducer = (state, action) => {
+	  switch (action) {
+	    case INCREMENT: return { counter: state.counter + 1 }
+
+	    case DECREMENT: return { counter: state.counter - 1 }
+
+	    case RESET: return { counter: 0 }
+
+	    default: return state
+	  }
+	}
+
+
+	// Create Context
+	export const counterContext = createContext()
+
+	function App() {
+
+	  const [newState, dispatch] = useReducer(reducer, initialState)
+
+	  return (
+	    <div className="App">
+	      {/* Send The dispatch Action To Component A And B For Allow All Functions In There */}
+	      <counterContext.Provider value={{ count: newState.counter, countDispatch: dispatch }}>
+		App.js Counter: {newState.counter}
+		<button onClick={() => dispatch(INCREMENT)}>+ App.js</button>
+		<button onClick={() => dispatch(DECREMENT)}>- App.js</button>
+		<button onClick={() => dispatch(RESET)}>0 App.js</button>
+		<CompA />
+		<CompB />
+	      </counterContext.Provider>
+	    </div>
+	  );
+	}
+
+	export default App;
+
+
+
+	CompA.js
+	---------
+
+	import React, { useContext } from 'react';
+	import { counterContext } from '../App'
+
+
+	const CompA = () => {
+	    const counter = useContext(counterContext)
+
+	    return (
+		<div>
+		    CompA
+		    Counter: {counter.count}
+		    {/* Note Here I Use The Dispatch That Passed From 'counterContext.Provider' In [App.js] */}
+		    <button onClick={() => counter.countDispatch('INCREMENT')}>+ CompA</button>
+		    <button onClick={() => counter.countDispatch('DECREMENT')}>- CompA</button>
+		    <button onClick={() => counter.countDispatch('RESET')}>0 CompA</button>
+		</div>
+	    );
+	};
+
+	export default CompA;
+
+
+
+	CompB.js
+	---------
+
+	import React, { useContext } from 'react';
+	import { counterContext } from '../App'
+
+	const CompB = () => {
+
+	    const counter = useContext(counterContext)
+	    return (
+		<div>
+		    CompB: {counter.count}
+		    {/* Note Here I Use The Dispatch That Passed From 'counterContext.Provider' In [App.js] */}
+		    <button onClick={() => counter.countDispatch('INCREMENT')}>+ CompB</button>
+		    <button onClick={() => counter.countDispatch('DECREMENT')}>- CompB</button>
+		    <button onClick={() => counter.countDispatch('RESET')}>0 CompB</button>
+		</div>
+	    );
+	};
+
+	export default CompB;
+
+	

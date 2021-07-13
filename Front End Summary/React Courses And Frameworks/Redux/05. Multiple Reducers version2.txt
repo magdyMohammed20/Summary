@@ -1,0 +1,89 @@
+const BUY_CAKE = 'BUY_CAKE'
+const BUY_ICE = 'BUY_ICE' 
+
+function Buy_Cake(){
+  return{
+    type: BUY_CAKE
+  }
+}
+
+function Buy_Ice(){
+  return{
+    type: BUY_ICE
+  }
+}
+
+
+const initState = {
+  numOfCakes: 10,
+  numOfIce: 5 // Add New State Property
+}
+
+// Create Cake Reducer
+const cakesReducer = (state=initState , Action) =>{
+  switch(Action.type){
+    case BUY_CAKE: return {
+      ...state,
+      numOfCakes: state.numOfCakes - 1
+    }
+    default:return state
+  }
+}
+
+// Create Ice Reducer
+const IceReducer = (state=initState , Action) =>{
+  switch(Action.type){ 
+    case BUY_ICE: return{
+      ...state,
+      numOfIce: state.numOfIce - 1
+    }
+    default:return state
+  }
+}
+
+// Combine All Reducers
+const AllReducers = Redux.combineReducers({
+  cakesReducer,
+  IceReducer
+})
+
+// Pass All Reducers To Store
+const store = Redux.createStore(AllReducers)
+
+const subscriber =store.subscribe(()=> {
+    console.log('Update State ' , store.getState())
+})
+
+/*
+{
+  IceReducer: Object { numOfCakes: 10, numOfIce: 5 }
+  cakesReducer: Object { numOfCakes: 9, numOfIce: 5 }
+}
+*/
+store.dispatch(Buy_Cake())
+
+/*
+{
+  IceReducer: Object { numOfCakes: 10, numOfIce: 5 }
+  cakesReducer: Object { numOfCakes: 8, numOfIce: 5 }
+}
+*/
+store.dispatch(Buy_Cake()) 
+
+/*
+{
+  IceReducer: Object { numOfCakes: 10, numOfIce: 4 }
+  cakesReducer: Object { numOfCakes: 8, numOfIce: 5 }
+}
+*/
+store.dispatch(Buy_Ice()) 
+
+/*
+{
+  IceReducer: Object { numOfCakes: 10, numOfIce: 3 }
+  cakesReducer: Object { numOfCakes: 8, numOfIce: 5 }
+}
+*/
+store.dispatch(Buy_Ice()) 
+
+subscriber()

@@ -1,0 +1,13 @@
+(1) Remove create-react-app If Install It Globally
+----------------------------------------------------
+==> npm uninstall -g create-react-app
+
+(2) Create React App Methods
+-----------------------------
+==> First Method: npx create-react-app my-app
+==> Second Method: npm init react-app my-app 
+==> Third Method: yarn create react-app my-app
+
+(3) Start App
+--------------
+==> yarn start Or npm start

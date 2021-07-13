@@ -1,0 +1,23 @@
+(1) Background Clip
+-----------------
+==> Utilities for controlling the bounding box of an element's background.
+
+Class               Properties
+-------------------------------------------------------------
+.bg-clip-border	    background-clip: border-box;
+.bg-clip-padding	background-clip: padding-box;
+.bg-clip-content	background-clip: content-box;
+.bg-clip-text	    background-clip: text;
+
+(2) Samples
+-------------
+
+  <div class="bg-clip-border p-4 border-4 border-dashed border-purple-800 bg-purple-500"></div>
+
+
+(3) Responsive Background Clip
+-------------------------------
+
+    <div class="bg-clip-padding md:bg-clip-border">
+        <!-- ... -->
+    </div>

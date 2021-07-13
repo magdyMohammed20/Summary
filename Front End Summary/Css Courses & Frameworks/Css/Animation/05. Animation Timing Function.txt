@@ -1,0 +1,41 @@
+(1) What's animation-timing-function
+------------------------------------
+==> property specifies the speed curve of the animation
+
+
+(2) animation-timing-function values
+------------------------------------
+==> ease : Specifies an animation with a slow start, then fast, then end slowly (this is default)
+==> linear : Specifies an animation with the same speed from start to end
+==> ease-in : Specifies an animation with a slow start
+==> ease-out : Specifies an animation with a slow end
+==> ease-in-out : Specifies an animation with a slow start and end
+==> cubic-bezier(n,n,n,n) : Lets you define your own values in a cubic-bezier function
+
+
+(3) animation-timing-function Example
+-------------------------------------
+
+	/* Animation Code */
+	@keyframes ChangeBackColor {
+	  0%   {background-color:red; left:0px; top:0px;}
+	  25%  {background-color:blue; left:200px; top:0px;}
+	  50%  {background-color:green; left:200px; top:200px;}
+	  75%  {background-color:red; left:0px; top:200px;}
+	  100% {background-color:yellow; left:0px; top:0px;}
+	}
+
+	/* Each Animation Interval Time In The Animation Has A Time From cubic-bezier*/
+	.parent{
+	  width: 50px;
+	  height: 50px;
+	  background-color: rgb(12, 138, 197);
+	  border-radius: 100%;
+	  position: relative;
+	  animation-name: ChangeBackColor;
+	  animation-duration: 4s;
+	  animation-iteration-count: infinite;
+	  animation-direction: normal;
+	  /* Specify 4 Args As Animation Interval Is 3 */
+	  animation-timing-function: cubic-bezier(.03 , .9 , .01 , .03);
+	}

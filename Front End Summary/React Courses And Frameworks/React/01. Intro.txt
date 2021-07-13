@@ -1,0 +1,13 @@
+(1) What Is React
+-----------------
+==> Js Library For Building User Interface 
+==> Provide (SPA)
+==> Is (V) In (MVC)
+==> Provide Dynamic Web Apps
+
+(2) Important In React
+----------------------
+==> Components
+==> JSX (js xml)
+==> Virtual DOM [For Performance And Speed]
+

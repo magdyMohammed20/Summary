@@ -1,0 +1,24 @@
+(1) Font Style
+--------------------
+==> Utilities for controlling the style of text.
+
+Class          Properties
+-------------------------------------------------------------
+.italic	       font-style: italic;
+.not-italic	   font-style: normal;
+
+
+(2) Samples
+-------------
+
+    <p class="italic">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officia, sed?
+    </p>
+
+
+(3) Responsive Font Style
+----------------------------
+
+    <p class="italic sm:not-italic md:italic lg:not-italic xl:italic ...">
+      The quick brown fox jumped over the lazy dog.
+    </p>

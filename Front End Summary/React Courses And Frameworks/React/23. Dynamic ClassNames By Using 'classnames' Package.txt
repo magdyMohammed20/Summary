@@ -1,0 +1,24 @@
+(1) Install Package [npm i classnames]
+(2) Import In App.js [import classnames from 'classnames']
+
+(3) Use As This Code
+----------------------
+import classnames from 'classnames'
+
+class App extends Component{
+  state={
+    // Will Set 'green' And 'blue' Only As They Are True
+    classes:classnames({green : 1>0 , blue: true , red:false} , 'Test1' , 'Test2')
+  }
+
+  render(){
+
+
+    return(
+      <div className="App">
+         <!-- OutPut: <p class="green blue Test1 Test2"></p> -->
+        <p className={this.state.classes}></p>
+      </div>
+    )
+  }
+}

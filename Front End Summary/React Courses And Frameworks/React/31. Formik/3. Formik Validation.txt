@@ -1,0 +1,77 @@
+(1) Install Validation Library In Project [yup]
+-----------------------------------------------
+==> npm i yup
+
+(2) Import Library
+-------------------------------
+==> import * as Yup from 'yup'
+
+(3) All Code
+-------------
+
+import React, { Component } from 'react';
+import {Formik , Field , ErrorMessage} from 'formik' // ErrorMessage Imported Form Display Validation Output
+import * as Yup from 'yup'
+
+class Blog extends Component {
+    state = {
+        values:[]
+    }
+    submit = (values) =>{
+        this.setState({
+            values
+        })
+
+    }
+
+    form = props =>{
+        return (
+            <form onSubmit={props.handleSubmit}>
+                <Field name='name'/>
+                <span style={{color: 'red'}}>
+                    <ErrorMessage name='name'/>
+                </span>
+                <Field name='email' type='email'/>
+                <span style={{color: 'red'}}>
+                    <ErrorMessage name='email'/>
+                </span>
+                <Field name='sel' component='select' required>
+                    <option value='1'>1</option>
+                    <option value='2'>2</option>
+                    <option value='3'>3</option>
+                    <option value='4'>4</option>
+                </Field>
+
+                <Field type='checkbox' name='active'/>
+                <Field type='radio' name='rad' value='1'/>
+                <Field type='radio' name='rad' value='2'/>
+                <Field type='radio' name='rad' value='3'/>
+                <button type='submit'>Submit</button>
+            </form>
+        )
+        
+    }
+
+    schema = () =>{
+        const schema1 = Yup.object().shape({
+            name: Yup.string().required(), // Specify Value Type And It's Validation
+            email: Yup.string().required()
+        })
+
+        return schema1
+    }
+    render() {
+        return (
+            <div>
+                <Formik 
+                    initialValues = {{name: '',email:'',sel:'',active:'',rad:'1'}} 
+                    onSubmit = {this.submit} 
+                    render = {this.form} 
+                    validationSchema={this.schema} // Call 'schema' For Validate The Form
+                />
+            </div>
+        );
+    }
+}
+
+export default Blog;

@@ -1,0 +1,10 @@
+(1) Uninstalling Packages From Project (Syntax)
+-----------------------------------------------
+==> npm uninstall Package_Name
+
+EX:
+-----
+==> npm uninstall moment // This Will Uninstall 'moment' But Not Remove It From Package.json Dependency
+==> npm uninstall moment --save // This Will Uninstall 'moment' And Remove It From Package.json Dependency
+==> npm uninstall moment --save-dev // This Will Uninstall 'moment' And Remove It From Package.json Dev-Dependency
+

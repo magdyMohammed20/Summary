@@ -1,0 +1,33 @@
+(1) Place Items
+-----------------
+==> Utilities for controlling how items are justified and aligned at the same time On Both Axis.
+
+
+Class                   Properties
+------------------------------------------------
+.place-items-auto	    place-items: auto;
+.place-items-start	    place-items: start;
+.place-items-end	    place-items: end;
+.place-items-center	    place-items: center;
+.place-items-stretch	place-items: stretch;
+
+
+(2) Samples
+--------------
+
+  <div class="grid grid-cols-3 place-items-start h-48 bg-gray-400">
+    <div class="p-2 bg-gray-200 m-2">111</div>
+    <div class="p-2 bg-gray-200 m-2">2</div>
+    <div class="p-2 bg-gray-200 m-2">3</div>
+    <div class="p-2 bg-gray-200 m-2">1</div>
+    <div class="p-2 bg-gray-200 m-2">2</div>
+    <div class="p-2 bg-gray-200 m-2">3</div>
+  </div>
+
+
+(3) Responsive Place Items
+----------------------------
+
+    <div class="place-items-start md:place-items-center">
+    <!-- ... -->
+    </div>

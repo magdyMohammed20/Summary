@@ -1,0 +1,108 @@
+(1) Gutters
+------------
+==> Gutters are the padding between your columns, used to responsively space and align content in the Bootstrap grid system.
+
+
+(2) Horizontal Gutters (gx-[0-5])
+-----------------------
+
+    <div class="container px-4">
+      <div class="row gx-5">
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-5">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+      </div>
+    </div>
+    
+    
+(3) Vertical Gutters (gy-[0-5])
+----------------------
+
+    <div class="container px-4">
+      <div class="row gx-5 gy-5">
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-5">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+      </div>
+    </div>
+    
+    
+(4) Horizontal & vertical Gutters
+----------------------------------
+
+    <div class="container px-4">
+      <div class="row g-5">
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-6">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col-5">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+      </div>
+    </div>
+    
+    
+(5) Row Columns Gutters (g-[0-5])
+------------------------
+
+    <div class="container px-4">
+      <div class="row row-cols-2 g-2 g-lg-5">
+        <div class="col">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+      </div>
+    </div>
+    
+    
+(6) No Gutters [removes the negative margins from .row and the horizontal padding from all immediate children columns]
+---------------
+
+    <div class="container">
+      <div class="row g-0">
+        <div class="col">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+        <div class="col">
+          <div class="p-3 border bg-light">Custom column padding</div>
+        </div>
+      </div>
+    </div>

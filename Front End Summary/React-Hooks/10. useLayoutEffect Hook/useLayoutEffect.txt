@@ -1,8 +1,0 @@
-(1) Different Between 'useEffect' And 'useLayoutEffect'
-------------------------------------------------------
-==> useEffect : Make Re-Rendering After Any Change In The Component 
-==> useLayoutEffect : The signature is identical to useEffect, but it fires synchronously after all DOM mutations
-
-(2) More About 'useEffect' And 'useLayoutEffect' Is Here [https://blog.logrocket.com/useeffect-vs-uselayouteffect/]
-
-

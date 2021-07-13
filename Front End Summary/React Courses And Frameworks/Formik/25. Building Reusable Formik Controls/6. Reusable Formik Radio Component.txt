@@ -1,0 +1,128 @@
+(1) Create Resusable Radio Component
+---------------------------------------
+
+
+    // Create [Radio.js] Component
+    import React from 'react'
+    import {Field , ErrorMessage} from 'formik'
+    import TextError from './TextError'
+
+    function Radio(props) {
+        const{label , name , options , ...rest} = props
+
+        return (
+            <div className='form-control'>
+                <label>{label}</label>
+                <Field name={name} {...rest}>
+                    {
+                        ({field}) => {
+                            return options.map(option => {
+                                return (
+                                    <React.Fragment key={option.key}>
+                                        <input 
+                                            type='radio' 
+                                            id={option.value} 
+                                            {...field} 
+                                            value={option.value} 
+                                            checked={field.value === option.value}
+                                        />
+                                        <label htmlFor={option.value}>{option.key}</label>
+
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+                    }
+                </Field>
+                <ErrorMessage name={name} component={TextError}/>
+            </div>
+        )
+    }
+
+    export default Radio
+
+
+	
+    // Handle Radio In [FormikControl.js]
+    import React from 'react'
+    import Input from './Input'
+    import Textarea from './Textarea'
+    import Select from './Select'
+    import Radio from './Radio'
+
+    function FormikControl(props) {
+        const {control , ...rest} = props
+
+        switch(control){
+            case 'input' : 
+                return <Input {...rest}/>
+            case 'textarea':
+                return <Textarea {...rest}/>
+            case 'select' : 
+                return <Select {...rest}/>
+            case 'radio':
+                return <Radio {...rest}/>
+            case 'checkbox':
+            case 'date':
+            default: return null
+        }
+    }
+
+    export default FormikControl
+
+
+
+    // Handle Radio Validation In [FormikContainer.js]
+    import React from 'react'
+    import {Formik , Form} from 'formik'
+    import * as Yup from 'yup'
+    import FormikControl from './FormikControl'
+
+    export default function FormContainer() {
+        const selectOptions = [
+            {key : 'Select An Option' , value: ''},
+            {key : 'key1' , value: 'Option1'},
+            {key : 'Key2' , value: 'Option2'},
+            {key : 'Key3' , value: 'Option3'}
+        ]
+
+        // Create Radio Options As Array
+        const radioOptions = [
+            {key : 'Option1' , value: 'rOption1'},
+            {key : 'Option2' , value: 'rOption2'},
+            {key : 'Option3' , value: 'rOption3'},
+            {key : 'Option4' , value: 'rOption4'}
+        ]
+        const initialValues = {
+            email : '',
+            description: '',
+            selectOption: '',
+            radioOption: ''
+        }
+        const validationSchema = Yup.object({
+            email: Yup.string().required('Required Email'),
+            description: Yup.string().required('Please Enter Desc'),
+            selectOption: Yup.string().required('Please Enter Selection'),
+            radioOption: Yup.string().required('Please Select Radio'),
+        })
+        const onSubmit = values => {
+            console.log('Form Data Is ' , values)
+        }
+
+        return (
+            <div>
+                <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                    {
+                        formik => <Form>
+                            <FormikControl control='input' type='email' label='email' name='email'/>
+                            <FormikControl control='textarea' label='Description' name='description'/>
+                            <FormikControl control='select' label='select' name='selectOption' options={selectOptions}/>
+                            <FormikControl control='radio' label='radio' name='radioOption' options={radioOptions}/>
+                            <button type='submit'>Submit</button>
+                        </Form>
+                    }
+                </Formik>        
+            </div>
+        )
+    }
+

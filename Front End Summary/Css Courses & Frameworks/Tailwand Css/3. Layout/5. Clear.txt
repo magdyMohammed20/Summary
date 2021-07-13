@@ -1,0 +1,41 @@
+(1) Clear Classes
+-------------------
+
+Class           Properties
+------------------------------
+.clear-left	    clear: left;
+
+.clear-right	clear: right;
+
+.clear-both	    clear: both;
+
+.clear-none	    clear: none;
+
+
+(2) Notes
+------------
+==> Use [clear-left] to position an element below any preceding left-floated elements.
+==> Use [clear-right] to position an element below any preceding right-floated elements.
+==> Use [clear-both] to position an element below all preceding floated elements.
+==> Use [clear-none] to reset any clears that are applied to an element. This is the default value for the clear property.
+
+
+(3) Samples
+--------------
+
+    <div class="p-4">
+      <img class="float-left mr-4 my-2 h-24"
+        src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80">
+      <img class="float-right ml-4 my-2 h-32"
+        src="https://images.unsplash.com/photo-1459262838948-3e2de6c1ec80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80">
+      <p class="clear-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam venenatis et lorem sit amet
+        vehicula. Etiam vel nibh nec nisi euismod mollis ultrices condimentum velit. Proin velit libero, interdum ac
+        rhoncus sit amet, pellentesque ac turpis. Quisque ac luctus turpis, vel efficitur ante. Cras convallis risus vel
+        .</p>
+    </div>
+
+
+(4) Responsive Clear [Size{sm | md | lg | xl}:Clear{clear-left | clear-right | clear-both | clear-none}]
+----------------------------------------------------------------------------------------------------------
+
+    <div class='clear-right md:clear-left'>....</div>

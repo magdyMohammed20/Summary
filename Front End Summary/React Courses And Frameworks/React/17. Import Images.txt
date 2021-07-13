@@ -1,0 +1,19 @@
+(1) If Want To Import Image In Project You Should Set It In The Project Firstly
+
+(2) Import The Image
+---------------------
+
+	import firstImage from './ch.jpg'
+
+
+
+	<div>
+		<img src={firstImage}/>
+	</div>
+
+(3) Import Image From 'public' Folder In The Style Inside Any Component
+-------------------------------------------------------------------------
+
+	// Note That images Is Folder Inside 'public' Folder	
+	bacground-image: url('images/Home/home-bg.jpg');
+

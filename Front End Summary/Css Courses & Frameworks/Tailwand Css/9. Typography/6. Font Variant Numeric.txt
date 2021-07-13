@@ -1,0 +1,35 @@
+(1) Font Variant Numeric
+--------------------------
+==> Utilities for controlling the variant of numbers.
+==> Use the font-variant-numeric utilities to enable additional glyphs for numbers, fractions, and ordinal markers (in fonts that support them)
+
+Class             Properties
+-------------------------------------------------------------
+.normal-nums	       font-variant-numeric: normal;
+.ordinal	           font-variant-numeric: ordinal;
+.slashed-zero	       font-variant-numeric: slashed-zero;
+.lining-nums	       font-variant-numeric: lining-nums;
+.oldstyle-nums	     font-variant-numeric: oldstyle-nums;
+.proportional-nums	 font-variant-numeric: proportional-nums;
+.tabular-nums	       font-variant-numeric: tabular-nums;
+.diagonal-fractions	 font-variant-numeric: diagonal-fractions;
+.stacked-fractions	 font-variant-numeric: stacked-fractions;
+
+
+(2) These utilities are composable so you can enable multiple font-variant-numeric features by combining multiple classes in your HTML
+----------------------------------------------------------------------------------------------------------------------------------------
+
+  <p class="ordinal slashed-zero tabular-nums ...">1234567890</p>
+
+(2) Samples
+-------------
+
+  <p class="ordinal font-mono">1sr</p>
+  <p class="slashed-zero font-mono">01012935740</p>
+  <p class="diagonal-fractions font-serif">1/2</p>
+
+
+(3) Responsive Font Variant Numeric
+--------------------------------------
+
+  <div class="proportional-nums md:tabular-nums"></div>

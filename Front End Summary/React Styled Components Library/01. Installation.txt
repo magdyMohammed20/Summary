@@ -1,4 +1,0 @@
-(1) After Creating The React App With [create-react-app] Tool Write [npm i --save styled-components] Or [npm i -D styled-components] In CMD
-
-(2) Now The styled components Library Installed In Your App And Can Use It
-

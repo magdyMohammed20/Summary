@@ -1,0 +1,55 @@
+Aliases
+---------
+==> While importing a function from a module, we can chose to use an alias name instead.
+==> note That, once the alias is used, you can not use the old name to call the module features
+    [EX : Can't Call 'sum' In 'index.js' But Must Call 'add']
+
+EX
+----
+
+	index.html
+	-----------
+
+	<!DOCTYPE html>
+	<html lang="en" dir="ltr">
+
+	<head>
+	  <meta charset="utf-8">
+	  <title>Fetch Data</title>
+	  <link rel="stylesheet" href="style.css" />
+	</head>
+
+	<body>
+
+	  <!-- Note Here Should Write type="module" -->
+	  <script type="module" src="./index.js">
+	  </script>
+	</body>
+
+	</html>
+
+
+	index.js [Aliases Uses Here By Using 'as' Keyword]
+	---------
+
+	import { sum as add, sub as min } from './calc.js'
+
+	let sum2Nums = add(20, 30)
+	let sub2Nums = min(30, 20)
+
+	console.log(sum2Nums)
+	console.log(sub2Nums)
+
+
+	calc.js
+	--------
+
+	const sum = (a, b) => {
+	    return a + b
+	}
+
+	const sub = (a, b) => {
+	    return a - b
+	}
+
+	export { sum, sub }

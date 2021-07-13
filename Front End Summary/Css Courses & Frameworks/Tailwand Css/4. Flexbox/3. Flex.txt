@@ -1,0 +1,82 @@
+(1) Flex
+------------
+==> Utilities for controlling how flex items both grow and shrink. (Items don't grow when there's extra space) (Items shrink if possible when needed)
+
+Class               Properties
+-------------------------------------
+.flex-1	            flex: 1 1 0%;
+.flex-auto	        flex: 1 1 auto;
+.flex-initial	    flex: 0 1 auto;
+.flex-none	        flex: none;
+
+==> Use .flex-initial to allow a flex item to shrink but not grow, taking into account its initial size
+==> Use .flex-1 to allow a flex item to grow and shrink as needed, ignoring its initial size
+==> Use .flex-auto to allow a flex item to grow and shrink, taking into account its initial size
+==> Use .flex-none to prevent a flex item from growing or shrinking
+
+(2) Samples
+---------------
+
+  <div class="flex">
+    <div class="flex-initial bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, eligendi!
+    </div>
+    <div class="flex-initial bg-gray-400 mx-2 p-3 my-2">
+      lorem ipsum
+    </div>
+    <div class="flex-initial bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum dolor sit amet.
+    </div>
+  </div>
+
+  <div class="flex">
+    <div class="flex-1 bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, eligendi!
+    </div>
+    <div class="flex-1 bg-gray-400 mx-2 p-3 my-2">
+      lorem ipsum
+    </div>
+    <div class="flex-1 bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum dolor sit amet.
+    </div>
+  </div>
+
+  <div class="flex">
+    <div class="flex-auto bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, eligendi!
+    </div>
+    <div class="flex-auto bg-gray-400 mx-2 p-3 my-2">
+      lorem ipsum
+    </div>
+    <div class="flex-auto bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum dolor sit amet.
+    </div>
+  </div>
+
+  <div class="flex">
+    <div class="flex-none bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, eligendi!
+    </div>
+    <div class="flex-1 bg-gray-400 mx-2 p-3 my-2">
+      lorem ipsum
+    </div>
+    <div class="flex-1 bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum dolor sit amet.
+    </div>
+  </div>
+
+
+(3) Responsive Flex
+---------------------
+
+  <div class="flex">
+    <div class="flex-none sm:flex-auto md:flex-1 lg:flex-initial bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sunt, eligendi!
+    </div>
+    <div class="flex-none sm:flex-auto md:flex-1 lg:flex-initial bg-gray-400 mx-2 p-3 my-2">
+      lorem ipsum
+    </div>
+    <div class="flex-none sm:flex-auto md:flex-1 lg:flex-initial bg-gray-400 mx-2 p-3 my-2">
+      Lorem ipsum dolor sit amet.
+    </div>
+  </div>

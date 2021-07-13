@@ -1,0 +1,15 @@
+(1) Download [Node.js] And Install It
+
+(2) Install [Create-React-App] Tool Globally
+---------------------------------------------
+==> npm i -g create-react-app 
+
+(3) Create Or Download The React Project
+-----------------------------------------
+==> create-react-app app_Name [EX: create-react-app firstProject]
+
+(4) Run The Project
+-------------------
+==> cd firstProject
+==> [npm start] Or [yarn start] 
+

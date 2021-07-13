@@ -1,0 +1,7 @@
+(1) Should Install Nodejs From It's Official Site Or Through Terminal
+
+
+(2) After Install Nodejs Write This Commands In CMD Or terminal
+----------------------------------------------------------------
+==> node -v // For Check Nodejs Version
+==> npm -v // For Check npm Version

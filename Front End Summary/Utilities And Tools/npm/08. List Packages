@@ -1,0 +1,6 @@
+(1) List The Installed Packages
+----------------------------------
+==> npm list // List All Local Packages And Packages That Depending On It
+==> npm list --depth 0 // List All Local Packages In Specific Level
+==> npm list --depth 1 // List All Local Packages In Specific Level
+==> npm list --global true --depth 0 // List All Global Packages

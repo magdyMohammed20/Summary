@@ -1,0 +1,29 @@
+(1) Translate
+--------------
+==> Utilities for translating elements with transform.
+
+Class
+---------------------------------------------
+.{translate | -translate}-{x | y}-{0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | 20 | 24 | 32 | 40 | 48 | 56 | 64 | px}
+.{-translate | translate}-{x | y}-full
+.{-translate | translate}-{x | y}-1/2
+.{translate | -translate}-{x|y}-1/2
+
+(2) Samples
+-------------
+
+    <img class="transform translate-y-6 ...">
+    <img class="transform -translate-y-6 ...">
+    <img class="transform translate-y-0 ...">
+
+(3) Resposive Translate
+-------------------------
+
+    .{sm|md|lg|xl}:{translate | -translate}-{x | y}-{Number}
+
+
+(4) Change Translate When Hover In Spacific Screen
+--------------------------------------------------
+
+  <div class="w-64 h-64 bg-gray-400 mx-auto mt-3 transform transition duration-500 ease-in hover:translate-x-6 lg:hover:translate-x-8">
+  </div>

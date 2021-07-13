@@ -1,0 +1,26 @@
+(1) Containers
+---------------
+==> Containers are a fundamental building block of Bootstrap that contain, pad, and align your content withing a given device or viewport
+
+
+(2) Bootstrap comes with three different containers
+-----------------------------------------------------
+==> .container, which sets a max-width at each responsive breakpoint
+==> .container-fluid, which is width: 100% at all breakpoints
+==> .container-{breakpoint}, which is width: 100% until the specified breakpoint
+
+
+(3) All Available Containers
+------------------------------
+==> .container
+==> .container-sm
+==> .container-md
+==> .container-lg
+==> .container-xl
+==> .container-xxl
+==> .container-fluid
+
+
+(4) Responsive containers [.container-sm , .container-md , .container-lg , .container-xl , .container-xxl]
+--------------------------
+==> Responsive containers allow you to specify a class that is 100% wide until the specified breakpoint is reached, after which we apply max-widths for each of the higher breakpoints. For example, .container-sm is 100% wide to start until the sm breakpoint is reached, where it will scale up with md, lg, xl, and xxl.

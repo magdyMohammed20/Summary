@@ -1,5 +1,0 @@
-(1) Overflow
--------------
-
-    <div class="overflow-auto">...</div>
-    <div class="overflow-hidden">...</div>

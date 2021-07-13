@@ -1,0 +1,4 @@
+(1) If I Delete Commit And Want To Retrive It
+---------------------------------------------------
+==> git reflog // Write This And Copy The Deleted Commit Id
+==> git cherry-pick Deleted_Commit_Id [EX: git cherry-pick dc861be]

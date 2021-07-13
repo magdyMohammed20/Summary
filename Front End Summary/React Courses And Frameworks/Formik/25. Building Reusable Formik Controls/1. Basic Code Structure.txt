@@ -1,0 +1,64 @@
+(1) Reusable Formik Controls
+------------------------------
+==> FormikContainer Component
+==> FormikControl Component
+==> Input
+==> Textarea
+==> Select
+==> RadioButtons
+==> Checkboxes
+==> DatePicker
+==> Registration , Login And Course Enrollment Form
+==> UI Component Library
+
+
+(2) Code Structure
+--------------------
+
+	FormikContainer.js
+	--------------------
+
+	import React from 'react'
+	import {Formik , Form} from 'formik'
+	import * as Yup from 'yup'
+
+	export default function FormContainer() {
+
+    		const initialValues = {}
+    		const validationSchema = Yup.object({})
+    		const onSubmit = values => {
+        		console.log('Form Data Is ' , values)
+    		}
+
+    	return (
+        	<div>
+            		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+                		{
+                    			formik => <Form>
+                        			<button>Submit</button>
+                    			</Form>
+                		}
+            		</Formik>        
+        	</div>
+    		)
+	}
+
+
+	App.js
+	---------
+
+	import React from 'react';
+	import logo from './logo.svg';
+	import './App.css';
+	import FormikContainer from './components/FormikContainer';
+
+		function App() {
+  			return (
+    				<div className="App">
+      					<FormikContainer/>
+    				</div>
+  		);
+	}
+
+	export default App;
+

@@ -1,6 +1,0 @@
-(1) Why 'UseEffect'
---------------------
-==> When Use Class Component And Components Lifecycle There Are A lot Of Side Effects
-==> It's Replacement For 'componentDidMount' , 'componentDidUpdate' , 'componentWillUnmount'
-
-

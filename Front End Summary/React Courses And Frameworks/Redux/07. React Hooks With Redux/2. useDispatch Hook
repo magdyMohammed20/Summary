@@ -1,0 +1,111 @@
+(1) useDispatch Hook
+--------------------
+==> Used To Dispatch Action With React Redux
+
+
+EX:
+-----
+
+	ActionTypes.js
+	---------------
+	
+	export const BUY_CAKE = 'BUY_CAKE'
+	
+	
+	ActionCreators.js
+	------------------
+	
+	import {BUY_CAKE} from './ActionTypes'
+
+	export const buy_cake = () => {
+	    return {
+		type: BUY_CAKE
+	    }
+	}
+	
+	
+	Reducer.js
+	-----------
+	
+	import {BUY_CAKE} from './ActionTypes'
+
+	const initialState = {
+	    numOfCakes: 10
+	}
+
+	const Reducer = (state = initialState , action) => {
+	    switch(action.type){
+		case BUY_CAKE:
+		    return{
+		        ...state,
+		        numOfCakes: state.numOfCakes === 0 ? 0 : state.numOfCakes - 1
+		    }
+
+		default: return state
+	    }
+	}
+
+	export default Reducer
+	
+	
+	
+	Store.js
+	--------
+	
+	import Reducer from './Reducer'
+	import {createStore} from 'redux'
+
+
+	const Store = createStore(Reducer)
+
+	export default Store
+	
+	
+	Cakes.js
+	---------
+	
+	import React from 'react'
+	import {useSelector , useDispatch} from 'react-redux'
+	import {buy_cake} from '../Redux/ActionCreators'
+	function Cakes (props) {
+
+	    const numOfCakes = useSelector(state => state.numOfCakes)
+	    
+	    // Here Use 'useDispatch' Instead Of Creating 'mapDispatchToProps' Function And Not Need To Use 'connect' Function That Imported from 'react-redux'
+	    
+	    const dispatch = useDispatch()
+
+	    return (
+		<div>
+		    <h1>Number Of Cakes Is : {numOfCakes}</h1>
+		    <button onClick={()=> dispatch(buy_cake())}>Buy Cake</button>         
+		</div>
+	    )
+	    
+	}
+
+	export default Cakes
+	
+	
+	App.js
+	-------
+	
+	import React from 'react';
+	import './App.css';
+	import {Provider} from 'react-redux'
+	import Store from './Redux/Store'
+	import Cakes from './Components/Cakes'
+
+	function App(props) {
+	  return (
+	      <div className="App">
+		<Provider store={Store}>
+		  <Cakes/>
+		</Provider>
+	      </div>
+
+	  );
+	}
+
+	export default App;
+	

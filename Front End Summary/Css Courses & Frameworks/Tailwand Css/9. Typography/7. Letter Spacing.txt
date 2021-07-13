@@ -1,0 +1,29 @@
+(1) Letter Spacing
+--------------------------
+==> Utilities for controlling the tracking (letter spacing) of an element.
+
+Class                 Properties
+-------------------------------------------------------------
+.tracking-tighter	    letter-spacing: -0.05em;
+.tracking-tight	      letter-spacing: -0.025em;
+.tracking-normal	    letter-spacing: 0;
+.tracking-wide	      letter-spacing: 0.025em;
+.tracking-wider	      letter-spacing: 0.05em;
+.tracking-widest	    letter-spacing: 0.1em;
+
+
+(2) Samples
+-------------
+
+  <p class="tracking-tighter font-serif">magdy mohammed</p>
+  <p class="tracking-tight font-sans">magdy mohammed</p>
+  <p class="tracking-normal font-serif">magdy mohammed</p>
+  <p class="tracking-wide font-sans">magdy mohammed</p>
+  <p class="tracking-wider font-serif">magdy mohammed</p>
+  <p class="tracking-widest font-serif">magdy mohammed</p>
+
+
+(3) Responsive Letter Spacing
+-----------------------------------
+
+  <p class="tracking-tight sm:tracking-normal md:tracking-wide lg:tracking-normal xl:tracking-tight"></p>

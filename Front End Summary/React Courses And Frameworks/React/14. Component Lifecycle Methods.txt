@@ -1,0 +1,59 @@
+(1) Is Specific Function That Used To Perform Specific Tasks
+----------------------------------------------------------------
+==> Constructor()
+==> render()
+==> ComponentDidMount()
+==> ComponentDidUpdate()
+
+
+(2) Constructor [Used With Any Class Or Component]
+-----------------
+
+	constructor(){
+    		super()
+    		console.log('Hellow')
+  	}
+
+(3) render [Used For Print Specific Content]
+-----------
+
+  render(){
+    return <div></div>
+  }
+
+
+(4) ComponentDidMount [Load Data After Component Completely Loaded]
+---------------------
+
+  componentDidMount(){
+    console.log('ComponentDidMount')
+  }
+
+
+(5) ComponentDidUpdate [Make Action After Component State Changed]
+---------------------
+==> [prevProps , prevState] Is Optional
+
+class App extends Component {
+  state={
+    name: 'Mady'
+  }
+
+  change = () =>{
+    this.setState({
+      name: 'Mohammed'
+    })
+  }
+
+  componentDidUpdate(prevProps , prevState){
+    console.log(prevProps,prevState)
+  }
+  render(){
+    return (
+      <div>
+        <button onClick={this.change}>Change</button>
+      </div>
+    )
+ 
+  }
+}

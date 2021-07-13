@@ -1,0 +1,111 @@
+(1) Scrollspy
+--------------
+==> It must be used on a Bootstrap nav component or list group.
+==> requires position: relative; on the element you’re spying on, usually the <body>.
+==> When spying on elements other than the <body>, be sure to have a height set and overflow-y: scroll; applied.
+==> Anchors (<a>) are required and must point to an element with that id.
+
+
+(2) Scrollspy Sample
+---------------------
+
+        <nav id="navbar-example2" class="navbar navbar-light bg-light px-3">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <ul class="nav nav-pills">
+              <li class="nav-item">
+                <a class="nav-link" href="#fat">@fat</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#mdo">@mdo</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Dropdown</a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li><a class="dropdown-item" href="#one">one</a></li>
+                  <li><a class="dropdown-item" href="#two">two</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#three">three</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+          <div data-spy="scroll" data-target="#navbar-example2" data-offset="0" style="height: 150px; overflow-y: scroll;">
+            <h4 id="fat">@fat</h4>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus unde doloremque ut quasi officiis ad voluptates inventore laudantium quia iure dicta voluptate, a alias illum porro vitae cupiditate neque voluptatem aut? Soluta cupiditate vero exercitationem maiores maxime, odit expedita laudantium quis amet numquam iste nam sint fuga placeat quidem voluptatibus provident eligendi! Exercitationem assumenda sint quos eum natus fugiat tempore quas optio, beatae enim eligendi nulla atque illum aut animi quo rerum eaque. Laboriosam ex asperiores magni quis qui. Ut eum quo fuga nihil! Corrupti eum tempore officiis eligendi cupiditate quibusdam, fugit explicabo ea voluptatem, pariatur earum culpa velit dolore.
+            </p>
+            <h4 id="mdo">@mdo</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, aspernatur? Ipsum vero, neque distinctio, fugit consequatur nesciunt ab ipsa, labore aliquam quibusdam earum nemo architecto quas asperiores iste est ratione at alias quasi beatae. Odit tempore voluptatem cumque deserunt nostrum ipsum. Beatae, asperiores ullam, aspernatur quasi itaque mollitia deleniti eveniet autem optio debitis quos sint magni minima commodi magnam architecto nemo tempora quia, expedita iure reprehenderit consequatur? Odio similique cum numquam accusamus consequuntur eum sint culpa explicabo fuga dolor molestias placeat officiis facere nam doloribus cupiditate sequi soluta, ipsum tempore aut totam excepturi? Nobis fugit incidunt modi dolorem cumque porro.</p>
+            <h4 id="one">one</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor voluptas sit deserunt dolore sapiente a incidunt ullam dicta? Sunt error ipsam vel debitis perspiciatis dolores soluta, est maxime officia adipisci! Recusandae dolorem minima excepturi reprehenderit illum corrupti quos quaerat architecto molestiae laboriosam esse delectus nemo ipsum quis repellendus culpa rerum, labore eveniet at odit optio, modi ipsam? Illum dignissimos neque odio ea porro officiis quis nam voluptatum, consequatur excepturi dolore temporibus id voluptate corrupti saepe blanditiis aspernatur voluptates facilis dolorum! Deserunt, voluptatem aspernatur hic laudantium explicabo eos quaerat totam eveniet voluptate, natus aliquid. Amet ea esse corporis facere, voluptate mollitia.</p>
+            <h4 id="two">two</h4>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt dolor quasi quisquam blanditiis ex tenetur quam consectetur, voluptas eum neque itaque ut et recusandae similique tempore earum atque, provident sit laboriosam molestiae eaque voluptate illum maiores dolore. Illo tempore assumenda nesciunt ratione aliquid itaque, tempora similique rem quam eius reiciendis ipsam, quibusdam nam voluptatem incidunt in animi iste voluptatibus eos earum eum, ipsa vitae. Quod dicta incidunt quam mollitia recusandae maiores voluptas vero! Molestiae architecto exercitationem numquam repudiandae recusandae, voluptates inventore praesentium beatae nostrum aperiam. Sint corporis impedit ratione atque dolorem, culpa ipsam doloribus nobis nam libero obcaecati, est voluptates.</p>
+            <h4 id="three">three</h4>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, corrupti? Impedit magnam explicabo cumque amet. Facere quae vitae eveniet sapiente veritatis dolore necessitatibus tempore magni, similique distinctio in harum molestias optio nihil commodi dolor quas quisquam impedit dicta vel. Reiciendis, deleniti. Saepe nihil impedit explicabo amet veniam fuga quos, molestiae error, dolorem soluta facilis facere? Dolores necessitatibus fuga, repudiandae id unde illum sint autem sed iure deserunt iste, corrupti voluptate, similique repellendus ea libero molestiae quos qui labore nulla voluptatibus tempora rerum. Soluta dicta, excepturi at amet maxime aspernatur voluptatum enim inventore dolores optio rerum libero expedita laboriosam animi reprehenderit.</p>
+          </div>
+
+
+(3) Scrollspy With Nested Navs
+--------------------------------
+
+        <div class="d-flex">
+            <nav id="navbar-example3" class="navbar navbar-light bg-light w-25">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <nav class="nav nav-pills flex-column">
+                  <a class="nav-link" href="#item-1">Item 1</a>
+                  <nav class="nav nav-pills flex-column">
+                    <a class="nav-link ml-3 my-1" href="#item-1-1">Item 1-1</a>
+                    <a class="nav-link ml-3 my-1" href="#item-1-2">Item 1-2</a>
+                  </nav>
+                  <a class="nav-link" href="#item-2">Item 2</a>
+                  <a class="nav-link" href="#item-3">Item 3</a>
+                  <nav class="nav nav-pills flex-column">
+                    <a class="nav-link ml-3 my-1" href="#item-3-1">Item 3-1</a>
+                    <a class="nav-link ml-3 my-1" href="#item-3-2">Item 3-2</a>
+                  </nav>
+                </nav>
+              </nav>
+              
+              <div data-spy="scroll" data-target="#navbar-example3" data-offset="0" style="width: 75%;overflow-y: scroll; height: 500px;">
+                <h4 id="item-1">Item 1</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id, culpa error nemo deleniti corporis aut cum dignissimos fuga, nisi nostrum, impedit amet. Laboriosam consectetur aut pariatur atque cumque sed perferendis molestias fugit quasi, quas officiis ratione veritatis esse iusto dicta exercitationem itaque error officia amet odit sunt numquam voluptatum ducimus. Maxime aliquam facilis consectetur error sapiente a, asperiores alias aperiam. Doloremque blanditiis molestiae, quod deserunt dolorem explicabo ullam minima omnis quos labore ratione optio, dolores alias, quo corporis debitis? Tempora magni qui quod rem quae nisi velit tenetur ex eius totam? Soluta sit amet atque, enim nobis repellendus nam veritatis.</p>
+                <h5 id="item-1-1">Item 1-1</h5>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptas beatae iste. Magnam, temporibus facilis suscipit iusto, blanditiis numquam nulla beatae ipsum magni provident laborum? Nisi aspernatur reiciendis molestiae aut sequi totam odit doloribus provident aliquid nostrum! Ab, optio rem ea itaque nobis doloremque porro est sunt hic. Quaerat, sapiente suscipit assumenda fugiat ducimus inventore dignissimos vero natus tempore unde magnam in aut error aspernatur voluptatum optio officiis. Aliquam nihil veritatis, eius perferendis non molestias cumque voluptatum in ratione sint. Eaque odit praesentium officia, consequuntur ipsum quae dolores assumenda deserunt placeat, repellat qui iste tempora sed cumque veritatis dolorum id?</p>
+                <h5 id="item-1-2">Item 1-2</h5>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, nemo. Quia magnam doloribus, voluptas optio nemo numquam totam quasi voluptatum neque iste beatae ipsum mollitia cupiditate, quo consectetur maiores voluptatem quis natus animi delectus illo! Inventore iste eos dolores natus praesentium, sapiente modi, ab nam veniam saepe doloribus esse ratione itaque vel? Voluptas nam veniam quia aliquam error. Temporibus, nesciunt facilis. Temporibus, illo culpa eos perferendis omnis nemo labore eaque neque inventore! Quae aut possimus dolores corporis debitis vero sunt, et facilis ad blanditiis facere fugit necessitatibus accusantium officiis dignissimos? Amet commodi corrupti ex ab aliquam, ut incidunt quis sequi.</p>
+                <h4 id="item-2">Item 2</h4>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus pariatur eveniet saepe quaerat veritatis? Recusandae culpa necessitatibus porro, corrupti incidunt et explicabo quae possimus harum unde qui praesentium voluptatem dolore. Dolore illo, non ullam minus est, libero aliquam laboriosam earum aut cupiditate sint obcaecati? Sint a ut autem quod odio consequuntur quidem cumque maiores nihil laboriosam aliquid assumenda corrupti ipsam laudantium, quisquam, nostrum commodi! Quia incidunt dolorem numquam atque aliquam maiores voluptatibus esse error ea ipsa. Quibusdam eum voluptatem aliquid labore alias magni repellat facilis sit illo, non, sapiente debitis et nisi consequatur deleniti possimus vel asperiores accusamus, veritatis voluptates.</p>
+                <h4 id="item-3">Item 3</h4>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sint laboriosam alias quaerat culpa consequuntur repellat necessitatibus non facilis eveniet libero. Magni repellat blanditiis libero quibusdam nesciunt sed vero iste quos sint iure, voluptatibus odio doloribus architecto placeat non atque fugiat mollitia rem in omnis? Sint recusandae, molestias, amet in quis illo delectus et itaque nesciunt fuga eaque vel omnis quas aut debitis laudantium modi. Inventore dolores reiciendis enim eos, cum doloremque voluptatum, ex expedita porro rem voluptate voluptatem natus qui fuga ipsam aut perspiciatis iusto libero! Deleniti necessitatibus in nam nobis fugit iste et repudiandae quis minus voluptatem. Magnam, ratione?</p>
+                <h5 id="item-3-1">Item 3-1</h5>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Saepe labore facilis, rerum ad cum eos sint dolorum blanditiis enim temporibus est ab, fugit vel cupiditate minus impedit obcaecati numquam ullam. Beatae esse explicabo rerum itaque porro quam expedita sit sunt illo neque sint, assumenda ex quis non quidem. Eligendi et suscipit maxime iste consequuntur pariatur fugit, doloribus sequi corporis, voluptatum unde quas debitis quod architecto incidunt aliquid mollitia velit esse ea nam? Eum quisquam temporibus provident voluptates repellendus odio dolores nihil hic sapiente fugiat, fugit reprehenderit praesentium dignissimos est consequuntur, omnis explicabo sint ipsa unde illo animi pariatur. Natus, neque!</p>
+                <h5 id="item-3-2">Item 3-2</h5>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur magni ab inventore, suscipit iste sint quidem fugit, odit earum animi natus odio, ex culpa doloribus? Dicta veritatis blanditiis, voluptatem nam labore ab deserunt? Error quia quos tempora sit aut dicta perspiciatis rem velit sed exercitationem sint, temporibus pariatur quam asperiores eveniet nulla deleniti atque est sequi enim eos. Expedita, animi ut ducimus quae dignissimos maxime et? Optio, laborum accusamus minus ipsum quibusdam minima rem aut est magni assumenda labore vel totam tempore cum eius impedit at dolor harum laboriosam nam iusto? Nesciunt, ea. Voluptatibus ea culpa est libero iusto eos?</p>
+              </div>
+
+        </div>
+
+
+(4) Scrollspy With List Group
+-------------------------------
+
+        <div class="d-flex">
+            <div id="list-example" class="list-group w-25">
+                <a class="list-group-item list-group-item-action" href="#list-item-1">Item 1</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-2">Item 2</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-3">Item 3</a>
+                <a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>
+              </div>
+              <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example w-75" style="height: 300px; overflow-y: scroll;">
+                <h4 id="list-item-1">Item 1</h4>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus accusamus est ratione at. Nam non ea dolor ipsam molestias nobis id at. Atque recusandae quidem voluptas nihil iusto facilis, ipsam odit dolores blanditiis numquam repellendus vitae! Voluptate praesentium pariatur explicabo ab iusto, suscipit similique ratione officia quas, itaque nostrum vitae minima eum ullam provident, rerum quaerat ut voluptatum iste! Quibusdam labore nulla soluta consectetur voluptas, placeat ab fugit, dolores a, odio beatae aperiam nam explicabo enim ratione alias minus! Illum quia voluptatibus sequi soluta aut repellendus minima, consectetur quidem. Autem expedita molestiae odit, nulla eius blanditiis minima! Explicabo, id maiores.
+                </p>
+                <h4 id="list-item-2">Item 2</h4>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora odit, dignissimos vero explicabo, deserunt delectus soluta quod nisi commodi consequatur quasi provident exercitationem dolore earum eius ea neque rerum porro fuga illo. Eum voluptates esse molestiae quis possimus, explicabo ipsum delectus perferendis vitae? Soluta maxime illo debitis alias eius, animi voluptatem omnis velit, veniam adipisci rerum laboriosam corrupti repellendus impedit rem cupiditate repellat a. Voluptatibus ea dolore reprehenderit minima quas tempora illum suscipit labore accusamus eveniet aperiam et magnam fugiat, iste earum quisquam. Nihil in, esse repellat obcaecati iure ipsum atque eaque rem molestias quo, distinctio voluptatem facilis. Sit, quam!</p>
+                <h4 id="list-item-3">Item 3</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit odit nisi qui maxime iusto vitae voluptatibus officia, tenetur officiis molestias vero libero ipsum architecto inventore magnam? Eaque dolorum harum voluptate deleniti consequatur! Voluptates odit aliquid porro quas! Veritatis, officiis! In blanditiis inventore temporibus et illo repellat ipsa tempore quis. Adipisci, in aperiam. Sit inventore placeat culpa. Nemo nostrum corporis illo aliquam nulla nihil odio veniam cumque eligendi quibusdam expedita quia provident animi facilis quae eveniet, quo rerum deserunt, beatae cupiditate suscipit aliquid ducimus nobis vel. Quidem ducimus qui deserunt reprehenderit facilis cum sint fugiat sapiente aperiam! Vero quas corporis laboriosam?</p>
+                <h4 id="list-item-4">Item 4</h4>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Optio maxime tenetur accusantium, ipsum odio dicta ut unde at hic vitae ex ullam atque est numquam dolorem eum, molestias rerum. Animi quis earum impedit nesciunt. Possimus, quibusdam. Debitis corporis ullam nesciunt, eum veritatis, asperiores itaque suscipit quasi sunt eveniet iste? Nisi, aut similique accusantium blanditiis at adipisci voluptatem tempore voluptas vero? Molestias placeat voluptates rem sapiente, illum animi dolorem? Eligendi laboriosam aspernatur unde. Nemo tempora nesciunt illum earum sed eos consequuntur quos ipsa adipisci repudiandae dolor, placeat tenetur ratione dignissimos vero reprehenderit facilis maxime atque incidunt! Libero, repellat! Sunt, hic voluptate!</p>
+              </div>
+        </div>

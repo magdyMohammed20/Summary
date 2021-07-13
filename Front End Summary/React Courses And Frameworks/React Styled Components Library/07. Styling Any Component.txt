@@ -1,0 +1,25 @@
+(1) If Want To Style Any Component That Not Exist In The 'styled-components'
+------------------------------------------------------------------------------
+
+	import React from 'react';
+	import styled from 'styled-components'
+	import { BrowserRouter, Link } from 'react-router-dom'
+
+	// For Style Any Element Should Do As This
+	const StyledLink = styled(Link)`
+	  color: red
+	`
+
+	function App() {
+	  return (
+	    <div className="App">
+	      <BrowserRouter>
+		<StyledLink>
+		  Styled Link Router
+		</StyledLink>
+	      </BrowserRouter>
+	    </div>
+	  );
+	}
+
+	export default App;
