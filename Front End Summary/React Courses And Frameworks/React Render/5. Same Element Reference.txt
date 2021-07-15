@@ -1,0 +1,59 @@
+(1) If Want Child Component To Not Re-Render With The Parent Component
+-----------------------------------------------------------------------
+
+
+    UseState.js (Parent)
+    ----------------------
+
+    import React, {useState} from 'react'
+
+    export const UseState = ({children}) => {
+        const [count , setCount] = useState(0)
+
+        console.log('Parent Re-Render')
+
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>Add To 1</button>
+                {count}
+                {children}
+            </div>
+        )
+    }
+
+
+    Child.js (Child)
+    -----------------
+
+    import React from 'react'
+
+    function Child() {
+        console.log('Child Re-Render')
+        
+        return (
+            <div>
+                Child
+            </div>
+        )
+    }
+
+    export default Child
+
+
+    App.js
+    --------
+
+    import {UseState} from './Components/UseState'
+    import Child from './Components/Child'
+
+    function App() {
+    return (
+        <div className="App">
+        <UseState>
+            <Child/>
+        </UseState>
+        </div>
+    );
+    }
+
+    export default App;
