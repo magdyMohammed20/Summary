@@ -1,0 +1,70 @@
+(1) Improving Render Behavior Of Context API
+----------------------------------------------
+==> Here When Click On Counter Button The Parent Component And Child 'C' Re-Rendered Only
+
+
+    UseState.js
+    ---------------
+
+    import React, {useState} from 'react'
+    import {MemoChildA} from './Child'
+
+    export const countContext = React.createContext();
+    const CountProvider = countContext.Provider;
+
+    export const UseState = () => {
+        const [count , setCount] = useState(0)
+
+        console.log('Parent Re-Render')
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>{count}</button>
+                <CountProvider value={count}>
+                    <MemoChildA/>
+                </CountProvider>
+            </div>
+        )
+    }
+
+
+
+    Child.js
+    ----------
+
+    import React,{useContext} from 'react'
+    import {countContext} from './UseState'
+
+    export function ChildA() {
+        console.log('Child A Re-Render')
+        return (
+            <div>
+                Child A
+                <ChildB/> 
+            </div>
+        )
+    }
+
+    // Note Here Use React.memo
+    export const MemoChildA = React.memo(ChildA);
+
+    export function ChildB() {
+        console.log('Child B Re-Render')
+        return (
+            <div>
+                Child B
+                <ChildC/> 
+            </div>
+        )
+    }
+
+
+    export function ChildC() {
+        const count = useContext(countContext)
+
+        console.log('Child C Re-Render')
+        return (
+            <div>
+                Child C {count}
+            </div>
+        )
+    }
