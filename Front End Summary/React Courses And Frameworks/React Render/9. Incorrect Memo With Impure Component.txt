@@ -1,0 +1,47 @@
+(1) Incorrect Memo
+--------------------
+
+==> When Use Date In Child Component It Only Re-Rendered 1 Time When 'name' Changed And It's InCorrect As I Want To Change Date When Counter Changed Too
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    UseState.js
+    ---------------
+
+    import React, {useState} from 'react'
+    import Child from './Child'
+    export const UseState = () => {
+        const [count , setCount] = useState(0)
+        const [name, setName] = useState('magdy')
+        console.log('Parent Re-Render')
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>{count}</button>
+                <button onClick={() => setName('Hossam')}>Change</button>
+                <Child name={name}/>
+                
+            </div>
+        )
+    }
+
+
+
+    Child.js
+    -----------
+
+    import React from 'react'
+
+    function Child({name}) {
+        const date = new Date();
+
+        console.log('Child Re-Render')
+
+        return (
+            <div>
+                Hellow {name}
+                It's Currently {date.getHours()} : {date.getMinutes()} : {date.getSeconds()}
+            </div>
+        )
+    }
+
+    export default React.memo(Child)
+
