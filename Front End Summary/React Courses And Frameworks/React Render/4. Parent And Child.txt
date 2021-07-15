@@ -1,0 +1,45 @@
+(1) Parent And Child Rendering
+--------------------------------
+==> When New State Equal To Old State It Will Re Render The Parent Component Only 1 Time Else It Re Render The Parent And Child Component
+
+
+    useState.js
+    -------------
+
+    import React, {useState} from 'react'
+    import Child from './Child'
+
+    export const UseState = () => {
+        const [count , setCount] = useState(0)
+
+        console.log('Parent Re-Render')
+
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>Add To 1</button>
+                <button onClick={() => setCount(0)}>Add To 0</button>
+                <button onClick={() => setCount(5)}>Add To 5</button> 
+                {count}
+                <Child/>
+            </div>
+        )
+    }
+
+
+
+    Child.js
+    ----------
+
+    import React from 'react'
+
+    function Child() {
+        console.log('Child Re-Render')
+        
+        return (
+            <div>
+                Child
+            </div>
+        )
+    }
+
+    export default Child
