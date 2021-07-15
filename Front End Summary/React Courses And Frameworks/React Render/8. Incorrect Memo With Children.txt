@@ -1,0 +1,120 @@
+(1) Incorrect React.memo() With Children
+------------------------------------------
+
+==> React.memo() Working Fine If Child Component Has Text Node
+----------------------------------------------------------------
+
+    Child.js
+    ----------
+
+    import React from 'react'
+
+    function Child({children , name}) {
+        console.log('Child Re-Render')
+
+        return (
+            <div>
+                {children} {name}
+            </div>
+        )
+    }
+
+    export default React.memo(Child)
+
+
+
+    UseState.js
+    ------------
+
+    import React, {useState} from 'react'
+    import Child from './Child'
+    export const UseState = () => {
+        const [count , setCount] = useState(0)
+        const [name, setName] = useState('magdy')
+        console.log('Parent Re-Render')
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>{count}</button>
+                <button onClick={() => setName('Hossam')}>Change</button>
+                <Child name={name}>
+                    Hellow
+                </Child>
+            </div>
+        )
+    }
+
+
+    App.js
+    -------
+
+    import {UseState} from './Components/UseState'
+
+    function App() {
+        return (
+            <div className="App">
+                <UseState/>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+
+==> React.memo() Not Working Fine If Child Component Has An Element As Child
+-----------------------------------------------------------------------------
+
+
+    Child.js
+    ----------
+
+    import React from 'react'
+
+    function Child({children , name}) {
+        console.log('Child Re-Render')
+
+        return (
+            <div>
+                {children} {name}
+            </div>
+        )
+    }
+
+    export default React.memo(Child)
+
+
+    UseState.js
+    ------------
+
+    import React, {useState} from 'react'
+    import Child from './Child'
+    export const UseState = () => {
+        const [count , setCount] = useState(0)
+        const [name, setName] = useState('magdy')
+        console.log('Parent Re-Render')
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>{count}</button>
+                <button onClick={() => setName('Hossam')}>Change</button>
+                <Child name={name}>
+                    <strong>Hellow</strong>
+                </Child>
+            </div>
+        )
+    }
+
+
+    App.js
+    -------
+
+    import {UseState} from './Components/UseState'
+
+    function App() {
+        return (
+            <div className="App">
+                <UseState/>
+            </div>
+        );
+    }
+
+    export default App;
