@@ -1,0 +1,87 @@
+(1) Another Way To Optimize Context API Re-Rendering
+------------------------------------------------------
+==> Using 'children' Props
+
+
+    UseState.js
+    ---------------
+
+    import React, {useState} from 'react'
+
+    export const countContext = React.createContext();
+    const CountProvider = countContext.Provider;
+
+    // 1- We Set children As Arg And Wrap It With Provider
+    export const UseState = ({children}) => {
+
+        const [count , setCount] = useState(0)
+
+        console.log('Parent Re-Render')
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>{count}</button>
+                <CountProvider value={count}>
+                    {children}
+                </CountProvider>
+            </div>
+        )
+    }
+
+
+    Child.js
+    ----------
+
+    import React,{useContext} from 'react'
+    import {countContext} from './UseState'
+
+    export function ChildA() {
+        console.log('Child A Re-Render')
+        return (
+            <div>
+                Child A
+                <ChildB/> 
+            </div>
+        )
+    }
+
+
+    export function ChildB() {
+        console.log('Child B Re-Render')
+        return (
+            <div>
+                Child B
+                <ChildC/> 
+            </div>
+        )
+    }
+
+
+    export function ChildC() {
+        const count = useContext(countContext)
+
+        console.log('Child C Re-Render')
+        return (
+            <div>
+                Child C {count}
+            </div>
+        )
+    }
+
+
+    App.js
+    --------
+
+    import {UseState} from './Components/UseState'
+    import {ChildA} from './Components/Child'
+
+    function App() {
+        return (
+            <div className="App">
+                <UseState>
+                    <ChildA/>
+                </UseState>
+            </div>
+        );
+    }
+
+    export default App;
