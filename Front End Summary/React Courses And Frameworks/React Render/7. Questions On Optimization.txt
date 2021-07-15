@@ -1,0 +1,18 @@
+(1) When Use [Same Element Reference] And [React.memo()]
+-----------------------------------------------------------
+
+==> Same Element Reference
+---------------------------
+- When Parent Component Re-Renders As State Change In Parent Component
+- This Technique Not Work If Parent Component Re-Renders Because Of Changes In It's Props
+- State Change ? [Yes]  --- Props Change ? [No]
+
+
+==> Reference.memo()
+---------------------
+- When Child Component Is Being Asked To Re-Render Due To Changes In Parent State Which Don't Affect The Child Component Props In Anyway
+
+
+(2) If React.memo() Provides Optimization By Comparing Props Why Not Wrap Every Single Component With React.memo()
+-------------------------------------------------------------------------------------------------------------------
+==> Lets Say [Component Render Time = 10ms] [React.memo Time = 2ms] So In First Render With No Props Changes Take 2ms But Second Render With Props Changes Take 12ms
