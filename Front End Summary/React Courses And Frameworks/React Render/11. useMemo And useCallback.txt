@@ -1,0 +1,102 @@
+(1) We Want To Solve Problem Of Previous File
+----------------------------------------------
+==> Create Memoized Person Using 'useMemo' Hook In 'UseState.js'
+==> Now When Click On Change Name Button You Note That 'Child' Component Rendered 1 Time Only And If Click On Counter Button The 'Child' Component Not Rendered Yet
+
+    UseState.js
+    -------------
+
+    import React, {useState , useMemo} from 'react'
+    import Child from './Child'
+    export const UseState = () => {
+        const [count , setCount] = useState(0)
+        const [name, setName] = useState('magdy')
+
+        const person = {
+            fName: 'Omar',
+            lName: 'Mohammed'
+        }
+
+        // 1- Create Memoized Person
+        const memoPerson = useMemo(() => person, [])
+
+        console.log('Parent Re-Render')
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>{count}</button>
+                <button onClick={() => setName('Hossam')}>Change</button>
+                <Child name={name} person={memoPerson}/>
+                
+            </div>
+        )
+    }
+
+
+    Child.js
+    --------------
+
+    import React from 'react'
+
+    function Child({name , person}) {
+        
+        console.log('Child Re-Render')
+
+        return (
+            <div>
+                Hellow {name} 
+                And Person Is {person.fName} {person.lName}
+            </div>
+        )
+    }
+
+    export default React.memo(Child)
+
+
+
+(2) If You Use A Function Instead Of Person Object Use 'useCallback' Instead Of 'useMemo'
+------------------------------------------------------------------------------------------
+
+
+    UseState.js
+    -------------
+
+    import React, {useState , useCallback} from 'react'
+    import Child from './Child'
+    export const UseState = () => {
+        const [count , setCount] = useState(0)
+        const [name, setName] = useState('magdy')
+
+        const handleClick = () => {}
+
+        const memoHandleClick = useCallback(handleClick , [])
+
+        console.log('Parent Re-Render')
+        return (
+            <div>
+                <button onClick={() => setCount(c => c + 1)}>{count}</button>
+                <button onClick={() => setName('Hossam')}>Change</button>
+                <Child name={name} memoHandleClick={memoHandleClick}/>
+                
+            </div>
+        )
+    }
+
+
+
+    Child.js
+    ----------
+
+    import React from 'react'
+
+    function Child({name}) {
+        
+        console.log('Child Re-Render')
+
+        return (
+            <div>
+                Hellow {name} 
+            </div>
+        )
+    }
+
+    export default React.memo(Child)
