@@ -1,0 +1,124 @@
+(1) Object Mutation
+--------------------
+
+==> Wrong Way (There Is No Re-Render When Click On The Button)
+---------------------------------------------------------------
+
+    import React, {useState} from 'react'
+
+    const initialState = {
+        fName: 'Magdy',
+        lName: 'Mohammed'
+    }
+
+    export const UseState = () => {
+        const [person , setPerson] = useState(initialState)
+
+        console.log('Re-Render')
+
+        const handleNames = () => {
+            person.fName = 'Omar'
+            person.lName = 'Mohammed'
+            setPerson(person)
+        }
+        return (
+            <div>
+                <button onClick={() => handleNames()}>{person.fName} {person.lName}</button>        
+            </div>
+        )
+    }
+
+
+==> Right Way
+--------------
+
+    import React, {useState} from 'react'
+
+    const initialState = {
+        fName: 'Magdy',
+        lName: 'Mohammed'
+    }
+
+    export const UseState = () => {
+        const [person , setPerson] = useState(initialState)
+
+        console.log('Re-Render')
+
+        const handleNames = () => {
+            const newPerson = {...person}
+
+            newPerson.fName = 'Omar'
+            newPerson.lName = 'Mohammed'
+            setPerson(newPerson)
+        }
+        return (
+            <div>
+                <button onClick={() => handleNames()}>{person.fName} {person.lName}</button>        
+            </div>
+        )
+    }
+
+
+(2) Array Mutation
+--------------------
+
+==> Wrong Way
+---------------
+
+    import React, {useState} from 'react'
+
+    const initialState = ['Magdy' , 'Mohammed']
+
+    export const UseState = () => {
+        const [persons , setPersons] = useState(initialState)
+
+        console.log('Re-Render')
+
+        const handleNames = () => {
+            persons.push('Ahmed')
+            persons.push('Omar')
+            setPersons(persons)
+        }
+        return (
+            <div>
+                <button onClick={() => handleNames()}>Add</button> 
+                {
+                    persons.map(person => {
+                        return <div key={person}>{person}</div>
+                    })
+                }       
+            </div>
+        )
+    }
+
+
+==> Right Way
+--------------
+
+    import React, {useState} from 'react'
+
+    const initialState = ['Magdy' , 'Mohammed']
+
+    export const UseState = () => {
+        const [persons , setPersons] = useState(initialState)
+
+        console.log('Re-Render')
+
+        const handleNames = () => {
+            const newPersons = [...persons]
+
+            newPersons.push('Ahmed')
+            newPersons.push('Omar')
+            setPersons(newPersons)
+        }
+        return (
+            <div>
+                <button onClick={() => handleNames()}>Add</button> 
+                {
+                    persons.map(person => {
+                        return <div key={person}>{person}</div>
+                    })
+                }       
+            </div>
+        )
+    }
