@@ -1,0 +1,10 @@
+(1) Why Table Component
+-------------------------
+==> Build Some Sort Of A Table To Visualize The Data Is Invitable 
+==> Data Will Be Represented To Marketing Team , Admin Team Or Provides Reports For Customers
+
+
+(2) React Table
+-----------------
+==> Collection Of Hooks For Building Powerful Tables And Data Grid Experience
+==> It's A Table Utility And Not Table Component
