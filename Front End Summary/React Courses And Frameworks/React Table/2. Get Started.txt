@@ -1,0 +1,6 @@
+(1) React Table Installation
+--------------------------------
+==> [yarn add react-table]  Or [npm install react-table --save]
+
+==> For Getting Fake Data Go To [mockaroo.com] And Download Data As Json
+==> After Download Fake Data Move Data File To Your React Project [Inside Components Folder]
