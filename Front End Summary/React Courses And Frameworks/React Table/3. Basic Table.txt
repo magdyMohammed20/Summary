@@ -1,0 +1,284 @@
+(1) Steps To Building Table
+-----------------------------
+==> Get The Data You Want To Display [EX: Get Data From Mockaroo.com]
+==> Define Columns For Table
+==> Use The Data And Columns To Create Table Instance Using React Table
+==> Define Basic Table Structure Using Plain Html
+==> Use Table Instance In Step 3 To Bring Life To Html Defined In Step4 
+==> Include Css For The Table
+
+
+(2) Executing Steps
+----------------------
+
+Step1 : Download Data From Mocakroo.com And Move The MOCK_DATA.json To Components Folder
+-----------------------------------------------------------------------------------------
+
+    [
+        {"id":1,"first_name":"Skipton","last_name":"Beswetherick","email":"sbeswetherick0@ebay.co.uk","gender":"Male","ip_address":"221.64.106.109"},
+        {"id":2,"first_name":"Hube","last_name":"Cleare","email":"hcleare1@oakley.com","gender":"Bigender","ip_address":"35.226.103.120"},
+        {"id":3,"first_name":"Aeriel","last_name":"Jeanel","email":"ajeanel2@google.com","gender":"Agender","ip_address":"42.247.137.49"},
+        {"id":4,"first_name":"Alysa","last_name":"Mileham","email":"amileham3@hostgator.com","gender":"Female","ip_address":"106.30.83.181"}
+    ]
+
+Step2 : Create Columns.js File In Components Folder
+------------------------------------------------------
+
+    export const COLUMNS = [
+        {
+            Header: 'id',
+            accessor: 'id'
+        },
+        {
+            Header: 'first_name',
+            accessor: 'first_name'
+        },
+        {
+            Header: 'last_name',
+            accessor: 'last_name'
+        },
+        {
+            Header: 'email',
+            accessor: 'email'
+        },
+        {
+            Header: 'gender',
+            accessor: 'gender'
+        }
+    ]
+
+
+Step3 : Create Table Instance By Creating BasicTable.js File In Components Folder
+----------------------------------------------------------------------------------
+
+    import React , {useMemo} from 'react'
+    import {useTable} from 'react-table'     // First Import
+    import {COLUMNS} from './Columns'        // Second Import
+    import MOCK_DATA from './MOCK_DATA.json' // Third Import
+
+    function BasicTable() {
+
+        // Memoized Data And Columns
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        // Table Instance
+        const tableInstance = useTable({ columns,data })
+        
+        return (
+            <div>
+
+            </div>
+        )
+    }
+
+    export default BasicTable
+
+
+Step4: Create Table Structure In BasicTable.js
+-------------------------------------------------
+
+    import React , {useMemo} from 'react'
+    import {useTable} from 'react-table'     // First Import
+    import {COLUMNS} from './Columns'        // Second Import
+    import MOCK_DATA from './MOCK_DATA.json' // Third Import
+
+    function BasicTable() {
+
+        // Memoized Data And Columns
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        // Table Instance
+        const tableInstance = useTable({ columns,data })
+        
+        // Create Table Structure
+        return (
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        )
+    }
+
+    export default BasicTable
+
+
+
+Step5 : Use Table Instance To Create Necessary UI
+---------------------------------------------------
+
+    import React , {useMemo} from 'react'
+    import {useTable} from 'react-table'     
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+
+    function BasicTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        const tableInstance = useTable({ columns,data })
+        
+        // Use Table Instance To Create Necessary UI
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            prepareRow,
+        } = tableInstance
+
+        return (
+            <table {...getTableProps()}>
+                <thead>
+                    {
+                        headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getFooterGroupProps()}>
+                                {
+                                    headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps()}>
+                                            {column.render('Header')}
+                                        </th>
+                                    ))
+                                }
+                            </tr>
+                        ))
+                    }
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {
+                        rows.map(row => {
+                            prepareRow(row)
+
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {
+                                        row.cells.map(cell => {
+                                            return (
+                                                <td {...cell.getCellProps()}>
+                                                    {cell.rander('Cell')}
+                                                </td>
+                                            )
+                                        })
+                                    }
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+        )
+    }
+
+    export default BasicTable
+
+
+
+Step6 : Include Css For The Table By Creating style.css File Inside Components Folder Then Import It In BasicTable.js 
+-----------------------------------------------------------------------------------------------------------------------
+
+    style.Css
+    ----------
+
+    table {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    td, th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+    
+    tr:nth-child(even){background-color: #f2f2f2;}
+
+    tr:hover {background-color: #ddd;}
+
+    th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #04AA6D;
+        color: white;
+    }
+
+
+
+    BasicTable.js
+    ---------------
+
+    import React , {useMemo} from 'react'
+    import {useTable} from 'react-table'     
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function BasicTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        const tableInstance = useTable({ columns,data })
+        
+        // Use Table Instance To Create Necessary UI
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            prepareRow,
+        } = tableInstance
+
+        return (
+            <table {...getTableProps()}>
+                <thead>
+                    {
+                        headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getFooterGroupProps()}>
+                                {
+                                    headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps()}>
+                                            {column.render('Header')}
+                                        </th>
+                                    ))
+                                }
+                            </tr>
+                        ))
+                    }
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {
+                        rows.map(row => {
+                            prepareRow(row)
+
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {
+                                        row.cells.map(cell => {
+                                            return (
+                                                <td {...cell.getCellProps()}>
+                                                    {cell.rander('Cell')}
+                                                </td>
+                                            )
+                                        })
+                                    }
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
+        )
+    }
+
+    export default BasicTable
