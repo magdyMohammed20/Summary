@@ -1,0 +1,38 @@
+(1) If You Have Date With A Specific Format And Want To Sort It Will Not Sort As It Consider To Be A String Not Date So We Will Use 'date-fns' To Format The Date
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+==> Step1: Install 'date-fns' [yarn add date-fns] 
+
+
+==> Step2: Import 'format' Inside 'Columns.js' File And Add 'Cell' Property In Date Field
+-------------------------------------------------------------------------------------------
+
+    import {format} from 'date-fns'
+
+    export const COLUMNS = [
+        {
+            Header: 'id',
+            accessor: 'id'
+        },
+        {
+            Header: 'first_name',
+            accessor: 'first_name'
+        },
+        {
+            Header: 'last_name',
+            accessor: 'last_name'
+        },
+        {
+            Header: 'email',
+            accessor: 'email'
+        },
+        {
+            Header: 'gender',
+            accessor: 'gender'
+        },
+        {
+            Header: 'date',
+            accessor: 'date',
+            Cell: ({value}) => format(new Date(value) , 'dd/MM/yyyy') 
+        }
+    ]
