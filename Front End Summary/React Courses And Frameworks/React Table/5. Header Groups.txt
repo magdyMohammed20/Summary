@@ -1,0 +1,134 @@
+(1) Create Grouped Columns (EX: Merge First And Last Name Under 'Name')
+------------------------------------------------------------------------
+
+Step1: Create Columns Structure In Columns.js File
+-----------------------------------------------------
+
+    // Here first_name And last_name Grouped In 1 Column
+    // And gender And email Grouped In 1 Column
+    export const GROUPED_COLUMNS = [
+        {
+            Header: 'id',
+            Footer: 'id',
+            accessor: 'id'
+        },
+        {
+            Header: 'Name',
+            Footer: 'Name',
+            columns: [
+                {
+                    Header: 'first_name',
+                    Footer: 'first_name',
+                    accessor: 'first_name'
+                },
+                {
+                    Header: 'last_name',
+                    Footer: 'last_name',
+                    accessor: 'last_name'
+                }
+            ]
+        },
+        {
+            Header: 'Info',
+            Footer: 'Info',
+            accessor: 'info',
+            columns: [
+                {
+                    Header: 'email',
+                    Footer: 'email',
+                    accessor: 'email'
+                },
+                {
+                    Header: 'gender',
+                    Footer: 'gender',
+                    accessor: 'gender'
+                }
+            ]
+        }
+    ]
+
+
+Step2: Use It Inside BasicTable.js But Replace [{...column.getFooterProps}] By [{...column.getFooterProps()}] In <tfoot>
+--------------------------------------------------------------------------------------------------------------------------
+
+    import React , {useMemo} from 'react'
+    import {useTable} from 'react-table'     
+    import {GROUPED_COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function BasicTable() {
+
+        const columns = useMemo(() => GROUPED_COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        const tableInstance = useTable({ columns,data })
+        
+        // Use Table Instance To Create Necessary UI
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            footerGroups,
+            rows,
+            prepareRow,
+        } = tableInstance
+
+        return (
+            <table {...getTableProps()}>
+                <thead>
+                    {
+                        headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {
+                                    headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps()}>
+                                            {column.render('Header')}
+                                        </th>
+                                    ))
+                                }
+                            </tr>
+                        ))
+                    }
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {
+                        rows.map(row => {
+                            prepareRow(row)
+
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {
+                                        row.cells.map(cell => {
+                                            return (
+                                                <td {...cell.getCellProps()}>
+                                                    {cell.render('Cell')}
+                                                </td>
+                                            )
+                                        })
+                                    }
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+                <tfoot>
+                    {
+                        footerGroups.map(footerGroup => (
+                            <tr {...footerGroup.getFooterGroupProps()}>
+                                {
+                                    footerGroup.headers.map(column => (
+                                        <td {...column.getFooterProps()}>
+                                            {column.render('Footer')}
+                                        </td>
+                                    ))
+                                }
+                            </tr>   
+                        ))
+                    }
+                </tfoot>
+            </table>
+        )
+    }
+
+    export default BasicTable
