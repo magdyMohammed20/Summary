@@ -1,0 +1,132 @@
+(1) Filtering Types
+--------------------
+==> Global Filtering
+==> Column Filtering
+
+
+(2) Global Filtering
+----------------------
+==> We Want To Create Input Field To Search For Specific Value In The Table
+
+
+==> Step1 : Create 'FilterInput.js' Component Inside 'Components' Folder
+-------------------------------------------------------------------------
+
+    FilterInput.js
+    ---------------
+
+    import React from 'react'
+
+    // filter : Is Value Of Input Field
+    // setFilter: Method To Set Input Field Value
+    function FIlterInput({filter , setFilter}) {
+        return (
+            <div>
+                Search: {' '}
+                <input value={filter || ''} onChange={e => setFilter(e.target.value)}/>
+            </div>
+        )
+    }
+
+    export default FIlterInput
+
+
+Step2: Import 'useGlobalFilter' Hook And Pass It To 'useTable' Hook
+       Destruct 'state' And 'setGlobalFilter' From 'tableInstance' Variable
+       Then From 'state' Destruct 'globalFilter'
+       Then Wrap <table> With 'Fragment' And Set 'FilterInput' Component Above Table And Pass 'globalFilter' And 'setGlobalFilter' To 'FilterInput' Component
+---------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    import React , {useMemo} from 'react'
+    // Import useGlobalFilter
+    import {useTable , useGlobalFilter} from 'react-table'     
+    import {GROUPED_COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import FilterInput from './FilterInput'
+    import './style.css'
+
+    function FilteringTable() {
+
+        const columns = useMemo(() => GROUPED_COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        // Pass useGlobalFilter To useTable
+        const tableInstance = useTable({ columns,data } , useGlobalFilter)
+        
+        // Destruct 'state' And 'setGlobalFilter' From 'tableInstance' Variable
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            footerGroups,
+            rows,
+            prepareRow,
+            state,
+            setGlobalFilter
+        } = tableInstance
+
+        // From 'state' Destruct 'globalFilter'
+        const {globalFilter} = state
+
+        // Wrap <table> With 'Fragment' And Set 'FilterInput' Component Above Table And Pass 'globalFilter' And 'setGlobalFilter' To 'FilterInput' Component
+        return (
+            <>
+                <FilterInput filter={globalFilter} setFilter={setGlobalFilter}/>
+                    <table {...getTableProps()}>
+                        <thead>
+                            {
+                                headerGroups.map(headerGroup => (
+                                    <tr {...headerGroup.getHeaderGroupProps()}>
+                                        {
+                                            headerGroup.headers.map(column => (
+                                                <th {...column.getHeaderProps()}>
+                                                    {column.render('Header')}
+                                                </th>
+                                            ))
+                                        }
+                                    </tr>
+                                ))
+                            }
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {
+                                rows.map(row => {
+                                    prepareRow(row)
+
+                                    return (
+                                        <tr {...row.getRowProps()}>
+                                            {
+                                                row.cells.map(cell => {
+                                                    return (
+                                                        <td {...cell.getCellProps()}>
+                                                            {cell.render('Cell')}
+                                                        </td>
+                                                    )
+                                                })
+                                            }
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                        <tfoot>
+                            {
+                                footerGroups.map(footerGroup => (
+                                    <tr {...footerGroup.getFooterGroupProps()}>
+                                        {
+                                            footerGroup.headers.map(column => (
+                                                <td {...column.getFooterProps()}>
+                                                    {column.render('Footer')}
+                                                </td>
+                                            ))
+                                        }
+                                    </tr>   
+                                ))
+                            }
+                        </tfoot>
+                    </table>
+            </>
+        )
+    }
+
+    export default FilteringTable
