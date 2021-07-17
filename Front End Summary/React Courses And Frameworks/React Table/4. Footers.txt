@@ -1,0 +1,131 @@
+(1) Create Footer For The Table
+----------------------------------
+
+==> Step1 : Add Footer Property To Columns.js File
+---------------------------------------------------- 
+
+    export const COLUMNS = [
+        {
+            Header: 'id',
+            Footer: 'id',
+            accessor: 'id'
+        },
+        {
+            Header: 'first_name',
+            Footer: 'first_name',
+            accessor: 'first_name'
+        },
+        {
+            Header: 'last_name',
+            Footer: 'last_name',
+            accessor: 'last_name'
+        },
+        {
+            Header: 'email',
+            Footer: 'email',
+            accessor: 'email'
+        },
+        {
+            Header: 'gender',
+            Footer: 'gender',
+            accessor: 'gender'
+        }
+    ]
+
+
+==> Step2: In BasicTable.js Destruct [headerGroups] From [useTable] Hook And Set <tfoot> After <tbody>
+--------------------------------------------------------------------------------------------------------
+
+    import React , {useMemo} from 'react'
+    import {useTable} from 'react-table'     
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function BasicTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        const tableInstance = useTable({ columns,data })
+        
+        // Use Table Instance To Create Necessary UI
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            footerGroups,
+            rows,
+            prepareRow,
+        } = tableInstance
+
+        return (
+            <table {...getTableProps()}>
+                <thead>
+                    {
+                        headerGroups.map(headerGroup => (
+                            <tr {...headerGroup.getHeaderGroupProps()}>
+                                {
+                                    headerGroup.headers.map(column => (
+                                        <th {...column.getHeaderProps()}>
+                                            {column.render('Header')}
+                                        </th>
+                                    ))
+                                }
+                            </tr>
+                        ))
+                    }
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                    {
+                        rows.map(row => {
+                            prepareRow(row)
+
+                            return (
+                                <tr {...row.getRowProps()}>
+                                    {
+                                        row.cells.map(cell => {
+                                            return (
+                                                <td {...cell.getCellProps()}>
+                                                    {cell.render('Cell')}
+                                                </td>
+                                            )
+                                        })
+                                    }
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+                <tfoot>
+                    {
+                        footerGroups.map(footerGroup => (
+                            <tr {...footerGroup.getFooterGroupProps()}>
+                                {
+                                    footerGroup.headers.map(column => (
+                                        <td {...column.getFooterProps}>
+                                            {column.render('Footer')}
+                                        </td>
+                                    ))
+                                }
+                            </tr>   
+                        ))
+                    }
+                </tfoot>
+            </table>
+        )
+    }
+
+    export default BasicTable
+
+
+==> Step3: Add td Style That In tfoot In style.css
+----------------------------------------------------
+
+    table th , tfoot td {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: center;
+        background-color: #04AA6D;
+        color: white;
+    }
