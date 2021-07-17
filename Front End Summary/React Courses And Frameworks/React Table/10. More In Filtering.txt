@@ -1,0 +1,192 @@
+(1) If Want Disable Filtering In Specific Column In [Column Filtering]
+-----------------------------------------------------------------------
+==> Add ['disableFilters' : true] To Column Object In 'Columns.js'
+
+    {
+        Header: 'id',
+        accessor: 'id',
+        Filter: ColumnFilter,
+        disableFilters : true
+    }
+
+
+(2) If Want To Add Filter Input To All Columns Without Adding 'Filter' Property Inside 'Columns.js' You Must Define Default Column In 'FilteringTable.js' Component
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    FilteringTable.js
+    ------------------
+
+    import React , {useMemo} from 'react'
+    import {useTable , useGlobalFilter , useFilters} from 'react-table'     
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import FilterInput from './FilterInput'
+    import ColumnFilter from './ColumnFilter' // Import ColumnFilter
+    import './style.css'
+
+
+    function FilteringTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        // Anything Inside This Will Applied To Each Column In The Table
+        const defaultColumn = useMemo(() => {
+            return {
+                Filter: ColumnFilter
+            }
+        } , [])
+
+        // Pass 'defaultColumn' To useTable Hook
+        const tableInstance = useTable({ columns,data,defaultColumn } , useFilters ,useGlobalFilter)
+        
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            footerGroups,
+            rows,
+            prepareRow,
+            state,
+            setGlobalFilter
+        } = tableInstance
+
+        const {globalFilter} = state
+
+        return (
+            <>
+                <FilterInput filter={globalFilter} setFilter={setGlobalFilter}/>
+                    <table {...getTableProps()}>
+                        <thead>
+                            {
+                                headerGroups.map(headerGroup => (
+                                    <tr {...headerGroup.getHeaderGroupProps()}>
+                                        {
+                                            headerGroup.headers.map(column => (
+                                                <th {...column.getHeaderProps()}>
+                                                    {column.render('Header')}
+
+                                                    <div>
+                                                        {column.canFilter ? column.render('Filter') : null}
+                                                    </div>
+                                                </th>
+                                            ))
+                                        }
+                                    </tr>
+                                ))
+                            }
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {
+                                rows.map(row => {
+                                    prepareRow(row)
+
+                                    return (
+                                        <tr {...row.getRowProps()}>
+                                            {
+                                                row.cells.map(cell => {
+                                                    return (
+                                                        <td {...cell.getCellProps()}>
+                                                            {cell.render('Cell')}
+                                                        </td>
+                                                    )
+                                                })
+                                            }
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                        <tfoot>
+                            {
+                                footerGroups.map(footerGroup => (
+                                    <tr {...footerGroup.getFooterGroupProps()}>
+                                        {
+                                            footerGroup.headers.map(column => (
+                                                <td {...column.getFooterProps()}>
+                                                    {column.render('Footer')}
+                                                </td>
+                                            ))
+                                        }
+                                    </tr>   
+                                ))
+                            }
+                        </tfoot>
+                    </table>
+            </>
+        )
+    }
+
+    export default FilteringTable
+
+
+    Columns.js
+    --------------
+
+    import {format} from 'date-fns'
+
+    // Look Here There Is No Filter Property Because Of We Define It Inside 'defaultColumn' In 'FilteringTable.js' File
+    export const COLUMNS = [
+        {
+            Header: 'id',
+            accessor: 'id',
+            disableFilters : true
+        },
+        {
+            Header: 'first_name',
+            accessor: 'first_name'    
+        },
+        {
+            Header: 'last_name',
+            accessor: 'last_name'
+        },
+        {
+            Header: 'email',
+            accessor: 'email'
+        },
+        {
+            Header: 'gender',
+            accessor: 'gender'
+        },
+        {
+            Header: 'date',
+            accessor: 'date',
+            Cell: ({value}) => format(new Date(value) , 'dd/MM/yyyy')
+        }
+    ]
+
+(3) In Normal Case Searching Executed After Each Input Value Changed And This Is Not Normal If Number Of Rows Is Bigger So We Will Use 'Debouncing' To Minimize The Cost Of Searching
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+==> Here We Execute It On 'Global Filter'
+
+
+    FilterInput.js
+    ---------------
+
+    import React,{useState} from 'react'
+    import {useAsyncDebounce} from 'react-table'
+
+    function FilterInput({filter , setFilter}) {
+        const[value , setValue] = useState(filter);
+
+        // Searching Executed After Pressing On Last Button Within 2 Seconds 
+        const onChange = useAsyncDebounce(value => {
+            setFilter(value || undefined)
+        } , 2000)
+
+        return (
+            <div>
+                Search: {' '}
+                <input 
+                    value={value || ''} 
+                    onChange={(e) => {
+                        setValue(e.target.value)
+                        onChange(e.target.value)
+                    }}
+                />
+            </div>
+        )
+    }
+
+    export default FilterInput
