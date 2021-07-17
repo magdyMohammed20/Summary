@@ -1,0 +1,168 @@
+(1) Column Filtering
+----------------------
+
+==> Step1: Create 'ColumnFilter.js' Component In 'Components' Folder
+--------------------------------------------------------------------
+
+    import React from 'react'
+
+    // filter : Is Value Of Input Field
+    // setFilter: Method To Set Input Field Value
+    function ColumnFilter({column}) {
+        const{filter , setFilter} = column;
+        
+        return (
+            <div>
+                Search: {' '}
+                <input value={filter || ''} onChange={e => setFilter(e.target.value)}/>
+            </div>
+        )
+    }
+
+    export default ColumnFilter
+
+
+==> Step2: Inside 'FilteringTable.js' Component Import 'useFilters' 
+           Pass 'useFilters' To 'useTable' Hook
+           Inside <th> Set Column Filtering
+---------------------------------------------------------------------------------------------------
+
+
+    import React , {useMemo} from 'react'
+    // Import useFilters
+    import {useTable , useGlobalFilter , useFilters} from 'react-table'     
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import FilterInput from './FilterInput'
+
+    import './style.css'
+
+    function FilteringTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        // Pass 'useFilters' To 'useTable' Hook
+        const tableInstance = useTable({ columns,data } , useFilters ,useGlobalFilter)
+        
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            footerGroups,
+            rows,
+            prepareRow,
+            state,
+            setGlobalFilter
+        } = tableInstance
+
+        const {globalFilter} = state
+
+        return (
+            <>
+                <FilterInput filter={globalFilter} setFilter={setGlobalFilter}/>
+                    <table {...getTableProps()}>
+                        <thead>
+                            {
+                                headerGroups.map(headerGroup => (
+                                    <tr {...headerGroup.getHeaderGroupProps()}>
+                                        {
+                                            headerGroup.headers.map(column => (
+                                                <th {...column.getHeaderProps()}>
+                                                    {column.render('Header')}
+
+                                                    <div>
+                                                        {column.canFilter ? column.render('Filter') : null}
+                                                    </div>
+                                                </th>
+                                            ))
+                                        }
+                                    </tr>
+                                ))
+                            }
+                        </thead>
+                        <tbody {...getTableBodyProps()}>
+                            {
+                                rows.map(row => {
+                                    prepareRow(row)
+
+                                    return (
+                                        <tr {...row.getRowProps()}>
+                                            {
+                                                row.cells.map(cell => {
+                                                    return (
+                                                        <td {...cell.getCellProps()}>
+                                                            {cell.render('Cell')}
+                                                        </td>
+                                                    )
+                                                })
+                                            }
+                                        </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                        <tfoot>
+                            {
+                                footerGroups.map(footerGroup => (
+                                    <tr {...footerGroup.getFooterGroupProps()}>
+                                        {
+                                            footerGroup.headers.map(column => (
+                                                <td {...column.getFooterProps()}>
+                                                    {column.render('Footer')}
+                                                </td>
+                                            ))
+                                        }
+                                    </tr>   
+                                ))
+                            }
+                        </tfoot>
+                    </table>
+            </>
+        )
+    }
+
+    export default FilteringTable
+
+
+
+Step3: Attach Filtering With Each Column In 'Columns.js'
+---------------------------------------------------------
+
+    import {format} from 'date-fns'
+    import ColumnFilter from './ColumnFilter' // Import Filter Input Component
+
+    // Call ColumnFilter Component Inside Each Column
+    export const COLUMNS = [
+        {
+            Header: 'id',
+            accessor: 'id',
+            Filter: ColumnFilter
+        },
+        {
+            Header: 'first_name',
+            accessor: 'first_name',
+            Filter: ColumnFilter
+        },
+        {
+            Header: 'last_name',
+            accessor: 'last_name',
+            Filter: ColumnFilter
+        },
+        {
+            Header: 'email',
+            accessor: 'email',
+            Filter: ColumnFilter
+        },
+        {
+            Header: 'gender',
+            accessor: 'gender',
+            Filter: ColumnFilter
+        },
+        {
+            Header: 'date',
+            accessor: 'date',
+            Cell: ({value}) => format(new Date(value) , 'dd/MM/yyyy'),
+            Filter: ColumnFilter
+        }
+    ]
