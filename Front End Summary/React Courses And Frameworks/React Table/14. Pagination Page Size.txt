@@ -1,0 +1,138 @@
+(1) Change Pagination Page Size
+---------------------------------
+==> In All Previous Pagination Lesson Table Contains 10 Rows Per Page And I Want To Control On Size Of The Page
+
+==> Step1: Destruct 'setPageSize' From 'tableInstance'
+==> Step2: Destruct 'pageSize' From 'state'
+==> Step3: Add <select> After Table To Enable User Select Page Size By Self
+
+
+EX
+----
+
+    import React , {useMemo} from 'react'
+    import {useTable , usePagination} from 'react-table' 
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function PaginationTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        const tableInstance = useTable({ columns,data } , usePagination)
+        
+        // Step1: Destruct 'setPageSize' From 'tableInstance'
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            page,
+            nextPage,
+            previousPage,
+            canNextPage,
+            canPreviousPage,
+            pageOptions,
+            gotoPage,
+            pageCount,
+            state,
+            setPageSize,
+            prepareRow,
+        } = tableInstance
+
+        // Step2: Destruct 'pageSize' From 'state'
+        const {pageIndex , pageSize}  = state;
+
+        return (
+            <>
+                <table {...getTableProps()}>
+                    <thead>
+                        {
+                            headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {
+                                        headerGroup.headers.map(column => (
+                                            <th {...column.getHeaderProps()}>
+                                                {column.render('Header')}
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {
+                            page.map(row => {
+                                prepareRow(row)
+
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {
+                                            row.cells.map(cell => {
+                                                return (
+                                                    <td {...cell.getCellProps()}>
+                                                        {cell.render('Cell')}
+                                                    </td>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                
+                <div>
+                    <span>
+                        Page: {' '}
+                        <strong>
+                            {pageIndex + 1} Of {pageOptions.length}
+                        </strong>
+                    </span>
+                    <span>
+                        | Go To Page : {' '}
+                        <input  
+                            type='number'
+                            min={1}
+                            max={pageOptions.length}
+                            onChange={e => {
+                                const pageNumber = e.target.value ? Number(e.target.value) : 0
+                                
+                                if(pageNumber > pageOptions.length){
+                                    alert('Sorry Out Of Range')
+                                    e.target.value = 1;
+                                    gotoPage(0)
+                                }
+                                gotoPage(pageNumber)
+                            }} />
+                    </span>
+                    
+                    {/* Step3: Add <select> After Table To Enable User Select Page Size By Self */}
+                    <span>
+                        <select value={pageSize} onChange={e => setPageSize(Number(e.target.value))}>
+                        { 
+                                [10,25,50].map(num => <option value={num}> Show {num} Rows</option>)
+                        }
+                        </select>
+                    </span>
+                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                        {'<<'}
+                    </button>
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                    
+                    {
+                        pageOptions.map((pn , index) => <button onClick={() => gotoPage(index)}>{pn + 1}</button>)
+                    }
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                        {'>>'}
+                    </button>
+                </div>
+            </>
+        )
+    }
+
+    export default PaginationTable
