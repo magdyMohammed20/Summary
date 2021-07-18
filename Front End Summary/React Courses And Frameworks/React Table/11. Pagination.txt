@@ -1,0 +1,198 @@
+(1) React Table Pagination
+----------------------------
+
+==> Step1: Import 'usePagination' Hook From 'react-table' And Pass To 'useTable' Hook
+==> Step2: Instead Of Destructing 'rows' From 'tableInstance' We Will Destructing 'page' Instead
+==> Step3: Destructing 'nextPage' And 'previousPage' From 'tableInstance' For Create Next And Previous Buttons
+==> Step4: After <table> Add Div Which Contains Next And Previous Buttons With Calling 'nextPage' And 'previousPage' Functions On There
+==> Step5: There Are Another Property That Can Improve Pagination Implementation
+           'canNextPage' And 'canPreviousPage' Are Boolean Value Which Tell You Can Go Next Or Previous
+           Then Import It Inside Buttons 'disabled' Property
+    
+
+EX: 
+-----
+
+    import React , {useMemo} from 'react'
+    import {useTable , usePagination} from 'react-table' // Step1: Import 'usePagination' Hook   
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function PaginationTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        // Step1: Pass 'usePagination' To 'useTable' Hook 
+        const tableInstance = useTable({ columns,data } , usePagination)
+        
+        // Step2: Destructing 'page' Instead Of 'rows'
+        // Step3: Destructing 'nextPage' And 'previousPage'
+        // Step5: Import 'canNextPage' And 'canPreviousPage'
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            page,
+            nextPage,
+            previousPage,
+            canNextPage,
+            canPreviousPage,
+            prepareRow,
+        } = tableInstance
+
+        return (
+            <>
+                <table {...getTableProps()}>
+                    <thead>
+                        {
+                            headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {
+                                        headerGroup.headers.map(column => (
+                                            <th {...column.getHeaderProps()}>
+                                                {column.render('Header')}
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {
+                            page.map(row => {
+                                prepareRow(row)
+
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {
+                                            row.cells.map(cell => {
+                                                return (
+                                                    <td {...cell.getCellProps()}>
+                                                        {cell.render('Cell')}
+                                                    </td>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                {/* Step4: Add Div Which Contains Next And Previous Buttons With Calling 'nextPage' And 'previousPage' Functions On There */}
+                {/* Step5: Import 'canNextPage' And 'canPreviousPage' Inside Buttons 'disabled' Property */}
+                <div>
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                </div>
+            </>
+        )
+    }
+
+    export default PaginationTable
+
+
+
+(2) Adding Pages Index In Pagination [For Notify You With Page Index]
+-----------------------------------------------------------------------
+
+==> Step1: Import 'pageOptions' And 'state' From 'tableInstance'
+==> Step2: Destruct 'pageIndex' From 'state'
+==> Step3: Display Page Index In Span Before Next And Previous Buttons
+
+
+EX
+---
+
+    import React , {useMemo} from 'react'
+    import {useTable , usePagination} from 'react-table' 
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function PaginationTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        
+        const tableInstance = useTable({ columns,data } , usePagination)
+        
+        // Step1: Destruct 'pageOptions' And 'state'
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            page,
+            nextPage,
+            previousPage,
+            canNextPage,
+            canPreviousPage,
+            pageOptions,
+            state,
+            prepareRow,
+        } = tableInstance
+
+        // Step2: Destruct 'pageIndex' From 'state'
+        const {pageIndex}  = state;
+
+        return (
+            <>
+                <table {...getTableProps()}>
+                    <thead>
+                        {
+                            headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {
+                                        headerGroup.headers.map(column => (
+                                            <th {...column.getHeaderProps()}>
+                                                {column.render('Header')}
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {
+                            page.map(row => {
+                                prepareRow(row)
+
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {
+                                            row.cells.map(cell => {
+                                                return (
+                                                    <td {...cell.getCellProps()}>
+                                                        {cell.render('Cell')}
+                                                    </td>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                
+                <div>
+                    {/* Step3: Display Page Index In Span Before Next And Previous Buttons */}
+                    <span>
+                        Page: {' '}
+                        <strong>
+                            {pageIndex + 1} Of {pageOptions.length}
+                        </strong>
+                    </span>
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                </div>
+            </>
+        )
+    }
+
+    export default PaginationTable
