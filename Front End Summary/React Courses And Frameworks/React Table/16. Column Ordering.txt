@@ -1,0 +1,123 @@
+(1) Column Ordering
+---------------------
+==> Step1: Import 'useColumnOrder' From 'react-table'
+==> Step2: Pass 'useColumnOrder' To 'useTable' Hook
+==> Step3: Destruct 'setColumnOrder' From 'tableInstance'
+==> Step4: Add Button To Control On Columns Order
+==> Step5: Create 'changeOrder' Function And Call It Inside Created Button
+
+
+    ColumnOrder.js
+    ----------------
+
+    import React , {useMemo} from 'react'
+    import {useTable , useColumnOrder} from 'react-table' // Step1: Import 'useColumnOrder' From 'react-table'    
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function ColumnOrder() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        // Step2: Pass 'useColumnOrder' To 'tableInstance'
+        const tableInstance = useTable({ columns,data } , useColumnOrder)
+        
+        // Step3: Destruct 'useColumnOrder' From 'tableInstance'
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            setColumnOrder,
+            prepareRow,
+        } = tableInstance
+
+        // Step5: Create 'changeOrder' Function
+        const changeOrder = () => {
+            // Pass All Values Of 'accessor' Property That In 'Columns.js'
+            // Here I Write Accessor With Order Of Columns.js But 'gender' , 'date' , 'email' Is Different So When Click On Order Button The Ordering Of Them Will Be Different Only
+            setColumnOrder(['id','first_name','last_name','gender','date','email'])
+        }
+        return (
+            <>
+            {/* Step4: Add Button To Control On Columns Order */}
+            <button onClick={()=> changeOrder()}>Change Column Order</button>
+            <table {...getTableProps()}>
+                <thead>
+                {
+                    headerGroups.map(headerGroup => (
+                        <tr {...headerGroup.getHeaderGroupProps()}>
+                            {
+                                headerGroup.headers.map(column => (
+                                    <th {...column.getHeaderProps()}>
+                                        {column.render('Header')}
+                                    </th>
+                                ))
+                            }
+                        </tr>
+                    ))
+                }
+                </thead>
+                <tbody {...getTableBodyProps()}>
+                {
+                    rows.map(row => {
+                        prepareRow(row)
+
+                        return (
+                            <tr {...row.getRowProps()}>
+                                {
+                                    row.cells.map(cell => {
+                                        return (
+                                            <td {...cell.getCellProps()}>
+                                                {cell.render('Cell')}
+                                            </td>
+                                        )
+                                    })
+                                }
+                            </tr>
+                        )
+                    })
+                }
+                </tbody>
+            </table>
+            </>
+        )
+    }
+
+    export default ColumnOrder
+
+
+    Columns.js
+    ----------------
+
+    import {format} from 'date-fns'
+
+    export const COLUMNS = [
+        {
+            Header: 'id',
+            accessor: 'id'
+        },
+        {
+            Header: 'first_name',
+            accessor: 'first_name'    
+        },
+        {
+            Header: 'last_name',
+            accessor: 'last_name'
+        },
+        {
+            Header: 'email',
+            accessor: 'email'
+        },
+        {
+            Header: 'gender',
+            accessor: 'gender'
+        },
+        {
+            Header: 'date',
+            accessor: 'date',
+            Cell: ({value}) => format(new Date(value) , 'dd/MM/yyyy')
+        }
+    ]
