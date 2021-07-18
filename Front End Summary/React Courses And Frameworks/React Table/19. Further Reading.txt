@@ -1,0 +1,7 @@
+(1) Further Reading
+---------------------
+==> Grouping
+==> In-line Row Editing
+==> Row Drag And Drop
+==> Column Resizing
+==> React Table + Material UI
