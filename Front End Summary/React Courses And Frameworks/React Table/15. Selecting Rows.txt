@@ -1,0 +1,153 @@
+(1) Selecting Rows
+---------------------
+==> Select Specific Row/s And Display It's Data
+
+==> Step1: Select First 10 Rows Only To Display In The Table
+==> Step2: Create 'Checkbox.js' Component For Helping In Select Row And Import Inside 'RowSelection.js' Component
+==> Step3: Import 'useRowSelect' From 'react-table' And Pass It To 'useTable' Hook
+==> Step4: Destruct 'selectedFlatRows' From 'tableInstance'
+==> Step5: In 'tableInstance' And After 'useRowSelect' Add Function For Adding Column To The Table Which Will Contains Checkboxes
+==> Step6: Remove '<React.StrictMode>' From index.js File [This Step Can Perform Without It]
+==> Step7: Add <pre> Code After Table To Display Data
+
+EX
+---
+
+    RowSelection.js
+    ----------------
+
+    import React , {useMemo} from 'react'
+    import {useTable , useRowSelect} from 'react-table' // Step3: Import 'useRowSelect' From 'react-table' And Pass It To 'useTable' Hook
+    import Checkbox from './Checkbox'
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function RowSelection() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        // Step3: Pass It To 'useTable' Hook
+        // Step5: In 'tableInstance' And After 'useRowSelect' Add Function For Adding Column To The Table Which Will Contains Checkboxes
+        const tableInstance = useTable(
+            { 
+                columns,
+                data 
+            }, 
+            useRowSelect , 
+            (hooks) => {
+                hooks.visibleColumns.push(columns => {
+                    return [
+                        {
+                            id: 'selection',
+                            Header: ({getToggleAllRowsSelectedProps}) => (
+                                <Checkbox {...getToggleAllRowsSelectedProps()}/>
+                            ),
+                            Cell: ({row}) => (
+                                <Checkbox {...row.getToggleRowSelectedProps()}/>
+                            )
+                        },
+                        ...columns
+                    ]
+                })
+            })  
+        
+        // Step4: Destruct 'selectedFlatRows' From 'tableInstance'
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            rows,
+            selectedFlatRows,
+            prepareRow,
+        } = tableInstance
+
+        // Step1: Select First 10 Rows Only
+        const first10Rows = rows.slice(0 , 10)
+        return (
+            <>
+                <table {...getTableProps()}>
+                    <thead>
+                        {
+                            headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {
+                                        headerGroup.headers.map(column => (
+                                            <th {...column.getHeaderProps()}>
+                                                {column.render('Header')}
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {
+                            first10Rows.map(row => {
+                                prepareRow(row)
+
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {
+                                            row.cells.map(cell => {
+                                                return (
+                                                    <td {...cell.getCellProps()}>
+                                                        {cell.render('Cell')}
+                                                    </td>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+
+                {/* Step7: Add <pre> Code After Table To Display Data */}
+                <pre>
+                    <code>
+                        {
+                            JSON.stringify(
+                                {
+                                    selectedFlatRows: selectedFlatRows.map((row) => row.original),
+                                },
+                                null,
+                                2
+                            )
+                        }
+                    </code>
+                </pre>
+            </>
+        )
+    }
+
+    export default RowSelection
+
+
+
+    Checkbox.js
+    -------------
+
+    import React from 'react'
+
+    const Checkbox = React.forwardRef(
+        ({ indeterminate, ...rest }, ref) => {
+        const defaultRef = React.useRef()
+        const resolvedRef = ref || defaultRef
+    
+        React.useEffect(() => {
+            resolvedRef.current.indeterminate = indeterminate
+        }, [resolvedRef, indeterminate])
+    
+        return (
+            <>
+            <input type="checkbox" ref={resolvedRef} {...rest} />
+            </>
+        )
+        }
+    )
+
+    export default Checkbox
