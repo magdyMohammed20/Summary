@@ -1,0 +1,225 @@
+(1) Go To First Or Last Page With Pagination
+---------------------------------------------
+==> Creating 2 Buttons Which Can Go To First Or Last Page Directly
+
+==> Step1: Import 'gotoPage' And 'pageCount' From 'tableInstance'
+==> Step2: Add '<<' And '>>' Buttons
+
+EX
+---
+
+    import React , {useMemo} from 'react'
+    import {useTable , usePagination} from 'react-table' 
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function PaginationTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        
+        const tableInstance = useTable({ columns,data } , usePagination)
+        
+        // Step1: Destruct 'gotoPage' And 'pageCount'
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            page,
+            nextPage,
+            previousPage,
+            canNextPage,
+            canPreviousPage,
+            pageOptions,
+            gotoPage,
+            pageCount,
+            state,
+            prepareRow,
+        } = tableInstance
+
+        const {pageIndex}  = state;
+
+        return (
+            <>
+                <table {...getTableProps()}>
+                    <thead>
+                        {
+                            headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {
+                                        headerGroup.headers.map(column => (
+                                            <th {...column.getHeaderProps()}>
+                                                {column.render('Header')}
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {
+                            page.map(row => {
+                                prepareRow(row)
+
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {
+                                            row.cells.map(cell => {
+                                                return (
+                                                    <td {...cell.getCellProps()}>
+                                                        {cell.render('Cell')}
+                                                    </td>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                
+                <div>
+                    <span>
+                        Page: {' '}
+                        <strong>
+                            {pageIndex + 1} Of {pageOptions.length}
+                        </strong>
+                    </span>
+                    {/* Step2: Add '<<' And '>>' Buttons */}
+                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                        {'<<'}
+                    </button>
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                    {/* Step2: Add '<<' And '>>' Buttons */}
+                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                        {'>>'}
+                    </button>
+                </div>
+            </>
+        )
+    }
+
+    export default PaginationTable
+
+
+(2) Go To Any Page You Want By Adding Input To Enter Page Number
+-----------------------------------------------------------------
+
+    import React , {useMemo} from 'react'
+    import {useTable , usePagination} from 'react-table' 
+    import {COLUMNS} from './Columns'        
+    import MOCK_DATA from './MOCK_DATA.json' 
+    import './style.css'
+
+    function PaginationTable() {
+
+        const columns = useMemo(() => COLUMNS , [])
+        const data = useMemo(() => MOCK_DATA , [])
+
+        
+        const tableInstance = useTable({ columns,data } , usePagination)
+        
+        const {
+            getTableProps,
+            getTableBodyProps,
+            headerGroups,
+            page,
+            nextPage,
+            previousPage,
+            canNextPage,
+            canPreviousPage,
+            pageOptions,
+            gotoPage,
+            pageCount,
+            state,
+            prepareRow,
+        } = tableInstance
+
+        const {pageIndex}  = state;
+
+        return (
+            <>
+                <table {...getTableProps()}>
+                    <thead>
+                        {
+                            headerGroups.map(headerGroup => (
+                                <tr {...headerGroup.getHeaderGroupProps()}>
+                                    {
+                                        headerGroup.headers.map(column => (
+                                            <th {...column.getHeaderProps()}>
+                                                {column.render('Header')}
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            ))
+                        }
+                    </thead>
+                    <tbody {...getTableBodyProps()}>
+                        {
+                            page.map(row => {
+                                prepareRow(row)
+
+                                return (
+                                    <tr {...row.getRowProps()}>
+                                        {
+                                            row.cells.map(cell => {
+                                                return (
+                                                    <td {...cell.getCellProps()}>
+                                                        {cell.render('Cell')}
+                                                    </td>
+                                                )
+                                            })
+                                        }
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+                
+                <div>
+                    <span>
+                        Page: {' '}
+                        <strong>
+                            {pageIndex + 1} Of {pageOptions.length}
+                        </strong>
+                    </span>
+                    {/* Step1: Go To Any Page You Want By Adding Input To Enter Page Number */}
+                    <span>
+                        | Go To Page : {' '}
+                        <input  
+                            type='number'
+                            min={1}
+                            max={pageOptions.length}
+                            onChange={e => {
+                                const pageNumber = e.target.value ? Number(e.target.value) : 0
+                                
+                                // If Enter Bigger Number Show Error Message
+                                if(pageNumber > pageOptions.length){
+                                    alert('Sorry Out Of Range')
+                                    e.target.value = 1;
+                                    gotoPage(0)
+                                }
+                                gotoPage(pageNumber)
+                            }} />
+                    </span>
+                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                        {'<<'}
+                    </button>
+                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>Previous</button>
+                    <button onClick={() => nextPage()} disabled={!canNextPage}>Next</button>
+                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                        {'>>'}
+                    </button>
+                </div>
+            </>
+        )
+    }
+
+    export default PaginationTable
