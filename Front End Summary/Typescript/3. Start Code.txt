@@ -1,0 +1,47 @@
+(1) Start Code
+----------------
+==> Create 'index.ts' File In Project
+
+
+    index.ts
+    ---------
+
+    import axios from 'axios'
+
+    const url = "https://jsonplaceholder.typicode.com/posts/1";
+
+    axios.get(url).then(res => console.log(res.data))
+
+
+==> Convert Ts File To Js File By Run Command [tsc index.ts] 
+==> You Will Note That Another File Called [index.js] Generated
+==> Run [index.js] In Console Using Command [node index.js]
+
+==> Instead Of Run The 3 Previous Steps You Can Run This Commands (But It Not Generate Js File)
+-------------------------------------------------------------------------------------------------
+--> npm install -D tslib @types/node (For Prevent Cannot find module '@types/node/package.json' Error)
+--> ts-node index.ts
+
+
+(2) Full Code With Interface
+------------------------------
+
+    index.ts
+    ----------
+
+    import axios from 'axios'
+
+    const url = "https://jsonplaceholder.typicode.com/posts/1";
+
+    // Specify The Object Structure
+    interface Todo {
+        id: number,
+        title: string
+    }
+
+    axios.get(url).then(res => {
+        const data = res.data as Todo;
+
+        console.log(`ID Is : ${data.id}
+                    Title Is : ${data.title}`)
+    })
