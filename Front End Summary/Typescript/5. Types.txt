@@ -1,0 +1,13 @@
+(1) Types In Typescript
+--------------------------
+==> string  : 'Magdy' - "" - "Magdy"
+==> number  : 10 - (-10) - 0.453413423
+==> boolean : true - false
+==> Date    : new Date()
+==> Todo    : {id: 1 , title: 'Hellow World'}
+
+
+ (2) Types
+ -----------
+ ==> Primitive Types : number - boolean - void - undefined - string - symbol - null
+ ==> Object Types : functions - arrays - classes - objects
