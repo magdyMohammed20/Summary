@@ -1,0 +1,17 @@
+(1) Defining Variables
+-------------------------
+
+    // Defining Function
+    // a function with one parameter, named i, of type number, that doesn’t have a return value
+    const logNum : (i:number) => void = (i:number) => {
+        console.log(i)
+    }
+
+(2) Type Annotations
+----------------------
+==> Tell Typescript The Type (EX: let x:number = 10)
+
+
+(3) Type Inference
+--------------------
+==> Typescript Gusses The Type (EX: let x = 10)
