@@ -1,0 +1,19 @@
+(1) Defining Variables
+------------------------
+
+    // Define Array
+    const arr:string[] = ['Red' , 'Green' , 'Blue'];
+    const arr2:number[] = [1,2,3];
+    const truth:boolean[] = [true , false , true];
+
+
+    // Define Classes
+    class Car {/* Write Here */}
+    const car:Car = new Car();
+
+
+    // Define Object Literal
+    const obj:{x:number ; y:number} = {
+        x : 10,
+        y : 20
+    }
