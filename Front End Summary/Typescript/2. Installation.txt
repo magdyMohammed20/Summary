@@ -1,0 +1,12 @@
+(1) Install Typescript Compiler
+---------------------------------
+==> npm install -g typescript ts-node
+
+Note: ts-node ==> Command Line Tool That Allows To Compile And Execute TS With 1 Command 
+Note: Ensure Installation After Install ==> [tsc --help]
+
+(2) Create Project
+-------------------
+==> Create Project Folder
+==> Run [npm init -y]
+==> npm install axios [For Fetch Json Data]
