@@ -1,0 +1,21 @@
+(1) Typescript
+-----------------
+==> Javascript + Type System
+
+
+(2) What TS Type System Do ?
+------------------------------
+==> Help Us Catching Errors During Development
+==> Uses "Type Annotations" To Analyze Our Code
+==> Only Active During Development
+==> Doesn't Provide Any Performence Optimization
+
+
+(3) Typescript Structure
+--------------------------
+==> Typescript Code ==> Typescript Compiler ==> Plain Old Javascript
+
+
+(4) Typescript Online Editor
+------------------------------
+==> typescriptlang.org/play
