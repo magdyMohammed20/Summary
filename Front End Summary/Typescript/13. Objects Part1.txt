@@ -1,0 +1,93 @@
+(1) How To Use Objects
+-------------------------
+
+    const obj = {
+        name: 'Magdy',
+        age: 20,
+        coords:{
+            lat: 0,
+            lng: 20
+        },
+        setAge(age : number): void{
+            this.age = age;
+        }
+    }
+
+    const {age}:{age:number} = obj;
+    const {coords:{lat , lng}}:{coords: {lat:number , lng:number}} = obj;
+
+
+(2) How To Use Arrays
+-----------------------
+
+    EX
+    ----
+
+    // Define Single Deminsional Array Of Strings
+    const colors:string[] = ['Red' , 'Green'];
+
+    // Define Multi Deminsional Array
+    const cars:string[][] = [
+        ['bmw'],
+        ['chevy']
+    ]
+
+
+    EX
+    ---
+
+    const colors:string[] = ['Red' , 'Green'];
+
+    colors.map((color:string):string => color)
+
+
+(3) Array Flexible Types
+--------------------------
+
+    EX
+    ----
+
+    // Array Contains Strings And Dates And Numbers
+    const arr:(string | Date | number)[] =  [new Date() , '2030-10-20'];
+
+    arr.push(10)
+
+    console.log(arr) // [ 2021-08-03T13:19:53.922Z, '2030-10-20', 10 ]
+
+
+(4) Tuples
+------------
+==> Array Like Structure Where Each Element Represents Some Property Of A Record
+==> Tuple can contain two values of different data types
+
+EX (Represent Object Values In Array)
+---
+
+    const obj = {
+        color: 'Brown',
+        carbonated: true,
+        sugar: 40
+    }
+
+    // We Set Type Annotations Here For Easily Recognize The Order Of Values And Types
+    const pepsi:[string , boolean , number] = ['Brown' , true , 40]
+
+    console.log(pepsi) // [ 'Brown', true, 40 ]
+
+
+EX (Use 'type' Keyword)
+---
+
+    const obj = {
+        color: 'Brown',
+        carbonated: true,
+        sugar: 40
+    }
+
+    // Use Type Here To Store Type Annotation
+    type Drink = [string , boolean , number];
+
+    // Use Here For Reuse The Code
+    const pepsi:Drink = ['Black' , true , 40]
+    const sprite:Drink = ['White' , true , 30]
+    const shwipse:Drink = ['Brown' , false , 20]
