@@ -1,0 +1,37 @@
+(1) Type Annotations For Functions
+------------------------------------
+==> Tell Typescript What Type Of Arguments A Function Will Receive And What Type Values It Will Return
+
+
+(2) Type Inference For Functions
+---------------------------------
+==> Typescript Tries To Figure Out What Type Of Value A Function Will Return 
+
+
+EX (Type Annotations)
+---
+
+    const add = (a :number , b :number): number => {
+        return a + b
+    }
+
+    console.log(add(10 , 10))
+
+
+EX (Type Inference)
+---
+
+    const add = (a :number , b :number) => {
+        return a + b
+    }
+
+    console.log(add(10 , 10))
+
+
+EX (Type Annotations With 'function' Keyword)
+---
+
+    function add (a:number , b:number): number{
+        return a + b
+    }
+
