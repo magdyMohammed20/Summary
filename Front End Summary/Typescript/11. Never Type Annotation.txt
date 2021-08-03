@@ -1,0 +1,10 @@
+(1) never 'Type Annotation'
+-----------------------------
+==> which indicates the values that will never occur
+
+EX (a function which will not return to its end point or always throws an exception)
+---
+
+    function throwErr (message):never {
+        throw new Error(message)
+    }
