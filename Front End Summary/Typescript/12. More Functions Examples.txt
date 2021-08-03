@@ -1,0 +1,34 @@
+(1) EXAMPLE
+-------------
+
+    const forecast = {
+        date: new Date(),
+        weather: 'Sunny'
+    }
+
+    // Typescript
+    const logWeather = (foreca:{date: Date , weather: string}):void => {
+        console.log(foreca.date)
+        console.log(foreca.weather)
+    }
+
+
+    logWeather(forecast)
+
+
+(2) Previous Sample With Destructuring
+---------------------------------------
+
+    const forecast = {
+        date: new Date(),
+        weather: 'Sunny'
+    }
+
+    // Use ES6 Destructuring {date , weather}
+    const logWeather = ({date , weather}:{date: Date , weather: string}):void => {
+        console.log(date)
+        console.log(weather)
+    }
+
+
+    logWeather(forecast)
