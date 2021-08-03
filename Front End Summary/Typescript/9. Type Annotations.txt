@@ -1,0 +1,86 @@
+(1) When To Use Type Annotations
+----------------------------------
+
+==> [1] With Function That Returns 'Any' Type
+-----------------------------------------------
+
+    EX
+    ---
+
+        /*
+            // JSON.parse() Returns 'Any' Type
+
+            'false'             ==> JSON.parse() ==> Boolean
+            '4'                 ==> JSON.parse() ==> Number
+            '{"value" : 5}'     ==> JSON.parse() ==> Number
+            '{"name" : "Alex"}' ==> JSON.parse() ==> String
+
+            ////// Note : JSON.parse() Finally Returns 'Any' Type Not As Previous ///////////
+        */ 
+
+        const json = '{"x" : 10 , "y" : 20}';
+        const coor = JSON.parse(json) // Type Here Is 'any'
+        console.log(coor) // {x : 10 , y : 20}
+
+
+    [1] 'Any' Type 
+    ----------------
+    ==> Type Just As 'String' Or 'Boolean' Means That TS Has No Idea What This Is Can't Check For Correct Property References
+    ==> 'Any' Type Not Have Any Error Checking [EX: coor.wefwefwefefewf // This Legal]
+
+    [2] Fix Problem Of Error Checking
+    ----------------------------------
+
+        const json = '{"x" : 10 , "y" : 20}';
+
+        // Add Type Annotation For Fix The Problem
+        const coor:{x:number ; y:number} = JSON.parse(json)
+        console.log(coor) // {x : 10 , y : 20}
+        coor.wefwefwefewfwef // Error
+
+
+==> [2] When Declare A Variable On One Line And Initialize It Later
+---------------------------------------------------------------------
+
+EX
+---
+
+    let colors = ['red' , 'green' , 'blue'];
+    let foundColor:boolean; // Look Here
+
+    for(let x = 0; x < colors.length ; x++){
+        if(colors[x] === 'green'){
+            foundColor = true; // Look Here
+        }
+    }
+
+
+==> [3] When We Want A Variable To Have A Type That Can't Be Inferred
+-----------------------------------------------------------------------
+
+
+    Wrong EX
+    ------------
+
+    let colors = ['red' , 'green' , 'blue'];
+    let foundColor = false; // Type Is Boolean
+
+    for(let x = 0; x < colors.length ; x++){
+        if(colors[x] === 'green'){
+            // Can't Assign String Value To Boolean Variable
+            foundColor = colors[x]; // Type Is String
+        }
+    }
+
+
+    Right EX
+    ------------
+
+    let colors = ['red' , 'green' , 'blue'];
+    let foundColor:boolean | string = false; // Can Use Multi Type Annotations
+
+    for(let x = 0; x < colors.length ; x++){
+        if(colors[x] === 'green'){
+            foundColor = colors[x];
+        }
+    }
