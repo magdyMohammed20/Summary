@@ -1,0 +1,63 @@
+(1) Install Library With Typescript
+--------------------------------------
+==> npm i faker   [ For Install Faker ]
+==> npm i @types/faker [For Get Type Definition File Of Faker]
+
+
+EX
+---
+
+    User.ts
+    ---------
+
+    import faker from 'faker'
+
+    export class User{
+        name: string;
+
+        location:{
+            lat: number,
+            lng: number
+        }
+
+        constructor(){
+            this.name = faker.name.firstName()
+            // Use + Here To Convert String To Number
+            // Can Use parseFloat() Instead Of '+'
+            this.location = {
+                lat: +(faker.address.latitude()),
+                lng: +(faker.address.longitude())
+            }
+        }
+    }
+
+
+    index.ts
+    ----------
+
+    import {User} from './User'
+
+    const user = new User();
+
+    console.log(user)
+
+
+    index.html
+    ------------
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <script src="./index.ts"></script>
+    </body>
+    </html>
+
+
+==> Run Using [parcel index.html] In Terminal
