@@ -1,0 +1,58 @@
+(1) If Parent Class Constructor Different From Child Class Constructor
+------------------------------------------------------------------------
+
+EX
+----
+
+    class Vechicle{
+        // Remove Class Property And Set 'Public' Here
+        constructor(public color: string){
+            this.color = color;
+        }
+        protected drive():string{
+            return 'Hellow There'
+        }
+    }
+
+    class Car extends Vechicle{    
+
+        constructor(public wheels:number){
+            super('Green') // Must Call Super Here
+        }
+        honk():void{
+            console.log(this.drive())
+        }
+    }
+    const vec = new Car(4);
+    console.log(vec.wheels) // 4
+    console.log(vec.color) // Green
+
+
+(2) Passing Property Value From Child Class To Parent Class
+-------------------------------------------------------------
+
+EX
+---
+
+    class Vechicle{
+        // Remove Class Property And Set 'Public' Here
+        constructor(public color: string){
+            this.color = color;
+        }
+        protected drive():string{
+            return 'Hellow There'
+        }
+    }
+
+    class Car extends Vechicle{    
+
+        constructor(public wheels:number , color:string){
+            super(color) // Passing Color To Parent Class
+        }
+        honk():void{
+            console.log(this.drive())
+        }
+    }
+    const vec = new Car(4 , 'Green');
+    console.log(vec.wheels) // 4
+    console.log(vec.color) // Green
