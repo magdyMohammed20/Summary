@@ -1,0 +1,32 @@
+(1) Classes
+-------------
+==> Blueprint To Create An Object With Some Fields(Values) And Methods(Functions) To Represent A "Thing"
+
+EX
+---
+    // Create A Class
+    class Vechicle{
+        drive():string{
+            return 'Hellow There'
+        }
+    }
+
+    // Create Object And Call Method Of The Class
+    const vec = new Vechicle();
+    console.log(vec.drive()) // Hellow There
+
+
+(2) Inheritance With Class
+----------------------------
+
+    class Vechicle{
+        drive():string{
+            return 'Hellow There'
+        }
+    }
+
+    // This Class Inherit Vechicle Class
+    class Car extends Vechicle{}
+
+    const car = new Car();
+    console.log(car.drive()) // Hellow There
