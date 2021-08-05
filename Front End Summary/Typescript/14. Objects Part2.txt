@@ -1,0 +1,147 @@
+(1) Interfaces
+---------------
+==> Creates New Type Describing Property Names And Value Types Of An Object
+
+EX: (Wrong Way : As Type Annotation Is Very Long)
+---
+
+    const oldCivic = {
+        name: 'Old',
+        year: 2000,
+        broken: true
+    }
+
+    // Type Annotation Is Very Long
+    const oldVechicle = (vec:{name: string ; year: number ; broken: boolean}):void => {
+        console.log(`Vec Name : ${vec.name}`)
+        console.log(`Vec Year : ${vec.year}`)
+        console.log(`Broken ? ${vec.broken}`)
+    }
+
+    oldVechicle(oldCivic);
+
+
+EX : (Use Interface For Fix Problem)
+---
+
+    // Use Interface
+    interface Vechicle{
+        name: string,
+        year: number,
+        broken: boolean
+    }
+
+    const oldCivic = {
+        name: 'Old',
+        year: 2000,
+        broken: true
+    }
+
+    // Use Interface As Type Annotation
+    const oldVechicle = (vec:Vechicle):void => {
+
+        console.log(`Vec Name : ${vec.name}`)
+        console.log(`Vec Year : ${vec.year}`)
+        console.log(`Broken ? ${vec.broken}`)
+    }
+
+    oldVechicle(oldCivic);
+
+
+EX (Define Function Inside Interface)
+---
+
+    // Define Summary In Interface
+    interface Vechicle{
+        name: string,
+        year: number,
+        broken: boolean,
+        summary():string
+    }
+
+    // Create Summary Body
+    const oldCivic = {
+        name: 'Old',
+        year: 2000,
+        broken: true,
+        summary():string {
+            return `Name Is ${this.name}
+                    Year Is ${this.year}
+                    Broken ? ${this.broken}
+            `
+        }
+    }
+
+    // Calling Summary Here
+    const oldVechicle = (vec:Vechicle):void => {
+        console.log(vec.summary())
+    }
+
+    oldVechicle(oldCivic);
+
+
+EX (An Exception)
+---
+
+    // We Can Remove Other Definitions From Interface
+    interface Vechicle{
+        summary():string
+    }
+
+    // Create Summary Body
+    const oldCivic = {
+        name: 'Old',
+        year: 2000,
+        broken: true,
+        summary():string {
+            return `Name Is ${this.name}
+                    Year Is ${this.year}
+                    Broken ? ${this.broken}
+            `
+        }
+    }
+
+    // Calling Summary Here
+    const oldVechicle = (vec:Vechicle):void => {
+        console.log(vec.summary())
+    }
+
+    oldVechicle(oldCivic);
+
+
+EX (Use Same Interface With Multiple Objects)
+---
+
+    interface Vechicle{
+        summary():string
+    }
+
+    // First Object
+    const oldCivic = {
+        name: 'Old',
+        year: 2000,
+        broken: true,
+        summary():string {
+            return `Name Is ${this.name}
+                    Year Is ${this.year}
+                    Broken ? ${this.broken}
+            `
+        }
+    }
+
+    // Second Object
+    const drink = {
+        color: 'Brown',
+        carbonated: true,
+        sugar: 40,
+        summary(): string{
+            return `My Drink Sugar Weight Is ${this.sugar}`
+        }
+    }
+
+    const oldVechicle = (vec:Vechicle):void => {
+        console.log(vec.summary())
+    }
+
+    oldVechicle(oldCivic);
+    oldVechicle(drink);
