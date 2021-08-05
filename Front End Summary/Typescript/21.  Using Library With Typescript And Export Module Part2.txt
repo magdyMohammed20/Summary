@@ -1,0 +1,61 @@
+(1) Second Sample Of Modules And Classes
+------------------------------------------
+
+EX
+---
+
+    Company.ts
+    ------------
+
+    import faker from 'faker'
+
+    export class Company{
+        companyName: string;
+        catchPhrase: string;
+        location:{
+            lat: number,
+            lng: number
+        }
+
+        constructor(){
+            this.companyName = faker.company.companyName();
+
+            this.catchPhrase = faker.company.catchPhrase();
+
+            this.location = {
+                lat: +(faker.address.latitude()),
+                lng: +(faker.address.longitude())
+            }
+        }
+    }
+
+
+    index.ts
+    ----------
+
+    import {Company} from './Company'
+
+    const company = new Company();
+
+    console.log(company)
+
+
+    index.html
+    ------------
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <script src="./index.ts"></script>
+    </body>
+    </html>
+
+
+==> Run Using [parcel index.html]
