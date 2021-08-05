@@ -1,0 +1,74 @@
+(1) Different Between Typescript Classes And ES6 Classes
+----------------------------------------------------------
+
+==> Modifiers
+--------------
+--> Public    : Method Can Called Anywhere , Anytime
+--> Private   : Method Can Only Be Called By Other Methods In This Class
+--> Protected : Method Can Be Called By Other Methods In This Class Or By Other Methods In Child Classes
+
+
+==> NOTE: If Method Not Have Modifier By Default It's 'Public'
+
+
+EX (Private Modifier)
+---
+
+    class Car{
+
+        private beep():void{
+            console.log('Beep')
+        }
+
+        fixIt():void{
+            console.log('Car Now Fixed');
+            this.beep(); // Calling Private Method Here Is Legal
+        }
+
+    }
+
+    const car = new Car();
+    car.fixIt()
+
+
+EX (If Want To Overwrite Method In Parent Class By Child Class The Modifier Must Not Changed)
+---
+
+    class Vechicle{
+        drive():string{
+            return 'Hellow There'
+        }
+    }
+
+    // Error Here As We Change The Modifier Of 'drive' Method From Public To Private
+    class Car extends Vechicle{
+        private drive():string{
+            return 'Hellow There'
+        }
+    }
+
+
+EX (Protected Modifier)
+--- 
+
+    class Vechicle{
+        protected drive():string{
+            return 'Hellow There'
+        }
+    }
+
+
+    class Car extends Vechicle{
+        
+        honk():void{
+            console.log(this.drive())
+        }
+    }
+
+    // This Is True
+    const car = new Car();
+    car.honk() // Hellow There
+
+    // This Is False As Protected Method Can Be Called By Other Methods In This Class Or By Other Methods In Child Classes Only
+    const vec = new Vechicle();
+    console.log(vec.drive())
