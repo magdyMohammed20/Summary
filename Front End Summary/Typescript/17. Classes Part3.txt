@@ -1,0 +1,56 @@
+(1) Define Properties In Class
+-------------------------------
+
+EX
+---
+
+    class Vechicle{
+
+        color:string = 'Red'; // Define Properties
+
+        protected drive():string{
+            return 'Hellow There'
+        }
+    }
+
+    const vec = new Vechicle();
+    console.log(vec.color) // Red
+
+
+(2) Constructor
+-----------------
+
+    class Vechicle{
+
+        color:string = 'Red'; // Define Properties
+
+        constructor(color: string){
+            this.color = color;
+        }
+
+        protected drive():string{
+            return 'Hellow There'
+        }
+    }
+
+    const vec = new Vechicle('Orange');
+    console.log(vec.color) // Orange
+
+
+(3) If Want To Remove Class Property Must Set 'public' In Constructor Arguments
+---------------------------------------------------------------------------------
+
+    class Vechicle{
+
+        // Remove Class Property And Set 'Public' Here
+        constructor(public color: string){
+            this.color = color;
+        }
+
+        protected drive():string{
+            return 'Hellow There'
+        }
+    }
+
+    const vec = new Vechicle('Orange');
+    console.log(vec.color) // Orange
