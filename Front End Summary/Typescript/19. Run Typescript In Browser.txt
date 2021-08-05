@@ -1,0 +1,44 @@
+(1) Install 'parcel-bundler' For Run Typescript In Browser
+------------------------------------------------------------
+==> npm i -g parcel-bundler
+
+(2) parcel-bundler
+-------------------
+==> Tool Helps Us To Run Typescript In Browser By Convert TS Files To Js Files
+
+
+EX
+---
+
+    index.html
+    -----------
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <script src="./index.ts"></script>
+    </body>
+    </html>
+
+
+    index.ts
+    ----------
+
+    console.log('Hellow World')
+
+
+    Run parcel In Terminal Then Open The Given Localhost Link In The Browser
+    --------------------------------------------------------------------------
+
+    [parcel index.html]
+
+
+==> You Will Note That A New Folder Created Called 'dist' That Contains 'index.html' With Converted 'ts' To 'js'
+
