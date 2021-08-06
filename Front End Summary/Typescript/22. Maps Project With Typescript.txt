@@ -1,0 +1,21 @@
+(1) Create Maps Project
+-------------------------
+==> Create 'New Project' In 'console.developers.google.com'
+==> Enable Maps In 'google console' By Enter To 'API & Services' Then 'Library' Then Search And Enter For/To 'Maps Javascript API' Then Click 'Enable' Button
+==> Generate API Key In 'google console' By Enter To 'API & Services' Then 'credentials' Then Click On 'Create Credentials' Then Select 'API Key' (AIzaSyCnb-nddfntnsG2FTKYI77-mtsmAGNoGEQ)
+==> Set This Script In 'index.html' File <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnb-nddfntnsG2FTKYI77-mtsmAGNoGEQ"></script>
+
+
+(2) Install Google Maps Type For Recognize 'google' Object
+------------------------------------------------------------
+==> npm i @types/googlemaps
+
+
+(3) Code
+----------
+
+    index.html
+    ------------
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Not Completed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
