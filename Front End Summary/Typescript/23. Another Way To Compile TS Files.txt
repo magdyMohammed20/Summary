@@ -1,0 +1,36 @@
+(1) Another Way To Compile And Watching TS Files
+--------------------------------------------------
+
+==> We Want To Organize Files As Following By Compile 'index.ts' To 'index.js' File In 'build' Folder
+
+    Project
+        -src
+            -index.ts
+        -build
+            -index.js
+
+==> We Need To Fix Configuration Of Typescript By Run 'tsc --init' You Will Note That 'tsconfig.json' Created In The Project
+
+==> Edit 'outDir' And 'rootDir' In 'tsconfig.json' 
+
+     "outDir": "./build",                          
+     "rootDir": "./src"
+
+==> Run 'tsc' In Terminal You Will Note That './src/index.ts' Converted To './build/index.js'
+==> If Want To Prevent Run 'tsc' In Terminal Every Time Add '-w' To Always Watching TS Files 'tsc -w'
+
+
+(2) Show Ts File Output In Terminal After Each Save
+-----------------------------------------------------
+==> Run [npm init -y] For Generate 'Package.json'
+==> Rum [npm i  nodemon concurrently] (concurrently: Used To Run commands concurrently)
+
+==> Add 'start' Commands In 'Package.json'
+
+    "scripts": {
+        "start:build":"tsc -w",
+        "start:run":"nodemon ./build/index.js",
+        "start":"concurrently npm:start:*"
+    }
+
+==> Run [npm start] In Terminal You Note That 'index.ts' Compiled And Give The Output And After Each Save It Compile The 'Ts' File And Give The Output In Terminal
