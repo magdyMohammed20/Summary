@@ -1,0 +1,166 @@
+(1) Another Way To Sort Number Array
+--------------------------------------
+
+    numberCollection.ts
+    ---------------------
+
+    export class numberCollection{
+
+        constructor(public data:number[]){}
+
+        get length():number{
+            return this.data.length
+        }
+
+        compare(leftIndex:number , rightIndex:number):boolean {
+            return this.data[leftIndex] > this.data[rightIndex]
+        }
+
+        swap(leftIndex:number , rightIndex:number):void{
+            const leftHand = this.data[leftIndex];
+            this.data[leftIndex] = this.data[rightIndex]
+            this.data[rightIndex] = leftHand;
+        }
+    }
+
+
+    index.ts
+    ---------
+
+    import {numberCollection} from './numberCollection'
+
+    class Sorter{
+
+        constructor(public collection:numberCollection){}
+
+        sort():void{
+
+            const{length} = this.collection;
+
+            for(let x=0; x<length; x++){
+                for(let y=0; y<length - x - 1; y++){
+                    
+                    if(this.collection.compare(y , y+1)){
+                        this.collection.swap(y , y+1)
+                    }
+                }
+            }
+
+        }
+    }
+
+    const numCol = new numberCollection([3,2,1]);
+    const sorting = new Sorter(numCol);
+    sorting.sort();
+    console.log(sorting.collection) // [ 1,2,3 ]
+
+
+
+(2) Add Interface To Previous Sample
+---------------------------------------
+
+    index.ts
+    ----------
+
+    import {numberCollection} from './numberCollection'
+    // Define Interface
+    interface Sortable{
+        length: number,
+        compare(leftIndex:number , rightIndex:number):boolean,
+        swap(leftIndex:number , rightIndex:number):void
+    }
+
+    class Sorter{
+        // Pass 'Sortable' Interface Here
+        constructor(public collection:Sortable){}
+
+        sort():void{
+
+            const{length} = this.collection;
+
+            for(let x=0; x<length; x++){
+                for(let y=0; y<length - x - 1; y++){
+                    
+                    if(this.collection.compare(y , y+1)){
+                        this.collection.swap(y , y+1)
+                    }
+                }
+            }
+
+        }
+    }
+
+    const numCol = new numberCollection([3,2,1]);
+    const sorting = new Sorter(numCol);
+    sorting.sort();
+    console.log(sorting.collection) // [ 1,2,3 ]
+
+
+(3) Sorting String With Interface
+-----------------------------------
+
+    characterColllection.ts
+    -------------------------
+
+    export class characterCollection{
+
+        constructor(public data:string){}
+
+        get length():number{
+            return this.data.length
+        }
+
+        compare(leftIndex:number , rightIndex:number):boolean{
+            return this.data[leftIndex].toLowerCase() > this.data[rightIndex].toLowerCase()
+        }
+
+
+        swap(leftIndex:number , rightIndex:number):void{
+            // Convert String To Array
+            const characters = this.data.split('')
+
+            const leftHand = characters[leftIndex];
+            characters[leftIndex] = characters[rightIndex]
+            characters[rightIndex] = leftHand
+
+            // Convert Array To String Finally
+            this.data = characters.join('')
+        }
+    }
+
+
+    index.ts
+    ---------
+    
+    import {characterCollection} from './characterCollection'
+    // Define Interface
+    interface Sortable{
+        length: number,
+        compare(leftIndex:number , rightIndex:number):boolean,
+        swap(leftIndex:number , rightIndex:number):void
+    }
+
+    class Sorter{
+        // Pass 'Sortable' Interface Here
+        constructor(public collection:Sortable){}
+
+        sort():void{
+
+            const{length} = this.collection;
+
+            for(let x=0; x<length; x++){
+                for(let y=0; y<length - x - 1; y++){
+                    
+                    if(this.collection.compare(y , y+1)){
+                        this.collection.swap(y , y+1)
+                    }
+                }
+            }
+
+        }
+    }
+
+    const charCol = new characterCollection("Xaa");
+    const sorting = new Sorter(charCol);
+    sorting.sort();
+    console.log(charCol.data) // aaX
