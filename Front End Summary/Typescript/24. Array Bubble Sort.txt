@@ -1,0 +1,77 @@
+(1) Array Bubble Sort
+-----------------------
+
+EX (Array Of Numbers)
+---
+
+    class Sorter{
+
+        constructor(public collection:number[]){
+            this.collection = collection;
+        }
+
+        sort():void{
+
+            // Get Array Length In TS
+            const{length} = this.collection;
+            let swap = 0;
+
+            for(let x=0; x<length; x++){
+                for(let y=0; y<length - x - 1; y++){
+                    if(this.collection[y] > this.collection[y + 1]){
+                        swap = this.collection[y];   
+                        this.collection[y] = this.collection[y + 1];
+                        this.collection[y + 1] = swap
+                        
+                    }
+                }
+            }
+
+        }
+    }
+
+    const sorting = new Sorter([3,10,-1,2]);
+    sorting.sort();
+    console.log(sorting.collection) // [ -1, 2, 3, 10 ]
+
+
+EX (Array Of Numbers Or String)
+---
+
+    class Sorter{
+
+        constructor(public collection:number[] | string[]){
+            this.collection = collection;
+        }
+
+        sort():void{
+
+            // Get Array Length In TS
+            const{length} = this.collection;
+
+            for(let x=0; x<length; x++){
+                for(let y=0; y<length - x - 1; y++){
+                    
+                    // If Array Is number[]
+                    if(this.collection instanceof Array){
+                        if(this.collection[y] > this.collection[y + 1]){
+                            let swap = this.collection[y];   
+                            this.collection[y] = this.collection[y + 1];
+                            this.collection[y + 1] = swap
+                            
+                        }
+                    }
+
+                    // If Array Is String[]
+                    if(typeof this.collection === 'string'){
+                        this.collection.sort()
+                    }
+                }
+            }
+
+        }
+    }
+
+    const sorting = new Sorter(['a','c','b']);
+    sorting.sort();
+    console.log(sorting.collection) // [ 'a', 'b', 'c' ]
