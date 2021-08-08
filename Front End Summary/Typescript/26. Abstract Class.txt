@@ -1,0 +1,71 @@
+(1) Abstract Class
+----------------------
+==> Can't Be Used To Create An Object Directly
+==> Only Used As Parent Class 
+==> Can Contain Real Implementation For Some Methods
+==> Implemented Methods Can Refer To Other Methods That Don't Actually Exist Yet
+==> Can Make Child Classes Promise To Implement Some Other Method
+
+
+Ex
+---
+
+    index.ts
+    ----------
+
+    // Marked As Abstract Class
+    export abstract class Sorter{
+
+        abstract compare(leftIndex:number , rightIndex:number):boolean;
+        abstract swap(leftIndex:number , rightIndex:number):void;
+        abstract length:number;
+        
+        sort():void{
+
+            const{length} = this;
+
+            for(let x=0; x<length; x++){
+                for(let y=0; y<length - x - 1; y++){
+                    
+                    if(this.compare(y , y+1)){
+                        this.swap(y , y+1)
+                    }
+                }
+            }
+
+        }
+    }
+
+
+
+    numberCollection.ts
+    ---------------------
+
+    import {Sorter} from './index'
+
+    export class numberCollection extends Sorter{
+
+        constructor(public data:number[]){
+            super()
+        }
+
+        get length():number{
+            return this.data.length
+        }
+
+        compare(leftIndex:number , rightIndex:number):boolean {
+            return this.data[leftIndex] > this.data[rightIndex]
+        }
+
+        swap(leftIndex:number , rightIndex:number):void{
+            
+            const leftHand = this.data[leftIndex];
+            this.data[leftIndex] = this.data[rightIndex]
+            this.data[rightIndex] = leftHand;
+
+        }
+    }
+
+    const numCol = new numberCollection([3,2,4,1]);
+    numCol.sort();
+    console.log(numCol.data) // [1,2,3,4]
