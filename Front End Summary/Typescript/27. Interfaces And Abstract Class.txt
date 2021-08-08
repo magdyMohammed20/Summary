@@ -1,0 +1,15 @@
+(1) Different Between Interfaces And Abstract Class
+-----------------------------------------------------
+
+==> Interfaces
+-----------------
+--> Setup A Contract Between Different Classes
+--> Use When We Have Very Different Objects That We Want To Work Together
+--> Promotes Loose Coupling
+
+
+==> Abstract Class
+-------------------
+--> Setup A Contract Between Different Classes
+--> Use When We Are Trying To Build Up A Definition Of An Object
+--> Strongly Couples Classes Together 
