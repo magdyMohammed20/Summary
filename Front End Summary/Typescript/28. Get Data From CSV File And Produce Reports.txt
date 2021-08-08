@@ -1,0 +1,43 @@
+(1) Steps
+----------
+==> Bring CSV File With Football Data
+==> Load Data From CSV File Using [Node std lib](https://nodejs.org/) Using [i bFile System][fs.readFileSync()]
+
+
+(2) Type Definition File
+-----------------------------
+
+    Typescript ==> Type Definition File ==> Js Library (EX: NodeJs Standard Lib [fs-http-os])
+
+(3) Install Type Definition File
+----------------------------------
+==> npm i @types/node
+
+
+(4) Code
+-----------
+
+    index.ts
+    ----------
+
+    import fs from 'fs'
+
+    const matches = fs.readFileSync('./football.csv' , {
+        encoding: 'utf-8'
+    }).split('\n').map((row:string):string[] => {
+        return row.split(',')
+    })
+
+    let manUnitedWins = 0;
+
+    for(let match of matches){
+
+        if(match[1] === "Man United" && match[5] === 'H'){
+            manUnitedWins++
+        }else if(match[2] === "Man United" && match[5] === 'H'){
+            manUnitedWins++
+        }
+    
+    }
+
+    console.log(`Man United Won ${manUnitedWins} Games`)
