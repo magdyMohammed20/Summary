@@ -1,0 +1,49 @@
+(1) Generics
+--------------
+==> Like Function Arguments But For Types In Function/Class Definitions
+==> Allow Us To Define The Type Of Property/Argument/Return Value At A Future Point 
+==> Used Heavily When Writing Reusable Code
+
+
+EX (With Class)
+----
+
+    class HoldAnyTHing<TypeOfData> {
+        data: TypeOfData;
+    }
+
+    const obj = new HoldAnyTHing<number>();  // Send Number
+    const obj2 = new HoldAnyTHing<string>(); // Send String
+
+    obj.data = 10;
+    obj2.data = 'Magdy';
+
+    console.log(obj.data)  // 10
+    console.log(obj2.data) // Magdy
+
+
+EX (With Function)
+---
+
+    function func<T>(a:T):T{
+        return a
+    }
+
+    console.log(10)
+    console.log('Magdy')
+
+
+EX (Function In Class)
+---
+
+    class HoldAnyTHing<T> {
+        data: T;
+
+        add(a:T):T{
+            return a
+        }
+    }
+
+    const obj = new HoldAnyTHing<number>();  // Send Number
+
+    console.log(obj.add(10))  // 10
