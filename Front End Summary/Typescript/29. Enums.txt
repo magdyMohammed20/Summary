@@ -1,0 +1,53 @@
+(1) Enums
+-----------
+==> define a set of named constants. Using enums can make it easier to document intent, or create a set of distinct cases
+
+EX
+---
+
+    import fs from 'fs'
+
+    const matches = fs.readFileSync('./football.csv' , {
+        encoding: 'utf-8'
+    }).split('\n').map((row:string):string[] => {
+        return row.split(',')
+    })
+
+    // Define Enum
+    enum matchResult {
+        HomeWin = 'H',
+        AwayWin = 'A',
+        draw = 'D'
+    }
+
+
+    let manUnitedWins = 0;
+
+    for(let match of matches){
+        if(match[1] === "Manchester United FC" && match[5] === matchResult.HomeWin){
+            manUnitedWins++
+        }else if(match[2] === "Manchester United FC" && match[5] === matchResult.AwayWin){
+            manUnitedWins++
+        }
+    }
+
+    console.log(`Man United Won ${manUnitedWins} Games`)
+
+
+EX (Enum With Function)
+---
+
+    // Define Enum
+    enum matchResult {
+        HomeWin = 'H',
+        AwayWin = 'A',
+        draw = 'D'
+    }
+
+    const func = ():matchResult => {
+        if(match[5] === 'H'){
+            return matchResult.HomeWin
+        }
+
+        return matchResult.AwayWin
+    }
