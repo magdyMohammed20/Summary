@@ -29,8 +29,8 @@ EX (With Function)
         return a
     }
 
-    console.log(10)
-    console.log('Magdy')
+    console.log(func(10))
+    console.log(func('Magdy'))
 
 
 EX (Function In Class)
@@ -47,3 +47,31 @@ EX (Function In Class)
     const obj = new HoldAnyTHing<number>();  // Send Number
 
     console.log(obj.add(10))  // 10
+
+
+EX (Generics With Function And Interface)
+---
+
+    class House{
+        print(){
+            console.log('I am House')
+        }
+    }
+
+    class Car{
+        print(){
+            console.log('I am Car')
+        }
+    }
+
+    interface Printable{
+        print():void;
+    }
+
+    function printAnyThing<T extends Printable>(arr:T[]):void{
+        for(let i=0; i<arr.length; i++){
+            arr[i].print()
+        }
+    }
+
+    printAnyThing([new House() , new Car()]) // I am House  // I am Car
