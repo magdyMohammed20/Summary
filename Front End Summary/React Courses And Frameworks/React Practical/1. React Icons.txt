@@ -1,0 +1,65 @@
+(1) React Icons
+----------------
+==> Is React Library That Contains Many Different Icons (https://react-icons.github.io/react-icons/)
+
+(2) Installtion
+-----------------
+==> [npm install react-icons --save] Or [yarn add react-icons]
+
+(3) Basic Sample
+-----------------
+
+    import {DiApple} from 'react-icons/di'
+    function App() {
+        return (
+            <div className="App">
+                <DiApple/>
+                <DiApple color='green' size='10rem'/>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Icon Context (Used When Collection Of Icons Have Same Style)
+-----------------
+
+    import {IconContext} from 'react-icons'
+    import {DiApple} from 'react-icons/di'
+
+    function App() {
+        return (
+            <IconContext.Provider value={{color: 'purple' , size: '5rem'}}>
+                <div className="App">
+                    <DiApple/>
+                    <DiApple color='green' size='10rem'/>
+                </div>
+            </IconContext.Provider>
+        );
+    }
+
+    export default App;
+
+
+(4) Icons Destructuring
+-------------------------
+
+    import {IconContext} from 'react-icons'
+    import * as anyName from 'react-icons/di'
+
+    function App() {
+
+    const{DiApple} = anyName;
+
+        return (
+            <IconContext.Provider value={{color: 'purple' , size: '5rem'}}>
+                <div className="App">
+                    <DiApple/>
+                    <DiApple color='green' size='10rem'/>
+                </div>
+            </IconContext.Provider>
+        );
+    }
+
+    export default App;
