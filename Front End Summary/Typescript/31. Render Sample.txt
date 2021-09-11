@@ -1,0 +1,121 @@
+(1) Sample
+------------
+
+    UserForm.ts
+    --------------
+
+    export class UserForm {
+        // Define Parent Property Of 'Element' Type [Element: Is Reference Of Any Html Element]
+        constructor(public parent: Element){}
+        template():string{
+            return `
+                <div>
+                    <h1> User Form </h1>
+                    <input/>
+                </div>
+            `;
+        }
+
+        render():void{
+            let tempElement = document.createElement('template');
+            tempElement.innerHTML = this.template();
+
+            this.parent.append(tempElement.content)
+        }
+
+    }
+
+
+    index.ts
+    ----------
+
+    import { UserForm } from "./views/UserForm";
+
+    const rootElement = document.getElementById('root');
+    
+    const x = new UserForm(rootElement);
+    
+    x.render()
+
+    index.html
+    ------------
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id='root'></div>
+        <script  src="./index.ts" ></script>
+    </body>
+    </html>
+
+
+
+(2) Add Button To The Form With Add Events To It
+-------------------------------------------------
+
+    UserForm.ts
+    --------------
+
+    export class UserForm {
+        constructor(public parent: Element){}
+    
+        // 2- Define eventsMaps
+        eventMaps():{[key: string]:() => void}{
+            return {
+                'click:button': this.onButtonClick,
+                'mouseenter:button': this.onButtonHover
+            }
+        }
+    
+        // 1- Define Function That Called When Click On Button
+        onButtonClick():void{
+            console.log('Hi There Click')
+        }
+    
+        // 1- Define Function That Called When Hover On Button
+        onButtonHover():void{
+            console.log('Hi There Hover')
+        }
+    
+        // 3- Create bindEvents Function
+        bindEvents(fragment: DocumentFragment):void{
+            const eventsMaps = this.eventMaps();
+    
+            for(let evKey in eventsMaps){
+                const[eventName , selector] = evKey.split(':');
+    
+                fragment.querySelectorAll(selector).forEach(element => {
+                    element.addEventListener(eventName , eventsMaps[evKey])
+                })
+            }
+    
+        }
+    
+        template():string{
+            return `
+                <div>
+                    <h1> User Form </h1>
+                    <input/>
+                    <button>Click</button>
+                </div>
+            `;
+        }
+    
+        render():void{
+            let tempElement = document.createElement('template');
+            tempElement.innerHTML = this.template();
+    
+            // 4- Call bindEvents Here
+            this.bindEvents(tempElement.content)
+    
+            this.parent.append(tempElement.content)
+        }
+    
+    }
+    
