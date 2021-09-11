@@ -1,0 +1,139 @@
+(1) React Modal
+-----------------
+==> Accessible modal dialog component for React.JS
+
+(2) Installation
+-----------------
+==> [yarn add react-modal] Or [npm install --save react-modal]
+
+(3) Basic Opened Modal
+------------------------
+
+    import Modal from 'react-modal'
+    function App() {
+    return (
+        <div className="App">
+            <Modal isOpen={true}>
+                <h2>Modal Title</h2>
+                <p>Modal Content</p>          
+            </Modal>
+        </div>
+    );
+    }
+
+    export default App;
+
+
+(4) Full Modal Sample
+-----------------------
+
+    import {useState} from 'react'
+    import Modal from 'react-modal'
+
+    function App() {
+
+        const[open , setOpen] = useState(false)
+    
+        return (
+            <div className="App">
+                <button onClick={() => setOpen(true)}>Open Modal</button>
+                <Modal isOpen={open}>
+                    <h2>Modal Title</h2>
+                    <p>Modal Content</p>  
+                    <button onClick={() => setOpen(false)}>Close Modal</button>        
+                </Modal>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(5) Close Modal When Click On Overlay Or Hit 'ESC' Button [onRequestClose={() => setOpen(!open)]
+-------------------------------------------------------------------------------------------------
+
+    import {useState} from 'react'
+    import Modal from 'react-modal'
+
+    function App() {
+
+        const[open , setOpen] = useState(false)
+    
+        return (
+            <div className="App">
+                <button onClick={() => setOpen(true)}>Open Modal</button>
+                <Modal isOpen={open} onRequestClose={() => setOpen(!open)}>
+                    <h2>Modal Title</h2>
+                    <p>Modal Content</p>  
+                    <button onClick={() => setOpen(false)}>Close Modal</button>        
+                </Modal>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(6) Prevent Accessibilty Error
+--------------------------------
+
+    import {useState} from 'react'
+    import Modal from 'react-modal'
+
+    // Prevent Accessibilty Error
+    Modal.setAppElement('#root');
+
+    function App() {
+
+        const[open , setOpen] = useState(false)
+    
+        return (
+            <div className="App">
+                <button onClick={() => setOpen(true)}>Open Modal</button>
+                <Modal isOpen={open} onRequestClose={() => setOpen(!open)}>
+                    <h2>Modal Title</h2>
+                    <p>Modal Content</p>  
+                    <button onClick={() => setOpen(false)}>Close Modal</button>        
+                </Modal>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(7) Styled Modal
+------------------
+
+    import {useState} from 'react'
+    import Modal from 'react-modal'
+
+    // Prevent Accessibilty Error
+    Modal.setAppElement('#root');
+
+    function App() {
+
+        const[open , setOpen] = useState(false)
+    
+        const styles = {
+            content: {
+                color: 'orange'
+            },
+
+            overlay:{
+                backgroundColor: 'gray'
+            }
+        }
+        return (
+            <div className="App">
+                <button onClick={() => setOpen(true)}>Open Modal</button>
+                <Modal isOpen={open} onRequestClose={() => setOpen(!open)} style={styles}>
+                    <h2>Modal Title</h2>
+                    <p>Modal Content</p>  
+                    <button onClick={() => setOpen(false)}>Close Modal</button>        
+                </Modal>
+            </div>
+        );
+    }
+
+    export default App;
