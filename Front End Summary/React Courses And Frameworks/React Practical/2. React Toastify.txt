@@ -1,0 +1,238 @@
+(1) React Toastify
+-------------------
+==> Is React Lib Used To Give You Toast Notifications (https://fkhadra.github.io/react-toastify/introduction/)
+
+(2) Installation
+------------------
+==> [npm i react-toastify] Or [yarn add react-toastify]
+
+(3) First Sample
+------------------
+
+    import {toast} from 'react-toastify'
+    import 'react-toastify/dist/ReactToastify.css';
+
+    toast.configure()
+
+    function App() {
+        const notify = () => toast("Wow so easy!");
+        return (
+            <div className="App">
+                <button onClick={notify}>Notify!</button>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(4) Second Sample
+-------------------
+
+    import {ToastContainer , toast} from 'react-toastify'
+    import 'react-toastify/dist/ReactToastify.css';
+
+    function App() {
+        const notify = () => toast("Wow so easy!");
+        return (
+            <div className="App">
+                <button onClick={notify}>Notify!</button>
+                <ToastContainer />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(5) Toast Position
+-------------------
+    import {ToastContainer , toast} from 'react-toastify'
+    import 'react-toastify/dist/ReactToastify.css';
+
+    function App() {
+        const notify = () => {
+            toast("Wow so easy!" , {position: toast.POSITION.TOP_RIGHT})
+
+            toast.success("Success Notification !", {
+                position: toast.POSITION.TOP_CENTER
+            });
+
+            toast.error("Error Notification !", {
+                : toast.POSITION.TOP_LEFT
+            });
+
+            toast.warn("Warning Notification !", {
+                position: toast.POSITION.BOTTOM_LEFT
+            });
+
+            toast.info("Info Notification !", {
+                position: toast.POSITION.BOTTOM_CENTER
+            });
+
+            toast("Custom Style Notification with css class!", {
+                position: toast.POSITION.BOTTOM_RIGHT
+            });
+        };
+        return (
+            <div className="App">
+                <button onClick={notify}>Notify!</button>
+                <ToastContainer />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(6) Handle Toast Duration Using 'autoClose' For All Toasts
+-------------------------------------------------------------
+
+    <ToastContainer autoClose={2000}/>
+
+(7) Handle Toast Duration Using 'autoClose' For Each Toasts
+-------------------------------------------------------------
+
+    function App() {
+        const notify = () => {
+            toast("Wow so easy!" , {position: toast.POSITION.TOP_RIGHT , autoClose: 8000})  
+            toast("Wow so easy!" , {position: toast.POSITION.TOP_LEFT , autoClose: 3000})
+        };
+    }
+
+
+(8) Prevent the toast from closing per toast
+----------------------------------------------
+
+    function App() {
+        const notify = () => {
+            // Set autoclose To 'False'
+            toast("Wow so easy!" , {position: toast.POSITION.TOP_LEFT , autoClose: false})
+        };
+    }
+
+
+(9) Prevent the toast from closing by default
+-----------------------------------------------
+
+    <ToastContainer autoClose={false}/>
+
+(10) Toast Colors With Icons And Theme
+---------------------------------------
+
+    function App() {
+        const notify = () => {
+            toast.error("Wow so easy!" , {position: toast.POSITION.TOP_RIGHT , autoClose: 8000 , theme:'dark'})  
+            toast.info("Wow so easy!" , {position: toast.POSITION.TOP_LEFT , autoClose: 3000})
+            toast.success("Wow so easy!" , {position: toast.POSITION.BOTTOM_LEFT , autoClose: 3000})
+            toast.warn("Wow so easy!" , {position: toast.POSITION.BOTTOM_RIGHT , autoClose: 3000})
+        };
+    }
+
+
+(11) Disable Icons For All Toasts
+-----------------------------------
+
+    <ToastContainer icon={false} />
+
+
+(12) Add Custom Icon To Toast
+-------------------------------
+
+    function App() {
+        const notify = () => {
+            toast.success("Wow so easy!" , {position: toast.POSITION.BOTTOM_LEFT , autoClose: 3000 , icon: '🚀'})
+        };
+    }
+
+
+(13) Pause Toast Hide When Window Focus Loses
+-------------------------------------------------
+==> Can add 'pauseOnFocusLoss={true}' To Each Toast
+
+    function App() {
+        const notify = () => {
+            toast.success("Wow so easy!" , {position: toast.POSITION.BOTTOM_LEFT , autoClose: 8000 , icon: '🚀'})
+        };
+        return (
+            <div className="App">
+                <button onClick={notify}>Notify!</button>
+                <ToastContainer pauseOnFocusLoss={true}/>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(14) Prevent Toast Duplication
+--------------------------------
+
+    function App() {
+        const notify = () => {
+            toast.success("Wow so easy!" , {toastId: 'custom-id-yes'})
+        };
+    }
+
+
+(15) Toast Delay
+-----------------
+
+    function App() {
+        const notify = () => {
+            toast.success("Wow so easy!" , {delay: 1000})
+        };
+    }
+
+
+(16) Specify Toasts Limit
+--------------------------
+
+    <ToastContainer limit={3}/>
+
+(17) Change Toast Transition
+------------------------------
+==> Can Add To [<ToastContainer transition={Zoom}/>] Or Following
+
+        const notify = () => {
+            // Slide
+            // Zoom
+            // Flip
+            // Bounce [Default]
+            toast.success("Wow so easy!" , {transition: Slide})
+        };
+
+
+(18) Enable Drag Toast
+------------------------
+
+    toast.success("Wow so easy!" , {draggablePercent: 60})
+    
+    Or
+
+    <ToastContainer draggablePercent={60}/>
+
+    Or [Disable Dragging]
+
+    <ToastContainer draggable={false}/>
+
+
+(19) Drag Toast Vertically
+----------------------------
+    <ToastContainer draggableDirection='y'/>
+    
+(20) Enable right to left support
+-------------------------------------
+
+    <ToastContainer rtl/>
+
+(21) Accessibility
+---------------------
+
+    <ToastContainer role="alert" />
+
+    Or
+
+    toast("hello", {
+        role: "alert"
+    })
