@@ -1,0 +1,97 @@
+(1) Installation
+-----------------
+==> [yarn add react-idle-timer] Or [npm install react-idle-timer --save]
+
+(2) Basic Sample
+-----------------
+
+    IdleTimerContainer.js
+    ------------------------
+
+    import React,{useRef} from 'react'
+    import IdleTimer from 'react-idle-timer'
+
+    function IdleTimerContainer() {
+        const idleRef = useRef(null)
+
+        // Will Display In Console After Each 5 Seconds From Page Reload
+        const onIdle = () => {
+            console.log('Hellow')
+        }
+        return (
+            <div>
+                <IdleTimer ref={idleRef} timeout={5 * 1000} onIdle={onIdle}>
+                </IdleTimer>            
+            </div>
+        )
+    }
+
+    export default IdleTimerContainer
+
+
+    App.js
+    -------
+
+    import IdleTimerContainer from "./IdleTimerContainer";
+    function App() {
+        return (
+            <div className="App">
+                <IdleTimerContainer/>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) IdleTimer With Modal
+--------------------------
+
+    import React,{useState , useRef} from 'react'
+    import IdleTimer from 'react-idle-timer'
+    import Modal from 'react-modal'
+
+    Modal.setAppElement('#root')
+
+    function IdleTimerContainer() {
+        const idleRef = useRef(null)
+        const[isLoggedIn , setIsLoggedIn] = useState(true)
+        const[isModalOpen , setIsModalOpen] = useState(false)
+        const sessionTimeOutRef = useRef(null)
+
+        const onIdle = () => {
+            console.log('Hellow')
+            setIsModalOpen(true)
+            sessionTimeOutRef.current = setTimeout(logOut , 2000)
+        }
+
+        const logOut = () => {
+            setIsModalOpen(false)
+            setIsLoggedIn(false)
+            clearTimeout(sessionTimeOutRef.current) // Clear Timeout For Prevent Modal AutoClose
+        }
+
+        const signIn = () => {
+            setIsModalOpen(false)
+            clearTimeout(sessionTimeOutRef.current) // Clear Timeout For Prevent Modal AutoClose
+        }
+        return (
+            <div>
+                {
+                    isLoggedIn ? <h1>Hellow Magdy</h1> : <h1>Hellow Guest</h1>
+                }
+                <Modal isOpen={isModalOpen}>
+                    <h1>You Have Been Idle For A While...</h1>
+                    <p>You Will Be Logged Out Soon</p>
+                    <button onClick={() => logOut()}>Logged Out</button>
+                    <button onClick={() => signIn()}>Keep Sign In</button>
+                </Modal>
+
+
+                <IdleTimer ref={idleRef} timeout={2 * 1000} onIdle={onIdle}>
+                </IdleTimer>            
+            </div>
+        )
+    }
+
+    export default IdleTimerContainer
