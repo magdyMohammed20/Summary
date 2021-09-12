@@ -1,0 +1,156 @@
+(1) Tippy.js-react
+-------------------
+==> React Tooltip Library (https://github.com/atomiks/tippyjs-react)
+
+(2) Installation
+-------------------
+==> [yarn add @tippyjs/react] Or [npm i @tippyjs/react]
+
+(3) Basic Sample
+-----------------
+
+    import Tippy from '@tippyjs/react'
+    import 'tippy.js/dist/tippy.css'
+
+    function App() {
+        return (
+            <div className="App">
+                {/* String Content */}
+                <Tippy content='Hellow'>
+                    <button>Open Tippy</button>
+                </Tippy>
+
+                {/* JSX Content */}
+                <Tippy content={<span style={{color: 'orange'}}>Hellow</span>}>
+                    <button>Open Tippy</button>
+                </Tippy>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(4) Passing Component To Tooltip
+---------------------------------
+
+    import Tippy from '@tippyjs/react'
+    import 'tippy.js/dist/tippy.css'
+
+    const ColredComp = () => {
+        return (
+            <span style={{color: 'yellow'}}>Colred Tooltip</span>
+        )
+    }
+
+    function App() {
+        return (
+            <div className="App">
+                {/* JSX Content */}
+                <Tippy content={<ColredComp/>}>
+                    <button>Open Tippy</button>
+                </Tippy>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(5) Headless Tooltip [Produce Tooltip Without Style]
+------------------------------------------------------
+
+    import Tippy from '@tippyjs/react/headless';
+    import 'tippy.js/dist/tippy.css'
+
+    function App() {
+        return (
+            <div className="App">
+                <Tippy
+                    render={attrs => (
+                        <div className="box" tabIndex="-1" {...attrs}>
+                        My tippy box
+                        </div>
+                    )}
+                    >
+                    <button>My button</button>
+                </Tippy>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(6) Custom Component As Child For Tooltip
+-------------------------------------------
+
+    import {forwardRef} from 'react'
+    import Tippy from '@tippyjs/react'
+    import 'tippy.js/dist/tippy.css'
+
+    const ColredComp = () => {
+        return (
+            <span style={{color: 'red'}}>Hellow</span>
+        )
+    }
+
+    const CustomComp = forwardRef((props , ref) => {
+        return (
+            <div ref={ref}>
+                <div>First Line</div>
+                <div>Second Line</div>
+            </div>
+        )
+    })
+
+    function App() {
+        return (
+            <div className="App">
+                {/* JSX Content */}
+                <Tippy content={<ColredComp/>}>
+                    <CustomComp/>
+                </Tippy>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(6) Disable Tooltip Arrow
+---------------------------
+
+    import Tippy from '@tippyjs/react'
+    import 'tippy.js/dist/tippy.css'
+
+    function App() {
+        return (
+            <div className="App">
+                <Tippy content='Hellow' arrow={false}>
+                    <button>Tooltip</button>
+                </Tippy>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(7) Tooltip Position
+---------------------
+
+    import Tippy from '@tippyjs/react'
+    import 'tippy.js/dist/tippy.css'
+
+    function App() {
+        return (
+            <div className="App">
+                <Tippy content='Hellow' placement='right'>
+                    <button>Tooltip</button>
+                </Tippy>
+            </div>
+        );
+    }
+
+    export default App;
