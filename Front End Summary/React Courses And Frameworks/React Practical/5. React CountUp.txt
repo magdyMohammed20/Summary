@@ -1,0 +1,98 @@
+(1) React-CountUp
+-------------------
+==> Library Used To Display Numerical Data With CountUp Animation
+
+(2) Installation
+-------------------
+==> [yarn add react-countup] Or [npm i react-countup]
+
+(3) Basic Sample
+-----------------
+
+    import CountUp from 'react-countup'
+
+    function App() {
+        return (
+            <div className="App">
+                <CountUp end={2000}/>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(4) Full Sample
+----------------
+
+    import CountUp from 'react-countup'
+
+    function App() {
+        return (
+            <div className="App">
+                <CountUp 
+                    start={0}
+                    end={2000}
+                    duration={10}
+                    delay={0}
+                    separator=" "
+                    decimals={4}
+                    decimal=","
+                    prefix="EUR"
+                    suffix="left"
+                    onEnd={() => console.log('Ended')}
+                    onStart={() => console.log('Started')}
+                />
+            </div>
+        );
+    }
+
+    export default App;
+
+(5) useCountUp Hook
+----------------------
+
+    import {useRef} from 'react'
+    import {useCountUp} from 'react-countup'
+
+    function App() {
+        const ref = useRef();
+        const {start , pauseResume , reset , update} = useCountUp({ ref , duration: 10 , end: 1000}) 
+
+        return (
+            <div className="App">
+                <div ref={ref}></div>
+                <button onClick={() => start()}>Start</button>
+                <button onClick={() => pauseResume()}>Pause/Resume</button>
+                <button onClick={() => reset()}>Reset</button>
+                <button onClick={() => update(2000)}>Update To 2000</button>
+            </div>
+        );
+    }
+
+    export default App;
+
+(6) Prevent Count On Page Load
+----------------------------------
+
+    import {useRef} from 'react'
+    import {useCountUp} from 'react-countup'
+
+    function App() {
+        const ref = useRef();
+        // startOnMount: false
+        const {start , pauseResume , reset , update} = useCountUp({ ref , duration: 10 , end: 1000 , startOnMount: false})
+        
+
+        return (
+            <div className="App">
+                <div ref={ref}></div>
+                <button onClick={() => start()}>Start</button>
+                <button onClick={() => pauseResume()}>Pause/Resume</button>
+                <button onClick={() => reset()}>Reset</button>
+                <button onClick={() => update(2000)}>Update To 2000</button>
+            </div>
+        );
+    }
+
+    export default App;
