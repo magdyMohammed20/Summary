@@ -1,0 +1,53 @@
+(1) 'react-color' Library Installation
+--------------------------------------
+==> [yarn add react-color] Or [npm install react-color --save]
+
+(2) Sample
+------------
+
+    import {useState} from 'react'
+    import {SketchPicker , ChromePicker , PhotoshopPicker , SwatchesPicker} from 'react-color'
+    function App() {
+        const [color , setColor] = useState('#FFF')
+
+        const onChangeComplete = (color) => {
+            setColor(color.hex)
+        }
+        return (
+            <div className="App">
+                <PhotoshopPicker color={color} onChange={(updatedColor) => onChangeComplete(updatedColor)}/>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Control Color Picker Using Open/Close Button And Display Selected Color
+----------------------------------------------------------------------------
+
+    import {useState} from 'react'
+    import {SketchPicker , ChromePicker , PhotoshopPicker , SwatchesPicker} from 'react-color'
+    function App() {
+        const [color , setColor] = useState('#FFF')
+        const [showColorPicker , setshowColorPicker] = useState(false)
+
+        const onChangeComplete = (color) => {
+            setColor(color.hex)
+        }
+        return (
+            <div className="App">
+                <button onClick={() => setshowColorPicker(!showColorPicker)}>
+                {
+                    showColorPicker ? 'Close Color Picker' : 'Open Color Picker'
+                }
+                </button>
+                {
+                showColorPicker && <PhotoshopPicker color={color} onChange={(updatedColor) => onChangeComplete(updatedColor)}/>
+                }
+                <h1>You Picked {color}</h1>
+            </div>
+        );
+    }
+
+    export default App;
