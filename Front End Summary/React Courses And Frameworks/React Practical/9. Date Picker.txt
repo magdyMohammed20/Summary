@@ -1,0 +1,76 @@
+(1) Date Picker Library Installation
+--------------------------------------
+==> [yarn add react-datepicker] Or [npm i react-datepicker]
+
+(2) Basic Sample
+------------------
+
+    import {useState} from 'react'
+    import DatePicker from 'react-datepicker'
+    import 'react-datepicker/dist/react-datepicker.css'
+
+    function App() {
+
+        const [startDate , setStartDate] = useState(new Date());
+
+        return (
+            <div className="App">
+                <DatePicker selected={startDate} onChange={date => setStartDate(date)}/>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Specify The Date Format
+-----------------------------
+
+    <DatePicker 
+        selected={startDate} 
+        onChange={date => setStartDate(date)}
+        dateFormat={'yyyy-MM-dd'}
+    />
+
+
+(4) Specify Min And Max Date
+-----------------------------
+
+    <DatePicker 
+        selected={startDate} 
+        onChange={date => setStartDate(date)}
+        dateFormat={'yyyy-MM-dd'}
+        minDate={new Date()}
+        maxDate={new Date('Sa Sep 18 2021')}
+    />
+
+
+(5) Disable WeekEnd Days 'filterDate'
+--------------------------------------
+
+    <DatePicker 
+        selected={startDate} 
+        onChange={date => setStartDate(date)}
+        filterDate={date => date.getDay() !== 6 && date.getDay() !== 0}
+    />
+
+
+(6) Add Clear Button Within DatePicker
+---------------------------------------
+
+    <DatePicker 
+        selected={startDate} 
+        onChange={date => setStartDate(date)}
+        isClearable
+    />
+
+(7) Add Years Dropdown
+------------------------
+
+    <DatePicker 
+        selected={startDate} 
+        onChange={date => setStartDate(date)}
+        isClearable
+        showYearDropdown
+        scrollableMonthYearDropdown
+    />
