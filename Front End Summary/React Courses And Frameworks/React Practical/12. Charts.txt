@@ -1,0 +1,230 @@
+(1) Charts Installation
+--------------------------
+==> yarn add react-chartjs-2 chart.js
+
+(2) Basic Sample
+-----------------
+
+    Line.js
+    ---------
+
+    import React from 'react'
+    import {Line} from 'react-chartjs-2'
+
+    function LineSet() {
+        const data = {
+            labels: ['Jan' , 'Feb' , 'Mar' , 'Apr' , 'May'],
+            datasets:[
+                {
+                    label:"Sales For 2021(M)",
+                    data: [1,4,2,3,5]
+                }
+            ]
+        }
+        return (
+            <div>
+                <Line data={data}/>            
+            </div>
+        )
+    }
+
+    export default LineSet
+
+
+    App.js
+    -------
+
+    import LineSet from './Components/Line'
+    import './App.css'
+
+    function App() {
+        return (
+            <div className="App">
+                <div className='chart'>
+                <LineSet/>
+                </div>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    App.css
+    --------
+
+    .App {
+        display: flex;
+        justify-content: center;
+    }
+
+    .chart{
+        width: 720px;
+    }
+
+
+(3) Multiple DataSets
+-----------------------
+
+    const data = {
+        labels: ['Jan' , 'Feb' , 'Mar' , 'Apr' , 'May'],
+        datasets:[
+            {
+                label:"Sales For 2021(M)",
+                data: [1,4,2,3,5]
+            },
+            {
+                label: 'Sales Expected In 2022(M)',
+                data: [4,5,8,9,10]
+            }
+        ]
+    }
+
+
+(4) Control On Colors
+----------------------
+
+    const data = {
+        labels: ['Jan' , 'Feb' , 'Mar' , 'Apr' , 'May'],
+        datasets:[
+            {
+                label:"Sales For 2021(M)",
+                data: [1,4,2,3,5],
+                borderColor: ['#F50'],
+                backgroundColor: ['#0F0'],
+                pointBackgroundColor: ['#00F'],
+                pointBorderColor: ['#000']
+            },
+            {
+                label: 'Sales Expected In 2022(M)',
+                data: [4,5,8,9,10],
+                borderColor: ['#ff12ba'],
+                backgroundColor: ['#F00'],
+                pointBackgroundColor: ['#fff412'],
+                pointBorderColor: ['#000']
+            }
+        ]
+    }
+
+
+(5) Chart Options
+------------------
+
+    const options = {
+        plugins: {
+            title: {
+                display: true,
+                text: 'Custom Chart Title'
+            }
+        },
+        scales: {
+            x:{
+                title:{
+                    display: true,
+                    text: 'x-Axis'
+                }
+            },
+            y: {
+                title:{
+                    display: true,
+                    text: 'Y-Axis'
+                }
+            }
+        }
+    }
+    return (
+        <div>
+            <Line data={data} options={options}/>            
+        </div>
+    )
+
+
+(6) Bar Chart
+---------------
+
+    import React from 'react'
+    import {Bar} from 'react-chartjs-2'
+
+    function BarSet() {
+        const data = {
+            labels: ['Jan' , 'Feb' , 'Mar' , 'Apr' , 'May'],
+            datasets:[
+                {
+                    label:"Sales For 2021(M)",
+                    data: [3,2,2,1,5],
+                    backgroundColor: ['#0F0'],
+                },
+                {
+                    label: 'Sales Expected In 2022(M)',
+                    data: [1,3,2,2,3],
+                    backgroundColor: ['#F00'],
+                }
+            ]
+        }
+
+        const options = {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Custom Chart Title'
+                }
+            },
+            scales: {
+                x:{
+                    title:{
+                        display: true,
+                        text: 'x-Axis'
+                    }
+                },
+                y: {
+                    title:{
+                        display: true,
+                        text: 'Y-Axis'
+                    }
+                }
+            }
+        }
+        return (
+            <div>
+                <Bar data={data} options={options}/>            
+            </div>
+        )
+    }
+
+    export default BarSet
+
+
+(7) Doughnut Chart
+--------------------
+
+    import React from 'react'
+    import {Doughnut} from 'react-chartjs-2'
+
+    function DoughnutSet() {
+        const data = {
+            labels: ['Jan' , 'Feb' , 'Mar' , 'Apr' , 'May'],
+            datasets:[
+                {
+                    label:"Sales For 2021(M)",
+                    data: [3,2,2,1,5],
+                    backgroundColor: ['#0F0' , '#F50' , '#000' , '#00F' , '#c108ad'],
+                }
+            ]
+        }
+
+        const options = {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Custom Chart Title'
+                }
+            }
+        }
+        return (
+            <div>
+                <Doughnut data={data} options={options}/>            
+            </div>
+        )
+    }
+
+    export default DoughnutSet
