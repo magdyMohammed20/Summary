@@ -1,0 +1,49 @@
+(1) Loading Indicators Installation
+--------------------------------------
+==> yarn add react-spinners
+
+(2) Basic Sample
+-----------------
+
+    import {BounceLoader , BeatLoader , BarLoader} from 'react-spinners'
+
+    function App() {
+        return (
+            <div className="App">
+                <BounceLoader loading={false}/>
+                <BeatLoader loading/>
+                <BarLoader loading/>
+            </div>
+        );
+    }
+
+    export default App;
+
+(3) Color And Size
+-------------------
+
+    <BounceLoader size={24} color='#F50' loading/>
+    <BeatLoader size={30} color='#00F' loading/>
+
+(4) Install Emotion Package For Easy Give Style For spinners
+-------------------------------------------------------------
+==> yarn add @emotion/core
+
+    import {BounceLoader , BeatLoader , BarLoader} from 'react-spinners'
+    import {css} from '@emotion/react'
+
+    const style = css`
+        margin-top: 100px;
+        display: block
+    `;
+
+    function App() {
+        return (
+            <div className="App">
+                <BounceLoader css={style} size={24} color='#F50' loading/>
+                <BeatLoader css={style} size={30} color='#00F' loading/>
+            </div>
+        );
+    }
+
+    export default App;
