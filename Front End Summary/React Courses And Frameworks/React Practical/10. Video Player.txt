@@ -1,0 +1,86 @@
+(1) 'react-player' Installation
+--------------------------------
+==> [yarn add react-player]
+
+(2) Basic Sample
+------------------
+
+    import ReactPlayer from 'react-player/lazy'
+
+    function App() {
+        return (
+            <div className="App">
+                <ReactPlayer url='https://www.youtube.com/watch?v=pqz3sTThsls'/>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Add Video Controls
+------------------------
+
+    <ReactPlayer controls url='https://www.youtube.com/watch?v=pqz3sTThsls'/>
+
+
+(4) Specify Width And Height
+-----------------------------
+
+    <ReactPlayer 
+        controls 
+        url='https://www.youtube.com/watch?v=pqz3sTThsls'
+        width='480px'
+        height='240px'
+    />
+
+
+(5) React Player Functions
+---------------------------
+
+    <ReactPlayer 
+        controls 
+        url='https://www.youtube.com/watch?v=pqz3sTThsls'
+        width='480px'
+        height='240px'
+        onReady={() => console.log('Ready')}
+        onStart={() => console.log('Start')}
+        onPause={() => console.log('Paused')}
+        onEnded={() => console.log('End')}
+        onError={() => console.log('Error')}
+    />
+
+
+(6) Different Video Source From Twitch
+----------------------------------------
+
+    <ReactPlayer 
+        controls 
+        url='https://www.twitch.tv/videos/1146551298'
+        width='480px'
+        height='240px'
+        onReady={() => console.log('Ready')}
+        onStart={() => console.log('Start')}
+        onPause={() => console.log('Paused')}
+        onEnded={() => console.log('End')}
+        onError={() => console.log('Error')}
+    />
+
+
+(7) Multi Url Will Create A Playlist
+--------------------------------------
+
+    <ReactPlayer 
+        controls 
+        url={[
+            'https://www.youtube.com/watch?v=QwwLLJr2RxY',
+            'https://www.youtube.com/watch?v=pqz3sTThsls'
+        ]}
+        width='480px'
+        height='240px'
+        onReady={() => console.log('Ready')}
+        onStart={() => console.log('Start')}
+        onPause={() => console.log('Paused')}
+        onEnded={() => console.log('End')}
+        onError={() => console.log('Error')}
+    />
