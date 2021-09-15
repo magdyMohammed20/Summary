@@ -1,0 +1,16 @@
+(1) React Testing Library Requirements
+---------------------------------------
+==> Install NodeJs
+
+(2) React Testing Features
+----------------------------
+==> Catch Bugs
+==> Increaes Confidence In Application
+==> Speed QA Time (Testing Time Estimation)
+==> Can Serve As Documentation For Another Developers
+
+(3) Types Of Tests
+-------------------
+==> Unit Testing : Tests Piece Of Code In Component In Isolation
+==> Integration Testing : Tests The Interactions Between Components 
+==> End To End Testing (E2E) : Test User Flow From Begin To End And Tests Every Sigle Feature Of Application
