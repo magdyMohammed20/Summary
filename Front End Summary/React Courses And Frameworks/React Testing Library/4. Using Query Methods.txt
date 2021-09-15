@@ -1,0 +1,258 @@
+(1) Test Specific Component
+------------------------------
+==> Beside The Tested Component[Header.js] Create Folder Called '__test__'
+==> Inside '__test__' Folder Create The Test File 'Header.test.js'
+
+
+EX
+---
+
+    Header.js
+    ----------
+
+    import React from 'react'
+
+    function Header({title}) {
+        return (
+            <div>
+                <h1>{title}</h1>
+            </div>
+        )
+    }
+
+    export default Header
+
+
+    Header.test.js
+    ----------------
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+    test('Test Header Component' , () => {
+        render(<Header title='todo'/>); // Give 'todo' For Title
+        const Element = screen.getByText(/todo/i); // Search Element That Contains 'todo' Text
+        expect(Element).toBeInTheDocument() // Test Passed
+    });
+
+    it('Test Header Component' , () => {
+        render(<Header/>); // Give 'todo' For Title
+        const Element = screen.getByRole(/heading/i); // Check If Component Is Heading 'h1 , h2....'
+        expect(Element).toBeInTheDocument() // Test Passed
+    });
+
+
+(2) Element Dulpication
+--------------------------
+
+    Header.js
+    -----------
+
+    import React from 'react'
+
+    function Header({title}) {
+        return (
+            <div>
+                <h1>{title}</h1>
+                <h2>Cats</h2>
+            </div>
+        )
+    }
+
+    export default Header
+
+
+    Header.test.js
+    ---------------
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+    // This Test Will Passed
+    it('Test Header Component' , () => {
+        render(<Header title='todo'/>);
+        const Element = screen.getByText(/todo/i); 
+        expect(Element).toBeInTheDocument() 
+    });
+
+    // This Test Will Failed As There Are More Than Heading Elements In Header.js
+    it('Test Header Component' , () => {
+        render(<Header title='todo'/>); 
+        const Element = screen.getByRole(/heading/i); 
+        expect(Element).toBeInTheDocument() 
+    });
+
+
+(3) Solve getByRole() Duplication Error By Passing {name: 'todo'} To It That Refer To Heading With Text 'todo'
+----------------------------------------------------------------------------------------------------------------
+
+    it('Test Header Component' , () => {
+        render(<Header title='todo'/>); 
+        const Element = screen.getByRole(/heading/i , {name: 'todo'}); 
+        expect(Element).toBeInTheDocument() 
+    });
+
+
+(4) getByTitle()
+------------------
+==> This Test Will Passed As As 'title' Prop In 'Header.js' Has Value Of 'Header' In 'Header.test.js'
+
+    Header.js
+    ------------
+
+    import React from 'react'
+
+    function Header({title}) {
+        return (
+            <div>
+                <h1 title='Header'> {title}</h1>
+            </div>
+        )
+    }
+
+    export default Header
+
+    Header.test.js
+    ---------------
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+    // This Test Will Passed
+    it('Test Header Component' , () => {
+        render(<Header title='todo'/>);
+        const Element = screen.getByTitle(/Header/i); 
+        expect(Element).toBeInTheDocument() 
+    });
+
+
+(5) getByTestId()
+--------------------
+
+    Header.js
+    ----------
+
+    import React from 'react'
+
+    function Header({title}) {
+        return (
+            <div>
+                <h1 title='todo' data-testid='header-1'> {title}</h1>
+            </div> 
+        )
+    }
+
+    export default Header
+
+
+    Header.test.js
+    ----------------
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+    // This Test Will Passed
+    it('Test Header Component' , () => {
+        render(<Header title='todo'/>);
+        const Element = screen.getByTestId(/header-1/i); 
+        expect(Element).toBeInTheDocument() 
+    });
+
+
+(6) findByText()
+------------------
+
+    Header.js
+    -----------
+
+    import React from 'react'
+
+    function Header({title}) {
+        return (
+            <div>
+                <h1 title='todo'> {title}</h1>
+            </div> 
+        )
+    }
+
+    export default Header
+    
+    Header.test.js
+    ---------------
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+    // This Test Will Passed
+    it('Test Header Component' , async () => {
+        render(<Header title='todo'/>);
+        const Element = await screen.findByText(/todo/i); 
+        expect(Element).toBeInTheDocument() 
+    });
+
+
+(7) queryByText()
+-------------------
+
+    Header.js
+    ------------
+
+    import React from 'react'
+
+    function Header({title}) {
+        return (
+            <div>
+                <h1 title='todo'> {title}</h1>
+            </div> 
+        )
+    }
+
+    export default Header
+
+
+    Header.test.js
+    ---------------
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+    // This Test Will Passed
+    it('Test Header Component' , async () => {
+        render(<Header title='todo'/>);
+        const Element = await screen.queryByText(/dogs/i); 
+        expect(Element).not.toBeInTheDocument() 
+    });
+
+
+(8) getAllByRole()
+---------------------
+
+    Header.js
+    -----------
+
+    import React from 'react'
+
+    function Header({title}) {
+        return (
+            <div>
+                <h1> {title}</h1>
+                <h2> {title}</h2>
+            </div> 
+        )
+    }
+
+    export default Header
+
+    Header.test.js
+    ---------------
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+    // This Test Will Passed
+    // Check Number Of Heading Element In 'Header' Component
+    it('Test Header Component' , async () => {
+        render(<Header title='todo'/>);
+        const Element = await screen.getAllByRole(/heading/i); 
+        expect(Element.length).toBe(2) 
+    });
