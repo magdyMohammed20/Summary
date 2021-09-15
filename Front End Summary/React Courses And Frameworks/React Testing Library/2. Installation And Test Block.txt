@@ -1,0 +1,31 @@
+(1) Installation
+-----------------
+==> By Default ReactJs Install Testing Library You Will Note That In [Package.json]
+
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10"
+
+(2) Trigger Test Runing 
+------------------------
+==> Write [npm run test] In CMD
+==> It Gives Some Option And You Can Press 'a'
+==> By Default The Test Occurs In 'App.test.js'
+
+
+(3) Test Block
+----------------
+==> First  : Render Component We Want To Test
+==> Second : Find Element That Want To Interact With
+==> Third  : Interact With Those Elements (click , change ...)
+==> Fourth : Assert That The Results Are As Expected
+
+    test('renders learn react link', () => {
+        // Render Component We Want To Test
+        render(<App />);
+        // Find Element That Want To Interact With
+        // Screen Looks In Rendered Component For Element That Contains 'learn react' Text
+        const linkElement = screen.getByText(/learn react/i);
+        // Fourth : Assert That The Results Are As Expected
+        expect(linkElement).toBeInTheDocument();
+    });
