@@ -1,0 +1,19 @@
+(1) 'screen' Query Methods
+----------------------------
+==> getBy()      : Select 1 Element
+==> findBy()     : Select 1 Element
+==> queryBy()    : Select 1 Element
+==> getAllBy()   : Select 1 Or More That Element
+==> findAllBy()  : Select 1 Or More That Element
+==> queryAllBy() : Select 0 Or 1 Or More That Element
+
+
+(2) Priority Of Query Methods
+-------------------------------
+==> getByRole
+==> getByLabelText
+==> getByPlaceholderText
+==> getByText
+==> getByAltText
+==> getByTitle
+==> getByTestId
