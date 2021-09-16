@@ -1,0 +1,108 @@
+(1) Basic Samples Without 'fireEvent'
+--------------------------------------
+
+EX
+---
+
+    AddInput.js
+    ------------
+
+    import React , {useState} from 'react'
+
+    function AddInput() {
+        const[todo , setTodo] = useState('')
+        const[todos , setTodos] = useState([])
+
+        const onChange = e => setTodo(e.target.value);
+        const onClick  = _ =>  {
+            if(todo !== ""){
+                setTodos([...todos , todo] )
+                setTodo("")
+            }
+        }
+
+        return (
+            <div>
+                <input onChange={onChange} value={todo} placeholder='Enter Task Here'/>      
+                <button onClick = {onClick}>Add Task</button> 
+
+                <ul>
+                    {
+                        todos.map(tod => (<li key={Math.random()}>{tod}</li>))
+                    }
+                </ul>
+            </div>
+        )
+    }
+
+    export default AddInput
+
+    AddInput.test.js
+    -----------------
+
+    import {render , screen} from '@testing-library/react'
+    import AddInput from './AddInput'
+
+    // Test Passed
+    test("Test AddInput Component" , () => {
+        render(<AddInput/>);
+        const inputElement = screen.getByPlaceholderText(/Enter Task Here/i)
+        expect(inputElement).toBeInTheDocument()
+    })
+
+
+EX (If Tested Component Accept Function As Parameter)
+---
+
+    AddInput.test.js
+    -----------------
+
+    import {render , screen} from '@testing-library/react'
+    import AddInput from './AddInput'
+
+    const mockSetTodo = jest.fn();
+
+    // Test Passed
+    test("Test AddInput Component" , () => {
+        render(<AddInput setTodo={mockSetTodo} />);
+        const inputElement = screen.getByPlaceholderText(/Enter Task Here/i)
+        expect(inputElement).toBeInTheDocument()
+    })
+
+
+(2) Sample With fireEvent
+---------------------------
+
+    AddInput.test.js
+    -----------------
+
+    import {render , screen , fireEvent} from '@testing-library/react'
+    import AddInput from './AddInput'
+
+    // Test Passed
+    test("Test AddInput Component" , () => {
+        render(<AddInput/>);
+        const inputElement = screen.getByPlaceholderText(/Enter Task Here/i)
+        fireEvent.change(inputElement , {target: {value: 'Go To Hell'}});
+        expect(inputElement.value).toBe('Go To Hell')
+    })
+
+
+(3) Check If Input Will Be Empty After Clicking On 'Add Task Button'
+---------------------------------------------------------------------
+
+    AddInput.test.js
+    -----------------
+
+    import {render , screen , fireEvent} from '@testing-library/react'
+    import AddInput from './AddInput'
+
+    // Test Passed
+    test("Test AddInput Component" , () => {
+        render(<AddInput/>);
+        const inputElement = screen.getByPlaceholderText(/Enter Task Here/i)
+        const buttonElement = screen.getByRole('button' , {name: 'Add Task'})
+        fireEvent.change(inputElement , {target: {value: 'Go To Hell'}});
+        fireEvent.click(buttonElement)
+        expect(inputElement.value).toBe('')
+    })
