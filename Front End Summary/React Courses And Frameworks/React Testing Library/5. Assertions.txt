@@ -1,0 +1,195 @@
+(1) Test Component That Display Counter
+-----------------------------------------
+
+    Display.js
+    ------------
+
+    import {Link} from 'react-router-dom'
+
+    function Display({counter}) {
+        return (
+            <div>
+                <p>
+                    Counter Is {counter} {counter === 1 ? 'Task' : 'Tasks'}
+                </p>
+                <Link to='/'/>
+            </div>
+        )
+    }
+
+    export default Display
+
+
+    Display.test.js
+    -----------------
+
+    import {render , screen} from '@testing-library/react'
+    import Display from './Display'
+    import {BrowserRouter} from 'react-router-dom'
+
+    // We Make That As Display Component Have 'Link' Without Wraping With '<BrowserRouter>' 
+    // For Prevent Error Of Using 'Link' Outside 'BrowserRouter' Component
+    const MockDisplay = ({counter}) => {
+        return(
+            <BrowserRouter>
+                <Display counter={counter}/>
+            </BrowserRouter>
+        )
+    }
+
+    it('Test Counter Component' , () => {
+        render(<MockDisplay counter={5}/>)
+        const pElement = screen.getByText(/Counter Is 5 Tasks/i)
+        expect(pElement).toBeInTheDocument();
+    })
+
+
+(2) Test Element Visibility
+------------------------------
+
+    Display.js
+    ------------
+
+    import {Link} from 'react-router-dom'
+
+    function Display({counter}) {
+        return (
+            <div style={{opacity: 0}}>
+                <p>
+                    Counter Is {counter} {counter === 1 ? 'Task' : 'Tasks'}
+                </p>
+                <Link to='/'/>
+            </div>
+        )
+    }
+
+    export default Display
+
+
+    Display.test.js
+    -----------------
+
+    import {render , screen} from '@testing-library/react'
+    import Display from './Display'
+    import {BrowserRouter} from 'react-router-dom'
+
+    // We Make That As Display Component Have 'Link' Without Wraping With '<BrowserRouter>' 
+    // For Prevent Error Of Using 'Link' Outside 'BrowserRouter' Component
+    const MockDisplay = ({counter}) => {
+        return(
+            <BrowserRouter>
+                <Display counter={counter}/>
+            </BrowserRouter>
+        )
+    }
+
+    // Test Will Failed
+    test('Test Counter Component' , () => {
+        render(<MockDisplay counter={5}/>)
+        const pElement = screen.getByText(/Counter Is 5 Tasks/i)
+        expect(pElement).toBeVisible();
+    })
+
+
+(3) Check If Element Contain Specific HTML Element As Child
+------------------------------------------------------------
+
+    Display.test.js
+    ----------------
+
+    it('Test Counter Component' , () => {
+        render(<MockDisplay counter={1000}/>)
+        const pElement = screen.getByText(/Counter Is 1000 Tasks/i)
+        // Check If Element Contain 'p' Tag As Child
+        expect(pElement).toContainHTML("p");
+    })
+
+
+(4) Check If Element Contains Text
+------------------------------------
+
+    Display.test.js
+    ----------------
+
+    it('Test Counter Component' , () => {
+        render(<MockDisplay counter={1000}/>)
+        const pElement = screen.getByText(/Counter Is 1000 Tasks/i)
+        expect(pElement).toHaveTextContent("Counter Is 1000 Tasks");
+    })
+
+
+(5) Another Check Of Element Content
+--------------------------------------
+
+    Display.js
+    ------------
+
+    import {Link} from 'react-router-dom'
+
+    function Display({counter}) {
+        return (
+            <div>
+                <p data-testid='para'>
+                    Counter Is {counter} {counter === 1 ? 'Task' : 'Tasks'}
+                </p>
+                <Link to='/'/>
+            </div>
+        )
+    }
+
+    export default Display
+
+
+    Display.test.js
+    -----------------
+
+    import {render , screen} from '@testing-library/react'
+    import Display from './Display'
+    import {BrowserRouter} from 'react-router-dom'
+
+    // We Make That As Display Component Have 'Link' Without Wraping With '<BrowserRouter>' 
+    // For Prevent Error Of Using 'Link' Outside 'BrowserRouter' Component
+    const MockDisplay = ({counter}) => {
+        return(
+            <BrowserRouter>
+                <Display counter={counter}/>
+            </BrowserRouter>
+        )
+    }
+
+    it('Test Counter Component' , () => {
+        render(<MockDisplay counter={1000}/>)
+        const pElement = screen.getByTestId(/para/i)
+        expect(pElement.textContent).toBe("Counter Is 1000 Tasks");
+    })
+
+
+(6) If One Test Fails In Same Test Block All Tests Will Fails Too
+---------------------------------------------------------------------
+
+    Display.test.js
+    ----------------
+
+    import {render , screen} from '@testing-library/react'
+    import Display from './Display'
+    import {BrowserRouter} from 'react-router-dom'
+
+    // We Make That As Display Component Have 'Link' Without Wraping With '<BrowserRouter>' 
+    // For Prevent Error Of Using 'Link' Outside 'BrowserRouter' Component
+    const MockDisplay = ({counter}) => {
+        return(
+            <BrowserRouter>
+                <Display counter={counter}/>
+            </BrowserRouter>
+        )
+    }
+
+    it('Test Counter Component' , () => {
+        render(<MockDisplay counter={1000}/>)
+        const pElement = screen.getByTestId(/para/i)
+        expect(pElement.textContent).toBe("Counter Is 1000 Tasks");
+        expect(pElement.textContent).toBe("Counter Is 1000 Tasks");
+        expect(pElement.textContent).toBe("Counter Is 1000 Tasks");
+        // This Test Failed So All Previous Will Fail Too
+        expect(pElement.textContent).toBe("Counter Is 999 Tasks");
+    })
