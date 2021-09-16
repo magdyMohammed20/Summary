@@ -1,0 +1,75 @@
+(1) Describe() Block
+------------------------
+==> Used For Grouping And Organize Package Of Tests
+
+EX
+---
+
+    Display.js
+    ------------
+
+    function Display({counter}) {
+        return (
+            <div>
+                <p>
+                    Counter Is {counter} {counter === 1 ? 'Task' : 'Tasks'}
+                </p>
+            </div>
+        )
+    }
+
+    export default Display
+
+
+
+    Display.test.js
+    -----------------
+
+    import {render , screen} from '@testing-library/react'
+    import Display from './Display'
+
+    describe('Test Package Of Tests' , () => {
+
+        // Test Passed
+        it('Test Counter Component' , () => {
+            render(<Display counter={1000}/>)
+            const Element = screen.getByText(/Counter Is 1000 Tasks/i)
+            expect(Element).toBeInTheDocument();
+        })
+
+        // Test Fail
+        it('Test Counter Component' , () => {
+            render(<Display counter={1000}/>)
+            const Element = screen.getByText(/Counter Is 999 Tasks/i)
+            expect(Element).toBeInTheDocument();
+        })
+    })
+
+
+(2) Nested Describe
+---------------------
+
+    Display.test.js
+    ----------------
+
+    import {render , screen} from '@testing-library/react'
+    import Display from './Display'
+
+    describe('Test Package Of Tests' , () => {
+
+        describe('Inner Test' , () => {
+            // Test Passed
+            it('Test Counter Component' , () => {
+                render(<Display counter={1000}/>)
+                const Element = screen.getByText(/Counter Is 1000 Tasks/i)
+                expect(Element).toBeInTheDocument();
+            })
+        })
+
+        // Test Fail
+        it('Test Counter Component' , () => {
+            render(<Display counter={1000}/>)
+            const Element = screen.getByText(/Counter Is 999 Tasks/i)
+            expect(Element).toBeInTheDocument();
+        })
+    })
