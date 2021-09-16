@@ -1,0 +1,86 @@
+(1) Finding Async Element
+---------------------------
+
+EX (findByTestId)
+---
+
+    Followers.js
+    --------------
+
+    import React , {useState , useEffect} from 'react'
+    import axios from 'axios'
+
+    function Followers() {
+
+        const[followers , setFollowers] = useState([])
+
+        useEffect(() => {
+            getFllowers()
+        }, [])
+
+        const getFllowers = async() => {
+            const {data} = await axios.get('https://randomuser.me/api/?results=5')
+            setFollowers(data.results)
+        }
+
+        return (
+            <div>
+                {
+                    followers.map((follower , index) => {
+                        return (
+                            <div data-testid={`follower-item-${index}`} style={{display: 'inline-block' , margin: '5px'}}>
+                                <img src={follower.picture.large} />
+                                <p>UserName : {follower.login.username}</p>
+                                <p>Email : {follower.email}</p>
+                                <p>FullName : {follower.name.title}.{follower.name.first} {follower.name.last}</p>
+                                <p>Country : {follower.location.country}</p>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+
+    export default Followers
+
+
+    Followers.test.js
+    -------------------
+
+    import {render , screen , fireEvent} from '@testing-library/react'
+    import Followers from './Followers';
+
+
+    describe('Test Package Of Tests' , () => {
+        // Test Will Pass
+        it("Test Fllowers Listing With Async/Await" , async() => {
+            render(<Followers/>);
+            // Get First Fetched User
+            // If Use 'getByTestId' It Produce Error
+            // So We Use 'findByTestId' Instead
+            // Must Use Async/Await Here For Enable To Find The Element
+            const divElement = await screen.findByTestId('follower-item-0')
+            expect(divElement).toBeInTheDocument()
+        })
+    })
+
+
+EX (findAllByTestId)
+---
+
+    Fllowers.test.js
+    --------------------
+
+    import {render , screen , fireEvent} from '@testing-library/react'
+    import Followers from './Followers';
+
+
+    describe('Test Package Of Tests' , () => {
+        // Test Will Pass
+        it("Test Fllowers Listing With Async/Await" , async() => {
+            render(<Followers/>);
+            const divElement = await screen.findAllByTestId(/follower-item/i)
+            expect(divElement.length).toBeGreaterThanOrEqual(5)
+        })
+    })
