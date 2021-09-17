@@ -1,0 +1,152 @@
+(1) beforeEach()
+-------------------
+==> Used For Runing Anything Before Each Test Executed
+
+Ex
+-----
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+    describe("Test Number Of Headings" , () => {
+        // This Will Executed Before Each Test
+        beforeEach(() => {
+            console.log('RUNING BEFORE EACH TEST')
+        })
+
+        it('Test Header Component' , async () => {
+            render(<Header title='todo'/>);
+            const headElement = await screen.getAllByRole(/heading/i); 
+            expect(headElement.length).toBe(2) 
+        });
+
+        it('Test If Button Exist' , async () => {
+            render(<Header title='todo'/>);
+            const btnElement = await screen.getByRole(/button/i); 
+            expect(btnElement).toBeInTheDocument() 
+        });
+    })
+
+(2) beforeAll()
+-------------------
+==> Used For Runing Anything Only Once Before All Tests Executed
+
+Ex
+---
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+
+    describe("Test Number Of Headings" , () => {
+
+        // This Will Executed Before Each Test
+        beforeEach(() => {
+            console.log('RUNING BEFORE EACH TEST')
+        })
+
+        // This Will Executed Before All Tests
+        beforeAll(() => {
+            console.log('RUNING BEFORE ALL ONCE')
+        })
+
+        it('Test Header Component' , async () => {
+            render(<Header title='todo'/>);
+            const headElement = await screen.getAllByRole(/heading/i); 
+            expect(headElement.length).toBe(2) 
+        });
+
+        it('Test If Button Exist' , async () => {
+            render(<Header title='todo'/>);
+            const btnElement = await screen.getByRole(/button/i); 
+            expect(btnElement).toBeInTheDocument() 
+        });
+    })
+
+(3) afterEach()
+-------------------
+==> Used For Runing Anything After Each Test Executed
+
+Ex
+-----
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+
+    describe("Test Number Of Headings" , () => {
+
+        // This Will Executed Before Each Test
+        beforeEach(() => {
+            console.log('RUNING BEFORE EACH TEST')
+        })
+
+        // This Will Executed Before All Tests
+        beforeAll(() => {
+            console.log('RUNING BEFORE ALL ONCE')
+        })
+
+        // This Will Executed After Each Test
+        afterEach(() => {
+            console.log('RUNING AFTER EACH TEST')
+        })
+
+        it('Test Header Component' , async () => {
+            render(<Header title='todo'/>);
+            const headElement = await screen.getAllByRole(/heading/i); 
+            expect(headElement.length).toBe(2) 
+        });
+
+        it('Test If Button Exist' , async () => {
+            render(<Header title='todo'/>);
+            const btnElement = await screen.getByRole(/button/i); 
+            expect(btnElement).toBeInTheDocument() 
+        });
+    })
+
+
+(4) afterAll()
+-------------------
+==> Used For Runing Anything Only Once After All Tests Executed
+
+Ex
+---
+
+    import {render , screen} from '@testing-library/react'
+    import Header from '../Header'
+
+
+    describe("Test Number Of Headings" , () => {
+
+        // This Will Executed Before Each Test
+        beforeEach(() => {
+            console.log('RUNING BEFORE EACH TEST')
+        })
+
+        // This Will Executed Before All Tests
+        beforeAll(() => {
+            console.log('RUNING BEFORE ALL ONCE')
+        })
+
+        // This Will Executed After Each Test
+        afterEach(() => {
+            console.log('RUNING AFTER EACH TEST')
+        })
+
+        // This Will Executed After All Tests
+        afterAll(() => {
+            console.log('RUNING AFTER ALL ONCE')
+        })
+
+        it('Test Header Component' , async () => {
+            render(<Header title='todo'/>);
+            const headElement = await screen.getAllByRole(/heading/i); 
+            expect(headElement.length).toBe(2) 
+        });
+
+        it('Test If Button Exist' , async () => {
+            render(<Header title='todo'/>);
+            const btnElement = await screen.getByRole(/button/i); 
+            expect(btnElement).toBeInTheDocument() 
+        });
+    })
