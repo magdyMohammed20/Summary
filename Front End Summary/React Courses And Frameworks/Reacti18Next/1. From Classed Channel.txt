@@ -1,0 +1,566 @@
+(1) Reacti18next
+-----------------
+==> is a powerful internationalization framework for React / React Native which is based on i18next.
+
+(2) Installation
+---------------------
+==> npm install react-i18next i18next --save
+
+
+(3) Sample Example
+------------------------
+
+    index.js
+    -----------
+
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import i18n from "i18next";
+    import { useTranslation , initReactI18next } from "react-i18next";
+
+    i18n
+    .use(initReactI18next) // passes i18n down to react-i18next
+    .init({
+        // the translations
+        resources: {
+            en: {
+                translation: {
+                    "Welcome to React": "Welcome to React and react-i18next"
+                }
+            },
+            fr: {
+                translation: {
+                    "Welcome to React": "Bienvenue à React et react-i18next"
+                }
+            }
+        },
+        lng: document.querySelector('html').lang, // if you're using a language detector, do not define the lng option
+        fallbackLng: "en",
+
+        interpolation: {
+            escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
+        }
+    });
+
+    function App() {
+        const { t } = useTranslation();
+        return <h2>{t('Welcome to React')}</h2>;
+    }
+    
+
+    ReactDOM.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+
+    export default i18n;
+
+
+    index.html
+    -------------
+
+    <html lang="en">
+
+
+
+(4) Can Use 'i18next-browser-languagedetector' For Fetch Browser Language To Set Default Language
+---------------------------------------------------------------------------------------------------
+==> yarn add i18next-browser-languagedetector
+
+
+EX
+----
+
+    index.js
+    ----------
+
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import i18n from "i18next";
+    import { useTranslation , initReactI18next } from "react-i18next";
+    import LanguageDetector from 'i18next-browser-languagedetector'
+    
+    i18n
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .init({
+        resources: {
+        en: {
+            translation: {
+                "Welcome to React": "Welcome to React and react-i18next"
+            }
+        },
+        fr: {
+            translation: {
+                "Welcome to React": "Bienvenue à React et react-i18next"
+            }
+        }
+        },
+        fallbackLng: "en",
+        detection:{
+            order: ['htmlTag', 'cookie', 'localStorage',  'path', 'subdomain']
+        },
+        interpolation: {
+            escapeValue: false
+        }
+    });
+
+    function App() {
+        const { t } = useTranslation();
+    
+        return <h2>{t('Welcome to React')}</h2>;
+    }
+    
+
+    ReactDOM.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+
+    export default i18n;
+
+
+    index.html
+    ------------
+
+    <html lang="fr">
+
+
+EX (Can Store Language In Cookies Using 'caches')
+---- 
+
+    index.js
+    -----------
+
+    i18n
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .init({
+        resources: {
+            en: {
+                translation: {
+                "Welcome to React": "Welcome to React and react-i18next"
+                }
+            },
+            fr: {
+                translation: {
+                "Welcome to React": "Bienvenue à React et react-i18next"
+                }
+            }
+        },
+        fallbackLng: "en",
+        detection:{
+            order: ['htmlTag', 'cookie', 'localStorage',  'path', 'subdomain'],
+            caches:['cookie']
+        },
+        interpolation: {
+            escapeValue: false
+        }
+    });
+    
+
+(5) All Previous Ways Isn't Best Practice To Translate So We Can Use 'i18next-http-backend' For Translation
+------------------------------------------------------------------------------------------------------------
+==> yarn add i18next-http-backend
+==> Inside 'public' Folder Create This Path [assets/locales/en/translation.json] And [assets/locales/fr/translation.json]
+==> Set Translation Inside 'assets/locales/en/translation.json' And 'assets/locales/fr/translation.json'
+==> Import 'HttpApi' In 'index.js'
+==> Remove 'resources' Object From 'index.js'
+==> Add 'backend' Object In 'index.js' To Load Translation Pathes
+==> Add 'react' Object In 'index.js' For Disable Suspense Error
+
+
+    en/translation.json
+    ---------------------
+
+    {
+        "Welcome to React": "Welcome to React and react-i18next"
+    }
+
+    fr/translation.json'
+    ---------------------
+
+    {
+        "Welcome to React": "Bienvenue à React et react-i18next"
+    }
+
+
+    index.js
+    ----------
+
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import i18n from "i18next";
+    import { useTranslation , initReactI18next } from "react-i18next";
+    import LanguageDetector from 'i18next-browser-languagedetector'
+    import HttpApi from 'i18next-http-backend'
+
+    i18n
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .use(HttpApi)
+    .init({
+        fallbackLng: "en",
+        detection:{
+            order: ['cookie', 'localStorage',  'path', 'subdomain'],
+            caches:['cookie']
+        },
+        backend:{
+            loadPath: '/assets/locales/{{lng}}/translation.json'
+        },
+        react: {
+            useSuspense: false
+        },
+        interpolation: {
+            escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
+        }
+    });
+
+    function App() {
+        const { t } = useTranslation();
+    
+        return <h2>{t('Welcome to React')}</h2>;
+    }
+    
+
+    ReactDOM.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+
+    export default i18n;
+
+
+(6) Change Language Using UI
+------------------------------
+==> In Previous Sample We Change Language Through Editing Cookie Value And We Want To Change It Using UI
+==> Add 'supportedLngs' Array In 'index.js'
+==> Import App From 'App.js' In 'index.js'
+==> Note: 'country_code' Setted If Want To Set Country Icons With 'Flag_icon_css' Library 
+
+EX (Without UI Buttons)
+----
+
+    public/assets/locales/ar/translation.json
+    --------------------------------------------
+
+    {
+        "app_title": "عنوان",
+        "language": "اللغة",
+        "welcome_message": "اهلا بكم",
+        "days_since_release": "لقد مرت {{number_of_days}} أيام على إصدار هذا الفيديو"
+    }
+
+    public/assets/locales/en/translation.json
+    --------------------------------------------
+
+    {
+        "app_title": "Title",
+        "language": "Language",
+        "welcome_message": "Welcome",
+        "days_since_release": "it's been {{number_of_days}} days since this video was released"
+    }
+
+    public/assets/locales/fr/translation.json
+    --------------------------------------------
+
+    {
+        "app_title": "Titre",
+        "language": "Langue",
+        "welcome_message": "Bienvenue",
+        "days_since_release": "ça fait {{number_of_days}} jours depuis la sortie de cette vidéo"
+    }
+
+
+    App.js
+    -------
+
+    import './App.css';
+    import { useTranslation } from 'react-i18next';
+
+    function App() {
+        const {t} = useTranslation();
+        const num_of_days = 10;
+        return (
+            <div className="App">
+                {t('welcome_message')}
+                {/* Passing Value To Json File */}
+                <h1>
+                    {
+                        t('days_since_release' , {number_of_days :num_of_days })
+                    }
+                </h1>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    index.js
+    ---------
+
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import App from './App'
+    import i18n from "i18next";
+    import {initReactI18next } from "react-i18next";
+    import LanguageDetector from 'i18next-browser-languagedetector'
+    import HttpApi from 'i18next-http-backend'
+
+    i18n
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .use(HttpApi)
+    .init({
+        supportedLngs: ['en' , 'fr' , 'ar'],
+        fallbackLng: "en",
+        detection:{
+            order: ['cookie', 'localStorage',  'path', 'subdomain'],
+            caches:['cookie']
+        },
+        backend:{
+            loadPath: '/assets/locales/{{lng}}/translation.json'
+        },
+        react: {
+            useSuspense: false
+        },
+        interpolation: {
+            escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
+        }
+    });
+
+    ReactDOM.render(
+        <React.StrictMode>
+            <App />
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+
+    export default i18n;
+
+
+EX (With UI Buttons)
+----
+
+    App.js
+    --------
+
+    import './App.css';
+    import { useTranslation } from 'react-i18next';
+    import i18next from 'i18next';
+
+    const languages = [
+        {
+            code: 'fr',
+            name: 'Francais',
+            country_code: 'fr'
+        },
+        {
+            code: 'en',
+            name: 'English',
+            country_code: 'gb'
+        },
+        {
+            code: 'ar',
+            name: 'Arabic',
+            country_code: 'sa'
+        }
+    ]
+    function App() {
+        const {t} = useTranslation();
+        const num_of_days = 10;
+        
+        return (
+            <div className="App">
+            
+                {
+                    languages.map(({code , name , country_code}) => {
+                        return(
+                            <button  key={country_code} onClick={() => i18next.changeLanguage(code)}>{name}</button>
+                        )
+                    }) 
+                }
+            
+
+                <div>
+                    {t('welcome_message')}
+                    <h1>
+                        {
+                            t('days_since_release' , {number_of_days :num_of_days })
+                        }
+                    </h1>
+                </div>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+EX (Can Add Loading Markup)
+---
+
+    index.js
+    -----------
+
+    import React , {Suspense} from 'react';
+    import ReactDOM from 'react-dom';
+    import App from './App'
+    import i18n from "i18next";
+    import {initReactI18next } from "react-i18next";
+    import LanguageDetector from 'i18next-browser-languagedetector'
+    import HttpApi from 'i18next-http-backend'
+
+    i18n
+    .use(initReactI18next)
+    .use(LanguageDetector)
+    .use(HttpApi)
+    .init({
+            supportedLngs: ['en' , 'fr' , 'ar'],
+            fallbackLng: "en",
+            detection:{
+            order: ['cookie', 'localStorage',  'path', 'subdomain'],
+            caches:['cookie']
+            },
+            backend:{
+                loadPath: '/assets/locales/{{lng}}/translation.json'
+            },
+            interpolation: {
+                escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
+            }
+    });
+
+    const loadingMarkup = () => {(
+        <div>
+            Loading...
+        </div>
+    )}
+
+    ReactDOM.render(
+        <Suspense fallback={loadingMarkup}>
+            <App />
+        </Suspense>,
+        document.getElementById('root')
+    );
+
+    export default i18n;
+
+
+EX (Change Body Direction When Lang Is Arabic)
+---
+==> Install js-cookie [yarn add js-cookie]
+
+    index.html
+    ------------
+
+        <body dir='ltr'>
+
+
+    App.js
+    --------
+
+    import { useEffect } from 'react';
+    import { useTranslation } from 'react-i18next';
+    import i18next from 'i18next';
+    import cookies from 'js-cookie'
+
+    const languages = [
+    {
+        code: 'fr',
+        name: 'Francais',
+        country_code: 'fr'
+    },
+    {
+        code: 'en',
+        name: 'English',
+        country_code: 'gb'
+    },
+    {
+        code: 'ar',
+        name: 'Arabic',
+        country_code: 'sa',
+        dir: 'rtl' // Add 'dir' Here
+    }
+    ]
+    function App() {
+        const currentLangCode = cookies.get('i18next') || 'en'; // Get Value From  Cookies
+        const currentlang = languages.find(l => l.code === currentLangCode);
+
+        const {t} = useTranslation();
+        const num_of_days = 10;
+
+        useEffect(() => {
+            document.body.dir = currentlang.dir || 'ltr';
+
+        }, [currentlang])
+
+        return (
+            <div className="App">
+            
+                {
+                    languages.map(({code , name , country_code}) => {
+                        return(
+                            <button  key={country_code} onClick={() => i18next.changeLanguage(code)}>{name}</button>
+                        )
+                    }) 
+                }
+            
+                <div>
+                    {t('welcome_message')}
+                    <h1>
+                        {
+                            t('days_since_release' , {number_of_days :num_of_days })
+                        }
+                    </h1>
+                </div>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+
+EX (Disable Current Language Button)
+---
+        App.js
+        --------
+
+        {
+          languages.map(({code , name , country_code}) => {
+            return(
+                <button  key={country_code} onClick={() => i18next.changeLanguage(code)} disabled={code === currentLangCode}>{name}</button>
+            )
+          }) 
+        }
+
+EX (Set Site Title)
+----    
+
+    App.js
+    --------
+
+    useEffect(() => {
+        document.body.dir = currentlang.dir || 'ltr';
+        document.title = t('app_title'); // Set Site Title
+    }, [currentlang])
+
+
+(7) If Want Change Language With 'Path' [EX: localhost:3000/ar]
+-------------------------------------------------------------------
+==> Set 'path' As First Value Of The Array In 'index.js'
+
+    index.js
+    ---------
+
+    detection:{
+        order: ['path' , 'cookie', 'localStorage',  'path', 'subdomain'],
+        caches:['cookie']
+    }
