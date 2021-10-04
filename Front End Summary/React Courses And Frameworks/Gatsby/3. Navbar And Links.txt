@@ -1,0 +1,110 @@
+(1) Create Navbar
+-------------------
+==> In 'src' Folder Create Folder Called 'Components' That Contains 'Navbar.js'
+==> In 'Navbar.js' Create The Required Navbar
+==> Import Navbar In [src/pages/index.js]
+==> Problem : But This Is Not Legal As We Must Import Navbar In Each Page We Create
+
+    Navbar.js
+    -----------
+
+    import React from 'react'
+    import {Link} from 'gatsby'
+
+    function Navbar() {
+        return (
+            <nav>
+                <h1>Web Worriers</h1>
+                <ul>
+                    <li><Link to='/'>Home</Link></li>
+                    <li><Link to='/about'>About</Link></li>
+                </ul>
+            </nav>
+        )
+    }
+
+    export default Navbar
+
+
+    src/pages/index.js
+    --------------------
+
+    import React from "react"
+    import Navbar from "../Components/Navbar"
+
+    export default function Home() {
+        return (
+            <section>
+                <Navbar/>
+                <h1>Magdy Mohammed</h1>
+                <p>Front End Developer</p>
+                <button>See More</button>
+            </section>
+        )
+    }
+
+
+(2) Slove Problem Using Layout File
+-------------------------------------
+==> Beside 'Navbar.js' Create File Called 'Layout.js'
+==> Inside Each Page [EX: about.js , index.js , 404.js] Wrap It With 'Layout' Component
+
+
+    Layout.js
+    -------------
+
+    import React from 'react'
+    import Navbar from './Navbar'
+
+    // Extract Layout Content To Render It
+    function Layout({children}) {
+        return (
+            <div className='layout'>
+                <Navbar/>
+                <div className='content'>
+                    {children}
+                </div>
+                <footer>
+                    <p>This Is Footer</p>
+                </footer>
+            </div>
+        )
+    }
+    export default Layout
+
+
+    src/pages/index.js
+    ---------------------
+
+    import React from "react"
+    import Layout from "../Components/Layout"
+
+    // Wrapping Here With 'Layout'
+    export default function Home() {
+        return (
+                <Layout>
+                    <section>
+                        <h1>Magdy Mohammed</h1>
+                        <p>Front End Developer</p>
+                        <button>See More</button>
+                    </section>
+                </Layout>
+            )
+    }
+
+
+    src/pages/about.js
+    ---------------------
+
+    import React from 'react'
+    import Layout from '../Components/Layout'
+    export default function About() {
+        return (
+            <Layout>
+                <div>
+                    <h1>About Page</h1>
+                    <p>Hellow My Friends This Is Me</p> 
+                </div>
+            </Layout>
+        )
+    }
