@@ -1,0 +1,67 @@
+(1) Gatsby
+------------
+==> Static Site Generator [SSG]
+==> Uses Combination Of React And GraphQL
+==> Gatsby Calles Itself Modern Site Generator
+
+(2) Static Site Generator [SSG]
+---------------------------------
+==> Generates Html Pages Using Combination Of Templates , Componnents And Data
+
+(3) Types Of Websites
+-------------------------
+
+[1] Static Website
+---------------------
+==> Use Static Html Pages With Maybe Css And Js Then Upload It To Host
+
+Drawbacks
+----------
+==> Hard To Update And Maintain Pages [Re-Writing Same Code In Every Page Like (Navbar , Footer....)]
+==> Fresh Request To Server For Every Page
+==> Don't Contains Dynamic Data 
+==> Is Good For SEO But Not Good For (Speed And Easy To Update)
+
+
+[2] Single Page Application [SPA]
+-----------------------------------
+==> Typical React/Vue/Angular Website
+==> Only Signle Server Request For Initial HTML Page 
+==> Every Thing Else (Routing , Data) Handled By SPA In The Browser
+
+Drawbacks
+----------
+==> Web Pages Aren't SEO Friendly
+
+
+[3] Server Side Rendering [SSR]
+---------------------------------
+==> Pages Rendered On The Server After Every Request
+==> Servers Sources Data And Uses Templates To Render Html Pages 
+==> Resulting Pages Are Sent Back To Browser
+
+Drawbacks
+------------
+==> Fresh Request Need To Be Made For Every Page
+==> Server Can Take Time To Get Data And Rendering Pages
+==> Is Good For SEO And Easy To Update But Not Good For Speed
+
+
+[4] Static Site Generator [SSG]
+---------------------------------
+==> Static Pages Are Compiled At Build Time (Before Deployment)
+==> Gatsby Sites/Pages Are Made Using React Componnents
+==> Static Pages Are Then Deployed To The Web
+==> After Initial Requets The Site Behaves More Like An SPA
+==> Is Good For Speed , SEO And Easy To Update
+
+
+(4) Gatsby Advantages
+----------------------
+==> Gatsby Can Handle Different Data Sources For Application [EX: Can Handle Data From Wordpress And Shopify And MongoDB In Same Time]
+
+==> Gatsby Combines All Resources Into Unified GraphQL Layer
+
+        Shopify   ========>  ------------      ---------------
+                                GraphQL  <====  Our Website
+        Wordpress ========>  ------------      ---------------
