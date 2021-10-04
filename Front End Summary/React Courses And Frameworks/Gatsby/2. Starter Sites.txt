@@ -1,0 +1,62 @@
+(1) Starter Sites
+------------------
+==> Can Go To Gatsby Site Then Click Starter Link To See Starter Sites Templates
+==> Below The Any Template There Are Command To Execute For Use This Template But Must Install 'Gatsby-Cli' First 
+
+
+(2) Install Gatsby And Any Templates You Want
+----------------------------------------------
+==> npm i -g gatsby-cli
+==> npx gatsby new gatsby-starter-hello-world-beta https://github.com/gatsby-inc/gatsby-starter-hello-world-beta
+
+(3) Run Gatsby On Local Server
+--------------------------------
+==> Run [gatsby develop] In CMD
+==> After Runing You Will Note That A New Folder Created Called 'public' That Contains The 'index.html'
+
+(4) Now Can Edit The 'src/pages/index.js' Or Can Create Another New pages
+
+(5) Create About Page
+-----------------------
+==> In [src/pages/] Folder Create 'About.js' File That Contains React Component And By Default Gatsby Create A Route For 'About' Component And Can Navigate It [localhost:8000/about]
+
+    About.js
+    -----------
+
+    import React from 'react'
+    function About() {
+        return (
+            <div>
+                <h1>About Page</h1>
+                <p>Hellow My Friends This Is Me</p> 
+            </div>
+        )
+    }
+    export default About
+
+
+(6) More Complex Structure
+-------------------------------
+==> You Can Create Folders And SubFolders For The pages [EX: src/pages/projects/firstProject/project.js] And Navigate It With [localhost:8000/projects/firstProject/project]
+==> If Specific Folder Have 'index.js' It Doesn't Matter To Write FileName As Last In The Path
+
+
+(7) Create 404 Page
+--------------------
+==> In [src/pages] Create File Called [404.js] To Show It When Link Is Not Founded
+==> When Execute It Shows A Develop Page If Click On 'preview custom 404 page' Button It Will Shows The Actual 404 Page But After Deploy It Will Shows 404 Page Directly 
+    
+    404.js
+    ---------
+
+    import React from 'react'
+
+    function NotFounded() {
+        return (
+            <div>
+                <h1>Error 404 Not Founded</h1>
+            </div>
+        )
+    }
+
+    export default NotFounded
