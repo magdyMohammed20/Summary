@@ -1,0 +1,51 @@
+(1) In Previous File The Technique We Did Is For Pages Not For Components
+
+(2) Use 'useStaticQuery' For Create Queries Inside Components Only
+-------------------------------------------------------------------
+
+    /src/Components/Navbar.js
+    -----------------------------
+
+    import React from 'react'
+    import {Link , graphql , useStaticQuery} from 'gatsby'
+
+    function Navbar() {
+
+        const query = useStaticQuery(graphql`
+            query myQuery{
+                site{
+                    siteMetadata{
+                        title
+                    }
+                }
+            }
+        `)
+
+        const {title} = query.site.siteMetadata
+        return (
+            <nav>
+                <h1>{title}</h1>
+                <ul>
+                    <li><Link to='/'>Home</Link></li>
+                    <li><Link to='/about'>About</Link></li>
+                    <li><Link to='/projects/firstProject'>My Projects</Link></li>
+                </ul>
+            </nav>
+        )
+    }
+
+    export default Navbar
+
+
+(3) You Can Write Query In Navbar By This Way
+-----------------------------------------------
+
+    const query = useStaticQuery(graphql`
+        {
+            site{
+                siteMetadata{
+                    title
+                }
+            }
+        }
+    `)
