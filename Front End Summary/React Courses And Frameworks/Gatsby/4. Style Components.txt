@@ -1,0 +1,71 @@
+(1) Style Components Ways
+--------------------------
+==> Global Css For [Navbar , Footer]
+==> Css Module For Other Components
+
+
+(2) Global Css
+----------------
+==> Inside 'src' Folder Create Folder Called 'styles' Contains 'styles.css'
+==> Import 'styles.css' File Inside 'Layout' Component
+
+
+    src/styles/styles.css
+    ----------------------
+
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+    *,body{
+        padding : 0;
+        margin: 0;
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+    body{
+        background: linear-gradient(at top left , red , green , blue)
+    }
+
+
+(3) Css Module
+----------------
+==> Inside 'src' Folder Create Folder Called 'styles' Contains 'home.module.css'
+==> Inside 'src/pages/index.js' Import 'home.module.css'
+
+    home.module.css
+    ----------------
+
+    .header{
+        background-color: red;
+        height: 100vh;
+    }
+
+    h1{
+        //...........
+    }
+
+    p{
+        //...........
+    }
+
+
+    index.js
+    -----------
+
+    import React from "react"
+    import Layout from "../Components/Layout"
+    import * as styles from '../styles/home.module.css'
+
+    // Wrapping Here With 'Layout'
+    export default function Home() {
+    return (
+            <Layout>
+                <section className={styles.header}>
+                    <h1>Magdy Mohammed</h1>
+                    <p>Front End Developer</p>
+                    <button>See More</button>
+                </section>
+            </Layout>
+        )
+    }
+
+
