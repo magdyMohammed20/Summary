@@ -1,0 +1,34 @@
+(1) Static Files
+------------------
+==> By Default There Are Folder Called 'static' In Our Gatsby Project
+==> Static Files Like Images , Extra Stylesheets , Js Files
+==> Any File In './static' Or 'public' Folders Are Enabled For Access From The Browser Directly 
+==> If We Set Image Inside './static' Folder By Default It Copied In 'public' Folder And Can Access It From Browser Link [localhost:8000/11.jpg]
+
+
+(2) Access Assets From Any Component
+----------------------------------------
+
+    index.js (Access 11.jpg)
+    ---------
+
+    import React from "react"
+    import Layout from "../Components/Layout"
+    import * as styles from '../styles/home.module.css'
+
+    export default function Home() {
+
+    const {header , h1text , para , imgcon} = styles;
+    return (
+            <Layout>
+                <section className={header}>
+                    <h1 className={h1text}>Magdy Mohammed</h1>
+                    <p className={para}>Front End Developer</p>
+                    <button>See More</button>
+                </section>
+                <section className={imgcon}>
+                    <img src='/11.jpg' alt='Computer Image'/>
+                </section>
+            </Layout>
+        )
+    }
