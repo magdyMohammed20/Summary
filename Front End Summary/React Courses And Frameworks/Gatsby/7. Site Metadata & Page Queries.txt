@@ -1,0 +1,96 @@
+(1) Add Metadata While Navigate [localhost:8000/___graphql]
+-------------------------------------------------------------
+==> Open 'gatsby-config.js' Then Add 'siteMetadata' Property To The Exported Object
+==> Restart Server Again
+
+    gatsby-config.js
+    ------------------
+
+    module.exports = {
+        plugins: [],
+        siteMetadata: {
+            title: 'This Is Title',
+            description: 'This Is Desc',
+            copyrights: '@copy Magdy Mohammed 2021'
+        }
+    }
+
+
+    localhost:8000/___graphql (Writing Query)
+    -----------------------------
+
+    query MyQuery {
+        site {
+            siteMetadata {
+                copyrights
+                description
+                title
+            }
+        }
+    }
+
+
+    Output
+    ----------
+
+    {
+        "data": {
+                "site": {
+                "siteMetadata": {
+                    "copyrights": "@copy Magdy Mohammed 2021",
+                    "description": "This Is Desc",
+                    "title": "This Is Title"
+                    }
+                }
+        },
+        "extension": {}
+    }
+
+
+(2) Create Query From Our Component
+-------------------------------------- 
+==> Gatsby Will Find The Exported Query And Pass It To The Props
+
+
+    src/pages/index.js
+    --------------------
+
+    import { graphql } from "gatsby"; // 2- Import graphql Here
+    import React from "react"
+    import Layout from "../Components/Layout"
+    import * as styles from '../styles/home.module.css'
+
+    export default function Home({data}) {
+    const {header , h1text , para , imgcon} = styles;
+
+    // 3- Fetch Quired Data From Props 
+    const {title , description} = data.site.siteMetadata;
+
+    return (
+            <Layout>
+                <section className={header}>
+                    <h1 className={h1text}>Magdy Mohammed</h1>
+                    <p className={para}>Front End Developer</p>
+                    <button>See More</button>
+                </section>
+                <section className={imgcon}>
+                    <img src='/11.jpg' alt='Computer Image'/>
+                </section>
+                <p className='d-block'>
+                    {title} - {description}
+                </p>
+            </Layout>
+        )
+    }
+
+    // 1- Export Query
+    export const query = graphql`
+        query MyQuery {
+            site {
+                siteMetadata {
+                    title
+                    description
+                }
+            }
+        }
+    `
