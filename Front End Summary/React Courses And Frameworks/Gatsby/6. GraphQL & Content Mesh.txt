@@ -1,0 +1,30 @@
+(1) Content Mesh
+------------------
+==> Gatsby Brings All Data Sources Into GraphQL Layer And Call This Content 'Mesh'
+
+(2) GraphQL
+-------------
+==> Is Query Language Used To Query Data
+==> Alternative To Using Rest API
+
+
+(3) Gatsby Store All Files And Content Inside GraphQL API And Access Data Using GraphQL Query
+
+    GraphQL Query    =========>  GraphQL API
+-----------------------------------------------------
+    allContentPosts{             (AllFiles , allContentPosts)
+        body,
+        title,
+        categories
+    }                           
+
+(4) Explore Site Data By Navigate To [http://localhost:8000/___graphql] And In SideBar Explorer Can Open 'site' Tab And Select 'Host' And 'Port' To Show There And Generates The Following Query
+
+    query MyQuery {
+        site {
+            host
+            port
+        }
+    }
+
+    
