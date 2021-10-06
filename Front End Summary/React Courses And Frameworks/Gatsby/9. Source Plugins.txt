@@ -1,0 +1,109 @@
+(1) Plugins (https://www.gatsbyjs.com/plugins)
+-------------
+==> Gatsby plugins are Node.js packages that you can add to your site. Plugins let you quickly add new features to your Gatsby site without needing to build them from scratch.
+
+(2) Use 'gatsby-source-filesystem' Plugin
+-------------------------------------------
+==> npm install gatsby-source-filesystem
+==> Inside 'src' Folder Create Folders Called 'notes' And Inside 'notes' Create Folder Called 'magdy' With [notes/foo.txt , notes/magdy/bar.txt]
+==> Add Plugin Object Inside 'plugins' Array In 'gatsby-config.js'
+==> Restart Gatsby Server Again
+==> Go To 'localhost:8000/___graphql' And Open 'allFile' Tab Then 'nodes' Then 'relativePath'
+==> Inside 'nodes' There Are 'relativeDirectory' That Refer To Any Folder Inside 'notes' Folder [And The Folder That In 'notes' Must Have Another Files]
+
+
+    gatsby-config.js
+    ---------------------
+
+    plugins: [
+        {
+            resolve: 'gatsby-source-filesystem',
+            options:{
+                name: 'notes',
+                path: `${__dirname}/src/notes/`
+            }
+        }
+    ]
+
+
+    Output
+    ----------
+
+    {
+        "data": {
+            "allFile": {
+            "nodes": [
+                {
+                    "relativePath": "foo.txt",
+                    "relativeDirectory": ""
+                },
+                {
+                    "relativePath": "magdy/bar.txt",
+                    "relativeDirectory": "magdy"
+                }
+            ]
+            }
+        },
+        "extensions": {}
+    }
+
+
+(3) Search Inside Multiple Files Using 'gatsby-source-filesystem'
+------------------------------------------------------------------
+
+
+    plugins: [
+        {
+            resolve: 'gatsby-source-filesystem',
+            options:{
+                name: 'notes',
+                path: `${__dirname}/src/notes/`
+            }
+        },
+        {
+            resolve: 'gatsby-source-filesystem',
+            options:{
+                name: 'projects',
+                path: `${__dirname}/src/projects/`
+            }
+        }
+    ]
+
+
+(4) Search For Specific File Using 'gatsby-source-filesystem'
+----------------------------------------------------------------
+==> Open 'allFile' => 'filter' => 'sourceInstanceName' => 'eq' => Write File Name In The Query
+
+    Query (Get Content Of 'projects' Folder)
+    --------
+
+    query MyQuery {
+        allFile(filter: {sourceInstanceName: {eq: "projects"}}) {
+            nodes{
+                relativePath
+                relativeDirectory
+            }
+        }
+    }
+
+
+    Output
+    --------
+
+    {
+        "data": {
+            "allFile": {
+                "nodes": [
+                    {
+                        "relativePath": "foo.txt",
+                        "relativeDirectory": ""
+                    },
+                    {
+                        "relativePath": "bar.txt",
+                        "relativeDirectory": ""
+                    }
+                ]
+            }
+        },
+        "extensions": {}
+    }
