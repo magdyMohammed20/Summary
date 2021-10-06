@@ -1,0 +1,61 @@
+(1) Markdown Transformer Plugin
+---------------------------------
+==> Parses Markdown files using Remark Plugin.
+==> npm i gatsby-transformer-remark
+==> Create 'magdy.md Inside 'src/projects' Folder 
+==> Add 'gatsby-transformer-remark' In 'plugins' Array That In 'gatsby-config.js'
+==> Restart Server
+==> Open 'localhost:8000/___graphql' And Select ['allMarkDownRemark' => 'nodes' => ['html' , 'frontmatter' => ['Stack' , 'slug' , 'title']]
+
+
+    magdy.md
+    ---------
+
+    ---
+    title: Front End Developer
+    Stack: Html & Css
+    slug: Dojo Coffe House
+    ---
+
+    **First Title**
+    lorem Ipsum 1
+
+    # Second Title
+    lorem Ipsum 1
+
+
+    gatsby-config.js
+    -------------------
+
+    plugins: [
+        'gatsby-transformer-remark',
+        {
+            resolve: 'gatsby-source-filesystem',
+            options:{
+                name: 'projects',
+                path: `${__dirname}/src/projects/`
+            }
+        }
+    ]
+
+
+    Output
+    ----------
+
+    {
+        "data": {
+            "allMarkdownRemark": {
+            "nodes": [
+                {
+                    "html": "<p><strong>First Title</strong>\r\nlorem Ipsum 1</p>\n<h1>Second Title</h1>\n<p>lorem Ipsum 1</p>",
+                    "frontmatter": {
+                        "Stack": "Html & Css",
+                        "slug": "Dojo Coffe House",
+                        "title": "Front End Developer"
+                    }
+                }
+            ]
+            }
+        },
+        "extensions": {}
+    }
