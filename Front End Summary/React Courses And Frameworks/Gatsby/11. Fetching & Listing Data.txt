@@ -1,0 +1,103 @@
+(1) Fetching And Listing Data That In Previous File
+-----------------------------------------------------
+
+    /src/projects/index.js
+    -----------------------
+
+    import { graphql, Link } from "gatsby"; // 2- Import graphql Here
+    import React from "react"
+    import Layout from "../../Components/Layout"
+    import * as styles from '../../styles/home.module.css'
+    
+    export default function Projects({data}) {
+        const {projects} = styles;
+        // 3- Fetch Quired Data From Props 
+        const arr = data.allMarkdownRemark.nodes;
+        return (
+            <Layout>
+                <div className={projects}>
+                {
+                    arr.map(element => {
+                    return (
+                        <Link to={'/projects/' + element.frontmatter.slug} key={element.id}>
+                            <div>
+                                <h3>{element.frontmatter.title}</h3>
+                                <p>{element.frontmatter.Stack}</p>
+                            </div>
+                        </Link>
+                    )
+                    })
+                }
+                </div>
+            </Layout>
+            )
+    }
+
+    // 1- Export Query
+    export const query = graphql`
+    query MyQuery2 {
+        allMarkdownRemark {
+            nodes {
+                frontmatter {
+                    Stack
+                    slug
+                    title
+                }
+                id
+            }
+        }
+    }
+    `
+
+
+    Home.module.css
+    -----------------
+
+    .projects{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 20px;
+        width: 90%;
+        margin: 80px 20px;
+        text-align: center;
+    }
+
+    .projects a{
+        color: #FFF;
+        text-decoration: none;
+    }
+    .projects p{
+        margin-top: 20px;
+    }
+
+
+    /src/projects/magdy.md
+    -------------------------
+
+    ---
+    title: Front End Developer
+    Stack: Html & Css
+    slug: Dojo_Coffe_House
+    ---
+
+    **First Title**
+    lorem Ipsum 1
+
+    # Second Title
+    lorem Ipsum 1
+
+
+    /src/projects/magdy2.md
+    -------------------------
+
+    ---
+    title: Back End Developer
+    Stack: Php & mysql
+    slug: Dojo_Coffe_House2
+    ---
+
+    **First Title**
+    lorem Ipsum 2
+
+    # Second Title
+    lorem Ipsum 2
