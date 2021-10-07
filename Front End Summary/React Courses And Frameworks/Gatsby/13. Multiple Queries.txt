@@ -1,0 +1,162 @@
+(1) Multiple Queries
+-----------------------
+
+    /src/projects/index.js (Query allMarkdownRemark And Site In Same Time)
+    -------------------------
+
+    import { graphql, Link } from "gatsby"; // 2- Import graphql Here
+    import React from "react"
+    import Layout from "../../Components/Layout"
+    import * as styles from '../../styles/home.module.css'
+    export default function Projects({data}) {
+        const {projects} = styles;
+        // 3- Fetch Quired Data From Props 
+        const arr = data.allMarkdownRemark.nodes;
+        console.log(data)
+        return (
+            <Layout>
+                <div className={projects}>
+                {
+                    arr.map(element => {
+                    return (
+                        <Link to={'/projects/' + element.frontmatter.slug} key={element.id}>
+                        <div>
+                            <h3>{element.frontmatter.title}</h3>
+                            <p>{element.frontmatter.Stack}</p>
+                        </div>
+                        </Link>
+                    )
+                    })
+                }
+                </div>
+            </Layout>
+            )
+    }
+
+    // 1- Export Query
+    export const query = graphql`
+        query MyQuery5 {
+            allMarkdownRemark(sort: {fields: frontmatter___date}) {
+                nodes {
+                    html
+                    frontmatter {
+                        Stack
+                        slug
+                        title
+                        date
+                    }
+                }
+            }
+
+            site{
+                siteMetadata{
+                    description
+                    title
+                    contact
+                }
+            }
+        }
+    `
+
+    gatsby.config.js
+    ------------------
+
+    module.exports = {
+        plugins: [
+            'gatsby-transformer-remark',
+            {
+            resolve: 'gatsby-source-filesystem',
+            options:{
+                name: 'projects',
+                path: `${__dirname}/src/projects/`
+            }
+            }
+        ],
+        siteMetadata: {
+                title: 'Mego Worriers',
+                description: 'This Is Desc',
+                contact: 'magdymohammed96@yahoo.com'
+            }
+    }
+
+
+(2) Another Multiple Queries
+-----------------------------
+
+    /src/projects/index
+    ------------------------
+
+    import { graphql, Link } from "gatsby"; // 2- Import graphql Here
+    import React from "react"
+    import Layout from "../../Components/Layout"
+    import * as styles from '../../styles/home.module.css'
+    export default function Projects({data}) {
+        const {projects} = styles;
+        // 3- Fetch Quired Data From Props 
+        const arr = data.projects.nodes;
+        console.log(data)
+        return (
+            <Layout>
+                <div className={projects}>
+                {
+                    arr.map(element => {
+                    return (
+                        <Link to={'/projects/' + element.frontmatter.slug} key={element.id}>
+                        <div>
+                            <h3>{element.frontmatter.title}</h3>
+                            <p>{element.frontmatter.Stack}</p>
+                        </div>
+                        </Link>
+                    )
+                    })
+                }
+                </div>
+            </Layout>
+            )
+    }
+
+    // 1- Export Query
+    export const query = graphql`
+        query MyQuery5 {
+            projects : allMarkdownRemark(sort: {fields: frontmatter___date}) {
+                nodes {
+                    html
+                    frontmatter {
+                        Stack
+                        slug
+                        title
+                        date
+                    }
+                }
+            }
+
+            contact : site {
+                siteMetadata {
+                    description
+                    title
+                    contact
+                }
+            }
+        }
+    `
+
+    gatsby.config.js
+    ------------------
+
+    module.exports = {
+        plugins: [
+            'gatsby-transformer-remark',
+            {
+            resolve: 'gatsby-source-filesystem',
+            options:{
+                name: 'projects',
+                path: `${__dirname}/src/projects/`
+            }
+            }
+        ],
+        siteMetadata: {
+                title: 'Mego Worriers',
+                description: 'This Is Desc',
+                contact: 'magdymohammed96@yahoo.com'
+            }
+    }
