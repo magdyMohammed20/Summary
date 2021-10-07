@@ -1,0 +1,64 @@
+(1) Sorting Queries 
+---------------------
+==> Go To [localhost:8000/__graphql] And Select 'allMarkdownRemark' => 'sort' => 'fields' => 'frontmatter___title' It Will Sort Depending On 'title' Property Ascending
+
+    Query
+    -------
+
+    query MyQuery {
+        allMarkdownRemark(sort: {fields: frontmatter___title}) {
+            nodes {
+                html
+                frontmatter {
+                    Stack
+                    slug
+                    title
+                }
+            }
+        }
+    }
+
+
+(2) Sorting Using Date
+-------------------------
+==> Add Date Inside 'md' Files Then Sort Like Previous Sample
+
+
+    magdy.md
+    ------------
+
+    ---
+    title: Front End Developer
+    Stack: Html & Css
+    slug: Dojo_Coffe_House
+    date: 1970-01-01 00:00:01
+    ---
+
+
+    magdy2.md
+    -----------
+
+    ---
+    title: Back End Developer
+    Stack: Php & mysql
+    slug: Dojo_Coffe_House2
+    date: 1970-01-03 00:00:01
+    ---
+
+
+    Query (Here Select 'frontmatter___date' From Dropdown)
+    -------
+
+    query MyQuery {
+        allMarkdownRemark(sort: {fields: frontmatter___date}) {
+            nodes {
+                html
+                frontmatter {
+                    Stack
+                    slug
+                    title
+                    date
+                }
+            }
+        }
+    }
