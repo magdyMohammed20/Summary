@@ -1,0 +1,14 @@
+(1) Turn On Redux Devtool With Middleware
+-------------------------------------------
+==> Use 'Compose'
+
+    store.js
+    -----------
+
+    import { createStore , applyMiddleware , compose} from "redux";
+    import reducer from "./reducer";
+    import logger from 'redux-logger'
+
+    const store = createStore(reducer , compose(applyMiddleware(logger) , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
+
+    export default store
