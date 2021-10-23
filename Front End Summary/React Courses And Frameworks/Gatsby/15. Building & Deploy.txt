@@ -1,0 +1,6 @@
+(1) Deploy Gatsby App On Netlify
+----------------------------------
+==> Run [gatsby build] In CMD And After That You Will Note That Pages Generated Inside 'public' Folder
+==> Now You Can Upload 'public' Folder Only To Netlify
+
+(2) Or Can Deploy Gatsby App Using Github
