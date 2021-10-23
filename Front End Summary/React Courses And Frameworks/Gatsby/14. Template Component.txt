@@ -1,0 +1,67 @@
+(1) If We Have Page Of Items And Click On Any Item Will Redirect To It's Page This Page We Will Make Template For It
+----------------------------------------------------------------------------------------------------------------------
+==> Inside 'src' Folder Create Folder Called 'templates' And In It Create File Called 'project-details.js'
+==> For Connect Item Link With Item Page We Create File Called 'gatsby-node.js' Beside 'src' Folder
+==> In 'project-details.js' Make Query To Fetch Data For Each Page
+
+    /src/templates/project-details.js
+    -----------------------------------
+
+    import { graphql } from 'gatsby'
+    import React from 'react'
+    import Layout from '../Components/Layout'
+
+    export default function projectDetails({data}) {
+        const {html} = data.markdownRemark;
+        const {Stack , title} = data.markdownRemark.frontmatter;
+
+        return (
+            <Layout>
+                <div>
+                    <h1>{title}</h1>
+                    <h2>{Stack}</h2>
+                    <div dangerouslySetInnerHTML={{__html : html}}/>
+                </div>
+            </Layout>
+        )
+    }
+
+    export const query = graphql`
+        query projectsPage($slug: String) {
+            markdownRemark(frontmatter: {slug: {eq: $slug}}) {
+                html
+                frontmatter {
+                    Stack
+                    title
+                }
+            }
+        }
+    `
+
+
+    /gatsby-node.js
+    ----------------
+
+    const path = require('path')
+
+    exports.createPages = async({graphql , actions}) => {
+        const {data} = await graphql(`
+            query projectsPage{
+                allMarkdownRemark{
+                    nodes{
+                        frontmatter{
+                            slug
+                        }
+                    }
+                }
+            }
+        `)
+
+        data.allMarkdownRemark.nodes.forEach(node => {
+            actions.createPage({
+                path: '/projects/' + node.frontmatter.slug,
+                component: path.resolve('./src/templates/project-details.js'),
+                context: {slug: node.frontmatter.slug}
+            })
+        });
+    }
