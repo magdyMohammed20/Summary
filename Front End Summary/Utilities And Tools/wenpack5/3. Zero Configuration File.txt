@@ -1,0 +1,81 @@
+(1) Configuration File
+-------------------------
+==> From WebPack4 To Higher Not Requires Configuration File
+==> For Run The Project Write [yarn dev] In CMD And After Run Note That A New Folder Created Called 'dist' 
+
+==> Before Run The Project There Are Few Configurations To Do
+----------------------------------------------------------------
+--> Project Must Contains 'src' Folder With At Least 1 Js File [This Only With Default Configuration]
+
+--> Can Control In WebPack Entry Point By Create 'webpack.config.js' Inside Project Folder
+
+    webpack.config.js
+    -------------------
+
+    // This Is Default
+    module.exports = {
+        entry: './src/index.js'
+    }
+
+    -------------------------
+    
+    // Can Set Another Entry Point Instead Previous
+    module.exports = {
+        entry: './magdy/index.js'
+    }
+
+
+--> Can Control WebPack Output
+
+    webpack.config.js
+    ------------------
+
+    const path = require('path')
+
+    module.exports = {
+        entry: './src/index.js',
+        output:{
+            path: path.resolve(__dirname , 'dist1'), // Final Folder Name
+            filename: 'mego.js' // Final File Name
+        }
+    }
+
+
+(2) Loaders
+---------------
+==> webpack only understands JavaScript and JSON files. Loaders allow webpack to process other types of files and convert them into valid modules that can be consumed by your application and added to the dependency graph
+
+    webpack.config.js
+    --------------------
+
+    const path = require('path');
+
+    module.exports = {
+        output: {
+            filename: 'my-first-webpack.bundle.js',
+        },
+
+        // The test property identifies which file or files should be transformed.
+        // The use property indicates which loader should be used to do the transforming.
+        module: {
+            rules: [{ test: /\.txt$/, use: 'raw-loader' }],
+        },
+    };
+
+(3) Mode
+---------
+==> By setting the mode parameter to either development, production or none, you can enable webpack's built-in optimizations that correspond to each environment. The default value is production
+
+    webpack.config.js
+    -------------------
+
+    const path = require('path')
+
+    module.exports = {
+        entry: './src/index.js',
+        output:{
+            path: path.resolve(__dirname , 'dist1'), 
+            filename: 'mego.js'
+        },
+        mode: 'development' // Set Mode Here
+    }
