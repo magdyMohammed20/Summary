@@ -1,0 +1,97 @@
+(1) Set And Get Git Default Editor
+------------------------------------
+==> Set : [git config --global core.editor vcode]
+==> Get : [git config --global core.editor]
+
+
+(2) For Explore Any Commands Options Prefix It With '--help' Term
+-------------------------------------------------------------------
+==> git --help
+==> git config --help
+
+
+(3) Change Name And Email For Specific Folder Only [Not Global]
+-----------------------------------------------------------------
+==> git config user.name "magdy20"
+==> git config user.email "magdymohammed96@yahoo.com" 
+
+
+(4) Tracking Files & UnTracked Files
+--------------------------------------
+==> Working Directory Is UnTracked
+==> Staging And History Areas Is Tracked
+
+(5) [git diff] And [git diff --staged]
+----------------------------------------
+==> [git diff] : Get Difference Between Working Directory And Staging Area
+==> [git diff --staged] : Get Difference Between Staging Area And History Area
+
+(6) Get Last 2 Commits
+------------------------
+==> git log -2
+
+(7) If Want To Know What Happened In Specific Commit [use patch (-p)]
+-----------------------------------------------------------------------
+==> git log -p [See What Happend In All Commits]
+==> git log -p -2 [See What Happend In Last 2 Commits]
+
+(8) Get Fomrmated log
+-----------------------
+==> git log --pretty=format:"%h - %an, %ar : %s" [Output : cc3dfd4 - magdy2020, 23 minutes ago : Update magdy1.txt]
+
+
+(9) Undo Changes Of Last Commit Between Staging Area And History
+------------------------------------------------------------------
+==> git commit --amend
+
+
+(10) Undo Changes Between Working Directory And Staging Area [Move File From Staging To Working Directory]
+-------------------------------------------------------------------------------------------------------------
+==> git reset HEAD <File-Name>
+
+
+(11) Undo Changes In Working Directory [It Revert The Working Directory File To Last Version In The History]
+--------------------------------------------------------------------------------------------------------------
+==> git checkout <File-Name>
+==> Dangerous Note: If The File Not Founded In Any Commit The File Will Deleted Forever
+
+_______________________________________________________________________________________________________________________
+
+
+(12) Branching
+----------------
+==> Each Staged File In Project Have A 'Blob' Object That Represent This File
+==> Blob Object : Have Generated 'sha1' Key For This File , Size And Content Of This File
+==> Tree Object : Is A Folder In Git That Contains Many Files
+==> Tree Object Contains A List Of Pointers To Blobs [Each Tree Object Pointers To Many Blob Objects]
+==> File In Git Called Blob , Directory In Git Called Tree
+==> When Commit Do It Create Object For This Commit Contains [Tree(Key) , Author , Commiter]
+
+==> Final Structure
+---------------------
+
+    [Commit Object] === Points To ===> [Tree Object] === Points To ===> Blob(s)
+
+
+==> Insert A File[That In Working Directory] To '.git/objects/' And Return A Key
+----------------------------------------------------------------------------------
+--> git hash-object -w magdy1.txt
+
+
+==> Create A Tree In '.git/objects/'
+-------------------------------------
+--> git write-tree
+
+_______________________________________________________________________________________________________________________
+
+(14) Merging
+--------------
+==> HEAD : Is Pointer To Current Active Branch
+==> Branches Location Is [.get/refs/heads/]
+
+==> When Do Merge Exact That
+--------------------------------
+--> Working Copy Is Clean
+--> Local Repository Is Up To Date
+--> Checkout To Branch That Will Receive The Changes [git checkout master]
+--> Merging [git merge feature-a]
