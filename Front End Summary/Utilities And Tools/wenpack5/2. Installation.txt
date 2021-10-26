@@ -1,0 +1,12 @@
+(1) Installation
+-----------------
+==> Create Project Folder And Run [yarn init -y] For Create [Package.json]
+==> Run [npm i --save-dev webpack] Or [yarn add -D webpack]
+==> Run [npm install --save-dev webpack-cli]
+==> Add Following "scripts" To [Package.json] Object Before 'devDependencies'
+
+    "scripts": {
+        "dev": "webpack" 
+    }
+
+==> Install Webpack Global Is Not Preferable
