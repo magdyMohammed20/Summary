@@ -1,0 +1,35 @@
+(1) Webpack
+-------------
+==> webpack is a static module bundler for modern JavaScript applications. When webpack processes your application, it internally builds a dependency graph from one or more entry points and then combines every module your project needs into one or more bundles, which are static assets to serve your content from
+==> Tool That Used To Compile Js Modules
+==> Give Large Number Of Files And Generates Single File
+==> Webpack Runs While Development Not In Production
+
+(2) Webpack Requirements
+---------------------------
+==> Knowledge Of Js
+==> Install Node.js 10.13.0+
+==> Command Line
+==> Webpack4 [Optional]
+
+
+(3) Module Bundlers 
+---------------------
+==> Is Tool Front End Developers Used To Bundle Js Modules Into Single Js File That Can Be Executed In The Browser
+==> EX: Webpack , RollUp , Parcel
+
+
+(4) Why Module Bundlers
+--------------------------
+==> Some Of Browsers Doesn't Support Module System
+==> It Helps You To Manage Dependency Relationship Of The Code , Load Modules In Dependency Order For You
+==> Load Your Assets In Dependency Order [Image , Css ...]
+
+
+(5) Bundle
+------------
+==> File That Contains All Modules Your Application Needs
+
+(6) Dependency Graph
+---------------------
+==> Any time one file depends on another, webpack treats this as a dependency
