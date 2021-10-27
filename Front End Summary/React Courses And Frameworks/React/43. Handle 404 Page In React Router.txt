@@ -1,0 +1,8 @@
+(1) Handle 404 Page Without Creating Component
+------------------------------------------------
+
+    <Switch>
+        <Route path = '/' exact component={ProductListing}/>
+        <Route path = '/product/:productId'  component={ProductDetails}/>
+        <Route>404 Not Found</Route>
+    </Switch>
