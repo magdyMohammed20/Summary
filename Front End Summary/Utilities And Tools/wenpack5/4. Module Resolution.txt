@@ -1,0 +1,16 @@
+(1) Webpack Modules
+--------------------
+==> In contrast to Node.js modules, webpack modules can express their dependencies in a variety of ways. A few examples are [es6 , CommonJs ..] Modules
+
+(2) Modules Resolution
+-----------------------
+==> There Are [resolver] is a library which helps in locating a module by its absolute path
+
+(3) Resolving rules in webpack
+--------------------------------
+
+==> Using [enhanced-resolve] Library, we
+-------------------------------------------
+--> Absolute paths [import '/home/me/file';]
+--> Relative paths [import '../src/file1'; import './file2';]
+--> Module paths   [import 'module/lib/file';]
