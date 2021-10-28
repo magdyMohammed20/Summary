@@ -1,0 +1,38 @@
+(1) Detect AdBlock In React
+------------------------------
+==> Install [npm i adblock-detect-react]
+
+    App.js
+    --------
+
+    import './App.css';
+    import Header from './containers/Header';
+    import ProductDetails from './containers/ProductDetails'
+    import ProductListing from './containers/ProductListing'
+    import { useDetectAdBlock } from "adblock-detect-react";
+    import {BrowserRouter , Route , Switch} from 'react-router-dom'
+    function App() {
+
+    const adBlockDetected = useDetectAdBlock();
+    
+    return (
+        <div className="App">
+        {
+            adBlockDetected ? <h1 className='alert alert-danger mx-auto w-75 mt-5'>Error Close Ad Block Please</h1> : (
+            <BrowserRouter>
+                <Header/>
+                <Switch>
+                    <Route path = '/' exact component={ProductListing}/>
+                    <Route path = '/product/:productId'  component={ProductDetails}/>
+                    <Route>
+                        <h1 className='text-center text-danger'>Error 404 Not Found</h1>
+                    </Route>
+                </Switch>
+            </BrowserRouter>
+            )
+        }
+        </div>
+    );
+    }
+
+    export default App;
