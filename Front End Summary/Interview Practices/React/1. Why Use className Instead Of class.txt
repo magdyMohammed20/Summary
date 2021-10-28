@@ -1,0 +1,19 @@
+(1) Why Use 'className' Not 'class' In JSX Elements
+-------------------------------------------------------
+
+    // Core Component
+    function Home(){
+        return <div class='something'>This Is Content</div>
+    }
+
+    // Becomes
+    // And 'class' Is Reserved Word In Js
+    function Home(){
+        return React.createElement({
+            'div',
+            {
+                class: 'something'
+            },
+            'This Is Content'
+        })
+    }
