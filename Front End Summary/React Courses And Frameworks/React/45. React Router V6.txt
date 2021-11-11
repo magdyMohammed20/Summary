@@ -1,0 +1,202 @@
+(1) React Router V6
+---------------------
+==> Replace 'Switch' Element With 'Routes' Element And Must Wrap All 'Route' Elements With 'Routes' Element
+==> Replce 'component' Prop With 'element' Prop
+==> No 'exact' Prop
+==> Remove 'activeClassName' from 'NavLink' Element
+==> New 'Outlet' Component For Decide Where Nested Route Content Should Rendered
+
+EX
+---
+
+    import './App.css';
+    import {Routes , Route, Link} from 'react-router-dom'
+    import Home from './Components/Home'
+    import Products from './Components/Products';
+    import About from './Components/About';
+    import ProductDetails from './Components/ProductDetail';
+    function App() {
+        return (
+            <div className="App">
+                <Link to='/'>Home</Link>
+                <Link to='/products'>Products</Link>
+                <Link to='/about'>About</Link>
+                <Routes>
+                    <Route path='/' element={<Home/>}/>
+                    <Route path='/products' element={<Products/>}/>
+                    <Route path='/products/:id' element={<ProductDetails/>}/>
+                    <Route path='/about' element={<About/>}/>
+                </Routes>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+EX (Remove 'activeClassName')
+---
+
+    import './App.css';
+    import {Routes , Route, NavLink} from 'react-router-dom'
+    import Home from './Components/Home'
+    import Products from './Components/Products';
+    import About from './Components/About';
+    import ProductDetails from './Components/ProductDetail';
+    function App() {
+
+    const checkActive = navData => navData.isActive ? 'Mego' : null;
+        return (
+            <div className="App">
+                <NavLink to='/' className={(navData) => checkActive(navData)}>Home</NavLink>
+                <NavLink to='/products' className={(navData) => checkActive(navData)}>Products</NavLink>
+                <NavLink to='/about' className={(navData) => checkActive(navData)}>About</NavLink>
+                <Routes>
+                    <Route path='/' element={<Home/>}/>
+                    <Route path='/products' element={<Products/>}/>
+                    <Route path='/products/:id' element={<ProductDetails/>}/>
+                    <Route path='/about' element={<About/>}/>
+                </Routes>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+EX (Nested Routes)
+---
+
+    App.js
+    ---------
+
+    import './App.css';
+    import {Routes , Route, NavLink , Navigate} from 'react-router-dom'
+    import Products from './Components/Products';
+    import About from './Components/About';
+    import ProductDetails from './Components/ProductDetail';
+    import Welcome from './Components/welcome';
+    function App() {
+
+    const checkActive = navData => navData.isActive ? 'Mego' : null;
+        return (
+            <div className="App">
+                <NavLink to='/' className={(navData) => checkActive(navData)}>Home</NavLink>
+                <NavLink to='/products' className={(navData) => checkActive(navData)}>Products</NavLink>
+                <NavLink to='/about' className={(navData) => checkActive(navData)}>About</NavLink>
+                <Routes>
+                    <Route path='/' element={<Navigate to='/welcome'/>}/>
+                    <Route path='/welcome/*' element={<Welcome/>}/>
+                    <Route path='/products' element={<Products/>}/>
+                    <Route path='/products/:id' element={<ProductDetails/>}/>
+                    <Route path='/about' element={<About/>}/>
+                </Routes>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    welcome.js
+    ------------
+
+    import React from 'react'
+    import {Routes , Route , Link} from 'react-router-dom'
+
+    function Welcome() {
+        return (
+            <div>
+                <h1> Hellow In Welcome Page </h1>
+                <Link to='new-user'>New User</Link>
+                <Routes>
+                    <Route path='new-user' element={<p>This Is P</p>}/>    
+                </Routes>            
+            </div>
+        )
+    }
+
+    export default Welcome
+
+
+EX (Nested Routes With Different Approach) 
+---
+==> Use Outlet To Tell React Where Nested Route Content Should Be Inserted
+
+
+    App.js
+    -------
+
+    import './App.css';
+    import {Routes , Route, NavLink , Navigate} from 'react-router-dom'
+    import Products from './Components/Products';
+    import About from './Components/About';
+    import ProductDetails from './Components/ProductDetail';
+    import Welcome from './Components/welcome';
+    function App() {
+
+    const checkActive = navData => navData.isActive ? 'Mego' : null;
+    return (
+        <div className="App">
+            <NavLink to='/' className={(navData) => checkActive(navData)}>Home</NavLink>
+            <NavLink to='/products' className={(navData) => checkActive(navData)}>Products</NavLink>
+            <NavLink to='/about' className={(navData) => checkActive(navData)}>About</NavLink>
+            <Routes>
+            <Route path='/' element={<Navigate to='/welcome'/>}/>
+            <Route path='/welcome/*' element={<Welcome/>}>
+                <Route path='new-user' element={<p>This Is P</p>}/>    
+            </Route>
+            <Route path='/products' element={<Products/>}/>
+            <Route path='/products/:id' element={<ProductDetails/>}/>
+            <Route path='/about' element={<About/>}/>
+            </Routes>
+        </div>
+    );
+    }
+
+    export default App;
+
+
+    welcome.js
+    -----------
+
+    import React from 'react'
+    import {Link , Outlet} from 'react-router-dom'
+
+    function Welcome() {
+        return (
+            <div>
+                <h1> Hellow In Welcome Page </h1>
+                {/* Content Will Inserted Before Link */}
+                <Outlet/>
+                <Link to='new-user'>New User</Link>
+                {/* Content Will Inserted After Link */}
+                <Outlet/>
+            </div>
+        )
+    }
+
+    export default Welcome
+
+
+EX (Navigate To Another Page)
+---
+==> navigate(-1) Or navigate(2)
+
+    products.js
+    -------------
+
+    import React from 'react'
+    import {useNavigate} from 'react-router-dom'
+
+    function Products() {
+        const navigate = useNavigate();
+        navigate('/welcome' , {replace: true})
+        return (
+            <div>
+                Products
+            </div>
+        )
+    }
+
+    export default Products
