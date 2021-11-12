@@ -1,0 +1,69 @@
+(1) Create Star Rating With React
+------------------------------------
+==> Install React Icons [yarn add react-icons]
+
+
+    App.js
+    ---------
+
+    import {useState} from 'react'
+    import {FaStar} from 'react-icons/fa'
+
+    // Styles
+    const styles = {
+        container: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center'
+        },
+        stars: {
+            orange: '#F50',
+            gray: '#DDD'
+        }
+    }
+
+    function App() {
+
+        const [currentValue , setCurrentValue] = useState(0)
+        const [hoverValue , setHoverValue] = useState(undefined)
+        const stars = Array(5).fill(0) // Fill Array To Display Five Stars
+
+        const handleClick = val => {
+            setCurrentValue(val)
+        }
+
+        const handleMouseEnter = val => {
+            setHoverValue(val)
+        }
+
+        const handleMouseLeave = _ => {
+            setHoverValue(undefined)
+        }
+
+        return (
+
+            <div style={styles.container}>
+                <h1>Star Rating With React</h1>
+                <div>
+                    {
+                        stars.map((_ , index ) => {
+                            return <FaStar 
+                                        key={index}
+                                        size={25}
+                                        style={{
+                                            margin: '0 3px',
+                                            cursor: 'pointer'
+                                        }}
+                                        color= {(currentValue || hoverValue) > index ? styles.stars.orange : styles.stars.gray}
+                                        onClick={() => handleClick(index + 1)}
+                                        onMouseEnter={() => handleMouseEnter(index + 1)}
+                                        onMouseLeave={() => handleMouseLeave()}
+                                    />
+                        })
+                    }
+                </div>
+            </div>
+        );
+    }
+
+    export default App;
