@@ -1,0 +1,101 @@
+(1) Install React Hook Form Library
+------------------------------------
+==> yarn add react-hook-form
+
+(2) Add Bootstrap5 To 'index.html'
+-----------------------------------
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+(3) Create Form UI
+--------------------
+
+
+    function App() {
+
+    return (
+        <div className="App">
+            <div className="container">
+                <div className="card w-50 mx-auto mt-5">
+                    <div className="card-body">
+                        <h1 className="card-title">Registration Form</h1>
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">username</label>
+                                <input type="text" class="form-control" id="name" placeholder="Enter username"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">email</label>
+                                <input type="email" class="form-control" id="email" placeholder="example@example.com"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pass" class="form-label">password</label>
+                                <input type="password" class="form-control" id="pass" placeholder="Enter password"/>
+                            </div>
+                            <button className="btn btn-primary mt-3">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+    }
+
+    export default App;
+
+
+(4) Full Validation Form
+--------------------------
+
+    import {useForm} from 'react-hook-form'
+
+    function App() {
+
+        const {register , handleSubmit , formState: {errors}} = useForm()
+
+        const onSubmit = data => {
+            console.log(data)
+        }
+        return (
+            <div className="App">
+                <div className="container">
+                    <div className="card w-50 mx-auto mt-5">
+                        <div className="card-body">
+                            <h1 className="card-title">Registration Form</h1>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <div className="mb-3">
+                                    <label htmlFor="name" className="form-label">username</label>
+                                    <input type="text" className="form-control" id="name" placeholder="Enter username" {...register('name' , {required: 'User Name Is Required' , minLength:{value: 4 , message: 'Name Min Length Is 4 Characters'} , maxLength: {value: 15 , message: 'Name Max Length Is 15 Characters'}})} autoComplete="false"/>
+                                    
+                                    {
+                                        errors.name && <div className="alert alert-danger mt-3">{errors.name.message}</div>
+                                    }
+                                    
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">email</label>
+                                    <input type="email" className="form-control" id="email" placeholder="example@example.com" { ...register('email' , {required: 'Email Is Required' , pattern:{value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i , message:'Invalid Email Please'}})} autoComplete="false"/>
+                                    
+                                    {
+                                        errors.email && <div className="alert alert-danger mt-3">{errors.email.message}</div>
+                                    }
+                                    
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="pass" className="form-label">password</label>
+                                    <input type="password" className="form-control" id="pass" placeholder="Enter password" {...register('pass' , {required: "Password Is Required" , pattern: {value: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i , message: 'Minimum eight characters, at least one letter, one number and one special character'}})} autoComplete="false"/>
+                                    {
+                                        errors.pass && <div className="alert alert-danger mt-3">{errors.pass.message}</div>
+                                    }
+                                </div>
+                                <input type="submit" className="btn btn-primary mt-3"/> 
+                            
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    export default App;
