@@ -1,0 +1,24 @@
+(1) Methods Of Creating React Native App
+------------------------------------------
+==> Expo CLI/TOOL
+==> React Native CLI 
+
+(2) Expo CLI/TOOL
+------------------
+==> Third Party Service That Free To Use
+==> Have Managed App Development Workflow
+==> Lots Of Convenience & Utlity Features Simlifies Development
+==> But You Are Limited To The Expo Ecosystem
+
+(3) React Native CLI 
+---------------------
+==> By React Native Team Community
+==> Bare-Bone Development (Only A Basic Setup)
+==> No Convenience Or Utlity Features
+==> Full Flexibility Integrate With Any Native Code
+
+(4) How Expo Works
+-------------------
+==> On Your Device Install 'expo client app' From Store And Your Code Loaded Into 'expo client app'
+==> You Can Publish Apps As Expo Apps
+==> You Can Also Publish Standalone Apps 
