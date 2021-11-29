@@ -1,0 +1,8 @@
+(1) Create App Using Expo  Cli
+-------------------------------
+==> Install NodeJs
+==> Run [npm install -g expo-cli]
+==> Create Project [expo init rn-my-app]
+==> Select 'Blank' 
+==> Set Project Name In The Object [rn-my-app]
+==> Starting Development Server [expo start] Or [npm start]
