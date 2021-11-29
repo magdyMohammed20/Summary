@@ -1,0 +1,17 @@
+(1) React Native
+-------------------
+==> Collection Of "Special" React Components
+==> Components Compiled To Native Widgets 
+==> Give Access To Native Platform APIs (EX: Used Device Camera)
+==> Give Tools For Connect Js Code To Native Platform Code As Used To Build Android And IOS Apps
+==> Not Use HTML Elements As It Not Supported 
+
+(2) Components
+----------------
+
+    React For Web     Native Component     Native Component      React Native
+                         (Android)               (ios)
+    ---------------------------------------------------------------------------
+       [<div>]         [android.view]          [UIView]            [<View>]
+
+==> React Native Convert <View> To [android.view] Or [UIView] Depending On Platform 
