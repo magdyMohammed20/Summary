@@ -1,0 +1,51 @@
+(1) <View> Can Contains Another <View>
+-----------------------------------------
+
+    <View>
+        <View></View>
+        <View></View>
+    </View>
+
+(2) Any Plain Text Must Be Inside <Text></Text>
+-------------------------------------------------
+
+    <Text>This Is Text</Text>
+
+(3) React Native Use Flex Box To Positioning Elements
+
+(4) React Native Not Use Css But [Inline Style Or Style Object]
+
+
+EX
+---
+
+    import React from 'react';
+    import { StyleSheet, Text, View , Button, TextInput} from 'react-native';
+
+    export default function App() {
+
+        return (
+            <View>
+                <View style={styles.mainContainer}>
+                    <TextInput placeholder="Enter Goal Here" style={styles.textInput}/>
+                    <Button title="Add" style={{marginTop: 10}}/>
+                </View>
+            </View>
+        );
+    }
+
+    const styles = StyleSheet.create({
+        mainContainer: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            margin: 50
+        },
+        textInput: {
+            borderColor: 'black' ,
+            borderWidth: 1,
+            padding: 4,
+            borderRadius: 5,
+            width: '80%'
+        }
+    })
