@@ -1,0 +1,15 @@
+(1) When We Add More And More Items We Note That No Scroll To See All Items So We Will Wrap Displaying Items With <ScrollView>
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+      <ScrollView style={styles.show}>
+        {
+          goals.map((goal , index) => (
+            <View style={styles.listItems} key={index}>
+              <View>
+                <Text>{goal}</Text>
+              </View>
+            </View>
+          ))
+        }
+      </ScrollView>
