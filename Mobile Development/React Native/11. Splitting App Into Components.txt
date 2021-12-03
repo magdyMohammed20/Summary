@@ -5,37 +5,23 @@
     --------
 
     import React , {useState} from 'react';
-    import { StyleSheet, Text, View , Button, TextInput , ScrollView, FlatList} from 'react-native';
+    import { StyleSheet, View , FlatList} from 'react-native';
+    import GoalInput from './Components/GoalInput';
     import GoalItem from './Components/GoalItem';
 
     export default function App() {
 
-        const [enteredGoal , setEnteredGoal] = useState('')
         const [goals , setGoals] = useState([])
 
-        const handleEnteredGoals = enteredGoal => {
-            setEnteredGoal(enteredGoal)
-        }
-
-        const addGoalHandler = () => {
+        const addGoalHandler = (enteredGoal) => {
             if(enteredGoal){
                 setGoals(currentGoals => [...currentGoals , {doid : Math.random().toString() , value: enteredGoal}])
-                setEnteredGoal('')
             }
         }
 
-
         return (
             <View>
-                <View style={styles.mainContainer}>
-                    <TextInput 
-                    placeholder="Enter Goal Here"  
-                    style={styles.textInput}
-                    onChangeText={handleEnteredGoals}
-                    value={enteredGoal}
-                    />
-                    <Button title="Add" onPress={addGoalHandler} />
-                </View>
+                <GoalInput  addGoalHandler={addGoalHandler}/>
                 <FlatList 
                     style={styles.show}
                     data={goals} 
@@ -45,26 +31,11 @@
                         <GoalItem title={itemData.item.value}/>
                     }
                 />
-
             </View>
         );
     }
 
     const styles = StyleSheet.create({
-        mainContainer: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 50,
-            padding: 10
-        },
-        textInput: {
-            borderColor: 'black' ,
-            borderWidth: 1,
-            padding: 4,
-            borderRadius: 5,
-            width: '80%'
-        },
         show:{
             padding: 10
         }
@@ -103,3 +74,52 @@
         }
     })
     export default GoalItem
+
+
+    ./Components/GoalInput.js
+    ----------------------------
+
+    import React,{useState} from 'react'
+    import { View , StyleSheet , TextInput , Button} from 'react-native'
+
+    function GoalInput({addGoalHandler}) {
+        const [enteredGoal , setEnteredGoal] = useState('')
+
+        const handleEnteredGoals = enteredGoal => {
+            setEnteredGoal(enteredGoal)
+        }
+
+        return (
+            <View style={styles.mainContainer}>
+                <TextInput 
+                    placeholder="Enter Goal Here"  
+                    style={styles.textInput}
+                    onChangeText={handleEnteredGoals}
+                    value={enteredGoal}
+                />
+                <Button title="Add" onPress={() => {
+                    addGoalHandler(enteredGoal)
+                    setEnteredGoal('')
+                }} />
+            </View>
+        )
+    }
+
+    export default GoalInput
+
+    const styles = StyleSheet.create({
+        mainContainer: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 50,
+            padding: 10
+        },
+        textInput: {
+            borderColor: 'black' ,
+            borderWidth: 1,
+            padding: 4,
+            borderRadius: 5,
+            width: '80%'
+        }
+    })
