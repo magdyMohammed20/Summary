@@ -1,0 +1,275 @@
+(1) Adding Modal To GoalInput.js
+-----------------------------------
+==> Set Modal Inside GoalInput.js
+==> Handle Modal Visibility In App.js
+
+
+    ./Components/GoalInput.js
+    ---------------------------
+
+    import React,{useState} from 'react'
+    import { View , StyleSheet , TextInput , Button , Modal} from 'react-native'
+
+    function GoalInput({addGoalHandler , isOpenModal}) {
+        const [enteredGoal , setEnteredGoal] = useState('')
+
+        const handleEnteredGoals = enteredGoal => {
+            setEnteredGoal(enteredGoal)
+        }
+
+        return (
+            <Modal visible={isOpenModal} animationType="slide">
+                <View style={styles.mainContainer}>
+                    <TextInput 
+                        placeholder="Enter Goal Here"  
+                        style={styles.textInput}
+                        onChangeText={handleEnteredGoals}
+                        value={enteredGoal}
+                    />
+                    <Button title="Add" onPress={() => {
+                        addGoalHandler(enteredGoal)
+                        setEnteredGoal('')
+                    }} />
+                </View>
+            </Modal>
+        )
+    }
+
+    export default GoalInput
+
+    const styles = StyleSheet.create({
+        mainContainer: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginTop: 50,
+            padding: 10
+        },
+        textInput: {
+            borderColor: 'black' ,
+            borderWidth: 1,
+            padding: 4,
+            borderRadius: 5,
+            width: '80%'
+        }
+    })
+
+
+    app.js
+    ----------
+
+    import React , {useState} from 'react';
+    import { StyleSheet, View , FlatList , Button} from 'react-native';
+    import GoalInput from './Components/GoalInput';
+    import GoalItem from './Components/GoalItem';
+
+    export default function App() {
+
+        
+        const [goals , setGoals] = useState([])
+        const [isOpenModal , setIsOpenModal] = useState(false)
+
+        const addGoalHandler = (enteredGoal) => {
+            if(enteredGoal){
+                setGoals(currentGoals => [...currentGoals , {doid : Math.random().toString() , value: enteredGoal}])
+            }
+        }
+
+        const onDeleteHandler = ({index}) => {
+            setGoals(currentGoals => {
+            return currentGoals.filter((_ , ind) => ind != index )
+        
+            })
+        }
+
+        const onOpenModal = () => {
+            setIsOpenModal(true)
+        }
+
+        return (
+            <View>
+                <View style={styles.modal}>
+                    <Button title="Add New Goal"  onPress={onOpenModal}/>
+                </View>
+                <GoalInput  addGoalHandler={addGoalHandler} isOpenModal={isOpenModal}/>
+                <FlatList 
+                    style={styles.show}
+                    data={goals} 
+                    keyExtractor={(item) =>  item.doid}
+                    renderItem={
+                    itemData => 
+                        <GoalItem onDelete={() => onDeleteHandler(itemData)} title={itemData.item.value}/>
+                    }
+                />
+            </View>
+        );
+    }
+
+    const styles = StyleSheet.create({
+        show:{
+            padding: 10
+        },
+        modal:{
+            marginVertical: 50,
+            padding: 30
+        }
+    })
+
+
+(2) But We Want To Center Modal Vertically
+--------------------------------------------
+==> Make mainContainer As Following
+
+    GoalInput.js
+    --------------
+
+        mainContainer: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        }
+
+(3) On The Previous Sample There Are Problem When Add Goal The Goal Isn't Visible As Modal Cover All Area
+----------------------------------------------------------------------------------------------------------
+==> To Solve Set 'isOpenModal' To 'False' At End Of 'addGoalHandler' function
+
+    app.js
+    --------
+
+    const addGoalHandler = (enteredGoal) => {
+        if(enteredGoal){
+            setGoals(currentGoals => [...currentGoals , {doid : Math.random().toString() , value: enteredGoal}])
+        }
+
+        setIsOpenModal(false)
+    }
+
+(4) Add Cancel Button 
+------------------------
+
+
+    GoalInput.js
+    -------------
+
+    import React,{useState} from 'react'
+    import { View , StyleSheet , TextInput , Button , Modal} from 'react-native'
+
+    function GoalInput({addGoalHandler , isOpenModal , cancelAdd}) {
+        const [enteredGoal , setEnteredGoal] = useState('')
+
+        const handleEnteredGoals = enteredGoal => {
+            setEnteredGoal(enteredGoal)
+        }
+
+        const addGoal = () => {
+            addGoalHandler(enteredGoal)
+            setEnteredGoal('')
+        }
+
+        const cancelGoal = () => {
+            cancelAdd()
+            setEnteredGoal('')
+        }
+        return (
+            <Modal visible={isOpenModal} animationType="slide">
+                <View style={styles.mainContainer}>
+                    <TextInput 
+                        placeholder="Enter Goal Here"  
+                        style={styles.textInput}
+                        onChangeText={handleEnteredGoals}
+                        value={enteredGoal}
+                    />
+                    <View style={styles.buttons}>
+                        <Button title="ADD" onPress={addGoal} />
+                        <Button title="CANCEL" color="red" onPress={cancelGoal} />
+                    </View>
+                </View>
+            </Modal>
+        )
+    }
+
+    export default GoalInput
+
+    const styles = StyleSheet.create({
+        mainContainer: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        textInput: {
+            borderColor: 'black' ,
+            borderWidth: 1,
+            padding: 4,
+            borderRadius: 5,
+            width: '80%',
+            marginBottom: 10
+        },
+        buttons:{
+            flexDirection: 'row'
+        }
+    })
+
+
+    app.js
+    ----------
+
+    import React , {useState} from 'react';
+    import { StyleSheet, View , FlatList , Button} from 'react-native';
+    import GoalInput from './Components/GoalInput';
+    import GoalItem from './Components/GoalItem';
+
+    export default function App() {
+        
+        const [goals , setGoals] = useState([])
+        const [isOpenModal , setIsOpenModal] = useState(false)
+
+        const addGoalHandler = (enteredGoal) => {
+            if(enteredGoal){
+                setGoals(currentGoals => [...currentGoals , {doid : Math.random().toString() , value: enteredGoal}])
+            }
+
+            setIsOpenModal(false)
+        }
+
+        const onDeleteHandler = ({index}) => {
+            setGoals(currentGoals => {
+            return currentGoals.filter((_ , ind) => ind != index )
+        
+            })
+        }
+
+        const onOpenModal = () => {
+            setIsOpenModal(true)
+        }
+
+        const cancelAdd = () => {
+            setIsOpenModal(false)
+        }
+        return (
+            <View>
+                <View style={styles.modal}>
+                    <Button title="Add New Goal" onPress={onOpenModal}/>
+                </View>
+                <GoalInput  addGoalHandler={addGoalHandler} isOpenModal={isOpenModal} cancelAdd={cancelAdd}/>
+                <FlatList 
+                    style={styles.show}
+                    data={goals} 
+                    keyExtractor={(item) =>  item.doid}
+                    renderItem={
+                    itemData => 
+                        <GoalItem onDelete={() => onDeleteHandler(itemData)} title={itemData.item.value}/>
+                    }
+                />
+            </View>
+        );
+    }
+
+    const styles = StyleSheet.create({
+        show:{
+            padding: 10
+        },
+        modal:{
+            marginTop: 50,
+            marginHorizontal: 10
+        }
+    })
