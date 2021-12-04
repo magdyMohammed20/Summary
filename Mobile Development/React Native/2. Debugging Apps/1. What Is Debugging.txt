@@ -1,0 +1,26 @@
+(1) What To Debug
+-------------------
+
+==> Error Messages / App Crashes
+---------------------------------
+--> Syntax Errors 
+--> Bug In Code [EX: Using Undefined Values]
+--> UnAvoidable Errors (Failing Network Requests)
+
+==> Logical Errors
+---------------------
+--> Undesired Or UnExpected App Behavior 
+--> UnExpected Or Unhandled User Behavior 
+--> Sequence Of Steps Leads To Errors
+
+
+==> Styling , Layout & UX
+----------------------------
+--> UnExpected Or Wrong Styling / Layout 
+--> InConsistent Results On Different Devices 
+--> Layout Doesn't Work In Certain Device Or Orientations 
+
+
+(2) How To Debug
+-------------------
+==> Read The Error Message Seriously 
