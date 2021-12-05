@@ -1,0 +1,62 @@
+(1) Use Append To Add Additional Content In Last Of Block To Block Of Code Without
+    Removing The Block Content
+-------------------------------------------------------------------
+
+	index.pug
+	----------
+
+	block magdy
+		p This Is The Main Paragraph
+
+	==
+
+	<p>This Is The Main Paragraph</p>
+
+
+	inher.pug
+	---------
+	extends index
+
+	block append magdy
+		div This Is Additional Div
+
+	==
+
+	<p>This Is The Main Paragraph</p>
+	<div>This Is Additional Div</div>
+
+
+(2) Use prepend To Add Additional Content In First Of Block To Block Of Code Without
+    Removing The Block Content
+-------------------------------------------------------------------
+
+	index.pug
+	----------
+
+	block magdy
+		p This Is The Main Paragraph
+
+	==
+
+	<p>This Is The Main Paragraph</p>
+
+
+	inher.pug
+	---------
+	extends index
+
+	block prepend magdy
+		div This Is Additional Div
+
+	==
+
+	<div>This Is Additional Div</div>
+	<p>This Is The Main Paragraph</p>
+	
+--------------------------------------------------------------------------
+Note: You Can Remove Block Keyword From inher.pug
+
+	extends index
+	append magdy
+		div This Is Simple Div
+--------------------------------------------------------------------------

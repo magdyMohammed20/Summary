@@ -1,0 +1,32 @@
+(1) How To Write For Loop
+---------------------------
+
+	ul
+	  -for(var x=0; x<=10; x++)
+            li
+	      h1 This Is Heading
+	      p This Is P
+
+(2) If I Want To Produce For Loop Counter
+-----------------------------
+
+	ul
+	  -for(var x = 1; x<4; x++)
+	    li #{x}
+
+(3) While Loop
+---------------------------
+
+	-var x = 1
+    	ul
+      	 while x<10
+          li= Text Here
+          -x++
+
+(4) If I Want To Produce While Loop Counter
+-----------------------------
+
+	-var x = 1
+	ul
+	 while x<10
+	  li= x++

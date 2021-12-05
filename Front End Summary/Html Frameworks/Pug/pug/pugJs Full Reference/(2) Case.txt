@@ -1,0 +1,51 @@
+(1) Case
+--------------
+
+  - var x = 1
+  case x
+    when 10
+      p(class='10') This Is 10
+    when 20
+      p(class='20') This Is 20
+    when 30
+      p(class="30") This Is 30
+    default
+      p(class="default") This Is Default
+
+(2) Case Fall Through
+-----------------------
+
+- var x = 1
+case x
+  when 1
+  when 10
+    p(class='10') This Is 10
+  when 20
+    p(class='20') This Is 20
+  when 30
+    p(class="30") This Is 30
+  default
+    p(class="default") This Is Default
+
+(3) Add Break If Specific Case Has No Anything
+---------------------------------------------
+
+  -var x = 10
+
+  case 10
+    -break
+  case 20
+    p This Is 20
+  default
+    p This Default
+
+(4) Block Expansion
+--------------------
+
+  - var x = 20
+  case x
+    when 1
+    when 10: p(class='10') This Is 10
+    when 20: p(class='20') This Is 20
+    when 30: p(class="30") This Is 30
+    default: p(class="default") This Is Default

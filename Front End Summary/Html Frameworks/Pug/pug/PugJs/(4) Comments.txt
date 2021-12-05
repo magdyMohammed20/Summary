@@ -1,0 +1,29 @@
+(1) Single Line Comment
+--------------------
+
+==> If I Want Comment Appear In Pug File And Html File
+-------------------------------------------------------
+
+	// This Is Comment
+
+==> If I Want Comment Appear In Pug File Only And Don't Appear In Html File
+-------------------------------------------------------
+
+	//- This Is Comment
+
+(2) Multiline Comment 
+---------------------
+
+==> If I Want Comment Appear In Pug File And Html File
+------------------------------------------------------
+
+	//
+	  This Is Comment With Indetation
+	  This Is Comment
+
+==> If I Want Comment Appear In Pug File Only And Don't Appear In Html File
+-------------------------------------------------------
+
+	//-
+	  This Is Comment With Indetation
+	  This Is Comment

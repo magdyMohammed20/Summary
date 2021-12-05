@@ -1,0 +1,36 @@
+(1) For Syntax Highlight You Should Install [language-pug (Atom)] Or [pug (Brackets)] 
+    Addons In Your Editor
+
+(2) Install Pud Through CMD [npm install pug-cli -g]
+
+(3) When Create Html File It's Extension Is (.pug) [EX : index.pug]
+
+(4) Make Watch For Pug File BY Write This In Nodejs Command Prompt
+-------------------------------------------
+
+	pug + PugFileFolderPath + -w
+
+EX:  pug C:\Users\Magdy\Desktop\pugjs-practical -w
+----
+
+(5) After Make Watch Command It Will Produce Another [html] File
+
+(6) Watch Is Make For [If I Write Any Thing In index.pug It Will Translate Pug File Content As
+                       Html To The Html File]
+
+(7) After I Make Watch The Produced Html File Become In The Same Path Of The Pug File
+    If I Want To Put It In Another Path I Will Write This In nodeJs Command Prompt
+-------------------------------------------------------------------------------
+
+	pug + pugFileFolderPath + -w + -o + (The Another Folder Path)
+
+EX : pug C:\Users\Magdy\Desktop\pugjs-practical -w -o Documents
+----
+
+(8) If I Want To Organize The Content Of Html File I Will Write This In Nodejs Command Prompt
+--------------------------------------------------------------------------------------------
+
+	pug + pugFileFolderPath + -w + -P
+
+EX:  pug C:\Users\Magdy\Desktop\pugjs-practical -w -P
+---

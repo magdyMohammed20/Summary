@@ -1,0 +1,23 @@
+(1) Inheritance With extends
+-----------------------------
+// Use It To Call Another Page In My Page
+
+	extends index	// Will Call All Content In index.pug File
+
+(2) Use block To Change Piece Of Calling Code
+-------------------------------------
+
+	// index.pug
+
+	block myChangingBlock
+	  div
+	    h1 Heading
+	    p This Is Para
+	    button Click Here
+
+	// current.pug
+	extends index
+
+	block myChangingBlock
+	  div
+	    p I Remove h1 And P And Button And Set P Only Here

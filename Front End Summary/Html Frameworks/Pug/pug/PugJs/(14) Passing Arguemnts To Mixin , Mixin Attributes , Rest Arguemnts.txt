@@ -1,0 +1,45 @@
+(1) Passing Argument To Mixin
+-------------------------------
+
+	mixin feat(featName)	// Create Mixin
+		span= featName
+
+
+	+feat('Magdy Mohammed')	// Call Mixin
+
+	==
+
+	<span> Magdy Mohammed </span>
+
+(2) Mixin Attributes
+--------------------------------
+
+	mixin feat(featName)	// Creaye Mixin
+		span(class='magdy', id='mm')= featName	// Mixin Attributes
+
+	+feat('Cheaper')	// Call Mixin
+
+	==
+
+	<span class='magdy' id='mm'>Cheaper</span>
+
+
+(3) Mixin With Rest Arguments
+------------------------------
+// Use It When Number Of Arguemnts Is UnKnown
+
+	mixin Names(...AllNames)	// Create Mixin
+		ul
+		  each x in AllName
+			li= x
+
+	+Names('Magdy','Mohammed','Ali','Hossam')	// Call Mixin
+
+	==
+
+	<ul>
+	  <li>Magdy</li>
+	  <li>Mohammed</li>
+	  <li>Ali</li>
+	  <li>Hossam</li>
+	</ul>

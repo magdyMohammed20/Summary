@@ -1,0 +1,25 @@
+(1) How To Write The Attribute [If Element Has 1 Or More Than Attribute]
+-------------------------------------------------------------------------
+==> First Way
+--------------
+  div(class='Magdy', id='Mohammed')
+
+==> Second Way
+-------------
+  div(class='Magdy' id='Mohammed')
+
+
+(2) How To Write The Attribute [If Element Has 1 Attribute]
+-------------------------------------------------------------
+
+  div.magdy     ==> <div class='magdy'></div>
+  div#Magdy     ==> <div id='Magdy'></div>
+  .magdy        ==> <div class='magdy'></div>           // As Div The More Popular Element
+  #magdy        ==> <div id='magdy'></div>              // As Div The More Popular Element
+
+(3) If Attribute Has Multi Value Like [style] You Can Write It As Object
+-------------------------------------------------------------------------
+
+      div(
+          style={'width':'200px','height':'200px','background-color':'green'}
+         )

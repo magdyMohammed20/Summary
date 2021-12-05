@@ -1,0 +1,27 @@
+(1) Conditions
+----------------
+
+  -var x = 10
+
+  if x > 10
+    p This Is Greater Than 10
+  else if x == 10
+    p This Is Equal To 10
+  else
+    p No There
+
+(2) unless Or Negated If
+---------------------------
+
+    -var x = 10
+    if !x==10       // This Is Return False
+      p Equal To 10
+    else
+      p No There    // Return <p>No There</p>
+
+    ===
+    -var x = 10
+    unless x==10    // This Is Return False
+      p Equal To 10
+    else
+      p No There    // Return <p>No There</p>

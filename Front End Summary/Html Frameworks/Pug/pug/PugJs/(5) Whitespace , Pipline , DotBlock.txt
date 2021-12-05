@@ -1,0 +1,43 @@
+(1) Pug Remove WhiteSpace That Exist Between The Elements
+----------------------------------------------------------
+
+	ul                     <ul>
+	  li First		 <li>First</li>
+	  			 <li>Second</li>
+	  li Second	==>	 <li>Third</li>		
+	  		       </ul>
+	  li Third
+
+(2) Pug Keep Whitespace That Exist Inside The Element
+-------------------------------------------------------
+
+
+	div  Hellow      World     ==>   <div>Hellow      World</div>	
+
+
+(3) If I Want To Make Pug Convert Element As Text [Pipline]
+------------------------------------------
+
+==> Here He Will Write p Letter Only Not <p></p>
+-------------------------
+	div
+	   | p
+
+(4) Dot Block (.)
+-----------------
+
+==> Any Thing Is Belong To [.] Is A Child For The Dot Parent
+    [Here . Is Child Of Div Then The Text After Dot Become Child For Div]
+    [Note: Any Thing After . It Will Be Plain Text Even If It Be Element]
+-------------------------------------------------------------
+	div
+	   p This Is Paragraph
+	   .
+	     span This Is Belong To Div	
+
+
+==> Pipline After Dot Has No Effect As Dot Deal With It As Plain Text
+----------------------------------------------------------------------
+
+	.
+	 |               ==> |

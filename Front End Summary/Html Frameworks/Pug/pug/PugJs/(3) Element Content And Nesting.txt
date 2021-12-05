@@ -1,0 +1,21 @@
+(1) Write Content Inside Specific Element
+------------------------------------------
+	Element + Space + Text
+
+EX 
+----
+
+	html
+	   head
+	   body
+               div This Is Simple Text
+
+(2) If I Want To Make Element Inside Parent In Same Line
+---------------------------------------------------------
+
+	div: a   // Link Inside Div
+
+(3) You Can Write Html Tags Inside Pug
+---------------------------------------
+
+	div <a>Click</a> wefewfewfew <strong>Click Text</strong>

@@ -1,0 +1,63 @@
+(1) Create Case
+-----------------
+
+	- var x = 10 
+
+	case x
+
+	  when 10
+		p This Is Ten
+
+	  when 100
+		p This Is Hundred
+
+	  default
+		p This Is #{x}
+
+(2) If 2 Cases Has Same Output
+-------------------------------
+
+	- var x = 1
+
+	case x
+	
+	  when 0
+	  when 1
+		p This Is Ten		// Print This If 0 Or 1
+
+	  when 100
+		p This Is Hundred
+
+	  default
+		p This Is #{x}
+
+(3) If Case Has No Output We Will Put (break) Inside This Case
+--------------------------------------------------------------
+
+	- var x = 10 
+
+	case x
+
+	  when 10
+		- break
+
+	  when 100
+		p This Is Hundred
+
+	  default
+		p This Is #{x}
+
+(4) Use Block Expansion With Case
+----------------------------------
+
+	- var x = 10
+
+	case x
+
+	  when 10: p This 10
+
+	  when 20: p This 20
+
+	  when 30: -break
+
+	  default: p This Is Default

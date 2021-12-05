@@ -1,0 +1,43 @@
+(1) UnBuffered Block Of Code
+------------------------------
+// Used To Combine More Variables
+
+	-
+	  var x = 'Magdy'
+	  var y = 10
+
+(2) Interpolation String
+------------------------------
+// Calling Variables
+
+	- var x = 10
+	ul
+	  li #{x}
+
+(3) String In Interpolation Has 2 Types
+---------------------------------------
+
+{1} Escaped
+------------
+
+	-var x = '<p>This Escaped</p>' // Output Will Be With &lt,&gt
+
+	div #{x}
+
+{2} UnEscaped
+--------------
+// Output Will Be Translated To Normal Text Without Tags
+
+	-var x = '<p>Thid Un Escaped</p>'
+
+	div !{x}
+
+(4) You Can Use Js Functions In Interpolation
+-----------------------------------------------
+
+	-var x = 'magdy'
+
+	div
+	  #{x.toUpperCase()}
+
+ 

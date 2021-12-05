@@ -1,0 +1,27 @@
+(1) How To Write Each With Array
+----------------------
+
+	each val in [1,2,3,4,5]
+	  div= val
+
+		==
+	<div>1</div>
+	<div>2</div>
+	<div>3</div>
+	<div>4</div>
+	<div>5</div>
+
+(2) Write Each With Print Index
+------------------------
+	ul
+	  each val,index in [1,2,3,4]
+            li= val+' '+index
+
+(3) If Array Is Empty I Will Show Specific Text By Using Else
+-------------------------------------------------------------
+
+	ul
+	 each val in []
+	  li= val
+	 else
+	  li No Items

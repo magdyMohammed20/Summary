@@ -1,0 +1,13 @@
+(1) Pug Is Template Engine For Html
+
+(2) What Pug Do
+------------------
+==> Clean Code
+==> Dynamic Content
+==> Variables
+==> Include
+==> Iteration (Loops)
+==> Switches
+==> If Condition
+==> Escaped Code
+==> Inheritnes , Extends 

@@ -1,0 +1,15 @@
+(1) How To Make File That I Will Include It
+---------------------------------------------
+
+{1} Make Folder Beside The Pug File [EX: magdy]
+{2} Make File Inside magdy Folder With .pug Extension That Has Links Tags That
+    I Will Include It[Ex: style.pug] And Write This Content Inside It
+---------------------------------
+    link(rel='stylesheet',href='css/.....')
+    link(rel='stylesheet',href='css/.....')
+
+{3} Include Files In Your Pug File
+------------------------------
+
+  head
+    include magdy/style.pug

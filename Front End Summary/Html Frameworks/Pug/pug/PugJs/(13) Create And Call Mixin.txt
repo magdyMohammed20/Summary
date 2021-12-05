@@ -1,0 +1,14 @@
+(1) What Is Mixin
+----------------------
+==> Piece Of Code You Can Call It Any Where
+
+(2) How To Write Mixin
+----------------------
+
+	mixin mixName           // Define Mixin
+		ul
+	  	  li Html
+	  	  li Css
+
+	
+	+mixName 		// Call Mixin

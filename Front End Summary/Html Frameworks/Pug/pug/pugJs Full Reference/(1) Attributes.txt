@@ -1,0 +1,90 @@
+(1) Attributes
+----------------
+
+    a(href= 'www.google.com', class='link') Click
+
+        ====
+    <a href='www.google.com' class='link'> Click </a>
+
+(2) Attributes With Conditions
+-------------------------------
+
+    - var x = true
+    div(class= x? 'MagdyTrue':'MagdyFalse')
+
+      ===
+    <div class='MagdyTrue'></div>
+
+(3) Multiline Attributes
+-------------------------
+
+    div(
+      class='Magdy'
+      id='Bla'
+      data-scroll='scroll'
+    )
+
+    ===
+    <div class='Magdy' id='Bla' data-scroll='scroll'></div>
+
+(4) Escaped And UnEscaped Attribut
+-----------------------------------
+
+    a(class='<code>')
+    ===
+    <a class='&lt;code&gt;'></a>
+
+    a(class!='<code>')
+    ===
+    <a class='<code>'></a>
+
+(5) Attribute Can Be Object
+---------------------------
+
+  a(style= {'background-color':'red','color':'#FFF'}) Click
+
+  ===
+
+  <a style="background-color:red;color:#FFF;">Click</a>
+
+(6) Class Attributes With Array
+-------------------------------
+
+  -var x = ['Class1', 'Class2']
+  div(class= x)
+
+  ===
+
+  <div class="Class1 Class2"></div>
+
+(7) Class Literal
+-------------------
+
+    a.link
+    ===
+    <a class='link'></a>
+
+    .parent
+    ===
+    <div class='parent'></div>
+
+(8) Id Literal
+--------------------
+
+    a#link
+    ===
+    <a id='link'></a>
+
+    #link
+    ===
+    <a id='link'></a>
+
+(9) &attributes
+----------------------
+
+  -
+    var x = ['Class1', 'Class2']
+    var y = {'data-text': 'Text','data':'foo'}
+  div(class= x)&attributes(y)
+  ===
+  <div class="Class1 Class2" data-text="Text" data="foo"></div>

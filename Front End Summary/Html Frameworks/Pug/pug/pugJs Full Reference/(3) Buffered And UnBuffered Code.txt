@@ -1,0 +1,32 @@
+(1) UnBuffered Code
+--------------------
+==> It Doesn't Add Anything To The Output
+==> Start With -
+
+  -for(var x=0; x<10; x++)
+    p This Is Para
+
+(2) Block UnBuffered Code
+-----------------------------
+
+    -
+      var x = 10
+      var y = 20
+
+(3) Buffered Code
+------------------------------
+==> Start With =
+==> It Evaluates Js Expression
+
+{1} Escaped Buffered Code
+__________________________
+      p= 'Hellow Magdy <div>'
+      ==
+      <p>Hellow Magdy &lt;div&gt;</p>
+
+{2} UnEscaped Buffered Code
+__________________________
+
+      p!= 'Hellow Magdy </div>'
+      ==
+      <p>Hellow Magdy </div></p>

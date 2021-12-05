@@ -1,0 +1,41 @@
+(1) UnBuffered Code
+------------------------
+// Code Don't Show In Html File
+
+  body
+    - var className='magdy'
+    div(class=className)           =====> <div class='magdy'></div>
+
+(2) If I Want To Add More Classes With UnBuffered
+--------------------------------------------------
+
+  body
+    - var className='magdy'
+    div(class=className + ' NewClass')     ====> <div class='magdy NewClass'></div>
+
+(3) UnBuffered Is Triggred By Global Scope
+---------------------------------------------------
+
+  body
+    div(class = className)    ======> <div class='undefined'></div>
+    - var className = 'magdy'
+
+(4) Right Way To Write UnBuffered Code
+--------------------------------------
+
+      - var className='magdy'
+      doctype html
+      body
+        div(class=className)
+
+(5) Buffered Code [Or Escaped Code]
+----------------------------------------
+// Will Produce Tags As Plain Text With Tags In The Browser
+
+      div='Here <b>Magdy</b>'   ===> <div>Here &lt;b&gt;Magdy&lt;/b&gt;</div>
+
+(6) If I Want To Stop Buffered Code Or Escaped Code
+-----------------------------------------
+// Will Translate Tags As Text In The Browser
+
+    div != 'Here <b>Magdy</b>'    ===> <div><b>Magdy</b></div>

@@ -1,0 +1,78 @@
+(1) How To Escape Operators
+-----------------------------
+
+{1} First Way
+--------------
+// If I Want To Produce #{x} As Text Not Variable We Use \
+
+	-var x = 10
+	div \#{x}
+
+{2} Second Way
+--------------
+// If I Want To Produce x.toUpperCase() As Text Not Variable We Use ''
+
+	-var x = 'Magdy'
+	div #{'x.toUpperCase()'}
+
+(2) Tag Interpolation
+----------------------------
+// Use For Write Html Tags Inside Pug File but With Pug Syntax
+-----------------
+
+	div.
+	  #[p This Is Paragraph]
+
+	div #[p This Is Paragraph]
+
+	==
+	<div>
+	  <p>This Is Paragraph</p>
+	</div>
+
+	<div>
+	  <p>This Is Paragraph</p>
+	</div>
+
+// If I Want To Set Attributes For Tag Interpolation
+------------------
+
+	div.
+	  #[p(class='magdy') This P Text]
+
+
+	div #[p(class='magdy') This P Text]
+
+	==
+
+	<div>
+	  <p class='magdy'>This P Text</p>
+	</div>
+
+	<div>
+	  <p class='magdy'>This P Text</p>
+	</div>
+
+// If Tag Interpolation Parent Has Attributes
+----------------------------------------------
+
+	div(class='magdy').
+		#[p This Is Text]
+
+	==
+
+	<div class='magdy'>
+	  <p>This Is Text</p>
+	</div>
+
+// If Tag Interpolation Parent Has Class
+----------------------------------------------
+
+	div.magdy.
+      		#[p Magdy Here]
+
+	==
+
+	<div class='magdy'>
+	  <p>Magdy Here</p>
+	</div>
