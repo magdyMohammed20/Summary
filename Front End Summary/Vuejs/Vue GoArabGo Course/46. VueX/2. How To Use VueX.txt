@@ -1,0 +1,81 @@
+(1) We Already Include VueX When We Setup Vue Cli And Create The 
+    Project So We Didn't Need To Install VueX Again In Our Project
+
+(2) In Our Project There Is A File Called [store.js] In This File
+    There Are 2 Imports For [vue] And [vuex] And Including VueX
+    Plugin By Using Vue.use(vuex) And Have Too An Export Of The
+    Store That Contain 3 Objects For [State , Mutations , Actions]
+    And There Are An Import For [Store] In [main.js] File
+    And Including Of Store In Vue Instance That In [main.js] File
+
+(3) So If I Want To Share A Variable Called [counter] Between All
+    Pages I Will Include This Variable In [store.js] File And
+    Inside [state] Object And We Will Import This Variable Inside 
+    Any Pages [EX: About.vue , Help.vue] Through Make Computed
+    Property That Call This Variable And Return It And Use 2 Methods
+    For Excute Event In This [counter] And Finally Set Computed
+    Property Inside <template> So You Can Use [counter] Variable
+    In Any Page By This Steps
+------------------------------------------------------------
+
+  store.js
+  ---------
+
+    state:{counter : 0}
+
+  About.vue
+  -----------
+    <template>
+      <div>
+        <button class="btn btn-primary mr-3" @click="increase()">Increase</button>
+        <button class="btn btn-primary">decrease</button>
+        <p class="mt-3">
+          About And Shared Counter Value Is {{counter}}
+        </p>
+      </div>
+    </template>
+
+    <script>
+      export default{
+        computed: {
+          counter(){
+            return this.$store.state.counter; // Call [counter] Here
+          }
+        },
+        methods: {
+          increase(){
+            this.$store.state.counter++; // Increse [counter]
+          },
+          decrease(){
+            this.$store.state.counter--; // decrease [counter]
+          }
+        },
+      }
+    </script> 
+
+
+   Help.vue [Any Change On Counter That In About.vue Will Appear In Help.vue Too]
+   ----------
+
+    <template>
+      <div class="home page">
+        Home {{counter}}
+      </div>
+    </template>
+
+    <script>
+
+    export default {
+      name: "home",
+      computed: {
+        counter(){
+          return this.$store.state.counter;
+        }
+      },
+    };
+    </script>  
+
+----------------------------------------------------------------
+Note: This Way Of Update The State Is Not True So In [Mutations] 
+      Lesson We Will Use [Mutations] To Update The [State]
+----------------------------------------------------------------      

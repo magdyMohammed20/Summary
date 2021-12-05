@@ -1,0 +1,3 @@
+<div id="magdy" >
+  <com1 name='Magdy Mohammed'></com1>
+</div>

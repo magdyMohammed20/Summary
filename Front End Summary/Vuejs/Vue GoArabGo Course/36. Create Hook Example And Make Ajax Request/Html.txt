@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel='stylesheet' href='css/style.css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <!--
+      Create Hook And Ajax Requests By Vue Resource
+
+      (1) We Will InClude Vue Resource CDN Script
+      ____________________________________________
+      <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+      (2) We Will Visit Website Called [ Jsonplaceholder ] For Get Link Of File
+          That Contain Fake Data To Work On It
+
+      (3) We Set Vue Resource Code Inside My Function To Get Data From [JsonPlaceholder]
+      ______________________________________________
+
+      methods:{
+        getPosts:function(){
+          // GET /someUrl
+          this.$http.get('https://jsonplaceholder.typicode.com/posts').then(response => {
+
+            // get body data
+            this.someData = response.body;
+
+          }, response => {
+            // error callback
+          });
+        }
+      }
+      (4) Store The Fake Data Inside Array Called [myData]
+      ______________________________________
+
+      props:{myData: []}
+
+      methods:{
+        getPosts:function(){
+          // GET /someUrl
+          this.$http.get('https://jsonplaceholder.typicode.com/posts').then(response => {
+
+            // get body data
+            this.myData = response.body;
+
+          }, response => {
+            // error callback
+          });
+        }
+    }
+
+    (5) Call Function getPosts() For Get Data
+    ____________________________________________
+
+    <div id="magdy" >
+      <button @click='getPosts()'>Get Posts</button>
+    </div>
+
+    (6) Ajax Request Is Done And The Result Will Showen
+        In Network Tab In Browser And In [XHR] Partition
+
+    (7) Now I Can Extract Any Data That I Want It
+    ______________________________________
+
+      <p v-for='s in myData'>{{s.id}}</p>
+
+    (8) If I Want To Call Fake Data After Page Load I
+        Will Use 'created' Property And Call getPosts()
+        Inside It Then a Button That Call getPosts()
+        I Can Remove It
+
+    -->
+    <div id="magdy" >
+      <button @click='getPosts()'>Get Posts</button>
+
+      <h1>{{myData.length}}</h1>
+      <p v-for='s in myData'>ID = {{s.id}}</p>
+
+    </div>
+
+
+    <script src='js/vue.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

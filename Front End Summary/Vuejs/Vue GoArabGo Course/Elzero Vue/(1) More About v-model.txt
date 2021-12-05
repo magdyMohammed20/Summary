@@ -1,0 +1,59 @@
+(1) v-model With CheckBox
+--------------------------
+==> لما هعمل تشيك لل للعنصر فهيغير قيمة المتغير
+
+  data: { checked: true }
+
+  <input type="checkbox" v-model='checked'/>
+  <h1>Your Name Is {{checked}}</h1>
+
+(2) v-model With Multiple CheckBoxes
+-------------------------------------
+==> لما هعمل تشيك لواحدة منهم فهيحط القيمة بتاعتها في
+المصفوفة وهيعدل القيمة اللي في الاتش ون  
+
+==> You Can Write This With Radio input But We Will
+    Declare (checked) Variable With Any Value Except 
+    Array As In Radio We Select Only 1 Value But
+    With CheckBox We Select Multiple Values
+
+  data: {
+    checked: []
+  }
+
+  <input type="checkbox" v-model='checked' value='First'/>
+  <input type="checkbox" v-model='checked' value='Second' />
+  <input type="checkbox" v-model='checked' value='Third' />
+
+  <h1>Your Name Is {{checked}}</h1>
+
+ (3) v-model With Select
+ ------------------------
+
+  data: { ch: '' } 
+
+  <select v-model='ch'>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+  </select>
+
+  <h1>Your Name Is {{ch}}</h1>
+
+
+(4) v-model With Radio
+-----------------------
+
+	new Vue({
+  	   el: '#magdy',
+  	   data:{
+    	     val: 'one'
+  	   }
+        })
+
+    <div id="magdy" >
+      <input type="radio" value="one" v-model='val'/>
+      <input type="radio" value="two" v-model='val'/>
+    </div>
+
+

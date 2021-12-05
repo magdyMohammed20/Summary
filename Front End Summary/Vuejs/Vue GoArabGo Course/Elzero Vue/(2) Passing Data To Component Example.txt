@@ -1,0 +1,38 @@
+(1) Vue Code
+-------------
+
+Vue.component('app-magdy',{
+
+  template:`
+    <p>
+      Article Id Is  {{id}} <br>
+      Article Title Is {{title}} <br>
+      And Title Author Name Is {{Author}} <br><br>
+    </p>
+  `,
+
+  props:['id','title','Author']
+
+})
+
+var vm = new Vue({
+  el:'.magdy',
+  data: {
+    name: 'Magdy',
+    articles:[
+      {id: 1 , title: 'Title 1' , Author : 'Magdy'},
+      {id: 2 , title: 'Title 2' , Author : 'Mohammed'},
+      {id: 3 , title: 'Title 3' , Author : 'Hossam'},
+      {id: 4 , title: 'Title 4' , Author : 'Ali'}
+    ]
+  }
+})
+
+(2) HTML Code
+----------------
+
+<div class="magdy">
+  <app-magdy v-for='ar in articles' :id='ar.id' :title='ar.title' :Author='ar.Author'>
+
+  </app-magdy>
+</div>

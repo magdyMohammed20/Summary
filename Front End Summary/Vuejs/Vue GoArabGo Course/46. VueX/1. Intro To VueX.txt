@@ -1,0 +1,10 @@
+(1) What Is Vuex?
+------------------
+==> Is Library + State Management Pattern
+==> [State] Means Data That I Want To Share It Between Components
+
+(2) Problem Is If I Want To Share Data Between Different Components
+    So It Will Be Complex Without Using Vuex So Vuex Will Be Simplify
+    Data Sharing Between Components By Using [Store] And [Store]
+    Will Contain This Data That You Can Use It Inside Any Component
+    

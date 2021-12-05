@@ -1,0 +1,24 @@
+new Vue({
+  el: '#magdy',
+  props:{
+    myData:[],
+  },
+  methods:{
+    getPosts:function(){
+      // GET /someUrl
+      this.$http.get('https://jsonplaceholder.typicode.com/posts').then(response => {
+
+        // get body data
+        this.myData = response.body;
+
+      }, response => {
+        // error callback
+      });
+    }
+  },
+  created:function(){
+    // For Call getPosts() Firstly After Application Load
+    this.getPosts();
+
+  }
+})

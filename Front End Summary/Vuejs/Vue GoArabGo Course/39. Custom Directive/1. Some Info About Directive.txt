@@ -1,0 +1,6 @@
+(1) <button @click.stop='val = 1'> Click </button>
+-------------------------------------------------
+==> @ : Called Directive
+==> click: Called Argument
+==> stop: Called Modifier
+==> val=1: Called Value

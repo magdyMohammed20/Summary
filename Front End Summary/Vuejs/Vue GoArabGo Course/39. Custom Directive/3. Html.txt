@@ -1,0 +1,3 @@
+<div id="magdy" >
+  <div v-color:mego.border="'.4'">This Is Custom Directive</div>
+</div>

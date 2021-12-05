@@ -1,0 +1,66 @@
+(1) Actions Will Call [Mutations] Then [Mutations] Will Call [State]
+    And Can Perform Specific Task After Ajax Request
+
+EX:
+----
+
+      Store.js
+      --------
+
+      state: {
+        counter : 10
+      },
+      mutations: {
+        increase(state){
+          state.counter += 10;
+        },
+        increase2(state){
+          state.counter += 20;
+        }
+      },
+      actions: {
+        // Action Parameter Can Be Written By This Way
+        increaseAfter1Second(context){
+          setTimeout(function(){
+            context.commit('increase')
+          },1000);
+        },
+        // Action Parameter Can Be Written By Another Way
+        increaseAfter2Second({commit}){
+          setTimeout(function(){
+            commit('increase2')
+          },1000);
+        }
+      }
+
+      blog.vue
+      ---------
+
+      <template>
+        <div>
+          {{counter}}
+          <button @click='increase1Second()'>Increase After 1 Second</button>
+          <button @click='increase2Second()'>Increase After 2 Second</button>
+        </div>
+      </template>
+
+      <script>
+
+        export default{
+          methods: {
+            increase1Second(){
+              return this.$store.dispatch('increaseAfter1Second');
+            },
+            increase2Second(){
+              return this.$store.dispatch('increaseAfter2Second');
+            }
+          },
+          computed: {
+            counter(){
+              return this.$store.state.counter;
+            }
+          },
+
+          name: "Blog",
+        }
+      </script>

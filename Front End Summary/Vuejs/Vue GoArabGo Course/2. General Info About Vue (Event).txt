@@ -1,0 +1,42 @@
+(1) You Can Add Extra Parameter To Function And This Parameter Called [event]
+    That Has A lot Of Info About The Event
+------------------------------------------------------------------
+
+    new Vue({
+        el:'#m',
+        data:{
+            x:0,
+            y:0,
+            type:''
+        },
+        methods:{
+            show:function(event){
+                this.x = event.clientX;
+                this.y = event.clientY;
+                this.type = event.type;
+            }
+        }
+    })
+
+    <div id='m'>
+        <!-- You Should Put $ Before event Here -->
+        <button @click='show($event)'></button>
+        <h1>
+            X: {{x}}
+            Y: {{y}}
+            type: {{type}}
+        </h1>
+    </div>
+
+Note: You Can Call The Function That Has [event] Parameter Like This
+---------------------------------------------------------------------
+
+    <div id='m'>
+        <!-- You Should Put $ Before event Here -->
+        <button @click='show'></button>
+        <h1>
+            X: {{x}}
+            Y: {{y}}
+            type: {{type}}
+        </h1>
+    </div>

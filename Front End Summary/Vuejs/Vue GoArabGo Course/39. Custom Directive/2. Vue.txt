@@ -1,0 +1,28 @@
+Vue.directive('color',{
+
+  // inserted : Means When Add [color] Directive To
+  // Element It Will Excute Specific Code
+
+  // [el]: Refer To Element That I Will Put This Directive
+  // Inside It
+
+  // [binding]: Used For Get The Value Of Directive
+  inserted(el,binding){
+    //console.log(el);
+    el.style.color = 'red';
+    el.style.opacity = binding.value;
+
+
+    // Check If I Set Specific Modifier For Custom
+    // Directive i Will Excute Specific Code
+    if(binding.modifiers.border){
+      el.style.border = '1px solid green';
+    }
+
+    // Check If I Set Specific Argument For Custom
+    // Directive i Will Excute Specific Code
+    if(binding.arg == 'mego'){
+      console.log('Yes You Have Arg Called Mego');
+    }
+  }
+});

@@ -1,0 +1,50 @@
+(1) If I Have Div And This Div Has A Child And Both Divs Has mouseover Event
+    When I Hover On The Child The Functions Of Both Divs Will Be Excuted
+    But If I Want To Prevent Excute Of Parent Function When Hover On Child
+    I Will Use [stop] Modifier Within Child Event
+------------------------------------------------------------------------
+
+    new Vue({
+        methods:{
+            parent: function(){
+                console.log('Hellow Parent')
+            },
+
+            child: function(){
+                console.log('Hellow Child')
+            }
+        }
+    })
+
+    <div style='width: 200px; height: 200px; background-color: red' @mouseover='parent'>
+
+     <!-- Look Stop Here -->
+        <div style='width: 200px; height: 200px; background-color: blue' @mouseover.stop='child'></div>
+
+    </div>
+
+
+(2) (1) If I Have Div And This Div Has A Child And Both Divs Has mouseover Event
+    When I Hover On The Child The Functions Of Both Divs Will Be Excuted
+    But If I Want To Prevent Excute Of Parent Function When Hover On Child
+    I Will Use [self] Modifier Within Parent Event
+------------------------------------------------------------------------
+
+    new Vue({
+        methods:{
+            parent: function(){
+                console.log('Hellow Parent')
+            },
+
+            child: function(){
+                console.log('Hellow Child')
+            }
+        }
+    })
+
+    <!-- Look self Here -->
+    <div style='width: 200px; height: 200px; background-color: red' @mouseover.self='parent'>
+
+        <div style='width: 200px; height: 200px; background-color: blue' @mouseover='child'></div>
+
+    </div>

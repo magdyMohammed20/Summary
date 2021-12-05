@@ -1,0 +1,43 @@
+// Define Mixin
+// Set Template Property In Mixin To Call It In Different Places
+// And Mixin Can Have [data] Property That Return Some Info
+// And Can Contain [created] Property Too And So On
+
+var mixin = {
+  template:'<p>{{name}} {{date}}</p>',
+  data:function(){
+    return {date: Date.now()}
+  },
+  created:function(){
+    console.log('Component Created Now')
+  }
+};
+
+// Call Mixin
+// Here I Write [mixins] Property For Calling mixin Inside Component
+
+Vue.component('com1',{
+  mixins:[mixin],
+  props:['name']
+});
+
+
+
+// This Mixin Content Will Called By Default In Each Component And Root Without
+// Calling It By It's Name
+
+Vue.mixin({
+  data:function(){
+    return {
+      mego:'This Mixin Will Called By Default Without Calling It By It\'s Name'
+    }
+  }
+});
+
+
+new Vue({
+  el: '#magdy',
+  data:{
+    name: 'magdy Mohammed'
+  }
+})

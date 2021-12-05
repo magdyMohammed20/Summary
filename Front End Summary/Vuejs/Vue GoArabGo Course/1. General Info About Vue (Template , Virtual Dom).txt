@@ -1,0 +1,35 @@
+(1) Vue Code Don't Appear In Html As VueJs Use Virtual Dom
+
+(2) template Property Should Have Only 1 Root Element And This Element Can Contain
+    A lot Of Childs
+-----------------------------------------------------------------
+
+==> Error
+----------
+
+    new Vue({
+        
+        el:'#magdy',
+        
+        data:{
+            name: 'Magdy'
+        }
+        
+        // Div Here Is Root Element
+        template: '<div>{{name}}</div> <p></p>' // Look Here
+    })
+    
+==> Right
+-----------
+
+    new Vue({
+        
+        el:'#magdy',
+        
+        data:{
+            name: 'Magdy'
+        }
+        
+        // Div Here Is Root Element
+        template: '<div>{{name}} <p></p> </div>' // Look Here
+    })

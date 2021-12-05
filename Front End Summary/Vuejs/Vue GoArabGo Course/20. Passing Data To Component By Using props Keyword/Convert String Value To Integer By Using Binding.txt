@@ -1,0 +1,14 @@
+(1) If I Want To Store Specific Attribute Value As Number I Will Use [Binding]
+------------------------------------------------------------------------------
+
+==> Without Binding The Age Will Be Stored As String So I Will Use Binding To Store Age
+    As A Number
+
+<app-name :age='20'></app-name>
+
+Vue.component('app-name',{
+    data: function () { return {} },
+    template: `<span>{{age}}</span>`,
+    props:['age']
+  }
+)

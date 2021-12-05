@@ -1,0 +1,30 @@
+1. New Vue Instance
+2. [el] Property
+3. data Object
+4. mustache
+5. Method
+6. Directives [v-text , v-html , v-for , v-if , v-else , v-else-if , v-once , v-show , v-bind: (:) , v-on:(@) , v-model]
+7. Components
+8. Passing Data To Components
+9. Local And Global Component
+10. Computed Properties 
+11.Watch
+12. Install And Setup Vue Cli
+13. Single File Component
+
+1. Event With Specific Key (@keyup.enter)
+2. Event With Keyboard ShortCut (@keyup.ctrl.a)
+3. Change Data Values When Event Occur (@click = ' name = "Magdy" ')
+4. Like Button
+5. Bind Attribute By Using Object (<p :class='{blue : true , red : false}'>Click</p>)
+6. Bind Attribute By Using Array (:class="['Magdy' , 'Mohammed' , {active: true , not: false}]")
+7. Template Tag
+
+8. Loop Through Object (<li v-for='(item , key , index) in obj'>{{item}} {{key}} {{index}}</li>)
+9. Nested Loop
+10. Change Array Or Object Values Throuh (Vue.set(Array_Name , Index , New_Value)) Or (this.$set(Array_Name , Index , New_Value))
+11. Filter Array Depending On Specific Condition By Using [filter] Function
+12. Use [is] To Set Component Inside <table></table> (EX: <table> <tr is='app-name'></tr> </table>)
+13. Make Binding For [is] With v-model To Switch Between Differents Components With Select Box
+14. Use [props] Inside Component To Pass Values To It (EX: props:['name','age']  <app-name name='Magdy' age='20'></app-name>)
+15. 

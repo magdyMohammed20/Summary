@@ -1,0 +1,33 @@
+(1) You Can Use Bootstrap And FontAwesome For Grid System And Icons
+(2) Bulit Bootstrap Card And Set It In Component Called [EX: course]
+    And Call This Component Inside template Attribute In The Vue Instance
+(3) Set props Or Argument For Component That Have The Data
+    That I Want To Display It [# Of Lessons , # Of Likes ...]
+    And This Attribute Is Object That Have All Data That I Want To
+    Display It And I Will Make Bind For This Attribute From Another Attribute That
+    Have The Real Data In The Vue Instance
+
+(4) Use Attribute Called [created] In Vue Instance And This Attribute Is
+    A Function For Get The Real Data Before Set The Component
+
+(5) I Will Use Library Called [vue resource] For Make Ajax Rquest
+    And Get Data From Youtube API But First I Should Called This Library
+    Through CDN [<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script> ]
+    And I Will Make Function Inside [methods] Attribute In Vue Instance At The Following
+    Form For Get The Data From API And Replace [/someUrl] With Link Of [.Json] File
+    And Replace [this.someData] With [this.courses]
+    [Note: this.courses Is Empty Array That I Will Create It For Store Data]
+
+    getCourses:function(){
+      {
+        // GET /someUrl
+        this.$http.get('js/courses.json').then(response => {
+
+          // get body data
+          this.courses = response.body;
+
+        }, response => {
+          // error callback
+        });
+      }
+    }

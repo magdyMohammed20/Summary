@@ -1,0 +1,37 @@
+new Vue({
+    el: '#m',
+
+    data:{
+        hour: 0,
+        min: 0,
+        sec: 0
+    },
+
+    watch:{
+        hour:funvtion(v){
+            this.min = v * 60; // Convert Hours To Minutes
+        },
+        min:function(v){
+            this.sec = v * 60;  // Convert Minutes To Seconds
+            this.hour = v / 60; // Convert Minutes To Hours
+        },
+        sec:function(){
+            this.min = v / 60;   // Convert Seconds To Minutes
+            this.hour = v / 3600 // Convert Seconds To Hours
+        }
+    }
+})
+
+
+    <div id="magdy">
+
+      <label>Hour</label>
+      <input type="text" v-model='hour'/>
+
+      <label>Minute</label>
+      <input type="text" v-model='min'/>
+
+      <label>Second</label>
+      <input type="text" v-model='sec'/>
+
+    </div>

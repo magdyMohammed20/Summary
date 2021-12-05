@@ -1,0 +1,184 @@
+(1) After I Make Shared Data Between Page I Want To Make [Getters]
+    That Excute Any Operations In This Data So I Will Use [Getters]
+    So Firstly I Will Define [Getters] In [store.js] File
+--------------------------------------------------------------
+
+  store.js
+  -----------
+
+    export default new Vuex.Store({
+      state: {
+        counter : 0
+      },
+      getters: { // Define Getters Here And Should Pass [state] As Argument
+        doubleCounter(state) {
+          return state.counter * 2;
+        }
+      },
+      mutations: {},
+      actions: {}
+    });
+
+   About.vue [Called Getters Here]
+   ---------
+
+   <template>
+    <div class="about page p-5">
+      <button class="btn btn-primary mr-3" @click="increase()">Increase</button>
+      <button class="btn btn-primary" @click="decrease()">decrease</button>
+      <p class="mt-3">
+        About And Shared Counter Value Is {{counter}}   
+      </p>
+      <p>
+        And Double Counter Is {{doubledCounter}}
+      </p>
+    </div>
+  </template>
+
+  <script>
+
+    export default{
+      
+      computed: {
+        counter(){
+          return this.$store.state.counter;
+        }, // Computed Getters
+        doubledCounter(){
+          return this.$store.getters.doubleCounter;
+        }      
+      },
+      methods: {
+        increase(){
+          this.$store.state.counter++;
+        },
+        decrease(){
+          this.$store.state.counter--;
+        }
+      },
+    }
+  </script>
+ 
+(2) If I Want To Pass Argument To [Getters] You Must Write Getter Like This
+------------------------------------------------------------------------
+
+  store.js
+  ------------
+
+    export default new Vuex.Store({
+      state: {
+        counter : 0
+      },
+      getters: { // Pass [num] To Getter To Use It In Returned Value
+        doubleCounter: (state) => (num) => {
+          return state.counter * 2 * num;
+        }
+      },
+      mutations: {},
+      actions: {}
+    });  
+
+  About.vue [Pass Argument To Getter]
+  ---------
+
+  <template>
+    <div class="about page p-5">
+      <button class="btn btn-primary mr-3" @click="increase()">Increase</button>
+      <button class="btn btn-primary" @click="decrease()">decrease</button>
+      <p class="mt-3">
+        About And Shared Counter Value Is {{counter}}   
+      </p>
+      <p>
+        And Double Counter Is {{doubledCounter}}
+      </p>
+    </div>
+  </template>
+
+  <script>
+
+    export default{
+      
+      computed: {
+        counter(){
+          return this.$store.state.counter;
+        }, 
+        doubledCounter(){
+          // Here We Pass [.4] To Getter
+          return this.$store.getters.doubleCounter(.4);
+        }      
+      },
+      methods: {
+        increase(){
+          this.$store.state.counter++;
+        },
+        decrease(){
+          this.$store.state.counter--;
+        }
+      },
+    }
+  </script>  
+
+(3) If I Have A Lot Of Methods Inside Getters And Want To Call It Inside Any Page
+    But With Brief Syntax I Will Use [mapGetters] But Here We Will Use Getters
+    Methods That Don't Take Args
+------------------------------------------------------------------- 
+
+  store.js
+  -----------
+
+  import Vue from "vue";
+  import Vuex from "vuex";
+
+  Vue.use(Vuex);
+
+  export default new Vuex.Store({
+    state: {
+      counter : 0
+    },
+    getters: {
+      counter(state) {
+        return state.counter;
+      },
+      countered(state) {
+        return state.counter * 2;
+      }
+    },
+    mutations: {},
+    actions: {}
+  });
+
+  About.vue
+  -----------
+
+  <template>
+    <div class="about page p-5">
+      <button class="btn btn-primary mr-3" @click="increase()">Increase</button>
+      <button class="btn btn-primary" @click="decrease()">decrease</button>
+      <p class="mt-3">
+        Counter Is {{counter}}   
+      </p>
+      <p class="mt-3">
+        Double Counter Without Args Is {{countered}}   
+      </p>
+    </div>
+  </template>
+
+  <script>
+    import {mapGetters} from "vuex"; // You Must Import [mapGetters] Here
+
+    export default{
+      
+      computed: {
+        ...mapGetters(['counter','countered']), // Will Extract Getters Methods 
+                                                // That In [store.js] Inside 
+                                                // computed Object  
+      },
+      methods: {
+        increase(){
+          this.$store.state.counter++;
+        },
+        decrease(){
+          this.$store.state.counter--;
+        }
+      },
+    }
+  </script>

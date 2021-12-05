@@ -1,0 +1,224 @@
+(1) Mutations Used For Modify Or Update The State Instead Of Direct
+    Modify On The State
+
+(2) Firstly We Will Define Our Methods Inside [store.js] File And
+    Inside [Mutations] Object And Call This Methods Inside [About]
+    Page By Using [commit] Method
+---------------------------------------------------------------
+
+  store.js
+  ----------
+
+  import Vue from "vue";
+  import Vuex from "vuex";
+
+  Vue.use(Vuex);
+
+  export default new Vuex.Store({
+    state: {
+      counter : 0
+    },
+    mutations: {
+      increase(state) {
+        state.counter += 5;
+      },
+      decrease(state) {
+        state.counter -= 5;
+      },
+    },
+    actions: {}
+  });
+
+  About.vue
+  -----------
+  <template>
+    <div class="about page p-5">
+      <button class="btn btn-primary mr-3" @click="increase()">Increase</button>
+      <button class="btn btn-primary" @click="decrease()">decrease</button>
+      <p class="mt-3">
+        Counter Is {{counter}}
+      </p>
+    </div>
+  </template>
+
+<script>
+
+  export default{
+    
+    computed: {
+      counter(){
+        return this.$store.state.counter;
+      }
+    },
+    methods: {
+      increase(){
+        return this.$store.commit('increase');
+      },
+      decrease(){
+        return this.$store.commit('decrease');
+      }
+    }
+  }
+</script>
+
+(3) Passing Parameters To Mutations
+------------------------------------
+
+  store.js
+  ---------
+
+    import Vue from "vue";
+    import Vuex from "vuex";
+
+    Vue.use(Vuex);
+
+    export default new Vuex.Store({
+      state: {
+        counter : 0
+      },
+      mutations: {
+        n_increase(state , n) {
+          state.counter += n;
+        }
+      },
+      actions: {}
+    });
+
+
+  About.vue
+  -----------
+
+  <template>
+    <div class="about page p-5">
+      <button class="btn btn-primary mr-3" @click="increase_num()">Increase</button>
+      <p class="mt-3">
+        Counter Is {{counter}}
+      </p>
+    </div>
+  </template>
+
+  <script>
+
+    export default{
+      
+      computed: {
+        counter(){
+          return this.$store.state.counter;
+        }
+      },
+      methods: {
+        increase_num(){
+          return this.$store.commit('n_increase' , 100);
+        }
+      }
+    }
+  </script>
+
+(4) If I Have A Lot Of Methods Inside Mutations And Want 
+    To Call It Inside Any Page But With Brief Syntax I Will
+    Use [mapMutations]
+-----------------------------------------------------------
+
+  store.js
+  ---------
+
+  import Vue from "vue";
+  import Vuex from "vuex";
+
+  Vue.use(Vuex);
+
+  export default new Vuex.Store({
+    state: {
+      counter : 0
+    },
+    mutations: {
+      increase(state) {
+        state.counter += 5;
+      }
+    },
+    actions: {}
+  });
+
+  About.vue
+  ----------
+
+  <template>
+    <div class="about page p-5">
+      <button class="btn btn-primary mr-3" @click="increase()">Increase</button>
+      <p class="mt-3">
+        Counter Is {{counter}}
+      </p>
+    </div>
+  </template>
+
+  <script>
+    import {mapMutations} from 'vuex';
+
+    export default{
+      
+      computed: {
+        counter(){
+          return this.$store.state.counter;
+        }
+      },
+      methods: {
+        ...mapMutations(['increase'])
+      }
+    }
+  </script>
+
+
+
+
+(5) Passing More Than 1 Parameters To Mutations By using [Object] As Parameter
+---------------------------------------------------------------------
+
+  store.js
+  ---------
+
+  import Vue from "vue";
+  import Vuex from "vuex";
+
+  Vue.use(Vuex);
+
+  export default new Vuex.Store({
+    state: {
+      counter : 0
+    },
+    mutations: {
+      increase(state , obj) {
+        state.counter += obj.num;
+      }
+    },
+    actions: {}
+  });
+
+  About.js
+  ---------
+
+  <template>
+    <div class="about page p-5">
+      <button class="btn btn-primary mr-3" @click="n_increase()">Increase</button>
+      <p class="mt-3">
+        Counter Is {{counter}}
+      </p>
+    </div>
+  </template>
+
+  <script>
+    import {mapMutations} from 'vuex';
+
+    export default{
+      
+      computed: {
+        counter(){
+          return this.$store.state.counter;
+        }
+      },
+      methods: {
+        n_increase(){
+          return this.$store.commit('increase' , {num : 1000});
+        },
+      }
+    }
+  </script>

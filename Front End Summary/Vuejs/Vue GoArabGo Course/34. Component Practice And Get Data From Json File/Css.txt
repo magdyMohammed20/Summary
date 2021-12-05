@@ -1,0 +1,11 @@
+body{
+  direction: rtl;
+}
+
+.card{
+  text-align: right;
+}
+
+.fa-youtube-play{
+  color: #F00
+}
