@@ -1,0 +1,48 @@
+(1) For Example If I Compile Sass Files [_footer.scss , _card.scss] To
+    Compressed 1 Css File [EX: main.scss]
+    So If I Open Browser Inspect It's Difficult To See
+    Specific Classes That In This Css File And Any Style That Belongs To
+    [_footer.scss Or _card.scss] Will Be Belongs To [main.scss] So We Will Use 
+    [Gulp sourcemaps] To Organize Files And Make Styles Of 
+    [_footer.scss , _card.scss] Belongs To Them
+
+(2) Firstly We Will Install [gulp-sourcemaps] In Our Project 
+    By Write [npm i gulp-sourcemaps --save-dev] In [CMD]
+
+(3) Then I Will Call [gulp-sourcemaps] In [gulpfile.js]
+--------------------------------------------------------
+
+  var sourcemaps = require('gulp-sourcemaps');
+
+(4) Then I Will Write This Code
+---------------------------------
+
+  var sass = require('gulp-sass');
+  var gulp = require('gulp');
+  var liveReload = require('gulp-livereload');
+  var sourcemaps = require('gulp-sourcemaps');
+
+  gulp.task('cssFiles', function () { 
+    return gulp.src('project/**/*.scss')
+      .pipe(sourcemaps.init()) // Initialize SourceMaps Should Be Written After[src]
+      .pipe(sass({ outputStyle: 'compressed' }))
+      .pipe(sourcemaps.write()) // SourceMaps Write Should Be Written Before [dest]
+      .pipe(gulp.dest('dist'))
+      .pipe(liveReload()) 
+  });
+
+  gulp.task('watch', function () {
+    require('./server.js');
+    liveReload.listen(); // Listen For Changes
+    gulp.watch('project/**/*.scss', ['cssFiles'])
+  });
+
+(5) Then I Will Run Task Through [gulp watch] In [CMD]
+
+(6) And After Run You Note That Source Map Will Be Appear In
+    The Output Css File And If I Want To Put Source Map In
+    Isolated File I Will Pass '.' To write() And Save [main.scss]
+    Again For File Appear
+-------------------------------------------------  
+
+  .pipe(sourcemaps.write('.'))

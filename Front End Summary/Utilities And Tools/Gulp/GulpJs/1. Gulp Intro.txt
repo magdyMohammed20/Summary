@@ -1,0 +1,8 @@
+(1) What Gulp JS ?
+---------------------
+==> ToolKit That Automate Repeated Tasks And Build With Node Js
+
+(2) What Gulp Do? (Or) What Repeated Tasks?
+-----------------
+==> [Minify Css , Compile Sass Or Less , Compress Images , Upload Files]
+

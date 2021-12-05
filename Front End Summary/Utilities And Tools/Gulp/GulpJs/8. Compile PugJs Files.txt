@@ -1,0 +1,37 @@
+(1) We Will Create pug File In [Project] Folder [EX: index.pug]
+
+(2) I Will Install And Setup [gulp-pug] In My Project Through [CMD]
+    By Using This Command [npm i gulp-pug --save-dev]
+
+(3) Call [gulp-pug] Plugin In [gulpfile.js]
+--------------------------------------------
+
+  var pug = require('gulp-pug');
+
+EX: (Will Produce Minified Html File)
+-----
+
+  var gulp = require('gulp');
+
+  var pug = require('gulp-pug');
+
+  gulp.task('pugCompile' , ()=>
+    gulp.src('project/pug/index.pug')
+    .pipe(pug())
+    .pipe(gulp.dest('dist'))
+  );
+
+EX: (Will Produce Pretty Html File)
+-----
+
+  var gulp = require('gulp');
+
+  var pug = require('gulp-pug');
+
+  gulp.task('pugCompile' , ()=>
+    gulp.src('project/pug/index.pug')
+    .pipe(pug({pretty : true}))
+    .pipe(gulp.dest('dist'))
+  );  
+
+(4) Then I Will Run Task In [CMD] By Write [gulp pugCompile]

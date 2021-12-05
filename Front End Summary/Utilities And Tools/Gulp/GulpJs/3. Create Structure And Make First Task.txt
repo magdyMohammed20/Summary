@@ -1,0 +1,41 @@
+(1) Inside Project Folder That I Create It In The Previous Lesson
+    I Will Create Another Folder And Give It Any Name [EX: Project]
+    And This Folder Will Contain All Files That In Development Stage
+    [EX: Sass Files , Images , ....]
+
+(2) And Create Another Folder Inside Gulp Project Folder And This Folder
+    Created For Project Production And Called It For Example [dist]
+
+(3) And Create Another File Inside Gulp Project Folder That Called
+    [gulpfile.js] And You Must Named This File With This Name As Gulp
+    Project Don't Run Without This File Name , Then I Will Create My First
+    Task In This File By This Way
+------------------------------------------------------------------
+
+    // Import gulp Module From Node_Modules Folder
+    var gulp = require('gulp');
+
+    // First Task
+    gulp.task('taskName' , function(){
+        // Code
+    });
+
+    EX:
+    -----
+
+    var gulp1 = require('gulp');
+
+    gulp1.task('mego',() =>{
+        console.log('Hellow Mego In The First Gulp Task');
+    });
+
+
+(4) Then I Will Run The Project By Using The CMD And First You Should Be
+    Focused On Project Folder By Using [cd Project_Name]
+    Then I Will Run The Task That I Create It By Using This Command
+    [gulp taskName]
+
+(5) If There Is Any Problem In Task Run You Can Install Another Version
+    Of Gulp Like [npm install gulp@3.9.0]
+
+

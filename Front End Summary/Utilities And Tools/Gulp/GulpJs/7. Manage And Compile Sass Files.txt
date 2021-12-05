@@ -1,0 +1,72 @@
+(1) In [Project] Folder I Will Create [Css] Folder That Contain Another Folder Called
+    [sass] And Beside [sass] Folder I Will Create [sass] File [EX: main.scss]
+    That I Will Compile And Combine All [sass] Files That Inside [sass] Folder To
+    This File
+
+(2) I Will Create Sass Files Inside [Sass] Folder [EX: _header.scss | _nav.scss ....]
+    And This Files Name Start With Underscore For Prevent Auto Compile And We Will
+    Write Some Of Codes In This Files Then I Will Import This Files In [main.scss] File
+    Through [EX: @import 'sass/header.scss']
+
+(3) I Will Install [gulp-sass] Through [CMD] By Write [npm i gulp-sass --save-dev]
+
+(4) I Will Call [gulp-sass] in [gulpfile.js]
+---------------------------------------------
+
+      var sass = require('gulp-sass');
+
+EX: (Here It Will Produce Css File Called [main.css])
+----
+
+  var gulp = require('gulp');
+
+  var concate = require('gulp-concat');
+
+  var prefix = require('gulp-autoprefixer');
+
+  var sass = require('gulp-sass');
+
+  gulp.task('cssFiles' , ()=>
+    gulp.src('project/css/main.scss')
+    .pipe(sass())
+    .pipe(prefix('last 100 versions'))
+    .pipe(gulp.dest('dist/css-compiled'))
+  );
+
+EX: (compile [main.scss] To [mego.css])
+-----
+
+  var gulp = require('gulp');
+
+  var concate = require('gulp-concat');
+
+  var prefix = require('gulp-autoprefixer');
+
+  var sass = require('gulp-sass');
+
+  gulp.task('cssFiles' , ()=>
+    gulp.src('project/css/main.scss')
+    .pipe(sass())
+    .pipe(concate('mego.css'))
+    .pipe(prefix('last 100 versions'))
+    .pipe(gulp.dest('dist/css-compiled'))
+  );
+
+(5) If I Want To Control On Output Style I Can Use [outputStyle]
+----------------------------------------------------------------
+
+  var gulp = require('gulp');
+
+  var concate = require('gulp-concat');
+
+  var prefix = require('gulp-autoprefixer');
+
+  var sass = require('gulp-sass');
+
+  gulp.task('cssFiles' , ()=>
+    gulp.src('project/css/main.scss')
+    .pipe(sass({outputStyle: 'compressed'})) // Output Will Be Compressed
+    .pipe(concate('mego.css'))
+    .pipe(prefix('last 100 versions'))
+    .pipe(gulp.dest('dist/css-compiled'))
+  );

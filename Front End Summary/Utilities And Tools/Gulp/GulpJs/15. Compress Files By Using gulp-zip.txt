@@ -1,0 +1,32 @@
+(1) Used For Compress File To [.zip] File
+ 
+(2) Firstly I Install [gulp-zip] By write [ npm i gulp-zip --save-dev ]
+    In CMD
+
+(3) Then I Will Call [gulp-zip] Plugin In [gulpfile.js]
+--------------------------------------------------------
+
+    var zip = require('gulp-zip');
+
+(3) Then I Make Task For Compress All Files That In [dist] Folder
+------------------------------------------------------------------
+
+var gulp       = require('gulp'),
+    notify     = require('gulp-notify'),
+    zip        = require('gulp-zip');
+
+gulp.task('compress' , ()=> {
+  return gulp.src('dist/**/*.*') // Any File With Any Extension In [dist]
+         .pipe(zip('TestProject.zip')) // [TestProject.zip] Name Of Compressed
+                                       // Folder
+         .pipe(gulp.dest('.')) // Set Produced File Beside [dist] Folder
+         .pipe(notify('Files Is Compressed Correctly'))
+});
+gulp.task('watch', function () {
+  require('./server.js');
+  liveReload.listen(); // Listen For Changes
+  gulp.watch('dist/**/*.*' , ['compress']);
+
+});
+
+(4) Then I Will Write [gulp watch] In [CMD] To Run The Task

@@ -1,0 +1,61 @@
+(1) If I Have More Than 1 File With The Same Extension [.css Or .js ....]
+    And I Want To Concate The Content Of This Files In 1 File So I Will Use
+    [gulp-concat] Plugin
+
+(2) Firstly You Should Install [gulp-concat] Plugin By Using [CMD] But You Should
+    Focus On Project Folder By Using [cd Project_Name] And Write This Command
+    [npm i --save-dev gulp-concat] And For Make Sure That [gulp-concat] Is Installed Correctlly In My Project You Can Enter To [Package.json] File
+    And Will See If [gulp-concat] Is Putted In [devDependencies] Object
+
+(3) Now I Can Use [gulp-concat] Plugin In [gulpfile.js]
+----------------------------------------------------
+
+    var gulp = require('gulp');
+    var con = require('gulp-concat'); // Call [gulp-concat]
+
+    // Transfer All Css Files And Collect All Css Files In 1 File Called [main.css]
+    // Then Transfer [main.css] To [dist] Folder
+
+    gulp.task('transfer-css-files' , function(){
+        return gulp.src('project/*.css')
+           .pipe(con('main.css'))
+           .pipe(gulp.dest('dist'));
+    });
+
+
+(4) Now I Can Run This Task In [CMD] By Write [gulp transfer-css-files]
+    And After Excute This Command [main.css] Will Created In [dist] Folder
+    And Have The Content Of All Css File Inside It
+
+
+(5) Another Example [Concate All Js Files In Only 1 File [all.js] ]
+---------------------
+
+    var gulp = require('gulp');
+
+    var con = require('gulp-concat');
+
+    gulp.task('transfer-js-files',()=>
+
+          gulp.src('project/*.js')
+          .pipe(con('all.js'))
+          .pipe(gulp.dest('dist'))
+
+    );
+
+(6) I Can Specify The Symbol That Separates Between The combined Files By Add And Object
+    To concate Plugin And Specify This Symbol
+---------------------------------------------------------------------------------------
+
+==> Here Will Separate Between Combined Files By Using ';'
+
+	var gulp = require('gulp');
+
+	var concate = require('gulp-concat');
+
+
+	gulp.task('cssFiles' , ()=>
+  	  gulp.src('project/css/*.css')
+  	  .pipe(concate('main.css' , {newLine : ';'}))
+  	  .pipe(gulp.dest('dist/css-compiled'))
+	);

@@ -1,0 +1,40 @@
+(1) First I Will Install [gulp-autoprefixer] By Write This Command In [Cmd]
+    [npm i --save-dev gulp-autoprefixer] After Excute This Command You Can Make sure That [gulp-autoprefixer] Is Installed By See It In [devDependencies] Object In [Package.json] Folder
+
+(2) Now You Can Use [gulp-autoprefixer] Plugin
+----------------------------------------------
+
+var gulp = require('gulp');
+
+var con = require('gulp-concat');
+
+var prefixer = require('gulp-autoprefixer'); // Call ['gulp-autoprefixer'] Plugin
+
+gulp.task('auto-prefix',function(){
+    return gulp.src('project/*.css') // Transfer All Css Files
+           .pipe(con('main.css')) // And Collect All Css Files In 1 File Called [main.css]
+           .pipe(prefixer()) // Auto Prefix Css Properties
+           .pipe(gulp.dest('dist')); // Then Transfer [main.css] To [dist] Folder
+});
+
+
+(3) Gulp Will Prefix Css Properties Depending On The Last Browsers Versions
+    So If I Want To Prefix Properties Depending On Specific Versions I Can
+    Pass Parameter That Indicate The Specific Versions
+----------------------------------------------------------------------------
+
+var gulp = require('gulp');
+
+var con = require('gulp-concat');
+
+var prefixer = require('gulp-autoprefixer'); // Call ['gulp-autoprefixer'] Plugin
+
+gulp.task('auto-prefix',function(){
+    return gulp.src('project/*.css') // Transfer All Css Files
+           .pipe(con('main.css')) // And Collect All Css Files In 1 File Called [main.css]
+           .pipe(prefixer('last 2 versions')) // Auto Prefix Css Properties                                          // Depending On The Last 2 Versions                                    // Of Browsers
+           .pipe(gulp.dest('dist')); // Then Transfer [main.css] To [dist] Folder
+});
+
+(4) Then After Run The Task In [CMD] You Will Note That Gulp Will Auto Prefix All
+    Css Properties That Need For Prefixes

@@ -1,0 +1,38 @@
+(1) Firstly I Will Make Folder Inside [project] Folder That Called [js] And This
+    Folder Will Contain All Js Files That I Want To Concatenate It In 1 File And
+    Minify This File So I Will Create Another 2 Js Files In [js] Folder
+    [EX: one.js , two.js]
+
+(2) Then I Will Install [gulp-uglify] In My Project Through [CMD] By Write
+    [npm i gulp-uglify --save-dev]
+
+(3) Then I Will Call [gulp-uglify] Plugin In [gulpfile.js]
+---------------------------------------------------------
+
+      var uglify = require('gulp-uglify');
+
+(4) Then I Will Write Full Code In [gulpfile.js]
+------------------------------------------------
+
+  var concate = require('gulp-concat'),
+      gulp = require('gulp'),
+      liveReload = require('gulp-livereload'),
+      uglify = require('gulp-uglify');
+
+  gulp.task('jsMinify' , function(){
+      return gulp.src('project/js/*.js')
+             .pipe(concate('all.js'))
+             .pipe(uglify())
+             .pipe(gulp.dest('dist/js'))
+             .pipe(liveReload())
+  });
+
+  gulp.task('watch', function () {
+    require('./server.js');
+    liveReload.listen(); // Listen For Changes
+    gulp.watch('project/js/*.js' , ['jsMinify']);
+
+  });
+
+(5) Then I Will Write [gulp watch] In [CMD] For Run Task And Concate And Minify
+    js Files In 1 File

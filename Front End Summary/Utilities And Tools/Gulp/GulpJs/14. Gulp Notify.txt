@@ -1,0 +1,42 @@
+(1) Used For Display Windows Message That Refers To Any Thing
+    [EX: Display Message After Task Is Excuted]
+    But You Must Sure That The [Windows Snore Toast] Is [On]
+    To Display [gulp-notify] Messages And If I Want To Sure
+    I Will Open [Notifications & actions] That In Windows And Sure That
+    [snore toast] Is [ON] And Click On [Snore toast] To Sure That
+    [notifications Banners] Is Enabled
+
+(2) Firstly We Install [gulp-notify] By Write [npm i gulp-notify --save-dev]
+    By Using [CMD] In Our Project
+
+(3) Then I Will Call [gulp-notify] Plugin In [gulpfile.js]
+-----------------------------------------------------------
+
+  var notify = require('gulp-notify');
+
+(4) Then You Will Use It Normally In Tasks
+-------------------------------------------
+
+var concate = require('gulp-concat'),
+    gulp = require('gulp'),
+    liveReload = require('gulp-livereload'),
+    uglify = require('gulp-uglify'),
+    notify = require('gulp-notify');
+
+  gulp.task('jsMinify' , function(){
+      return gulp.src('project/js/*.js')
+             .pipe(concate('all.js'))
+             .pipe(uglify())
+             .pipe(gulp.dest('dist/js'))
+             .pipe(notify('Finshing')) // Show 'Finshing' After Task Excuted
+             .pipe(liveReload())
+  });
+
+  gulp.task('watch', function () {
+    require('./server.js');
+    liveReload.listen(); // Listen For Changes
+    gulp.watch('project/js/*.js' , ['jsMinify']);
+
+  });
+
+(5) Then I Will Run Task By Write [gulp watch] In [CMD]

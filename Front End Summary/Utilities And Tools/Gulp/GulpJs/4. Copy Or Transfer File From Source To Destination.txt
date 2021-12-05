@@ -1,0 +1,35 @@
+var gulp = require('gulp');
+
+
+// Transfer [index.html] File That In [Project] Folder To [dist] Folder
+gulp.task('firstTask',function(){
+    return gulp.src('project/index.html')
+        .pipe(gulp.dest('dist'));
+});
+
+
+// Transfer All Files That Have [.html] Extension From [Project] Folder To [dist] Folder
+gulp.task('secondTask',function(){
+    return gulp.src('project/*.html')
+          .pipe( gulp.dest('dist') )
+});
+
+
+// Transfer All Files That Have Any Extension From [Project] Folder To [dist] Folder
+gulp.task('thirdTask',function(){
+    return gulp.src('project/*.*')
+           .pipe( gulp.dest('dist') )
+});
+
+
+// Transfer Specific Files From [Project] Folder To [dist] Folder By Using [Object]
+gulp.task('fourthTask',function(){
+    return gulp.src(['project/index.html','project/index2.html']).pipe(gulp.dest('dist'));
+});
+
+
+
+// Transfer Specific Files From [Project] Folder To Another Folder That        Inside The [dist] Folder By Using [Object] And If [mego] Folder Is Not      Founded Or [dist] Folder Not Founded Gulp Will Create [dist] Folder And    Create [mego] Folder By Default
+gulp.task('fifthTask',function(){
+    return gulp.src(['project/index.html','project/index2.html']).pipe(gulp.dest('dist/mego'));
+});

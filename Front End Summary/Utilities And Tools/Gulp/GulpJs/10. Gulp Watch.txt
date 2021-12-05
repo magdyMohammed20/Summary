@@ -1,0 +1,69 @@
+(1) For Watch Changes That Occures In Specific Specific File
+
+(2) In gulp File I Will Write This Code
+------------------------------------------
+
+    var gulp = require('gulp');
+
+    var pug = require('gulp-pug');
+
+    gulp.task('pugCompile', () => {
+
+      gulp.src('project/pug/index.pug')
+        .pipe(pug({pretty: true }))
+        .pipe(gulp.dest('dist'))
+
+    });
+
+    gulp.task('watch' , function(){
+        require('./server.js'); // For Start Server In Watch Operation
+        gulp.watch('./project/pug/index.pug' , ['pugCompile'])
+    })
+
+(3) If The Installed Gulp Version Is Higher So This Watch Syntax Will Not Work Correctly So I Will Use This Syntax Instead Of Previous Watch Syntax
+----------------------------------------------------------------------
+
+    gulp.task('watch' , function(){
+        gulp.watch('./project/pug/index.pug' , gulp.series('pugCompile'))
+    })
+
+(4) Then I Will Run The Watch Task By Using [CMD] And Write [gulp watch] And     After This Command If Any Change Occur In [index.pug] The Cmd Will Watch     This File
+
+(5) If I Want To Watch More Than 1 File
+--------------------------------------------
+
+    var gulp = require('gulp');
+
+    var pug = require('gulp-pug');
+
+    var sass = require('gulp-sass');
+
+    gulp.task('pugCompile', () => {
+
+      gulp.src('project/pug/index.pug')
+        .pipe(pug({pretty: true }))
+        .pipe(gulp.dest('dist'))
+
+    });
+
+    gulp.task('cssFiles', () => {
+
+      gulp.src('project/pug/style.scss')
+        .pipe(sass())
+        .pipe(gulp.dest('dist'))
+
+    });
+
+    gulp.task('watch' , function(){
+        gulp.watch('./project/pug/index.pug' , ['pugCompile']);
+        gulp.watch('./project/css/style.scss' , ['cssFiles'])
+    });
+
+(6) If I Want Gulp To Watch All Sass Files
+--------------------------------------------
+
+    gulp.task('watch' , function(){
+        // [**] Mean Any Folder Inside Css Folder
+        // [*] Mean Any File Inside Any Folder That Inside Css Folder
+        gulp.watch('./project/css/**/*.scss' , ['pugCompile']);
+    });

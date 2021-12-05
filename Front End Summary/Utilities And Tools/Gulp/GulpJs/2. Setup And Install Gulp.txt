@@ -1,0 +1,24 @@
+(1) Create Project Folder Normally (EX: gulp-project)
+(2) Focus On Project Folder Directoy By Using [cd gulp-project] Through [CMD]
+(3) Install [Intializer] Through [CMD] By Using This Command [npm init]
+(4) It Will Ask Me For Package Name That I Will Enter Any Name [EX: magdy]
+(5) It Will Show Me Package Version Then I Click [Enter Button]
+(6) It Will Ask Me For Project Description That I Will Enter Any Description [EX: First Gulp Project]
+
+(7) Then I Will Escape [Test Command , Git Repoistery , Keywords] By Hit [Enter Button]
+
+(8) Then I Will Enter Author Name [EX: Mego]
+
+(9) Then I Will Escape [license] By Hit [Enter Button]
+
+(10) Then Hit Enter For Confirm This Settings
+
+(11) After Confirm Settings A [Package.json] File Will Appear In The Project Folder
+
+(12) Then I Will Setup And Install Gulp By Write [npm i gulp -g] In [CMD] But This Command 
+     Will Install Gulp Globally And No There Any Change In The Project Folder That I Will
+     Create It So If I Will Setup Gulp Locally I Will Write This Command In Cmd
+     [npm i --save-dev gulp] And After Write This Command You Will See That A New Folder That
+     Appear In My Project Folder
+
+

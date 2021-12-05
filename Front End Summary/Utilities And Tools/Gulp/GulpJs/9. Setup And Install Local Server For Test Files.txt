@@ -1,0 +1,50 @@
+(1) There Are A lot Of Local Servers To Install It In Your Project
+    EX: gulp-webserver , gulp-connect , gulp-live-server , 
+        static-server  , gulp-serve 
+
+(2) Then I Will Create Another Folder That Beside [package.json]
+    File That Called [EX: server.js]
+
+(3) So I Will Install Any Local Server Through [CMD] , I Will Install
+    [static-server]  [npm i --save-dev static-server]
+
+(4) Then I Will Write This Code In [server.js] For Start The 
+    Live Server
+------------------------------------------------------------
+
+  // Written In CamelCase
+  var StaticServer = require('static-server');
+
+  var server = new StaticServer({
+    rootPath: './dist',
+    port: 8080
+  });
+
+  // When Start Server
+  server.start(function () {
+    console.log('Server Is Ready To Start ...' , server.port);
+  });
+
+
+
+(4) Then I Will Run This File [server.js] In [Cmd] By Write
+    [node server.js] And I Can Write [localhost:8080] In Browser
+    To Open The Server
+
+(5) In Any Task In [gulpfile.js] File i Can Start Server Before 
+    Excute The Task By Write [require('./server.js')]     
+    So You Can Ignore Run The Server By Using [node server.js] 
+    And Run This Task Normally In [CMD]
+------------------------------------------------------------
+
+  var gulp = require('gulp');
+  var pug = require('gulp-pug');
+
+  gulp.task('compilePug' , function(){
+    require('./server.js');
+    gulp.src('project/index.pug')
+        .pipe(pug())
+        .pipe(gulp.dest('dist'))
+  });
+
+
