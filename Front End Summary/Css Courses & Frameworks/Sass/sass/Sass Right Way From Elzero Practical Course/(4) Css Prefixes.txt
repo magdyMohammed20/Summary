@@ -1,0 +1,37 @@
+(1) Build Prfixer With Mixin
+------------------------------
+
+	mixin.scss
+	--------------
+
+	@mixin prefixer($property, $value, $prefixes:()){
+
+		@each $val in $prefixes{
+			#{'-' + $val + '-' + $property} : $value
+		}
+
+		#{$property}: $value
+
+	}
+
+
+	style.scss
+	-----------
+
+	div{
+		color: red;
+
+		@include prefixer(transition, all .5s linear, webkit moz o ms)
+	
+	}
+
+	=====================Output======================
+
+	div{
+		color: red;
+		-webkit-transition: all .5s linear;
+		-moz-transition: all .5s linear;
+		-o-transition: all .5s linear;
+		-ms-transition: all .5s linear;
+		transition: all .5s linear;
+	}

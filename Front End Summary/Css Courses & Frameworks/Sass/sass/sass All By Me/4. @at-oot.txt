@@ -1,0 +1,34 @@
+$mainColor: green;
+$childColor: #EEE;
+$secondColor: #000;
+
+div{
+  background-color: $mainColor;
+  width: 200px;
+  height: 200px;
+
+  // Use @at-root For Reduce Selectors Generators
+  @at-root p.magdy{
+    color: red;
+    background-color: $childColor;
+    padding: 10px;
+  }
+}
+
+
+// @at-root With Multiple Childs
+// Define Vars
+$mainColor: green;
+$childColor: #EEE;
+$secondColor: #000;
+
+div{
+  background-color: $mainColor;
+  width: 200px;
+  height: 200px;
+
+  @at-root{
+    .child1{color: $mainColor}
+    .child2{color: $childColor}
+  }
+}

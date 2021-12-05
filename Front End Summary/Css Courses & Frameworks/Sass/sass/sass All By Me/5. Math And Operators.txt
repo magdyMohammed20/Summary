@@ -1,0 +1,33 @@
+// Define Vars
+$mainColor: green;
+$main-Width: 200px;
+
+div{
+  background-color: $mainColor;
+  width: 200px + 10; // 210px
+  height: 200px;
+}
+
+
+
+// Division Operator Cases
+//-----------------------------
+$mainColor: green;
+$main-Width: 200px;
+
+div{
+  background-color: $mainColor;
+  width: 200px + 10; 
+  height: $main-Width / 10px; // 20 [When Use Vars]
+  border: floor(2.2)/2 solid $mainColor; // 1 solid green [When Use Function]
+  left: (22/2) // 11 [Put Division Opertion Inside ()]
+}
+
+
+// Vars As Plaintext In Operations[Use Interpolation]
+$var1: 10px;
+$var2: 20px;
+
+div{
+  font: #{$var1} / #{$var2} // 10px/20px
+}

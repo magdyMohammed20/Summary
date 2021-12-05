@@ -1,0 +1,51 @@
+// Extend Another Element Style [Put Here .magdy Will Rendered In The Output]
+.magdy{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%
+}
+
+
+.mohammed{
+  @extend .magdy
+}
+
+// If Want To Prevent .magdy From Render
+%magdy{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%
+}
+
+
+.mohammed{
+  @extend %magdy
+}
+
+
+// Extend Optional Flag
+%class1{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%
+}
+
+%class2{
+  color: green;
+}
+
+
+.mohammed{
+  @extend %class1;
+  @extend %class2;
+  @extend %class3 !optional; // If %class3 Not Exist There Are No Error
+}

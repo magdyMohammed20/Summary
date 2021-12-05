@@ -1,0 +1,20 @@
+(1) Consider @import Arrangement
+----------------------------------
+// Here Variables Imported Before buttons As Buttons Use $padding Variables
+
+	_variables.scss
+	------------------
+
+	$padding: 20px;
+
+	_buttons.scss
+	-------------------
+	button{
+		padding: $padding
+	
+	}
+
+	sass.scss
+	--------------------
+	@import 'variables.scss'; 
+	@import 'buttons.scss'

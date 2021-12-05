@@ -1,0 +1,77 @@
+(1) Create Animation Mixin And Call It
+---------------------------------------
+
+	_mixins.scss
+	--------------
+
+	@mixin keyf($keyframe-name){
+
+		@-webkit-keyframes #{$keyframe-name}{
+			@content;
+		}
+
+		@-moz-keyframes #{$keyframe-name}{
+			@content;
+		}	
+
+		@keyframes #{$keyframe-name}{
+			@content;
+		}
+
+	}
+
+
+	style.scss
+	------------
+
+	@import 'mixins.scss'
+
+	@include keyf(fadeIn){
+		0%{
+			opacity: 0
+		}
+		50%{
+			opacity: 1
+		}
+		100%{
+			opacity: 0
+		}
+	}
+
+	=============output=====================
+
+	@-webkit-keyframes fadeIn{
+		0%{
+			opacity: 0
+		}
+		50%{
+			opacity: 1
+		}
+		100%{
+			opacity: 0
+		}
+	}
+
+	@-moz-keyframes fadeIn{
+		0%{
+			opacity: 0
+		}
+		50%{
+			opacity: 1
+		}
+		100%{
+			opacity: 0
+		}
+	}
+
+	@keyframes fadeIn{
+		0%{
+			opacity: 0
+		}
+		50%{
+			opacity: 1
+		}
+		100%{
+			opacity: 0
+		}
+	}

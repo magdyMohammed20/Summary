@@ -1,0 +1,5 @@
+1) Install NPM
+
+2) Write [npm install -g sass] In CMD
+
+3) Make Watch File By [sass --watch style.scss:style.css]

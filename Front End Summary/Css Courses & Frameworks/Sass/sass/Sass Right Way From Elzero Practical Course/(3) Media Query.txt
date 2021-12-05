@@ -1,0 +1,71 @@
+(1) How To Write Media Query For Specific Element
+---------------------------------------------------
+// Media Written Inside The Element
+
+	div{
+		color: red;
+
+		@media screen and(max-width: 500px){
+			color: blue
+		}
+
+	}
+
+
+(2) Use Screen Size As Variable
+----------------------------------------------------
+
+	$medium: 992px;
+
+	p{
+
+	   color: red;
+
+	   @media(max-width: $medium){
+	     color: blue
+	   }
+	}
+
+
+(3) Use Media Size As Variable
+---------------------------------
+
+	$size: '(min-width: 500px)';
+
+	p{
+		color: red;
+
+		@media #{$size}{
+			color: blue
+		}
+	}
+
+
+(4) Call Media With Mixin And @content Derictive
+--------------------------------------------------
+
+	style.scss
+	------------
+
+	@import 'mixin.scss'
+
+	p{
+	
+		@include magdy(500px,min){
+			color: red
+		}	
+
+	}
+	
+	mixin.scss
+	-------------
+
+	@mixin magdy($size,$minOmax){
+
+		@media(#{$minOmax}-width : $size){
+
+			@content;
+
+		}
+
+	}

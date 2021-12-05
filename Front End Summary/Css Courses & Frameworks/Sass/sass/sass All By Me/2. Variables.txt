@@ -1,0 +1,16 @@
+// Define Vars
+$mainColor: green;
+$childColor: #EEE;
+
+.magdy{
+  background-color: $mainColor;
+  width: 200px;
+  height: 200px;
+
+
+  p{
+    color: red;
+    background-color: $childColor;
+    padding: 10px;
+  }
+}

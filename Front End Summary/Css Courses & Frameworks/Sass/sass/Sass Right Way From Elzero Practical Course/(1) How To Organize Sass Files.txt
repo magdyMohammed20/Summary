@@ -1,0 +1,13 @@
+(1) Make Foolder Called Components [For Buttons - Navs - ......] And Any File Inside This Folder
+    Put _ Before File Name For Prevent Compile For This File [Ex: _buttons.scss]
+
+(2) Make Folder Called helpers [For Functions - Mixins - Variables - ...] And Any File Inside This Folder
+    Put _ Before File Name For Prevent Compile For This File [Ex: _mixins.scss]
+
+(3) Make Folder Called layout [For Headrs - Navs - Footer - Grid System..] As This Components Is Shared
+    In All Website Pages And Any File Inside This Folder
+    Put _ Before File Name For Prevent Compile For This File [Ex: _header.scss]
+
+(4) Make Folder Called Pages [For Homepage - Services - Contact...] Any File Inside This Folder
+    Put _ Before File Name For Prevent Compile For This File [Ex: _home.scss] And I Call
+    Any Of This Pages Through Another Page
