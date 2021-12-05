@@ -1,0 +1,24 @@
+(1) Open Remote Debugger
+--------------------------
+==> First Ensure That You Select [LAN] OR [LOCAL] In Web Browser 
+==> If Use Android Emulator (CTRL + M) => Debug Js Remotly => Will Open (http://localhost:19000/debugger-ui/)
+==> If Use EXPO (Shake Device) => Select Debug Remote Js => Will Open (http://localhost:19000/debugger-ui/) 
+==> If You Get Error Says [Remote debugger is in a background tab which may cause apps to perform slowly] You Must Maintain Priority Checkbox In The Browser
+
+
+(2) BreakPoints 
+----------------
+==> Go To Browser => Open Sources Tab => Select DebuggerWorker.js => And Open App.js => Can Select Any Line By Click On Line Numeber To Mark As BreakPoint
+
+
+(3) Debugging ui
+-----------------
+==> When Shake Phone Or Press (CTRL + M) Select [Show Element Inspector] => Then Select [inspect]
+==> Now You Can Press On Any Element In The Application To Inspect It
+
+(4) Use React Native Debugger Application
+-------------------------------------------
+==> Go To [https://github.com/jhen0409/react-native-debugger/releases] And Download The [.exe] File And Install Normally
+==> After Open The App Press [CTRL + T] And Enter Port = 19000 (But Must Close [http://localhost:19000/debugger-ui/]) Then [Confirm] 
+==> Then In Phone Select [Debug Remote Js] 
+==> Now You Can Inspect Android App Elements In React Native Debugger Application
