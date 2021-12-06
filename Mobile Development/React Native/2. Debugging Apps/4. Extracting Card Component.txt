@@ -1,0 +1,77 @@
+(1) Extract StartGameScreen Component Into Card
+--------------------------------------------------
+
+    ./Components/Card.js
+    ----------------------
+
+    import React from 'react'
+    import { StyleSheet, View } from 'react-native'
+
+    export default function Card(props) {
+        return (
+            <View style={{...styles.card , ...props.style}}>
+                {props.children}
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        card: {
+            shadowColor: 'black',
+            shadowOffset: {width: 0 , height: 2},
+            shadowRadius: 6,
+            shadowOpacity: .6,
+            elevation: 6,
+            backgroundColor: '#FFF',
+            padding: 20,
+            marginVertical: 30,
+            borderRadius: 10
+        }
+    })
+
+
+    ./Screens/StartGameScreen.js (After Extract It's Content)
+    ------------------------------
+
+    import React from 'react'
+    import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+    import Card from '../Components/Card'
+
+    export default function StartGameScreen() {
+        return (
+            <View style={styles.screen}>
+                <Text style={styles.title}>Start New Game !</Text>
+                <Card style={styles.inputContainer}>
+                    <Text>Select Number</Text>
+                    <TextInput/>
+                    <View style={styles.buttonContainer}>
+                        <Button title='Reset' onPress={() => {}}/>
+                        <Button title='Confirm' onPress={() => {}}/>
+                    </View>
+                </Card>
+
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            padding: 10,
+            alignItems: 'center'
+        },
+        title: {
+            fontSize: 20
+        },
+        inputContainer:{
+            width: 300,
+            maxWidth: '100%',
+            alignItems: 'center',
+        },
+        buttonContainer:{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+            paddingHorizontal: 20
+        }
+    })
