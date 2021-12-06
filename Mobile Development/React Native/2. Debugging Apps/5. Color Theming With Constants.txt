@@ -1,0 +1,95 @@
+(1) Set Colors In One Place 
+------------------------------
+==> Create Folder Called 'Constants' And Can Have Many Js Files To Easy Development Of Theming
+
+
+    ./Constants/Colors.js
+    -----------------------
+
+    export default {
+        primary: '#f7287b',
+        secondary: '#c717fc',
+        black: '#222'
+    }
+
+
+    ./Components/Header.js
+    -----------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+    import Colors from '../Constants/Colors'
+
+    export default function Header({title}) {
+        return (
+            <View style={styles.header}>
+                <Text style={styles.headerTitle}>{title}</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        header: {
+            width: '100%',
+            height: 60,
+            backgroundColor: Colors.black, // Use Colors Here
+            alignItems: 'center',
+            justifyContent: 'center'
+        },
+        headerTitle:{
+            color: '#999',
+            fontSize: 18
+        }
+    })
+
+
+    ./Screens/StartGameScreen.js
+    ------------------------------
+
+    import React from 'react'
+    import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+    import Card from '../Components/Card'
+    import Colors from '../Constants/Colors'
+
+    export default function StartGameScreen() {
+        return (
+            <View style={styles.screen}>
+                <Text style={styles.title}>Start New Game !</Text>
+                <Card style={styles.inputContainer}>
+                    <Text>Select Number</Text>
+                    <TextInput/>
+                    {/* Use Colors Here */}
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.button}><Button title='Reset' color={Colors.secondary} onPress={() => {}}/></View>
+                        <View style={styles.button}><Button title='Confirm' color={Colors.primary} onPress={() => {}}/></View>
+                    </View>
+                </Card>
+
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            padding: 10,
+            alignItems: 'center'
+        },
+        title: {
+            fontSize: 20
+        },
+        inputContainer:{
+            width: 300,
+            maxWidth: '100%',
+            alignItems: 'center',
+        },
+        buttonContainer:{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+            paddingHorizontal: 20
+        },
+        button: {
+            width: 100
+        }
+    })
