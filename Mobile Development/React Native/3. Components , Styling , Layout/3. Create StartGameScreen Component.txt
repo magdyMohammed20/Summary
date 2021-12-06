@@ -1,0 +1,48 @@
+(1) Create StartGameScreen Component
+--------------------------------------
+
+    ./Screens/StartGameScreen.js
+    -------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+
+    export default function StartGameScreen() {
+        return (
+            <View style={styles.screen}>
+                <Text>The Game Screen !!</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            padding: 10,
+            alignItems: 'center'
+        }
+    })
+
+
+    App.js
+    --------
+
+    import React from 'react';
+    import { StyleSheet, Text, View } from 'react-native';
+    import Header from './Components/Header'
+    import StartGameScreen from './Screens/StartGameScreen';
+
+    export default function App() {
+        return (
+            <View style={styles.screen}>
+                <Header title='Guess Number'/>
+                <StartGameScreen/>      
+            </View>
+        );
+    }
+
+    const styles = StyleSheet.create({
+        screen:{
+            flex: 1
+        }
+    });
