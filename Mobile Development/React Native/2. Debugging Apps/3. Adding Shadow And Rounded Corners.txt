@@ -1,0 +1,20 @@
+(1) Adding Shadows And Rounded Corners
+----------------------------------------
+
+    ./Screens/StartGameScreen.js
+    ------------------------------
+    
+    inputContainer:{
+        width: 300,
+        maxWidth: '100%',
+        alignItems: 'center',
+        shadowColor: 'black',
+        shadowOffset: {width: 0 , height: 2},
+        shadowRadius: 6,
+        shadowOpacity: .6,
+        elevation: 6, // Must Add This For Shadow Working On Android
+        backgroundColor: '#FFF',
+        padding: 20,
+        marginVertical: 30,
+        borderRadius: 10
+    }
