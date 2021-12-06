@@ -1,0 +1,84 @@
+(1) Configure & Style TextInput
+---------------------------------
+==> Separate TextInput In Isolate Component
+
+
+    ./Components/Input.js
+    -----------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View , TextInput } from 'react-native'
+
+    export default function Input(props) {
+        return (
+            <View>
+                <TextInput {...props} style={{...styles.input , ...props.style}}/>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        input : {
+            height: 30,
+            borderBottomWidth: 1,
+            borderBottomColor: '#DDD',
+            marginVertical: 10,
+            textAlign: 'center'
+        }
+    })
+
+
+    ./Screens/StartGameScreen.js
+    -------------------------------
+
+    import React from 'react'
+    import { Button, StyleSheet, Text, TextInput, View } from 'react-native'
+    import Card from '../Components/Card'
+    import Input from '../Components/Input'
+    import Colors from '../Constants/Colors'
+
+    export default function StartGameScreen() {
+        return (
+            <View style={styles.screen}>
+                <Text style={styles.title}>Start New Game !</Text>
+                <Card style={styles.inputContainer}>
+                    <Text>Select Number</Text>
+                    <Input style={styles.input} blurOnSubmit autoCapitalize='none' autoCorrect={false}  keyboardType='numeric' maxLength={2}/>
+                    <View style={styles.buttonContainer}>
+                        <View style={styles.button}><Button title='Reset' color={Colors.secondary} onPress={() => {}}/></View>
+                        <View style={styles.button}><Button title='Confirm' color={Colors.primary} onPress={() => {}}/></View>
+                    </View>
+                </Card>
+
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            padding: 10,
+            alignItems: 'center'
+        },
+        title: {
+            fontSize: 20
+        },
+        inputContainer:{
+            width: 300,
+            maxWidth: '100%',
+            alignItems: 'center',
+        },
+        input: {
+            width: 200
+        },
+        buttonContainer:{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+            paddingHorizontal: 20,
+            marginVertical: 10
+        },
+        button: {
+            width: 100
+        }
+    })
