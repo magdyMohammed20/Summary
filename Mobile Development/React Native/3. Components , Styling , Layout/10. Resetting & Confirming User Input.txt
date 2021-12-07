@@ -1,0 +1,87 @@
+(1) Make Reset Button Functionality
+--------------------------------------
+
+    StartGameScreen.js
+    -------------------
+
+    const resetInput = () => {
+        setNumber('')
+    }
+
+
+    <View style={styles.button}><Button title='Reset' color={Colors.secondary} onPress={resetInput}/></View>
+
+
+(2) Make Confirm Button Functionality
+---------------------------------------
+
+    StartGameScreen.js
+    --------------------
+
+    import React , {useState} from 'react'
+    import { Button, StyleSheet, Text, View , TouchableWithoutFeedback , Keyboard } from 'react-native'
+    import Card from '../Components/Card'
+    import Input from '../Components/Input'
+    import Colors from '../Constants/Colors'
+
+    export default function StartGameScreen() {
+        const [number , setNumber] = useState('')
+        const [confirmed , setConfirmed] = useState(false)
+        const [selectedNumber , setSelectedNumber] = useState('')
+
+        const inputHandler = text => {
+            setNumber(text.replace(/[^0-9]/g , ''))
+        }
+
+        const resetInput = () => {
+            setNumber('')
+            setConfirmed(false)
+        }
+
+        const confirmHandler = () => {
+            if(number){
+                const chosenNumber = parseInt(number)
+
+                if(chosenNumber === NaN || chosenNumber <= 0 || chosenNumber > 99){
+                    return;
+                }
+                setConfirmed(true)
+                setSelectedNumber(chosenNumber)
+                setNumber('')
+            }
+        }
+
+        let finalNumber;
+
+        if(confirmed){
+            finalNumber = `Selected Number Is ${selectedNumber}`
+        }
+
+        return (
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                <View style={styles.screen}>
+                    <Text style={styles.title}>Start New Game !</Text>
+                    <Card style={styles.inputContainer}>
+                        <Text>Select Number</Text>
+                        <Input 
+                            value={number}
+                            onChangeText={inputHandler}
+                            style={styles.input} 
+                            blurOnSubmit 
+                            autoCapitalize='none' 
+                            autoCorrect={false}  
+                            keyboardType='numeric' 
+                            maxLength={2}
+                        />
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.button}><Button title='Reset' color={Colors.secondary} onPress={resetInput}/></View>
+                            <View style={styles.button}><Button title='Confirm' color={Colors.primary} onPress={confirmHandler}/></View>
+                        </View>
+                    </Card>
+                    <Text>
+                        {finalNumber}
+                    </Text>
+                </View>
+            </TouchableWithoutFeedback>
+        )
+    }
