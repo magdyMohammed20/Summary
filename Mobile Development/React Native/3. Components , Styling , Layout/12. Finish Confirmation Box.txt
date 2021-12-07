@@ -1,0 +1,151 @@
+(1) Finish Confirmation Box
+-----------------------------
+
+    StartGameScreen.js
+    -------------------
+
+    import React , {useState} from 'react'
+    import { Button, StyleSheet, Text, View , TouchableWithoutFeedback , Keyboard, Alert } from 'react-native'
+    import Card from '../Components/Card'
+    import Input from '../Components/Input'
+    import Colors from '../Constants/Colors'
+    import NumberContainer from '../Components/NumberContainer'
+
+    export default function StartGameScreen() {
+        const [number , setNumber] = useState('')
+        const [confirmed , setConfirmed] = useState(false)
+        const [selectedNumber , setSelectedNumber] = useState('')
+
+        const inputHandler = text => {
+            setNumber(text.replace(/[^0-9]/g , ''))
+
+        }
+
+        const resetInput = () => {
+            setNumber('')
+            setConfirmed(false)
+        }
+
+        const confirmHandler = () => {
+            
+            // If Field Not Empty Make Validation Then Confirm
+            // Else Show Alert Error Of The Empty
+            if(number){
+                const chosenNumber = parseInt(number)
+
+                if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99){
+                    Alert.alert('Invalid Number !' , 'Number Has To Be Between 1 And 99' , [{text: 'Okay' , style: 'destructive' , onPress: resetInput}])
+                    return;
+                }
+                setConfirmed(true)
+                setSelectedNumber(chosenNumber)
+                setNumber('')
+
+                Keyboard.dismiss()
+            }else{
+                Alert.alert('Invalid Number !' , 'Field Must Have Number' , [{text: 'Okay' , style: 'cancel'}])
+            }
+
+        }
+
+        let finalNumber;
+
+        if(confirmed){
+            finalNumber = <Card style={styles.summaryContainer}>
+                <Text>You Select</Text>
+                <NumberContainer selectedNumber={selectedNumber}/>
+                <Button title='START GAME' style={{marginVertical: 10}}/> 
+            </Card>
+        }
+
+        return (
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+                <View style={styles.screen}>
+                    <Text style={styles.title}>Start New Game !</Text>
+                    <Card style={styles.inputContainer}>
+                        <Text>Select Number</Text>
+                        <Input 
+                            value={number}
+                            onChangeText={inputHandler}
+                            style={styles.input} 
+                            blurOnSubmit 
+                            autoCapitalize='none' 
+                            autoCorrect={false}  
+                            keyboardType='numeric' 
+                            maxLength={2}
+                        />
+                        <View style={styles.buttonContainer}>
+                            <View style={styles.button}><Button title='Reset' color={Colors.secondary} onPress={resetInput}/></View>
+                            <View style={styles.button}><Button title='Confirm' color={Colors.primary} onPress={confirmHandler}/></View>
+                        </View>
+                    </Card>
+                    <Text>
+                        {finalNumber}
+                    </Text>
+                </View>
+            </TouchableWithoutFeedback>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            padding: 10,
+            alignItems: 'center'
+        },
+        title: {
+            fontSize: 20
+        },
+        inputContainer:{
+            width: 300,
+            maxWidth: '100%',
+            alignItems: 'center',
+        },
+        input: {
+            width: 50
+        },
+        buttonContainer:{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            width: '100%',
+            paddingHorizontal: 20,
+            marginVertical: 10
+        },
+        button: {
+            width: 100
+        },
+        summaryContainer: {
+            alignItems: 'center'
+        }
+    })
+
+
+    NumberContainer.js (Used To Display The Final Selected Number)
+    --------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+    import Colors from '../Constants/Colors'
+
+    export default function NumberContainer({selectedNumber}) {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.number}>{selectedNumber}</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        container:{
+            backgroundColor: Colors.primary,
+            padding: 7,
+            marginVertical: 15,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 10,
+        },
+        number: {
+            color: Colors.white,
+            fontSize: 18  
+        }
+    })
