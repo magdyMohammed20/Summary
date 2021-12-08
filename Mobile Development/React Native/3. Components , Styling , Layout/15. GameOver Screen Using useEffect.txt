@@ -1,0 +1,136 @@
+(1) GameOver Screen Using useEffect
+-------------------------------------
+==> Create 'GameOverScreen.js' In 'Screens' Folder
+
+
+    ./Screens/GameOverScreen.js
+    ------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+
+    export default function GameOverScreen() {
+        return (
+            <View style={styles.screen}>
+                <Text>The Game Is Over !</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
+    })
+
+
+    ./Screens/GameScreen.js
+    -------------------------
+
+    import React , {useState , useRef, useEffect} from 'react'
+    import { Button, StyleSheet, Text, View , Alert } from 'react-native'
+    import Card from '../Components/Card'
+    import NumberContainer from '../Components/NumberContainer'
+
+    const generateRandomNumber = (min , max , exclude) => {
+
+        min = Math.ceil(min);
+        max  = Math.floor(max);
+        const rndNum = Math.floor(Math.random() * (max - min)) + min;
+        
+        if(rndNum === exclude){
+            return generateRandomNumber(min , max , exclude)
+        }
+
+        else{
+            return rndNum
+        }
+    }
+    export default function GameScreen(props) {
+        const {userChoice , onGameOver} = props
+        const[currentGuess , setCurrentGuess] = useState(generateRandomNumber(1 , 100 , userChoice))
+        const [rounds , setRounds] = useState(0)
+
+        const currentLow = useRef(1)
+        const currentHigh = useRef(100)
+
+
+        useEffect(() => {
+            if(currentGuess === userChoice){
+                onGameOver(rounds)
+            }
+        } , [currentGuess , userChoice , onGameOver])
+        const nextGuessHandler = direction => {
+
+            if((direction === 'lower' && currentGuess < userChoice) || (direction === 'greater' && currentGuess > userChoice )){
+                Alert.alert('Don\'t Lie' , 'You Know That Is Wrong' , [{text: 'Sorry!' , style:'cancel'}])
+                return;
+            }
+
+            if(direction === 'lower'){
+                currentHigh.current = currentGuess
+            }else{
+                currentLow.current = currentGuess
+            }
+
+            const nextNumber = generateRandomNumber(currentLow.current , currentHigh.current , currentGuess)
+            setCurrentGuess(nextNumber)
+            setRounds(currentRounds => currentRounds + 1)
+        }
+
+
+        return (
+            <View style={styles.screen}>
+                <Text>Opponent Guess</Text>
+                <NumberContainer selectedNumber={currentGuess}/>
+                <Card>
+                    <View style={styles.buttonsContainer}>
+                        <Button title='LOWER' onPress={nextGuessHandler.bind(this , 'lower')}/>
+                        <Button title='GREATER' onPress={nextGuessHandler.bind(this , 'greater')}/>
+                    </View>
+                </Card>
+            </View>
+        )
+    }
+
+
+    App.js
+    --------
+
+    import React , {useState} from 'react';
+    import { StyleSheet, Text, View } from 'react-native';
+    import Header from './Components/Header'
+    import GameScreen from './Screens/GameScreen';
+    import StartGameScreen from './Screens/StartGameScreen';
+    import GameOverScreen from './Screens/GameOverScreen';
+    export default function App() {
+        const[userNumber , setUserNumber] = useState()
+        const [guessRounds , setGuessRounds] = useState(0)
+
+        const startGameHandler = userNum => {
+            setUserNumber(userNum)
+            setGuessRounds(0)
+        }
+
+        const gameOverHandler = numOfRounds => {
+            setGuessRounds(numOfRounds)
+        }
+
+        let content = <StartGameScreen onStartGame={startGameHandler}/>
+
+        if(userNumber && guessRounds <= 0){
+            content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler}/>
+        }
+        else if(guessRounds > 0){
+            content = <GameOverScreen/>
+        }
+
+        return (
+            <View style={styles.screen}>
+                <Header title='Guess Number'/>
+                {content}
+            </View>
+        );
+    }
