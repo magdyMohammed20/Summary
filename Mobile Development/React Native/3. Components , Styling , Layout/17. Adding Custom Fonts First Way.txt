@@ -1,0 +1,81 @@
+(1) Adding Custom Fonts
+--------------------------
+==> Inside 'assets' Folder Set Fonts 'ttf' Files
+==> By Default 'expo-font' Package InCluded And Can Sure By Run [expo install expo-font]
+==> If Not Installed Must Install [expo install expo-app-loading]
+
+    App.js
+    --------
+    
+    import React , {useState} from 'react';
+    import { StyleSheet, Text, View } from 'react-native';
+    import Header from './Components/Header'
+    import GameScreen from './Screens/GameScreen';
+    import StartGameScreen from './Screens/StartGameScreen';
+    import GameOverScreen from './Screens/GameOverScreen';
+    import AppLoading from 'expo-app-loading'
+    import * as Font from 'expo-font';
+
+    const fetchFonts = () => {
+        return Font.loadAsync({
+            'cotton-butter': require('./assets/fonts/CottonButter.ttf')
+        })
+    }
+
+    export default function App() {
+        const[userNumber , setUserNumber] = useState()
+        const [guessRounds , setGuessRounds] = useState(0)
+        const[dataLoaded , setDataLoaded] = useState(false)
+
+        if(!dataLoaded){
+            return <AppLoading 
+            startAsync={fetchFonts} 
+            onFinish={() => setDataLoaded(true)}
+            onError={err => console.log(err)}
+            />
+        }
+        
+        const configureNewGameHamdler = _ => {
+            setGuessRounds(0)
+            setUserNumber(null)
+        }
+        const startGameHandler = userNum => {
+            setUserNumber(userNum)
+        }
+
+        const gameOverHandler = numOfRounds => {
+            setGuessRounds(numOfRounds)
+        }
+
+        let content = <StartGameScreen onStartGame={startGameHandler}/>
+
+        if(userNumber && guessRounds <= 0){
+            content = <GameScreen userChoice={userNumber} onGameOver={gameOverHandler}/>
+        }
+        else if(guessRounds > 0){
+            content = <GameOverScreen guessRounds={guessRounds} userNumber={userNumber} startNewGame={configureNewGameHamdler}/>
+        }
+
+        return (
+            <View style={styles.screen}>
+                <Header title='Guess Number' font={'Inter-SemiBoldItalic'}/>
+                {content}
+            </View>
+        );
+    }
+
+    const styles = StyleSheet.create({
+        screen:{
+            flex: 1
+        }
+    });
+
+
+
+    ./Screens/StartGameScreen.js [Use The Font Inside Any Component]
+    ------------------------------------------------------------------
+
+    title: {
+        fontSize: 20,
+        fontFamily: 'cotton-butter'
+    }
