@@ -1,0 +1,96 @@
+(1) Types Of Images Included
+-----------------------------
+==> Local Image
+==> Network Image
+
+
+(2) Add Local Image
+---------------------
+
+    GameOverScreen.js
+    ------------------
+
+    import React from 'react'
+    import { StyleSheet, Image, View , Button } from 'react-native'
+    import BodyText from '../Components/BodyText'
+    export default function GameOverScreen({guessRounds , userNumber , startNewGame}) {
+        return (
+            <View style={styles.screen}>
+                <BodyText>The Game Is Over !</BodyText>
+                <Image source={require('../assets/img.jpg')}/>
+                <BodyText>Rounds : {guessRounds}</BodyText>
+                <BodyText>Number Was : {userNumber}</BodyText>
+                <Button title="NEW GAME" onPress={startNewGame}/>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
+    })
+
+
+(3) Local Image style
+-----------------------
+==> Give Width And Height And Specify 'resizeMode'
+
+    <Image 
+        source={require('../assets/img.jpg')}
+        style={styles.img}
+        resizeMode='contain'
+    />
+
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        img: {
+            width: '80%',
+            height: 300
+        }
+    })
+
+
+(4) Style Local Image With Parent
+-----------------------------------
+
+    <View style={styles.imageContainer}>
+        <Image 
+            source={require('../assets/img.jpg')}
+            style={styles.img}
+            resizeMode='cover'
+        />
+    </View>
+
+
+    const styles = StyleSheet.create({
+        imageContainer:{
+            width: '80%',
+            height: 300,
+            borderRadius: 10,
+            borderWidth: 3,
+            borderColor: 'black',
+            overflow: 'hidden'
+        },
+        img: {
+            width: '100%',
+            height: '100%'
+        }
+    })
+
+
+(5) Add Network Image
+-----------------------
+
+    <Image 
+        source={{uri: 'https://image.shutterstock.com/shutterstock/photos/763093549/display_1500/stock-photo-feet-in-woollen-socks-by-the-christmas-fireplace-couple-sitting-under-the-blanket-relaxes-by-warm-763093549.jpg'}}
+        style={styles.img}
+        resizeMode='cover'
+    />
