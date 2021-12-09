@@ -1,0 +1,131 @@
+(1) Use Google Fonts
+----------------------
+==> expo install expo-font @expo-google-fonts/inter
+
+    App.js
+    -------
+
+    import React from 'react';
+    import { View, Text } from 'react-native';
+    import AppLoading from 'expo-app-loading';
+    import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
+
+    export default function App() {
+        let [fontsLoaded] = useFonts({
+            Inter_900Black,
+        });
+
+        if (!fontsLoaded) {
+            return <AppLoading />;
+        } 
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontFamily: 'Inter_900Black', fontSize: 40 }}>Inter Black</Text>
+            </View>
+        );
+        
+    }
+
+
+(2) Load Font From Existing Font File
+----------------------------------------
+
+    import React from 'react';
+    import { Text, View } from 'react-native';
+    import AppLoading from 'expo-app-loading';
+    import { useFonts } from 'expo-font';
+
+    export default props => {
+        let [fontsLoaded] = useFonts({
+            'Inter-Black': require('./assets/fonts/Inter-Black.otf'),
+        });
+
+        if (!fontsLoaded) {
+            return <AppLoading />;
+        } 
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontFamily: 'Inter-Black', fontSize: 40 }}>Inter Black</Text>
+                <Text style={{ fontSize: 40 }}>Platform Default</Text>
+            </View>
+        );
+        
+    };
+
+
+(3) Loading a remote font directly from the web
+--------------------------------------------------
+
+    import React from 'react';
+    import { Text, View } from 'react-native';
+    import AppLoading from 'expo-app-loading';
+    import { useFonts } from 'expo-font';
+
+    export default props => {
+        
+        let [fontsLoaded] = useFonts({
+            'Inter-SemiBoldItalic': 'https://rsms.me/inter/font-files/Inter-SemiBoldItalic.otf?v=3.12',
+        });
+
+        if (!fontsLoaded) {
+            return <AppLoading />;
+        } 
+
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text style={{ fontFamily: 'Inter-SemiBoldItalic' }}>Inter SemiBoldItalic</Text>
+                <Text>Platform Default</Text>
+            </View>
+        );
+        
+    };
+
+
+(4) Using Font.loadAsync instead of the useFonts hook
+-------------------------------------------------------
+==> If you don't want to use the useFonts hook (for example, maybe you prefer class components), you can use Font.loadAsync directly
+
+
+    App.js
+    ---------
+
+    import React from 'react';
+    import { Text, View, StyleSheet } from 'react-native';
+    import AppLoading from 'expo-app-loading';
+    import * as Font from 'expo-font';
+
+    let customFonts = {
+        'Inter-Black': require('./assets/fonts/Inter-Black.otf'),
+        'Inter-SemiBoldItalic': 'https://rsms.me/inter/font-files/Inter-SemiBoldItalic.otf?v=3.12',
+    };
+
+    export default class App extends React.Component {
+        state = {
+            fontsLoaded: false,
+        };
+
+        async _loadFontsAsync() {
+            await Font.loadAsync(customFonts);
+            this.setState({ fontsLoaded: true });
+        }
+
+        componentDidMount() {
+            this._loadFontsAsync();
+        }
+
+        render() {
+            if (this.state.fontsLoaded) {
+            return (
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text>Platform Default</Text>
+                    <Text style={{ fontFamily: 'Inter-Black' }}>Inter Black</Text>
+                    <Text style={{ fontFamily: 'Inter-SemiBoldItalic' }}>Inter SemiBoldItalic</Text>
+                </View>
+            );
+            } else {
+                return <AppLoading />;
+            }
+        }
+    }
