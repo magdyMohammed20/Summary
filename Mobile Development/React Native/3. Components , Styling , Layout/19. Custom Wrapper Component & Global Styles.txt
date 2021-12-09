@@ -1,0 +1,92 @@
+(1) We Want To Set The Custom Fonts In All Text In Our App
+------------------------------------------------------------
+==> We Know That The Fonts Fetched In App.js As Previous 2 Files
+==> Create Custom Component With The Custom Font 
+==> Import The Custom Component In Any Component With Replace Any <Text> With The <BodyText>
+
+    ./Components/BodyText.js
+    --------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text } from 'react-native'
+
+    export default function BodyText(props) {
+        return (
+            <Text style={{...styles.body , ...props.style}}>
+                {props.children}
+            </Text>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        body : {
+            fontFamily: 'Inter-SemiBoldItalic'
+        }
+    })
+
+
+    ./Components/Header.js
+    -----------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+    import Colors from '../Constants/Colors'
+    import BodyText from './BodyText'
+
+    export default function Header({title}) {
+        return (
+            <View style={styles.header}>
+                <BodyText style={styles.headerTitle}>{title}</BodyText>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        header: {
+            width: '100%',
+            height: 60,
+            backgroundColor: Colors.black, // Use Colors Here
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 40
+        },
+        headerTitle:{
+            color: '#999',
+            fontSize: 18,
+        }
+    })
+
+
+(2) Create Global style
+-------------------------
+==> Inside 'Constants' Folder Create 'default-style.js'
+==> Inside Any Component Import 'default-style.js' And Use It 
+
+
+    default-style.js
+    -----------------
+
+    import Colors from "./Colors";
+    import { StyleSheet } from "react-native";
+
+    export default StyleSheet.create({
+        bodyText: {
+            color: Colors.secondary,
+            fontSize: 30
+        }
+    })
+
+
+    Header.js
+    -----------
+
+    import BodyText from './BodyText'
+    import globalStyle from '../Constants/default-style'
+
+    export default function Header({title}) {
+        return (
+            <View style={styles.header}>
+                <BodyText style={styles.headerTitle , globalStyle.bodyText}>{title}</BodyText>
+            </View>
+        )
+    }
