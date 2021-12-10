@@ -1,0 +1,14 @@
+(1) Another Alert Syntax
+--------------------------
+	
+    // Showing Yes And No Buttons To Confirm Cancel Or Delete Specific Item
+    Alert.alert(
+        'Sure To Delete This Item ?!!', 
+	'If Sure Press OK Else Press NO' 
+        , 
+	 [
+            {text: 'NO 👎' , style: 'cancel'} , 
+            {text: 'Ok 👍' , onPress: () => setGoals(currentGoals => currentGoals.filter((_ , ind) => index !== ind))}
+    	 ]
+	
+    )
