@@ -1,0 +1,20 @@
+(1) Add Icons
+---------------
+==> All Icons Here [https://icons.expo.fyi/]
+==> AntDesign Icons [https://oblador.github.io/react-native-vector-icons/]
+==> Icons Can Get From Different Elements [AntDesign , Ionicons , MaterialIcons ..]
+
+EX
+---
+
+    import { Ionicons } from '@expo/vector-icons'
+
+    <Ionicons name='md-checkmark-circle' size={32} color='red' />
+
+
+EX
+---
+
+    import { AntDesign } from '@expo/vector-icons'
+
+    <AntDesign name='shoppingcart' size={32} color='red' />
