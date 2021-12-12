@@ -1,0 +1,45 @@
+(1) Wrong Aspect
+-----------------
+==> When We Give Element [width: 100] We Don't No The Size Of Screen So We Use Dimensions API For Know Screen Or Window Size And Decide The Elements Size We Want
+
+EX (Using Dimensions API With Width) 
+--- 
+
+    import {Dimensions} from 'react-native'
+
+    // Using Window width
+    button: {
+        width: Dimensions.get('window').width / 3.4,
+    }
+
+    Or
+
+    // Using Screen width
+    button: {
+        width:Dimensions.get('screen').width / 3.4
+    }
+
+
+EX (Using If Condition With Dimensions)
+---
+
+    container{
+        marginTop: Dimensions.get('window').height >  600 ? 20 : 10
+    }
+
+
+EX (Using If With Assigning Css Style)
+---
+
+    <View style={{ ...(Dimensions.get('window').height < 600 ? styles.card : styles.card2), ...props.style }}>
+        {props.children}
+    </View>
+
+
+EX (Append Style Depending On Condition)
+--- 
+
+    // Append 'redShadow' If Greater Than 600 Or 'blueShadow' If Less Than 600
+    <View style={{ ...(Dimensions.get('window').height > 600 ? styles.redShadow : styles.blueShadow), ...styles.card, ...props.style }}>
+        {props.children}
+    </View>
