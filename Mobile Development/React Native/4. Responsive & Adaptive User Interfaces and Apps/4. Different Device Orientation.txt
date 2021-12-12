@@ -1,0 +1,33 @@
+(1) Can Constrol Device Orientation Inside 'app.json' File With 'orientation' Property But When Change Must Restart The Server
+--------------------------------------------------------------------------------------------------------------------------------
+==> Orientation Can Be 'portrait' , 'landscape' , 'default'
+==> But At First The Screen Isn't Scrollable And This Is The Problem So We Can Wrap All Content With <ScrollView>
+==> If The Keyboard Cover The Content We Can Wrap Content With <KeyboardAvoidingView> And Specify Distance Between Using 'keyboardVerticalOffset'
+
+EX
+---
+
+    import {
+        Button,
+        StyleSheet,
+        Text,
+        View,
+        ScrollView,
+        TouchableWithoutFeedback,
+        Keyboard,
+        Alert,
+        Dimensions,
+        KeyboardAvoidingView
+
+    } from 'react-native'
+
+
+    <ScrollView>
+        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={30}>
+            <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+
+            .....
+
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
+    </ScrollView>
