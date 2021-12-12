@@ -1,0 +1,5 @@
+(1) The Error Is
+-----------------
+==> Error: useRoutes() may be used only in the context of a <Router> component.
+
+(2) Error Solution Is Wrapping All Content With <BrowserRouter></BrowserRouter>
