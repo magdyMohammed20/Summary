@@ -1,0 +1,8 @@
+(1) We Want To Build Apps With Great Look On Different Sizes And Platforms
+
+(2) What Will Learn
+---------------------
+==> How To Detect Devices Dimensions And Orientation
+==> Adjust Layout Based On Size & Orientation
+==> How To Detect Device Platform (Android - ios)
+==> Adjust Code And UI Based On The Platform
