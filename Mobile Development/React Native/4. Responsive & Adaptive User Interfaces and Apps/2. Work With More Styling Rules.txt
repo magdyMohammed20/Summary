@@ -1,0 +1,12 @@
+(1) Working With More Styling Rules
+-------------------------------------
+
+==> Adjust Responsive Element Width
+-------------------------------------
+
+    inputContainer: {
+        maxWidth: '95%', // Large Width
+        minWidth: 300,   // For Small Devices
+        width: '80%',    // General Width
+        alignItems: 'center',
+    }
