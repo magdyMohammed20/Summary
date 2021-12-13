@@ -1,0 +1,27 @@
+(1) On ios System There Are A Notch In Screen That Takes Some Area From Screen And Can Overlapped With App Content
+--------------------------------------------------------------------------------------------------------------------
+==> So React Native Use 'SafeAreaView' To Respect Notches And Other Issues  
+
+
+EX (Wrap All Elements With <SafeAreaView></SafeAreaView> In App.js And Give SafeAreaView The Style Of Previous Top Parent)
+---
+
+    <SafeAreaView>
+        .....
+    </SafeAreaView>
+
+
+Full EX
+---------
+
+    App.js
+    -------
+
+    import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
+    
+    <SafeAreaView style={styles.screen}>
+      <View>
+        <Header title='Guess Number' />
+        {content}
+      </View>
+    </SafeAreaView>
