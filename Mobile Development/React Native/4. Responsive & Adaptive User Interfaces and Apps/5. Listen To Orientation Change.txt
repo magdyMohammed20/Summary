@@ -1,0 +1,51 @@
+(1) Listen To Orientation Change
+----------------------------------
+
+    StartGameScreen.js
+    -------------------
+
+    import React, { useState } from 'react'
+    import {Dimensions} from 'react-native'
+
+    const [buttonWidth, setButtonWidth] = useState(Dimensions.get('window').width / 3.4)
+
+    // Listen To Orientation Change
+    const updateLayout = () => {
+        setButtonWidth(Dimensions.get('window').width / 3.4)
+    }
+
+    Dimensions.addEventListener('change', updateLayout)
+
+    <View style={styles.buttonContainer}>
+        <View style={{ width: buttonWidth }}><Button title='Reset' color={Colors.secondary} onPress={resetInput} /></View>
+        <View style={{ width: buttonWidth }}><Button title='Confirm' color={Colors.primary} onPress={confirmHandler} /></View>
+    </View>
+
+
+(2) Use useEffect With Orientation Change
+-------------------------------------------
+
+    StartGameScreen.js
+    -------------------
+
+    import React, { useState } from 'react'
+    import {Dimensions} from 'react-native'
+
+    const [buttonWidth, setButtonWidth] = useState(Dimensions.get('window').width / 3.4)
+
+    useEffect(() => {
+        // Listen To Orientation Change
+        const updateLayout = () => {
+            setButtonWidth(Dimensions.get('window').width / 3.4)
+        }
+        Dimensions.addEventListener('change', updateLayout)
+
+        return () => {
+            Dimensions.removeEventListener('change' , updateLayout)
+        }
+    })
+
+    <View style={styles.buttonContainer}>
+        <View style={{ width: buttonWidth }}><Button title='Reset' color={Colors.secondary} onPress={resetInput} /></View>
+        <View style={{ width: buttonWidth }}><Button title='Confirm' color={Colors.primary} onPress={confirmHandler} /></View>
+    </View>
