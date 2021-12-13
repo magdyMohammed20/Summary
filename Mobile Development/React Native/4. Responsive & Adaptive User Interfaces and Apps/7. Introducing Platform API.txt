@@ -1,0 +1,70 @@
+(1) With Platform API You Can Fetch Platform You Work On [android - ios ..]
+--------------------------------------------------------------------------
+
+    import { StyleSheet, Text, View, Platform } from 'react-native'
+
+    <View style={styles.header}>
+        <BodyText style={styles.headerTitle, globalStyle.bodyText}>{title}</BodyText>
+        <Text style={styles.platform}>Used Is {Platform.OS}</Text>
+    </View>
+
+
+(2) Can Give Style Depending On Platform Type
+-----------------------------------------------
+
+    platform: {
+        color: Platform.OS === 'android' ? 'red' : 'blue'
+    }
+
+
+(3) Using Platform.select()
+------------------------------
+
+
+    Header.js
+    -----------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, Platform } from 'react-native'
+    import Colors from '../Constants/Colors'
+    import BodyText from './BodyText'
+    import globalStyle from '../Constants/default-style'
+
+    export default function Header({ title }) {
+        return (
+            <View style={{
+                ...styles.header, ...Platform.select({
+                    ios: styles.headerIos,
+                    android: styles.headerAndroid
+                })
+            }}>
+                <BodyText style={styles.headerTitle, globalStyle.bodyText}>{title}</BodyText>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        header: {
+            width: '100%',
+            height: 60,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: 40
+        },
+        headerTitle: {
+            color: '#999',
+            fontSize: 18,
+        },
+        headerAndroid: {
+            backgroundColor: Colors.moreBlack,
+        },
+        headerIos: {
+            backgroundColor: Colors.black,
+        }
+    })
+
+
+(4) Platform Specific Code Files
+-----------------------------------
+==> If I Have Custom Component [mainButton.js] And Want To Customize It Depending On Platform So We Will Make 2 Files Instead Of [mainButton.js] For Android And ios [mainButton.android.js] And [mainButton.ios.js] And Js Will Import The Needed Component Depending On Platform Automatically
+
