@@ -1,0 +1,13 @@
+(1) Use Expo Screen Orientation API
+--------------------------------------
+==> Install [expo install expo-screen-orientation]
+==> Use Expo Screen Orientation Normal
+==> Syntax : ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.[Option])
+==> Option Can Be [ALL , PORTRAIT  , PORTRAIT_UP , PORTRAIT_DOWN , LANDSCAPE , LANDSCAPE_LEFT , LANDSCAPE_RIGHT , OTHER(Invalid) , UNKNOWN(Invalid)]
+
+Ex
+---
+
+    import * as ScreenOrientation from 'expo-screen-orientation'
+
+    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.ALL)
