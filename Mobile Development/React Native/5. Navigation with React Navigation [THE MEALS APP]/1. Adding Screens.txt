@@ -1,0 +1,99 @@
+(1) Adding App Screens
+------------------------
+==> Creare 'screens' Folder Which Contains App Pages
+==> Inside 'screens' Folder Create 'CategoriesScreen.js' , 'CategoryMealScreen.js' , 'FavouritesScreen.js' , 'MealDetailScreen.js' , 'FiltersScreen.js'
+
+(2) All Screens
+------------------
+
+    screens/CategoriesScreen.js
+    ----------------------------
+
+    import React from 'react'
+    import { StyleSheet, View, Text } from 'react-native'
+
+    const CategoriesScreen = () => {
+        return <View style={styles.screen}>
+            <Text>The Categories Screen</Text>
+        </View>
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
+    })
+
+    export default CategoriesScreen
+
+
+    screens/CategoryMealScreen.js
+    -------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+
+    export default function CategoryMealScreen() {
+        return (
+            <View>
+                <Text>CategoryMealScreen</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({})
+
+
+    screens/FavouritesScreen.js
+    ----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+
+    export default function FavouritesScreen() {
+        return (
+            <View>
+                <Text>FavouritiesScreen</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({})
+
+
+
+    screens/FiltersScreen.js
+    -----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+
+    export default function FilterScreen() {
+        return (
+            <View>
+                <Text>FilterScreen</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({})
+
+
+
+    screens/MealDetailScreen.js
+    -----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+
+    export default function MealDetailScreen() {
+        return (
+            <View>
+                <Text>MealDetailScreen</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({})
