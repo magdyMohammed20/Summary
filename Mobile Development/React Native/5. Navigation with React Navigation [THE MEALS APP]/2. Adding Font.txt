@@ -1,0 +1,42 @@
+(1) Adding Font In App.js
+---------------------------
+==> Install 'expo-app-loading' [expo install expo-app-loading]
+==> Add 'open-sans' Font File Inside 'assets' Folder
+
+
+    App.js
+    -------
+
+    import React from 'react';
+    import { StyleSheet, Text, View } from 'react-native';
+    import AppLoading from 'expo-app-loading'
+    import { useFonts } from 'expo-font'
+
+    export default function App() {
+        let [fontsLoaded] = useFonts({
+            'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
+        })
+
+        if (!fontsLoaded) {
+            return <AppLoading />
+        }
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.txt}>Hellow</Text>
+            </View>
+        );
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+            backgroundColor: '#fff',
+            alignItems: 'center',
+            justifyContent: 'center',
+
+        },
+        txt: {
+            fontFamily: 'open-sans'
+        }
+    });
