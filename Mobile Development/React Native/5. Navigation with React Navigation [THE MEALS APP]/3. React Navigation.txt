@@ -1,0 +1,194 @@
+(1) React Navigation And Installation In V3
+---------------------------------------------
+==> Third Party Library Which Manage Routing and navigation for Expo and React Native apps.
+==> Install [npm i --save react-navigation]
+==> Install Extra Dependencies [expo install react-native-screens react-native-safe-area-context]
+
+
+(2) React Navigation And Installation In V6
+----------------------------------------------
+==> npm install @react-navigation/native
+==> [expo install react-native-screens react-native-safe-area-context] For Expo Project Or [npm install react-native-screens react-native-safe-area-context] For React Native Project
+==> npm install @react-navigation/native-stack
+
+
+(3) Basic Usage (V6)
+-----------------------
+
+
+    App.js
+    ---------
+
+    import React from 'react';
+    import CategoriesScreen from './screens/CategoriesScreen'
+    import { StyleSheet, Text, View } from 'react-native';
+    import AppLoading from 'expo-app-loading'
+    import { useFonts } from 'expo-font'
+    import { NavigationContainer } from '@react-navigation/native';
+    import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+    const Stack = createNativeStackNavigator();
+
+
+    export default function App() {
+
+        let [fontsLoaded] = useFonts({
+            'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
+        })
+
+        if (!fontsLoaded) {
+            return <AppLoading />
+        }
+        return (
+            <NavigationContainer>
+                <Stack.Navigator >
+                    <Stack.Screen name="All Categories" component={CategoriesScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        );
+    }
+
+    const styles = StyleSheet.create({});
+
+
+(4) Navigate Between Screens
+-----------------------------
+==> If Display CategoriesScreen.js Props There Are A Lot Of Actions
+==> Specify Initial Screen Using 'initialRouteName' Prop
+
+
+==> Basic Navigate Between screens
+------------------------------------
+
+    App.js
+    -------
+
+    import React from 'react';
+    import CategoriesScreen from './screens/CategoriesScreen'
+    import CategoryMealScreen from './screens/CategoryMealScreen'
+    import MealDetailScreen from './screens/MealDetailScreen'
+    import FavouritesScreen from './screens/FavouritesScreen'
+    import FiltersScreen from './screens/FiltersScreen'
+    import { StyleSheet } from 'react-native';
+    import AppLoading from 'expo-app-loading'
+    import { useFonts } from 'expo-font'
+    import { NavigationContainer } from '@react-navigation/native';
+    import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+    const Stack = createNativeStackNavigator();
+
+
+    export default function App() {
+
+        let [fontsLoaded] = useFonts({
+            'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
+        })
+
+        if (!fontsLoaded) {
+            return <AppLoading />
+        }
+        return (
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="categories">
+                    <Stack.Screen name="categories" component={CategoriesScreen} />
+                    <Stack.Screen name="meals" component={CategoryMealScreen} />
+                    <Stack.Screen name="meal Details" component={MealDetailScreen} />
+                    <Stack.Screen name="favourites" component={FavouritesScreen} />
+                    <Stack.Screen name="search" component={FiltersScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        );
+    }
+
+
+    /screens/CategoriesScreen.js (Switch Between Screen Here)
+    -----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, Button } from 'react-native'
+
+    export default function CategoriesScreen(props) {
+
+        return (
+            <View style={styles.container}>
+                <Text>Hellow This Is CategoriesScreen</Text>
+                <Button
+                    title='details'
+                    onPress={() => props.navigation.navigate('meal Details')}
+                />
+            </View>
+        )
+    }
+
+
+==> Go Back Button
+--------------------
+
+    MealDetailScreen.js
+    ---------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, Button } from 'react-native'
+
+    export default function MealDetailScreen(props) {
+        return (
+            <View>
+                <Text>MealDetailScreen</Text>
+                <Button title='Go Back' onPress={() => props.navigation.goBack()} />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({})
+
+
+
+==> Go Again To Same Screen Using 'push()'
+-------------------------------------------
+==> Can Navigate To Different Screen With 'push()'
+
+    MealDetailScreen.js
+    --------------------
+        
+    import React from 'react'
+    import { StyleSheet, Text, View, Button } from 'react-native'
+
+    export default function MealDetailScreen(props) {
+        return (
+            <View>
+                <Text>MealDetailScreen</Text>
+                <Button title='Go Again' onPress={() => props.navigation.push('meal Details')} />
+                <Button title='Go Back' onPress={() => props.navigation.goBack()} />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({})
+
+
+==> Go To Previous Screen With 'pop()'
+---------------------------------------
+
+    <Button
+        title='Go Back With Pop'
+        onPress={() => props.navigation.pop()}
+    />
+
+
+==> Go To First Screen Using 'popToTop()'
+------------------------------------------
+
+    <Button 
+        title='Go First Screen' 
+        onPress={() => props.navigation.popToTop()} 
+    />
+
+
+==> Using replace()
+---------------------
+--> replace the current route with a new one
+
+    <Button
+        title='Replace'
+        onPress={() => props.navigation.replace('meal Details')}
+    />
