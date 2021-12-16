@@ -1,0 +1,73 @@
+(1) Isolate Category Element That In 'CategoriesScreen.js' In Another Component
+---------------------------------------------------------------------------------
+
+    /components/CategoryGridTile.js
+    ---------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+    import Colors from '../constants/Colors'
+
+    export default function CategoryGridTile(props) {
+        const { id, title, color } = props.item;
+
+        return (
+            <TouchableOpacity style={styles.container} onPress={props.onSelect} activeOpacity={1}>
+                <View style={{ ...styles.gridItem, backgroundColor: color }}>
+                    <Text style={styles.txt} numberOfLines={2}>
+                        {title}
+                    </Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1
+        },
+        gridItem: {
+            flex: 1,
+            margin: 13,
+            height: 100,
+            justifyContent: 'flex-end',
+            alignItems: 'flex-end',
+            padding: 10,
+            borderRadius: 10,
+            shadowColor: Colors.blackColor,
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: .7,
+            shadowRadius: 10,
+            elevation: 4
+        },
+        txt: {
+            color: Colors.blackColor,
+            fontStyle: 'italic',
+            fontWeight: 'bold',
+            fontSize: 22,
+            textAlign: 'right'
+        }
+    })
+
+
+    /screens/CategoriesScreen.js
+    -----------------------------
+
+    import React from 'react'
+    import { View, FlatList } from 'react-native'
+    import { CATEGORIES } from '../data/dumy-data'
+    import CategoryGridTile from '../components/CategoryGridTile'
+    export default function CategoriesScreen(props) {
+
+        const renderData = ({ item }) => (
+            <CategoryGridTile item={item} onSelect={() => {
+                props.navigation.navigate('meal Details', { id: item.id, title: item.title, color: item.color })
+            }} />
+        )
+
+        return (
+            <View>
+                <FlatList numColumns={2} data={CATEGORIES} renderItem={renderData} />
+            </View>
+        )
+    }
