@@ -1,0 +1,82 @@
+(1) Sending And Reading Params
+---------------------------------
+
+    CategoriesScreen.js (Passing Data Here)
+    ---------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native'
+    import { CATEGORIES } from '../data/dumy-data'
+
+    export default function CategoriesScreen(props) {
+
+        const renderData = ({ item: { id, title, color } }) => (
+            <TouchableOpacity
+                style={styles.container}
+                onPress={
+                    () => {
+                        props.navigation.navigate('meal Details', { id, title, color })
+                    }
+                }>
+                <View style={{ ...styles.gridItem, backgroundColor: color }}>
+                    <Text style={styles.txt}>
+                        {title}
+                    </Text>
+                </View>
+            </TouchableOpacity>
+        )
+
+        return (
+            <View>
+                <FlatList numColumns={2} data={CATEGORIES} renderItem={renderData} />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1
+        },
+        gridItem: {
+            flex: 1,
+            margin: 15,
+            height: 150,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        txt: {
+            color: '#FFF'
+        }
+    })
+
+
+    MealDetailScreen.js (Read And Display Data Here)
+    ----------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+
+    export default function MealDetailScreen(props) {
+
+        // Fetch Data And Display
+        const { id, title, color } = props.route.params;
+        return (
+            <View style={{ flex: 1 }}>
+                <View style={{ ...styles.header, backgroundColor: color }}>
+                    <Text style={styles.txt}>{title}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        header: {
+            width: '100%',
+            height: 150,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        txt: {
+            fontSize: 30
+        }
+    })
