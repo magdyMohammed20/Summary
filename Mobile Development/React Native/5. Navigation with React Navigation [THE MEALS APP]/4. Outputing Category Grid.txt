@@ -1,0 +1,73 @@
+(1) Create 'models' Folder That Contains 'category.js'
+--------------------------------------------------------
+
+    models/category.js
+    --------------------
+
+    class Category {
+        constructor(id, title, color) {
+            this.id = id
+            this.title = title
+            this.color = color
+        }
+    }
+
+    export default Category
+
+
+(2) Create 'data' Folder That Contains 'dumy-data.js'
+--------------------------------------------------------
+
+    data/dumy-data.js
+    -------------------
+
+    import Category from '../models/category'
+
+    export const CATEGORIES = [
+        new Category('c1', 'Italian', '#f5428d'),
+        new Category('c2', 'Quick & Easy', '#f54242'),
+        new Category('c3', 'Hamburgers', '#f5a442'),
+        new Category('c4', 'German', '#f5d142'),
+        new Category('c5', 'Light & Lovely', '#368dff'),
+        new Category('c6', 'Exotic', '#41d95d'),
+        new Category('c7', 'Breakfast', '#9eecff'),
+        new Category('c8', 'Asian', '#b9ffb0'),
+        new Category('c9', 'French', '#ffc7ff'),
+        new Category('c10', 'Summer', '#47fced')
+    ];
+
+
+(3) Display Data And Specify Number Of Columns Inside 'CategoriesScreen.js'
+-----------------------------------------------------------------------------
+
+
+    screens/CategoriesScreen.js
+    -----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+    import { CATEGORIES } from '../data/dumy-data'
+
+    export default function CategoriesScreen(props) {
+
+        const renderData = ({ item: { title, color } }) => <View style={{ ...styles.gridItem, backgroundColor: color }}><Text style={styles.txt}>{title}</Text></View>
+        return (
+            <View style={styles.container}>
+                <FlatList numColumns={2} data={CATEGORIES} renderItem={renderData} />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+
+        gridItem: {
+            flex: 1,
+            margin: 15,
+            height: 150,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        txt: {
+            color: '#FFF'
+        }
+    })
