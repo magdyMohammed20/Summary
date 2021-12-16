@@ -1,0 +1,11 @@
+(1) When Navigate To NavigationDetail.js I Want To Set Selected Item Title As Title For 'NavigationDetail'
+------------------------------------------------------------------------------------------------------------
+
+==> For Single Screen
+-----------------------
+
+    <Stack.Screen 
+        name="meal Details" 
+        component={MealDetailScreen} 
+        options={({ route }) => ({ title: route.params.title })} 
+    />
