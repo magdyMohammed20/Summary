@@ -1,0 +1,64 @@
+(1) Loading Meals For Categories
+----------------------------------
+==> First Make CategoryScreen.js Navigate To CategoryMealScreen.js
+==> Fetching Data And Filter And Display In CategoryMealScreen.js
+==> Change CategoryMealScreen Navigation Title To Be The Current Selected Category In 'App.js'
+
+    CategoryScreen.js
+    --------------------
+
+    import React from 'react'
+    import { View, FlatList } from 'react-native'
+    import { CATEGORIES } from '../data/dumy-data'
+    import CategoryGridTile from '../components/CategoryGridTile'
+    export default function CategoriesScreen(props) {
+
+        const renderData = ({ item }) => (
+            <CategoryGridTile item={item} onSelect={() => {
+                props.navigation.navigate('meals', { id: item.id, title: item.title, color: item.color })
+            }} />
+        )
+
+        return (
+            <View>
+                <FlatList numColumns={2} data={CATEGORIES} renderItem={renderData} />
+            </View>
+        )
+    }
+
+
+
+    CategoryMealScreen.js
+    -----------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, FlatList } from 'react-native'
+    import { MEALS } from '../data/dumy-data'
+
+
+    export default function CategoryMealScreen(props) {
+        const { id, title, color } = props.route.params;
+
+        // Filter Whole Data To Get Meals Of Selected Category 
+        const currentMeals = MEALS.filter(meal => meal.categoryId.indexOf(id) >= 0)
+
+        const displayMeals = itemData => <View><Text>{itemData.item.title}</Text></View>
+
+        return (
+            <View>
+                <FlatList
+                    data={currentMeals}
+                    renderItem={displayMeals}
+                />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({})
+
+
+
+    App.js
+    --------
+
+    <Stack.Screen name="meals" component={CategoryMealScreen} options={({ route }) => ({ title: route.params.title })} />
