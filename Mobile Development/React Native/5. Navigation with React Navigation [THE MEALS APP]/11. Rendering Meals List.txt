@@ -1,0 +1,101 @@
+(1) Rendering Meals List
+--------------------------
+==> Create 'MealItem.js' Inside Components Folder
+==> Import 'MealItem.js' Inside 'CategoryMealScreen.js'
+
+
+    Components/MealItem.js
+    ------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native'
+    import Colors from '../constants/Colors'
+
+    export default function MealItem(props) {
+        const { title, duration, complexity, affordability, imgUrl } = props.item;
+
+        return (
+            <View style={styles.mealItem}>
+                <TouchableOpacity>
+                    <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
+                        <ImageBackground source={{ uri: imgUrl }} style={styles.bgImg}>
+                            <Text numberOfLines={1} style={styles.title}>{title}</Text>
+                        </ImageBackground>
+                    </View>
+                    <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
+                        <Text>{duration}m</Text>
+                        <Text>{complexity.toUpperCase()}</Text>
+                        <Text>{affordability.toUpperCase()}</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        mealItem: {
+            width: '100%',
+            height: 200,
+            backgroundColor: Colors.darkenWhite,
+            marginVertical: 10,
+            borderRadius: 10,
+            overflow: 'hidden'
+        },
+        mealRow: {
+            flexDirection: 'row',
+        },
+        mealHeader: {
+            height: '90%'
+        },
+        mealDetail: {
+            justifyContent: 'space-between',
+            paddingHorizontal: 10
+        },
+        bgImg: {
+            width: '100%',
+            height: '100%',
+            justifyContent: 'flex-end'
+        },
+        title: {
+            fontFamily: 'open-sans',
+            color: Colors.whiteColor,
+            backgroundColor: 'rgba(0,0,0,.7)',
+            padding: 5,
+            textAlign: 'center',
+            fontSize: 18
+        }
+    })
+
+
+    screens/CategoryMealScreen.js
+    -------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, FlatList } from 'react-native'
+    import { MEALS } from '../data/dumy-data'
+    import MealItem from '../components/MealItem'
+
+    export default function CategoryMealScreen(props) {
+        const { id, title, color } = props.route.params;
+
+        // Filter Whole Data To Get Meals Of Selected Category 
+        const currentMeals = MEALS.filter(meal => meal.categoryId.indexOf(id) >= 0)
+
+        // Passing Item Here To Fetch Data In MealItem.js
+        const displayMeals = itemData => <MealItem item={itemData.item} />
+
+        return (
+            <View style={styles.screen}>
+                <FlatList
+                    data={currentMeals}
+                    renderItem={displayMeals}
+                />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            padding: 7
+        }
+    })
