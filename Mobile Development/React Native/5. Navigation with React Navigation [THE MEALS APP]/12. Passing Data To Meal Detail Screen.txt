@@ -1,0 +1,131 @@
+(1) Passing Data Of Selected Meal To 'MealDetailScreen.js'
+------------------------------------------------------------
+
+    CategoryMealScreen.js
+    ------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, FlatList } from 'react-native'
+    import { MEALS } from '../data/dumy-data'
+    import MealItem from '../components/MealItem'
+
+    export default function CategoryMealScreen(props) {
+        const { id, title, color } = props.route.params;
+
+        // Filter Whole Data To Get Meals Of Selected Category 
+        const currentMeals = MEALS.filter(meal => meal.categoryId.indexOf(id) >= 0)
+
+        const displayMeals = itemData => <MealItem item={itemData.item} onSelect={data => props.navigation.navigate('meal Details', { data: itemData.item })} />
+
+        return (
+            <View style={styles.screen}>
+                <FlatList
+                    data={currentMeals}
+                    renderItem={displayMeals}
+                />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            padding: 7
+        }
+    })
+
+
+
+    MealItem.js
+    -------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, TouchableOpacity, ImageBackground } from 'react-native'
+    import Colors from '../constants/Colors'
+
+    export default function MealItem(props) {
+        const { title, duration, complexity, affordability, imgUrl } = props.item;
+
+        return (
+            <View style={styles.mealItem}>
+                <TouchableOpacity onPress={props.onSelect}>
+                    <View style={{ ...styles.mealRow, ...styles.mealHeader }}>
+                        <ImageBackground source={{ uri: imgUrl }} style={styles.bgImg}>
+                            <Text numberOfLines={1} style={styles.title}>{title}</Text>
+                        </ImageBackground>
+                    </View>
+                    <View style={{ ...styles.mealRow, ...styles.mealDetail }}>
+                        <Text>{duration}m</Text>
+                        <Text>{complexity.toUpperCase()}</Text>
+                        <Text>{affordability.toUpperCase()}</Text>
+                    </View>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        mealItem: {
+            width: '100%',
+            height: 200,
+            backgroundColor: Colors.darkenWhite,
+            marginVertical: 10,
+            borderRadius: 10,
+            overflow: 'hidden'
+        },
+        mealRow: {
+            flexDirection: 'row',
+        },
+        mealHeader: {
+            height: '90%'
+        },
+        mealDetail: {
+            justifyContent: 'space-between',
+            paddingHorizontal: 10
+        },
+        bgImg: {
+            width: '100%',
+            height: '100%',
+            justifyContent: 'flex-end'
+        },
+        title: {
+            fontFamily: 'open-sans',
+            color: Colors.whiteColor,
+            backgroundColor: 'rgba(0,0,0,.7)',
+            padding: 5,
+            textAlign: 'center',
+            fontSize: 18
+        }
+    })
+
+
+
+    MealDetailScreen.js
+    ----------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View } from 'react-native'
+
+    export default function MealDetailScreen(props) {
+
+        // Fetch Data And Display
+        const { title } = props.route.params.data;
+        return (
+            <View style={{ flex: 1 }}>
+                <View style={{ ...styles.header }}>
+                    <Text style={styles.txt}>{title}</Text>
+                </View>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        header: {
+            width: '100%',
+            height: 150,
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        txt: {
+            fontSize: 30
+        }
+    })
