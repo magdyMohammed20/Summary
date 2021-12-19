@@ -1,0 +1,49 @@
+(1) Adding Header Favourite Button Inside MealDetailScreen.js
+--------------------------------------------------------------
+==> Install [npm i react-navigation-header-buttons]
+==> Create Component For Favourite Button 'HeaderButton.js'
+
+    App.js
+    --------
+
+    import HeaderBtn from './components/HeaderBtn';
+    import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+
+
+    <Stack.Screen
+        name="meal Details"
+        component={MealDetailScreen}
+        options={
+            ({ navigation, route }) => {
+                return {
+                headerTitle: route.params.title,
+                headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderBtn}>
+                    <Item title='favourite' iconName='staro' onPress={() => navigation.navigate('categories')} />
+                </HeaderButtons>
+                }
+            }
+        }
+    />
+
+
+    /components/HeaderBtn.js
+    -------------------------------
+
+    import React from 'react'
+    import { StyleSheet } from 'react-native'
+    import { AntDesign } from '@expo/vector-icons'
+    import Colors from '../constants/Colors'
+    import { HeaderButton } from 'react-navigation-header-buttons'
+
+    export default function HeaderBtn(props) {
+        return (
+            <HeaderButton
+                IconComponent={AntDesign}
+                iconSize={20}
+                color={Colors.darkenWhite}
+                {...props}
+            />
+        )
+    }
+
+    const styles = StyleSheet.create({})
