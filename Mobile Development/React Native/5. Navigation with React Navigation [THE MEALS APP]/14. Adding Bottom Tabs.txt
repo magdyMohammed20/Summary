@@ -1,0 +1,217 @@
+(1) Adding Bottom Tabs
+------------------------
+==> Install [npm install @react-navigation/bottom-tabs]
+==> Handle Inside [App.js]
+
+
+    App.js
+    --------
+
+    import React from 'react';
+    import CategoriesScreen from './screens/CategoriesScreen'
+    import CategoryMealScreen from './screens/CategoryMealScreen'
+    import MealDetailScreen from './screens/MealDetailScreen'
+    import FavouritesScreen from './screens/FavouritesScreen'
+    import FiltersScreen from './screens/FiltersScreen'
+    import { StyleSheet, Button } from 'react-native';
+    import AppLoading from 'expo-app-loading'
+    import { useFonts } from 'expo-font'
+    import { NavigationContainer } from '@react-navigation/native';
+    import { createNativeStackNavigator } from '@react-navigation/native-stack';
+    import Colors from './constants/Colors'
+    import HeaderBtn from './components/HeaderButton';
+    import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+    import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+
+    const Stack = createNativeStackNavigator();
+    const Tab = createBottomTabNavigator();
+
+    // Create Isolated Component With The Desired Navigated Tabs (Categories , Favourites)
+    function Home() {
+        return (
+            <Tab.Navigator screenOptions={{ headerShown: false }}>
+                <Tab.Screen name="categories" component={CategoriesScreen} />
+                <Tab.Screen name="favourites" component={FavouritesScreen} />
+            </Tab.Navigator>
+        );
+    }
+
+    export default function App() {
+
+    let [fontsLoaded] = useFonts({
+        'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
+    })
+
+    if (!fontsLoaded) {
+        return <AppLoading />
+    }
+    return (
+        <NavigationContainer>
+        <Stack.Navigator
+            screenOptions={
+            {
+                headerStyle: { backgroundColor: Colors.blackColor },
+                headerTintColor: Colors.whiteColor,
+                headerTitleStyle: {
+                fontWeight: 'bold'
+                }
+            }
+            }>
+
+            {/* Look Hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee */}
+            <Stack.Screen name="Home" component={Home} />
+
+            <Stack.Screen name="meals" component={CategoryMealScreen} options={({ route }) => ({ title: route.params.title })} />
+            <Stack.Screen
+            name="meal Details"
+            component={MealDetailScreen}
+            options={
+                ({ navigation, route }) => {
+                return {
+                    headerTitle: route.params.title,
+                    headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderBtn}>
+                    <Item title='favourite' iconName='staro' onPress={() => navigation.navigate('categories')} />
+                    </HeaderButtons>
+                }
+                }
+            }
+            />
+
+            <Stack.Screen name="search" component={FiltersScreen} />
+        </Stack.Navigator>
+        </NavigationContainer>
+    );
+    }
+
+    const styles = StyleSheet.create({});
+
+
+(2) Tabs Colors
+----------------
+
+    function Home() {
+        return (
+            <Tab.Navigator 
+                screenOptions={{ 
+                    headerShown: false,
+                    tabBarActiveTintColor: 'red',
+                    tabBarInactiveTintColor: 'green' 
+                }}>
+                <Tab.Screen name="categories" component={CategoriesScreen} />
+                <Tab.Screen name="favourites" component={FavouritesScreen} />
+            </Tab.Navigator>
+        );
+    }
+
+
+(3) Add Icons And Handle Navigation Header Inside Favourites And Categories screens
+-------------------------------------------------------------------------------------
+
+    App.js
+    -------
+
+    import React from 'react';
+    import CategoriesScreen from './screens/CategoriesScreen'
+    import CategoryMealScreen from './screens/CategoryMealScreen'
+    import MealDetailScreen from './screens/MealDetailScreen'
+    import FavouritesScreen from './screens/FavouritesScreen'
+    import FiltersScreen from './screens/FiltersScreen'
+    import { StyleSheet } from 'react-native';
+    import AppLoading from 'expo-app-loading'
+    import { useFonts } from 'expo-font'
+    import { NavigationContainer } from '@react-navigation/native';
+    import { createNativeStackNavigator } from '@react-navigation/native-stack';
+    import Colors from './constants/Colors'
+    import HeaderBtn from './components/HeaderButton';
+    import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+    import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+    import { AntDesign, Ionicons } from '@expo/vector-icons'
+
+    const Stack = createNativeStackNavigator();
+    const Tab = createBottomTabNavigator();
+
+    function Categories() {
+        return (
+            <Tab.Navigator
+            screenOptions={
+                ({ route }) => ({
+
+                tabBarIcon: ({ focused, color, size }) => {
+                    if (route.name === 'categories') {
+                        return <Ionicons name={'restaurant'} size={size} color={color} />;
+                    } else {
+                        return <AntDesign name={'staro'} size={size} color={color} />;
+                    }
+
+                }
+                ,
+                tabBarActiveTintColor: '#000',
+                tabBarInactiveTintColor: '#999',
+                headerStyle: {
+                    backgroundColor: Colors.blackColor,
+                },
+                headerTintColor: '#FFF',
+                //headerShown: false
+                })}
+            >
+
+
+                <Tab.Screen name="categories" component={CategoriesScreen} />
+                <Tab.Screen name="favourites" component={FavouritesScreen} />
+            </Tab.Navigator >
+        );
+        }
+
+        export default function App() {
+
+            let [fontsLoaded] = useFonts({
+                'open-sans': require('./assets/fonts/OpenSans-Regular.ttf')
+            })
+
+            if (!fontsLoaded) {
+                return <AppLoading />
+            }
+            return (
+                <NavigationContainer>
+                    <Stack.Navigator
+                        screenOptions={
+                            {
+                                headerStyle: { backgroundColor: Colors.blackColor },
+                                headerTintColor: Colors.whiteColor,
+                                headerTitleStyle: {
+                                fontWeight: 'bold'
+                                }
+                            }
+                        }>
+
+                        {/* Look Hereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee */}
+                        {/* Hide Stack Navigator Header And Show Tabs Header Instead When Navigate To Categories And Favourites Screens */}
+                        <Stack.Screen name="Categories" component={Categories} options={
+                            () => {
+                                return {
+                                headerShown: false
+                                }
+                            }
+                        } />
+
+                        <Stack.Screen name="meals" component={CategoryMealScreen} options={({ route }) => ({ title: route.params.title })} />
+                        <Stack.Screen
+                        name="meal Details"
+                        component={MealDetailScreen}
+                        options={
+                            ({ navigation, route }) => {
+                                return {
+                                    headerTitle: route.params.title,
+                                    headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderBtn}>
+                                    <Item title='favourite' iconName='staro' onPress={() => navigation.navigate('categories')} />
+                                    </HeaderButtons>
+                                }
+                            }
+                        }
+                        />
+
+                        <Stack.Screen name="search" component={FiltersScreen} />
+                    </Stack.Navigator>
+                </NavigationContainer>
+            );
+    }
