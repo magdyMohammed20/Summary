@@ -1,0 +1,206 @@
+(1) Redux
+-----------
+==> Third Party Lib That Introduce A Centeral Store In Js Memory Not DB
+
+(2) Installation
+--------------------
+==> npm i redux react-redux
+
+
+(2) Basic (Showing Store Value)
+---------------------------------
+
+    store/reducers/reducers.Js
+    ----------------------------
+
+    const initialState = {
+        counter: 0
+    }
+
+    export const reducer = (state = initialState, action) => {
+        return state
+    }
+
+
+    App.Js
+    -------
+
+    import { StyleSheet, View } from 'react-native';
+    import Counter from './components/Counter'
+    import { combineReducers, createStore } from 'redux';
+    import { Provider } from 'react-redux'
+    import { reducer } from './store/reducers/reducer'
+
+
+    // Combine All Reducers
+    const allReducers = combineReducers({
+        counter: reducer
+    })
+
+    // Connect Store With Reducers
+    const store = createStore(allReducers)
+
+    // Wrap All Here With Provider And Connect With Store
+    export default function App() {
+        return (
+            <Provider store={store}>
+                <View style={styles.container}>
+                    <Counter />
+                </View>
+            </Provider>
+        );
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+        },
+    });
+
+
+
+    components/Counter.Js
+    ----------------------
+
+    import React from 'react'
+    import { StyleSheet, Button, View, Text } from 'react-native'
+    import { useSelector } from 'react-redux'
+
+
+    export default function Counter() {
+
+        const counter = useSelector(state => state.counter.counter)
+
+        return (
+            <View style={styles.screen}>
+                <View style={styles.txtCounter}>
+                    <Text>{counter}</Text>
+                </View>
+                <View style={styles.buttons}>
+                    <Button title='Counter+' />
+                    <Button title='Counter-' />
+                </View>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1
+        },
+        buttons: {
+            flex: 1,
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+        },
+        txtCounter: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
+    })
+
+
+(2) Dispatching Actions
+--------------------------
+
+    /store/actions/counterActions.Js
+    ----------------------------------
+
+    export const INCREMENT = "INCREMENT"
+    export const DECREMENT = "DECREMENT"
+
+
+    export const increment = (payload) => {
+        return {
+            type: INCREMENT,
+            payload
+        }
+    }
+
+    export const decrement = (payload) => {
+        return {
+            type: DECREMENT,
+            payload
+        }
+    }
+
+
+    store/reducers/reducer.Js
+    --------------------------
+
+
+    import { INCREMENT, DECREMENT } from "../actions/counterActions"
+
+    const initialState = {
+        counter: 0
+    }
+
+    export const reducer = (state = initialState, action) => {
+
+        switch (action.type) {
+            case INCREMENT:
+                return {
+                    ...state,
+                    counter: state.counter + 1,
+                    payload: action.payload
+                }
+
+            case DECREMENT:
+                return {
+                    ...state,
+                    counter: state.counter - 1,
+                    payload: action.payload
+                }
+        }
+
+
+        return state
+    }
+
+
+    /components/counter.Js
+    -----------------------
+
+    import React from 'react'
+    import { StyleSheet, Button, View, Text } from 'react-native'
+    import { useSelector, useDispatch } from 'react-redux'
+    import { increment, decrement } from '../store/actions/counterActions'
+
+    export default function Counter() {
+
+        const counter = useSelector(state => state.counter.counter)
+        const payload = useSelector(state => state.counter.payload)
+        const dispatch = useDispatch()
+
+        return (
+            <View style={styles.screen}>
+                <View style={styles.txtCounter}>
+                    <Text>{counter}</Text>
+                    <Text>{payload}</Text>
+                </View>
+                <View style={styles.buttons}>
+                    <Button title='Counter+' onPress={() => dispatch(increment("Increment"))} />
+                    <Button title='Counter-' onPress={() => dispatch(decrement("Decrement"))} />
+                </View>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1
+        },
+        buttons: {
+            flex: 1,
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: 'space-around'
+        },
+        txtCounter: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
+    })
