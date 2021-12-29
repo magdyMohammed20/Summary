@@ -1,0 +1,106 @@
+(1) Display Data From Redux Inside ProductsOverview.js
+---------------------------------------------------------
+
+    screens/shop/ProductsOverview.js
+    ---------------------------------
+
+    import React from 'react'
+    import { Text, View, FlatList } from 'react-native'
+    import { useSelector } from 'react-redux'
+
+    export default function ProductsOverview() {
+
+        // Fetch Data From Redux
+        const allProducts = useSelector(state => state.products.availableProducts);
+
+        // Render Products Inside Flat List
+        const renderProducts = ({ item }) => (<View><Text>{item.id}</Text></View>)
+
+        return (
+            <View>
+                <FlatList data={allProducts} renderItem={renderProducts} />
+            </View>
+        )
+    }
+
+
+(2) Setup Navigation
+----------------------
+==> Inside 'navigation' Folder Create [shopNavigator.js]
+==> Import Navigator Inside [App.js]
+
+
+    navigation/shopNavigator.js
+    ----------------------------
+
+    import React from 'react'
+    import { NavigationContainer } from '@react-navigation/native'
+    import { createNativeStackNavigator } from '@react-navigation/native-stack'
+    import ProductsOverview from '../screens/shop/ProductsOverview'
+
+
+    const Stack = createNativeStackNavigator()
+
+    const AppNavigator = () => {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen name="Home" component={ProductsOverview} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
+    }
+
+    export default AppNavigator
+
+
+    App.js
+    -------
+
+    import { createStore, combineReducers } from 'redux';
+    import { Provider } from 'react-redux';
+    import { reducer } from './store/reducers/product';
+    import AppNavigator from './navigation/shopNavigator';
+
+    const allReducers = combineReducers({
+        products: reducer
+    })
+
+    const store = createStore(allReducers)
+
+    export default function App() {
+        return (
+            <Provider store={store}>
+                <AppNavigator />
+            </Provider>
+        );
+    }
+
+
+(3) Add Header Style 
+----------------------
+==> Inside [constants] Folder Create [Colors.js] File
+==> Set Colors Inside [Stack.Navigator]
+
+    /constants/Colors.js
+    ----------------------
+
+        export default {
+            primary: '#f4511e',
+            accent: '#fff'
+        }
+
+
+    /screens/navigation/shopNavigator.js
+    ---------------------------------------
+        
+        import Colors from '../constants/Colors'
+
+        <Stack.Navigator
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: Colors.primary
+                },
+                headerTintColor: Colors.accent
+            }}
+        >
