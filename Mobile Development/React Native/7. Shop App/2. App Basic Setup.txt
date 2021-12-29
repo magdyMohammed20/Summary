@@ -1,0 +1,9 @@
+(1) Create Basic Folders 
+------------------------
+==> Create [screens , components , navigation , constants , store] Folders 
+==> Inside [screens] Folder Create [shop , user] Folders
+==> Inside [shop] Folder Create [ProductsOverview.js , ProductDetails.js , CartScreen.js , OrdersScreen.js] 
+==> Inside [user] Folder Create [UserProducts.js , EditProduct.js]
+==> Install [npm i redux react-redux] And [yarn add @react-navigation/native]
+==> Install [expo install react-native-screens react-native-safe-area-context] And [npm install @react-navigation/native-stack]
+
