@@ -1,0 +1,81 @@
+(1) Create Component For Product Item
+---------------------------------------
+==> Inside [Components] Folder Create [Shop] Folder Contains [ProductItem.js]
+==> Now Can Use [ProductItem.js] Inside [ProductsOverview.js] In Render Method Of Flatlist
+
+    ./Components/shop/ProductItem.js
+    -----------------------------------
+
+    import React from 'react'
+    import { View, Text, Image, Button, StyleSheet } from 'react-native'
+    import Colors from '../../constants/Colors'
+
+    const ProductItem = props => {
+        return (
+            <View style={styles.product}>
+                <View style={styles.imgContainer}>
+                    <Image source={{ uri: props.imgUrl }} style={styles.img} />
+                </View>
+                <View style={styles.details}>
+                    <Text style={styles.title}>{props.title}</Text>
+                    <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+                </View>
+                <View style={styles.actions}>
+                    <Button title='View Details' color={Colors.btnSuccess} />
+                    <Button title='To Cart' color={Colors.btnSecondary} />
+                </View>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        product: {
+            shadowColor: 'black',
+            shadowOpacity: .7,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 8,
+            elevation: 5,
+            borderRadius: 10,
+            height: 300,
+            margin: 20,
+            backgroundColor: 'white',
+            overflow: 'hidden'
+        },
+        imgContainer: {
+            width: '100%',
+            height: '60%'
+        },
+        img: {
+            width: '100%',
+            height: '100%'
+        },
+        details: {
+            alignItems: 'center',
+            height: '15%'
+        },
+        title: {
+            fontSize: 18,
+            marginVertical: 4
+        },
+        price: {
+            fontSize: 14,
+            color: '#888'
+        },
+        actions: {
+            flexDirection: 'row',
+            justifyContent: 'space-around',
+            alignItems: 'center',
+            height: '25%'
+        }
+    })
+    export default ProductItem
+
+
+
+    ./screens/shop/ProductsOverview.js
+    -----------------------------------
+
+    import ProductItem from '../../components/shop/ProductItem'
+
+    // Passing Data Inside Render Method Of Flatlist
+    const renderProducts = ({ item }) => <ProductItem imgUrl={item.imageUrl} title={item.title} price={item.price} />
