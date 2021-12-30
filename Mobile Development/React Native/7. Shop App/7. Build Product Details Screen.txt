@@ -1,0 +1,51 @@
+(1) Build Product Details Screen
+----------------------------------
+
+    ./screens/shop/ProductDetails.js
+    ---------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, Button, Image, ScrollView, View } from 'react-native'
+    import { useSelector } from 'react-redux'
+    import Colors from '../../constants/Colors';
+    export default function ProductDetails(props) {
+
+        const selectedItem = useSelector(state => state.products.availableProducts.find(item => item.id == props.route.params.id))
+
+        const { imageUrl, price, description } = selectedItem;
+
+        return (
+            <ScrollView>
+                <Image style={styles.img} source={{ uri: imageUrl }} />
+                <View style={styles.actions}>
+                    <Button title="Add To Cart" color={Colors.btnSecondary} />
+                </View>
+                <Text style={styles.price}>${price}</Text>
+                <Text style={styles.desc}>{description}</Text>
+            </ScrollView>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        img: {
+            width: '100%',
+            height: 300
+        },
+        actions: {
+            marginVertical: 10,
+            alignItems: 'center'
+        },
+        price: {
+            fontSize: 20,
+            textAlign: 'center',
+            color: '#888',
+            marginVertical: 10
+        },
+        desc: {
+            fontSize: 15,
+            textAlign: 'center',
+            paddingHorizontal: 20
+        }
+    })
+
+
