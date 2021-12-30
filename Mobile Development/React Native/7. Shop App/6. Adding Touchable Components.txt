@@ -1,0 +1,159 @@
+(1) Setup [ProductDetails.js]
+-------------------------------
+==> Set [ProductDetails.js] Content
+==> Set ProductDetails Inside [navigation/shopNavigator.js]
+==> Passing Data With Id And Buttons Actions From [ProductOverview.js] To [ProductItem.js] Component And Passing Title Too To Setted As Navigation Title
+==> Inside [ProductItem.js] Use The Passed Actions To Fetch The Desired Product
+
+
+    ./screens/shop/ProductDetails.js
+    ----------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, Image } from 'react-native'
+    import { useSelector } from 'react-redux'
+    export default function ProductDetails(props) {
+
+        const selectedItem = useSelector(state => state.products.availableProducts.find(item => item.id == props.route.params.id))
+
+        return (
+            <View>
+                <Text>{selectedItem.title}</Text>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({})
+
+
+    ./navigation/shopNavigator.js
+    -------------------------------
+
+    import React from 'react'
+    import { NavigationContainer } from '@react-navigation/native'
+    import { createNativeStackNavigator } from '@react-navigation/native-stack'
+    import ProductsOverview from '../screens/shop/ProductsOverview'
+    import ProductDetails from '../screens/shop/ProductDetails'
+    import Colors from '../constants/Colors'
+
+    const Stack = createNativeStackNavigator()
+
+    const AppNavigator = () => {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerStyle: {
+                            backgroundColor: Colors.primary
+                        },
+                        headerTintColor: Colors.accent
+                    }}
+                >
+                    <Stack.Screen name="All Products" component={ProductsOverview} />
+                    <Stack.Screen name="Item Details" component={ProductDetails} options={({ route }) => ({ title: route.params.title })} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
+    }
+
+    export default AppNavigator
+
+
+
+    ./screens/shop/ProductOverview.js
+    -----------------------------------
+
+    import React from 'react'
+    import {View, FlatList } from 'react-native'
+    import { useSelector } from 'react-redux'
+    import ProductItem from '../../components/shop/ProductItem'
+
+    export default function ProductsOverview(props) {
+
+        // Fetch Data From Redux
+        const allProducts = useSelector(state => state.products.availableProducts);
+
+        // Render Products Inside Flat List
+        const renderProducts = ({ item }) =>
+            <ProductItem
+                imgUrl={item.imageUrl}
+                title={item.title}
+                price={item.price}
+                onViewDetails={() => props.navigation.navigate('Item Details', { id: item.id, title: item.title })}
+            />
+
+        return (
+            <View>
+                <FlatList data={allProducts} renderItem={renderProducts} />
+            </View>
+        )
+    }
+
+
+
+    ./Components/shop/ProductItem.js
+    ---------------------------------
+
+    import React from 'react'
+    import { View, Text, Image, Button, StyleSheet } from 'react-native'
+    import Colors from '../../constants/Colors'
+
+    const ProductItem = props => {
+        return (
+            <View style={styles.product}>
+                <View style={styles.imgContainer}>
+                    <Image source={{ uri: props.imgUrl }} style={styles.img} />
+                </View>
+                <View style={styles.details}>
+                    <Text style={styles.title}>{props.title}</Text>
+                    <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+                </View>
+                <View style={styles.actions}>
+                    <Button title='View Details' color={Colors.btnSuccess} onPress={props.onViewDetails} />
+                    <Button title='Add To Cart' color={Colors.btnSecondary} />
+                </View>
+            </View>
+        )
+    }
+
+
+
+
+(2) Can Make Product Touchable
+--------------------------------
+
+    ./Components/shop/ProductItem.js
+    ----------------------------------
+
+    import React from 'react'
+    import { View, Text, Image, Button, StyleSheet, Platform, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
+    import Colors from '../../constants/Colors'
+
+    const ProductItem = props => {
+
+        // Depending On Platform Select Touch Effect
+        let TouchabkeCmp = TouchableOpacity;
+
+        if (Platform.OS === 'android' && Platform.Version >= 21) {
+            TouchabkeCmp = TouchableNativeFeedback
+        }
+
+        // Use useForeground Here For Prevent Any Floated Content From Touch Effect 
+        return (
+            <TouchabkeCmp onPress={props.onViewDetails} useForeground>
+                <View style={styles.product}>
+                    <View style={styles.imgContainer}>
+                        <Image source={{ uri: props.imgUrl }} style={styles.img} />
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.title}>{props.title}</Text>
+                        <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+                    </View>
+                    <View style={styles.actions}>
+                        <Button title='View Details' color={Colors.btnSuccess} onPress={props.onViewDetails} />
+                        <Button title='Add To Cart' color={Colors.btnSecondary} />
+                    </View>
+                </View>
+            </TouchabkeCmp>
+        )
+    }
