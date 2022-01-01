@@ -1,0 +1,184 @@
+(1) Create Cart Header Button
+--------------------------------
+==> Inside [Components] Folder Create [UI] Folder And Create [HeaderButton.js] In It
+==> Install [npm i react-navigation-header-buttons]
+==> Set HeaderButton Inside shopNavigator.js
+==> Use Header Button Inside [ProductsOverview.js]
+
+
+    /Components/UI/HeaderButton.js
+    --------------------------------
+
+    import React from 'react'
+    import { Platform, View } from 'react-native'
+    import { AntDesign } from '@expo/vector-icons'
+    import { HeaderButton } from 'react-navigation-header-buttons'
+    import Colors from '../../constants/Colors'
+
+    export default function HeaderBtn(props) {
+        return (
+            <View>
+                <HeaderButton
+                    {...props}
+                    IconComponent={AntDesign}
+                    iconSize={24}
+                    color={Platform.OS == 'android' ? Colors.btnSuccess : 'black'}
+                />
+            </View>
+        )
+    }
+
+
+    /navigation/shopNavigator.js
+    -----------------------------
+
+    import React from 'react'
+    import { NavigationContainer } from '@react-navigation/native'
+    import { createNativeStackNavigator } from '@react-navigation/native-stack'
+    import ProductsOverview from '../screens/shop/ProductsOverview'
+    import ProductDetails from '../screens/shop/ProductDetails'
+    import Colors from '../constants/Colors'
+    import HeaderBtn from '../components/UI/HeaderButton'
+    import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+    import CartScreen from '../screens/shop/CartScreen'
+    const Stack = createNativeStackNavigator()
+
+    const AppNavigator = (props) => {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerStyle: {
+                            backgroundColor: Colors.primary,
+                        },
+                        headerTintColor: Colors.accent,
+                        headerTitleStyle: {
+                            fontFamily: 'open-sans'
+                        }
+                    }}
+                >
+                    <Stack.Screen
+                        name="All Products"
+                        component={ProductsOverview}
+                        options={({ navigation }) => ({
+                            headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderBtn}>
+                                <Item title="search" iconName="shoppingcart" onPress={() => navigation.navigate('Cart')} />
+                            </HeaderButtons>
+                        })}
+                    />
+                    <Stack.Screen name="Item Details" component={ProductDetails} options={({ route }) => ({ title: route.params.title })} />
+                    <Stack.Screen name="Cart" component={CartScreen} />
+
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
+    }
+
+    export default AppNavigator
+
+
+
+    /screens/shop/ProductsOverview.js
+    ----------------------------------
+
+    import React from 'react'
+    import { View, FlatList } from 'react-native'
+    import ProductItem from '../../components/shop/ProductItem'
+    import { useDispatch, useSelector } from 'react-redux'
+    import * as CartActions from '../../store/actions/Cart'
+
+    export default function ProductsOverview(props) {
+
+        // Fetch Data From Redux
+        const allProducts = useSelector(state => state.products.availableProducts);
+
+        const dispatch = useDispatch()
+
+        // Render Products Inside Flat List
+        const renderProducts = ({ item }) =>
+            <ProductItem
+                imgUrl={item.imageUrl}
+                title={item.title}
+                price={item.price}
+                onViewDetails={() => props.navigation.navigate('Item Details', { id: item.id, title: item.title })}
+                onAddToCart={() => dispatch(CartActions.addToCart(item))}
+            />
+
+        return (
+            <View>
+                <FlatList data={allProducts} renderItem={renderProducts} />
+            </View>
+        )
+    }
+
+
+
+(2) Create Cart Screen 
+------------------------
+
+    /screens/shop/CartScreen.js
+    ----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+    import { useSelector } from 'react-redux'
+    import Colors from '../../constants/Colors'
+
+    export default function CartScreen() {
+        const totalAmount = useSelector(state => state.Cart.totalAmount)
+        const cartItems = useSelector(state => {
+            const transformedCartItems = []
+
+            for (let key in state.Cart.items) {
+                transformedCartItems.push({
+                    productId: key,
+                    productTitle: state.Cart.items[key].productTitle,
+                    productPrice: state.Cart.items[key].productPrice,
+                    quantity: state.Cart.items[key].quantity,
+                    sum: state.Cart.items[key].sum
+                })
+            }
+
+            return transformedCartItems
+        })
+        return (
+            <View style={styles.screen}>
+                <View style={styles.summary}>
+                    <Text style={styles.summaryText}>
+                        Total: <Text style={styles.amount}>${totalAmount.toFixed(2)}</Text>
+                    </Text>
+                    <Button title="Order Now" color={Colors.btnSecondary} disabled={cartItems.length == 0} />
+                </View>
+                <View>
+                    <Text>Cart Items</Text>
+                </View>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            margin: 20
+        },
+        summary: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 20,
+            padding: 10,
+            shadowColor: 'black',
+            shadowOpacity: 0.26,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 8,
+            elevation: 5,
+            borderRadius: 10,
+            backgroundColor: 'white'
+        },
+        summaryText: {
+            fontFamily: 'open-sans-bold',
+            fontSize: 18
+        },
+        amount: {
+            color: Colors.btnSuccess
+        }
+    });
