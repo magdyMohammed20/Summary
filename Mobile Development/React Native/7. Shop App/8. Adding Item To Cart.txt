@@ -1,0 +1,242 @@
+(1) Adding Item To Cart
+-------------------------
+==> In [store] Folder And In [actions] Folder Create [Cart.js] And In [reducers] Folder Create [Cart.js]
+==> In [models] Folder Create [cart-item.js] As Class BluePrint
+==> Passing Actions From [ProductsOverview.js] To [ProductItem.js] And [ProductDetails.js]
+==> Connect Cart Reducer With App.js
+
+    /store/actions/Cart.js
+    ------------------------
+
+    export const ADD_TO_CART = "ADD_TO_CART"
+
+    export const addToCart = product => {
+        return {
+            type: ADD_TO_CART,
+            product: product
+        }
+    }
+
+
+    /store/reducers/Cart.js
+    -------------------------
+
+    import { ADD_TO_CART } from "../actions/Cart"
+    import CartItem from "../../models/Cart-item"
+
+    const initialState = {
+        items: {},
+        totalAmount: 0
+    }
+
+    export default (state = initialState, action) => {
+        switch (action.type) {
+            case ADD_TO_CART:
+                let updatedOrNewCartItem; // This Var For Adding Data Dynamically [New Or Updated] Product
+                const { id, title, price } = action.product
+
+                console.log('-----------------------')
+                // If Item Already In Cart
+                if (state.items[action.product.id]) {
+
+                    updatedOrNewCartItem = new CartItem(
+                        state.items[id].quantity + 1,
+                        title,
+                        price,
+                        state.items[id].sum + price
+                    )
+                }
+                else {
+                    updatedOrNewCartItem = new CartItem(1, price, title, price)
+                }
+
+                return {
+                    ...state,
+                    items: {
+                        ...state.items,
+                        [id]: updatedOrNewCartItem
+                    },
+                    totalAmount: state.totalAmount + price
+                }
+        }
+        return state
+    }
+
+
+
+    /models/Cart-item.js
+    ----------------------
+
+    export default class CartItem {
+        constructor(quantity, price, title, sum) {
+            this.quantity = quantity
+            this.price = price
+            this.title = title
+            this.sum = sum
+        }
+    }
+
+
+
+    screens/ProductsOverview.js
+    -----------------------------
+
+    import React from 'react'
+    import { View, FlatList } from 'react-native'
+    import { useSelector } from 'react-redux'
+    import ProductItem from '../../components/shop/ProductItem'
+    import { useDispatch } from 'react-redux'
+    import * as CartActions from '../../store/actions/Cart'
+
+    export default function ProductsOverview(props) {
+
+        // Fetch Data From Redux
+        const allProducts = useSelector(state => state.products.availableProducts);
+
+        const dispatch = useDispatch()
+
+        // Render Products Inside Flat List
+        const renderProducts = ({ item }) =>
+            <ProductItem
+                imgUrl={item.imageUrl}
+                title={item.title}
+                price={item.price}
+                onViewDetails={() => props.navigation.navigate('Item Details', { id: item.id, title: item.title })}
+                onAddToCart={() => dispatch(CartActions.addToCart(item))}
+            />
+
+        return (
+            <View>
+                <FlatList data={allProducts} renderItem={renderProducts} />
+            </View>
+        )
+    }
+
+
+
+    components/ProductItem.js
+    ---------------------------
+
+    import React from 'react'
+    import { View, Text, Image, Button, StyleSheet, Platform, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
+    import Colors from '../../constants/Colors'
+
+    const ProductItem = props => {
+
+        // Depending On Platform Select Touch Effect
+        let TouchabkeCmp = TouchableOpacity;
+
+        if (Platform.OS === 'android' && Platform.Version >= 21) {
+            TouchabkeCmp = TouchableNativeFeedback
+        }
+
+        // Use useForeground Here For Prevent Any Floated Content From Touch Effect 
+        return (
+            <TouchabkeCmp onPress={props.onViewDetails} useForeground>
+                <View style={styles.product}>
+                    <View style={styles.imgContainer}>
+                        <Image source={{ uri: props.imgUrl }} style={styles.img} />
+                    </View>
+                    <View style={styles.details}>
+                        <Text style={styles.title}>{props.title}</Text>
+                        <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+                    </View>
+                    <View style={styles.actions}>
+                        <Button title='View Details' color={Colors.btnSuccess} onPress={props.onViewDetails} />
+                        <Button title='Add To Cart' color={Colors.btnSecondary} onPress={props.onAddToCart} />
+                    </View>
+                </View>
+            </TouchabkeCmp>
+        )
+    }
+
+
+    screens/shop/ProductDetails.js
+    --------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, Button, Image, ScrollView, View } from 'react-native'
+    import { useSelector, useDispatch } from 'react-redux'
+    import Colors from '../../constants/Colors';
+    import * as CartActions from '../../store/actions/Cart'
+
+    export default function ProductDetails(props) {
+
+        const selectedItem = useSelector(state => state.products.availableProducts.find(item => item.id == props.route.params.id))
+
+        const { imageUrl, price, description } = selectedItem;
+
+        const dispatch = useDispatch();
+
+        return (
+            <ScrollView>
+                <Image style={styles.img} source={{ uri: imageUrl }} />
+                <View style={styles.actions}>
+                    <Button title="Add To Cart" color={Colors.btnSecondary} onPress={() => CartActions.addToCart(selectedItem)} />
+                </View>
+                <Text style={styles.price}>${price}</Text>
+                <Text style={styles.desc}>{description}</Text>
+            </ScrollView>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        img: {
+            width: '100%',
+            height: 300
+        },
+        actions: {
+            marginVertical: 10,
+            alignItems: 'center'
+        },
+        price: {
+            fontSize: 20,
+            textAlign: 'center',
+            color: '#888',
+            marginVertical: 10,
+            fontFamily: 'open-sans-bold'
+        },
+        desc: {
+            fontSize: 15,
+            textAlign: 'center',
+            paddingHorizontal: 20,
+            fontFamily: 'open-sans'
+        }
+    })
+
+
+    App.js
+    -------
+
+    import { createStore, combineReducers } from 'redux';
+    import { Provider } from 'react-redux';
+    import { reducer } from './store/reducers/product';
+    import Cart from './store/reducers/Cart'
+    import AppNavigator from './navigation/shopNavigator';
+    import AppLoading from 'expo-app-loading'
+    import { useFonts } from 'expo-font'
+
+    const allReducers = combineReducers({
+        products: reducer,
+        Cart: Cart
+    })
+
+    const store = createStore(allReducers)
+
+    export default function App() {
+
+        let [fontsLoaded] = useFonts({
+            'open-sans': require('./assets/Fonts/OpenSans-Regular.ttf'),
+            'open-sans-bold': require('./assets/Fonts/OpenSans-Bold.ttf')
+        })
+
+        if (!fontsLoaded) {
+            return <AppLoading />
+        }
+
+        return (
+            <Provider store={store}>
+                <AppNavigator />
+            </Provider>
+        );
+    }
