@@ -1,0 +1,140 @@
+(1) Outputting Cart Items
+---------------------------
+==> Create Component For Cart Item [CartItem.js] Inside [Components] Folder In [shop] Folder
+==> Import [CartItem.js] Inside [CartScreen.js]
+
+
+    Components/shop/CartItem.js
+    ------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native'
+    import { Ionicons } from '@expo/vector-icons'
+    export default function CartItem(props) {
+
+        return (
+            <View style={styles.container}>
+                <View style={styles.itemData}>
+                    <Text style={styles.quantity}>{props.quantity}</Text>
+                    <Text style={styles.sameText}>{props.title}</Text>
+                </View>
+                <View style={styles.itemData}>
+                    <Text style={styles.sameText}>$ {props.amount}</Text>
+                    <TouchableOpacity style={styles.deleteButton} onPress={props.onRemove}>
+                        <Ionicons
+                            name={Platform.ios == 'android' ? 'md-trash' : 'ios-trash'}
+                            size={20}
+                            color='red'
+                        />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            padding: 10,
+            backgroundColor: '#FFF',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginVertical: 8
+        },
+        itemData: {
+            flexDirection: 'row',
+            alignItems: 'center'
+        },
+        quantity: {
+            fontFamily: 'open-sans',
+            fontSize: 20,
+            color: '#888'
+        },
+        sameText: {
+            fontFamily: 'open-sans-bold',
+            fontSize: 16
+        },
+        deleteButton: {
+            marginLeft: 20
+        }
+    })
+
+
+
+    screens/shop/CartScreen.js
+    ----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+    import { useSelector } from 'react-redux'
+    import CartItem from '../../components/shop/CartItem'
+    import Colors from '../../constants/Colors'
+
+    export default function CartScreen() {
+        const totalAmount = useSelector(state => state.Cart.totalAmount)
+        const cartItems = useSelector(state => {
+            const transformedCartItems = []
+
+            for (let key in state.Cart.items) {
+                transformedCartItems.push({
+                    productId: key,
+                    productTitle: state.Cart.items[key].title,
+                    productPrice: state.Cart.items[key].price,
+                    quantity: state.Cart.items[key].quantity,
+                    sum: state.Cart.items[key].sum
+                })
+            }
+
+            return transformedCartItems
+        })
+
+        console.log('--------------------------')
+        console.log(cartItems)
+        return (
+            <View style={styles.screen}>
+                <View style={styles.summary}>
+                    <Text style={styles.summaryText}>
+                        Total: <Text style={styles.amount}>${totalAmount.toFixed(2)}</Text>
+                    </Text>
+                    <Button title="Order Now" color={Colors.btnSecondary} disabled={cartItems.length == 0} />
+                </View>
+                <FlatList
+                    data={cartItems}
+                    renderItem={itemData =>
+                        <CartItem
+                            quantity={itemData.item.quantity}
+                            title={itemData.item.productTitle}
+                            amount={itemData.item.sum}
+                            onRemove={() => { }}
+                        />}
+                    keyExtractor={item => item.productId}
+                />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            margin: 20
+        },
+        summary: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 20,
+            padding: 10,
+            shadowColor: 'black',
+            shadowOpacity: 0.26,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 8,
+            elevation: 5,
+            borderRadius: 10,
+            backgroundColor: 'white'
+        },
+        summaryText: {
+            fontFamily: 'open-sans-bold',
+            fontSize: 18
+        },
+        amount: {
+            color: Colors.btnSuccess
+        }
+    });
