@@ -1,0 +1,253 @@
+(1) Deleting Item From Cart
+-----------------------------
+==> Add Delete Action In [Store/actions/Cart.js] 
+==> Handle Delete In Reducer [Store/reducers/Cart.js]
+==> Handle Deleting Item In [CartScreen.js]
+==> Pass onRemove Action From [CartScreen.js] To [CartItem.js]
+
+    Store/actions/Cart.js
+    ----------------------
+
+    export const ADD_TO_CART = "ADD_TO_CART"
+    export const REMOVE_FROM_CART = "REMOVE_FROM_CART"
+
+    export const addToCart = product => {
+        return {
+            type: ADD_TO_CART,
+            product: product
+        }
+    }
+
+    export const removeFromCart = productId => {
+        return {
+            type: REMOVE_FROM_CART,
+            pid: productId
+        }
+    }
+
+
+
+    Store/reducers/Cart.js
+    -----------------------
+
+    import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/Cart"
+    import CartItem from "../../models/Cart-item"
+
+    const initialState = {
+        items: {},
+        totalAmount: 0
+    }
+
+    export default (state = initialState, action) => {
+        switch (action.type) {
+            case ADD_TO_CART:
+                let updatedOrNewCartItem; // This Var For Adding Data Dynamically [New Or Updated] Product
+                const { id, title, price } = action.product
+
+                // If Item Already In Cart
+                if (state.items[action.product.id]) {
+
+                    updatedOrNewCartItem = new CartItem(
+                        state.items[id].quantity + 1,
+                        title,
+                        price,
+                        state.items[id].sum + price
+                    )
+                }
+                else {
+                    updatedOrNewCartItem = new CartItem(1, title, price, price)
+                }
+
+                return {
+                    ...state,
+                    items: {
+                        ...state.items,
+                        [id]: updatedOrNewCartItem
+                    },
+                    totalAmount: state.totalAmount + price
+                }
+
+            case REMOVE_FROM_CART:
+                const quantity = state.items[action.pid].quantity
+                const selectedCartItem = state.items[action.pid]
+                let updatedCartItems;
+
+                // If Item Quantity Greater Than 1 Reduce Quantity
+                // Else Remove It
+                if (quantity > 1) {
+                    const updatedCartItem = new CartItem(
+                        selectedCartItem.quantity - 1,
+                        selectedCartItem.title,
+                        selectedCartItem.price,
+                        selectedCartItem.sum - selectedCartItem.price
+                    )
+
+                    updatedCartItems = {
+                        ...state.items,
+                        [action.pid]: updatedCartItem
+                    }
+                }
+                else {
+                    updatedCartItems = { ...state.items };
+                    delete updatedCartItems[action.pid];
+                }
+
+                return {
+                    ...state,
+                    items: updatedCartItems,
+                    totalAmount: selectedCartItem.price > state.totalAmount ? 0 : state.totalAmount - selectedCartItem.price
+                }
+        }
+        return state
+    }
+
+
+
+    screens/shop/CartScreen.js
+    ----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+    import { useSelector, useDispatch } from 'react-redux'
+    import CartItem from '../../components/shop/CartItem'
+    import Colors from '../../constants/Colors'
+    import { removeFromCart } from '../../store/actions/Cart'
+
+    export default function CartScreen() {
+        const dispatch = useDispatch()
+
+        const totalAmount = useSelector(state => state.Cart.totalAmount)
+        const cartItems = useSelector(state => {
+            const transformedCartItems = []
+
+            for (let key in state.Cart.items) {
+                transformedCartItems.push({
+                    productId: key,
+                    productTitle: state.Cart.items[key].title,
+                    productPrice: state.Cart.items[key].price,
+                    quantity: state.Cart.items[key].quantity,
+                    sum: state.Cart.items[key].sum
+                })
+            }
+
+            return transformedCartItems
+        })
+
+
+        return (
+            <View style={styles.screen}>
+                <View style={styles.summary}>
+                    <Text style={styles.summaryText}>
+                        Total: <Text style={styles.amount}>${totalAmount.toFixed(2)}</Text>
+                    </Text>
+                    <Button title="Order Now" color={Colors.btnSecondary} disabled={cartItems.length == 0} />
+                </View>
+                <FlatList
+                    data={cartItems}
+                    renderItem={itemData =>
+                        <CartItem
+                            quantity={itemData.item.quantity}
+                            title={itemData.item.productTitle}
+                            amount={itemData.item.sum}
+                            onRemove={() => dispatch(removeFromCart(itemData.item.productId))}
+                        />}
+                    keyExtractor={item => item.productId}
+                />
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        screen: {
+            margin: 20
+        },
+        summary: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 20,
+            padding: 10,
+            shadowColor: 'black',
+            shadowOpacity: 0.26,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 8,
+            elevation: 5,
+            borderRadius: 10,
+            backgroundColor: 'white'
+        },
+        summaryText: {
+            fontFamily: 'open-sans-bold',
+            fontSize: 18
+        },
+        amount: {
+            color: Colors.btnSuccess
+        }
+    });
+
+
+    components/shop/CartItem.js
+    -----------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, TouchableOpacity, Platform } from 'react-native'
+    import { Ionicons } from '@expo/vector-icons'
+    export default function CartItem(props) {
+
+        return (
+            <View style={styles.container}>
+                <View style={styles.itemData}>
+                    <Text style={styles.quantity}>{props.quantity}</Text>
+                    <Text style={styles.sameText}>{props.title}</Text>
+                </View>
+                <View style={styles.itemData}>
+                    <Text style={styles.sameText}>$ {props.amount}</Text>
+                    <TouchableOpacity style={styles.deleteButton} onPress={props.onRemove}>
+                        <Ionicons
+                            name={Platform.ios == 'android' ? 'md-trash' : 'ios-trash'}
+                            size={20}
+                            color='red'
+                        />
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        container: {
+            padding: 10,
+            backgroundColor: '#FFF',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginVertical: 8
+        },
+        itemData: {
+            flexDirection: 'row',
+            alignItems: 'center'
+        },
+        quantity: {
+            fontFamily: 'open-sans',
+            fontSize: 20,
+            color: '#888',
+            marginRight: 7
+        },
+        sameText: {
+            fontFamily: 'open-sans-bold',
+            fontSize: 16
+        },
+        deleteButton: {
+            marginLeft: 20
+        }
+    })
+
+
+
+(2) There Are Problem Of Resorting Items In Cart After Delete Any Item
+--------------------------------------------------------------------------
+==> Solve Problem With Sorting [transformedCartItems] Inside [CartScreen.js]
+
+
+    CartScreen.js
+    ---------------
+
+        return transformedCartItems.sort((a, b) => a.productId > b.productId ? 1 : -1)
