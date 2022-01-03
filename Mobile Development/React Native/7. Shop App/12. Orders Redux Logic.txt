@@ -1,0 +1,96 @@
+(1) Creating Orders Redux Logic
+--------------------------------
+==> Inside [store] Folder Create [orders.js] In [actions] And [reducers] Folders
+==> Inside [models] Folder Create Order BluePrint Class In [order.js]
+==> Concat The Reducer In [App.js]
+==> In [CartScreen.js] Import The Add To Cart Action And Pass It To Button
+
+
+    store/action/orders.js
+    -----------------------
+
+    export const ADD_ORDER = "ADD_ORDER"
+
+    export const addOrder = (cartItems, totalAmount) => {
+
+        return {
+            type: ADD_ORDER,
+            orderData: {
+                items: cartItems,
+                amount: totalAmount
+            }
+        }
+    }
+
+
+
+    store/reducers/orders.js
+    -------------------------
+
+    import { ADD_ORDER } from "../actions/orders"
+    import { Order } from "../../models/order"
+
+    const initialState = {
+        orders: []
+    }
+
+    export const orderReducer = (state = initialState, action) => {
+
+        switch (action.type) {
+            case ADD_ORDER:
+                const newOrder = new Order(
+                    new Date().toString(),
+                    action.orderData.items,
+                    action.orderData.amount,
+                    new Date()
+                )
+
+                return {
+                    ...state,
+                    orders: state.orders.concat(newOrder)
+                }
+        }
+
+        return state
+
+    }
+
+
+
+    models/order.js
+    -----------------
+
+    export class Order {
+        constructor(id, items, totalAmount, date) {
+            this.id = id
+            this.items = items
+            this.totalAmount = totalAmount
+            this.date = date
+        }
+    }
+
+
+
+    App.js
+    --------
+
+    import { orderReducer } from './store/reducers/orders'
+
+    const allReducers = combineReducers({
+        products: reducer,
+        Cart: Cart,
+        orders: orderReducer
+    })
+
+
+    screens/shop/CartScreen.js
+    ----------------------------
+
+    import * as OrdersAction from '../../store/actions/orders'
+
+    <Button
+        title="Order Now"
+        color={Colors.btnSecondary}
+        disabled={cartItems.length == 0}
+        onPress={() => dispatch(OrdersAction.addOrder(cartItems, totalAmount))}
+    />
