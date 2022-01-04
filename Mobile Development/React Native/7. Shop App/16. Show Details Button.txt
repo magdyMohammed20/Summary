@@ -1,0 +1,135 @@
+(1) Handle Show Details Button In Orders Screen
+------------------------------------------------
+==> Handle The Button In [OrderItem.js]
+==> Passing Ordered Items From [OrdersScreen] To [OrderItem]
+==> Handle Touchable Element In [CartItem.js] To ReUse In [OrderItem.js]
+
+
+    /Components/shop/OrderItem.js
+    -------------------------------
+
+    import React, { useState } from 'react'
+    import { StyleSheet, Text, View, Button } from 'react-native'
+    import Colors from '../../constants/Colors'
+    import moment from 'moment'
+    import CartItem from './CartItem'
+
+    export default function OrderItem(props) {
+        const [showDetails, setShowDetails] = useState(false)
+        return (
+            <View style={styles.orderItem}>
+                <View style={styles.summary}>
+                    <Text style={styles.totalAmount}>${props.totalAmount.toFixed(2)}</Text>
+                    <Text style={styles.date}>{moment(props.date).format('MMMM Do YYYY, hh:mm')}</Text>
+                </View>
+                <Button
+                    color={Colors.btnSecondary}
+                    title={showDetails ? 'Hide Details' : 'Show Details'}
+                    onPress={() => setShowDetails(prevState => !prevState)}
+                />
+
+                {
+                    showDetails && props.items.map(cartItem =>
+                        <CartItem
+                            quantity={cartItem.quantity}
+                            title={cartItem.productTitle}
+                            amount={cartItem.sum}
+                            key={cartItem.productId}
+                        />
+                    )
+                }
+            </View>
+        )
+    }
+
+    const styles = StyleSheet.create({
+        orderItem: {
+            shadowColor: 'black',
+            shadowOpacity: .7,
+            shadowOffset: { width: 0, height: 2 },
+            shadowRadius: 8,
+            elevation: 5,
+            borderRadius: 10,
+            margin: 15,
+            backgroundColor: 'white',
+            padding: 10
+        },
+        summary: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            marginBottom: 10
+        },
+        totalAmount: {
+            fontSize: 16,
+            fontFamily: 'open-sans-bold'
+        },
+        date: {
+            fontSize: 16,
+            fontFamily: 'open-sans',
+            color: '#888'
+        }
+    })
+
+
+
+
+    /screens/shop/OrdersScreen.js
+    -------------------------------
+
+    import React from 'react'
+    import { View, FlatList } from 'react-native'
+    import { useSelector } from 'react-redux'
+    import OrderItem from '../../components/shop/OrderItem'
+
+    export default function OrdersScreen() {
+
+        const orders = useSelector(state => state.orders.orders)
+
+        return (
+            <View>
+                <FlatList
+                    data={orders}
+                    renderItem={
+                        itemData => <OrderItem
+                            totalAmount={itemData.item.totalAmount}
+                            date={itemData.item.date}
+                            items={itemData.item.items}
+                        />
+                    }
+                />
+            </View>
+        )
+    }
+
+
+
+    /Components/shop/CartItem.js
+    ------------------------------
+
+    {
+        props.deleteable && <TouchableOpacity style={styles.deleteButton} onPress={props.onRemove}>
+            <Ionicons
+                name={Platform.ios == 'android' ? 'md-trash' : 'ios-trash'}
+                size={20}
+                color='red'
+            />
+        </TouchableOpacity>
+    }
+
+
+    /screens/shop/CartScreen.js
+    ----------------------------
+
+    <FlatList
+        data={cartItems}
+        renderItem={itemData =>
+            <CartItem
+                quantity={itemData.item.quantity}
+                title={itemData.item.productTitle}
+                amount={itemData.item.sum}
+                onRemove={() => dispatch(removeFromCart(itemData.item.productId))}
+                deleteable={true}
+            />}
+        keyExtractor={item => item.productId}
+    />
