@@ -1,0 +1,41 @@
+(1) Creating Orders Screen
+--------------------------------
+==> Create Logic Of [OrdersScreen.js]
+==> As In This Time Drawer Has Problems With Us We Add Icons In Header To Redirect To Orders Screen
+
+
+    screens/shop/OrdersScreen.js
+    -------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, FlatList } from 'react-native'
+    import { useSelector } from 'react-redux'
+
+    export default function OrdersScreen() {
+
+        const orders = useSelector(state => state.orders.orders)
+
+        return (
+            <View>
+                <FlatList
+                    data={orders}
+                    renderItem={itemData => <Text>{itemData.item.totalAmount}</Text>}
+                />
+            </View>
+        )
+    }
+
+
+    navigation/shopNavigator.js
+    ----------------------------
+
+    <Stack.Screen
+        name="All Products"
+        component={ProductsOverview}
+        options={({ navigation }) => ({
+            headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderBtn}>
+                <Item title="search" iconName="shoppingcart" onPress={() => navigation.navigate('Cart')} />
+                <Item title="orders" iconName="appstore1" onPress={() => navigation.navigate('Orders Screen')} />
+            </HeaderButtons>
+        })}
+    />
