@@ -1,0 +1,83 @@
+(1) Clearing The Cart After Make Order
+-----------------------------------------
+==> In Cart Reducer Import [ADD_ORDER] from actions/orders.js
+
+
+    store/reducers/Cart.js
+    -----------------------
+
+    import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/Cart"
+    import CartItem from "../../models/Cart-item"
+    import { ADD_ORDER } from '../actions/orders'
+
+    const initialState = {
+        items: {},
+        totalAmount: 0
+    }
+
+    export default (state = initialState, action) => {
+        switch (action.type) {
+            case ADD_TO_CART:
+                let updatedOrNewCartItem; // This Var For Adding Data Dynamically [New Or Updated] Product
+                const { id, title, price } = action.product
+
+                // If Item Already In Cart
+                if (state.items[action.product.id]) {
+
+                    updatedOrNewCartItem = new CartItem(
+                        state.items[id].quantity + 1,
+                        title,
+                        price,
+                        state.items[id].sum + price
+                    )
+                }
+                else {
+                    updatedOrNewCartItem = new CartItem(1, title, price, price)
+                }
+
+                return {
+                    ...state,
+                    items: {
+                        ...state.items,
+                        [id]: updatedOrNewCartItem
+                    },
+                    totalAmount: state.totalAmount + price
+                }
+
+            case REMOVE_FROM_CART:
+                const quantity = state.items[action.pid].quantity
+                const selectedCartItem = state.items[action.pid]
+                let updatedCartItems;
+
+                // If Item Quantity Greater Than 1 Reduce Quantity
+                // Else Remove It
+                if (quantity > 1) {
+                    const updatedCartItem = new CartItem(
+                        selectedCartItem.quantity - 1,
+                        selectedCartItem.title,
+                        selectedCartItem.price,
+                        selectedCartItem.sum - selectedCartItem.price
+                    )
+
+                    updatedCartItems = {
+                        ...state.items,
+                        [action.pid]: updatedCartItem
+                    }
+                }
+                else {
+                    updatedCartItems = { ...state.items };
+                    delete updatedCartItems[action.pid];
+                }
+
+                return {
+                    ...state,
+                    items: updatedCartItems,
+                    totalAmount: selectedCartItem.price > state.totalAmount ? 0 : state.totalAmount - selectedCartItem.price
+                }
+
+            case ADD_ORDER:
+                return initialState
+        }
+        return state
+    }
+
