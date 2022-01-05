@@ -1,0 +1,90 @@
+(1) Create User Products Screen
+---------------------------------
+==> Create [userProducts.js] Logic
+==> Create Navigator For [userProducts.js] 
+
+
+    screens/user/userProducts.js
+    ------------------------------
+
+    import React from 'react'
+    import { StyleSheet, Text, View, FlatList } from 'react-native'
+    import { useSelector } from 'react-redux'
+    import ProductItem from '../../components/shop/ProductItem'
+
+    export default function UserProducts() {
+        const userProducts = useSelector(state => state.products.userProducts)
+
+        return (
+            <View>
+                <FlatList
+                    data={userProducts}
+                    renderItem={itemData =>
+                        <ProductItem
+                            imgUrl={itemData.item.imageUrl}
+                            title={itemData.item.title}
+                            price={itemData.item.price}
+                            onViewDetails={() => { }}
+                            onAddToCart={() => { }}
+                        />
+
+                    }
+                />
+            </View>
+        )
+    }
+
+
+    navigation/shopNavigator.js
+    ----------------------------
+
+
+    import React from 'react'
+    import { NavigationContainer } from '@react-navigation/native'
+    import { createNativeStackNavigator } from '@react-navigation/native-stack'
+    import ProductsOverview from '../screens/shop/ProductsOverview'
+    import ProductDetails from '../screens/shop/ProductDetails'
+    import Colors from '../constants/Colors'
+    import HeaderBtn from '../components/UI/HeaderButton'
+    import { HeaderButtons, Item } from 'react-navigation-header-buttons'
+    import CartScreen from '../screens/shop/CartScreen'
+    import OrdersScreen from '../screens/shop/OrdersScreen'
+    import userProducts from '../screens/user/UserProducts'
+
+    const Stack = createNativeStackNavigator()
+    const AppNavigator = (props) => {
+        return (
+            <NavigationContainer>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerStyle: {
+                            backgroundColor: Colors.primary,
+                        },
+                        headerTintColor: Colors.accent,
+                        headerTitleStyle: {
+                            fontFamily: 'open-sans'
+                        }
+                    }}
+                >
+                    <Stack.Screen
+                        name="All Products"
+                        component={ProductsOverview}
+                        options={({ navigation }) => ({
+                            headerRight: () => <HeaderButtons HeaderButtonComponent={HeaderBtn}>
+                                <Item title="search" iconName="shoppingcart" onPress={() => navigation.navigate('Cart')} />
+                                <Item title="orders" iconName="appstore1" onPress={() => navigation.navigate('Orders Screen')} />
+                                <Item title="admin" iconName="dashboard" onPress={() => navigation.navigate('User Screen')} />
+
+                            </HeaderButtons>
+                        })}
+                    />
+                    <Stack.Screen name="Item Details" component={ProductDetails} options={({ route }) => ({ title: route.params.title })} />
+                    <Stack.Screen name="Cart" component={CartScreen} />
+                    <Stack.Screen name="Orders Screen" component={OrdersScreen} />
+                    <Stack.Screen name="User Screen" component={userProducts} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        )
+    }
+
+    export default AppNavigator
