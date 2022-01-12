@@ -1,0 +1,193 @@
+(1) Firstly We Will Divide Previous Logic Into Multi Files
+-------------------------------------------------------------
+
+    store/counterSlice.js
+    ------------------------
+
+    import { createSlice } from "@reduxjs/toolkit";
+
+    const initState = { counter: 0 }
+
+    const counterSlice = createSlice({
+        name: "counter",
+        initialState: initState,
+        reducers: {
+            increment: (state, action) => { state.counter += action.payload },
+            decrement: (state, action) => { state.counter -= action.payload }
+        }
+    })
+
+    export const counterReducer = counterSlice.reducer;
+    export const { increment, decrement } = counterSlice.actions
+
+
+    store/index.js
+    ----------------
+
+    import { createStore } from "@reduxjs/toolkit";
+    import { counterReducer } from "./counterSlice";
+
+    const store = createStore(counterReducer)
+
+    export default store
+
+
+    components/counter.js
+    ----------------------
+
+    import React from 'react'
+    import { useSelector, useDispatch } from 'react-redux'
+    import { increment, decrement } from '../store/counterSlice'
+
+    function Counter() {
+        const state = useSelector(state => state)
+        const dispatch = useDispatch()
+
+        return (
+            <div>
+                <h1 className='m-4 h1'>Counter: {state.counter}</h1>
+                <button onClick={() => dispatch(increment(5))}>+</button>
+                <button onClick={() => dispatch(decrement(5))}> - </button>
+            </div>
+        )
+    }
+
+    export default Counter
+
+
+(2) Multi Reducers Using Configure store
+-----------------------------------------
+
+    store/index.js
+    ----------------
+
+    // 1- Import configureStore Instead Of createStore
+    import { configureStore } from "@reduxjs/toolkit";
+    import { counterReducer } from "./counterSlice";
+
+    // 2- Handle ConfigureStore Here With Turn On Redux Devtool
+    const store = configureStore({
+        reducer: {
+            counter: counterReducer
+        },
+        devTools: window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    })
+
+    export default store
+
+
+(3) Multi Reducers [Counter , Login , Logout]
+-----------------------------------------------
+
+    store/authSlice.js
+    -------------------
+
+    import { createSlice } from "@reduxjs/toolkit";
+
+    const initState = { login: false }
+
+    const authSlice = createSlice({
+        name: 'authSlice',
+        initialState: initState,
+        reducers: {
+            login: (state) => { state.login = !state.login },
+            logout: (state) => { state.login = !state.login }
+        }
+    })
+
+    export const authReducer = authSlice.reducer
+    export const { login, logout } = authSlice.actions
+
+
+    store/counterSlice.js
+    ----------------------
+
+    import { createSlice } from "@reduxjs/toolkit";
+
+    const initState = { counter: 0 }
+
+    const counterSlice = createSlice({
+        name: "counter",
+        initialState: initState,
+        reducers: {
+            increment: (state, action) => { state.counter += action.payload },
+            decrement: (state, action) => { state.counter -= action.payload }
+        }
+    })
+
+    export const counterReducer = counterSlice.reducer;
+    export const { increment, decrement } = counterSlice.actions
+
+
+    store/index.js
+    ---------------
+
+    // 1- Import configureStore Instead Of createStore
+    import { configureStore } from "@reduxjs/toolkit";
+    import { counterReducer } from "./counterSlice";
+    import { authReducer } from "./authSlice";
+    // 2- Handle ConfigureStore Here With Turn On Redux Devtool
+    const store = configureStore({
+        reducer: {
+            counter: counterReducer,
+            auth: authReducer
+        },
+        devTools: window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    })
+
+    export default store
+
+
+    components/counter.js
+    ----------------------
+
+    import React from 'react'
+    import { useSelector, useDispatch } from 'react-redux'
+    import { increment, decrement } from '../store/counterSlice'
+    import { login, logout } from '../store/authSlice'
+
+
+    function Counter() {
+        const state = useSelector(state => state)
+        const dispatch = useDispatch()
+        console.log(state)
+        return (
+            <div>
+                {
+                    state.auth.login ? (
+                        <>
+                            <h1 className='m-4 h1'>Counter: {state.counter.counter}</h1>
+                            <button onClick={() => dispatch(increment(5))}>+</button>
+                            <button onClick={() => dispatch(decrement(5))}> - </button>
+                            <button onClick={() => dispatch(logout())}> Logout </button>
+                        </>
+
+                    ) : (
+                        <button onClick={() => dispatch(login())}> Login </button>
+                    )
+                }
+            </div>
+        )
+    }
+
+    export default Counter
+
+
+    App.js
+    -------
+
+    import Counter from "./components/Counter";
+    import { Provider } from 'react-redux'
+    import store from './store/index'
+    function App() {
+
+        return (
+            <div className="App bg-black">
+                <Provider store={store}>
+                    <Counter />
+                </Provider>
+            </div>
+        );
+    }
+
+    export default App;
