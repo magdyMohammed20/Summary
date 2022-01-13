@@ -7,9 +7,9 @@
 Note: In Previous Redux Version We Install [redux , react-redux] With Toolkit Version We Don't Need To Install [redux]
 Note: Redux Toolkit Uses 'Immer' Lib To Prevent State Mutation
 
-(2) Installation
+(2) Installation [We Don't Need To Install 'redux' Lib]
 -------------------
-==> npm install @reduxjs/toolkit
+==> npm install @reduxjs/toolkit react-redux
 
 
 (3) Step1
