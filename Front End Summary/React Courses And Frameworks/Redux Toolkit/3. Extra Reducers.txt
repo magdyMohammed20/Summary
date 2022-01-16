@@ -1,0 +1,54 @@
+(1) Extra Reducers
+--------------------
+==> Extra Reducers Make Listen To Specific Action For Execute Additional Action
+
+EX (In Counter Sample We Want To Reset Counter When Log Out)
+---
+
+==> First Way
+
+    store/counterSlice.js 
+    -----------------------
+
+        import { logout, login } from './authSlice' // 1- Import Action From Auth Reducer
+
+        // 2- Use The Action Inside 'extraReducers'
+        extraReducers: {
+            [logout]: (state, action) => {
+                state.counter = 0
+                // {type: 'authSlice/logout', payload: undefined}
+                // You Can Pass Payload To Logout Dispatch And Use It After Logout
+                console.log(action)
+            }
+        }
+
+
+
+==> Second Way
+---------------
+
+    store/counterSlice.js 
+    -----------------------
+
+    // Use The Action Inside 'extraReducers'
+    extraReducers: (builder) => {
+        builder.addCase(logout, (state, action) => {
+            state.counter = 0
+        })
+    }
+
+
+==> Multi Cases
+-----------------
+
+    // Use The Action Inside 'extraReducers'
+    extraReducers: (builder) => {
+        // When Logout Reset Counter
+        builder.addCase(logout, (state, action) => {
+            state.counter = 0
+        }).
+        // When LogIn Set Counter To 20
+        addCase(login, (state, action) => {
+            state.counter = 20
+        })
+    }
