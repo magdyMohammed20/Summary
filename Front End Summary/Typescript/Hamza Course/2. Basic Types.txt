@@ -1,0 +1,31 @@
+(1) Basic Types
+-----------------
+
+    let x: number = 10; // Number Type
+    let y: string = "Magdy"; // String Type
+    let z: boolean = true; // Boolean Type
+    let a: any = 200; // Any Type
+    let arr: number[] = [1, 2, 3] // Array Of Nums
+    let arr2: string[] = ["a", "b"] // Array Of Strings
+    let arr3: any[] = ["a", 1, 2] // Array Of 
+    let date: Date = new Date()
+    let nu: null = null
+    let un: undefined = undefined
+
+
+(2) Solve Problem Of 'Cannot Redeclare Block Scoped Variable Name'
+--------------------------------------------------------------------
+
+    index.ts
+    ---------
+
+    export { };
+    let x: number = 10; // Number Type
+
+    index.js
+    ----------
+
+    "use strict";
+    exports.__esModule = true;
+    var x = 10; // Number Type
+
