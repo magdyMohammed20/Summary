@@ -1,0 +1,13 @@
+(1) Typescript
+----------------
+==> Is Js With Syntax For Types
+
+(2) Install
+------------
+==> Global [npm install -g typescript] 
+==> Local [npm install typescript --save-dev]
+
+(3) Creating Typescript Files And Compile
+-------------------------------------------
+==> Create Ts File With '.ts' Instead Of 'js' [EX: index.ts]
+==> Compile [index.ts] To Js File Using [tsc index] In CDM
