@@ -1,0 +1,33 @@
+(1) Interface
+--------------
+
+    interface User {
+        name: string,
+        age: 20
+    }
+
+    const user1: User = {
+        name: 'Magdy',
+        age: 20
+    }
+
+
+(2) Optional Interface Value
+------------------------------
+
+    // Interface With Make 'age' Optional Using [?]
+    interface User {
+        name: string,
+        age?: 20
+    }
+
+    // No Age
+    const user1: User = {
+        name: 'Magdy',
+    }
+
+    // With Age
+    const user2: User = {
+        name: 'Magdy',
+        age: 20
+    }
