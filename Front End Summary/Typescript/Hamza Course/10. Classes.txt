@@ -1,0 +1,118 @@
+(1) Classes
+-------------
+
+EX
+---
+
+    class Car {
+        name: string;
+        speed: number;
+
+        constructor(name: string, speed: number) {
+            this.name = name
+            this.speed = speed
+        }
+
+        info(): void {
+            console.log(`${this.name} , ${this.speed}`)
+        }
+    }
+
+    const car1 = new Car('BMW', 45)
+
+    console.log(car1) // Car {name: 'BMW', speed: 45}
+    car1.info() // BMW , 45
+    console.log(car1.name) // BMW
+    console.log(car1.speed) // 45
+
+
+EX (Private Class Vars)
+---
+
+    class Car {
+        private name: string;
+        private speed: number;
+
+        constructor(name: string, speed: number) {
+            this.name = name
+            this.speed = speed
+        }
+
+        info(): void {
+            console.log(`${this.name} , ${this.speed}`)
+        }
+    }
+
+    const car1 = new Car('BMW', 45)
+
+    console.log(car1) // Car {name: 'BMW', speed: 45}
+    car1.info() // BMW , 45
+
+
+EX (Class Inheritance)
+---
+
+    class Car {
+        private name: string;
+        private speed: number;
+
+        constructor(name: string, speed: number) {
+            this.name = name
+            this.speed = speed
+        }
+
+        info(): void {
+            console.log(`${this.name} , ${this.speed}`)
+        }
+    }
+
+    class Bike extends Car {
+        color: string;
+
+        constructor(name: string, speed: number, color: string) {
+            super(name, speed)
+            this.color = color
+        }
+    }
+
+    const c = new Bike("Bik1", 10, 'red')
+
+    console.log(c) // Bike {name: 'Bik1', speed: 10, color: 'red'}
+
+
+EX (Class With Interface)
+--- 
+
+
+    interface Parent {
+        name: string,
+        speed: number,
+        info(): void
+    }
+
+    class Car implements Parent {
+        private name: string;
+        private speed: number;
+
+        constructor(name: string, speed: number) {
+            this.name = name
+            this.speed = speed
+        }
+
+        info(): void {
+            console.log(`${this.name} , ${this.speed}`)
+        }
+    }
+
+    class Bike extends Car {
+        color: string;
+
+        constructor(name: string, speed: number, color: string) {
+            super(name, speed)
+            this.color = color
+        }
+    }
+
+    const c = new Bike("Bik1", 10, 'red')
+
+    console.log(c) // Bike {name: 'Bik1', speed: 10, color: 'red'}
