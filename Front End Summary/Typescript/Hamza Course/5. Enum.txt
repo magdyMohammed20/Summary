@@ -1,0 +1,42 @@
+(1) Enum
+-----------
+==> Define Set Of Named Constants
+
+EX1
+----
+
+    enum weeks {
+        sun,
+        monday,
+        tuseday
+    }
+
+    // Enum Here As Array
+    console.log(weeks.sun) // 0
+    console.log(weeks.monday) // 1
+
+
+EX2 (Set Start Index)
+----
+
+    enum weeks {
+        sun = 1,
+        monday,
+        tuseday
+    }
+
+    // Enum Here As Array
+    console.log(weeks.sun) // 1
+    console.log(weeks.monday) // 2
+
+EX3
+----
+
+    enum weeks {
+        sun = "sunday",
+        monday = "monday"
+    }
+
+    // Enum Here As Array
+    console.log(weeks.sun) // sunday
+    console.log(weeks.monday) // monday
