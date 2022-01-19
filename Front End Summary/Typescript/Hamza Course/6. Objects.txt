@@ -1,0 +1,27 @@
+(1) Object With Define Type
+------------------------------
+
+    // Obejcts
+    let obj : {
+        name: string,
+        age: number
+    } = {
+        name: 'Magdy',
+        age: 20
+    }
+
+
+(2) Type Definition
+---------------------
+
+    // Define Person Type
+    type Person = {
+        name: string,
+        age: number
+    }
+
+    // Obejcts With Person Type
+    let obj: Person = {
+        name: 'Magdy',
+        age: 20
+    }
