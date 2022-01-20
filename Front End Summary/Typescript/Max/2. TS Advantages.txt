@@ -1,0 +1,6 @@
+(1) TS Advantages
+------------------
+==> Add Types
+==> Add Next Generation Js Features Compiled Down To Older Browsers 
+==> Add Non Js Features Like Interfaces Or Generics
+==> Add Meta Programming Features Like Decorators
