@@ -1,0 +1,24 @@
+(1) Type Inference
+--------------------
+==> Means That TS inferred Type Of Variable From It's Value
+
+    const num = 5 // Type Not Set Here As Type inferred From [5] Value
+
+(2) Type Assignment
+---------------------
+
+    // First 
+    let num; // If Type Not Defined It Considred To Be 'any' Type
+    num = 'magdy'; // This Is True
+    num = 10; // This Is True
+
+
+    // Second
+    let num:number; // Type Here Is Number So Must Be Number Value In 'num'
+    num = 10; // This Is True
+    num = "dd" // This Is False
+
+
+    // Third
+    let num = "magdy"; // Because Of 'Type Inference' num Considred To Be String
+    num = 10; // So We Can't Assign Number To String Variable
