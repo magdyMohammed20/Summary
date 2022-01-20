@@ -1,0 +1,40 @@
+(1) Ts Types
+-------------
+==> Number (1 , -1 , -1.4342)
+==> String ('dd' , "ss" , `sss`)
+==> Boolean (True , False)
+==> Object ({name: 'Magdy'})
+
+(2) Object Type
+-----------------
+
+    // Bad Way Of Object Type
+    // TS Define This As {key : Type}
+    let obj: object = {
+        name: 'Magdy',
+        age: 30
+    }
+
+    console.log(obj.name) // 'name' Not Founded In 'obj' Type 'object'
+
+
+
+    // Best Way Of Object Type
+    let obj: {
+        name: string; // Look ; Here
+        age: number
+    } = {
+        name: 'Magdy',
+        age: 30
+    }
+
+    console.log(obj.name) // Magdy
+
+
+(3) Inferered Object Type
+--------------------------
+
+    const obj = {
+        name: 'Magdy', // By Default Ts Knows Key Type Using The Value
+        age: 30
+    }
