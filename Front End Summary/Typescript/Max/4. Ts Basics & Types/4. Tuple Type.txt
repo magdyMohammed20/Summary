@@ -1,0 +1,46 @@
+(1) Tuple
+------------
+==> Is Fixed Length Array
+
+(2) Inferered Tuple Type
+--------------------------
+
+    let obj = {
+        role: [1, 'teacher'] // Ts Knows That role Is Array With Only 2 Values 'number' And 'string'
+    }
+
+(3) Explicit Tuple Type
+------------------------
+
+EX1
+----
+
+    let obj : {
+        role: [number , string]
+    } = {
+        role: [1, 'teacher']
+    }
+
+EX2
+----
+
+    let obj: {
+        role: [number, string]
+    } = {
+        role: [1, 'teacher']
+    }
+
+    obj.role[0] = 'ss' // This Is False
+    obj.role[1] = 'ss' // This Is True
+
+EX3
+----
+
+    let obj: {
+        role: [number, string]
+    } = {
+        role: [1, 'teacher']
+    }
+
+    obj.role = [1, 'Programmer', 10] // This Is False
+    obj.role.push('Worker') // Push Is Exception And Will Work Normally
