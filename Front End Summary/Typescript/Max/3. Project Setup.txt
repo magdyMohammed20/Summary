@@ -1,0 +1,15 @@
+(1) Ts Project Setup
+----------------------
+==> npm init -y [Generate Package.json]
+==> npm install --save-dev lite-server [For Watching Files And Generate node_modules]
+==> Create Files [index.html , index.ts] 
+==> Compile [tsc index.ts] Then Import [index.js] In [index.html]    
+
+==> In [Package.json] Add Start Script
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lite-server"
+  }
+
+==> Then Run [npm start] It Will Begin In [localhost:3000]
