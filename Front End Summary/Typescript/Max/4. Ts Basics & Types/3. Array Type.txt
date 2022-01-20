@@ -1,0 +1,24 @@
+(1) Ts Types
+-------------
+==> Number (1 , -1 , -1.4342)
+==> String ('dd' , "ss" , `sss`)
+==> Boolean (True , False)
+==> Object ({name: 'Magdy'})
+==> Array ([1,2,3])
+
+(2) Inferred Array Type
+-------------------------- 
+
+    let obj = {
+        name: 'Magdy',
+        age: 30,
+        hobbies: ['sports', 'reading', 'running'] // Ts Inferered That 'hobbies' Is Array Of Strings
+    }
+
+(3) Explicit Array Type
+------------------------
+
+    let fruits: string[];
+
+    fruits[0] = "Apple"; // This Is True
+    fruits[1] = 10; // This Is False
