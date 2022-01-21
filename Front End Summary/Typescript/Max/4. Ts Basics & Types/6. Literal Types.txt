@@ -1,0 +1,25 @@
+(1) Literal Types
+------------------
+==> literal types allow you to define a type that accepts only one specified string literal
+
+EX
+---
+
+    // Look At 'op' Parameter I Specified It's Value That Can Be Only 'as-sum' Or 'as-str' 
+    // This Is Called Literal Types
+    function operation(
+        num1: number | string,
+        num2: number | string,
+        op: 'as-sum' | 'as-str') {
+
+        if (typeof num1 === 'number' && typeof num2 === 'number' || op === 'as-sum') {
+            return +num1 + +num2
+        }
+
+        if (typeof num1 === 'string' && typeof num2 === 'string' || op === 'as-str') {
+            return num1.toString() + num2.toString()
+        }
+    }
+
+    console.log(operation(10, 20, 'as-sum')) // 30
+    console.log(operation('10', 20, 'as-str')) // 1020
