@@ -1,0 +1,9 @@
+(1) never Type
+----------------
+
+    // This Function Never Produce A Value
+    function throwError(message: string, code: number): never {
+        throw { message, code }
+    }
+
+    throwError("Hey There Are Error", 500)
