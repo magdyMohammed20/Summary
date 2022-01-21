@@ -1,0 +1,43 @@
+(1) Inferered Function Type
+----------------------------
+
+    // By Default Ts Knows That Those Functions Returning Type Depending On Return Statement
+    function sum (num1:number , num2:number){
+        return num1 + num2
+    }
+
+    function sum(num1: number, num2: number) {
+        return num1.toString() + num2.toString()
+    }
+
+
+(2) Sample Of Inferered Void Function
+---------------------------------------
+
+    // This Function Return Type Inferered To 'number'
+    function sum(num1: number, num2: number) {
+        return num1 + num2
+    }
+
+    // This Function Return Type Inferered To 'void'
+    // Means That Doesn't Return Anything
+    function printResult(num: number) {
+        console.log('Result Is ' + num)
+    }
+
+    printResult(sum(10, 20)) // Result Is 30
+
+
+(3) If Function Not Return Anything It Can Be 'undefined' Or 'void' Type
+--------------------------------------------------------------------------
+
+    function printResult(num: number):undefined {
+        console.log('Result Is ' + num)
+        return;
+    }
+
+
+    function printResult(num: number):void {
+        console.log('Result Is ' + num)
+        return;
+    }
