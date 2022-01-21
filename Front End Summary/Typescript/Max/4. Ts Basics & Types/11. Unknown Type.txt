@@ -1,0 +1,36 @@
+(1) Unknown Type
+-------------------
+
+EX
+---
+
+    let inputNumber: unknown;
+    let inputString: string;
+
+
+    inputNumber = 10;
+    inputNumber = 'max';
+
+    inputString = inputNumber // Error : Type 'unknown' is not assignable to type 'string'
+
+
+    console.log(inputString) // max
+
+
+EX (More Type Check With Unknown)
+---
+
+    let inputNumber: unknown;
+    let inputString: string;
+
+    inputNumber = 10;
+    inputNumber = 'max';
+
+    if (typeof inputNumber === 'string') {
+        inputString = inputNumber
+    }
+
+    console.log(inputString) // max
+
+
+
