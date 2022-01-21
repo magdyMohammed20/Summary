@@ -1,0 +1,12 @@
+(1) Function Type As Callback
+-------------------------------
+
+    function addHandler(n1: number, n2: number, cb: (num: number) => void) {
+        const res = n1 + n2;
+        cb(res) // Look Here We Pass 'res'
+    }
+
+
+    addHandler(20, 20, (res) => { // Look Here Must Pass 'res' Too
+        console.log(res) // 40
+    })
