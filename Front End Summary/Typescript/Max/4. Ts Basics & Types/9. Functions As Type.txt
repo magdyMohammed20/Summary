@@ -1,0 +1,40 @@
+(1) Our Problem
+-----------------
+
+    function sum(num1: number, num2: number) {
+        return num1 + num2
+    }
+
+    // combinedValue Type Here Is 'any' Type And This Is Error
+    let combinedValue = sum;
+    combinedValue = 5;
+
+    console.log(combinedValue(10, 20)) // Error As combinedValue Is Number Not Function
+
+
+(2) Solution
+-------------
+
+    function sum(num1: number, num2: number) {
+        return num1 + num2
+    }
+
+    // Here We Specified combinedValue Type To Be 'Function'
+    let combinedValue: Function;
+
+    combinedValue = sum;
+    console.log(combinedValue(10, 20)) // 30
+
+
+(3) Specify Return Type Of Function
+------------------------------------
+
+    function sum(num1: number, num2: number) {
+        return num1 + num2
+    }
+
+    // Here We Specified combinedValue Type To Be 'Function' And Parameter And Return Type Too
+    let combinedValue: (a: number, b: number) => number;
+
+    combinedValue = sum;
+    console.log(combinedValue(10, 20)) // 30
