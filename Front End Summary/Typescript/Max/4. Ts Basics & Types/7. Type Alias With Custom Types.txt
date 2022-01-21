@@ -1,0 +1,25 @@
+(1) Combining Types Using Type Alias
+--------------------------------------
+
+EX
+----
+
+    type combinable = number | string; // Look Here
+    type operational = 'as-sum' | 'as-str'; // Look Here
+    function operation(
+        num1: combinable, // Look Here
+        num2: combinable, // Look Here
+        op: operational // Look Here
+    ) {
+
+        if (typeof num1 === 'number' && typeof num2 === 'number' || op === 'as-sum') {
+            return +num1 + +num2
+        }
+
+        if (typeof num1 === 'string' && typeof num2 === 'string' || op === 'as-str') {
+            return num1.toString() + num2.toString()
+        }
+    }
+
+    console.log(operation(10, 20, 'as-sum')) // 30
+    console.log(operation('10', 20, 'as-str')) // 1020
