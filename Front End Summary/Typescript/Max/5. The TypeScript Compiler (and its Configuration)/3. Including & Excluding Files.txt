@@ -1,0 +1,74 @@
+(1) Exlude In [tsconfig.json]
+-------------------------------
+==> Contains Names Of Folders That Doesn't Exist In Compilation [EX: node_modules]
+
+EX (Prevent node_modules And functions.ts From Compile) 
+---
+    {
+        "compilerOptions": {
+            "module": "commonjs"
+        },
+        "exclude": [
+            "node_modules",
+            "functions.ts"
+        ]
+    }
+
+EX (Prevent All Files End With .dev.ts From Compile)
+---
+
+    "exclude": [
+        "node_modules",
+        "*.dev.ts"
+    ]
+
+
+EX (Prevent All Files In Any Folder End With .dev.ts From Compile)
+---
+
+    "exclude": [
+        "node_modules",
+        "**/*.dev.ts"
+    ]
+
+(2) Include In [tsconfig.json]
+-------------------------------
+==> Including That Only Files Will Be Compiled Anything Other Will Not Compiled
+
+
+EX (If Have functions.ts And index.ts The [index.ts] Only Compiled And functions.ts Not)
+---
+
+    {
+        "compilerOptions": {
+            "module": "commonjs"
+        },
+        "exclude": [
+            "node_modules",
+            "*.dev.ts"
+        ],
+        "include": [
+            "index.ts"
+        ]
+    }
+
+
+(3) "files" Option
+-------------------
+==> Specifies an allowlist of files to include in the program. An error occurs if any of the files can’t be found
+
+    {
+        "compilerOptions": {
+            "module": "commonjs"
+        },
+        "exclude": [
+            "node_modules",
+            "*.dev.ts"
+        ],
+        "include": [
+            "index.ts"
+        ],
+        "files": [
+            "index.ts"
+        ]
+    }
