@@ -1,0 +1,13 @@
+(1) In Nested Routes If We Navigate To Products It Doesn't Select Any Route To Render At Start From 'Featured' Or 'New'
+------------------------------------------------------------------------------------------------------------------------
+==> So Index Route Used To Select One Of 'Featured' Or 'New' Components To Render When Navigate To Products
+
+    App.js [Adding Index Route In App.js To Make 'New' Component Render When Navigate To Products]
+    --------
+
+    <Route path='products' element={<Products />}>
+        <Route index element={<New />} />
+        <Route path='new' element={<New />} />
+        <Route path='featured' element={<Featured />} />
+    </Route>
+
