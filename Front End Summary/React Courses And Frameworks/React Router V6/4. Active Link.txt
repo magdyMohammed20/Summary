@@ -1,0 +1,44 @@
+(1) Active Link
+----------------
+==> Use <NavLink/> Instead of <Link/>
+
+    Nav.js
+    -------
+
+    import React from 'react';
+    import { NavLink } from 'react-router-dom'
+
+    function Nav() {
+        return <nav>
+            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/about'>About</NavLink>
+        </nav>;
+    }
+
+    export default Nav;
+
+
+(2) Style Active Link Using Js Method
+---------------------------------------
+
+    Nav.js
+    -------
+
+    import React from 'react';
+    import { NavLink } from 'react-router-dom'
+
+    function Nav() {
+
+        const navLinkStyle = ({ isActive }) => {
+            return {
+                fontWeight: isActive ? 'bold' : 'normal',
+                textDecoration: isActive ? 'none' : 'underline'
+            }
+        }
+        return <nav>
+            <NavLink to='/' style={navLinkStyle}>Home</NavLink>
+            <NavLink to='/about' style={navLinkStyle}>About</NavLink>
+        </nav>;
+    }
+
+    export default Nav;
