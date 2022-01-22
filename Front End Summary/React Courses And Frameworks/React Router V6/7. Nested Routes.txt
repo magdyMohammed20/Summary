@@ -1,0 +1,85 @@
+(1) Create Nested Routes
+--------------------------
+==> Add Products Link In Nav.js
+==> Create Products Component With Nested Links And Outlet Component
+==> Create Nested Routes In App.js
+
+
+    Nav.js
+    ---------
+
+    import React from 'react';
+    import { NavLink } from 'react-router-dom'
+
+    function Nav() {
+
+        const navLinkStyle = ({ isActive }) => {
+            return {
+                fontWeight: isActive ? 'bold' : 'normal',
+                textDecoration: isActive ? 'none' : 'underline'
+            }
+        }
+        return <nav>
+            <NavLink to='/' style={navLinkStyle}>Home</NavLink>
+            <NavLink to='/about' style={navLinkStyle}>About</NavLink>
+            <NavLink to='/products' style={navLinkStyle}>Products</NavLink>
+        </nav>;
+    }
+
+    export default Nav;
+
+
+    Products.js [Using Outlet To Render Nested Routes]
+    ------------
+
+    import React from 'react';
+    import { Link, Outlet } from 'react-router-dom'
+    function Products() {
+        return <div>
+            <input name='search' placeholder='Search For Something' />
+
+            <nav>
+                <Link to='new'>New</Link>
+                <Link to='featured'>Featured</Link>
+            </nav>
+            <Outlet />
+        </div>;
+    }
+
+    export default Products;
+
+
+    App.js
+    --------
+
+    import React from 'react'
+    import Home from './components/Home'
+    import Nav from './components/Nav'
+    import NotFounded from './components/NotFounded'
+    import Products from './components/Products'
+    import New from './components/New'
+    import Featured from './components/Featured'
+    import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+    function App() {
+
+    return (
+        <BrowserRouter>
+        <div className="App">
+            <Nav />
+            <Routes>
+            <Route path='/' element={<Home />} />
+
+            <Route path='products' element={<Products />}>
+                <Route path='new' element={<New />} />
+                <Route path='featured' element={<Featured />} />
+            </Route>
+
+            <Route path='*' element={<NotFounded />} />
+            </Routes>
+        </div>
+        </BrowserRouter>
+    );
+    }
+
+    export default App;
