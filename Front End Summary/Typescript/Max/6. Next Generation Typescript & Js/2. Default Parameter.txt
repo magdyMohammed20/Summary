@@ -1,0 +1,15 @@
+(1) Default Parameter With Type Definition
+--------------------------------------------
+
+EX
+---
+    // Here 'num2' Has Default Value Of 1
+    function sum(num1: number, num2: number = 1) {
+        if (num1 + num2 > 0) {
+            return num1 + num2
+        }
+    }
+
+    const printOutput: (a: number | string) => void = input => console.log(input)
+
+    printOutput(sum(10)) // 11
