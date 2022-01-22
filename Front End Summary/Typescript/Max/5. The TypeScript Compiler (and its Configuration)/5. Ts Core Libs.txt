@@ -1,0 +1,58 @@
+(1) Using 'libs' Option In 'tsconfig.json' To Enable Use Core Functions And Methods
+-------------------------------------------------------------------------------------
+
+==> Problem Here
+------------------
+
+    tsconfig.json
+    ---------------
+
+    /* Note That libs Is Empty And This Cause The Error */
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "lib": []
+    }
+
+
+    index.ts
+    ---------
+
+    // document Isn't Defined
+    let btn = document.querySelector('button')
+
+    // console Isn't Defined
+    btn.addEventListener('click', () => {
+        console.log('Hellow')
+    })
+
+
+==> Solve Problem
+--------------------
+
+    tsconfig.json
+    ---------------
+
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "lib": [
+            "dom", // Look Here
+            "es6", // Look Here
+            "DOM.Iterable", // Look Here
+            "ScriptHost" // Look Here
+        ]
+    }
+
+    index.ts
+    ---------
+
+    // There Is No Problems
+    let btn = document.querySelector('button')
+
+    btn.addEventListener('click', () => {
+        console.log('Hellow')
+    })
+
+
+(2) If Don't Use 'lib' It Takes Options From 'target' Value
