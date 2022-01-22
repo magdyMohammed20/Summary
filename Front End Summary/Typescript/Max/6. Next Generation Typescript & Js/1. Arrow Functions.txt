@@ -1,0 +1,28 @@
+(1) Arrow Function With 1 Parameter Using TS
+----------------------------------------------
+
+
+    function sum(num1: number, num2: number) {
+        if (num1 + num2 > 0) {
+            return num1 + num2
+        }
+    }
+
+    // If Function Has Only 1 Parameter And Don't Want To Wrap This Parameter In ()
+    // [printOutput:(a:number | string) => void] Is Function Skeleton
+    // Which Accept 1 parameter Of number Or String Type And Not return Anything
+    // input => console.log(input) Is Function Body
+    // Which [input] Parameter Must Be Number Or String
+    const printOutput: (a: number | string) => void = input => console.log(input)
+
+    printOutput(sum(10, 20)) // 30
+
+
+(2) Arrow Function With Callbacks
+-----------------------------------
+
+    const btn = document.querySelector('button')
+
+    // I Don't Need To Specify 'event' Type Here As By Default TS Knows Event Of The Callback
+    btn.addEventListener('click', event => { })
+    
