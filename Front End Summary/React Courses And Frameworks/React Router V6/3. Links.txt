@@ -1,0 +1,48 @@
+(1) Links To Navigate To Routes
+---------------------------------
+==> Create Nav.js
+==> Import Nav In App.js
+
+
+    Nav.js
+    -------
+
+    import React from 'react';
+    import { Link } from 'react-router-dom'
+
+    function Nav() {
+        return <nav>
+            <Link to='/'>Home</Link>
+            <Link to='/about'>About</Link>
+        </nav>;
+    }
+
+    export default Nav;
+
+
+    App.js
+    --------
+
+    import React from 'react'
+    import Home from './components/Home'
+    import About from './components/About'
+    import Nav from './components/Nav'
+    import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+    function App() {
+
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <Nav />
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        {/* Note Here Can Use 'about' Instead Of '/about' */}
+                        <Route path='about' element={<About />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        );
+    }
+
+    export default App;
