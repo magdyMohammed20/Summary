@@ -1,0 +1,7 @@
+(1) Target Option In tsconfig.json
+------------------------------------
+
+    "compilerOptions": {
+        "target": "es5", // Specify EcmaScript Output Version
+        "module": "commonjs"
+    }
