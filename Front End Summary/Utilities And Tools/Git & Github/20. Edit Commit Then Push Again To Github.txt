@@ -3,3 +3,8 @@
 (2) Last Commit Will Opened In Editor Or In Terminal And Can Edit It
 
 (3) git push origin --force // Will Push All Commits Again To Github
+
+
+(4) Edit Last Commit Message Directly
+--------------------------------------
+==> git commit --amend -m "New commit message."
