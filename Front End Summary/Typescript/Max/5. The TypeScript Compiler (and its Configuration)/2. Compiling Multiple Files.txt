@@ -1,0 +1,8 @@
+(1) Compiling Multi TS Files
+------------------------------
+==> If We Have [app.ts , analytic.ts] And Want To Compile To [app.js , analytic.js]
+
+(2) Steps
+-----------
+==> tsc --init [Produce tsconfig.json]
+==> Run [tsc] And Will Compile All TS Files Or Run [tsc --watch] For Watching All TS Files
