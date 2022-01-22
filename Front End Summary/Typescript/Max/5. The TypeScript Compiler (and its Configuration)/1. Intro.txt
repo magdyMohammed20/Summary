@@ -1,0 +1,5 @@
+(1) When Compile TS File We Use [tsc fileName] Every File Changed And This Way Not Practical In Large Projects With Many Typescript Files
+
+(2) First Solution (Watching Mode) [Works Fine If We Have Little TS Files]
+------------------------------------
+==> [tsc fileName --watch] Or [tsc fileName -w]
