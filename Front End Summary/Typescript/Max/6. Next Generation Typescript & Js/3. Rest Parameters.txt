@@ -1,0 +1,9 @@
+(1) Rest Parameters
+--------------------
+
+    // Here Rest Parameter With Type Is Array Of Numbers
+    function sum(...nums: number[]) {
+        return nums.reduce((curRes, curVal) => curRes + curVal, 0)
+    }
+
+    console.log(sum(10, 20, 30)) // 60
