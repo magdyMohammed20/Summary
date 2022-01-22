@@ -1,0 +1,43 @@
+(1) Configure Routes
+----------------------
+==> Create Routes Components [Home.js , About.js]
+==> Confgiure Routes In [App.js]
+
+
+    Home.js
+    --------
+
+    import React from 'react';
+
+    function Home() {
+        return <div>
+            Home Page
+        </div>;
+    }
+
+    export default Home;
+
+
+    App.js
+    --------
+
+    import React from 'react'
+    import Home from './components/Home'
+    import About from './components/About'
+    import { BrowserRouter, Routes, Route } from 'react-router-dom'
+    
+    function App() {
+
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/about' element={<About />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        );
+    }
+
+    export default App;
