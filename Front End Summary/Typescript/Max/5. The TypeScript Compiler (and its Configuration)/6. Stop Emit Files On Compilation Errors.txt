@@ -1,0 +1,35 @@
+(1) If I Want To Compile Ts Files And Want To Prevent Compile If There Are Error In Any Ts File
+-------------------------------------------------------------------------------------------------
+
+    tsconfig.json [Use "noEmitOnError": true]
+    ----------------
+
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "noEmitOnError": true // if Any Ts Files Has Error So It Will Not Compiled
+    }
+
+
+    src/index.ts
+    -------------
+
+    // This Code Don't Produce Error So Will Compiled As use ! Mark
+    let btn = document.querySelector('button')!
+
+    btn.addEventListener('click', () => {
+        console.log('Hellow')
+    })
+
+
+    src/index.ts
+    --------------
+
+    // This Is Code Will Produce Error So This File Will Not Compile
+    let btn = document.querySelector('button')
+
+    btn.addEventListener('click', () => {
+        console.log('Hellow')
+    })
