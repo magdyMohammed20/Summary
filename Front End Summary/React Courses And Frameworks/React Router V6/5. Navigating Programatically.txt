@@ -1,0 +1,102 @@
+(1) Navigate To Specific Route Without <Link/>
+------------------------------------------------
+==> In Example We Want To Navigate To Order Page Using Home Page
+
+    Home.js
+    ----------
+
+    import React from 'react';
+    import { useNavigate } from 'react-router-dom'
+
+    function Home() {
+        const navigate = useNavigate();
+        return <div>
+            <button onClick={() => navigate('order')}>Go To Order</button>
+        </div>;
+    }
+
+    export default Home;
+
+
+    Order.js
+    ----------
+
+    import React from 'react';
+
+    function Order() {
+        return <div>
+            Hellow Order!!
+        </div>;
+    }
+
+    export default Order;
+
+
+    App.js
+    -------
+
+    import React from 'react'
+    import Home from './components/Home'
+    import Nav from './components/Nav'
+    import Order from './components/Order'
+    import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+    function App() {
+
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <Nav />
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='order' element={<Order />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        );
+    }
+
+    export default App;
+
+
+(2) Using Go Back Button In Order.js
+--------------------------------------
+
+    Order.js
+    ---------
+
+    import React from 'react';
+    import { useNavigate } from 'react-router-dom'
+
+    function Order() {
+
+        const navigate = useNavigate()
+
+        return <div>
+            Hellow Order!!
+            <button onClick={() => navigate(-1)}>Go Back</button>
+        </div>;
+    }
+
+    export default Order;
+
+
+(3) Prevent Pushing In Stack In (1)
+-------------------------------------
+==> In This Sample When Navigate From Home To Order Then Go Back It Will Not Go To Home As It Replaced As We Set {replace: true}
+
+
+    Home.js
+    --------
+
+    import React from 'react';
+    import { useNavigate } from 'react-router-dom'
+
+    function Home() {
+        const navigate = useNavigate();
+        return <div>
+            <button onClick={() => navigate('order', { replace: true })}>Go To Order</button>
+        </div>;
+    }
+
+    export default Home;
