@@ -1,0 +1,93 @@
+(1) Prevent Using Unused Local Variables
+------------------------------------------
+
+    tsconfig.json [Use "noUnusedLocals": true]
+    --------------
+
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "noUnusedLocals": true
+    }
+
+
+    index.ts [Produce Warning As 'res' Is Not Used Local Variable]
+    ----------
+
+    function sum(num1, num2) {
+        let name = 'Magdy';
+        return num1 + num2
+    }
+
+    console.log(sum(1, 2))
+
+
+(2) Prevent Unused Parameter
+-------------------------------
+
+    tsconfig.json [Use "noUnusedParameters": true]
+    ----------------
+
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "noUnusedLocals": true,
+        "noUnusedParameters": true
+    }
+
+    index.ts
+    ---------
+
+    // Produce Warning As 'num2' Is Unused Parameter
+    function sum(num1, num2) {
+        return num1
+    }
+
+    console.log(sum(1, 2))
+
+
+(3) Prevent Implicit return
+-----------------------------
+
+    tsconfig.json [Use "noImplicitReturns": true]
+    ---------------
+
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "noImplicitReturns": true
+    }
+
+
+    index.ts
+    -----------
+
+    // This Produce Warning As Return Is Inside If Scope
+    function sum(num1: number, num2: number) {
+        if (num1 + num2 > 0) {
+            return num1 + num2
+        }
+    }
+
+    console.log(sum(1, 2))
+
+
+    index.ts [Solve The Problem By Set By Set "noImplicitReturns" : false Or Make index.ts Like This ]
+    ---------
+
+    function sum(num1: number, num2: number) {
+        if (num1 + num2 > 0) {
+            return num1 + num2
+        }
+
+        return "Not Complete"; // Return Anything Here
+
+    }
+
+    console.log(sum(1, 2))
