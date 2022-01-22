@@ -1,0 +1,61 @@
+(1) Strict 'noImplicitAny'
+---------------------------
+
+==> Strict Any Keyword [Not Allow You To Use 'any' Type]
+
+    index.ts
+    ---------
+
+    // 'message' Type Here Is 'string' And Will Not Produce Error
+    // If 'message' Not Have :string It Will Produce Error As It Will be 'any' Type
+    function sayHellow(message:string) {
+        console.log(message)
+    }
+
+    sayHellow('Hellow There')
+
+
+    tsconfig.json [Use "noImplicitAny": true To Prevent Use 'any' Type]
+    --------------
+
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        "noEmitOnError": true,
+        "noImplicitAny": true
+    }
+
+
+(2) Strict 'strictNullChecks'
+--------------------------------
+
+    tsconfig.json ["strictNullChecks": true Here Will Not Accept Any Value To Be NULL]
+    --------------
+
+    "compilerOptions": {
+        "target": "es6",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "rootDir": "./src",
+        /*"removeComments": false*/
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true
+    }
+
+
+    index.ts
+    ----------
+
+    let btn = document.querySelector('button')
+
+    // This Code Produce Error As 'btn' Considered To Be NULL
+    // Solve This Problem By Add ! After [document.querySelector('button')!]
+    // Or By Set 'strictNullChecks' To False
+    // Or By Make Check On Button Using if(btn){....}
+    btn.addEventListener('click', () => {
+        console.log('Hellow')
+    })
+
