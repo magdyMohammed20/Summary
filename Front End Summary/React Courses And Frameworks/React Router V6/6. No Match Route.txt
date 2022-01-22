@@ -1,0 +1,46 @@
+(1) Handle Not Match Root If User Navigated To Un Existed Url
+----------------------------------------------------------------
+==> Create 'NotFounded.js' Component
+==> Handle In App.js
+
+
+    NotFounded.js
+    -------------
+
+    import React from 'react';
+
+    function NotFounded() {
+        return <div>
+            <h1>Page Not Founded 404</h1>
+        </div>;
+    }
+
+    export default NotFounded;
+
+
+    App.js
+    ---------
+
+    import React from 'react'
+    import Home from './components/Home'
+    import Nav from './components/Nav'
+    import NotFounded from './components/NotFounded'
+
+    import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+    function App() {
+
+        return (
+            <BrowserRouter>
+                <div className="App">
+                    <Nav />
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='*' element={<NotFounded />} />
+                    </Routes>
+                </div>
+            </BrowserRouter>
+        );
+    }
+
+    export default App;
