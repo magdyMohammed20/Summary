@@ -1,0 +1,121 @@
+(1) Getter
+------------
+
+    class Department {
+
+        constructor(
+            public readonly id: string,
+            private name: string,
+            protected employees: string[]
+        ) { }
+
+        describe(this: Department) {
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+
+        addEmployee(name: string) {
+            this.employees.push(name)
+        }
+
+    }
+
+    class ITDepartment extends Department {
+
+        private lastAdmin: string; // Make private For Access Only Using Getter 
+
+        get getLastAdmin() {
+            if (this.lastAdmin) {
+                return this.lastAdmin
+            }
+            throw new Error('Something Error!!!')
+        }
+
+        constructor(id: string, public admins: string[]) {
+            super(id, "IT", [])
+            this.lastAdmin = admins[0]
+        }
+
+        addAdmin(text: string) {
+            this.admins.push(text)
+            this.lastAdmin = text
+        }
+    }
+
+    const it = new ITDepartment("1", ['Magdy', 'Ahmed']) // If Pass Empty Array Here It Will Produce "Something Error!!!" Error
+    it.addAdmin('Mona')
+    it.addAdmin('Mona2')
+    console.log(it.getLastAdmin) // Mona2
+
+
+(2) Setter
+------------
+
+    class Department {
+
+        constructor(
+            public readonly id: string,
+            private name: string,
+            protected employees: string[]
+        ) { }
+
+        describe(this: Department) {
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+
+        addEmployee(name: string) {
+            this.employees.push(name)
+        }
+
+    }
+
+    class ITDepartment extends Department {
+
+        private lastAdmin: string;
+
+        constructor(id: string, public admins: string[]) {
+            super(id, "IT", [])
+            this.lastAdmin = admins[0]
+        }
+
+        get getLastAdmin() {
+            if (this.lastAdmin) {
+                return this.lastAdmin
+            }
+            throw new Error('Something Error!!!')
+        }
+
+        // I Will Use This Setter Instead Of addAdmin With The Class Object
+        set setAdmin(value: string) {
+            if (!value) {
+                throw new Error('Value Not Founded')
+            }
+            this.addAdmin(value)
+        }
+
+        addAdmin(text: string) {
+            this.admins.push(text)
+            this.lastAdmin = text
+        }
+
+        getAllAdmins() {
+            return this.admins
+        }
+    }
+
+    const it = new ITDepartment("1", ['Magdy', 'Ahmed'])
+    it.setAdmin = 'Mona'
+    it.setAdmin = 'Mona2'
+    console.log(it.getLastAdmin) // Mona2
+    console.log(it.getAllAdmins()) // ['Magdy', 'Ahmed', 'Mona', 'Mona2']
+
+
+(3) Setter If Remove [addAdmin] Method
+-----------------------------------------
+
+    set setAdmin(value: string) {
+        if (!value) {
+            throw new Error('Value Not Founded')
+        }
+        this.admins.push(value)
+        this.lastAdmin = value
+    }
