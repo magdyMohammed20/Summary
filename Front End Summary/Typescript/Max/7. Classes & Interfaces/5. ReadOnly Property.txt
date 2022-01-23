@@ -1,0 +1,43 @@
+(1) ReadOnly Property
+----------------------
+
+    class Department {
+
+        // Look That Access Adding readOnly To Prevent ReAssign Value Inside Or Outside The Class
+        constructor(public readonly id: string, private name: string) { }
+
+        describe(this: Department) {
+            this.id = 10 // This Not Allowed As id Is Read Only Prop
+
+            // This Is Allowed Is To Read Id Only Not Change It's Value
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+
+    }
+
+    const accounting = new Department("1", 'Accounting')
+
+    accounting.id = 20 // This Not Allowed As id Is Read Only Prop
+    accounting.describe() // Department Info : Id : 10 Accounting
+
+
+(2) Right Way To Deal With ReadOnly
+--------------------------------------
+
+    class Department {
+
+        // Look That Access Adding readOnly To Prevent ReAssign Value Inside Or Outside The Class
+        constructor(public readonly id: string, private name: string) { }
+
+        describe(this: Department) {
+            // Read Only Inside The Class
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+    }
+
+    const accounting = new Department("1", 'Accounting')
+
+    accounting.describe() // Department Info : Id : 1 Accounting
+
+    // Read Only Outside The Class 
+    console.log(accounting.id) // 1
