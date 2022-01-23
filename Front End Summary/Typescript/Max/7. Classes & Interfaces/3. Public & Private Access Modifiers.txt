@@ -1,0 +1,45 @@
+(1) Problem
+--------------
+==> Here There Are Previous Ways To Access employees Array Through Function Or Through Class Object
+==> So I Want To Access employees Using Function Only
+
+
+    class Department {
+
+        name: string;
+        employees: string[] = []
+
+        constructor(n: string) {
+            this.name = n
+        }
+
+        describe(this: Department) {
+            console.log('Department Is : ' + this.name)
+        }
+
+        addEmplyee(employee) {
+            this.employees.push(employee)
+        }
+
+        displayEmployeeInfo() {
+            console.log(this.employees.length)
+            console.log(this.employees)
+        }
+    }
+
+    const accounting = new Department('Accounting')
+
+    accounting.addEmplyee('Magdy')
+    accounting.addEmplyee('Mohammed')
+
+    // Through Class Object
+    accounting.employees[2] = 'Hossam' 
+    
+    // Through Function
+    accounting.displayEmployeeInfo() // 3 // ['Magdy', 'Mohammed' , 'Hossam']
+
+
+(2) Solution Of Problem To Make employees Private
+---------------------------------------------------
+
+    private employees: string[] = []
