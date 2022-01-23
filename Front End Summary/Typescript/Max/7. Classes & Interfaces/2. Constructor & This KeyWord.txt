@@ -1,0 +1,53 @@
+(1) Problem Of This KeyWord
+------------------------------
+
+    class Department {
+
+        name: string;
+
+        constructor(n: string) {
+            this.name = n
+        }
+
+        describe() {
+            console.log('Department Is : ' + this.name)
+        }
+    }
+
+    const accounting = new Department('Accounting')
+    const accountCopy = { describe: accounting.describe }
+
+    // Undefined Here As 'this' Refer To 'accountCopy' And It Not Have 'name' Property
+    accountCopy.describe() // Department Is : undefined
+
+
+(2) [3] Solution Of 1
+------------------------
+
+    // Solution 1
+    // By Adding 'name' Prop In accountCopy Object
+    const accountCopy = { describe: accounting.describe, name: 'Secondary Dept' }
+
+    accountCopy.describe() // Department Is : Secondary Dept
+
+
+    // Solution 2
+    // By Adding 'name' Prop In accountCopy Object And This Prop Is From The Class
+    const accounting = new Department('Accounting')
+    const accountCopy = { describe: accounting.describe, name: new Department('Secondary Dept').name }
+
+    accountCopy.describe() // Department Is : Secondary Dept
+
+
+    // Solution 3
+
+    // Passing this:Department To describe Method
+    describe(this: Department) {
+        console.log('Department Is : ' + this.name)
+    }
+
+    const accounting = new Department('Accounting')
+    // Add name Prop In accountCopy Object
+    const accountCopy = { describe: accounting.describe, name: 'Secondary Dept' }
+
+    accountCopy.describe() // Department Is : Secondary Dept
