@@ -1,0 +1,37 @@
+(1) URL Params [Same Sample Of Previous File]
+-----------------
+
+    App.js
+    --------
+
+        <BrowserRouter>
+            <div className="App">
+                <Nav />
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='*' element={<NotFounded />} />
+                    <Route path='users' element={<Users />}>
+                        <Route path=':userId' element={<UserDetails />} />
+                        <Route path='admin' element={<Admin />} />
+                    </Route>
+                </Routes>
+            </div>
+        </BrowserRouter>
+
+
+    UserDetails.js
+    ---------------
+
+    import React from 'react';
+    import { useParams } from 'react-router-dom'
+
+    function UserDetails() {
+
+        const { userId } = useParams();
+
+        return <div>
+            <h1>User Details Page {userId}</h1>
+        </div>;
+    }
+
+    export default UserDetails;
