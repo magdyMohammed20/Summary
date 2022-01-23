@@ -1,0 +1,48 @@
+(1) Problem
+--------------
+==> Is Operation Of Redeclare Variables
+
+
+    class Department {
+
+        // First Here Is Declare
+        id: string;
+        private name: string;
+
+        // Here Is Redeclare For Constructor Params
+        constructor(i: string, n: string) {
+            this.name = n
+            this.id = i
+        }
+
+        describe(this: Department) {
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+
+    }
+
+    const accounting = new Department("1", 'Accounting')
+
+    accounting.describe() // Department Info : Id : 1 Accounting
+
+
+(2) Solution Using Shorthand
+------------------------------
+==> Delete First Declare And Use Access Modifiers In Constructor Params
+==> Delete Constructor Body Too
+
+    class Department {
+
+        // Look That Access Modifiers Inside Constructor Params
+        constructor(public id: string, private name: string) {
+        }
+
+        describe(this: Department) {
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+
+    }
+
+    const accounting = new Department("1", 'Accounting')
+
+    accounting.describe() // Department Info : Id : 1 Accounting
