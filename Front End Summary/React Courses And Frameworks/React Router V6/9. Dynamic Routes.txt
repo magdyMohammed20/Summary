@@ -1,0 +1,96 @@
+(1) Dynamic Routes
+-------------------
+==> Handle Routes In App.js
+==> Create Users.js Component Which Contains All Users With Link
+==> Create UserDetails.js Which Contains Details Of User Dynamically
+==> Create Admin.js Which A Page Of Admin In users Route
+==> Note: [users/:id] Called Dynamic Route 
+
+    App.js
+    --------
+
+    <BrowserRouter>
+      <div className="App">
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='*' element={<NotFounded />} />
+          <Route path='users' element={<Users />} />
+          <Route path='users/:id' element={<UserDetails />} />
+          <Route path='users/admin' element={<Admin />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+
+
+
+    Users.js
+    ----------
+
+    import React from 'react';
+
+    function Users() {
+        return <div>
+            <h1>User 1</h1>
+            <h1>User 2</h1>
+            <h1>User 3</h1>
+        </div>;
+    }
+
+    export default Users;
+
+
+    UserDetails.js
+    -----------------
+
+    function UserDetails() {
+        return <div>
+            <h1>User Details Page</h1>
+        </div>;
+    }
+
+    export default UserDetails;
+
+
+
+    Admin.js
+    ----------
+
+    import React from 'react';
+
+    function Admin() {
+        return <div>
+            <h1>Admin Page</h1>
+        </div>;
+    }
+
+    export default Admin;
+
+
+(2) Dynamic Routes Can Contains Nested Route 
+---------------------------------------------
+
+    App.js
+    --------
+
+        <Route path='users' element={<Users />}>
+            <Route path=':id' element={<UserDetails />} />
+            <Route path='admin' element={<Admin />} />
+        </Route>
+
+    Users.js [Use Outlet Component To Render Nested Route]
+    -----------
+
+    import React from 'react';
+    import { Outlet } from 'react-router-dom'
+
+    function Users() {
+        return <div>
+            <h1>User 1</h1>
+                <h1>User 2</h1>
+                <h1>User 3</h1>
+            <Outlet />
+        </div>;
+    }
+
+    export default Users;
