@@ -1,0 +1,48 @@
+(1) Basic Inherit
+------------------
+
+    class Department {
+
+        constructor(public readonly id: string, private name: string) { }
+
+        describe(this: Department) {
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+    }
+
+    class ITDepartment extends Department { }
+
+    const it = new ITDepartment("1", 'IT')
+
+    it.describe() // Department Info : Id : 1 IT
+
+
+(2) Using Super Keyword
+-------------------------
+
+    class Department {
+
+        constructor(public readonly id: string, private name: string) { }
+
+        describe(this: Department) {
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+
+    }
+
+    class ITDepartment extends Department {
+
+        constructor(id: string, public admins: string[]) {
+            // Use Super If Want To Change Child Class Constructor
+            super(id, "IT")
+        }
+
+        displayAdmins() {
+            console.log(this.admins)
+        }
+    }
+
+    const it = new ITDepartment("1", ['Magdy', 'Ahmed'])
+
+    it.describe() // Department Info : Id : 1 IT
+    it.displayAdmins() // ['Magdy', 'Ahmed']
