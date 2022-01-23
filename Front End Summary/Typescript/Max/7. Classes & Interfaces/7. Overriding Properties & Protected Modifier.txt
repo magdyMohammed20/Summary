@@ -1,0 +1,97 @@
+(1) Problem Of Not Use Protected Keyword
+------------------------------------------
+
+    class Department {
+
+        // Problem Start From employees Is Private
+        constructor(
+            public readonly id: string,
+            private name: string,
+            private employees: string[]
+        ) { }
+
+        describe(this: Department) {
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+
+        // employees Can Accessed Inside It's Class Only Not To Child Classes
+        addEmployee(name: string) {
+            this.employees.push(name)
+        }
+
+    }
+
+    class ITDepartment extends Department {
+
+        constructor(id: string, public admins: string[]) {
+            super(id, "IT", [])
+        }
+
+        // So Can't Access employees Here As Private 
+        addEmployee(name: string) {
+            if (name === 'max') {
+                return
+            }
+            else {
+                this.employees.push(name) // Error
+            }
+        }
+        displayAdmins() {
+            console.log(this.admins)
+        }
+    }
+
+    const it = new ITDepartment("1", ['Magdy', 'Ahmed'])
+
+    it.describe()
+    it.displayAdmins() 
+
+
+(2) Protected Will Solve Problem
+----------------------------------
+
+    class Department {
+
+        constructor(
+            public readonly id: string,
+            private name: string,
+            protected employees: string[]
+        ) { }
+
+        describe(this: Department) {
+            console.log('Department Info : Id : ' + this.id + ' ' + this.name)
+        }
+
+        addEmployee(name: string) {
+            this.employees.push(name)
+        }
+
+    }
+
+    class ITDepartment extends Department {
+
+        constructor(id: string, public admins: string[]) {
+            super(id, "IT", [])
+        }
+
+        // Override addEmployee Here For Add Extra logic
+        // Now employees Can Accessed Here As It Protected Type
+        addEmployee(name: string) {
+            if (name === 'max') {
+                return
+            }
+            else {
+                this.employees.push(name) // Error
+            }
+        }
+        displayEmps() {
+            console.log(this.employees)
+        }
+    }
+
+    const it = new ITDepartment("1", ['Magdy', 'Ahmed'])
+
+    it.describe() // Department Info : Id : 1 IT
+    it.addEmployee('max') // Will Not Added
+    it.addEmployee('Magdy') // Will Added
+    it.displayEmps()  // ['Magdy']
