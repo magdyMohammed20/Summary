@@ -1,0 +1,41 @@
+(1) Classes
+-------------
+==> BluePrint For Objects That Define How Object Look Like Which Properties And Methods They Have
+==> Make Creation Of Similar Objects Mush Easier
+
+(2) First Class
+------------------ 
+
+    class Department {
+
+        name: string;
+
+        constructor(n: string) {
+            this.name = n
+        }
+    }
+
+    const accounting = new Department('Accounting')
+
+    console.log(accounting) // Department {name: 'Accounting'}
+
+
+(2) Class With Functions
+----------------------------
+
+    class Department {
+
+        name: string;
+
+        constructor(n: string) {
+            this.name = n
+        }
+
+        describe() {
+            console.log('Department Is : ' + this.name)
+        }
+    }
+
+    const accounting = new Department('Accounting')
+
+    accounting.describe() // Department Is : Accounting
