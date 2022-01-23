@@ -1,0 +1,27 @@
+(1) Search Params
+-------------------
+==> Search Params Like [localhost:3000/usrers/1?filter=magdy] (?filter=magdy Here Is Search Params)
+
+
+    Users.js
+    ------------
+
+    import React from 'react';
+    import { Outlet, useSearchParams } from 'react-router-dom'
+
+    function Users() {
+
+        const [searchParams, setSearchParams] = useSearchParams()
+
+        console.log(searchParams.get('filter')) // Get Search Params ['active']
+        return <div>
+            <h1>User 1</h1>
+            <h1>User 2</h1>
+            <h1>User 3</h1>
+            <button onClick={() => setSearchParams({ filter: 'active' })}>Go To Active</button>
+            <button onClick={() => setSearchParams({})}>Reset Search Params</button>
+            <Outlet />
+        </div>;
+    }
+
+    export default Users;
