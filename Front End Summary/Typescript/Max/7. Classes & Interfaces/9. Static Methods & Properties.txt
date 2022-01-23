@@ -1,0 +1,61 @@
+(1) Make Property Or Method As Static To Use It Without Creating Object From Class [EX: Math In Js] 
+
+(2) Static Method 
+---------------------
+
+    class Department {
+
+        // Create Static Method
+        static crateEmployee(value: string) {
+            return { name: value }
+        }
+
+    }
+
+    // Access Static Method Using Class Name Only Without Using Object Class
+    const newEmp = Department.crateEmployee('Magdy')
+    console.log(newEmp) // {name: 'Magdy'}
+
+
+(3) Static Property
+---------------------
+
+    class Department {
+
+        // Define Static Property
+        static fiscalYear = 2020
+
+    }
+
+    // Access Static Property Using Class Name Only Without Using Object Class
+    const year = Department.fiscalYear
+    console.log(year) // 2020
+
+
+(4) Use Static Property Inside It's Class Without Using 'this' 
+----------------------------------------------------------------
+
+    class Department {
+
+        // Define Static Property
+        static fiscalYear = 2020
+
+        constructor(
+            public readonly id: string,
+            private name: string,
+            protected employees: string[],
+        ) { }
+        
+        // Use Static Property Here
+        describe() {
+            console.log(Department.fiscalYear)
+        }
+
+        addEmployee(name: string) {
+            this.employees.push(name)
+        }
+    }
+
+    // Access Static Property Using Class Name Only Without Using Object Class
+    const it = new Department("1", "IT", ['Magdy'])
+    it.describe() // 2020
