@@ -1,0 +1,51 @@
+(1) Can Replace 'interface' With 'type' Keyword
+-------------------------------------------------
+
+    type Person = {
+        name: string,
+        age: number,
+
+        getData(): void
+    }
+
+
+    let user1: Person = {
+        name: 'Magdy',
+        age: 20,
+        getData: function () {
+            console.log(this.name)
+            console.log(this.age)
+        }
+    }
+
+    user1.getData() // Magdy // 20
+
+
+(2) Interface With Class
+-------------------------
+
+    interface Person {
+        name: string,
+        age: number,
+
+        getData(greet: string): void
+    }
+
+    class User implements Person {
+        name: string;
+        age: number;
+
+        constructor(n: string, a: number) {
+            this.name = n;
+            this.age = a
+        }
+
+        getData(greet: string) {
+            console.log(greet + ' ' + this.name + ' ' + this.age)
+        }
+    }
+
+    let u: Person;
+    u = new User("Magdy", 20)
+
+    u.getData('Hellow') // Hellow Magdy 20
