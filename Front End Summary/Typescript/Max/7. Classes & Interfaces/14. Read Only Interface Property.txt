@@ -1,0 +1,32 @@
+(1) Read Only Interface Property
+-----------------------------------
+==> You Can't Specify Private Or Public Interface Property Or Method But Can Use Read Only
+
+
+    interface Person {
+        readonly name: string, // Look Here
+        age: number,
+
+        getData(greet: string): void
+    }
+
+    class User implements Person {
+        name: string;
+        age: number;
+
+        // Can Set Read Only Value Using Function Or Constructor 
+        // But Can Change Using Objet Created From Class Directly [u.name = "Hossam"]
+        constructor(n: string, a: number) {
+            this.name = n;
+            this.age = a
+        }
+
+        getData(greet: string) {
+            console.log(greet + ' ' + this.name + ' ' + this.age)
+        }
+    }
+
+    let u: Person;
+    u = new User("Mohammed", 20)
+
+    u.getData('Hellow') // Hellow Mohammed 20
