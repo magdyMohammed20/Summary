@@ -1,0 +1,108 @@
+(1) Class Can Inherit Multi Interfaces
+-----------------------------------------
+
+    interface Named {
+        readonly name: string,
+    }
+
+    interface Person {
+        age: number
+
+        getData(greet: string): void
+    }
+
+    // Class Inherit Multi Interfaces
+    class User implements Person, Named {
+        name: string;
+        age: number;
+
+        constructor(n: string, a: number) {
+            this.name = n;
+            this.age = a
+        }
+
+        getData(greet: string) {
+            console.log(greet + ' ' + this.name + ' ' + this.age)
+        }
+    }
+
+    let u: Person;
+    u = new User("Mohammed", 20)
+
+    u.getData('Hellow') // Hellow Mohammed 20
+
+
+(2) Interface Can Inherit Another Interface
+--------------------------------------------
+
+    interface Named {
+        readonly name: string,
+    }
+
+    // This Interface Inherit Named Interface 
+    // But Class 'User' Must Handle All Properties In 'Named' And 'Person' Interfaces
+    interface Person extends Named {
+        age: number
+
+        getData(greet: string): void
+    }
+
+    // Class Inherit Multi Interfaces
+    class User implements Person {
+        name: string;
+        age: number;
+
+        constructor(n: string, a: number) {
+            this.name = n;
+            this.age = a
+        }
+
+        getData(greet: string) {
+            console.log(greet + ' ' + this.name + ' ' + this.age)
+        }
+    }
+
+    let u: Person;
+    u = new User("Mohammed", 20)
+
+    u.getData('Hellow') // Hellow Mohammed 20
+
+
+(3) Interface Can Extends Multi Interfaces
+-----------------------------------------------
+
+    interface Named {
+        readonly name: string,
+    }
+
+    interface Named2 {
+        lName: string;
+    }
+
+    // Extends Multi Interfaces
+    interface Person extends Named, Named2 {
+        age: number
+
+        getData(greet: string): void
+    }
+
+    // Class Inherit Multi Interfaces
+    class User implements Person {
+        name: string;
+        lName: string;
+        age: number;
+
+        constructor(n: string, a: number) {
+            this.name = n;
+            this.age = a
+        }
+
+        getData(greet: string) {
+            console.log(greet + ' ' + this.name + ' ' + this.age)
+        }
+    }
+
+    let u: Person;
+    u = new User("Mohammed", 20)
+
+    u.getData('Hellow') // Hellow Mohammed 20
