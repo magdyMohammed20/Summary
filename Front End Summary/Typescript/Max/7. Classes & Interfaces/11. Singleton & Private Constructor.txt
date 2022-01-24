@@ -1,0 +1,36 @@
+(1) Singleton & Private Constructor
+--------------------------------------
+==> Singleton is, at its core, a design pattern that restricts the instantiation of a class to one object. Usually, the goal is to manage the global application state
+
+    class Department {
+
+        constructor(
+            public readonly id: string
+        ) { }
+    }
+
+    class ITDepartment extends Department {
+
+        // Define Instance From The Class 
+        private static instance: ITDepartment;
+
+        private constructor(id: string) {
+            super(id)
+        }
+
+        static getInstance() {
+            if (ITDepartment.instance) {
+                return this.instance
+            }
+            
+            // Look That Only One Object
+            this.instance = new ITDepartment("it1")
+
+            return this.instance
+        }
+    }
+
+    const it = ITDepartment.getInstance()
+    const it2 = ITDepartment.getInstance()
+    console.log(it)  // ITDepartment {id: 'it1'}
+    console.log(it2) // ITDepartment {id: 'it1'}
