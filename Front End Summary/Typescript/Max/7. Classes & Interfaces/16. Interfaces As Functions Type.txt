@@ -1,0 +1,30 @@
+(1) Basic Function Type
+-------------------------
+
+    // Define Function Using 'type'
+    type fun = (n1: number, n2: number) => number
+
+    let addFun: fun;
+
+    addFun = (n1: number, n2: number) => {
+        return n1 + n2
+    }
+
+    console.log(addFun(1, 2)) // 3
+
+
+(3) Function Type Using Interface
+----------------------------------
+
+    // Define Function Using 'type'
+    interface fun {
+        (n1: number, n2: number): number;
+    }
+
+    let addFun: fun;
+
+    addFun = (n1: number, n2: number) => {
+        return n1 + n2
+    }
+
+    console.log(addFun(1, 2)) // 3
