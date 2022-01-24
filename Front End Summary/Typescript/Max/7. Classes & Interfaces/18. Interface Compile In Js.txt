@@ -1,0 +1,1 @@
+(1) If Use Interface In Typescript File And See The Compilation In Js File There Is No Implementation For Interface As It Fully TS Feature No Js Feature 
