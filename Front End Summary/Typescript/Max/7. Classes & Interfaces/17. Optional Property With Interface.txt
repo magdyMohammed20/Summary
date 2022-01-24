@@ -1,0 +1,39 @@
+(1) If Interface Has Property And Want To Make It Optional To Implement In Class
+---------------------------------------------------------------------------------
+
+    interface Named2 {
+        name: string,
+        lName?: string; // Use ? To Make lName Optional Implemented In The Extending Class
+    }
+
+
+    class Person implements Named2 {
+        name: string;
+        constructor(n: string) {
+            this.name = n;
+
+        }
+    }
+
+
+(2) Handle Optinal Property
+------------------------------
+
+    interface Named2 {
+        name?: string;
+    }
+
+    class Person implements Named2 {
+        name?: string;
+        constructor(n?: string) {
+            if (n) {
+                this.name = n;
+            }
+        }
+    }
+
+    let p1 = new Person("Magdy")
+    let p2 = new Person()
+
+    console.log(p1) // Person {name: 'Magdy'}
+    console.log(p2) // Person {}
