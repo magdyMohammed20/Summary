@@ -1,0 +1,80 @@
+(1) Intersection Types
+------------------------
+==> Allows Us To Combine Types
+
+EX (Type Intersection)
+----
+
+    type Admin = {
+        name: string,
+        previliages: string[]
+    }
+
+    type Employee = {
+        name: string,
+        startDate: Date
+    }
+
+    type ElevatedEmp = Admin & Employee // This Called Intersection Types
+
+    // This Object Contains Props Of Admin & Employee Types
+    const c1: ElevatedEmp = {
+        name: 'Magdy',
+        previliages: [],
+        startDate: new Date()
+    }
+
+
+(2) Type Intersection With Interfaces (First Way)
+--------------------------------------------------
+
+    interface Admin {
+        name: string,
+        previliages: string[]
+    }
+
+    interface Employee {
+        name: string,
+        startDate: Date
+    }
+
+    type ElevatedEmp = Admin & Employee // This Called Intersection Types
+
+    const c1: ElevatedEmp = {
+        name: 'Magdy',
+        previliages: [],
+        startDate: new Date()
+    }
+
+
+(3) Type Intersection With Interfaces (Second Way)
+----------------------------------------------------
+
+    interface Admin {
+        name: string,
+        previliages: string[]
+    }
+
+    interface Employee {
+        name: string,
+        startDate: Date
+    }
+
+    interface ElevatedEmp extends Admin, Employee { } // This Called Intersection Types
+
+    const c1: ElevatedEmp = {
+        name: 'Magdy',
+        previliages: [],
+        startDate: new Date()
+    }
+
+
+(4) Union With Intersection Types
+-----------------------------------
+
+    type combinable = string | number // Union Types
+    type numeric = number | boolean; // Union Types
+
+    type uni = combinable & numeric // Intersection Types
+
+    const c2:uni = 10 // C2 Must Be Number Only As Intersection Between 'combinable' And 'numeric' Is Number
