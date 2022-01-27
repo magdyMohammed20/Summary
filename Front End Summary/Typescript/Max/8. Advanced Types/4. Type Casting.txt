@@ -1,0 +1,29 @@
+(1) Accessing DOM Element In Typescript
+-----------------------------------------
+
+EX1 (First Way Of Define Element Type)
+----
+
+    // Use <HTMLInputElement> To Define Element Type
+    // Use ! To Sure Not NULL Or Undefined
+    let input = <HTMLInputElement>document.querySelector('input')!
+
+    input.value = 'Hellow World';
+
+
+EX2 (Second Way Of Define Element Type)
+----
+
+    let input = document.querySelector('input')! as HTMLInputElement
+
+    input.value = 'Hellow World';
+
+
+EX3 (Third Way Of Define Element Type) [If Want To Delete ! Mark]
+----
+
+    let input = document.querySelector('input')
+
+    if (input) {
+        (input as HTMLInputElement).value = 'Hellow World';
+    }
