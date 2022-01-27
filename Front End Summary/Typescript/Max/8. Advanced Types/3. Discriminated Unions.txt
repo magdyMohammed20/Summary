@@ -1,0 +1,69 @@
+(1) Discriminated Unions
+-------------------------
+==> also called algebraic data types or tagged unions are a combination of three things [The discriminant - The union - Type guards]
+
+
+(2) Disadvantages Of Type Guard
+---------------------------------
+
+    interface Bird {
+        birdSpeed: number
+    }
+
+    interface Horse {
+        horseSpeed: number
+    }
+
+
+    type Animal = Bird | Horse
+
+    function calcSpeed(animal: Animal) {
+
+        // With This Check May Forget Letter Or Write Wrong Property Name
+        // Like Here 'birdSped' Not Founded
+        if ('birdSped' in animal) {
+            console.log(animal.birdSpeed)
+        }
+
+        // With This Check May Forget Letter Or Write Wrong Property Name
+        // Like Here 'horseSped' Not Founded
+        if ('horseSped' in animal) {
+            console.log(animal.horseSpeed)
+        }
+    }
+
+
+(3) Solution Of (2)
+-----------------------
+
+    interface Bird {
+        type: 'bird';
+        birdSpeed: number
+    }
+
+    interface Horse {
+        type: 'horse';
+        horseSpeed: number
+    }
+
+
+    type Animal = Bird | Horse
+
+    function calcSpeed(animal: Animal) {
+
+        let speed;
+        switch (animal.type) {
+            case 'bird':
+                speed = animal.birdSpeed
+                break;
+            case 'horse':
+                speed = animal.horseSpeed
+                break;
+
+        }
+
+        console.log(`Running Speed Of ${animal.type} Is ${speed}`)
+    }
+
+    calcSpeed({ type: 'bird', birdSpeed: 35 }) // Running Speed Of bird Is 35
+    calcSpeed({ type: 'horse', horseSpeed: 35 }) // Running Speed Of horse Is 35
