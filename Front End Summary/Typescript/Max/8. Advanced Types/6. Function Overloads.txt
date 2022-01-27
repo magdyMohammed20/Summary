@@ -1,0 +1,59 @@
+(1) Function Overloads
+-------------------------
+
+EX (Problem)
+---
+
+    type combine = string | number
+
+
+    function add(a: combine, b: combine) {
+        if (typeof a === 'string' || typeof b === 'string') {
+            return a.toString() + b.toString()
+        }
+
+        return a + b
+    }
+
+    const sum = add('Magdy ', 'Mohammed')
+    console.log(sum.split('')) // Error: 'split' does not exist on type 'string | number'
+
+
+EX2 (First Solution Is Type Casting But Not Optimal)
+----
+
+    type combine = string | number
+
+    function add(a: combine, b: combine) {
+        if (typeof a === 'string' || typeof b === 'string') {
+            return a.toString() + b.toString()
+        }
+
+        return a + b
+    }
+
+    const sum = add('Magdy ', 'Mohammed') as string // Add This Type Casting
+    console.log(sum.split('')) 
+
+
+EX3 (Second Solution Is Function Overloads)
+----
+
+    type combine = string | number
+
+    // This Is Called Functio Overloads
+    function add(a: number, b: number): number;
+    function add(a: string, b: string): string;
+    function add(a: string, b: number): string;
+    function add(a: number, b: string): string;
+
+    function add(a: combine, b: combine) {
+        if (typeof a === 'string' || typeof b === 'string') {
+            return a.toString() + b.toString()
+        }
+
+        return a + b
+    }
+
+    const sum = add('Magdy', ' Mo')
+    console.log(sum.split('')) 
