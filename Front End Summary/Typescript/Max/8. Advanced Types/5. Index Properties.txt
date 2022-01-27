@@ -1,0 +1,49 @@
+(1) Index Properties
+---------------------
+==> The idea of the index signatures is to type objects of unknown structure when you only know the key and value types
+
+EX
+---
+
+    interface container {
+        [prop: string]: string
+    }
+
+    const obj: container = {
+        name: 'Magdy',
+        email: 'magdy@yahoo.com'
+    }
+
+    console.log(obj.name) // Magdy
+
+
+EX [Valid Number As Key]
+---
+
+    interface container {
+        [prop: string]: string,
+    }
+
+    const obj: container = {
+        name: 'Magdy',
+        email: 'magdy@yahoo.com',
+        10: '10' // If Write Key As Number It's Valid 
+    }
+
+    console.log(obj[10]) // 10
+
+
+EX (Invalid)
+---
+
+    interface container {
+        [prop: string]: string
+    }
+
+    const obj: container = {
+        name: 'Magdy',
+        email: 'magdy@yahoo.com',
+        num: 10 // Invalid As Value Not String Which Not Implements The Interface
+    }
+
+    console.log(obj.name) 
