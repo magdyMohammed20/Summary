@@ -1,0 +1,139 @@
+(1) Type Guards
+----------------
+
+EX
+---
+
+    type combinable = string | number // Union Types
+
+    function add (a:combinable , b:combinable){
+        // This Condition Called Type Guard
+        if(typeof a === 'string' && typeof b === 'string'){
+            return a.toString() + b.toString()
+        }
+
+        return +a + +b
+    }
+
+
+(2) Problem & Solution
+------------------------
+
+EX (Problem)
+-------------
+
+    type Admin = {
+        name: string,
+        previliages: string[]
+    }
+
+    type Employee = {
+        name: string,
+        startDate: Date
+    }
+
+    type unKnown = Admin | Employee // Union Types
+
+    function print(emp: unKnown) {
+        console.log(emp.name); // This Valid As name Prop Exists In 'Admin' & 'Employee' Types
+        console.log(emp.previliages) // This Not Valid As 'previliages' Exists Only In 'Admin' Type    
+    }
+
+
+EX (Solution)
+---------------
+
+    function print(emp: unKnown) {
+        console.log(emp.name); // This Valid As name Prop Exists In 'Admin' & 'Employee' Types
+        
+        // Check If emp Object Has 'previliages' Property
+        if('previliages' in emp){
+            console.log(emp.previliages) 
+        }
+    }
+
+
+EX [Full Valid Sample]
+-----------------------
+
+
+    type Admin = {
+        name: string,
+        previliages: string[]
+    }
+
+    type Employee = {
+        name: string,
+        startDate: Date
+    }
+
+    type unKnown = Admin | Employee // Union Types
+
+    function print(emp: unKnown) {
+        console.log(emp.name); // This Valid As name Prop Exists In 'Admin' & 'Employee' Types
+
+        // Check If emp Object Has 'previliages' Property
+        if ('previliages' in emp) {
+            console.log(emp.previliages)
+        }
+
+        if ('startDate' in emp) {
+            console.log(emp.startDate)
+        }
+    }
+
+    print({ name: 'Magdy', startDate: new Date() }) // Magdy   // Thu Jan 27 2022 16:26:53 GMT+0200
+    print({ name: 'Mohammed', previliages: ['Create-Server'] }) // Mohammed  // ['Create-Server']
+
+
+(3) Type Guards With Class
+-----------------------------
+
+EX1
+----
+
+    class Vechicle {
+        drive() {
+            console.log('Drive Vechicle')
+        }
+    }
+
+    class Truck {
+        drive() {
+            console.log('Drive Truck')
+        }
+
+        loadTruck() {
+            console.log('Loading Truck...')
+        }
+    }
+
+    type car = Vechicle | Truck
+
+    const c1 = new Vechicle()
+    const c2 = new Truck()
+
+    function useCar(vechicle: car) {
+        vechicle.drive()
+
+        // Check If 'loadTruck' Exists In The Object
+        if ('loadTruck' in vechicle) {
+            vechicle.loadTruck()
+        }
+
+    }
+
+    useCar(c2) // Drive Truck // Loading Truck...
+
+
+EX2 (Using Js instanceof Feature)
+----
+
+    function useCar(vechicle: car) {
+        vechicle.drive()
+
+        // Use 'instanceof' Here
+        if (vechicle instanceof Truck) {
+            vechicle.loadTruck()
+        }
+    }
