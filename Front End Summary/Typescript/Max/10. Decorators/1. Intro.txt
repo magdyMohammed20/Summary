@@ -1,0 +1,22 @@
+(1) Whats's Decorators
+----------------------
+==> Is Feature Which Very Useful For Meta Programming
+
+(2) Before Start Using Decorators
+-----------------------------------
+==> In [tsconfig.json] Set 'target' To 'ES6'
+==> In [tsconfig.json] Enable "experimentalDecorators" And Set It To 'true'
+
+    {
+        "compilerOptions": {
+            "target": "ES6",
+            "module": "commonjs",
+            "outDir": "./dist",
+            "rootDir": "./src",
+            "experimentalDecorators": true
+        },
+        "exclude": [
+            "node_modules",
+            "*.dev.ts"
+        ]
+    }
