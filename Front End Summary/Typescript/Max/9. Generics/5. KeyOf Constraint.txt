@@ -1,0 +1,20 @@
+(1) Without KeyOf
+--------------------
+
+    function convertAndExtract(obj: object, key: string) {
+        return 'Value Is ' + obj[key]
+    }
+
+    // TS Not Guranteed That  'name' Exists In {}
+    console.log(convertAndExtract({}, 'name')) // Undefined
+
+
+(2) With KeyOf
+---------------
+
+    // Define U As Key Of T With Generics
+    function convertAndExtract<T extends object, U extends keyof T>(obj: T, key: U) {
+        return 'Value Is ' + obj[key]
+    }
+
+    console.log(convertAndExtract({ name: 'Magdy' }, 'name')) // Value Is Magdy
