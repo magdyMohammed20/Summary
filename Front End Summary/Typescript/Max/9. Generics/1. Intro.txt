@@ -1,0 +1,42 @@
+(1) What Generics
+-------------------
+==> Is Typescript Feature
+
+EX
+---
+
+    let names: Array<string> = []
+    names = ['Magdy']
+    console.log(names) // ['Magdy']
+
+EX
+---
+
+    let names: Array<string | number> = []
+    names = [10, 'Magdy']
+    console.log(names) // [10, 'Magdy']
+
+
+(2) Promise Is Generics
+-------------------------
+
+    let Pro:Promise<string> = new Promise((res , rej) => {
+        setTimeout(() => {
+            res('Code Done')
+        },2000)
+    })
+
+
+(3) Promise With Generics Exception
+-------------------------------------
+==> Must Takecare Of Types
+
+    // This Promise Return Any Type
+    let Pro: Promise<any> = new Promise((res, rej) => {
+        setTimeout(() => {
+            res(10)
+        }, 2000)
+    })
+
+    // But split Method Not Exist In 10
+    Pro.then(data => console.log(data.split(''))) // Error As Split Not Founded In Number Value
