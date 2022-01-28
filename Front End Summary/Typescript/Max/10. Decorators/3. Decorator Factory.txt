@@ -1,0 +1,46 @@
+(1) Basic Decorator Factory
+---------------------------
+
+    // Create Decorator Factory Which Return Function
+    function Logger() {
+        return function (con: Function) {
+            console.log(con);
+            console.log('Logging...')
+        }
+    }
+
+    @Logger()
+    class Person {
+        name = "Magdy";
+
+        constructor() {
+            console.log("Hellow From Constructor...")
+        }
+    }
+
+    let p = new Person()
+
+
+(2) Passing Data To Decorator Factory
+---------------------------------------
+
+    // Passing Argument To Decorator Factory
+    function Logger(logString: string) {
+        return function (con: Function) {
+            console.log(con);
+            console.log('Logging...')
+            console.log(logString)
+        }
+    }
+
+    // Pass Parameters Value To Decorator Factory
+    @Logger('LOGGING - PERSON')
+    class Person {
+        name = "Magdy";
+
+        constructor() {
+            console.log("Hellow From Constructor...")
+        }
+    }
+
+    let p = new Person()
