@@ -1,0 +1,91 @@
+(1) Use Multi Decorators Factory
+---------------------------------
+
+    // First Decorator
+    function Logger(logString: string) {
+        return function (_: Function) {
+            console.log(logString)
+        }
+    }
+
+    // Second Decorator
+    function withTemplate(template, hookId) {
+        return function (constructor: any) {
+            console.log('WithTemplate')
+            let hookElement = document.getElementById(hookId)
+            let p1 = new constructor()
+            if (hookElement) {
+                hookElement.innerHTML = template
+                hookElement.innerHTML += p1.name
+            }
+        }
+    }
+
+    // Calling Multi Decorators Here
+    @Logger('Logger...')
+    @withTemplate('<h1>Hellow World</h1>', 'app')
+    class Person {
+        name = "Magdy";
+
+        constructor() {
+            console.log("Hellow From Constructor 1...")
+        }
+    }
+
+    let p = new Person()
+
+
+
+(2) Multi Decorators Factory Executed From Bottom To Up In Previous Sample '@withTemplate' Executed Then '@Logger'
+
+
+(3) Another Execution Arrangement [As console.log Is Outside The Factory]
+---------------------------------------------------------------------------
+==> In The Following Sample OutPut Is  
+
+            Logger1...
+            withTemplate 1...
+            WithTemplate 2 ...
+            Hellow From Constructor 1...
+            Logger2...
+            Hellow From Constructor 1...
+
+
+EX
+---
+
+    // First Decorator
+    function Logger(logString: string) {
+        console.log('Logger1...') // Look Here
+        return function (_: Function) {
+            console.log(logString)
+        }
+    }
+
+    // Second Decorator
+    function withTemplate(template, hookId) {
+        console.log('withTemplate 1...') // Look Here
+        return function (constructor: any) {
+            console.log('WithTemplate 2 ...')
+            let hookElement = document.getElementById(hookId)
+            let p1 = new constructor()
+            if (hookElement) {
+                hookElement.innerHTML = template
+                hookElement.innerHTML += p1.name
+            }
+        }
+    }
+
+    // Calling Multi Decorators Here
+    @Logger('Logger2...')
+    @withTemplate('<h1>Hellow World</h1>', 'app')
+    class Person {
+        name = "Magdy";
+
+        constructor() {
+            console.log("Hellow From Constructor 1...")
+        }
+    }
+
+    let p = new Person()
+
