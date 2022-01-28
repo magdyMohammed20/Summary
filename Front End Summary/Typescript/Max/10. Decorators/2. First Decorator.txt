@@ -1,0 +1,38 @@
+(1) First Decorator
+--------------------
+
+    // Decorator Is Function
+    function Logger(con: Function) {
+        console.log(con);
+        console.log('Logging...')
+    }
+
+    @Logger // Call Decorator
+    class Person {
+        name = "Magdy";
+
+        constructor() {
+            console.log("Hellow From Constructor...")
+        }
+    }
+
+    let p = new Person()
+
+    
+    /*
+
+    **********
+      Output
+    **********
+
+        class Person {
+            constructor() {
+                this.name = "Magdy";
+                console.log("Hellow From Constructor...");
+            }
+        }
+
+        Logging...
+
+        Hellow From Constructor...
+    */
