@@ -1,0 +1,80 @@
+(1) Build useful Decorator To Render Html Inside Element Using id
+-------------------------------------------------------------------
+
+    index.html
+    -----------
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="./dist/index.js" defer></script>
+    </head>
+
+    <body>
+        <div id="app"></div>
+    </body>
+
+    </html>
+
+
+    index.ts
+    ------------
+
+    // Create Decorator Takes 2 Params
+    // template: Is Html Elements
+    // hookId: Is Html Element Id To Render 'template' In It 
+    function withTemplate(template, hookId) {
+        return function (_: Function) {
+            let hookElement = document.getElementById(hookId)
+            if (hookElement) {
+                hookElement.innerHTML = template
+            }
+        }
+    }
+
+    @withTemplate('<h1>Hellow World</h1>', 'app')
+    class Person {
+        name = "Magdy";
+
+        constructor() {
+            console.log("Hellow From Constructor...")
+        }
+    }
+
+    let p = new Person()
+
+
+(2) Using Constructor Inside Decorator
+----------------------------------------
+
+    function withTemplate(template, hookId) {
+        return function (constructor: any) {
+            let hookElement = document.getElementById(hookId)
+
+            // Can Create Object From Person Constructor Here
+            let p1 = new constructor()
+            
+            if (hookElement) {
+                hookElement.innerHTML = template
+                
+                // Can Use Object Props
+                hookElement.innerHTML += p1.name
+            }
+        }
+    }
+
+    @withTemplate('<h1>Hellow World</h1>', 'app')
+    class Person {
+        name = "Magdy";
+
+        constructor() {
+            console.log("Hellow From Constructor...")
+        }
+    }
+
+    let p = new Person()
