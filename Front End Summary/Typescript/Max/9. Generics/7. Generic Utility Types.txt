@@ -1,0 +1,27 @@
+(1) Partial Utility
+---------------------
+
+
+    interface Main {
+        name: string,
+        age: number
+    }
+
+    function courses(name: string, age: number):Main {
+        // We Define coursesList Here Of 'Main' Type So Can't Make Value As {}
+        // So Use Partial To Make Shape Of 'Main' Optional
+        // Use Partial To Allow You To Initialize With {}
+        let coursesList: Partial<Main> = {}
+        coursesList.name = name
+        coursesList.age = age
+
+        return coursesList as Main
+    }
+
+
+(2) ReadOnly Utility
+----------------------
+
+    // Define ReadOnly Array Of String Names 
+    let names: Readonly<string[]> = ['Magdy', 'Mohammed']
+    names.push('Hossam') // Not Valid
