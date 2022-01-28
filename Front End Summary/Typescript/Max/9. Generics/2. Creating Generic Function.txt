@@ -1,0 +1,53 @@
+(1) Creating Custom Generic
+-----------------------------
+
+==> Problem
+--------------
+
+    let merge = (objA: object, objB: object) => {
+        return Object.assign(objA, objB)
+    }
+
+    const m = merge({ name: 'Magdy' }, { age: 24 });
+
+    console.log(m.name) // There Is No Error In Browser But Error In TS
+
+
+==> First Solution [Not Optimal]
+---------------------------------
+
+    let merge = (objA: object, objB: object) => {
+        return Object.assign(objA, objB)
+    }
+
+    // Look Here
+    const m = merge({ name: 'Magdy' }, { age: 24 }) as {name: string , age: number};
+
+    console.log(m.name) // No Errors In Browser Or Ts
+
+
+==> Second Solution [Use Generics]
+-----------------------------------
+
+    // Using <T , U> Define This Function To Return Intersection Of objA , objB
+    function merge<T, U>(objA: T, objB: U) {
+        return Object.assign(objA, objB)
+    }
+
+    // Look Here
+    const m = merge({ name: 'Magdy' }, { age: 24 });
+
+    console.log(m.name) // No Errors In Browser Or Ts
+
+
+(2) Define Shape Of Sended Data Of Generics
+---------------------------------------------
+
+    function merge<T, U>(objA: T, objB: U) {
+        return Object.assign(objA, objB)
+    }
+
+    // Look Here
+    const m = merge<{ name: string }, { age: number }>({ name: 'Magdy' }, { age: 24 });
+
+    console.log(m.name) // No Errors In Browser Or Ts
