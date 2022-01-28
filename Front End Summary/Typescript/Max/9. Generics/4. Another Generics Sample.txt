@@ -1,0 +1,20 @@
+(1) Another Generics Sample
+------------------------------
+
+    interface Lengthy {
+        length: number
+    }
+    function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+
+        let descText = 'Got No Value'
+
+        if (element.length === 1) {
+            descText = 'Got 1 Chars'
+        } else if (element.length > 1) {
+            descText = 'Got ' + element.length + ' Chars';
+        }
+
+        return [element, descText]
+    }
+
+    console.log(countAndDescribe('Hellow World')) // ['Hellow World', 'Got 12 Chars']
