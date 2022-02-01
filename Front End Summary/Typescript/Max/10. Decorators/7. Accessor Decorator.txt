@@ -1,0 +1,111 @@
+(1) Decorator For Accessor [Getter , Setter]
+----------------------------------------------
+
+    function Logger(target: any, name: string, descriptor: PropertyDescriptor) {
+        console.log(target) // Whole Class Prototype
+        console.log(name) // price
+        console.log(descriptor) // Object Of Getter And Setter Of 'price'
+
+    }
+
+    class Product {
+        title: string;
+        private _price: number;
+
+        // Decorator For price Setter
+        @Logger
+        set price(val: number) {
+            if (val > 0) {
+                this._price = val
+            }
+            else {
+                throw new Error('Price Must Greater Than 0')
+            }
+        }
+
+        constructor(t: string, p: number) {
+            this.title = t;
+            this._price = p
+        }
+
+        getPriceWithTax(tax: number) {
+            return this._price * (1 + tax)
+        }
+
+    }
+
+
+(2) Decorator For Class Method
+--------------------------------
+
+    function Logger(target: any, name: string | Symbol, descriptor: PropertyDescriptor) {
+        console.log(target) // Whole Class Prototype
+        console.log(name) // getPriceWithTax
+        console.log(descriptor) // Prototype Of getPriceWithTax
+
+    }
+
+    class Product {
+        title: string;
+        private _price: number;
+
+
+        set price(val: number) {
+            if (val > 0) {
+                this._price = val
+            }
+            else {
+                throw new Error('Price Must Greater Than 0')
+            }
+        }
+
+        constructor(t: string, p: number) {
+            this.title = t;
+            this._price = p
+        }
+
+        // Logger For Method
+        @Logger 
+        getPriceWithTax(tax: number) {
+            return this._price * (1 + tax)
+        }
+
+    }
+
+
+(3) Decorator For Method Parameter In The Class
+-------------------------------------------------
+
+    function Logger(target: any, name: string | Symbol, position: number) {
+        console.log(target) // Whole Method Prototype
+        console.log(name) // getPriceWithTax
+        console.log(position) // Position Of Parameter // 0
+
+    }
+
+
+    class Product {
+        title: string;
+        private _price: number;
+
+
+        set price(val: number) {
+            if (val > 0) {
+                this._price = val
+            }
+            else {
+                throw new Error('Price Must Greater Than 0')
+            }
+        }
+
+        constructor(t: string, p: number) {
+            this.title = t;
+            this._price = p
+        }
+
+        // Look Here Decorator For Method Parameter
+        getPriceWithTax(@Logger tax: number) {
+            return this._price * (1 + tax)
+        }
+
+    }
