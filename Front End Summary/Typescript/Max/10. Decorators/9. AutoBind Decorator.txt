@@ -1,0 +1,57 @@
+(1) Normal Binding
+--------------------
+
+    class Printer {
+        message: string = 'Hellow Message'
+
+        showMessage() {
+            console.log(this.message)
+        }
+    }
+
+    let p1 = new Printer()
+
+    let btn = document.querySelector('button')!
+
+    // p1.showMessage Must Bind p1 As this Without Bind Refer To Button
+    btn.addEventListener('click', p1.showMessage.bind(p1))
+
+
+
+(2) Auto Bind Using Decorator
+--------------------------------
+
+    function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+
+        let originalMethod = descriptor.value;
+
+        let adjDescriptor: PropertyDescriptor = {
+            configurable: true,
+            enumerable: false,
+            get() {
+                const boundFn = originalMethod.bind(this)
+                return boundFn
+            }
+        }
+
+        return adjDescriptor
+
+    }
+
+
+    class Printer {
+        message: string = 'Hellow Message'
+
+        // Add Auto Bind Decorator For showMessage
+        @autobind
+        showMessage() {
+            console.log(this.message)
+        }
+    }
+
+    let p1 = new Printer()
+
+    let btn = document.querySelector('button')!
+
+    // Not Use Bind Here As We Build It Using Decorator
+    btn.addEventListener('click', p1.showMessage)
