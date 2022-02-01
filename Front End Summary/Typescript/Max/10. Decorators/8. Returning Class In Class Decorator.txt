@@ -1,0 +1,35 @@
+(1) Returning Class In Class Decorator
+-----------------------------------------
+
+    function withTemplate(template, hookId) {
+
+        console.log('Hellow With Template')
+        return function <T extends { new(...args: any[]): { name: string } }>(originalConstructor: T) {
+
+            // Decorator Factory Return Class Here
+            return class extends originalConstructor {
+                constructor(..._: any[]) {
+                    super()
+
+                    let hookElement = document.getElementById(hookId)
+
+                    if (hookElement) {
+                        hookElement.innerHTML = template
+
+                        hookElement.innerHTML += this.name
+                    }
+                }
+            }
+        }
+    }
+
+    @withTemplate('<h1>Hellow World</h1>', 'app')
+    class Person {
+        name = "Magdy";
+
+        constructor() {
+            console.log("Hellow From Constructor...")
+        }
+    }
+
+    let p = new Person()
