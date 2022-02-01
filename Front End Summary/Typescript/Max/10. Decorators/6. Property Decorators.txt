@@ -1,0 +1,43 @@
+(1) Can Make Decorator For Property
+--------------------------------------
+
+EX (Set Decorator For Title)
+---
+
+    function Log(target: any, propName: string | Symbol) {
+        // Refer To Whole Class
+        console.log(target)
+
+        // Refer To Property Which Logger Specified For It
+        console.log(propName) // title
+    }
+
+    class Product {
+        // Look Here Decorator On Title Property
+        @Log
+        title: string;
+        private _price: number;
+
+        set price(val: number) {
+            if (val > 0) {
+                this._price = val
+            }
+            else {
+                throw new Error('Price Must Greater Than 0')
+            }
+        }
+
+        constructor(t: string, p: number) {
+            this.title = t;
+            this._price = p
+        }
+
+        getPriceWithTax(tax: number) {
+            return this._price * (1 + tax)
+        }
+
+    }
+
+
+    const p1 = new Product('P1', 3000)
+    console.log(p1.getPriceWithTax(.3)) // 3900
