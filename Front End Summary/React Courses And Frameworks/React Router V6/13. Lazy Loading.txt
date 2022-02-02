@@ -1,0 +1,45 @@
+(1) Lazy Loading
+------------------
+==> means that a component or a part of code must get loaded when it is required
+
+
+(2) Create Lazy Loading For About Page Using React Router And Lazy Loading
+------------------------------------------------------------------------------
+
+    About.js [A Component With Long Text And Must Use Export Default Not Export Only]
+    -----------
+
+    ....
+
+
+    App.js
+    --------
+
+    import React, { Suspense } from 'react' // 1- Import Suspense
+    import Home from './components/Home'
+    import Nav from './components/Nav'
+    import NotFounded from './components/NotFounded'
+    import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+    // 2- Make Lazy Loading Component
+    const LazyAbout = React.lazy(() => import('./components/About'))
+
+    // 3- Wrap Lazy Loading Component With <Suspense></Suspense>
+    function App() {
+
+    return (
+        <BrowserRouter>
+        <div className="App">
+            <Nav />
+            <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='*' element={<NotFounded />} />
+            <Route path='/about' element={<Suspense fallback={<div>Loading...</div>}><LazyAbout /></Suspense>} />
+            </Routes>
+
+        </div>
+        </BrowserRouter>
+    );
+    }
+
+    export default App;
