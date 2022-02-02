@@ -1,0 +1,50 @@
+(1) Relative Links
+-------------------
+==> Don't Start With Forward Slash And Inherit The Closest Route In  Which They Are Rendered
+==> In EX1 The <Link> In [Products.js] Not Relative Link As It Goes To [http://localhost:3000/featured] Or [http://localhost:3000/new] And Right Is [http://localhost:3000/products/featured] Or [http://localhost:3000/products/new]
+==> In EX2 The <Link> Is Relative As We Remove '/' From 'to' Attribute 
+
+EX1
+-----  
+
+
+    App.js
+    ---------
+
+        <Route path='products' element={<Products />}>
+            <Route path='new' element={<New />} />
+            <Route path='featured' element={<Featured />} />
+        </Route>
+
+
+    Products.js
+    -------------
+
+    import React from 'react';
+    import { Link, Outlet } from 'react-router-dom'
+    function Products() {
+        return <div>
+            <input name='search' placeholder='Search For Something' />
+
+            <nav>
+                <Link to='new'>New</Link>
+                <Link to='featured'>Featured</Link>
+            </nav>
+            <Outlet />
+        </div>;
+    }
+
+    export default Products;
+
+
+
+EX2 [Note : Remove / From to Attribute To Be Relative Link]
+----- 
+
+    Products.js
+    --------------
+
+    <nav>
+        <Link to='new'>New</Link>
+        <Link to='featured'>Featured</Link>
+    </nav>
