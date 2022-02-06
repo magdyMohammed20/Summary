@@ -1,0 +1,67 @@
+(1) Creating Auto Bind Decorator
+----------------------------------
+
+    index.ts
+    ----------
+
+    // 1- Create autobind decorator
+    function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+
+        const originalMethod = descriptor.value;
+
+        let adjDescriptor: PropertyDescriptor = {
+            enumerable: false,
+            configurable: true,
+            get() {
+                let boundFn = originalMethod.bind(this)
+
+                return boundFn
+            }
+        }
+
+        return adjDescriptor
+    }
+
+    class ProjectInput {
+
+        templateElement: HTMLTemplateElement
+        hostElement: HTMLDivElement
+        element: HTMLFormElement;
+
+        titleInputElement: HTMLInputElement;
+        descInputElement: HTMLInputElement;
+        pepInputElement: HTMLInputElement;
+
+
+        constructor() {
+            this.templateElement = <HTMLTemplateElement>document.getElementById('project-input');
+            this.hostElement = <HTMLDivElement>document.getElementById('app');
+            const importedNode = document.importNode(this.templateElement.content, true)
+            this.element = importedNode.firstElementChild as HTMLFormElement
+
+            this.titleInputElement = this.element.querySelector('#title')! as HTMLInputElement
+            this.descInputElement = this.element.querySelector('#description')! as HTMLInputElement
+            this.pepInputElement = this.element.querySelector('#people')! as HTMLInputElement
+
+            this.configure()
+            this.attach()
+
+        }
+
+        private attach() {
+            this.hostElement.insertAdjacentElement('afterbegin', this.element)
+        }
+
+        // 2- Use autobind Decorator Before handleSubmit Method And Remove bind From configure()
+        @autobind
+        private handleSubmit(e: Event) {
+            e.preventDefault()
+            console.log(this.titleInputElement.value)
+        }
+
+        private configure() {
+            this.element.addEventListener('submit', this.handleSubmit)
+        }
+    }
+
+    const prjInput = new ProjectInput()
