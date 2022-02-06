@@ -1,0 +1,52 @@
+(1) Interacting With Dom Elements
+-----------------------------------
+
+    index.ts
+    -----------
+
+    class ProjectInput {
+
+        templateElement: HTMLTemplateElement
+        hostElement: HTMLDivElement
+        element: HTMLFormElement;
+
+        // 1- Vars For Html Inputs [title , description , people]
+        titleInputElement: HTMLInputElement;
+        descInputElement: HTMLInputElement;
+        pepInputElement: HTMLInputElement;
+
+
+        constructor() {
+            this.templateElement = <HTMLTemplateElement>document.getElementById('project-input');
+            this.hostElement = <HTMLDivElement>document.getElementById('app');
+            const importedNode = document.importNode(this.templateElement.content, true)
+            this.element = importedNode.firstElementChild as HTMLFormElement
+
+            // 2- Accessing Html Inputs And Append To Vars
+            this.titleInputElement = this.element.querySelector('#title')! as HTMLInputElement
+            this.descInputElement = this.element.querySelector('#description')! as HTMLInputElement
+            this.pepInputElement = this.element.querySelector('#people')! as HTMLInputElement
+
+            this.configure()
+            this.attach()
+
+        }
+
+        private attach() {
+            this.hostElement.insertAdjacentElement('afterbegin', this.element)
+        }
+
+        // 4- Create This Method For Handle Submition Of Configure Method 
+        private handleSubmit(e: Event) {
+            e.preventDefault()
+            console.log(this.titleInputElement.value)
+        }
+
+        // 3- Create Configure For add Event To Form Element
+        // handleSubmit Must Bind this As 'this' In handleSubmit Method Refer To The Function Itself
+        private configure() {
+            this.element.addEventListener('submit', this.handleSubmit.bind(this))
+        }
+    }
+
+    const prjInput = new ProjectInput()
