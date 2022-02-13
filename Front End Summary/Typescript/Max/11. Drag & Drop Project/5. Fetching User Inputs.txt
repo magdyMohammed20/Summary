@@ -1,0 +1,104 @@
+(1) Fetching User Inputs And Make Clear Function
+--------------------------------------------------
+
+    index.ts
+    ---------
+
+    function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+
+        const originalMethod = descriptor.value;
+
+        let adjDescriptor: PropertyDescriptor = {
+            enumerable: false,
+            configurable: true,
+            get() {
+                let boundFn = originalMethod.bind(this)
+
+                return boundFn
+            }
+        }
+
+        return adjDescriptor
+    }
+
+    class ProjectInput {
+
+        templateElement: HTMLTemplateElement
+        hostElement: HTMLDivElement
+        element: HTMLFormElement;
+
+        titleInputElement: HTMLInputElement;
+        descInputElement: HTMLInputElement;
+        pepInputElement: HTMLInputElement;
+
+
+        constructor() {
+            this.templateElement = <HTMLTemplateElement>document.getElementById('project-input');
+            this.hostElement = <HTMLDivElement>document.getElementById('app');
+            const importedNode = document.importNode(this.templateElement.content, true)
+            this.element = importedNode.firstElementChild as HTMLFormElement
+
+            this.titleInputElement = this.element.querySelector('#title')! as HTMLInputElement
+            this.descInputElement = this.element.querySelector('#description')! as HTMLInputElement
+            this.pepInputElement = this.element.querySelector('#people')! as HTMLInputElement
+
+            this.configure()
+            this.attach()
+
+        }
+
+        private attach() {
+            this.hostElement.insertAdjacentElement('afterbegin', this.element)
+        }
+
+        // 1- Create Function For Gather User Inputs Value
+        // return Array If Inputs Valid Or void If Not Valid
+        private gatherUserInputs(): [string, string, number] | void {
+
+            // 2- Fetch Data Values
+            let title = this.titleInputElement.value;
+            let desc = this.descInputElement.value;
+            let people = this.pepInputElement.value;
+
+            // 3- Make Check If Not Valid
+            if (
+                title.trim().length === 0 ||
+                desc.trim().length === 0 ||
+                people.trim().length === 0
+            ) {
+                alert('Invalid Inputs Values Try Again !!!');
+                return;
+            } else {
+                return [title, desc, +people]
+            }
+
+        }
+
+        //5- Make Clear Method After Form Submittion
+        private clearInputs() {
+            this.titleInputElement.value = '';
+            this.descInputElement.value = '';
+            this.pepInputElement.value = '';
+        }
+
+
+        @autobind
+        private handleSubmit(e: Event) {
+            e.preventDefault()
+
+            // 4- Handle Gathered User Inputs In Submit Method
+            const userInputs = this.gatherUserInputs();
+
+            // If Data Valid And Come In Array Display It
+            if (Array.isArray(userInputs)) {
+                console.log(userInputs)
+                this.clearInputs()
+            }
+        }
+
+        private configure() {
+            this.element.addEventListener('submit', this.handleSubmit)
+        }
+    }
+
+    const prjInput = new ProjectInput()
