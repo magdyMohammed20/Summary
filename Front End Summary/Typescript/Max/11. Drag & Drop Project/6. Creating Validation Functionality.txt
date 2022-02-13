@@ -1,0 +1,172 @@
+(1) Creating Validation Functionality
+----------------------------------------
+
+    // 1- Create Interface With Data Structure
+    interface Validatable {
+        value: string | number;
+        required?: boolean;
+        minLength?: number;
+        maxLength?: number;
+        min?: number;
+        max?: number;
+    }
+
+    // 2- Create Validate Function
+    function validate(validatableInputs: Validatable) {
+
+        let isValid = true;
+        let {
+            required,
+            value,
+            minLength,
+            maxLength,
+            min,
+            max
+        } = validatableInputs
+
+        // If Value Property Setted To Be Required Handle isValid Variable
+        if (required) {
+            // Will Be False If value Empty And True If Not Empty
+            isValid = isValid && value.toString().trim().length !== 0
+        }
+
+        // User Can Set minLength Or Not So We Must Handle Null
+        // If minLrngth Is Setted And Not Equal NULL And Type Of Value Is String Handle isVallid Variable
+        if (minLength != null && typeof value === 'string') {
+            isValid = isValid && value.length > minLength
+        }
+
+        if (maxLength != null && typeof value === 'string') {
+            isValid = isValid && value.length < maxLength
+        }
+
+        if (min != null && typeof value === 'number') {
+            isValid = isValid && value > min
+        }
+
+        if (max != null && typeof value === 'number') {
+            isValid = isValid && value < max
+        }
+
+        return isValid
+    }
+
+    function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+
+        const originalMethod = descriptor.value;
+
+        let adjDescriptor: PropertyDescriptor = {
+            enumerable: false,
+            configurable: true,
+            get() {
+                let boundFn = originalMethod.bind(this)
+
+                return boundFn
+            }
+        }
+
+        return adjDescriptor
+    }
+
+    class ProjectInput {
+
+        templateElement: HTMLTemplateElement
+        hostElement: HTMLDivElement
+        element: HTMLFormElement;
+
+        titleInputElement: HTMLInputElement;
+        descInputElement: HTMLInputElement;
+        pepInputElement: HTMLInputElement;
+
+
+        constructor() {
+            this.templateElement = <HTMLTemplateElement>document.getElementById('project-input');
+            this.hostElement = <HTMLDivElement>document.getElementById('app');
+            const importedNode = document.importNode(this.templateElement.content, true)
+            this.element = importedNode.firstElementChild as HTMLFormElement
+
+            this.titleInputElement = this.element.querySelector('#title')! as HTMLInputElement
+            this.descInputElement = this.element.querySelector('#description')! as HTMLInputElement
+            this.pepInputElement = this.element.querySelector('#people')! as HTMLInputElement
+
+            this.configure()
+            this.attach()
+
+        }
+
+        private attach() {
+            this.hostElement.insertAdjacentElement('afterbegin', this.element)
+        }
+
+
+        private gatherUserInputs(): [string, string, number] | void {
+
+
+            let title = this.titleInputElement.value;
+            let desc = this.descInputElement.value;
+            let people = this.pepInputElement.value;
+
+
+            // 3- Assign Value To Object Of Same Type Of Validatable Interface
+            let enteredTitle: Validatable = {
+                value: title,
+                required: true,
+                minLength: 5,
+                maxLength: 20
+            }
+
+            let enteredDesc: Validatable = {
+                value: desc,
+                required: true,
+                minLength: 10,
+                maxLength: 100
+            }
+
+            let enteredPep: Validatable = {
+                value: +people,
+                required: true,
+                min: 1,
+                max: 100
+            }
+
+
+            // 4- Use validate Function To Handle Validation
+            if (
+                !validate(enteredTitle) ||
+                !validate(enteredDesc) ||
+                !validate(enteredPep)
+            ) {
+                alert('Invalid Inputs Values Try Again !!!');
+                return;
+            } else {
+
+                return [title, desc, +people]
+            }
+
+        }
+
+        private clearInputs() {
+            this.titleInputElement.value = '';
+            this.descInputElement.value = '';
+            this.pepInputElement.value = '';
+        }
+
+
+        @autobind
+        private handleSubmit(e: Event) {
+            e.preventDefault()
+
+            const userInputs = this.gatherUserInputs();
+
+            if (Array.isArray(userInputs)) {
+                console.log(userInputs)
+                this.clearInputs()
+            }
+        }
+
+        private configure() {
+            this.element.addEventListener('submit', this.handleSubmit)
+        }
+    }
+
+    const prjInput = new ProjectInput()
