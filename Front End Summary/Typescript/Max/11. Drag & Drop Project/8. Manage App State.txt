@@ -1,0 +1,268 @@
+(1) Build Class For Manage App State
+--------------------------------------
+
+    interface Validatable {
+        value: string | number;
+        required?: boolean;
+        minLength?: number;
+        maxLength?: number;
+        min?: number;
+        max?: number;
+    }
+
+    function validate(validatableInputs: Validatable) {
+
+        let isValid = true;
+        let {
+            required,
+            value,
+            minLength,
+            maxLength,
+            min,
+            max
+        } = validatableInputs
+
+        if (required) {
+            isValid = isValid && value.toString().trim().length !== 0
+        }
+
+        if (minLength != null && typeof value === 'string') {
+            isValid = isValid && value.length > minLength
+        }
+
+        if (maxLength != null && typeof value === 'string') {
+            isValid = isValid && value.length < maxLength
+        }
+
+        if (min != null && typeof value === 'number') {
+            isValid = isValid && value > min
+        }
+
+        if (max != null && typeof value === 'number') {
+            isValid = isValid && value < max
+        }
+
+        return isValid
+    }
+
+    function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
+
+        const originalMethod = descriptor.value;
+
+        let adjDescriptor: PropertyDescriptor = {
+            enumerable: false,
+            configurable: true,
+            get() {
+                let boundFn = originalMethod.bind(this)
+
+                return boundFn
+            }
+        }
+
+        return adjDescriptor
+    }
+
+    class ProjectInput {
+
+        templateElement: HTMLTemplateElement
+        hostElement: HTMLDivElement
+        element: HTMLFormElement;
+
+        titleInputElement: HTMLInputElement;
+        descInputElement: HTMLInputElement;
+        pepInputElement: HTMLInputElement;
+
+
+        constructor() {
+            this.templateElement = <HTMLTemplateElement>document.getElementById('project-input');
+            this.hostElement = <HTMLDivElement>document.getElementById('app');
+            const importedNode = document.importNode(this.templateElement.content, true)
+            this.element = importedNode.firstElementChild as HTMLFormElement
+
+            this.titleInputElement = this.element.querySelector('#title')! as HTMLInputElement
+            this.descInputElement = this.element.querySelector('#description')! as HTMLInputElement
+            this.pepInputElement = this.element.querySelector('#people')! as HTMLInputElement
+
+            this.configure()
+            this.attach()
+
+        }
+
+        private attach() {
+            this.hostElement.insertAdjacentElement('afterbegin', this.element)
+        }
+
+
+        private gatherUserInputs(): [string, string, number] | void {
+
+
+            let title = this.titleInputElement.value;
+            let desc = this.descInputElement.value;
+            let people = this.pepInputElement.value;
+
+
+            let enteredTitle: Validatable = {
+                value: title,
+                required: true,
+                minLength: 5,
+                maxLength: 20
+            }
+
+            let enteredDesc: Validatable = {
+                value: desc,
+                required: true,
+                minLength: 10,
+                maxLength: 100
+            }
+
+            let enteredPep: Validatable = {
+                value: +people,
+                required: true,
+                min: 1,
+                max: 100
+            }
+
+
+            if (
+                !validate(enteredTitle) ||
+                !validate(enteredDesc) ||
+                !validate(enteredPep)
+            ) {
+                alert('Invalid Inputs Values Try Again !!!');
+                return;
+            } else {
+
+                return [title, desc, +people]
+            }
+
+        }
+
+        private clearInputs() {
+            this.titleInputElement.value = '';
+            this.descInputElement.value = '';
+            this.pepInputElement.value = '';
+        }
+
+
+        @autobind
+        private handleSubmit(e: Event) {
+            e.preventDefault()
+
+            const userInputs = this.gatherUserInputs();
+
+            if (Array.isArray(userInputs)) {
+
+                // 3- Destructuring Data Here
+                const [title, description, people] = userInputs
+
+                // 4- Call addProject From Project State Instance To Push Data To State
+                state.addProject(title, description, people)
+
+                console.log(state)
+                this.clearInputs()
+            }
+        }
+
+        private configure() {
+            this.element.addEventListener('submit', this.handleSubmit)
+        }
+    }
+
+    class ProjectList {
+
+        templateElement: HTMLTemplateElement
+        hostElement: HTMLDivElement
+        element: HTMLElement;
+        assignedProjects: any[]; // 9- Create assignedProjects Array
+
+        constructor(private type: 'active' | 'finished') {
+            this.templateElement = <HTMLTemplateElement>document.getElementById('project-list');
+            this.hostElement = <HTMLDivElement>document.getElementById('app');
+
+            // 11- Empty assignedProjects
+            this.assignedProjects = []
+            const importedNode = document.importNode(this.templateElement.content, true)
+            this.element = importedNode.firstElementChild as HTMLElement
+
+            this.element.id = `${this.type}-projects`;
+
+            // 8- Call addListener
+            state.addListener((projects: any) => {
+                this.assignedProjects = projects
+                this.renderProjects()
+            })
+
+            this.attach()
+            this.renderContent()
+        }
+
+        // 10- Create renderProjects
+        private renderProjects() {
+            const listEl = document.getElementById(`${this.type}-projects-list`)! as HTMLUListElement;
+
+            for (const prjItem of this.assignedProjects) {
+                const listItem = document.createElement('li')
+                listItem.textContent = prjItem.title
+                listEl.appendChild(listItem)
+            }
+
+        }
+
+        private renderContent() {
+            const listId = `${this.type}-projects-list`;
+            this.element.querySelector('ul')!.id = listId;
+            this.element.querySelector('h2')!.textContent = `${this.type.toUpperCase()} PROJECTS`
+        }
+
+        private attach() {
+            this.hostElement.insertAdjacentElement('beforeend', this.element)
+        }
+
+    }
+
+    // 1- Create ProjectState Class
+    class ProjectState {
+        private state: any[] = []
+        private static instance: ProjectState;
+        private listeners: any[] = [] // 5- Create Listener Array
+
+        private constructor() {
+        }
+
+        // 6- Create addListener Function
+        addListener(listenerFn: Function) {
+            this.listeners.push(listenerFn)
+        }
+
+        static getInstance() {
+            if (this.instance) {
+                return this.instance
+            }
+            this.instance = new ProjectState()
+            return this.instance
+        }
+
+        addProject(title: string, description: string, numOfPeople: number) {
+            const newProject = {
+                id: Math.random().toString(),
+                title,
+                description,
+                numOfPeople
+            }
+
+            this.state.push(newProject)
+
+            // 7- Loop Through Listeners Array
+            for (const listenerFn of this.listeners) {
+                listenerFn(this.state.slice())
+            }
+        }
+    }
+
+    const prjInput = new ProjectInput()
+
+    // 2- Create Global Instance From ProjectState Class
+    const state = ProjectState.getInstance()
+
+    const activePrjList = new ProjectList('active')
+    const finishedPrjList = new ProjectList('finished')
