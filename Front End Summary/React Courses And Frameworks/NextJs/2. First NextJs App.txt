@@ -1,0 +1,14 @@
+(1) Setup Before Use
+-----------------------
+==> Install NodeJs [Sure That Install Latest Update]
+==> Use [npx create-next-app nextjs-first-app] Or [yarn create nextjs-first-app] For Create The App
+==> Use [yarn dev] Or [npm run dev] For Run Project
+
+(2) Project Structure
+-----------------------
+==> 'public' Folder : For Contains All Public Assets
+==> 'pages' Folder : For Containing Routing Files
+
+(3) How Next Run
+------------------
+==> In [__app.js] There Are Component Called 'MyApp' Which Take 'Component' As Argument This Component Passed From 'index.js' To Render All Content

@@ -1,0 +1,15 @@
+(1) Create Routing
+---------------------
+==> In Startup Project We Install Later Delete 'index.js' From 'pages' Folder And Create New One Called 'index.js' With New Content
+==> If Navigate To [localhost:3000] Will See Content Of 'index.js' In The Web Page
+
+    index.js
+    -----------
+
+        Any JSX Component
+
+
+(2) Create Pages Like About And Profile
+-----------------------------------------
+==> In 'pages' Folder Create 'About.js' And 'Profile.js' With Jsx Component And Now Can Navigate To [localhost:3000/About] Or [localhost:3000/Profile]
+

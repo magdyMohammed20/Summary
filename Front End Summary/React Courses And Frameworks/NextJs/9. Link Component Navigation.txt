@@ -1,0 +1,66 @@
+(1) Creating Navbar In Home Page To Navigate To All Pages Using Links
+-----------------------------------------------------------------------
+
+    /pages/index.js
+    ------------------
+
+    import Link from 'next/link' // Import Link From NextJs
+
+    function Home() {
+        return (
+            <div>
+                <Link href='/blog'>
+                    <a>Blog</a>
+                </Link>
+
+                <Link href='/products'>
+                    <a>Products</a>
+                </Link>
+            </div>
+        )
+    }
+
+    export default 
+    
+
+(2) Handle Links In Products Page
+-----------------------------------
+
+    /pages/products/index.js
+    -------------------------
+
+    import Link from 'next/link'
+
+    function index() {
+        return (
+            <div>
+                <h1>
+                    <Link href='/products/1'>
+                        <a>Product1</a>
+                    </Link>
+                </h1>
+                <h1>
+                    <Link href='/products/2'>
+                        <a>Product2</a>
+                    </Link>
+                </h1>
+                <h1>
+                    <Link href='/products/3'>
+                        <a>Product3</a>
+                    </Link>
+                </h1>
+            </div>
+        )
+    }
+
+    export default index
+
+
+(3) Use Replace Property To Replace Previous Page With Current Page So When Click On Browser Back Button It Return To Later Page Not Previous Page
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+    <h1>
+        <Link href='/products/3' replace={true}>
+            <a>Product3</a>
+        </Link>
+    </h1>

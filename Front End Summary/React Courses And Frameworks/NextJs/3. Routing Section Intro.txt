@@ -1,0 +1,8 @@
+(1) React Routing VS NextJs Routing
+-------------------------------------
+==> React Has More Steps To Use Routing [Install Package , Handle Routes ...]
+==> NextJs : Has File System Based Routing Mechanism
+
+(2) NextJs Routing
+--------------------
+==> When File Created In 'pages' Folder It Becomes A Route

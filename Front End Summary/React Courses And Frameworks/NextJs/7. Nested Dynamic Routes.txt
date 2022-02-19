@@ -1,0 +1,64 @@
+(1) If We Need To Make Product Detail Page And Product Review Page
+----------------------------------------------------------------------
+==> First Create 'products' Folder In 'pages' Folder
+==> Create ([productId]) Folder Which Contains [index.js] Folder At This Point We Make Dynamic Routes Of [localhost/products/id]
+==> Create 'review' Folder Inside ([productId]) Folder And Create ([reviewId].js) In it To Make This [localhost:3000/products/1/review/1]
+
+==> Whole Structure
+
+    products
+        -[productId]
+            -review
+                -[reviewId].js
+            -index.js
+        -index.js
+
+
+    [reviewId].js (Product Review Page)
+    ---------------
+
+    import { useRouter } from 'next/router'
+
+    function index() {
+        const { query: { reviewId } } = useRouter()
+
+        return (
+            <div>Review - {reviewId}</div>
+        )
+    }
+
+    export default index
+
+
+    [productId]/index.js (Product Details Page)
+    ----------------------
+
+    import { useRouter } from 'next/router' // Import useRouter From NextJs
+
+    function productDetails() {
+        const { query: { productId } } = useRouter(); // Extract ProductId From Page Query
+        return (
+            <div>Details Page - {productId}</div>
+        )
+    }
+
+    export default productDetails
+
+
+
+    products/index.js (Products Listing Page)
+    -------------------
+
+    function index() {
+        return (
+            <div>
+                <h1>Product 1</h1>
+                <h1>Product 2</h1>
+                <h1>Product 3</h1>
+            </div>
+        )
+    }
+
+    export default index
+
+

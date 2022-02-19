@@ -1,0 +1,23 @@
+(1) NextJs 
+-----------
+==> React Framework For Production
+
+(2) ReactJs VS NextJs
+-----------------------
+==> React: Not Quite Possible To Build Full Feature App Ready To Deployed To Production
+==> React: Library For Build UI
+==> React: You Have To Make Decisions On Other Features Of App Like Routing , Styling , Auth ..
+
+==> NextJs: Package That Use React For Build UI
+==> NextJs: Loaded With More Features Enable You To Build App That Ready For Production Like Routing , Styling , Auth ..
+==> NextJs: No Need To Install Additional Packages As Provide Everything For You
+
+
+(3) Why NextJs
+--------------- 
+==> File Based Routing
+==> Pre-Rendering
+==> API Routes : Can Make Api Use NextJs
+==> Support For Css Modules [TailwindCss , Styles-Components]
+==> Auth
+==> Dev And Prod Build System

@@ -1,0 +1,48 @@
+(1) Dynamic Routes
+--------------------
+==> If Have Products Page Contains A Lot Of Products And Want To Make Product Details Page
+
+    pages/products/index.js [Main Products Page Which Contains All Products]
+    -------------------------
+
+    function index() {
+        return (
+            <div>
+                <h1>Product 1</h1>
+                <h1>Product 2</h1>
+                <h1>Product 3</h1>
+            </div>
+        )
+    }
+
+    export default index
+
+
+    pages/products/[productId].js (Note That File Name Must Be Inside [])
+    ------------------------------
+
+    function productDetails() {
+        return (
+            <div>Details Page</div>
+        )
+    }
+
+    export default productDetails
+
+
+(2) Display Route Id In Product Details Page
+------------------------------------------------
+
+    pages/products/[productId].js (Note That File Name Must Be Inside [])
+    ------------------------------
+
+    import { useRouter } from 'next/router' // Import useRouter From NextJs
+
+    function productDetails() {
+        const { query: { productId } } = useRouter(); // Extract ProductId From Page Query
+        return (
+            <div>Details Page - {productId}</div>
+        )
+    }
+
+    export default productDetails

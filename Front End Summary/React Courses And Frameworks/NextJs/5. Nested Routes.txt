@@ -1,0 +1,8 @@
+(1) Nested Routes
+--------------------
+==> We Need To Make Nested Routes In Blog Page Like [localhost/blog/first] And [localhost/blog/second]
+    And Need If User Navigate To [localhost:3000/blog] It Shows Startup Blog Page
+==> Create Folder Called 'blog' In 'pages' Folder And Create 'first.js' And 'second.js' In It
+==> Create Startup Blog Page So Create 'index.js' In 'blog' Folder
+
+

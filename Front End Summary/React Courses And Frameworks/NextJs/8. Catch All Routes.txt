@@ -1,0 +1,59 @@
+(1) If Want To Build Docs Site And Want To Build Side Navbar Which Contains All Features And Concepts Links
+-------------------------------------------------------------------------------------------------------------
+==> Sample Of Navigate Link [localhost/docs/Feature1/Concept1]
+
+    Navbar
+    ---------
+
+    Feature1
+        -Concept 1
+        -Concept 2
+        -Concept 3
+    Feature2
+    Feature3
+
+
+(2) Steps Of Creating Docs Navbar
+-----------------------------------
+==> Create 'docs' Folder In 'pages' Folder
+==> In 'docs' Folder Create File Called ([...params].js) And Use (...) To Handle Any Deeper Routes In It
+
+
+    /docs/[...params].js
+    -----------------------
+
+    import { useRouter } from 'next/router'
+
+    function docs() {
+
+        const router = useRouter()
+
+	// Use [] To Avoid To Be Undefined As NextJs Pre-Render
+        const { params = [] } = router.query
+
+        console.log(params)
+        // Means That Link Like This [localhost:3000/docs/feature1/concept1]
+        // [feature1 , concept1]
+        if (params.length === 2) {
+            return <div>
+                You Select To See Feature : {params[0]} And Concept : {params[1]}
+            </div>
+        }
+
+        // Means That Link Like This [localhost:3000/docs/feature1]
+        // [feature1]
+        else if (params.length === 1) {
+            return <div>
+                You Select To See Feature : {params[0]}
+            </div>
+
+        }
+        return (
+            <div>Docs Home Page</div>
+        )
+    }
+
+    export default docs
+
+
+(3) But Note That In Previous Sample If Link Like [localhost:3000/docs] It Produce 404 Error Solution Is Rename ([...params].js) To ([[...params]].js)
