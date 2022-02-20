@@ -1,0 +1,18 @@
+(1) Create Page Not Found Page [404] To Override Default NextJs 404 Page
+--------------------------------------------------------------------------
+==> In 'pages' Folder Create '404.js' File Which Containing Error Message With Your Styling
+
+    /pages/404.js
+    --------------
+
+    import React from 'react'
+
+    function NotFounded() {
+        return (
+            <div>
+                <h1>Error 404 | Page Not Founded</h1>
+            </div>
+        )
+    }
+
+    export default NotFounded

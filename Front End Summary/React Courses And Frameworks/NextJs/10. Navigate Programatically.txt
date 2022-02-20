@@ -1,0 +1,46 @@
+(1) Navigate To Specific Route Using Or Anything Except Link
+-----------------------------------------------------------------
+
+    /pages/index.js
+    -----------------
+
+    import Link from 'next/link'
+    import { useRouter } from 'next/router' // Import useRouter
+
+    function Home() {
+
+        // Get Router Object
+        const router = useRouter()
+
+        // Use push Function To Navigate Programatically
+        const handleClick = () => {
+            console.log('Hellow')
+            router.push('/products')
+        }
+
+        return (
+            <div>
+                <Link href='/blog'>
+                    <a>Blog</a>
+                </Link>
+
+                <Link href='/products'>
+                    <a>Products</a>
+                </Link>
+
+                <button onClick={handleClick}>Place Order</button>
+            </div>
+        )
+    }
+
+    export default Home
+
+
+(2) Use replace() Instead Of push() To Navigate And Replace Page Which Containing Element That Execute The Navigation With The Navigated Page
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // Use replace Function To Navigate Programatically
+    const handleClick = () => {
+        console.log('Hellow')
+        router.replace('/products')
+    }

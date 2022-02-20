@@ -1,0 +1,35 @@
+(1) Pre-Rendering
+-------------------
+==> Next.js pre-generates HTML for every page rather than having it all done by the client-side JavaScript. Pre-rendering is finished by default in a Next.j app
+
+(2) Types Of Pre-Rendering
+----------------------------
+==> Static Generation : The HTML is generated at build time and will be reused on each request.
+==> Server-side Rendering : The HTML is generated on each request.
+
+(3) Static Generation
+-----------------------
+==> With Data
+==> without Data
+==> Incremental Static Generation
+==> Dynamic Parameters When Fetching 
+
+(4) Server side Rendering
+--------------------------
+==> Data Fetching
+
+
+(5) Hydration
+-----------------
+==> React Components Are Initialized And App Become Interactive
+
+
+(6) ReactJs VS NextJs In Rendering
+------------------------------------
+==> NextJs Use Pre-Render Which Pre-Render HTML First Then Make Hydration
+==> ReactJs Not Use Pre-Render Which At First App Not Render In Intial Load And Make Hydration Directly
+
+(7) Why Pre-Render
+--------------------
+==> Improve Performence
+==> Helps With SEO

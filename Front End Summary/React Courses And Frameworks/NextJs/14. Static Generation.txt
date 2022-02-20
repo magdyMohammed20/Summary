@@ -1,0 +1,12 @@
+(1) NextJs Support 2 Forms Of Pre-Render
+-------------------------------------------
+==> Static Generation
+==> Server Side Rendering
+
+(2) Static Generation
+-----------------------
+==> Method Of Pre-Rendering Where HTML Pages Generated At Build Time
+==> Is Most Recommended Pre-Rendering Method 
+==> Page Can Built Once , Cached By CDN And Served To Client Almost Instantly
+==> Most Site Ue This Method [Blog Pages - ECommerce Pages - Docs - Marketing Pages]
+
