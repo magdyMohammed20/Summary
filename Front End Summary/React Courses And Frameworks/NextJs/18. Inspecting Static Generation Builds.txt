@@ -1,0 +1,6 @@
+(1) Inspect How NextJs App Prepared For Production
+---------------------------------------------------
+==> Before Run Build Delete '.next' Folder Which Generated When Run The App using [npm run dev] As It Will Generated Again When Build The App
+==> For Run App Build [npm run build] Then See The Data In Editor Terminal
+
+(2) For Inspect Generated Html Files Open '.next' Folder Then 'pages' Folder And See All Generated Html Files And Generated Js Files Too

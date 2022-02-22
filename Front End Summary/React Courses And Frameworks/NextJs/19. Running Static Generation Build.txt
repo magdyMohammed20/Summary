@@ -1,0 +1,25 @@
+(1) Run NextJs App Using [yarn start] Or [npm start] But Before Sure That [.next] Folder Exist
+(2) Go To Browser And 'empty Cache And Hard Reload' Then Inspect Network Tab
+(3) In Network Respone Fetch [Css Code , WebpackCode , FrameworkCode , ReactCode('main') ]
+
+(4) If Change Any Content In Any Page And Run Using [yarn start] No Output Changed As Must Run [npm run build] Then Run [yarn start] See Following Sample
+
+    /pages/index.js
+    -----------------
+
+    import Link from 'next/link'
+
+    function Home() {
+        return (
+            <div>
+                <Link href='/users'>
+                    <a>Users</a>
+                </Link>
+            </div>
+        )
+    }
+
+    export default Home
+
+(5) In Previous Sample At Initial Page Load It Loads HomePage And users Page Assets So When Navigate To users Page Using The Link It Will Not Load Any Additional Assets In Network Tab As All Loads At First Initial Load
+    Note That : users Page Using 'getStaticProps' To Fetch User Data From Json Placeholder

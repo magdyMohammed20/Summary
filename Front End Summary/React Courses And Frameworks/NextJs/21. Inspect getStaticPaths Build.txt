@@ -1,0 +1,17 @@
+(1) Inspect getStaticPaths Build [By Run Using 'yarn build']
+-----------------------------------
+==> Run [yarn build] In Project Terminal
+==> Will Note That [/posts , /posts/1 , /posts/2 , /posts/3] Generated Using SSG
+==> If Open '.next/server/pages' Path Will Note That [posts.html , posts.json] Generated  
+==> If Open '.next/server/pages/posts' Path Will Note That All Posts Files Generated 
+
+(2) Inspect getStaticPaths In Network Tab [By Run Using 'yarn start']
+------------------------------------------
+==> Run [yarn start] In Project Terminal
+==> Open Browser On 'localhost:3000/posts/1' And Make 'Empty Cache And Hard Reload' Then See Response In Network Tab
+==> Will Note That File Called '1' Generated Of Type 'text/html' And Generate Some Files
+
+==> If Navigate To 'localhost:3000/posts' Will Note In Network Tab File Called 'posts' Generated Of Type 'text/html' And Json Files Of [/posts/1 , /posts/2 , /posts/3]
+
+
+(3) If Open 'localhost:3000/posts' And Navigate To 'localhost:3000/posts/1' Using Link Will Note That There Is No Additional Files Generated In Network Tab
