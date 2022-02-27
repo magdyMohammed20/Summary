@@ -1,0 +1,68 @@
+(1) You Might Need Always To Pre-Render Data [Like: User Dashboard] Beacause Of Dashboard Is User Specific And SEO Is Not Relevant So No Need To Pre-Render Data So We Will Use Client Side Data Fetching
+
+(2) Steps
+-------------
+==> Create 'dash.json' Beside 'pages' Folder And Set This Data In It
+
+    {
+        "dashboard": {
+            "posts": 5,
+            "likes": 10,
+            "followers": 20,
+            "following": 30
+        }
+    }
+
+==> In Package.json Change Scripts To Be Then Run [yarn serve-json] Then Explore [http://localhost:4000/dashboard] And See Data
+
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "serve-json": "json-server --watch dash.json --port 4000"
+    }
+
+
+==> Inside 'pages' Create Folder Called 'dashboard' And Create 'index.js' With Following Content Then Run [yarn dev]
+
+
+    /pages/dashboard/index.js
+    ---------------------------
+
+    import { useState, useEffect } from 'react'
+
+    export default function Dashboard() {
+
+        const [isLoading, setIsLoading] = useState(true)
+        const [dashboardData, setDashboardData] = useState(null)
+
+        useEffect(() => {
+
+            async function fetchData() {
+                const response = await fetch("http://localhost:4000/dashboard")
+                const data = await response.json()
+                setDashboardData(data)
+                setIsLoading(false)
+            }
+
+            fetchData()
+        }, [])
+
+        if (isLoading) {
+            return <div>Loading...</div>
+        }
+
+        return (
+            <div>
+                <h1>User Dashboard</h1>
+                <p>Posts - {dashboardData.posts}</p>
+                <p>Likes - {dashboardData.likes}</p>
+                <p>Followers - {dashboardData.followers}</p>
+                <p>Following - {dashboardData.following}</p>
+            </div>
+        )
+    }
+
+
+==> If Open Network Tab And See Response Page Will See Loading Indicator Only As There Is No Pre-Render Here

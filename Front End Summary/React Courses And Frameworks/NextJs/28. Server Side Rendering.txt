@@ -1,0 +1,20 @@
+(1) 2 Forms Of Pre-Rendering
+-------------------------------
+==> Static Generation 
+==> Server Side Rendering
+
+(2) Static Generation
+-------------------------
+==> Html Statically Generated At Build Time , Built Page Is Then Cashed And Reused For Each Request
+==> For Dynamic Pages With 'getStaticpaths' And Fallback Set To True The Page Not Generated At Build Time But Is Generated In Initial Request
+==> With ISR Page Can Be Re-Generated For A Request After The Revalidation Time Has Elapsed
+
+(3) Problems With Static Generation
+------------------------------------
+==> Can't Fetch Data At Request Time [Run Into Problem Of Stale Data (Which Data Updated Without Reflected To User Screen)] And Not Optimize For SEO
+==> We Don't Get Access To Incoming Request If Page Pre-Rendered At Build Time
+
+(4) Server Side Rendering (SSR)
+-----------------------------------
+==> Allow You To Pre-Render Page At Request Time Not Build Time 
+==> HTML Generated For Every Incoming Request

@@ -1,0 +1,70 @@
+(1) Make Dynamic Paramsters With SSR
+--------------------------------------
+==> We Want If Navigate To [localhost:3000/new/sprts] Or [localhost:3000/fashion] Will Navigate To Page Contains All Category News
+==> In 'news.json' Add 'category' Property For Every Object
+
+    {
+        "news": [
+            {
+                "id": 1,
+                "title": "First News",
+                "body": "This Is First Product",
+                "category": "sports"
+            },
+            {
+                "id": 2,
+                "title": "Second News",
+                "body": "This Is Second Product",
+                "category": "fashion"
+            },
+            {
+                "id": 3,
+                "title": "Third News",
+                "body": "This Is Third Product",
+                "category": "sports"
+            }
+        ]
+    }
+
+
+==> In 'news' Folder Create '[category].js' File
+
+
+    export default function getNewsByCategory({ articles, category }) {
+
+        return <div>
+            <h1>{category}</h1>
+            <div>
+                {
+                    articles.map(article => (
+                        <div key={article.id}>
+                            <h4>{article.title}</h4>
+                            <p>
+                                {article.body}
+                            </p>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+
+    }
+
+    export async function getServerSideProps(context) {
+
+        // Category Here As File Name Called [category].js
+        let { params: { category } } = context;
+
+        let response = await fetch(`http://localhost:4000/news?category=${category}`)
+
+        const data = await response.json()
+
+        return {
+            props: {
+                articles: data,
+                category: category
+            }
+        }
+    }
+
+==> If Run [yarn dev] And Navigate To [localhost:3000/news/sports] Or [localhost:3000/news/fashion] Will Get Data Of Each Category

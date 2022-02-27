@@ -1,0 +1,18 @@
+(1) What Is 'fallback: false' In 'getStaticPaths'
+---------------------------------------------------
+
+(2) Available 'fallback' Values
+---------------------------------
+==> fallback: false
+==> fallback: true
+==> fallback: 'blocking'
+
+(3) fallback: false
+---------------------
+==> The Paths Returned From 'getStaticPaths' Will Be Rendered To Html At Build Time By 'getStaticProps'
+==> Any Paths Not Returned By 'getStaticPaths' Will Result In 404 Page
+
+(4) When fallback: fallback Is Suitable
+------------------------------------------
+==> If Have App With Small Number Of Paths
+==> Where New Pages Are Not Added Often [Like Blog Sites]

@@ -1,0 +1,6 @@
+(1) Inspecting Build Of SSR
+-----------------------------
+==> Delete '.next' Folder
+==> Run [yarn build]
+==> See '.next/server/pages/news' Will Note That No Any Html Or JSON Generated As In SSR Pages Generated At Request Time 
+==> Run [yarn start] And Inspect Network Tab And See Pages Response

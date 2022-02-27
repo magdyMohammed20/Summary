@@ -1,0 +1,39 @@
+(1) SWR (Stale White Revalidate)
+---------------------------------
+==> Is React Hooks Library For Data Fetching
+
+(2) Install In NextJs Project Using [yarn add swr]
+
+(3) Inside 'pages' Create 'dashboard-swr' Folder Then Create 'index.js' In It
+
+
+    /pages/dashboard-swr/index.js [Work With Json File In The Previous File]
+    ----------------------------------
+
+    import useSWR from "swr";
+
+    // Method For Fetch Data Using Fetch API
+    const fetcher = async () => {
+        const response = await fetch("http://localhost:4000/dashboard")
+        const data = await response.json()
+        return data
+    }
+
+    export default function DashboardSwr() {
+
+        // First Arg Of 'useSWR' Is Unique Key For Data Fetch
+        const { data, error } = useSWR('dashboard', fetcher)
+
+        if (error) return 'An Error Occured'
+        if (!data) return 'Loading...'
+
+        return (
+            <div>
+                <h1>User Dashboard</h1>
+                <p>Posts - {data.posts}</p>
+                <p>Likes - {data.likes}</p>
+                <p>Followers - {data.followers}</p>
+                <p>Following - {data.following}</p>
+            </div>
+        )
+    }

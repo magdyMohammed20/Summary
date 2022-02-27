@@ -1,0 +1,139 @@
+(1) Issues Of Static Site Generation
+--------------------------------------
+==> Build Time Is Proportional To Number Of Pages In App
+==> A Page Once Generated Can Contain Stale Data Till The Time You Rebuild The App
+
+(2) Build Time Issue
+----------------------
+==> If Have Ecommerce Site Each Page Takes 100ms To Build So If Have 100 Products Will Takes 10 Seconds To Build All But If Have More And More Products Build Time Will Be So Big
+
+(3) Stale Data Issue
+---------------------
+==> Some Of Apps Might Build Evary Day Like Ecommerce Every Day Products Added Or Updated
+
+(4) Steps
+-----------
+==> Install JSON SERVER [yarn add json-server]
+
+==> Beside 'pages' Folder Create 'db.json' With This Data
+
+    {
+        "products": [
+            {
+                "id": 1,
+                "product": "First Product",
+                "price": 100,
+                "description": "This Is First Product"
+            },
+            {
+                "id": 2,
+                "product": "Second Product",
+                "price": 140,
+                "description": "This Is Second Product"
+            },
+            {
+                "id": 3,
+                "product": "Third Product",
+                "price": 200,
+                "description": "This Is Third Product"
+            }
+        ]
+    }
+
+==> Add Json Server Command In Scripts Inside [package.json]
+
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "serve-json" : "json-server --watch db.json --port 4000"
+    }
+
+==> Run Json Server Using [yarn serve-json] Then Open [localhost:4000/products] And Will See 'db.json' Data
+    And If Navigate To [localhost:4000/products/1] Will See Individual Product Data
+
+
+==> Handle Products And Product Details Page
+
+
+    /pages/products/[productId].js
+    --------------------------------
+
+    import { useRouter } from "next/router"
+
+    export default function SingleProduct({ product }) {
+
+        const router = useRouter()
+        if (router.isFallback) {
+            return <div>Loading...</div>
+        }
+
+        return <>
+            <h1>{product.title} {product.price}</h1>
+        </>
+    }
+
+    // Here Only The First Product Page Will Generated In Build Time Only
+    export async function getStaticPaths() {
+
+        return {
+            paths: [{ params: { productId: '1' } }],
+            fallback: true
+        }
+    }
+
+    export async function getStaticProps(context) {
+
+        const { params } = context
+        const response = await fetch(`http://localhost:4000/products/${params.productId}`)
+        const data = await response.json()
+
+        return {
+            props: {
+                product: data
+            }
+        }
+    }
+
+
+
+    /pages/products/index.js
+    --------------------------
+
+    import Link from 'next/link'
+
+    export default function productList({ products }) {
+
+        return (
+            <>
+                {
+                    products.map(({ id, title, price, description }) => <div key={id}>
+                        <Link href={`/products/${id}`} passHref>
+                            <h1>{title}</h1>
+                        </Link>
+                        <p>${price}</p>
+                        <p>{description}</p>
+                    </div>)
+                }
+            </>
+        )
+    }
+
+    export async function getStaticProps() {
+        const response = await fetch('http://localhost:4000/products')
+        const data = await response.json()
+
+        return {
+            props: {
+                products: data
+            }
+        }
+    }
+
+==> If Run [yarn build] Will Note That In '.next/server/pages/products' Only [1.html , 1.json] Generated 
+==> If Run [yarn start] And Navigate To [localhost:3000/products] Will See All Products
+==> If Update Any Value In First Product In 'db.json' It Will Not Refelected To [localhost:3000/products] Or [localhost:3000/products/1]  But If Change Any Value In Second Product Only Once Will Refelected To [localhost:3000/products/2] Only And Not Refelected To [localhost:3000/products] But If Change Second Product Again It Will Not Reflected In Any Route
+    For Solve This Problem Will Use ISR [Incremental Static Regeneration]
+
+==> ISR: Allow You To Update Static Pages After You Have Build Your App

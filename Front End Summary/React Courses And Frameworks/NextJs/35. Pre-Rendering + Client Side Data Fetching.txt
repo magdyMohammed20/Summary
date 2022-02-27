@@ -1,0 +1,148 @@
+(1) Pre-Rendering + Client Side Data Fetching
+----------------------------------------------
+==> If Want To Build Of Events Page That Happening Around
+
+(2) Steps
+------------
+==> Beside 'pages' Folder Create 'events.json' File
+
+    {
+        "events": [
+            {
+                "id": 1,
+                "title": "First Event",
+                "description": "This Is First Event",
+                "category": "c1",
+                "data": "jan 25"
+            },
+            {
+                "id": 2,
+                "title": "Second Event",
+                "description": "This Is Second Event",
+                "category": "c2",
+                "data": "mar 22"
+            },
+            {
+                "id": 3,
+                "title": "Third Event",
+                "description": "This Is Third Event",
+                "category": "c3",
+                "data": "Apr 22"
+            }
+        ]
+    }
+
+
+==> List Events And Filter Events Of First category
+
+    /pages/events/index.js [But After Filter The Page Url Still [localhost:3000/events]]
+    -----------------------
+
+    import { useState } from 'react'
+
+    export default function Events({ events }) {
+
+        const [eventsList, setEventsList] = useState(events)
+
+        // This Function For Filter Events That In c1 Category
+        async function filterC1() {
+            const response = await fetch('http://localhost:4000/events?category=c1')
+            const data = await response.json()
+
+            setEventsList(data)
+        }
+
+        return (
+            <div>
+                <h1>Events</h1>
+                <button onClick={filterC1}>Filter c1</button>
+                {
+                    eventsList.map(event => (
+                        <div key={event.id}>
+                            <h1>
+                                {event.id} - {event.title} - {event.date} | {event.category}
+                            </h1>
+                            <p>
+                                {event.description}
+                            </p>
+                            <hr />
+                        </div>
+                    ))
+                }
+            </div>
+
+        )
+    }
+
+    export async function getServerSideProps() {
+        const response = await fetch('http://localhost:4000/events')
+        const data = await response.json()
+
+        return {
+            props: {
+                events: data
+            }
+        }
+    }
+
+
+==> In Previous Sample We Want To Change Url After Filtering So Will Use Shallow Routing [As Shallow routing allows you to change the URL without running data fetching methods again]
+
+
+    /pages/events/index.js 
+    -----------------------
+
+    import { useState } from 'react'
+    import { useRouter } from 'next/router'
+    export default function Events({ events }) {
+
+        const [eventsList, setEventsList] = useState(events)
+        const router = useRouter()
+
+
+        // This Function For Filter Events That In c1 Category
+        async function filterC1() {
+            const response = await fetch('http://localhost:4000/events?category=c1')
+            const data = await response.json()
+            setEventsList(data)
+
+            // Note Here Using Shallow Routing
+            router.push('/events?category=sports', undefined, { shallow: true })
+        }
+
+        return (
+            <div>
+                <h1>Events</h1>
+                <button onClick={filterC1}>Filter c1</button>
+                {
+                    eventsList.map(event => (
+                        <div key={event.id}>
+                            <h1>
+                                {event.id} - {event.title} - {event.date} | {event.category}
+                            </h1>
+                            <p>
+                                {event.description}
+                            </p>
+                            <hr />
+                        </div>
+                    ))
+                }
+            </div>
+
+        )
+    }
+
+    export async function getServerSideProps(context) {
+
+        const { query: { category } } = context
+        const queryString = category ? 'category=sports' : ''
+
+        const response = await fetch(`http://localhost:4000/events?${queryString}`)
+        const data = await response.json()
+
+        return {
+            props: {
+                events: data
+            }
+        }
+    }

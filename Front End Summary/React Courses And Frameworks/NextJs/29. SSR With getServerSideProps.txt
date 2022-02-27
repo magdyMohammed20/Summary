@@ -1,0 +1,86 @@
+(1) Fetch Data From API Using SSR
+----------------------------------
+
+==> Create 'news.json' Beside 'Pages' Folder And Edit Script In Package.json Then Run [yarn serve-json] Then Navigate To [localhost:4000/news] And See Your Json Data
+
+    news.json
+    ----------
+
+    {
+        "news": [
+            {
+                "id": 1,
+                "title": "First News",
+                "body": "This Is First Product"
+            },
+            {
+                "id": 2,
+                "title": "Second News",
+                "body": "This Is Second Product"
+            },
+            {
+                "id": 3,
+                "title": "Third News",
+                "body": "This Is Third Product"
+            }
+        ]
+    }
+
+
+    package.json
+    --------------
+
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "serve-json": "json-server --watch news.json --port 4000"
+    }
+
+
+==> In 'pages' Folder Create File Called 'news' And Create 'index.js' In It
+
+
+    /pages/news/index.js [Run Using 'yarn dev']
+    ----------------------
+
+    export default function newsList({ articles }) {
+        return <div>
+            <h1>News List</h1>
+            {
+                articles.map(article => (
+                    <div key={article.id}>
+                        <h1>{article.title}</h1>
+                        <p>
+                            {article.body}
+                        </p>
+                    </div>
+                ))
+            }
+        </div>
+    }
+
+    // For Using SSR Must Export Async Function Calld 'getServerSideProps'
+    export async function getServerSideProps() {
+
+        const response = await fetch(`http://localhost:4000/news`)
+        const data = await response.json()
+
+        return {
+            props: {
+                articles: data
+            }
+        }
+    }
+
+(2) getServerSideProps()
+-------------------------
+==> Runs Only In Server Side
+==> Code Written In It Won't Included In Js Bundle That Is Sent To The Browser
+==> Can Write Server Side Code Directly In getServerSideProps() [Can Access File Systems Or Query DB Like In NodeJs]
+==> Can Set API Key In It And Won't Provide It To The Browser
+==> Allowed To Use It In Page And Can't Use In Regular Component
+==> It Used Only For Pre-Rendering And Don't Client Side Data Fetching
+==> Must Return Object With 'props' Property Which Is An Object Too
+==> Will Run At Request Time

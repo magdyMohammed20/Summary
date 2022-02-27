@@ -1,0 +1,56 @@
+(1) ISR (Incremental Static Regeneration)
+----------
+==> We Need To Update Pages Which Needed A Change Without Rebuild App
+==> With ISR Allow You To Update Static Pages After Build App
+
+(2) How ISR Solve Problem Of Rebuild
+--------------------------------------
+==> In getStaticProps Function Apart From Props Key We Can Specify A Revalidate Key
+==> Value Of Revalidate Is Number Of Seconds After Which A Page Re-Generation Can Occur
+
+(3) Solution
+----------------
+==> In Products Page Specify 'revalidate' Value In 'getStaticProps'
+
+    /pages/products/index.js
+    ---------------------------
+
+    export async function getStaticProps() {
+        const response = await fetch('http://localhost:4000/products')
+        const data = await response.json()
+
+        return {
+            props: {
+                products: data
+            },
+            // Will Revalidate Product List Page After 10 Seconds From Page Refresh Or Reload
+            // Wait For 10 Seconds After Change Value In 'db.json' Then Reload Page So Page Will ReGenerated In Background But Will Not Updated In Browser Untill Refresh Page Again
+            revalidate: 10 
+        }
+    }
+
+==> For Run Delete '.next' Folder And Run [yarn build] Again Then [yarn start]
+==> Now If Change Any Value Inside 'db.json' Will Affected In Browser After 10 Second From Page Load
+
+==> But Must Use 'revalidate' Inside [productId].js
+
+
+    /pages/products/[productId].js
+    ---------------------------------
+
+    export async function getStaticProps(context) {
+
+        const { params } = context
+        const response = await fetch(`http://localhost:4000/products/${params.productId}`)
+        const data = await response.json()
+
+        return {
+            props: {
+                product: data
+            },
+            revalidate: 10
+        }
+    }
+
+==> For Make [productId].js Work Must Delete '.next' And Run [yarn build] Then [yarn start]
+

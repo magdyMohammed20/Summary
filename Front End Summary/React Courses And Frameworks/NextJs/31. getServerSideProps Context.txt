@@ -1,0 +1,58 @@
+(1) getServerSideProps() Give You Access To The Incoming Request
+
+(2) Different Objects You Can Access Using In getServerSideProps()
+--------------------------------------------------------------------
+
+==> Request And Response Objects
+----------------------------------
+
+    /pages/news/[category].js
+    ---------------------------
+
+    export async function getServerSideProps(context) {
+
+        // Can Destruct res And req From Context
+        let { params: { category }, req, res } = context;
+
+        console.log(req.headers.cookie) // Will Be Undefined In First Request But In Other Request Will Be 'name=magdy'
+        res.setHeader('Set-Cookie', ['name=magdy']) // Will Set Cookie In Browser
+
+
+        let response = await fetch(`http://localhost:4000/news?category=${category}`)
+        const data = await response.json()
+
+        return {
+            props: {
+                articles: data,
+                category: category
+            }
+        }
+    }
+
+
+==> Query Objects
+---------------------
+
+    /pages/news/[category].js
+    ---------------------------
+
+    export async function getServerSideProps(context) {
+
+        // Destruct Query Here
+        let { params: { category }, req, res, query } = context;
+
+        // If [localhost:3000/news/sports] Will Be { category: 'sports' }
+        // If [localhost:3000/news/fashion] Will Be { category: 'fashion' }
+        // If [localhost:3000/news/fashion?subcat=mego] Will Be { subcat: 'mego', category: 'fashion' }
+        console.log(query)
+
+        let response = await fetch(`http://localhost:4000/news?category=${category}`)
+        const data = await response.json()
+
+        return {
+            props: {
+                articles: data,
+                category: category
+            }
+        }
+    }
