@@ -1,0 +1,27 @@
+(1) Create Dynamic API Routes Using API Route
+----------------------------------------------
+==> From The Previous Created API We Want If Request This Link [http://localhost:3000/api/comments/:id] Must Fetch The Specified Comment Only
+==> So In '/pages/api/comments' Create File Called ([commentId].js) 
+==> Now If Go To [http://localhost:3000/api/comments/1] Will Fetch Json Data Of First Comment
+
+    /pages/api/comments/[commentId].js
+    ------------------------------------
+
+    import { comments } from "../../../data/comments"
+
+    function singleComment(req, res) {
+
+        // Fetch Comment Id From Page Link
+        const { commentId } = req.query
+
+        const selectedComment = comments.find(comment => comment.id == parseInt(commentId))
+
+        if (selectedComment) {
+
+            res.status(200).json(selectedComment)
+        } else {
+            res.status(404).send('Comment Not Found')
+        }
+    }
+
+    export default singleComment

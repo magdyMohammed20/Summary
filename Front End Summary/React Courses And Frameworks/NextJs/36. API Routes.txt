@@ -1,0 +1,21 @@
+(1) API Routes
+----------------
+==> NextJs Is Full Stack Framework
+==> Can Write Front End Code In React And Write API's That Can Be Called By Front End Code 
+==> API Routes Allow You To Create Restfull EndPoint 
+==> Within 'pages' Folder There Are Folder Called 'api'
+
+(2) Handle First API
+-----------------------
+==> Inside '/pages/api' Create File Called 'index.js'
+==> Then Run [yarn dev] And Explore [http://localhost:3000/api]
+
+    /pages/api/index.js
+    ----------------------
+
+    export default function handler(req, res) {
+        res.status(200).json({ name: 'Home Page API Route' })
+    }
+
+
+(3) Can Create Nested Folders And Files Inside 'api' Folder

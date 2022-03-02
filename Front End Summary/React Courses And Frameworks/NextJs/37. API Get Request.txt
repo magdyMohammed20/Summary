@@ -1,0 +1,68 @@
+(1) Create API Using API Routes
+---------------------------------
+==> In Root Folder Create 'data' Folder And Create 'comments.js' In It
+==> Handle Comments Data Inside '/api/comments/index.js'
+==> Navigate To [http://localhost:3000/api/comments] And See API Data
+
+
+    /data/comments.js
+    -------------------
+
+    export const comments = [
+        {
+            id: 1,
+            text: 'First Comment'
+        },
+        {
+            id: 2,
+            text: 'Second Comment'
+        }, {
+            id: 3,
+            text: 'Third Comment'
+        }
+    ]
+
+    /api/comments/index.js
+    ------------------------
+
+    import { comments } from "../../../data/comments";
+
+    export default function handler(req, res) {
+        res.status(200).json(comments)
+    }
+
+
+(2) Create GET Request To Fetch Created Data Above
+----------------------------------------------------
+==> Write The Following And Explore [localhost:3000/comments]
+
+
+    /pages/comments/index.js
+    --------------------------
+
+    import { useState } from "react"
+    export default function Comments() {
+
+        const [comments, setComments] = useState([])
+        const [isLoaded, setIsLoaded] = useState(false)
+
+        const loadComments = async () => {
+            if (!isLoaded) {
+                const data = await fetch('/api/comments')
+                const response = await data.json()
+                await setComments(response)
+                setIsLoaded(true)
+            }
+        }
+
+        return (
+            <div>
+                <button onClick={loadComments}>Load Comments</button>
+                {
+                    comments.map(comment => <div key={comment.id}>
+                        <p>{comment.id} - {comment.text}</p>
+                    </div>)
+                }
+            </div>
+        )
+    }
