@@ -1,0 +1,62 @@
+(1) API's And Pre-Rendering
+-------------------------------
+==> We Want If Navigate To [localhost:3000/comments/1] Will Pre-Render Details Page Of Comment With id = 1
+==> So In 'pages' Folder Create Folder Called 'comments' And Create [commentId].js In It
+==> Calling Your API Inside getStaticProps Or getStaticPath Is Not Recommended
+
+    /data/comments.js
+    --------------------
+
+    export const comments = [
+        {
+            id: 1,
+            text: 'First Comment'
+        },
+        {
+            id: 2,
+            text: 'Second Comment'
+        }, {
+            id: 3,
+            text: 'Third Comment'
+        }
+    ]
+
+
+    /pages/comments/[commentId].js
+    -------------------------------
+
+    import { comments } from '../../data/comments'
+
+    function Component({ comment }) {
+        return (
+            <div>
+                {comment.id} - {comment.text}
+            </div>
+        )
+    }
+
+    export default Component
+
+    export async function getStaticPaths() {
+        return {
+            paths: [
+                { params: { commentId: '1' } },
+                { params: { commentId: '2' } },
+                { params: { commentId: '3' } }
+            ],
+            fallback: false
+        }
+    }
+
+    export async function getStaticProps(context) {
+        const { params: { commentId } } = context
+
+        // As Using Of Your Own API Isn't Recommended In getStaticProps And getStaticPaths Here We Deal With The Array Of Comment Not API Of Comments
+        const comment = comments.find(comment => comment.id === parseInt(commentId))
+
+        return {
+            props: {
+                comment
+            }
+        }
+    }

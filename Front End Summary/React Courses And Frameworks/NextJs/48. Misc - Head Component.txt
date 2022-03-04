@@ -1,0 +1,105 @@
+(1) When Inspecting NextJs App In Browser Will Note That <head> Section With Default Content So We Can Control It Using Head Component
+
+    /pages/About.js
+    ------------------
+
+    import Head from 'next/head' // 1- Import Head Component
+
+    function About() {
+
+        // 2- Use Head Component And Set Content
+        return (
+            <>
+                <Head>
+                    <title>About Page</title>
+                    <meta name='description' content='this Is About Page' />
+
+                </Head>
+                <div style={{ backgroundColor: 'red' }}>
+                    <div>1</div>
+                    <div>2</div>
+                </div>
+            </>
+        )
+    }
+
+    export default About
+
+
+(2) Specify Head Content In Dynamic Routes Using 'getServerSideProps'
+-----------------------------------------------------------------------
+==> Navigate To [localhost:3000/blog/1] And See Result When Inspect Page
+
+    /pages/blog/[pageId].js
+    -------------------------
+
+    import React from 'react'
+    import Head from 'next/head'
+
+    function BlogPage(props) {
+
+        return (
+            <>
+                <Head>
+                    <title>{props.title}</title>
+                    <meta name='description' content={props.description} />
+                </Head>
+                <div>
+                    Hellow World
+                </div>
+            </>
+        )
+    }
+
+    export default BlogPage
+
+    export async function getServerSideProps() {
+        return {
+            props: {
+                title: 'Blog Single Page',
+                description: 'This Is Blog Single Page'
+            }
+        }
+    }
+
+
+(3) If Don't Want To Set <Head> In Each Page So We Will Use Only Once In '_app.js'
+------------------------------------------------------------------------------------
+
+    /pages/about.js
+    -----------------
+
+    About.title = 'About Page'; // 1- Set Page Title Value Here
+    About.metaDesc = 'This Is About Page'; // 2- Set Page Meta Content
+    function About() {
+
+        return (
+            <>
+                <div style={{ backgroundColor: 'red' }}>
+                    <div>1</div>
+                    <div>2</div>
+                </div>
+            </>
+        )
+    }
+
+    export default About
+
+
+    /pages/_app.js
+    -----------------
+
+    import Head from 'next/head'
+
+    function MyApp({ Component, pageProps }) {
+
+        return <>
+            <Head>
+                <title>{Component.title}</title>
+                <meta name='description' content={Component.metaDesc}/>
+            </Head>
+            <Component {...pageProps} />
+        </>
+    }
+
+    export default MyApp

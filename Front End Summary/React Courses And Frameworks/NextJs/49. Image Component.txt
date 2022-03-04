@@ -1,0 +1,78 @@
+(1) Where To Set Images In Project
+------------------------------------
+==> Set All Images Which Used In NextJs App Inside 'public' Folder
+
+(2) Sample
+-------------
+==> Having 5 Images In 'public' Folder And Want To Display In '/pages/pets.js'
+==> But If Inspect Network Tab Will Note That Images Size Is Big Which Will Increase Load Time
+
+    /pages/pets.js
+    ----------------
+
+    export default function PetsPage() {
+        return (
+            <div>
+                {
+                    ['1', '2', '3', '4', '5'].map(path => <div>
+                        <img src={`/${path}.jpg`} alt={path} width={420} height={200} />
+                    </div>)
+                }
+            </div>
+        )
+    }
+
+
+(3) Improve Image Using 'Image' Component
+------------------------------------------
+==> If Use 'Image' Component Will Decrease Image Size And Load Time Will Decreased Too As NextJs Convert Images To 'webp' Which Will Find It In '.next/cache/images' Folder
+
+
+    /pages/pets.js
+    ----------------
+
+    import Image from 'next/image'
+
+    export default function PetsPage() {
+        return (
+            <div>
+                {
+                    ['1', '2', '3', '4', '5'].map(path => <div>
+                        <Image src={`/${path}.jpg`} alt={path} width={420} height={200} />
+                    </div>)
+                }
+            </div>
+        )
+    }
+
+(4) Image Component Benefits
+------------------------------
+==> Automatic Optimization Of Image Size And Format (As In (3))
+==> Lazy Loading [In First Load It Load Some Of Images Which Fit To Viewpoort Height And If Scroll Will Load The Other Image Which Appear In Viewport]
+==> Can Produce Blured Image With Static Images Only
+
+
+(5) Can Produce Blured Image With Static Images Only
+-----------------------------------------------------
+
+    /pages/pets.js
+    ----------------
+
+    import Image from 'next/image'
+    import img from '/public/1.jpeg'
+
+    export default function PetsPage() {
+        return (
+            <div>
+                {/* This Is Static Image */}
+                <Image src={img} placeholder='blur' alt='img' width={420} height={350} />
+
+                {/* This Is Dynamic Images Which Can't Use Blur With It */}
+                {
+                    ['1', '2', '3', '4', '5'].map(path => <div>
+                        <Image src={`/${path}.jpg`} alt={path} width={420} height={350} />
+                    </div>)
+                }
+            </div>
+        )
+    }

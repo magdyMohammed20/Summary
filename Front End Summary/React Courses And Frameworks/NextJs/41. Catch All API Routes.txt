@@ -1,0 +1,21 @@
+(1) Catch All API Routes
+--------------------------
+==> API Can Have Multi Routes Like [localgost:3000/api/seg1/seg2/seg3] Which seg1 Is Mandatory And [seg2 , seg3] Are Optional
+==> For Create API Route For Above Sample Create ([...params].js) File In 'pages/api' Folder
+
+   /pages/api/[...params].js
+   ----------------------------
+
+    export default function handler(req, res) {
+        // 'params' Here Refer To File Name In [...params].js
+        const par = req.query.params
+
+        console.log(par)
+
+        // If Request [localhost:3000/api/seg1] Will Return ['seg1'] In Browser
+        // If Request [localhost:3000/api/seg1/seg2] Will Return ['seg1' , 'seg2'] In Browser
+        res.status(200).json(par) // Will Return Array Of Link Routes As Json In [localhost:3000/api/(Any Params)] 
+    }
+
+(2) If There Is No 'index.js' File Inside '/pages/api' Folder And Want If Request [localhost:3000/api] No 404 Error Appear And Start With Logic Of [...params].js Must Rename [...params].js To [[...params]].js
+

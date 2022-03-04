@@ -1,0 +1,6 @@
+(1) Adding Css Global Styles In NextJs App
+--------------------------------------------
+==> In Your NextJs App There Are Folder Called 'styles' Which Contains 'globals.css' File And Imported Inside '/pages/_app.js'
+==> So If Want To Create Global Style Must Import Css File In '_app.js'
+==> If Want To Use Bootstrap Globally So Must Install Bootstrap [yarn add bootstrap] Then Import Bootstrap Css File In '_app.js' [import "bootstrap/dist/css/bootstrap.min.css"]
+

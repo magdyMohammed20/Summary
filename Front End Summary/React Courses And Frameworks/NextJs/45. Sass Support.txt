@@ -1,0 +1,38 @@
+(1) Use Sass With NextJs
+--------------------------
+==> Install Sass In NextJs Project [yarn add sass]
+==> Now In 'styles' Folder Can Create '_colors.scss' And 'About.module.scss'
+
+    /styles/_colors.scss
+    -----------------------
+
+    $green: #0F5;
+    $blue: #50F;
+
+    /styles/About.module.scss
+    ----------------------------
+
+    @import 'colors';
+
+    .about{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: $green;
+    }
+
+    /pages/about.js
+    -----------------
+
+    import styles from '../styles/About.module.scss'
+
+    function about() {
+        return (
+            <div className={styles.about}>
+                <div>1</div>
+                <div>2</div>
+            </div>
+        )
+    }
+
+    export default about

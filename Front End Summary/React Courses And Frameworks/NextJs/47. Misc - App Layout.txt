@@ -1,0 +1,112 @@
+(1) When Creating Website Each Page Has Own Style But There Are Share Layout Between All Pages Like All Pages Has Same Header And Footer But We Don't Need To Import Header And Footer In Each Page So We Make This Logic
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    /components/Footer.js
+    ----------------------
+
+    export default function Footer() {
+        return <footer>
+            Footer
+        </footer>
+    }
+
+    /components/Header.js
+    -----------------------
+
+    export default function Header() {
+        return <header>
+            Header
+        </header>
+    }
+
+    /styles/layout.css
+    --------------------
+
+    header{
+        background-color: #CCC;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    footer{
+        background-color: #CCC;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    /pages/_app.js [Import Header And Footer Here For Be In All Pages]
+    ----------------
+
+    import '../styles/globals.css'
+    import 'bootstrap/dist/css/bootstrap.min.css'
+    import Header from '../components/Header' // 1- Import Header
+    import Footer from '../components/Footer' // 2- Import Footer
+    import '../styles/layout.css' // 3- Import Layout Style
+
+    // 4- Wrap All Using Fragment 
+    function MyApp({ Component, pageProps }) {
+        return <>
+            <Header />
+            <Component {...pageProps} />
+            <Footer />
+        </>
+    }
+
+    export default MyApp
+
+
+(2) If There Are Specific Page Don't Want To Include Header Or Footer In It
+-----------------------------------------------------------------------------
+
+
+    /pages/about.js [Here We Don't Need To Include Header]
+    ----------------
+
+    import Footer from "../components/Footer"
+
+    function About() {
+        return (
+            <div style={{ backgroundColor: 'red' }}>
+                <div>1</div>
+                <div>2</div>
+            </div>
+        )
+    }
+
+    export default About
+
+    // Here We Don't Want To Include Header In About Page
+    About.getLayout = function pageLayout(page) {
+        return (
+            <>
+                {page}
+                <Footer />
+            </>
+        )
+    }
+
+
+    /pages/_app.js
+    ---------------
+
+    import '../styles/globals.css'
+    import 'bootstrap/dist/css/bootstrap.min.css'
+    import Header from '../components/Header'
+    import Footer from '../components/Footer'
+    import '../styles/layout.css'
+
+    function MyApp({ Component, pageProps }) {
+
+        // Check If Page Has It's Own Layout
+        if (Component.getLayout) {
+            return Component.getLayout(<Component {...pageProps} />)
+        }
+
+        return <>
+            <Header />
+            <Component {...pageProps} />
+            <Footer />
+        </>
+    }
+
+    export default MyApp
