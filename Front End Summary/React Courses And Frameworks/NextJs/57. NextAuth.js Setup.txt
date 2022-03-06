@@ -1,0 +1,89 @@
+(1) Configure Navbar And Routes
+---------------------------------
+
+    /components/Navbar.js
+    -----------------------
+
+    import Link from 'next/link'
+
+    export default function Navbar() {
+        return (
+            <nav>
+                <ul>
+                    <li><Link href='/'><a>Home</a></Link></li>
+                    <li><Link href='/dashboard'><a>Dashboard</a></Link></li>
+                    <li><Link href='/blog'><a>Blog</a></Link></li>
+                    <li><Link href='#'><a>Sign In</a></Link></li>
+                    <li><Link href='#'><a>Sign Out</a></Link></li>
+                </ul>
+            </nav>
+        )
+    }
+
+    /components/Navbar.css
+    ------------------------
+
+     // Any Style You Want
+
+
+    /pages/_app.js
+    -----------------
+
+    import '../styles/globals.css'
+    import Navbar from '../components/Navbar'
+    import '../components/navbar.css'
+
+
+    function MyApp({ Component, pageProps }) {
+        return <>
+            <Navbar />
+            <Component {...pageProps} />
+        </>
+    }
+
+    export default MyApp
+
+
+    /pages/blog.js
+    ----------------
+
+    // Normal Page
+
+    /pages/dashboard.js
+    --------------------
+
+    // Normal Page
+
+(2) Setup NextAuth Using [yarn add next-auth]
+
+(3) Create This Folder '/api/auth/[...nextauth].js'
+------------------------------------------------------
+==> Create Github oAuth App By Go To Your Github 'Settings' Then  'Developer Settings' Then 'OAuth Apps' Then 'Register New Application' And Fill Data Like This
+    [App Name: nextAuth] [HomePage: http://localhost:3000] [Authorization callback URL: http://localhost:3000] Then Click 'Register' And Will Get Client Id And Can Generate 'new Client Secret' For Generate 'GITHUB_SECRET' Which In '.env.local' Below
+
+
+    /api/auth/[...nextauth].js
+    -----------------------------
+
+    import NextAuth from "next-auth"
+    import GithubProvider from "next-auth/providers/github"
+
+    export default NextAuth({
+        providers: [
+            GithubProvider({
+                clientId: process.env.GITHUB_ID,
+                clientSecret: process.env.GITHUB_SECRET,
+            })
+        ]
+    })
+
+==> Create '.env.local' In Project Root With This Content
+
+    /.env.local
+    -------------
+
+    GITHUB_ID=5ccdec11fdf1cc012fe6
+    GITHUB_SECRET=c23de8bdccfd9187f94dafcef38131b6b16a7a75
+
+==> After Make All Above Restart Server [yarn dev] And Navigate To [localhost:3000/api/auth/signin] And Make SignIn Normally Then Finally Redirected To Your Home Page Again But It Generates Cookies
+    If Want To Sign Out Navigate To [localhost:3000/api/auth/signout] And Will Note That SignIn Cookie Removed From Cookies

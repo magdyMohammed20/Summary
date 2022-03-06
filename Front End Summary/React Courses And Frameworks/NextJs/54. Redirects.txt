@@ -1,0 +1,30 @@
+(1) Redirects
+--------------
+==> allow you to redirect an incoming request path to a different destination path.
+==> If Your Website Under Mentainance And Want To Redirect User To Specific Page
+
+
+(2) Redirects Configured Inside 'next.config.js' File Then Run [yarn dev] After Configured 
+
+    next.config.js [We Want If User Navigate To About Page Will Redirect Me To Home Page]
+    -----------------
+
+    /** @type {import('next').NextConfig} */
+    const nextConfig = {
+    reactStrictMode: true,
+    redirects: async () => {
+        return [
+            {
+                source: '/about',
+                destination: '/',
+                permanent: true
+            }
+        ]
+        }
+    }
+
+    module.exports = nextConfig
+
+(3) permanent Property
+-----------------------
+==> true or false - if true will use the 308 status code which instructs clients/search engines to cache the redirect forever, if false will use the 307 status code which is temporary and is not cached.

@@ -1,0 +1,8 @@
+(1) Using Typescript With NextJs
+----------------------------------
+==> First : Create 'tsconfig.json' Inside Your Project But If Run [yarn dev] Will Give Error As Require Some Typescript Packages
+==> Add Packages Using [yarn add --dev typescript @types/react @types/node] Then Run [yarn dev] Again
+==> But If Use 'Absolute Imports' Or 'module Paths' Must Transfer 'compilerOptions' To 'tsconfig.json'
+
+(2) Note That NextJs Has It's Own Structure With Data Fetching And All Other Things You Can See It In NextJs Docs
+

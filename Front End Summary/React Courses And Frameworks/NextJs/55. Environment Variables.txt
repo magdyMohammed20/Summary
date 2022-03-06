@@ -1,0 +1,56 @@
+(1) Environment Variables
+---------------------------
+==> Creating Environment Variables For DB Hidden Data Or Other Secret Things
+
+(2) Steps [After Write Code Restart Server [yarn dev]]
+------------
+==> In NextJs Root Folder Create '.env.local' File Which Will Contains All Environment Variables
+
+    .env.local
+    ------------
+
+        DB_USER = Magdy
+        DB_PASS = 12345
+
+==> Can Use Environment Variables In Any Page
+
+    /Pages/blog/[blogId].js
+    -------------------------
+
+    import React from 'react'
+
+    function BlogPage({ data }) {
+        return (
+            <>
+                <div>{data}</div>
+            </>
+        )
+    }
+
+    export default BlogPage
+
+    export async function getServerSideProps() {
+
+        const user = process.env.DB_USER;
+        const pass = process.env.DB_PASS
+
+        console.log(user, pass) // Magdy 12345
+        return {
+            props: {
+                data: 'Hellow World'
+            }
+        }
+    }
+
+==> If Render [process.env.DB_USER] In Component It Will Not rendered As Data Allowed Only For NodeJs But Can Pass It To 'getServerSideProps' Props And Will Rendered Normally Or Make It Public Like Following
+
+    .env.local
+    --------------
+
+    NEXT_PUBLIC_ANALYTICS_ID = 123
+
+
+    /Pages/blog/[blogId].js
+    -------------------------
+
+     <div>{process.env.NEXT_PUBLIC_ANALYTICS_ID}</div>

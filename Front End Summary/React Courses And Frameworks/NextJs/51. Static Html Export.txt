@@ -1,0 +1,24 @@
+(1) next build , start , export
+---------------------------------
+==> next build : Build App For Production In '.next' Folder
+==> next start : start nodeJs Server That Supports Hybrid Pages , serving Both Statically Generated And Server Side Rendered Pages 
+==> next export : Export All Pages To Static Html Files That You Can Server Without Need Of NodeJs Server
+                  [Like : Landing Pages Or Blogs Or Any Content Generated At Build Time]
+
+
+(2) For Using [next export] Configure 'scripts' Object In [Package.json] 
+--------------------------------------------------------------------------
+
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "export": "next build && next export", // Look Here
+    }
+
+(3) When Run [yarn export] Will Give Error If Using [Image] Component Inside Any Page Or Component 
+    And Will Give Error If Use 'getServerSideProps' In Any Page So Can Use 'getStaticProps' Instead
+    And Will Give Error If Don't Use 'getStaticPaths' In Any Dynamic Route So Must Set 'getStaticPaths' With [fallback: false] As It Will Give Error If 'true'
+
+(4) After Fixing All Errors Run [yarn export] Again Will Note That All Static Html Files Generated Inside Folder Called 'out' In Your Project
+

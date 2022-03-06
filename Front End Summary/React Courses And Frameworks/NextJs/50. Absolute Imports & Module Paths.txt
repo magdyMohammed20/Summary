@@ -1,0 +1,45 @@
+(1) Problem
+--------------
+==> With Normal Import We Use '../' Or './' And It Is Complex
+
+(2) Absolute Import [To Prevent Use Of '../' Or './']
+-------------------------------------------------------
+==> Create 'jsconfig.json' Inside Your Project With This Content
+
+    {
+        "compilerOptions": {
+            "baseUrl": "."
+        }
+    }
+
+==> Now If Want To Import Any Component Or Page Don't Use '../' Or './' [EX: import Footer from 'components/Footer']
+
+
+(3) Module Paths Aliases
+--------------------------
+==> If Have This Structure And Want To Import [Header , Footer] In Any Page So The Import Statement Is Complex But Can Use Module Aliases To Simplify The Import
+
+    components
+        -layout
+            -Footer.js
+            -Header.js
+
+==> Module Path Aliases
+
+    jsconfig.js
+    -------------
+
+    {
+        "compilerOptions": {
+            "baseUrl": ".",
+            "paths": {
+                "@/layout/*": [
+                    "components/layout/*"
+                ]
+            }
+        }
+    }
+
+==> Import Will Be Like The Following
+
+    import Header from '@/layout/Header'

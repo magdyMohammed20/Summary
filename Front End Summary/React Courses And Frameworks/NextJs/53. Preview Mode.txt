@@ -1,0 +1,104 @@
+(1) Preview Mode
+-------------------
+==> Helps Apps That Rely On CMS
+
+(2) When To Use Preview Mode
+------------------------------
+==> In Pre-Rendering We Understood About Static Generation Where The Pages Are Pre-Rendered At Build Time It's Pretty Useful When Your Pages Fetch Data From CMS
+==> If Deploy Next App Then When You Make Changes In Your CMS They Won't Be Reflected As Pages Are Only Generated When You Build The App
+
+(3) Steps Of Preview Mode
+---------------------------
+==> In 'pages' Folder Create This Path '/pages/news/index.js'
+
+    /pages/news/index.js
+    ----------------------
+
+    export default function News({ data }) {
+        return <div>
+            <h1>{data}</h1>
+        </div>
+    }
+
+    export async function getStaticProps() {
+        return {
+            props: {
+                data: 'List Of Published Article'
+            }
+        }
+    }
+
+==> In 'api' Folder Create 'preview.js' File Then If Navigate To [localhost:3000/api/preview] Will See The Response And If Navigate 'Cookies' Will See It Create 2 Cookies
+
+    /api/preview.js
+    ----------------
+
+    export default function handler(req, res) {
+        res.setPreviewData({})
+        res.end('Preview Mode Enabled')
+    }
+
+==> Handle 'preview.js' Again But When Go To Browser Delete Generated Cookies And Navigate To [localhost:3000/api/preview?redirect=/news]
+
+    /api/preview.js 
+    ------------------
+
+    export default function handler(req, res) {
+        res.setPreviewData({})
+        res.redirect(req.query.redirect)
+    }
+
+==> Handle '/pages/news/index.js' Again And If Navigate To [localhost:3000/news] Will See 'List Of Drafted Article' Rendered
+
+    /pages/news/index.js
+    ----------------------
+
+    export default function News({ data }) {
+        return <div>
+            <h1>{data}</h1>
+        </div>
+    }
+
+    export async function getStaticProps(context) {
+        return {
+            props: {
+                data: context.preview ? 'List Of Drafted Article' : 'List Of Published Article'
+            }
+        }
+    }
+
+==> Set 'console' Statement In 'getStaticProps' Then Build The App Using [yarn build] Then Remove All Cookies Then [yarn start] If Navigate To [localhost:3000/news] See If Message Logged In terminal And If Navigate To [localhost:3000/api/preview?redirect=/news] And See If Message Logged In terminal
+
+
+==> Disable Preview Mode By Creating 'disable-preview.js' In 'api' Folder Then Run [yarn dev] Then If Navigate To [localhost:3000/api/preview?redirect=/news] Will Find The Cookies Generated But If Navigate To [localhost:3000/api/disable-preview] Will Note That All Cookies Deleted
+
+    /api/disable-preview.js
+    ------------------------
+
+    export default function handler(req, res) {
+        res.clearPreviewData()
+        res.end('Disable Preview Mode')
+    }
+
+==> Can Pass Data From 'preview.js' Handler To 'getStaticProps' context Then Navigate To [localhost:3000/api/preview?redirect=/news] And See Terminal Output
+
+    /api/preview.js
+    --------------------
+
+    export default function handler(req, res) {
+        // Here Passing 'user' Prop To context
+        res.setPreviewData({ user: 'Magdy Mohammed' })
+        res.redirect(req.query.redirect)
+    }
+
+    /pages/news/index.js
+    -------------------------
+
+    export async function getStaticProps(context) {
+        console.log(`Re-Rendering`, context.previewData) // Re-Rendering { user: 'Magdy Mohammed' }
+        return {
+            props: {
+                data: context.preview ? 'List Of Drafted Article' : 'List Of Published Article'
+            }
+        }
+    }

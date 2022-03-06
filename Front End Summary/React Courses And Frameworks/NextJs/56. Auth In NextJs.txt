@@ -1,0 +1,22 @@
+(1) User
+----------
+==> Has 2 Things [Identity , Access]
+==> Identity: Identify Who User Is [Authentication]
+==> Access : What Permissions User Has [Authorization]
+
+(2) Authentication Scenarios
+------------------------------
+==> Client Side Auth
+==> Server Side Auth
+==> API Route Auth
+
+(3) We Will Use 'NextAuth.js' Library To Handle Auth In NextJs App
+
+(4) NextAuth.js Supported Databases
+------------------------------------
+==> MySQL, MariaDB, Postgres, MongoDB and SQLite or without a database.
+
+(5) NextAuth.js Supported Auth
+-------------------------------
+==> Discord, Dropbox , Facebook , GitHub, GitLab, Google,Instagram , LinkedIn , Netlify , Reddit , Slack , Spotify ,  Twitch, Twitter , Zoom
+
