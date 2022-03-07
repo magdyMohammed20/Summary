@@ -1,0 +1,108 @@
+(1) Hiding Or Showing SignIn And SignOut Links Depending On Which User Logged In Or Out
+-----------------------------------------------------------------------------------------
+
+==> Step1 : Handle Session And SessionProvider Inside '/pages/_app.js'
+-----------
+
+    /pages/_app.js
+    -----------------
+
+    import '../styles/globals.css'
+    import Navbar from '../components/Navbar'
+    import '../components/navbar.css'
+    import { SessionProvider } from 'next-auth/react'
+
+    function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+        return <SessionProvider session={session}>
+            <Navbar />
+            <Component {...pageProps} />
+        </SessionProvider>
+    }
+
+    export default MyApp
+
+
+==> Step2 : Handle SignIn And SignOut Show In Navbar.js
+----------------------------------------------------------
+
+    /components/Navbar.js
+    -----------------------
+
+    import Link from 'next/link'
+    import { signIn, signOut, useSession } from 'next-auth/react' // 1- Import useSession
+
+    export default function Navbar() {
+
+        // Destructuring From useSession Hook
+        const { data: session, status } = useSession()
+
+        return (
+            <nav>
+                <ul>
+                    <li>
+                        <Link href='/'>
+                            <a>Home</a>
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link href='/dashboard'>
+                            <a>Dashboard</a>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link href='/blog'>
+                            <a>Blog</a>
+                        </Link>
+                    </li>
+
+                    {
+                        !session && status !== 'authenticated' && (
+                            <li>
+                                <Link href='/api/auth/signin'>
+                                    <a onClick={e => {
+                                        e.preventDefault()
+                                        signIn('github')
+                                    }}>Sign In</a>
+                                </Link>
+                            </li>
+                        )
+                    }
+
+
+                    {
+                        session && status !== 'unauthenticated' && (<li>
+                            <Link href='/api/auth/signout'>
+                                <a onClick={e => {
+                                    e.preventDefault()
+                                    signOut()
+                                }}>Sign Out</a>
+                            </Link>
+                        </li>)
+                    }
+
+                </ul>
+            </nav>
+        )
+    }
+
+==> Step3: But There Are Flicker Between SignIn And SignOut Events So Can Resolve Using Css Transition
+
+    Navbar.js
+    ----------
+
+    <ul className={!session && status === 'loading' ? 'loading' : 'loaded'}>
+
+
+    Navbar.css
+    ------------
+
+    .loading{
+        opacity: 0;
+        transition: all .3s linear;
+    }
+
+    .loaded{
+        opacity: 1;
+        transition: all .3s linear;
+    }

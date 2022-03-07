@@ -1,0 +1,55 @@
+(1) We Want To Show Or Hide Pages If SignIn Or SignOut Like Dashboard Page We Want To Hide If User Not SignIn
+
+(2) First Way Of Handle Dashboard Page 
+----------------------------------------
+
+    /Pages/dashboard.js
+    --------------------
+
+    import { useSession } from 'next-auth/react'
+
+    function dashboard() {
+        const { status } = useSession()
+
+        if (status === 'loading') {
+            return <div>Loading...</div>
+        }
+
+        if (status === 'unauthenticated') {
+            return <div>Access Denied</div>
+        }
+        return (
+            <div>You Signed In Now So You Are Welcome</div>
+        )
+    }
+
+    export default dashboard
+
+
+
+(3) Second Way Of Handle Dashboard Page 
+-----------------------------------------
+==> Here If User Enter To Dashboard Page Without Make SignIn It Will Display SignIn Window Else It Will Show Dashboard Normally
+
+    /Pages/dashboard.js
+    --------------------
+
+    import { useEffect } from 'react'
+    import { useSession, signIn } from 'next-auth/react'
+
+    function dashboard() {
+        const { status } = useSession()
+
+        useEffect(() => {
+            if (status === 'unauthenticated') signIn()
+        }, [status])
+
+        if (status !== 'authenticated') {
+            return <div>Loading...</div>
+        }
+        return (
+            <div>You Signed In Now So You Are Welcome</div>
+        )
+    }
+
+    export default dashboard

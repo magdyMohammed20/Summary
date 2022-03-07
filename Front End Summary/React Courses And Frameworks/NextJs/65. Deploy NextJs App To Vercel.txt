@@ -1,0 +1,6 @@
+(1) Deploy Your NextJs App To Vercel
+-------------------------------------
+==> Push Your NextJs App To Github
+==> Open Vercel Site And SignIn Using Github 
+==> Import Your Project From Github
+==> Enter Name To 'NEXT_PUBLIC_ANALYTICS_ID' And Value To 'vercel env value' In Environment Variables then deploy
