@@ -1,0 +1,14 @@
+(1) Delete Property And Own Value From Object
+-----------------------------------------------
+
+    // We Want To Delete 'age' From This Object
+    const user = {
+        fName: "Magdy",
+        lName: "Mohammed",
+        age: 20
+    }
+
+    const {age , ...rest} = user
+
+    console.log(user) // { fName:"Magdy", lName: "Mohammed",age: 20}
+    console.log(rest) // {fName: "Magdy" , lName: "Mohammed"}
