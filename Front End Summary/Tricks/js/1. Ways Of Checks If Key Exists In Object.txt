@@ -1,0 +1,27 @@
+(1) Ways Of Check If Specific Key Exists In The Object
+-------------------------------------------------------
+
+    let obj = { name: "Magdy", age: 20 }
+
+    /* Check If "age" Key Exists In The Object */
+    // First Way
+    let find = Object.keys(obj).some(v => v == "age") // True
+
+    // Second Way
+    let find2 = "age" in obj; // True
+
+    // Third Way
+    let find3 = obj.hasOwnProperty("age"); // True
+
+    // Fourth Way
+    let find4 = !!obj['age'] // True
+
+    // Fifth Way 
+    let find5 = Object.keys(obj).includes('age') // True
+
+    // Six Way
+    let find6 = Object.keys(obj).indexOf('age') > 0 // True
+
+
+
+
