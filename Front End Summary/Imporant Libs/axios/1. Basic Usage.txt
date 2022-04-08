@@ -1,0 +1,34 @@
+(1) Create Basic Required Files
+---------------------------------
+
+    /data/db.json [API Data]
+    ----------------
+        {
+            "posts" : [
+                {
+                    "id" : 1,
+                    "user" : "Magdy",
+                    "time" : "july , 23"
+                }
+            ]
+        }
+
+
+    /src/api/posts.js [API Base Url]
+    ------------------
+
+    import axios from 'axios'
+
+    export default axios.create({
+        baseUrl: "http://localhost:3500"
+    })
+
+
+    Create API Server From 'db.json'
+    ----------------------------------
+
+        npx json-server -p 3500 -w data/db.json
+
+
+    Navigate To "http://localhost:3500/posts" And See Result In Browser
+    ---------------------------------------------------------------------

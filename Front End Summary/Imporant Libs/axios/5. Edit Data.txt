@@ -1,0 +1,124 @@
+(1) Edit Data
+---------------
+
+    app.js
+    --------
+
+    import React, { useState, useEffect } from 'react'
+    import api from './api/posts'
+
+    function App() {
+
+    const [posts, setPosts] = useState([])
+
+    const [postContent, setPostContent] = useState("")
+
+    // For Update Post
+    const [editPostContent, setEditPostContent] = useState("")
+
+    // Fetch Data
+    useEffect(() => {
+        const fetchPosts = async () => {
+        try {
+            const response = await api.get('/posts')
+            setPosts(response.data)
+
+        } catch (err) {
+
+            if (err.response) {
+            console.log(err.response.data.message)
+            console.log(err.response.data)
+            console.log(err.response.status)
+            console.log(err.response.headers)
+            } else {
+            console.log(err.message)
+            }
+        }
+        }
+
+        // Call Fetch Posts Function
+        fetchPosts()
+
+    }, [])
+
+    // Add Data
+    const handleSubmit = async (e) => {
+
+        e.preventDefault()
+
+        let newId = posts.length ? posts[posts.length - 1].id + 1 : 1;
+        let datetime = new Date().toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" });
+
+        let newPost = {
+        id: newId,
+        time: datetime,
+        content: postContent
+        }
+
+        try {
+        const response = await api.post('/posts', newPost)
+        const allPosts = [...posts, response.data]
+        setPosts(allPosts)
+        setPostContent('')
+        } catch (err) {
+        console.log(err.message)
+        }
+    }
+
+    const handleChange = e => {
+        setPostContent(e.target.value)
+    }
+
+    // Delete Data
+    const handleDelete = async (id) => {
+
+        try {
+        await api.delete(`/posts/${id}`)
+        const newPosts = posts.filter(post => post.id !== id)
+        setPosts(newPosts)
+        }
+        catch (err) {
+        console.log(err.message)
+        }
+    }
+
+    // Edit Post
+    const handleEditPost = async (id) => {
+        let datetime = new Date().toLocaleDateString('en-us', { weekday: "long", year: "numeric", month: "short", day: "numeric" });
+
+        let updatePost = {
+        id,
+        time: datetime,
+        content: editPostContent
+        }
+
+        try {
+        const response = await api.put(`/posts/${id}`, updatePost)
+        setPosts(posts.map(post => post.id == id ? { ...response.data } : post))
+        setEditPostContent('')
+        } catch (err) {
+        console.log(err.message)
+        }
+    }
+    return (
+        <div id="App">
+
+        <form style={{ display: "flex" }} onSubmit={(e) => handleSubmit(e)}>
+            <div>
+            <label>Content</label>
+            <input type='text' onChange={(e) => handleChange(e)} value={postContent} />
+            </div>
+
+        </form>
+        {
+            posts && posts.map(post => <div key={post.id}>
+            <p>Time : {post.time.toString()}</p>
+            <p>Content : {post.content}</p>
+            <button onClick={() => handleDelete(post.id)}>Delete</button>
+            </div>)
+        }
+        </div >
+    );
+    }
+
+    export default App;
