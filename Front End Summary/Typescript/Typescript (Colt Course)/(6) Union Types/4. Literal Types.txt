@@ -1,0 +1,34 @@
+(1) Literal Types
+-------------------
+
+==> Start
+
+    // Here We Specify That zero Type Is Only 0 And Value Is Only 0 Too
+    let zero:0 = 0
+
+    // Error : Type '10' is not assignable to type '0'
+    zero = 10
+
+
+==> Specify Literal Types
+
+    // Here We Specify That zero Type Is Only 0 And Value Is Only 0 Too
+    let val:10 | 20 | 0 = 0
+
+    // Valid
+    val = 10
+    val = 0
+    val = 20
+
+    // Invalid
+    val = 23
+    val = 3
+
+
+(2) Another Sample
+--------------------
+
+    let str: "One" | "Two" ;
+
+    str = "One" // Valid
+    str = "Three" // Invalid

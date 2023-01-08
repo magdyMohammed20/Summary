@@ -1,0 +1,13 @@
+(1) Another Way To Declare And Define Class Properties
+--------------------------------------------------------
+
+    class Player {
+        // Define And Declare Class Props Inside Constructor Parameters
+        // We Don't Need To Using Somthing Like this.first = first Again
+        constructor(public first: string, public last: string) { }
+
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");
+
+    console.log(p1.first, p1.last);

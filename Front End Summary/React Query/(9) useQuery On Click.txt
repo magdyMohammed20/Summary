@@ -1,0 +1,45 @@
+(1) enabled
+---------------
+==> If Want To Stop useQuery Request Set enabled To 'False'
+
+    const { data, isLoading, isError, error, isFetching } = useQuery('get-heros', () => {
+        return axios.get('http://localhost:4000/superHeros')
+    }, {
+        enabled: false
+    })
+
+
+(2) Fire React Query Fetch With Button Click
+------------------------------------------------
+==> First Step  :  Destruct 'refetch' From useQuery()
+==> Second Step : Call 'refetch' On Button Click
+==> Can Use isFetching Property To Show Loading Fetching Indicator
+
+
+        import axios from 'axios';
+        import { useQuery } from 'react-query';
+
+        function RQsuperHeros() {
+
+            const { data, isError, error, isFetching, refetch } = useQuery('get-heros', () => {
+                return axios.get('http://localhost:4000/superHeros')
+            }, {
+                enabled: false
+            })
+
+            if (isFetching) return 'Fetching...';
+
+            if (isError) return <h1>{error.message}</h1>;
+
+
+            return (
+                <div>
+                    {
+                        data && data.data.map(hero => <div key={hero.id}>{hero.name}</div>)
+                    }
+                    <button onClick={refetch}>Refetch</button>
+                </div>
+            )
+        }
+
+        export default RQsuperHeros

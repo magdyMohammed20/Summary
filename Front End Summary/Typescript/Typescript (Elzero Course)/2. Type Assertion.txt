@@ -1,0 +1,30 @@
+(1) Problem Without Type Assertion
+-------------------------------------
+
+    let img = document.getElementById("img");
+
+    // Error : Property 'src' does not exist on type 'HTMLElement'
+    console.log(img.src) // TS Can't Identify That img Is Image Element With src Property
+
+(2) Solve Of Problem Using Type Assertion
+--------------------------------------------
+
+    // Type Assertion Here 'as HTMLImageElement'
+    let img = document.getElementById("img") as HTMLImageElement;
+
+    console.log(img.src) 
+
+
+(3) TS Not Make Any Check To Sure That Type Assertion Is Valid
+-----------------------------------------------------------------
+
+    // Code Without Problem
+    let str: any = "1000";
+    const data = (str as string).repeat(3);
+    console.log(data); // 100010001000
+
+    // Problem
+    // TS Will Produce Error After Execute This Code Not White Write This Code
+    let str2: any = 1000;
+    const data2 = (str2 as string).repeat(3);
+    console.log(data2); // Error : str2.repeat is not a function

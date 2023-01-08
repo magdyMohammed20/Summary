@@ -1,0 +1,45 @@
+(1) We Can Import And Emport Types In TS
+--------------------------------------------
+==> But Compilation Js File Of Ts File That Contains Exports Of Types Contains 'export {};'
+
+    utils.ts
+    ------------
+
+    export interface User {
+        id: number;
+        username: string;
+    }
+
+
+    index.ts
+    ----------
+
+    import { User } from "./utils.js";
+
+    class NewUser implements User {
+        constructor(public username: string, public id: number) { }
+
+        getUserName() {
+            console.log(this.username);
+        }
+
+        getUserId() {
+            console.log(this.id)
+        }
+    }
+
+    const user = new NewUser("Magdy", 10)
+
+    user.getUserName() // Magdy
+    user.getUserId() // 10
+
+
+(2) In Higher Versions Of TS You Can Declare That You Import A Type 
+-----------------------------------------------------------------------
+
+    // First Way: Here We Add 'type' Keyword
+    import type { User } from "./utils.js";
+
+
+    // Second Way
+    import { type User } from "./utils.js";

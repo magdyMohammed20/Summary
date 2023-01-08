@@ -1,0 +1,14 @@
+(1) Generics Default Value
+-------------------------------
+
+    // Can Set Default Value For Generic Type "string"
+    class User<T = string> {
+        constructor(public username: T) { }
+        sayHellow(): T {
+            return this.username
+        }
+    }
+
+    // ReAssign Generic Type To Class Instance
+    const u1 = new User<string>('Magdy')
+    const u2 = new User<number>(20)

@@ -1,0 +1,19 @@
+(1) With Interfaces If There Are Duplicated Interface It's Not Ovrride But It Appended
+---------------------------------------------------------------------------------------------
+
+
+    interface FirstSectionData{
+        fName: string;
+        lName: string;
+    }
+
+    interface FirstSectionData{
+        age: number;
+    }
+
+    // This 'user' Implements Both 'FirstSectionData' Interfaces
+    const user:FirstSectionData = {
+        fName: 'Magdy',
+        lName: 'Mohammed',
+        age: 20
+    }

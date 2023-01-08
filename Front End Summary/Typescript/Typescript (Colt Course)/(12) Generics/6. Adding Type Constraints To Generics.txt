@@ -1,0 +1,45 @@
+(1) Adding Type Constraints To Generics
+------------------------------------------
+
+==> Problem
+--------------
+
+    function merge<T, U>(obj1: T, obj2: U) {
+        return {
+            ...obj1,
+            ...obj2
+        }
+    }
+
+    // You Can Do This By Ad 9 Instead Of Object And This Is Wrong
+    // Spread A Number Or Boolean Will Give You Empty Object
+    const combo = merge({ name: 'Magdy' }, 9) // { name: 'Magdy' }
+
+
+==> Solve The Problem By Define Generics Parameters Type
+---------------------------------------------------------
+
+
+    // Specify Generics Params Using extends Keyword
+    function merge<T extends object, U extends object>(obj1: T, obj2: U) {
+        return {
+            ...obj1,
+            ...obj2
+        }
+    }
+
+    const combo = merge({ name: 'Magdy' }, { num: 9 })
+
+
+(2) Generics Parameters Can extends Interface
+-------------------------------------------------
+
+    interface doubLen {
+        length: number
+    }
+
+    function printDoubleLength<T extends doubLen>(num: T): number {
+        return 2 * num.length
+    }
+
+    console.log(printDoubleLength({ length: 10 })) // 20

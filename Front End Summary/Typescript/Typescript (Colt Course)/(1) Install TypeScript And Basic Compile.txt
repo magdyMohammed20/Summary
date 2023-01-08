@@ -1,0 +1,16 @@
+(1) Install TypeScript Globally
+----------------------------------
+==> npm i -g typescript
+==> Run [tsc -v] For Ensure Installation
+
+
+(2) Creating TS Files
+-------------------------
+==> Can Create TypeScript Files Using [.ts Or .tsx]
+==> tsx is [ts + jsx]
+
+
+(3) Compiling TS File 
+-----------------------
+==> After Creating TS File You Can Compile It To Js File Using [tsc file_name] (EX: tsc index.ts)
+

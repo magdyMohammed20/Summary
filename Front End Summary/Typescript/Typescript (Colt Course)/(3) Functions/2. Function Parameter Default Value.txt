@@ -1,0 +1,9 @@
+(1) Set Default Value For Parameter
+-------------------------------------
+
+    // Default Value Exist After Type Annotations
+    const sayHello = (msg: string = "Starter Welcome MSG") => {
+        return msg
+    }
+
+    sayHello('magdy')

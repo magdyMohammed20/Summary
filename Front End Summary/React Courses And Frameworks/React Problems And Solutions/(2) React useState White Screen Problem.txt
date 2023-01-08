@@ -1,0 +1,43 @@
+(1) React useState White Screen Problem
+-----------------------------------------
+==> If We Define User State And Want To Access Any Property In It But If Fail Will Give Us White Screen
+
+
+import { useState } from 'react';
+
+export default function App() {
+    const [user, setUser] = useState()
+
+    return (
+        <div className= "App" >
+        { user.name }
+        < /div>
+        );
+}
+
+
+==> Solve This Problem Can Be With Muti Solutions[Using(user?.name) - { user && user.name}]
+    But You Can Initialize user State with {} To Solve This Problem
+
+const [user, setUser] = useState({})
+
+
+
+    (2) In Same Object If Define if we have array in it and want to access first element
+    You Must Initialize images Array With Empty Array
+
+
+
+import { useState } from 'react';
+
+export default function App() {
+    const [user, setUser] = useState({
+        images: []
+    })
+
+    return (
+        <div className= "App" >
+        { user.images[0] }
+        < /div>
+        );
+}

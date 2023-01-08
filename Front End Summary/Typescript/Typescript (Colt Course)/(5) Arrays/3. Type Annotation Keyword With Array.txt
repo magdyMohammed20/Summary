@@ -1,0 +1,14 @@
+(1) Type Keyword With Define Array Type
+--------------------------------------------
+
+
+    type Point = {
+        x: number;
+        y: number;
+    }
+
+    // Array Of Objects Type Annotations
+    const coords: Point[] = [];
+
+    coords.push({ x: 10, y: 20 })
+    coords.push({ x: 30, y: 40 })

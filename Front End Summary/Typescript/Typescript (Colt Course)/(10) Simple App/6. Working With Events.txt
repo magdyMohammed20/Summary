@@ -1,0 +1,61 @@
+(1) Submit Event
+---------------------
+
+    index.html
+    ------------
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <form id="todoform">
+            <input type="text" id="todoinput" />
+            <button id="todobtn">Click Me</button>
+        </form>
+
+        <script src="./dist/index.js"></script>
+    </body>
+
+    </html>
+
+
+    index.ts
+    -------------
+
+    const btn = document.getElementById('todobtn')! as HTMLButtonElement;
+    const input = document.getElementById('todoinput') as HTMLInputElement;
+    const form = document.querySelector('form')!; // Here If We Not Specify Element Type TS Will Infered That Type Is 'HTMLFormElement'
+
+    // e: Type Is SubmitEvent You Can Set It Or TS Will Infered It Automatically
+    form.addEventListener('submit', (e: SubmitEvent) => {
+        e.preventDefault();
+        console.log("Submit")
+    })
+
+
+(2) SubmitEvent Type Fail Case
+---------------------------------
+==> If addEventListener Callback Separated You Must Set 'SubmitEvent' Type
+
+    index.ts
+    -------------
+
+    const btn = document.getElementById('todobtn')! as HTMLButtonElement;
+    const input = document.getElementById('todoinput') as HTMLInputElement;
+    const form = document.querySelector('form')!;
+
+
+    // Here We Must Specify e Type As SubmitEvent As Callback Is Separated
+    function submitCallback(e: SubmitEvent) {
+        e.preventDefault();
+        console.log("Submit")
+    }
+
+    form.addEventListener('submit', submitCallback)

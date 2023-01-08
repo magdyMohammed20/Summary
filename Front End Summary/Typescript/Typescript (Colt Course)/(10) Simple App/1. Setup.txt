@@ -1,0 +1,16 @@
+(1) Project Configuration
+-----------------------------
+==> Run [tsc --init] For Create (tsconfig.json)
+==> Create 2 Folders [src , dist]
+==> Configure (tsconfig.json) By Set [{"outDir": "./dist"}] And Set [{"include": ["src"]}]
+==> Run [npm init -y] For Create [Package.json] File
+==> In Project Folder Create [index.html] File And Import JS File Which Will Compiled In 'dist' Folder In It
+==> Install Lite Server Using [npm i lite-server]
+
+==> In [Package.json] And In "scripts" Add "start" Command 
+
+    "scripts": {
+        "start": "lite-server"
+    }
+
+==> Run [npm start] For Open Web Page

@@ -1,0 +1,92 @@
+(1) Advantage
+---------------------
+==> When Making Mutations You Can Update Front End State Before Post Request Performed
+
+    hooks/useQueryHeros.js
+    -------------------------
+
+    export const usePostHeroQuery = (addHero) => {
+        const newQueryClient = useQueryClient();
+        return useMutation('post-heros', addHero, {
+            // Perfomed After Mutation
+            onMutate: async (newHero) => {
+                await newQueryClient.cancelQueries('get-heros')
+                const previousHeroData = newQueryClient.getQueryData('get-heros')
+                newQueryClient.setQueryData('get-heros', (oldQueryData) => {
+                    return {
+                        ...oldQueryData.data,
+                        data: [
+                            ...oldQueryData.data,
+                            {
+                                id: oldQueryData?.data?.length + 1
+                                , ...newHero
+                            }
+                        ]
+                    }
+                })
+
+                return { previousHeroData }
+            },
+            onError: (_error, _hero, context) => {
+                newQueryClient.setQueryData('get-heros', context.previousHeroData)
+            },
+            // Run If Mutation Success Or Encounters An Error
+            onSettled: () => {
+                newQueryClient.invalidateQueries('get-heros')
+            }
+        })
+    }
+
+
+
+    components/RQsuperHeros.js
+    -----------------------------
+
+    import { useState } from 'react';
+    import { useQueryHeros, usePostHeroQuery } from '../hooks/useQueryHeros';
+    import axios from 'axios';
+
+    function RQsuperHeros() {
+        // States For Form Data
+        const [name, setHeroName] = useState('');
+        const [heroEgo, setHeroEgo] = useState('');
+
+        const onSuccess = data => { console.log('Data Fetching Success', data) }
+        const onError = error => { console.log('Data Fetching Error', error) }
+
+        const getHeros = () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }
+
+        // Function For Posting Data
+        const addHeros = (hero) => {
+            return axios.post('http://localhost:4000/superHeros', hero)
+        }
+        const { data, isError, error, refetch } = useQueryHeros(onSuccess, onError, getHeros)
+
+        // Calling Posting Data Hook
+        const { mutate: addHero, isLoading: isPostLoading, isError: isPostError, error: postError } = usePostHeroQuery(addHeros)
+
+        if (isError) return <h1>{error.message}</h1>;
+
+        if (isPostError) return <h1>{postError.message}</h1>;
+
+        if (isPostLoading) return <h1>Loading...</h1>
+        return (
+            <div>
+                <input type="text" name="hero" onChange={e => setHeroName(e.target.value)} />
+                <input type="text" name="heroEgo" onChange={e => setHeroEgo(e.target.value)} />
+                <button onClick={() => {
+                    addHero({ name, heroEgo })
+                }}>Add Hero</button>
+
+                {
+                    data && data.data.map(hero => <div key={hero.id} className="hero">
+                        {hero.name}
+                    </div>)
+                }
+            </div>
+        )
+    }
+
+    export default RQsuperHeros

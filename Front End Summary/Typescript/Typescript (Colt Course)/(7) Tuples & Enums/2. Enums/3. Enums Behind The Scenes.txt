@@ -1,0 +1,11 @@
+(1) Prevent Enum To Compiled In Final Js File
+--------------------------------------------------
+==> When Enum Compiled It Appear As Self Called Function With Complex Syntax
+==> But If We Add 'const' Before Enum It Compiled As Normal Js Constants Variables
+
+
+    const enum ResponseStatus {
+        PENDING = 10, 
+        ERROR = 404,
+        SUCCESS = 100
+    }

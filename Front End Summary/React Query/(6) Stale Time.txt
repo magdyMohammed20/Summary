@@ -1,0 +1,36 @@
+(1) Stale Time
+------------------
+==> If We Have Multi Routes And In Specific Route We Have Api Call But Not
+    Want In Every Time I Enter The Route The Api Call Repeated So We Specify Stale Time
+    For Refetch The Data After Specific Time When Enter The Route After First Time
+
+
+    SuperHeros.js
+    -----------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    function SuperHeros() {
+
+        const { data, isLoading, error, isError, isFetching } = useQuery('fetch-supers', () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }, {
+            staleTime: 30000 // ReFetch The Data After 30 Seconds From Enter The Route After First Time
+        })
+
+        if (isLoading) return 'Loading...';
+        if (isError) return error.message;
+        console.log({ isLoading, isFetching })
+
+
+        return (
+            <div>
+                {
+                    data.data.map(hero => <div key={hero.id}>{hero.name}</div>)
+                }
+            </div>
+        )
+    }
+
+    export default SuperHeros

@@ -1,0 +1,106 @@
+(1) Default Case With Previous Discriminated Unions
+------------------------------------------------------
+
+    interface Cow {
+        name: string;
+        weight: number;
+        kind: 'Cow'
+    }
+
+    interface Rooster {
+        name: string;
+        weight: number;
+        kind: 'Rooster'
+    }
+
+    type UnionAnimal = Cow | Rooster;
+
+
+    function getAnimal(animal: UnionAnimal) {
+        switch (animal.kind) {
+            case "Rooster":
+                return animal
+
+            case "Cow":
+                return animal
+            default:
+                // We Should Never Make It Here If We Handled All Cases Correctly
+                // So Here There Is No Error As We Will Not Enter Ever And Never In Default Case
+                const willNeverGetHere: never = animal;
+                return 'Something'
+        }
+    }
+
+    const rooster: Rooster = {
+        name: 'Rooster',
+        weight: 100,
+        kind: 'Rooster'
+    }
+
+    const cow: Cow = {
+        name: 'Cow',
+        weight: 100,
+        kind: 'Cow'
+    }
+
+
+    console.log(getAnimal(rooster)) // {name: 'Rooster', weight: 100, kind: 'Rooster'}
+    console.log(getAnimal(cow)) // {name: 'Rooster', weight: 100, kind: 'Cow'}
+
+
+(2) If We Not Add Specific Check For New Animal Kind
+---------------------------------------------------------
+
+    interface Cow {
+        name: string;
+        weight: number;
+        kind: 'Cow'
+    }
+
+    interface Rooster {
+        name: string;
+        weight: number;
+        kind: 'Rooster'
+    }
+
+    // This Is New Interface
+    interface Sheep {
+        name: string;
+        weight: number;
+        kind: 'Sheep'
+    }
+
+    // Add New Interface Here
+    type UnionAnimal = Cow | Rooster | Sheep;
+
+
+    function getAnimal(animal: UnionAnimal) {
+        // In Cases We Not Add Check Of 'Sheep' Kind So Default Case Will Occurs And Get Error As Assigned To 'never' Type Below
+        switch (animal.kind) {
+            case "Rooster":
+                return animal
+
+            case "Cow":
+                return animal
+            default:
+                // Error : Type 'Sheep' is not assignable to type 'never'
+                const willNeverGetHere: never = animal;
+                return 'Something'
+        }
+    }
+
+    const rooster: Rooster = {
+        name: 'Rooster',
+        weight: 100,
+        kind: 'Rooster'
+    }
+
+    const cow: Cow = {
+        name: 'Cow',
+        weight: 100,
+        kind: 'Cow'
+    }
+
+
+    console.log(getAnimal(rooster)) // {name: 'Rooster', weight: 100, kind: 'Rooster'}
+    console.log(getAnimal(cow)) // {name: 'Rooster', weight: 100, kind: 'Cow'}

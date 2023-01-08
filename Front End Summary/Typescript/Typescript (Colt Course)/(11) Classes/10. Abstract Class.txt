@@ -1,0 +1,46 @@
+(1) Abstract Class
+------------------------
+
+EX (Abstract Class Is A Class Which You Can't Create Instance From It)
+---
+
+    abstract class Employee {
+        constructor(public fName: string, public lName: string) { }
+    }
+
+    // Error : Cannot create an instance of an abstract class
+    const emp = new Employee();
+
+
+EX (Abstract Methods In Abstract Class)
+---
+
+    abstract class Employee {
+        constructor(public fName: string, public lName: string) { }
+        abstract greet(): void; // Abstract method
+    }
+
+    // Class Which Extends Abstract Class Must Implement All Abstract Methods In The Abstract Class
+    class fulltimeEmployee extends Employee {
+        greet(): void {
+            console.log("Hellow am A Full Time Employee");
+        }
+    }
+
+
+EX (Adding Constructor To Class Which Extends The Abstract Class)
+---
+
+    abstract class Employee {
+        constructor(public fName: string, public lName: string) { }
+        abstract greet(): void; // Abstract method
+    }
+
+    class fulltimeEmployee extends Employee {
+        constructor(public fName:string , public lName:string,private salary:number){
+            super(fName , lName)
+        }
+        greet(): void {
+            console.log("Hellow am A Full Time Employee");
+        }
+    }

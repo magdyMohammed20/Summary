@@ -1,0 +1,21 @@
+(1) Type Aliases For Object
+-------------------------------
+
+    type Point = {
+        x: number,
+        y: number
+    }
+
+    function person(props: Point) {
+        return { x: props.x * 2, y: props.y * 2 }
+    }
+
+    let data = { x : 10 , y: 20};
+    person(data)
+
+
+(2) Type Aliases For Variable
+-----------------------------------
+
+    type myNum = number;
+    let x:myNum = 10

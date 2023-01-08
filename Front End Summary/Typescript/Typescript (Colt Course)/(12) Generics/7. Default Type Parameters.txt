@@ -1,0 +1,21 @@
+(1) Default Type Parameters
+---------------------------------
+
+    // Default Type Parameter
+    function createArray<T = string>(): T[] {
+        return []
+    }
+
+    const emptyArray = createArray()
+
+
+(2) Reassign Parameter Type
+-------------------------------
+
+    function createArray<T = string>(): T[] {
+        return []
+    }
+
+    const emptyArray = createArray()
+    // Change Parameter Type
+    const emptyArray2 = createArray<number>()

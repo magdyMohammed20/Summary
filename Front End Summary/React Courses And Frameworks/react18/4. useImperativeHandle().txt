@@ -1,0 +1,103 @@
+(1) useImperativeHandle() Hook
+-------------------------------
+==> Used To Enable Parent Component To Access Methods And State Of Child Component
+
+    App.js
+    ---------
+
+    import { useRef } from "react";
+    import Counter from "./Counter";
+    function App() {
+        const ref = useRef()
+        return (
+            <div className="App">
+                <Counter ref={ref} />
+                <button onClick={() => ref.current.increment()}>Increment From Parent</button>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    Counter.js
+    -----------
+
+    import { useState, forwardRef, useImperativeHandle } from 'react'
+
+    // 1- Wrap Counter Component With forwardRef
+    const Counter = forwardRef((props, ref) => {
+
+        const [counter, setCounter] = useState(0)
+        // 2- Use useImperativeHandle Which Takes ref And Callback that Return The Increment In Object
+        useImperativeHandle(ref, () => ({ increment }))
+
+        const increment = () => setCounter(counter + 1)
+        return (
+            <div>
+                Counter : {counter}
+                <button onClick={increment}>
+                    Increment From Child
+                </button>
+            </div>
+        )
+
+    })
+
+    export default Counter
+
+
+(2) Can Give Label To The Shared Method
+----------------------------------------
+
+    Counter.js
+    ------------
+
+    // 'incrementFromParent' Is Label
+    useImperativeHandle(ref, () => ({ incrementFromParent: increment }))
+
+    App.js
+    ---------
+
+    <button onClick={() => ref.current.incrementFromParent()}>Increment From Parent</button>
+
+
+(3) Access Child State In Parent Component
+-------------------------------------------
+
+    App.js
+    --------
+
+    import { useRef } from "react";
+    import Counter from "./Counter";
+    function App() {
+        const ref = useRef()
+        return (
+            <div className="App">
+                Counter2 : {ref.current.counter2}
+                <Counter ref={ref} />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    Counter.js
+    --------------
+
+    import { useState, forwardRef, useImperativeHandle } from 'react'
+
+    const Counter = forwardRef((props, ref) => {
+        const [counter2, setCounter2] = useState(5)
+        useImperativeHandle(ref, () => ({ counter2 }))
+
+        return (
+            <div>
+                Child
+            </div>
+        )
+
+    })
+
+    export default Counter

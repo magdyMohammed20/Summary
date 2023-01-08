@@ -1,0 +1,35 @@
+(1) In Previous Module System Sample If Run Js File Using 'node' It Will Work Fine But If Open In The Browser There Are Some Errors
+
+(2) First Error: exports is not defined
+----------------------------------------
+==> Browser Can't Know CommonJs Syntax Or Export And Import 
+==> So We Must Change "module" Property Value To "ES6" In [tsconfig.json]
+
+    tsconfig.json
+    --------------
+
+    "module": "ES6"
+
+    utils.ts
+    ------------
+
+    export function add(num1, num2) {
+        return num1 + num2;
+    }
+
+
+    index.ts
+    ----------
+
+    import { add } from "./utils.js"; // This utils File Is Js File Not TS File
+    console.log(add(10, 20)) // 30
+
+
+(3) Second Error: Cannot use import statement outside a module
+-----------------------------------------------------------------
+==> Solve This By Add type="module" In Js Script
+
+    index.html
+    ------------
+
+    <script type="module" src="./dist/index.js"></script>

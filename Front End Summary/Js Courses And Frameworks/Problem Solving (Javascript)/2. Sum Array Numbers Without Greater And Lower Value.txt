@@ -1,0 +1,43 @@
+(1) First Solution
+----------------------
+
+    let arr = [1,12,3,4]
+
+    function SumWithoutGreaterAndLower(arr){
+        let minVal = Math.min(...arr);
+        let maxVal = Math.max(...arr);
+
+        let filteredArr = arr.filter(x => x !== minVal && x!== maxVal);
+        let reduceSum = filteredArr.reduce((acc , curr) => acc + curr, 0)
+        return reduceSum
+    }
+
+    console.log(SumWithoutGreaterAndLower(arr)) // 7
+
+
+(2) Second Solution
+----------------------
+
+    let arr = [1,12,3,4]
+    
+    function SumWithoutGreaterAndLower(arr){
+        return arr.filter(x => x !== Math.min(...arr) && x !== Math.max(...arr)).reduce((acc , curr) => acc + curr, 0)
+    }
+
+    console.log(SumWithoutGreaterAndLower(arr)) // 7
+
+
+(3) But There Are Problem Which Is Math.min() And Math.max() Delete All Redundant Of Greater And Lower Values And Get Max And Min
+-----------------------------------------------------------------------------------------------------------------------------------
+
+    // Solve This Problem Without Using Math.min() And Math.max() And User Sort Function To Easely Slice First And Last Elements
+    let arr = [1,1,12,3,4,12]
+    function SumWithoutGreaterAndLower(arr){
+        // Sort Array And Remove First And Last Elements At Same Time
+        let sortArr = arr.sort((a,b) => a-b).slice(1 , -1)
+        let reduceSum = sortArr.reduce((acc , curr) => acc + curr, 0)
+        return reduceSum
+    }
+
+    console.log(SumWithoutGreaterAndLower(arr)) // 20
+

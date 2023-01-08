@@ -1,0 +1,28 @@
+(1) With Object Type Annotations We Can Mark Any Property As Optional
+-----------------------------------------------------------------------
+
+    type Lang = {
+        name: string,
+        start_year?: number, // Here We Make start_year Optional
+        frameWorks: {
+            first_frame: string,
+            second_frame: string,
+            third_frame: string
+        }
+    }
+
+    function lang_frames(lang: Lang): void {
+        console.log(lang.frameWorks)
+    }
+
+    const js_lang: Lang = {
+        name: 'javascript',
+        frameWorks: {
+            first_frame: 'Reactjs',
+            second_frame: 'AngularJs',
+            third_frame: 'VueJs'
+        }
+    }
+
+
+    lang_frames(js_lang)

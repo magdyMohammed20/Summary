@@ -1,0 +1,31 @@
+(1) Start Working With Object
+----------------------------------
+
+    function createObj(person: { fName: string, lName: string }) {
+        return person.fName + ' ' + person.lName
+    }
+
+    createObj({ fName: 'Magdy', lName: 'Mohammed' })
+
+
+(2) Object Type With Variable
+--------------------------------
+
+    let coor:{x:number ; y:number} = {x : 10 , y: 20};
+
+
+(3) Quirky Thing With TS Object
+----------------------------------
+
+    function person(props: { name: string }) {
+        return props.name
+    }
+
+    // Passing Object Literal
+    // TS Consider Adding 'age' Here Is Mistake As It Infered That Type Is {name: string} Only
+    person({ name: 'Magdy', age: 25 })
+
+    // But If Pass Object Which Assigned To Variable It Not Considered Any Mistake
+    // It Consider 'age' Here As Additional Data
+    let data = { name: 'Magdy', age: 25 };
+    person(data)

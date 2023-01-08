@@ -1,0 +1,45 @@
+(1) Inheritance Between Interfaces
+------------------------------------
+
+    interface NormalProg {
+        name: string;
+        age: number;
+    }
+
+    // This Interface Inherit From NormalProg Interface
+    interface MidProg extends NormalProg {
+        job: string;
+        frameworks: string[];
+    }
+
+    const frontEnd: MidProg = {
+        name: 'Magdy',
+        age: 25,
+        job: "Frontend Dev",
+        frameworks: ["Reactjs"]
+    }
+
+
+(2) Interface Multiple Inheritance
+--------------------------------------
+
+    interface Person {
+        name: string
+    }
+
+    interface Employee {
+        readonly id: number;
+        age: number
+    }
+
+    // This Interface Inherits Person & Employee Interfaces
+    interface Programmer extends Person, Employee {
+        level: string;
+    }
+
+    const front_end: Programmer = {
+        name: 'Magdy',
+        age: 20,
+        level: 'Mid',
+        id: 10
+    }

@@ -1,0 +1,53 @@
+(1) Create Elements And Basic Submit Function
+-------------------------------------------------
+
+    index.html
+    ------------
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <ul id="todolist"></ul>
+        <form id="todoform">
+            <input type="text" id="todoinput" />
+            <button id="todobtn">Click Me</button>
+        </form>
+        <script src="./dist/index.js"></script>
+    </body>
+
+    </html>
+
+
+
+    index.ts
+    ------------
+
+    const btn = document.getElementById('todobtn')! as HTMLButtonElement;
+    const input = document.getElementById('todoinput') as HTMLInputElement;
+    const form = document.querySelector('form')!;
+    const todoList = document.getElementById('todolist')!;
+
+
+    // Here We Must Specify e Type As SubmitEvent As Callback Is Separated
+    function submitCallback(e: SubmitEvent) {
+        e.preventDefault();
+        const inputVal = input.value;
+        const newLi = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        newLi.append(inputVal);
+        newLi.prepend(checkbox);
+        todoList.append(newLi);
+        input.value = ""
+    }
+
+    form.addEventListener('submit', submitCallback)
+

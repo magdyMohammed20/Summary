@@ -1,0 +1,151 @@
+(1) Query By Id
+------------------
+==> If We Have List Of Products And Want To Make Details Page For Each Product So We Use Query By Id To List Single Item Data
+
+
+    hooks/useQueryHeros.js [For Get All Heros In Specific Route]
+    ------------------------
+
+    import { useQuery } from 'react-query';
+
+    export const useQueryHeros = (onSuccess, onError, fetchFn) => {
+        return useQuery('get-heros', fetchFn, {
+            onSuccess,
+            onError
+        })
+    }
+
+
+    Components/RQsuperHeros.js [List All Heros]
+    ----------------------------
+
+
+    import { useQueryHeros } from '../hooks/useQueryHeros';
+    import axios from 'axios';
+    import { useNavigate } from 'react-router-dom';
+
+    function RQsuperHeros() {
+        const navigate = useNavigate()
+        const onSuccess = data => { console.log('Data Fetching Success', data) }
+        const onError = error => { console.log('Data Fetching Error', error) }
+
+        const getHeros = () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }
+        const { data, isError, error } = useQueryHeros(onSuccess, onError, getHeros)
+
+        if (isError) return <h1>{error.message}</h1>;
+
+        return (
+            <div>
+                {
+                    data && data.data.map(hero => <div key={hero.id} className="hero">
+                        {hero.name}
+                        <button onClick={() => navigate(`/hero-details/${hero.id}`)}>View Details</button>
+                    </div>)
+                }
+            </div>
+        )
+    }
+
+    export default RQsuperHeros
+
+
+    App.js [Add Route For Hero Details]
+    ---------
+
+    import './App.css';
+    import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+    import Homepage from './Components/Homepage';
+    import SuperHeros from './Components/SuperHeros';
+    import RQsuperHeros from './Components/RQsuperHeros';
+    import NotFound from './Components/NotFound';
+    import { QueryClient, QueryClientProvider } from 'react-query';
+    import { ReactQueryDevtools } from 'react-query/devtools'
+    import HeroPageDetails from './Components/heroPageDetails';
+    function App() {
+
+    const queryClient = new QueryClient()
+    return (
+        <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+            <div className="App">
+            <nav>
+                <ul>
+                <li><Link to="/">Home Page</Link></li>
+                <li><Link to="/superheros">Super Heros</Link></li>
+                <li><Link to="/rqsuperheros">RQ Super Heros</Link></li>
+                </ul>
+            </nav>
+            <Routes>
+                <Route exact path="/" element={<Homepage />} />
+                <Route path="/superheros" element={<SuperHeros />} />
+                <Route path="/rqsuperheros" element={<RQsuperHeros />} />
+                <Route path="/hero-details/:id" element={<HeroPageDetails />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+            </div>
+        </BrowserRouter>
+
+        <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
+        </QueryClientProvider>
+    );
+    }
+
+    export default App;
+
+
+
+    hooks/useQueryHero.js [Hero Details Hook]
+    -----------------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    const fetchHeroDetails = (id) => {
+        return axios.get(`http://localhost:4000/superHeros/${id}`)
+    }
+    export const useQueryHero = (heroId) => {
+        return useQuery(['super-hero', heroId], () => fetchHeroDetails(heroId))
+    }
+
+
+    Components/heroPageDetails.js [Hero Details Page]
+    -------------------------------
+
+    import { useQueryHero } from '../hooks/useQueryHero';
+    import { useParams } from 'react-router-dom';
+
+    function HeroPageDetails() {
+        const { id } = useParams()
+        const { data, isLoading } = useQueryHero(id)
+
+        if (isLoading) {
+            return <h1>Loading...</h1>
+        }
+        return (
+            <div className='page-details'>
+                <h3>{data?.data?.name}</h3>
+            </div>
+        )
+    }
+
+    export default HeroPageDetails
+
+
+(2) Another Approach Of Passing Hero Id
+-----------------------------------------
+
+    hooks/useQueryHero.js
+    -----------------------
+
+        import axios from 'axios';
+        import { useQuery } from 'react-query';
+
+        const fetchHeroDetails = ({ queryKey }) => {
+            const id = queryKey[1]
+            return axios.get(`http://localhost:4000/superHeros/${id}`)
+        }
+        export const useQueryHero = (heroId) => {
+            return useQuery(['super-hero', heroId], fetchHeroDetails)
+        }

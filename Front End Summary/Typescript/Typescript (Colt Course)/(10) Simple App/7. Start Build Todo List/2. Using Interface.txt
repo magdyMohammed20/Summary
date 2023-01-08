@@ -1,0 +1,36 @@
+(1) Adding Interface For Todos
+--------------------------------
+
+    interface Todo {
+        text: string;
+        checked: boolean;
+    }
+
+    // Define Array Of Todos With Same Type Of Interface
+    const todos: Todo[] = [];
+
+    const btn = document.getElementById('todobtn')! as HTMLButtonElement;
+    const input = document.getElementById('todoinput') as HTMLInputElement;
+    const form = document.querySelector('form')!;
+    const todoList = document.getElementById('todolist')!;
+
+    // Create New Todo Function
+    function createTodo(todo: Todo) {
+        const inputVal = todo.text;
+        const newLi = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        newLi.append(inputVal);
+        newLi.prepend(checkbox);
+        todoList.append(newLi);
+        todos.push(todo);
+        input.value = ""
+    }
+
+    function submitCallback(e: SubmitEvent) {
+        e.preventDefault();
+        const todo: Todo = { text: input.value, checked: false }
+        createTodo(todo);
+    }
+
+    form.addEventListener('submit', submitCallback)

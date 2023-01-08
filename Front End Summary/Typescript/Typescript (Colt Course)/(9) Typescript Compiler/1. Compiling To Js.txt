@@ -1,0 +1,19 @@
+(1) Creating Config File Of Typescript
+-----------------------------------------
+==> Create Normal Project Folder Then Run Command [tsc --init] For Create [tsconfig.json]
+
+(2) Compile Multiple Typescript Files
+----------------------------------------
+==> If We Have Multiple TS Files You Can Compile All Using [tsc] Command Only
+
+
+(3) Watching Typescript File
+------------------------------------
+==> Instead Of Repeat Typing [tsc fileName.ts] You Can Watch TS File On Each Change Occurs Using [tsc -w fileName.ts]
+
+
+(4) Watching And Compile Multiple Files At Same Time
+-------------------------------------------------------
+==> Use [tsc -w]
+
+

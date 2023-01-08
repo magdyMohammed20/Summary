@@ -1,0 +1,12 @@
+(1) Multiple Types With Generics
+---------------------------------------
+
+    // <T,U> Called Multi Types
+    function merge<T,U>(obj1 :T, obj2:U) {
+        return {
+            ...obj1,
+            ...obj2
+        }
+    }
+
+    const combo = merge({name: 'Magdy'} , {pets: ['Loly' , 'Momo']})

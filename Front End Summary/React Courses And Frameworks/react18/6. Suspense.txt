@@ -1,0 +1,112 @@
+(1) Suspense
+---------------
+==> lets you specify the loading indicator in case some components in the tree below it are not yet ready to render
+==> Can handle more scenarios such as data fetching
+==> Today, lazy loading components is the only use case supported by <React.Suspense>
+
+
+(2) Different Between Suspense In V16 , V17 VS Concurent Suspense At V18
+--------------------------------------------------------------------------
+
+==> Legacy Suspense (16 , 17)
+------------------------------
+--> The element tree is immediately mounted in the DOM
+--> Effects/Lifecycle are fired
+--> The tree is visually hidden when suspense is triggered
+--> It is made visible only after the ComponentThatSuspends is resolved
+--> Concurrent Suspense
+
+==> Concurrent Suspense (18)
+-----------------------------
+--> Element is not mounted until the Component That Suspends is resolved
+--> Effects/Lifecycle are fired
+
+
+(3) Suspense With Lazy Loading
+--------------------------------
+
+    App.js
+    --------
+
+    import React from 'react';
+
+    const OtherComponent = React.lazy(() => {
+
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(import('./OtherComponent'))
+            }, 1000)
+        })
+    })
+
+    function App() {
+        return (
+            <div>
+                <React.Suspense fallback={"Loading..."}>
+                    <OtherComponent />
+                </React.Suspense>
+            </div>
+        )
+    }
+
+    export default App;
+
+
+    OtherComponent.js
+    ------------------
+
+    import React from 'react'
+
+    function OtherComponent() {
+        return (
+            <div>OtherComponent</div>
+        )
+    }
+
+    export default OtherComponent
+
+
+(4) Suspense In React 18
+---------------------------- 
+
+==> Step1 (Set This Values In Package.json 'dependencies' Object)
+------------
+
+    "react": "experimental",
+    "react-dom": "experimental",
+    "react-fetch": "experimental", // Used To Fetch Data
+
+==> Step2 (Hit 'npm install' To Install Versions And 'react-fetch')
+
+
+==> Full Sample
+------------------
+
+    App.js
+    ----------
+
+    import React, { useState, Suspense, useEffect } from 'react';
+    import { fetch } from 'react-fetch';
+
+    const User = () => {
+        const endpoint = 'https://jsonplaceholder.typicode.com/todos';
+        const todos = fetch(endpoint).json()
+
+        return <div>
+            {
+                todos.map(todo => <div key={todo.id}>{todo.title}</div>)
+            }
+        </div>;
+    };
+
+    export default function App() {
+
+        return (
+            <div className="App">
+                <Suspense fallback='Loading...'>
+                    <User />
+                </Suspense>
+            </div>
+        );
+    }
+

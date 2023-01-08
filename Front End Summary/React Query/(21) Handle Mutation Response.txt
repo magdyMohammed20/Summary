@@ -1,0 +1,19 @@
+(1) We Can Handle Data Refetch After Post Request Using Mutation Response Without Invalidation
+---------------------------------------------------------------------------------------------------
+==> Sample Is Same As Previous File Sample
+
+
+    hooks/useQueryHeros.js
+    ------------------------
+
+    export const usePostHeroQuery = (addHero) => {
+        const newQueryClient = useQueryClient();
+        return useMutation('post-heros', addHero, {
+            onSuccess: (data) => {
+                // setQueryData : Used To Update Cache
+                newQueryClient.setQueryData('get-heros', (oldQueryData) => {
+                    return { ...oldQueryData.data, data: [...oldQueryData.data, data.data] }
+                })
+            }
+        })
+    }

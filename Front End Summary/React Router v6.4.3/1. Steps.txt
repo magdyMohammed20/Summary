@@ -1,0 +1,456 @@
+(1) First Step (Handle Provider And Main Routes)
+------------------
+
+    index.js
+    ------------
+
+    import React from 'react';
+    import ReactDOM from 'react-dom/client';
+    import './index.css';
+    import App from './App';
+
+    // 1- Import createBrowserRouter, RouterProvider
+    import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+    // 2- Prepare All Routes
+    const router = createBrowserRouter([
+        {path: '/', element: <App />},
+        {path: '/faq' , element: <div>FAQ</div> },
+        {path: '/contact' , element: <div>Contact</div>}
+    ])
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+
+    // 3- Handle Router Provider
+    root.render(
+        <RouterProvider router={router} />
+    );
+
+
+(2) Second Step
+------------------
+==> Create Layout Component
+
+    Layout/Header.js
+    --------------------
+
+        import React from 'react'
+
+        function Header() {
+            return (
+                <div className='header'>
+                    <ul>
+                        <li>Home</li>
+                        <li>FAQ</li>
+                        <li>Contact</li>
+                    </ul>
+                </div>
+            )
+        }
+
+        export default Header
+
+
+(3) Third Step
+---------------------
+==> Create Pages
+
+    [pages/Contact.js]  [pages/Faq.js] [pages/Home.js]
+    ----------------------------------------------------
+
+    Normal Content
+
+
+(4) Fourth Step
+-------------------------------
+==> Use <Outlet/> In App.js
+
+
+    App.js
+    --------
+
+    import { Outlet } from 'react-router-dom';
+    import './App.css';
+    import Header from './layout/Header'
+    function App() {
+        return (
+            <div className="wrapper">
+                <Header />
+                <div className='content'>
+                    <Outlet />
+                </div>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(5) Fifth Step
+-------------------------------------------------------------
+==> Handle Provider Routes Again To Handle Main Route ['/']
+
+    index.js
+    ----------
+        
+    import Home from './pages/Home'
+    import Faq from './pages/Faq'
+    import Contact from './pages/Contact'
+
+    // '/' Will Render Layout And '/home' So We Fix It Using { index: true, element: <div>Home</div> }
+    const router = createBrowserRouter([
+        {
+            path: '/', // This Will Render Layout Only
+            element: <App />,
+            children: [
+                { index: true, element: <Home /> }, // Handle Here
+                { path: '/faq' , element: <Faq /> },
+                { path: '/contact' , element: <Contact /> }
+            ]
+        }
+    ])
+
+
+(6) Six Step
+----------------
+==> Use Link For Navigate
+
+
+    layout/Header.js [Note That to Without '/']
+    ------------------
+
+    import React from 'react';
+    import { Link } from 'react-router-dom';
+
+    function Header() {
+        return (
+            <div className='header'>
+                <ul>
+                    <li><Link to='/'>Home</Link></li>
+                    <li><Link to='faq'>FAQ</Link></li>
+                    <li><Link to='contact'>Contact</Link></li>
+                </ul>
+            </div>
+        )
+    }
+
+    export default Header
+
+
+(7) Handle Error Page
+------------------------
+==> Create Not Found Page [ErrorPage.js]
+==> Call Error Page In Provider In [errorElement].
+==> If Want To Render Not Found Message In Main Layout Will Set ErrorPage In createBrowserRouter With path Equal To '*'
+
+    pages/ErrorPage.js
+    ----------------------
+
+    function ErrorPage() {
+        return (
+            <div className='not-found'> <h1>404 Not Found</h1> </div>
+        )
+    }
+
+    export default ErrorPage
+
+
+    index.js
+    ----------
+
+    const router = createBrowserRouter([
+        {
+            path: '/',
+            element: <App />,
+            errorElement: <ErrorPage />,
+            children: [
+            { index: true, element: <Home /> },
+                ...routes
+            ]
+        }
+    ])
+
+
+    routes/index.js [For Combine All Routes In 1 Place]
+    -------------------
+
+    import Faq from "../pages/Faq";
+    import Contact from "../pages/Contact";
+    import ErrorPage from "../pages/ErrorPage";
+
+    const routes = [
+        { path: '/faq', element: <Faq /> },
+        { path: '/contact', element: <Contact /> },
+        { path: '*', element: <ErrorPage /> }
+    ];
+    export default routes;
+
+
+
+(8) In Previous Sample We Have Normal Routes Like 'faq - contact ...' 
+    But If We Have Another Nested Routes Like 'user - user/create' 
+    We Must Handle Routes Structure
+------------------------------------------------------------------------
+==> Create Root.js Which Will Contains Layout Of Normal Routes 'faq - contact'
+==> Import Root.js In index.js
+==> Create UserHeader.js With Different Css Style
+==> Create UserRoot.js For Containing All Users Routes 
+==> Add User Link In Header.js
+==> Call UserRoot.js In createBrowserRouter In index.js
+
+    routes/Root.js
+    -----------------
+
+    import { Outlet } from 'react-router-dom';
+    import '../App.css';
+    import Header from '../layout/Header'
+
+    function Root() {
+        return (
+            <div className="wrapper">
+                <Header />
+                <div className='content'>
+                    <Outlet />
+                </div>
+            </div>
+        );
+    }
+
+    export default Root;
+
+
+    index.js
+    -----------
+
+    import Root from './routes/Root';
+
+    const router = createBrowserRouter([
+        {
+            path: '/',
+            element: <Root />, // Here Instead Of App.js And Can Be Delete App.js File
+            errorElement: <ErrorPage />,
+            children: [
+                { index: true, element: <Home /> },
+                ...routes
+            ]
+        }
+    ])
+
+
+    layout/UserHeader.js
+    ------------------------
+
+    import React from 'react'
+    import { Link } from 'react-router-dom'
+
+    function UserHeader() {
+        return (
+            <div className='header header-user'>
+                <ul>
+                    <li><Link to='/'>Home</Link></li>
+                    <li><Link to='faq'>FAQ</Link></li>
+                    <li><Link to='contact'>Contact</Link></li>
+                </ul>
+            </div>
+        )
+    }
+
+    export default UserHeader
+
+
+    UserRoot.js
+    -------------
+
+    import { Outlet } from 'react-router-dom';
+    import '../App.css';
+    import UserHeader from '../layout/UserHeader';
+
+    function UserRoot() {
+        return (
+            <div className="wrapper">
+                <UserHeader />
+                <div className='content'>
+                    <Outlet />
+                </div>
+            </div>
+        );
+    }
+
+    export default UserRoot;
+
+
+    /layout/Header.js
+    --------------------
+
+    import { Link } from 'react-router-dom';
+
+    function Header() {
+        return (
+            <div className='header'>
+                <ul>
+                    <li><Link to='/'>Home</Link></li>
+                    <li><Link to='faq'>FAQ</Link></li>
+                    <li><Link to='contact'>Contact</Link></li>
+                    <li><Link to='user'>User</Link></li>
+                </ul>
+            </div>
+        )
+    }
+
+    export default Header
+
+
+    index.js
+    ------------
+
+    import UserRoot from './routes/UserRoot';
+
+    const router = createBrowserRouter([
+        {
+            path: '/',
+            element: <Root />,
+            errorElement: <ErrorPage />,
+            children: [
+                { index: true, element: <Home /> },
+                ...routes
+            ]
+        },
+        {
+            path: '/user',
+            element: <UserRoot />,
+            errorElement: <ErrorPage />,
+        }
+    ])
+
+
+(9) Active Link
+--------------------
+==> In UserHeader.js Use NavLink Instead Of Link
+==> In Any Style File Handle Active Class Style
+==> With This Logic Active Class Will Be Marked On Multi Navbar Link So Solve This Problem By Adding 'end' Attribute In First Main Page NavLink 
+
+    UserHeader.js
+    ---------------
+
+    import React from 'react'
+    import { NavLink } from 'react-router-dom'
+
+    function UserHeader() {
+        return (
+            <div className='header header-user'>
+                <ul>
+                    <li><NavLink to='/'>Home</NavLink></li>
+                    <li><NavLink to='/user' end>info</NavLink></li>
+                    <li><NavLink to='create'>Create</NavLink></li>
+                </ul>
+            </div>
+        )
+    }
+
+    export default UserHeader
+
+
+
+    App.css
+    ----------
+
+    .header .active {
+        background-color: #444;
+    }
+
+
+(10) Router Params 
+---------------------
+==> In userRoutes.js Prepare Routes Which Use Params
+==> Create Route Page Which Use Params [UserEdit.js]
+==> Handle Params Page Link In Navbar [UserHeader.js]
+
+
+    userRoutes.js
+    ----------------
+
+    import ErrorPage from "../pages/ErrorPage";
+    import UserInfo from "../pages/UserInfo";
+    import UserCreate from "../pages/UserCreate";
+    import UserEdit from "../pages/UserEdit";
+
+    const userRoutes = [
+        { path: 'info', element: <UserInfo /> },
+        { path: 'create', element: <UserCreate /> },
+        { path: 'edit/:id', element: <UserEdit /> },
+        { path: '*', element: <ErrorPage /> }
+    ];
+
+    export default userRoutes;
+
+
+    UserEdit.js
+    -------------
+
+    import { useParams } from 'react-router-dom';
+
+    function UserEdit() {
+        const { id } = useParams()
+        return (
+            <div>UserEdit - {id}</div>
+        )
+    }
+
+    export default UserEdit
+
+
+    UserHeader.js
+    ---------------
+
+    import React from 'react'
+    import { NavLink } from 'react-router-dom'
+
+    function UserHeader() {
+        return (
+            <div className='header header-user'>
+                <ul>
+                    <li><NavLink to='/'>Home</NavLink></li>
+                    <li><NavLink to='/user' end>info</NavLink></li>
+                    <li><NavLink to='create'>Create</NavLink></li>
+                    <li><NavLink to='edit/1'>Edit</NavLink></li>
+                </ul>
+            </div>
+        )
+    }
+
+    export default UserHeader
+
+
+(11) Programmatic Navigation 
+------------------------------
+
+    UserHeader.js
+    ----------------
+
+    import React from 'react'
+    import { NavLink, useNavigate } from 'react-router-dom'
+
+    function UserHeader() {
+
+        const navigate = useNavigate();
+
+        // You Can Use Replace Prop If Use Numbers Like '-1' To Replace Past Route With Previous Route
+        const handleLogout = () => {
+            navigate('/')
+        }
+        return (
+            <div className='header header-user'>
+                <ul>
+                    <li><NavLink to='/'>Home</NavLink></li>
+                    <li><NavLink to='/user' end>info</NavLink></li>
+                    <li><NavLink to='create'>Create</NavLink></li>
+                    <li><NavLink to='edit/1'>Edit</NavLink></li>
+                    <li>
+                        <button className="logout-btn" onClick={handleLogout}>Logout</button>
+                    </li>
+                </ul>
+            </div>
+        )
+    }
+
+    export default UserHeader

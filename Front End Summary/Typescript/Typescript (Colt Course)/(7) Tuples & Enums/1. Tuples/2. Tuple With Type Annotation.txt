@@ -1,0 +1,33 @@
+(1) Type Annotation With Tuple
+--------------------------------
+
+    type HTTPResponse = [number , string]
+
+    const goodRes: HTTPResponse = [10 , "Success"]
+
+
+(2) You Can Push To Tuple Even If You Specify Length And Types
+----------------------------------------------------------------
+
+    type HTTPResponse = [number, string]
+    const goodRes: HTTPResponse = [10, "Success"]
+
+    // This Is Valid 
+    goodRes.push(20)
+    console.log(goodRes) // [ 10, 'Success', 20 ]
+    goodRes.pop()
+    console.log(goodRes) // [ 10, 'Success' ]
+
+
+(3) Nested Tuple Type Definition
+-----------------------------------
+
+    type HTTPResponse = [number, string]
+
+    // arr Will Be Nested Array And Each Item Will Be With Specified Length And Type
+    let arr: HTTPResponse[] = [];
+
+    arr = [
+        [10, "magdy"],
+        [20, "Hossam"]
+    ]

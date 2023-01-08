@@ -1,0 +1,5 @@
+(1) Alternate Array Type Annotation
+------------------------------------
+
+    const nums: Array<number> = [10, 20]
+    const strs: Array<string> = ['str1' , 'str2']

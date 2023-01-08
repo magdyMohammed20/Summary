@@ -1,0 +1,63 @@
+(1) If Have Multi Api Calls And Want To Make Parallel Calls You Can Handle With React Query
+--------------------------------------------------------------------------------------------------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    const fetchHereos = () => axios.get('http://localhost:4000/superHeros')
+    const fetchFood = () => axios.get('http://localhost:4000/food')
+
+    function ParallelQueries() {
+        const { data: hereos } = useQuery('heros', fetchHereos)
+        const { data } = useQuery('foods', fetchFood)
+        return (
+            <div style={{ padding: '20px' }}>
+                <h2>Super Hereos</h2>
+                <ul>
+                    {hereos?.data?.map(hero => <li>{hero.name}</li>)}
+                </ul>
+                <hr />
+                <h2>Foods</h2>
+                <ul>
+                    {data?.data?.map(hero => <li>{hero.name}</li>)}
+                </ul>
+            </div>
+        )
+    }
+
+    export default ParallelQueries
+
+
+(2) Another Sample
+---------------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    const fetchHereos = () => axios.get('http://localhost:4000/superHeros')
+
+    const fetchFood = () => axios.get('http://localhost:4000/food')
+
+    function ParallelQueries() {
+
+        const { data: hereos, isLoading: isHereosLoading } = useQuery('heros', fetchHereos)
+        const { data: foods, isLoading: isFoodLoading } = useQuery('foods', fetchFood)
+
+        if (isHereosLoading || isFoodLoading) return <div>Loading...</div>
+
+        return (
+            <div style={{ padding: '20px' }}>
+                <h2>Super Hereos</h2>
+                <ul>
+                    {hereos?.data?.map(hero => <li>{hero.name}</li>)}
+                </ul>
+                <hr />
+                <h2>Foods</h2>
+                <ul>
+                    {foods?.data?.map(hero => <li>{hero.name}</li>)}
+                </ul>
+            </div>
+        )
+    }
+
+    export default ParallelQueries

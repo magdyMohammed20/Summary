@@ -1,0 +1,28 @@
+(1) Generic Class
+--------------------
+
+    interface Video {
+        title: string;
+        extension: string
+    }
+
+    interface Song {
+        title: string;
+        time: number;
+    }
+
+    // Playlist Here Defined As Generic Class 
+    class Playlist<T>{
+        public queue: T[] = [];
+
+        add(el: T) {
+            this.queue.push(el)
+        }
+    }
+
+    // Assign Type To Class Instance Here
+    const songs = new Playlist<Song>()
+    const videos = new Playlist<Video>()
+
+    songs.add({ title: 'First Song', time: 3 })
+    videos.add({ title: 'First Video', extension: 'mp4' })

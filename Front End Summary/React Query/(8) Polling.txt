@@ -1,0 +1,27 @@
+(1) Polling Means Automatic Refetching
+
+
+(2) referchInterval
+---------------------
+==> With This Configuration Property You Can Specify Interval Time For Refetch Api Data
+==> Default Value For This Property Is 'False'
+
+    // When Enter To The Route Which Use React Query Will Refetch The Data After Every 2 Seconds
+    const { data, isLoading, isError, error, isFetching } = useQuery('get-heros', () => {
+        return axios.get('http://localhost:4000/superHeros')
+    }, {
+        refetchInterval: 2000
+    })
+
+
+(3) refetchIntervalInBackground
+----------------------------------
+==> With This Property If Value Is 'True' And 'refetchInterval' Is Set Too Will Refetch Data Even If Window Is UnFocused
+
+
+    const { data, isLoading, isError, error, isFetching } = useQuery('get-heros', () => {
+        return axios.get('http://localhost:4000/superHeros')
+    }, {
+        refetchInterval: 2000,
+        refetchIntervalInBackground: true
+    })

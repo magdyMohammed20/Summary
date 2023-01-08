@@ -1,0 +1,37 @@
+(1) Problem With Private Modifier
+------------------------------------
+==> When Class Extends Another Class And Parent Class Has Private Property 
+    The Child Class Can't Access This Private Property So We Will Solve It Using Protected
+
+==> Protected Modifier Only Accessible In Child Class
+
+
+EX (Using Protected Modifier)
+---
+
+    class Player {
+        constructor(
+            public first: string,
+            public last: string,
+            protected _score: number) { }
+
+        get fullNameWithScore(): string {
+            return `${this.first} ${this.last} And Score Is ${this._score}`;
+        }
+
+        set score(val: number) {
+            this._score = val;
+        }
+    }
+
+    class secondPlayer extends Player {
+        set scoreChange(val: number) {
+            this._score = val;
+        }
+
+    }
+
+    const p1 = new secondPlayer("Magdy", "Mohammed", 10);
+
+    p1.scoreChange = 100
+    console.log(p1.fullNameWithScore) // Magdy Mohammed And Score Is 100

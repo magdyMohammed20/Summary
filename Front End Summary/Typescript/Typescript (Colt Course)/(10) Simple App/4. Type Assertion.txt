@@ -1,0 +1,25 @@
+(1) Unknown Type
+--------------------
+
+    const something: unknown = "Magdy"
+
+    // Error: Object is of type 'unknown'
+    console.log(something.length)
+
+
+(2) Type Assertion 
+---------------------
+==> For Solve 'Unknown' Type Problem
+
+    const something: unknown = "Magdy"
+    const len = (something as string).length; // 5
+
+
+(3) Variable Value Change
+----------------------------
+
+    const something: unknown = 4
+
+    const len = (something as string).length;
+
+    console.log(len) // undefined

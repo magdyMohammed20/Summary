@@ -1,0 +1,26 @@
+(1) Static Class Properties
+------------------------------
+==> Properties Which Is Own For Class Not The Created Instance Of Class
+
+EX (Calculate How Many Objects Created From Class)
+---
+
+class User {
+    static created: number = 0;
+    static getCount(): number {
+        return User.created;
+    }
+    constructor(public username: string) {
+        User.created++
+    }
+}
+
+const u1 = new User('Magdy');
+const u2 = new User('Mohammed');
+console.log(User.getCount()) // 2
+
+
+(2) Can Define Static And Private Class Prop At Same Time To Prevent Access It Using Class Instance
+-----------------------------------------------------------------------------------------------------
+
+    private static created: number = 0;

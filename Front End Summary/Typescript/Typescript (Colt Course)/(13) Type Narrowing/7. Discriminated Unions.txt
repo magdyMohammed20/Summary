@@ -1,0 +1,56 @@
+(1) Discriminiated Unions
+----------------------------
+==> Common Pattern In Typescript Involves Creating A Literal Property That Is Common Across Multiple Types
+
+
+EX
+---
+
+    interface Cow {
+        name: string;
+        weight: number;
+        kind: 'Cow' // Kind Here For Label Interface Type
+    }
+
+    interface Rooster {
+        name: string;
+        weight: number;
+        kind: 'Rooster'// Kind Here For Label Interface Type
+    }
+
+    // Here Are Discriminated Unions
+    type UnionAnimal = Cow | Rooster;
+
+
+    function getAnimal(animal: UnionAnimal) {
+        switch (animal.kind) {
+            case "Rooster":
+                return animal // animal Type Here Is 'Rooster'
+
+            case "Cow":
+                return animal // animal Type Here Is 'Cow'
+        }
+    }
+
+    const rooster: Rooster = {
+        name: 'Rooster',
+        weight: 100,
+        kind: 'Rooster'
+    }
+
+    const cow: Cow = {
+        name: 'Cow',
+        weight: 100,
+        kind: 'Cow'
+    }
+
+
+    // There Are Error Here
+    const cow2: Cow = {
+        name: 'Cow',
+        weight: 100,
+        kind: 'Cow2' // Type '"Cow2"' is not assignable to type '"Cow"'
+    }
+
+    console.log(getAnimal(rooster)) // {name: 'Rooster', weight: 100, kind: 'Rooster'}
+    console.log(getAnimal(cow)) // {name: 'Rooster', weight: 100, kind: 'Cow'}

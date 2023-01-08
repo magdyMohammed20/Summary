@@ -1,0 +1,24 @@
+(1) typeof Guards
+---------------------
+
+==> problem : In Following Sample repeat Function Not Exist In Number Type 
+
+    function tripple(tr: number | string){
+        return tr.repeat(2) // Error : Property 'repeat' does not exist on type 'number'
+    }
+
+
+==> Solve This Problem Using 'typeof'
+
+    function tripple(tr: number | string) {
+        // If tr Type is String Use Repeat With It
+        if (typeof tr == 'string') {
+            return tr.repeat(2)
+        }
+
+        // If tr Type Is Number Do Any Operation
+        return tr ** 3
+    }
+
+    console.log(tripple('Magdy')) // MagdyMagdy
+    console.log(tripple(3)) // 27

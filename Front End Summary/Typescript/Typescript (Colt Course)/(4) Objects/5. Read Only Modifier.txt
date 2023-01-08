@@ -1,0 +1,13 @@
+(1) In Object Type Annotations We Can Mark Property As Read Only Which We Not Able To Assign Value To It 
+-------------------------------------------------------------------------------------------------------------
+
+
+    type Points = { x: number; y: number; readonly z: number }
+
+    // Z Is Read Only But You Can Initialize Here With A Value
+    const coords: Points = {
+        x: 10, y: 20, z: 30
+    }
+
+    console.log(coords.z)
+    coords.z = 40

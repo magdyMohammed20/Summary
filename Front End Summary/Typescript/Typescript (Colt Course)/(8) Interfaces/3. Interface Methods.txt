@@ -1,0 +1,48 @@
+(1) Interface Methods
+-------------------------
+
+    interface Point {
+        x: number;
+        y: number;
+        get: () => string; // This Is Method Type Definition
+    }
+
+    // Implement Function Here
+    const coords: Point = { x: 10, y: 20, get: () => "Hellow World" }
+
+    console.log(coords.get()) // Hellow World
+
+
+(2) Another Interface Method Type Definition
+-----------------------------------------------
+
+    interface Point {
+        x: number;
+        y: number;
+        get(): string; // This Is Method Type Definition
+    }
+
+
+(3) Interface Method Parameter
+----------------------------------
+
+    interface Product {
+        name: string;
+        price: number;
+        // Here It Takes Price Number As Parameter And Return Number
+        applyDiscount(price: number): number
+    }
+
+    let shoes: Product;
+
+    shoes = {
+        name: 'Nike Shoes',
+        price: 100,
+        applyDiscount(amount: number) {
+            const newPrice = this.price * (1 - amount)
+            this.price = newPrice;
+            return this.price;
+        }
+    }
+
+    console.log(shoes.applyDiscount(.5)) // 50

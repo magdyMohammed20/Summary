@@ -1,0 +1,61 @@
+(1) Todos Checkbox Event Listener
+------------------------------------
+
+    index.ts
+    ----------
+
+    interface Todo {
+        text: string;
+        checked: boolean;
+    }
+
+    const btn = document.getElementById('todobtn')! as HTMLButtonElement;
+    const input = document.getElementById('todoinput') as HTMLInputElement;
+    const form = document.querySelector('form')!;
+    const todoList = document.getElementById('todolist')!;
+    const todos: Todo[] = readTodos();
+
+    todos.forEach(createTodo)
+
+    // Create Function For Save Todos To Local Storage
+    function saveTodos() {
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    function readTodos(): Todo[] {
+        const jsonTodos = localStorage.getItem('todos');
+        if (jsonTodos == null) return [];
+        return JSON.parse(jsonTodos)
+    }
+
+
+    function createTodo(todo: Todo) {
+        const inputVal = todo.text;
+        const newLi = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+
+        // If Todo Is Checked And Page Refreshed It Will Mark It As Finished
+        checkbox.checked = todo.checked
+
+        // After Check Single Todo As Finished Update Local Storage With Todos Status
+        checkbox.addEventListener('change', function () {
+            todo.checked = checkbox.checked
+            saveTodos()
+        })
+
+        newLi.append(inputVal);
+        newLi.prepend(checkbox);
+        todoList.append(newLi);
+    }
+
+    function submitCallback(e: SubmitEvent) {
+        e.preventDefault();
+        const todo: Todo = { text: input.value, checked: false }
+        createTodo(todo);
+        todos.push(todo);
+        saveTodos()
+        input.value = ""
+    }
+
+    form.addEventListener('submit', submitCallback)

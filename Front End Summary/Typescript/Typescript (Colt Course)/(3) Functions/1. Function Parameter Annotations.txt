@@ -1,0 +1,33 @@
+(1) Function Parameter Annotations
+-----------------------------------
+
+Problem
+------------
+
+    const square = num => num * num
+
+    // Here Square Function Accepts Parameter With 'any' Type 
+    square(10)
+    square('magdy')
+    square(false)
+
+
+Solve (By Define Parameter Type)
+--------
+
+    const square = (num:number) => num * num
+
+    // Valid
+    square(10)
+
+    // Not Valid
+    square('magdy')
+    square(false)
+
+
+(2) Function Parameter String Type Annotations
+-------------------------------------------------
+
+    const sayHello = (msg:string) => msg
+
+    sayHello('magdy')

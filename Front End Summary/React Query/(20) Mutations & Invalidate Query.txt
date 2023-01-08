@@ -1,0 +1,97 @@
+(1) Mutations
+----------------
+==> Making Post Request Using React Query
+
+
+    hooks / useQueryHeros.js
+    -----------------------
+
+        import { useMutation, useQuery } from 'react-query';
+        import RQsuperHeros from '../../../src/Components/RQsuperHeros'
+
+        export const useQueryHeros = (onSuccess, onError, fetchFn) => {
+            return useQuery('get-heros', fetchFn, {
+                onSuccess,
+                onError
+            })
+        }
+
+        // Create Query For Post Data
+        export const usePostHeroQuery = (addHero) => {
+            return useMutation('post-heros', addHero)
+        }
+
+
+
+    RQsuperHeros.js
+    --------------------
+
+    import { useState } from 'react';
+    import { useQueryHeros, usePostHeroQuery } from '../hooks/useQueryHeros';
+    import axios from 'axios';
+
+    function RQsuperHeros() {
+        // States For Form Data
+        const [name, setHeroName] = useState('');
+        const [heroEgo, setHeroEgo] = useState('');
+
+        const onSuccess = data => { console.log('Data Fetching Success', data) }
+        const onError = error => { console.log('Data Fetching Error', error) }
+
+        const getHeros = () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }
+
+        // Function For Posting Data
+        const addHeros = (hero) => {
+            return axios.post('http://localhost:4000/superHeros', hero)
+        }
+        const { data, isError, error, refetch } = useQueryHeros(onSuccess, onError, getHeros)
+
+        // Calling Posting Data Hook
+        const { mutate: addHero, isLoading: isPostLoading, isError: isPostError, error: postError } = usePostHeroQuery(addHeros)
+
+        if (isError) return <h1>{ error.message } < /h1>;
+
+        if (isPostError) return <h1>{ postError.message } < /h1>;
+
+        if (isPostLoading) return <h1>Loading...</h1>
+        return (
+            <div>
+            <input type= "text" name = "hero" onChange = { e => setHeroName(e.target.value) } />
+                <input type="text" name = "heroEgo" onChange = { e => setHeroEgo(e.target.value) } />
+                    <button onClick={
+                        () => {
+                            addHero({ name, heroEgo })
+                        }
+        }> Add Hero < /button>
+
+        {
+            data && data.data.map(hero => <div key={ hero.id } className = "hero" >
+                { hero.name }
+                < /div>)
+                    }
+        </div>
+            )
+    }
+
+    export default RQsuperHeros
+
+
+
+(2) Invalidate Query
+------------------------
+==> We Want To Refetch Data After Making Post Request
+
+    import { useMutation, useQuery, useQueryClient } from 'react-query';
+
+    // Create Query For Post Data
+    export const usePostHeroQuery = (addHero) => {
+        const newQueryClient = useQueryClient();
+        return useMutation('post-heros', addHero, {
+            onSuccess: () => {
+                // Here We Calling 'get-heros' Which Make Get Request For Data After Post It
+                newQueryClient.invalidateQueries('get-heros')
+            }
+        })
+    }

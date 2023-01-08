@@ -1,0 +1,20 @@
+(1) Tuples
+-------------
+==> Is Array Of Fixed Length And Ordered With Specific Types
+
+Examples
+-----------
+
+    // Colors Length Must Be 2 Only And All Values Must Be Numbers 
+    const colors: [number, number] = [10, 20]
+
+    // Colors2 Length Must Be 2 And First Member Must Be Number And Second Must Be String
+    const colors2: [number, string] = [101245, "red"]
+    // Invalid Case As First Element Must Be String And Second Must Be Number
+    const colors3: [string, number] = [103456, "green"]
+
+    // More Elements
+    const more1: [string, number, number, boolean] = ["First", 10, 20, false]
+
+    // Invalid As Length Is Greater Than The Specified Length
+    const moreLength: [number, string] = [10, "magdy", false]

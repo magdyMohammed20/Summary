@@ -1,0 +1,45 @@
+(1) Problem
+---------------
+==> Here We Have 2 Action First Is Increment Immediately With 1 And Second Is Wait For 2 Seconds Then Increment
+==> Problem Is When Click On Async Button And Fastly Click Multi Times On Normal Button Will Note That Increment Not
+Working Properly
+
+
+EX
+---
+
+
+import {useState} from 'react';
+
+export default function App() {
+const [number , setNumber] = useState(0)
+
+const increment = () => { setNumber(number + 1) }
+
+const incrementAsync = () => {
+setTimeout(() => {
+setNumber(number + 1)
+}, 2000)
+}
+
+return (
+<div className="App">
+    <button onClick={increment}>Increase</button>
+    <button onClick={incrementAsync}>Increase Async</button>
+    <h1>
+        {number}
+    </h1>
+</div>
+);
+}
+
+
+(2) Solving Problem By Using Function Syntax When Set State
+------------------------------------------------------------
+
+const incrementAsync = () => {
+setTimeout(() => {
+// Look Here
+setNumber(prevNum => prevNum + 1)
+}, 2000)
+}

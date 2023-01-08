@@ -1,0 +1,154 @@
+(1) Problem
+------------
+==> Here We Have Toggle Button Which Hide Or Showing Timer , When Timer Is Hidden SetInterval() Still Working And This Is Side Effect
+
+App.js
+---------
+
+    import { useState } from 'react';
+
+    function Component() {
+        const [now, setNow] = useState(new Date().toLocaleTimeString())
+
+        setInterval(() => {
+            console.log('Render')
+            setNow(new Date().toLocaleTimeString())
+        }, 1000)
+        
+        return (
+            <div className="App">
+                {now}
+            </div>
+        );
+    }
+
+    function App() {
+        const [showing, setShowing] = useState(false)
+
+        return (
+            <div>
+                <button onClick={() => setShowing(!showing)}>Toggle</button>
+                {showing && <Component />}
+            </div>
+        )
+    }
+
+    export default App;
+
+
+(2) Solve Problem Buy useEffect() 
+-----------------------------------
+
+    App.js
+    --------
+
+    import { useEffect, useState } from 'react';
+
+    function Component() {
+        const [now, setNow] = useState(new Date().toLocaleTimeString())
+
+        useEffect(() => {
+            const id = setInterval(() => {
+                console.log('Render')
+                setNow(new Date().toLocaleTimeString())
+            }, 1000)
+
+            return () => clearInterval(id)
+        })
+        return (
+            <div className="App">
+                {now}
+            </div>
+        );
+    }
+
+    function App() {
+        const [showing, setShowing] = useState(false)
+
+        return (
+            <div>
+                <button onClick={() => setShowing(!showing)}>Toggle</button>
+                {showing && <Component />}
+            </div>
+        )
+    }
+
+    export default App;
+
+
+(3) Another Problem
+---------------------
+==> If We Use 2 Copies Of Timer Component First Is Depending On 'showing' And Other Exist Directly When We Toggle The Timer Of The First Will Note That There Are Some Difference Between 2 Timers
+
+    App.js
+    ---------
+
+    function App() {
+        const [showing, setShowing] = useState(false)
+
+        return (
+            <div>
+                <button onClick={() => setShowing(!showing)}>Toggle</button>
+                
+                {/* Conditional Timer */}
+                {showing && <Component />}
+
+                {/* Direct Timer */}
+                <Component />
+            </div>
+        )
+    }
+
+    export default App;
+
+
+(4) Solution Of (3) Is To Make 'now' Initialization Outside The 'Component' But Must Use 'useSyncExtrenalStore()' To Make Time Updated Every Second
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    App.js
+    --------
+
+    import { useState, useSyncExternalStore } from 'react';
+
+    let now = new Date().toLocaleTimeString()
+
+    setInterval(() => {
+        now = new Date().toLocaleTimeString()
+        notifiers.forEach(notify => notify()) // For Update The External State 
+    }, 1000)
+
+    let notifiers = new Set()
+
+    function subscribe(notify) {
+        notifiers.add(notify)
+        return () => notifiers.delete(notify)
+    }
+
+    function Component() {
+
+        // useSyncExternalStore
+        // Takes 2 Parameters As Functions
+        // First Param : 'subscribe' Used to register a callback that is called whenever the store changes
+        // Second Param: 'getSnapshot' that returns the current value of the store.
+        let store = useSyncExternalStore(subscribe, () => now)
+
+        return (
+            <div className="App">
+                {store}
+            </div>
+        );
+    }
+
+    function App() {
+        const [showing, setShowing] = useState(false)
+
+        return (
+            <div>
+            <button onClick={() => setShowing(!showing)}>Toggle</button>
+            {showing && <Component />}
+            <Component />
+            </div>
+        )
+    }
+
+    export default App;

@@ -1,0 +1,31 @@
+(1) You Have Array Of Booleans And Want To Count Length Of True Values
+
+(2) Solution1
+----------------
+
+    const sheeps = [true,true,true,false,true,false]
+
+    function checkSheeps(sheeps){
+        return sheeps.filter(x => x == true).length
+    }
+
+    console.log(checkSheeps(sheeps)) // 4
+
+
+(3) Solution2
+----------------
+
+    const sheeps = [true,true,true,false,true,false]
+
+    function checkSheeps(sheeps){
+        let count = 0;
+        sheeps.map(x =>{
+            if(x){
+                count++;
+            }
+        })
+
+        return count;
+    }
+
+    console.log(checkSheeps(sheeps)) // 4

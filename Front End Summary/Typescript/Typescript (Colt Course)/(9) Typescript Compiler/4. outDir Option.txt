@@ -1,0 +1,12 @@
+(1) Compile Destination
+-------------------------
+==> When Compile TS Files Default Destination For Js File Is Beside It's Own TS File
+
+
+(2) outDir Option In tsconfig.json
+------------------------------------
+==> Here Will Compile All Ts File To 'dist' Folder And If Folder Not Exist It Will Create It 
+
+    "compilerOptions": {
+        outDir: "./dist"
+    }

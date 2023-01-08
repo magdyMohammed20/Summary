@@ -1,0 +1,34 @@
+(1) Annotating Class Fields
+------------------------------
+
+    class Player {
+        first: string;
+        last: string;
+        score = 0; // If There Is No Type Annotation TS Will Infered Type Automatically
+
+        constructor(first: string, last: string) {
+            this.first = first;
+            this.last = last;
+            this.score = 10;
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");
+
+
+(2) Union Operator With Class Field
+--------------------------------------
+
+    class Player {
+        first: string;
+        last: string;
+        score: number | string = 0; // Union Operator With Class Field
+
+        constructor(first: string, last: string) {
+            this.first = first;
+            this.last = last;
+            this.score = 10;
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");

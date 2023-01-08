@@ -1,0 +1,37 @@
+(1) Optional Interface Property
+------------------------------------
+
+    interface Point {
+        x: number;
+        y: number;
+        z?: number // z Here Is Optional
+    }
+
+    const coords1: Point = {
+        x: 1.343,
+        y: 1.55645
+    }
+
+    const coords2: Point = {
+        x: 1.343,
+        y: 1.55645,
+        z : 1.54354
+    }
+
+
+(2) Read Only Interface Property
+----------------------------------
+
+    interface Point {
+        x: number;
+        y: number;
+        readonly z: number // z Here Is Mandatory But We Can't Change Value Of It
+    }
+
+    // Error As Z Is Mandatory
+    const coords1: Point = { x: 1.343, y: 1.55645 }
+
+    const coords2: Point = { x: 1.343, y: 1.55645, z: 1.54354 }
+
+    // Error: Cannot assign to 'z' because it is a read-only property
+    coords2.z = 10

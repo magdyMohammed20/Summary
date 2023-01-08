@@ -1,0 +1,64 @@
+(1) If We Not Assign Values To Enum Members It Starts Increment From (0)
+-----------------------------------------------------------------------------
+
+    enum ResponseStatus {
+        PENDING, // 0
+        ERROR, // 1
+        SUCCESS // 2
+    }
+
+
+    const orderStatus1 = ResponseStatus.SUCCESS
+    const orderStatus2 = ResponseStatus.ERROR
+    const orderStatus3 = ResponseStatus.PENDING
+
+    function isSuccess(status: ResponseStatus) {
+        if (status == ResponseStatus.SUCCESS) {
+            return status
+        } else {
+            return 'Failed To Success'
+        }
+    }
+
+    console.log(isSuccess(orderStatus1)) // 2
+    console.log(isSuccess(orderStatus2)) // Failed To Success
+    console.log(isSuccess(orderStatus3)) // Failed To Success
+
+
+(2) You Can Assign Values To Enum Members
+----------------------------------------------
+
+    // Assign Here
+    enum ResponseStatus {
+        PENDING = 10,
+        ERROR = 404, 
+        SUCCESS = 100
+    }
+
+
+    const orderStatus1 = ResponseStatus.SUCCESS
+    const orderStatus2 = ResponseStatus.ERROR
+    const orderStatus3 = ResponseStatus.PENDING
+
+    function isSuccess(status: ResponseStatus) {
+        if (status == ResponseStatus.SUCCESS) {
+            return status
+        } else {
+            return 'Failed To Success'
+        }
+    }
+
+    console.log(isSuccess(orderStatus1)) // 100
+    console.log(isSuccess(orderStatus2)) // Failed To Success
+    console.log(isSuccess(orderStatus3)) // Failed To Success
+
+
+(3) You Can't Re Assign Value To Enum As Members Is Read Only
+------------------------------------------------------------------
+
+    enum ResponseStatus {
+        PENDING = 10, // 0
+        ERROR = 404, // 1
+        SUCCESS = 100 // 2
+    }
+    ResponseStatus.SUCCESS = 200

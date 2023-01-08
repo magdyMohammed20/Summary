@@ -1,0 +1,43 @@
+(1) Query Cache
+------------------
+==> If We Have Multi Routes And We Not Use Query Cache In Specific Route 
+    Every Time Enter This Route Which Has Api Call Will See React Query 
+    Loading Text But If Use Query Cache In This Route Will Not See The Loading Text
+    And If Api Data Updated Will See The Updated Data Too
+
+==> Cache Works By Check If Call Already Occurs In 'Stale' Tab In React Query Devtools
+
+==> Default Cache Time For React Query Is 5 Minutes But Can Control 
+
+
+    SuperHeros.js
+    -----------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    function SuperHeros() {
+
+        const { data, isLoading, error, isError, isFetching } = useQuery('fetch-supers', () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }, {
+            cacheTime: 10000 // Specify Cache Time
+        })
+
+        if (isLoading) return 'Loading...';
+        if (isError) return error.message;
+
+        // For Showing Loading Text Not Appear
+        console.log({ isLoading, isFetching })
+
+
+        return (
+            <div>
+                {
+                    data.data.map(hero => <div key={hero.id}>{hero.name}</div>)
+                }
+            </div>
+        )
+    }
+
+    export default SuperHeros

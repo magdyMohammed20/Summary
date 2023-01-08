@@ -1,0 +1,25 @@
+(1) Type Narrowing
+----------------------
+==> Using typeof Keyword For Check Different Cases Of Types
+
+
+(2) Problem And Solution
+----------------------------
+
+    // Problem
+    // This Is Invalid As price Can Be String Or Number And TS Conflicts Here
+    function calcTax(price: number | string , tax: number){
+        return price * tax;
+    }
+
+    // Solution
+    function calcTax(price: number | string, tax: number): void {
+        if (typeof price == 'number') {
+            console.log(price * tax);
+        } else {
+            console.log(`Price : ${price} And Tax : ${tax}`)
+        }
+    }
+
+    calcTax(10, 20) // 200
+    calcTax('1000', 20) // Price : 1000 And Tax : 20

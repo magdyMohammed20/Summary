@@ -1,0 +1,20 @@
+(1) 'strict' Option
+----------------------
+
+    {
+        "compilerOptions": {
+            "strict" : true
+        }
+    }
+
+
+    index.ts
+    ---------------
+
+    // As "strict" Is True TS Will Give Syntax Error Here As 'param' Not Have Type Definition
+    // But If Set "strict" To False It Will Not Give Any Syntax Error 
+    const func = (param) => {
+        console.log(param)
+    }
+
+    

@@ -1,0 +1,92 @@
+(1) Private Modifier
+-----------------------
+==> When Mark Class Property As Private You Can Use It Only Inside The Class And Can't Assign Value Using Class Instance
+
+
+EX
+---
+
+    class Player {
+        readonly first: string;
+        last: string;
+        private score: number; // Mark score As Private Field
+
+        constructor(first: string, last: string, score: number) {
+            this.first = first;
+            this.last = last;
+            this.score = score;
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed", 10);
+    p1.score = 20 // Error : Property 'score' is private and only accessible within class 'Player'
+
+
+(2) Private Modifier Using (#)
+---------------------------------
+==> # Is A Js Feature To Mark Property As Private
+
+
+EX
+----
+
+    class Player {
+        readonly first: string;
+        last: string;
+        #score: number = 0; // Mark score As Private Field
+
+        constructor(first: string, last: string, score: number) {
+            this.first = first;
+            this.last = last;
+            this.#score = score;
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed", 10);
+    p1.#score = 10 // Error : Property '#score' is not accessible outside class 'Player' because it has a private identifier
+
+
+(3) Private Method
+---------------------
+
+EX1
+-----
+
+    class Player {
+        readonly first: string;
+        last: string;
+
+        constructor(first: string, last: string) {
+            this.first = first;
+            this.last = last;
+            this.secretMethod() // Calling Private Method In Constructor
+        }
+
+        // Define Private Method
+        private secretMethod(): void {
+            console.log("Hellow Secret")
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");
+
+EX2
+-----
+
+    class Player {
+        readonly first: string;
+        last: string;
+
+        constructor(first: string, last: string) {
+            this.first = first;
+            this.last = last;
+        }
+
+        private secretMethod(): void {
+            console.log("Hellow Secret")
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");
+    p1.secretMethod() // Error As secretMethod Is Private But It Work Normally When Compiled To Js
+

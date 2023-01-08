@@ -1,0 +1,13 @@
+(1) First We Will Create File Called 'generics.tsx'
+
+(2) Arrow Function With Generics
+-----------------------------------
+
+
+    const getRand = <T,>(list: T[]): T => {
+        const randNum = Math.floor(Math.random() * list.length);
+        return list[randNum];
+    }
+
+
+    console.log(getRand<string>(["First", "second", "third"]))

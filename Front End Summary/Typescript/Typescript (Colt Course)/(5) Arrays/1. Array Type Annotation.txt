@@ -1,0 +1,15 @@
+(1) Array Type Annotation
+----------------------------
+
+    // Array Of Strings
+    let users: string[] = ["magdy"]
+
+    // Array Of Numbers
+    let nums:number[] = [10,20]
+
+(2) Infered Array Type
+--------------------------
+
+    const nums = [] // Is never Type
+
+    const nums = [10,20] // Is number[] Type

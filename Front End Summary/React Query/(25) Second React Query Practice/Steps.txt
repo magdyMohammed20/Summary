@@ -1,0 +1,332 @@
+(1) Install React Query And Axios
+-------------------------------------
+==> npm i react-query axios
+
+(2) Create JSON File For Data
+----------------------------------
+
+    db/db.json
+    ------------
+
+    {
+        "products": [
+            {
+                "id": 1,
+                "title": "iPhone 9",
+                "description": "An apple mobile which is nothing like apple",
+                "price": 549
+            },
+            {
+                "id": 2,
+                "title": "Realme 7",
+                "description": "An Realme mobile which is nothing like Realme",
+                "price": 100
+            }
+        ]
+    }
+        
+
+(3) Create Api File For Fetching Functions And Axios Instance
+----------------------------------------------------------------
+
+    /productsApi/productsApi.js
+    -------------------------
+
+    import axios from 'axios';
+
+    // 1- Create Axios Instance
+    const api = axios.create({
+        baseURL: 'https://localhost:4000'
+    })
+
+    // 2- Build Up Get All Products Method
+    export const getProducts = () => api.get('/products').then(response => response.data)
+
+
+    // 3- Build Up Get Single Product Data
+    export const getProduct = (id) => api.get(`/products/${id}`).then(response => response.data)
+
+    // 4- Build Up Update Product Method
+    export const updateProduct = ({ id, ...updatedProduct }) => {
+        return api.put(`/products/${id}`, updateProduct).then(res => res.data);
+    }
+
+
+(4) Configure React Query Provider
+------------------------------------
+
+    index.js
+    -----------
+
+    import ReactDOM from 'react-dom/client';
+    import App from './App';
+    import { QueryClientProvider, QueryClient } from 'react-query';
+    import { ReactQueryDevtools } from 'react-query/devtools'
+
+    const queryClient = new QueryClient();
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(
+        <QueryClientProvider client={queryClient}>
+            <App />
+            <ReactQueryDevtools initialIsOpen={true} />
+        </QueryClientProvider>
+    );
+
+
+(4) Start To Build Up Components And Data Fetch
+-------------------------------------------------
+
+    Components/AllProducts.js
+    ---------------------------
+
+    import { useQuery } from 'react-query';
+    import * as api from '../productsApi/productsApi';
+
+    function AllProducts() {
+        const { data: products, isLoading, isError, error } = useQuery('products', api.getProducts, {
+            retry: false // If Request Failed For Any Reason Will Prevent Request Sending Again
+        });
+
+        if (isLoading) return 'Loading Products....'
+        if (isError) return error.message
+
+        return (
+            <ul>
+                {
+                    products.map(product => <li key={product.id}>
+                        <h1>{product.title}</h1>
+                        <p>{product.description}</p>
+                        <p>Price : ${product.price}</p>
+                    </li>)
+                }
+            </ul>
+        )
+    }
+
+    export default AllProducts
+
+
+(5) Showing Product Details
+------------------------------
+
+    Components/AllProducts.js (Here We Add Button For Showing Details)
+    ----------------------------
+
+    import { useQuery } from 'react-query';
+    import * as api from '../productsApi/productsApi';
+
+    function AllProducts({ setProductId }) {
+        const { data: products, isLoading, isError, error } = useQuery('products', api.getProducts, {
+            retry: false // If Request Failed For Any Reason Will Prevent Request Sending Again
+        });
+
+        if (isLoading) return 'Loading Products....'
+        if (isError) return error.message
+        return (
+            <ul>
+                {
+                    products.map(product => <li key={product.id}>
+                        <h1>{product.title}</h1>
+                        <button onClick={() => setProductId(product.id)}>View</button>
+                    </li>)
+                }
+            </ul>
+        )
+    }
+
+    export default AllProducts
+
+
+    App.js (Add Product Id State And Import ProductDetails Component)
+    ---------
+
+    import './App.css';
+    import AllUsers from './components/AllProducts';
+    import ProductDetails from './components/ProductDetails';
+    import { useState } from 'react';
+
+    function App() {
+        const [productId, setProductId] = useState('')
+
+        return (
+            <div className="App">
+                <AllUsers setProductId={setProductId} />
+                <ProductDetails productId={productId} />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    components/ProductDetails.js (Use Product Id For Get Details)
+    ------------------------------
+
+    import { useQuery } from 'react-query';
+    import { getProduct } from '../productsApi/productsApi'
+    function ProductDetails({ productId }) {
+
+        const { data: product, isLoading } = useQuery(
+            ['product', productId],
+            () => getProduct(productId), {
+            enabled: Boolean(productId),
+        })
+
+        if (productId == '') return 'Please Select User!'
+        if (isLoading) return 'Loading User Data...'
+
+
+        return (
+            <div className='user-details'>
+                <h1>{product.title}</h1>
+                <p>${product.price}</p>
+                <p>{product.description}</p>
+            </div>
+        )
+    }
+
+    export default ProductDetails
+
+
+(6) Use isFecthing For Loading Spinner Between Cached Data
+---------------------------------------------------------------
+
+    import { useQuery } from 'react-query';
+    import { getProduct } from '../productsApi/productsApi'
+    function ProductDetails({ productId }) {
+
+        const { data: product, isLoading, isFetching } = useQuery(
+            ['product', productId],
+            () => getProduct(productId), {
+            enabled: Boolean(productId)
+        })
+
+        if (productId == '') return 'Please Select User!'
+        if (isLoading) return 'Loading User Data...'
+
+
+        return (
+            <div className='user-details'>
+                {
+                    isFetching ? 'Background Refetching...' : <>
+                        <h1>{product.title}</h1>
+                        <p>${product.price}</p>
+                        <p>{product.description}</p>
+                    </>
+                }
+
+            </div>
+        )
+    }
+
+    export default ProductDetails
+
+
+(7) Creating Edit User Form
+-------------------------------
+
+    components/ProductDetails.js
+    ------------------------------
+
+    import { useState } from 'react';
+    import { useQuery } from 'react-query';
+    import { getProduct } from '../productsApi/productsApi'
+    import ProductForm from './ProductForm';
+    function ProductDetails({ productId }) {
+        const [isEditing, setIsEditing] = useState(false);
+        const { data: product, isLoading, isFetching } = useQuery(
+            ['product', productId],
+            () => getProduct(productId), {
+            enabled: Boolean(productId),
+            refetchOnWindowFocus: false
+        })
+
+        if (productId == '') return 'Please Select User!'
+        if (isLoading) return 'Loading User Data...'
+
+
+        return (
+            <div className='user-details'>
+                {
+                    isEditing ? <div>
+                        <ProductForm setIsEditing={setIsEditing} product={product} />
+                    </div> : <>
+                        <h1>{product.title}</h1>
+                        <p>${product.price}</p>
+                        <p>{product.description}</p>
+                        <button onClick={() => setIsEditing(true)}>Edit</button>
+                    </>
+                }
+
+            </div>
+        )
+    }
+
+    export default ProductDetails
+
+
+    components/ProductForm.js
+    ---------------------------
+
+
+    import { useState } from 'react';
+    import { useMutation, useQueryClient } from 'react-query';
+    import { updateProduct } from '../productsApi/productsApi'
+
+    function ProductForm({ product, setIsEditing }) {
+        const queryClient = useQueryClient();
+        const [fields, setFields] = useState({ ...product });
+        const { isLoading, mutate } = useMutation(updateProduct, {
+            onMutate: (updatedProduct) => {
+                queryClient.setQueryData(['product', product.id], updatedProduct)
+                setIsEditing(false)
+            },
+            onSuccess: () => {
+                queryClient.invalidateQueries(['product', product.id])
+                queryClient.invalidateQueries('products')
+
+            }
+        });
+
+        const handleChange = (e) => {
+            const { name, value } = e.target;
+            setFields({ ...fields, [name]: value })
+        }
+
+        const handleSubmit = (e) => {
+            e.preventDefault();
+            mutate(fields)
+        }
+
+        if (isLoading) return 'Saving Your Changes...';
+
+        return (
+            <form onSubmit={e => handleSubmit(e)}>
+                <div>
+                    <label>Title</label>
+                    <div>
+                        <input
+                            name="title"
+                            type="text"
+                            value={fields.title}
+                            onChange={e => handleChange(e)}
+                        />
+                    </div>
+                </div>
+                <div>
+                    <label>Description</label>
+                    <div>
+                        <textarea
+                            name="description"
+                            value={fields.description}
+                            onChange={e => handleChange(e)}
+                        ></textarea>
+                    </div>
+                </div>
+                <button onClick={() => setIsEditing(false)}>Cancel</button>
+                <button>Save</button>
+            </form>
+        )
+    }
+
+    export default ProductForm

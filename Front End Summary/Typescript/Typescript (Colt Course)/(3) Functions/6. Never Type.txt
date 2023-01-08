@@ -1,0 +1,24 @@
+(1) Never Type
+----------------
+==> Used For Function Which Represent Values That Never Occur
+==> Use With Function That Always throws exceptions Or Function That Never Finishes Executing
+
+EX
+---
+
+    // By Default This Function Infered To Return 'void'
+    function error(msg: string) {
+        throw new Error(msg);
+    }
+
+    error('This Is Error');
+
+
+EX
+---
+
+    function gameloop():never{
+        while(true){
+            console.log('loop')
+        }
+    }

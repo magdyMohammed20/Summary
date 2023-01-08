@@ -1,0 +1,22 @@
+(1) Getters And Setters
+----------------------------
+
+    class Player {
+        constructor(public first: string, public last: string, private _score: number) { }
+
+        // Getters For All Class Props
+        get fullNameWithScore(): string {
+            return `${this.first} ${this.last} And Score Is ${this._score}`;
+        }
+
+        // Setters For Score Which Is Private
+        set score(val: number) {
+            this._score = val;
+        }
+
+    }
+
+    const p1 = new Player("Magdy", "Mohammed", 10);
+
+    p1.score = 100; // This Is A Setter
+    console.log(p1.fullNameWithScore) // This Is A Getter

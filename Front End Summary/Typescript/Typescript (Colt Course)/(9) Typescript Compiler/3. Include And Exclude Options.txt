@@ -1,0 +1,31 @@
+(1) include
+-------------
+==> With This Option In 'tsconfig.json' You Can Compile Specific Folder(s) That Contains TS Files And Ignore Other TS Files
+==> Default Value Of It Is (**) You Will Note That If Run [tsc] Command All TS Files Compiled
+
+
+    tsconfig.json (Here We Tell To Compile Only TS Files In 'src' Folder And If This Folder Not Found It Give Error While Compile Process)
+    ----------------
+
+    {
+        "compilerOptions": {},
+        "include": [
+            "src"
+        ]
+    }
+    
+
+(2) exclude
+--------------
+==> With This Option In 'tsconfig.json' You Can Ignore Compile Specific Folder(s)
+
+    tsconfig.json (Here Will Compile All TS In src Folder Except [donttouch.ts])
+    ----------------
+
+    "include": [
+        "src"
+    ],
+
+    "exclude": [
+        "src/donttouch.ts"
+    ]

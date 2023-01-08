@@ -1,0 +1,65 @@
+(1) Execute Success And Error Callbacks After Query Executed
+--------------------------------------------------------------
+
+Ex
+---
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    function RQsuperHeros() {
+
+        const onSuccess = () => { console.log('Data Fetching Success') }
+        const onError = () => { console.log('Data Fetching Error') }
+
+        const { data, isError, error, isFetching } = useQuery('get-heros', () => {
+            return axios.get('http://localhost:4000/superHero')
+        }, {
+            onSuccess,
+            onError
+        })
+
+        if (isFetching) return 'Fetching...';
+
+        if (isError) return <h1>{error.message}</h1>;
+
+        return (
+            <div>
+                {data && data.data.map(hero => <div key={hero.id}>{hero.name}</div>)}
+            </div>
+        )
+    }
+
+    export default RQsuperHeros
+
+
+(2) Success And Error Callbacks Arguments
+------------------------------------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    function RQsuperHeros() {
+
+        const onSuccess = data => { console.log('Data Fetching Success', data) }
+        const onError = error => { console.log('Data Fetching Error', error) }
+
+        const { data, isError, error, isFetching } = useQuery('get-heros', () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }, {
+            onSuccess,
+            onError
+        })
+
+        if (isFetching) return 'Fetching...';
+
+        if (isError) return <h1>{error.message}</h1>;
+
+        return (
+            <div>
+                {data && data.data.map(hero => <div key={hero.id}>{hero.name}</div>)}
+            </div>
+        )
+    }
+
+    export default RQsuperHeros

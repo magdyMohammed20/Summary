@@ -1,0 +1,9 @@
+// Comma Operator Evalutes From Left to Right And Return Value Of Last Operand
+let x = (2, 3)
+console.log(x) // 3
+
+
+// Another Sample
+let y = 10
+y = (y++, y)
+console.log(y) // 11

@@ -1,0 +1,212 @@
+(1) Installation
+--------------------
+==> npm i react - query axios
+
+
+(2) Create API JSON File
+--------------------------
+
+    data / db.json
+    ----------------
+
+    {
+        todos: [
+            {
+                userId: 1,
+                id: 1,
+                description: 'lorem1000',
+                title: 'First Todo'
+            }
+        ]
+    }
+
+
+(3) Handle React Query Config
+-------------------------------
+
+    index.js
+    --------------
+
+    import React from 'react';
+    import ReactDOM from 'react-dom/client';
+    import App from './App';
+    import { QueryClient, QueryClientProvider } from 'react-query';
+    import { ReactQueryDevtools } from 'react-query/devtools';
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    const queryClient = new QueryClient();
+
+    root.render(
+        <React.StrictMode>
+            <QueryClientProvider client={queryClient}>
+                <App />
+                <ReactQueryDevtools initialIsOpen={true} position="top-right" />
+            </QueryClientProvider>
+        </React.StrictMode>
+    );
+
+
+
+(4) Create Axios Instance
+---------------------------
+
+    api/todoApi.js
+    ---------------------
+
+    import axios from 'axios'
+
+    const todosApi = axios.create({
+        baseURL: 'http://localhost:4000'
+    })
+
+
+    export const getTodos = async () => {
+        const todos = await todosApi.get('/todos');
+        return todos.data
+    }
+
+    export const addTodo = async (todo) => {
+        return await todosApi.post('/todos', todo);
+    }
+
+    export const updateTodo = async (todo) => {
+        return await todosApi.patch(`/todos/${todo.id}`, todo);
+    }
+
+    export const deleteTodo = async ({ id }) => {
+        return await todosApi.delete(`/todos/${id}`);
+    }
+
+    export default todosApi
+
+
+(5) Brings Up Todos List File And Basic Requests
+---------------------------------------------------
+
+    features/todos/TodosList.js
+    ------------------------------
+
+    import { useState } from 'react';
+    import { useQuery, useQueryClient, useMutation } from 'react-query';
+    import { getTodos, addTodo, updateTodo, deleteTodo } from '../../api/todosApi'
+
+    function TodosList() {
+        // 1- Create New Todo State And Create Query Client Instance For Use In Something Like Invalidate Query
+        const [newTodo, setNewTodo] = useState('')
+        const queryClient = useQueryClient();
+
+        // 2- Bring Up All Todos Data Fetch
+        const { isLoading, data: todos, isError, error } = useQuery('get-todos', getTodos, {
+            enabled: true
+        });
+
+        // 3- Create Mutation For Add Todo
+        const addTodoMutation = useMutation('add-todo', addTodo, {
+            onSuccess: () => {
+                queryClient.invalidateQueries('get-todos')
+            }
+        })
+
+        // 4- Create Mutation For Delete Todo
+        const deleteTodoMutation = useMutation(deleteTodo, {
+            onSuccess: () => {
+                queryClient.invalidateQueries('get-todos')
+            }
+        })
+
+        // 4- Create Mutation For Update Todo
+        const updateTodoMutation = useMutation(updateTodo, {
+            onSuccess: () => {
+                queryClient.invalidateQueries('get-todos')
+            }
+        })
+
+        // 5- Create Submit Function
+        const handleSubmit = e => {
+            e.preventDefault();
+            addTodoMutation.mutate(
+                { "title": newTodo, completed: false }
+            )
+            setNewTodo('')
+        }
+
+        // 6- Create Todos Form
+        const TodoForm = () => {
+            return <form onSubmit={handleSubmit}>
+                <div>
+                    <div><label>Todo</label></div>
+                    <input
+                        name="title"
+                        value={newTodo}
+                        type="text"
+                        autoFocus
+                        onChange={
+                            (e) => setNewTodo(e.target.value)
+                        }
+
+                    />
+
+                </div>
+                <button disabled={newTodo == '' || newTodo.length < 5}>Add</button>
+            </form>
+        }
+
+
+        // 8- Coomponent Of Single Todo Show
+        const SingleTodo = ({ todo }) => {
+            return <div className='todo-item' >
+                <div className='todo-header'>
+                    <div>
+                        <input type="checkbox" checked={todo.completed}
+                            onChange={() => {
+                                updateTodoMutation.mutate({ ...todo, completed: !todo.completed })
+                            }}
+                        />
+                        <h3 style={{ textDecoration: todo.completed && 'line-through' }}>{todo.title}</h3>
+                    </div>
+                    <div>
+                        <button className='delete-btn' onClick={() => deleteTodoMutation.mutate({ id: todo.id })}>⛔</button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        // 7- Handle Error And Loading
+        let content = [];
+        if (isLoading) {
+            content = <div>Loading...</div>
+        } else if (isError) {
+            content = <div>{error.message}</div>
+        } else if (addTodoMutation.isLoading) {
+            content = <div>Adding Todo...</div>
+        } else {
+            content = todos?.map(singleTodo => <SingleTodo key={singleTodo.id} todo={singleTodo} />);
+        }
+
+
+        return (
+            <div className='todos-list'>
+                <TodoForm />
+                {content}
+            </div>
+        )
+    }
+
+    export default TodosList
+
+
+(5) Import Todos List In App.js
+---------------------------------
+
+    import './App.css';
+    import TodosList from './features/todos/TodosList';
+
+    function App() {
+        return (
+            <div className="App">
+                <TodosList />
+            </div>
+        );
+    }
+
+    export default App;

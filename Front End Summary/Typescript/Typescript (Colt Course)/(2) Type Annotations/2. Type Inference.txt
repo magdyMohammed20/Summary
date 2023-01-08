@@ -1,0 +1,4 @@
+(1) Typescript Can Extract Variable Type Without Define Type Annotation
+-------------------------------------------------------------------------
+
+    let str = "Magdy"; // Without Define Type TS Knows Type Of str Is A String

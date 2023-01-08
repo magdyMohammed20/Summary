@@ -1,0 +1,7 @@
+import Img from 'assets/images/bg-profile.jpeg';
+
+
+<img
+    onError={(e) => { e.target.src = Img }}
+    src={pageImg.picture}
+/>

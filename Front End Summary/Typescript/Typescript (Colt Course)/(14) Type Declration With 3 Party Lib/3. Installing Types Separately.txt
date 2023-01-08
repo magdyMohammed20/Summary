@@ -1,0 +1,14 @@
+(1) Problem
+--------------
+==> Some Of Third Party Libs Not Have Declaration Types File Like 'lodash' Library
+    So We Must Include Declarations Types File Manually
+
+(2) Solve
+------------
+==> For Adding Any Declaration Types File For Any Js Lib There Are Lib Called 'Definitely Typed' (https://github.com/DefinitelyTyped/DefinitelyTyped)
+    Which Have All Declarations Types File For Most Of Js Libs
+
+(3) How To Use 'Definitely Typed' Lib
+----------------------------------------
+==> For Install Declarations Types File Of Any Lib (EX: lodash)
+    Use This Syntax In Installation After Installing The Lib [npm i @types/lodash]

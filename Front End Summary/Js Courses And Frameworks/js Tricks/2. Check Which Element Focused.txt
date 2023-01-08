@@ -1,0 +1,15 @@
+// Check Which Element Focused
+
+<body>
+
+    <button id="magdy"> Button </button>
+
+    <script>
+        const btnElement = document.querySelector('#magdy')
+        document.body.addEventListener('click', (e) => {
+            //console.log(e.target)
+            console.log(document.activeElement)
+        })
+
+    </script>
+</body>

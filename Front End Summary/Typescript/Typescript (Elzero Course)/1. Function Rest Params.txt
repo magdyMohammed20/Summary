@@ -1,0 +1,10 @@
+(1) Function Rest Parameters With TS
+--------------------------------------
+
+    function addAll(...numbers: number[]): number {
+        let result = 0;
+        numbers.forEach(num => result += num);
+        return result;
+    }
+
+    console.log(addAll(10, 20, 1.4, 8.5, 0.1)) // 40

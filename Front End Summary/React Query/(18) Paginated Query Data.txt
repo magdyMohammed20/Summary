@@ -1,0 +1,72 @@
+(1) Steps To Make Api Paginated
+----------------------------------
+==> in db.json Add Colors Array
+
+    db.json
+    ---------
+
+    "colors": [
+        {"id": 1, "name": "red" },
+        {"id": 2, "name": "blue"},
+        {"id": 3,"name": "green"},
+        {"id": 4,"name": "black"},
+        {"id": 5,"name": "white"},
+        {"id": 6,"name": "yellow"}
+    ]
+
+==> In Browser We Have Some Api Link Options [limit And Page]
+---------------------------------------------------------------
+--> http://localhost:4000/colors?_limit=2 [Will Get First 2 Colors]
+--> http://localhost:4000/colors?_limit=2&_page=3 [Will Divide Colors On Pages And Each Page Has 2 Colors]
+
+
+
+==> Handle Paginated Logic
+-----------------------------
+
+    PaginatedQuery.js
+    -------------------
+
+    import { useState } from 'react';
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    const getColors = (pgNum) => {
+        return axios.get(`http://localhost:4000/colors?_limit=2&_page=${pgNum}`)
+    }
+
+    function PaginatedQuery() {
+        const [pageNumber, setPageNumber] = useState(1);
+        const { data, isLoading, isError, error } = useQuery(['get-colors', pageNumber], () => getColors(pageNumber))
+
+        if (isLoading) return 'Loading...';
+        if (isError) return error.message;
+
+        const handleNext = () => {
+            setPageNumber(pageNumber + 1)
+        };
+        const handlePrevious = () => {
+            if (pageNumber > 1) {
+                setPageNumber(pageNumber - 1)
+            }
+        };
+
+        return (
+            <div>
+                {data?.data.map(color => <div>{color.name}</div>)}
+                <button onClick={handleNext} disabled={pageNumber == 3}>Next</button>
+                <button onClick={handlePrevious} disabled={pageNumber <= 1}>Previous</button>
+            </div>
+        )
+    }
+
+    export default PaginatedQuery
+
+
+==> But Have problem While Navigated Between Pagination Pages We See Loading Indicator For Solve This problem
+    By Add 'keepPreviousData' Property
+---------------------------------------------------------------------------------------
+
+    const { data, isLoading, isError, error } = useQuery(['get-colors', pageNumber], () => getColors(pageNumber), {
+        keepPreviousData: true
+    })

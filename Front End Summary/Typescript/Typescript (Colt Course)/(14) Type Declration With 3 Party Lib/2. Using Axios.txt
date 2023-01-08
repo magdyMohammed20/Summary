@@ -1,0 +1,40 @@
+(1) Usage
+------------
+==> Install Axios In Normal TS Project [npm i axios]
+
+(2) Axios Own '.d.ts' File
+------------------------------
+==> In 'node_modules' Folder And In 'axios' Folder There Are Own 'Package.json' File 
+    And There Are Property Called 'types' And Value Is 'index.d.ts' Which Will Contains All Type Declrations
+
+
+(3) Return Type Of Axios Get
+--------------------------------
+
+    import axios from 'axios';
+
+    // Here Return Type Of 'get' Is Boolean
+    axios.get<boolean>('https://jsonplaceholder.typicode.com/todos').then(res => {
+        console.log(res.data)
+    }).catch(e => {
+        console.log(e)
+    })
+
+
+(4) Customize Type Declaration With Interface And Axios
+-----------------------------------------------------------
+
+    import axios from 'axios';
+
+    interface Todo {
+        userId: number;
+        id: number;
+        title: string;
+        completed: boolean
+    }
+    // Here Return Type Of 'get' Is Array Of Todo
+    axios.get<Todo[]>('https://jsonplaceholder.typicode.com/todos').then(res => {
+        console.log(res.data)
+    }).catch(e => {
+        console.log(e)
+    })

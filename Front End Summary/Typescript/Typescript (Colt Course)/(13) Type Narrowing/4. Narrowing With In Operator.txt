@@ -1,0 +1,45 @@
+(1) Problem Without Using 'in' Operator
+-------------------------------------------
+
+    interface firstClass{
+        name: string;
+        age: number;
+        job: string;
+    }
+
+    interface secondClass{
+        gender: string;
+        maritalStatus: string;
+    }
+
+    function handleClass(c:firstClass | secondClass){
+        // Error : Property 'job' does not exist on type 'firstClass | secondClass'
+        return c.job
+    }
+
+
+(2) Using 'in' Operator For Solving The Issue
+--------------------------------------------------
+
+    interface firstClass {
+        name: string;
+        age: number;
+        job: string;
+    }
+
+    interface secondClass {
+        gender: string;
+        maritalStatus: string;
+    }
+
+    // Using 'in' Operator Here To Specify Which Property Value You Want To Return
+    function handleClass(c: firstClass | secondClass) {
+        if ('age' in c) {
+            return c.age;
+        } else {
+            return c.gender;
+        }
+    }
+
+    console.log(handleClass({ name: 'Magdy', age: 25, job: 'Front End Dev' })) // 25
+    console.log(handleClass({ gender: 'Male', maritalStatus: 'Single' })) // Male

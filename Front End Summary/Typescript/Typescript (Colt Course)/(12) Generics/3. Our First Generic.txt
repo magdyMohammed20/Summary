@@ -1,0 +1,21 @@
+(1) Our First Generic
+------------------------
+
+    // Generic Function
+    // Type Here Can Replaced With 'interface' Or Any Thing Like 'BlaBla' It Just Parameter 
+    function identity<Type>(item: Type): Type {
+        return item
+    }
+
+    const x = identity<string>("Magdy");
+
+
+(2) Another Generic Function
+-------------------------------
+
+    function getRand<T>(list: T[]): T {
+        const randNum = Math.floor(Math.random() * list.length);
+        return list[randNum];
+    }
+
+    console.log(getRand<string>(["First", "second", "third"]))

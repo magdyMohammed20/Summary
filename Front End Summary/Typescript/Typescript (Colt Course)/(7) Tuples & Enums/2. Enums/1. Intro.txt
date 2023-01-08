@@ -1,0 +1,31 @@
+(1) Enums
+-----------
+==> Define Set Of Named Constants
+
+EX
+----
+
+    // 1- Define Enum
+    enum ResponseStatus {
+        PENDING,
+        ERROR,
+        SUCCESS
+    }
+
+    // 2- Access Enum Values
+    const orderStatus1 = ResponseStatus.SUCCESS
+    const orderStatus2 = ResponseStatus.ERROR
+    const orderStatus3 = ResponseStatus.PENDING
+
+    // 3- Define Status Parameter To Ensure That It's One Of 'PENDING', 'ERROR' , 'SUCCESS'
+    function isSuccess(status: ResponseStatus) {
+        if (status == ResponseStatus.SUCCESS) {
+            return 'Yes Success'
+        } else {
+            return 'Failed To Success'
+        }
+    }
+
+    console.log(isSuccess(orderStatus1)) // Yes Success
+    console.log(isSuccess(orderStatus2)) // Failed To Success
+    console.log(isSuccess(orderStatus3)) // Failed To Success

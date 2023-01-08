@@ -1,0 +1,99 @@
+(1) Custom Query Hook 
+----------------------
+==> Make Custom Query Hook For Reuse useQuery In Multiple Components Without Code Repeat
+
+
+    src/hooks/useQueryHook.js
+    ----------------------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    export const useQueryHeros = (onSuccess, onError) => {
+        return useQuery('get-heros', () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }, {
+            onSuccess,
+            onError,
+            select: data => {
+                const superHerosName = data.data.map(hero => hero.name)
+                return superHerosName
+            }
+        })
+    }
+
+
+    Components/RQSuperHeros.js
+    -----------------------------
+
+    import { useQueryHeros } from '../hooks/useQueryHeros'
+
+    function RQsuperHeros() {
+
+        const onSuccess = data => { console.log('Data Fetching Success', data) }
+        const onError = error => { console.log('Data Fetching Error', error) }
+
+        const { data, isError, error } = useQueryHeros(onSuccess, onError)
+
+        if (isError) return <h1>{error.message}</h1>;
+
+        return (
+            <div>
+                {
+                    data && data.map(heroName => <div key={heroName}>{heroName}</div>)
+                }
+            </div>
+        )
+    }
+
+    export default RQsuperHeros
+
+
+(2) Can Pass Get Data Function To Custom Hook Too
+---------------------------------------------------
+
+    src/hooks/useQueryHook.js
+    ----------------------------
+
+    import { useQuery } from 'react-query';
+
+    export const useQueryHeros = (onSuccess, onError, fetchFn) => {
+        return useQuery('get-heros', fetchFn, {
+            onSuccess,
+            onError,
+            select: data => {
+                const superHerosName = data.data.map(hero => hero.name)
+                return superHerosName
+            }
+        })
+    }
+
+
+    Components/RQSuperHeros.js
+    -----------------------------
+
+    import { useQueryHeros } from '../hooks/useQueryHeros'
+    import axios from 'axios';
+
+    function RQsuperHeros() {
+
+        const onSuccess = data => { console.log('Data Fetching Success', data) }
+        const onError = error => { console.log('Data Fetching Error', error) }
+
+        const getHeros = () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }
+        const { data, isError, error } = useQueryHeros(onSuccess, onError, getHeros)
+
+        if (isError) return <h1>{error.message}</h1>;
+
+        return (
+            <div>
+                {
+                    data && data.map(heroName => <div key={heroName}>{heroName}</div>)
+                }
+            </div>
+        )
+    }
+
+    export default RQsuperHeros

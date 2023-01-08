@@ -1,0 +1,28 @@
+(1) refetchOnMount [true , false , 'always']
+---------------------
+==> If Set To 'True' Data Will Be Fetched From Api When Component Re Rendered And the data is stale (This Is The Default Behavior)
+    And If Set To 'False' Data Chached At First Time And Brings Up Again Without Making Api Call
+    And If Set To 'always' the query will always refetch on mount
+
+    const { data, isLoading, isError, error, isFetching } = useQuery('get-heros', () => {
+        return axios.get('http://localhost:4000/superHeros')
+    }, {
+        refetchOnMount: true
+    })
+
+
+(2) refetchOnWindowFocus
+---------------------------
+==> If We Have 2 Routes First One Use Normal Api Call Using useEffect And React State
+    And Second One Using React Query Api Call
+    If Change json File Data 
+    In First Route Must Reload The Page To Listen To Api Data Changes
+    But At Second Route Which Use React Query We Didn't Need To Refresh The Page To Listen To Api Data Changes
+
+==> With refetchOnWindowFocus If Value Is 'True' Will Make Api Request When User Go To Another Tab Then Back To React Query Route Again
+
+        const { data, isLoading, isError, error, isFetching } = useQuery('get-heros', () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }, {
+            refetchOnWindowFocus: true
+        })

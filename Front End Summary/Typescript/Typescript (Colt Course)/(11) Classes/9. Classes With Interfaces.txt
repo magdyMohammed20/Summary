@@ -1,0 +1,56 @@
+(1) How Classes Implements Interfaces Properties
+---------------------------------------------------
+
+    interface Colorful {
+        color: string;
+    }
+
+    class Bike implements Colorful {
+        constructor(public color: string) { }
+    }
+
+    const b1 = new Bike("red")
+
+
+(2) How Classes Implements Interfaces Methods
+---------------------------------------------------
+
+    interface Colorful {
+        color: string;
+        sayColor(): void; // Interface Function
+    }
+
+    class Bike implements Colorful {
+        constructor(public color: string) { }
+
+        // Implement Interface Function
+        sayColor(): void {
+            console.log(`Color Is ${this.color}`)
+        }
+    }
+
+    const b1 = new Bike("red")
+    b1.sayColor()
+
+
+(3) Class Can Implents Multi Interfaces
+-------------------------------------------
+
+    interface Colorful {
+        color: string;
+    }
+
+    interface Printable {
+        sayColor(): void;
+    }
+
+    class Bike implements Colorful, Printable {
+        constructor(public color: string) { }
+
+        sayColor(): void {
+            console.log(`Color Is ${this.color}`)
+        }
+    }
+
+    const b1 = new Bike("red")
+    b1.sayColor()

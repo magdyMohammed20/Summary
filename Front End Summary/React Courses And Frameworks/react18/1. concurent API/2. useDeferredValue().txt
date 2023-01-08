@@ -1,0 +1,247 @@
+(1) Basic Sample Without DeferredValue()
+------------------------------------------
+==> Problem Here If Cpu Throtlling Is Slow Will Make Lag Behind The Scene
+
+    App.js
+    -------
+
+    import { useState } from 'react'
+    import ProductsList from './ProductsList'
+
+    // 1- Generates All Products
+    function generatedProducts() {
+        let products = []
+        for (let x = 0; x <= 2000; x++) {
+            products.push(`Product-${x}`)
+        }
+        return products
+    }
+
+    // 1- Call Generated Products In Single Variable
+    const dummyProducts = generatedProducts()
+
+    // 4- Create This For Filter Generated Products Depending On Input Value
+    const filterProducts = (filterTerm) => {
+        if (!filterTerm) {
+            return dummyProducts
+        }
+
+        // Will Filter The Products Array Depending Filter Input
+        return dummyProducts.filter(product => product.includes(filterTerm))
+    }
+    function App() {
+
+        // 2- Create Filter Term To Fetch Input Value
+        const [filterTerm, setFilterTerm] = useState('')
+
+        // 3- Create Function For Update Filter Term Depending On Input Change Value
+        const updateFilterChange = e => {
+            setFilterTerm(e.target.value)
+        }
+
+        // 5- Call filterProducts Here And Pass filterTerm to It
+        const filteredProducts = filterProducts(filterTerm)
+
+        return (
+            <div className="App">
+                <input type="text" value={filterTerm} onChange={updateFilterChange} />
+                <ProductsList products={filteredProducts} />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    ProductsList.js
+    ----------------
+
+    import { useId } from 'react'
+
+    function ProductsList({ products }) {
+        const id = useId()
+        return (
+            <div>
+                {
+                    products.map(product => <div id={`id-${product}`} key={`id-${product}`}>{product}</div>)
+                }
+            </div>
+        )
+    }
+
+    export default ProductsList
+
+
+(2) First Way To Improve Performance Is 'useTransition' Hook
+--------------------------------------------------------------
+
+    App.js
+    --------
+
+    import { useState, useTransition } from 'react'
+    import ProductsList from './ProductsList'
+
+    function generatedProducts() {
+        let products = []
+        for (let x = 0; x <= 2000; x++) {
+            products.push(`Product-${x}`)
+        }
+        return products
+    }
+
+    const dummyProducts = generatedProducts()
+
+    const filterProducts = (filterTerm) => {
+        if (!filterTerm) {
+            return dummyProducts
+        }
+
+        return dummyProducts.filter(product => product.includes(filterTerm))
+    }
+    function App() {
+        // 1- Create Instance From useTransition
+        const [isPending, startTransition] = useTransition()
+        const [filterTerm, setFilterTerm] = useState('')
+
+        const updateFilterChange = e => {
+            // 2- Wrap State Update With useTransition
+            startTransition(() => {
+            setFilterTerm(e.target.value)
+            })
+        }
+
+        const filteredProducts = filterProducts(filterTerm)
+
+        return (
+            <div className="App">
+            <input type="text" value={filterTerm} onChange={updateFilterChange} />
+            <ProductsList products={filteredProducts} />
+            </div>
+        );
+    }
+
+    export default App;
+
+(3) Use Is Pending For Showing Loading Text
+--------------------------------------------
+
+    App.js
+    -------
+
+    import { useState, useTransition } from 'react'
+    import ProductsList from './ProductsList'
+
+    function generatedProducts() {
+        let products = []
+        for (let x = 0; x <= 2000; x++) {
+            products.push(`Product-${x}`)
+        }
+        return products
+    }
+
+    const dummyProducts = generatedProducts()
+
+    const filterProducts = (filterTerm) => {
+        if (!filterTerm) {
+            return dummyProducts
+        }
+
+        return dummyProducts.filter(product => product.includes(filterTerm))
+    }
+    function App() {
+        // 1- Create Instance From useTransition
+        const [isPending, startTransition] = useTransition()
+        const [filterTerm, setFilterTerm] = useState('')
+
+        const updateFilterChange = e => {
+            // 2- Wrap State Update With useTransition
+            startTransition(() => {
+                setFilterTerm(e.target.value)
+            })
+        }
+
+        const filteredProducts = filterProducts(filterTerm)
+
+        return (
+            <div className="App">
+                <input type="text" value={filterTerm} onChange={updateFilterChange} />
+                {
+                    isPending ? "Updating List..." : <ProductsList products={filteredProducts} />
+                }
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(4) useDeferredValue() Hook
+-----------------------------
+==> accepts a value and returns a new copy of the value that will defer to more urgent updates. If the current render is the result of an urgent update, like user input, React will return the previous value and then render the new value after the urgent render has completed
+
+
+(5) Second Way To Improve Performance Is 'useDeferredValue' Hook Which Used In Child Component Not In Parent
+-------------------------------------------------------------------------------------------------------------
+
+
+    App.js [Note That We Remove useTransition]
+    -------
+
+    import { useState } from 'react'
+    import ProductsList from './ProductsList'
+
+    function generatedProducts() {
+        let products = []
+        for (let x = 0; x <= 2000; x++) {
+            products.push(`Product-${x}`)
+        }
+        return products
+    }
+
+    const dummyProducts = generatedProducts()
+
+    const filterProducts = (filterTerm) => {
+        if (!filterTerm) {
+            return dummyProducts
+        }
+
+        return dummyProducts.filter(product => product.includes(filterTerm))
+    }
+    function App() {
+        const [filterTerm, setFilterTerm] = useState('')
+
+        const updateFilterChange = e => {
+            setFilterTerm(e.target.value)
+        }
+
+        const filteredProducts = filterProducts(filterTerm)
+
+        return (
+            <div className="App">
+                <input type="text" value={filterTerm} onChange={updateFilterChange} />
+                <ProductsList products={filteredProducts} />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    ProductsList.js
+    ------------------
+
+    import { useId, useDeferredValue } from 'react'
+
+    function ProductsList({ products }) {
+        const id = useId()
+        const deferredProducts = useDeferredValue(products)
+        return (
+            <div>
+                {
+                    deferredProducts.map(product => <div id={`id-${product}`} key={`id-${product}`}>{product}</div>)
+                }
+            </div>
+        )
+    }
+
+    export default ProductsList

@@ -1,0 +1,13 @@
+(1) Sample : Hellow => HHeellllooww
+
+(2) Solution
+--------------
+
+    let str = "Hellow"
+    function doubleChars(str){
+        return str.split('').map(x => x.repeat(2)).join('')
+
+    }
+
+
+    console.log(doubleChars(str))

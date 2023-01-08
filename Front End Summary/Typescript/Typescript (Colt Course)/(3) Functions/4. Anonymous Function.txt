@@ -1,0 +1,9 @@
+(1) Anonymous Function
+-------------------------
+
+    let colors = ['red', 'green', 'blue']
+
+    // Here We Define Type Of Single Color
+    colors.map((color: string) => {
+        return color.toLocaleUpperCase()
+    })

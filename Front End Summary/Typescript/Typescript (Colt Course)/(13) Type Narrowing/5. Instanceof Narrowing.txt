@@ -1,0 +1,43 @@
+(1) instanceof Narrowing
+---------------------------
+
+EX
+---
+
+    function printFullDate(date: string | Date) {
+        if (date instanceof Date) {
+            console.log(date.toUTCString())
+        } else {
+            console.log(new Date(date).toUTCString())
+        }
+    }
+
+    // Can Send Date Or Stringified Date
+    printFullDate(new Date())
+    printFullDate("Thu, 19 Dec 2022 16:55:31 GMT")
+
+
+(2) instanceof With Classes
+-----------------------------
+
+    class Company {
+        constructor(public compName: string) { }
+    }
+
+    class User {
+        constructor(public username: string) { }
+    }
+
+    function printName(entity: Company | User) {
+        if (entity instanceof Company) {
+            console.log(`U Are Company With Name ${entity.compName}`)
+        } else {
+            console.log(`U Are User With Name ${entity.username}`)
+        }
+    }
+
+    const comp = new Company("First Comp");
+    printName(comp) // U Are Company With Name First Comp
+
+    const user = new User("First User");
+    printName(user) // U Are User With Name First User

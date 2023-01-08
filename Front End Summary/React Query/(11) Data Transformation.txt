@@ -1,0 +1,38 @@
+(1) Data Transformation
+---------------------------
+==> Use Data Transformation To Make Specific Filter On The Upcoming Data 
+==> Perform Data Transformation Inside 'select' Option
+
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    function RQsuperHeros() {
+
+        const onSuccess = data => { console.log('Data Fetching Success', data) }
+        const onError = error => { console.log('Data Fetching Error', error) }
+
+        const { data, isError, error } = useQuery('get-heros', () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }, {
+            onSuccess,
+            onError,
+            select: data => {
+                // Here Filter Names Only From Api Data And Return It To Render Names Only
+                const superHerosName = data.data.map(hero => hero.name)
+                return superHerosName
+            }
+        })
+
+        if (isError) return <h1>{error.message}</h1>;
+
+        return (
+            <div>
+                {
+                    data && data.map(heroName => <div key={heroName}>{heroName}</div>)
+                }
+            </div>
+        )
+    }
+
+    export default RQsuperHeros

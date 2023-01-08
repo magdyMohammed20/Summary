@@ -1,0 +1,40 @@
+(1) Basic Union Types
+------------------------
+
+    // num Can Be Number Or String
+    let num: number | string;
+
+    // Valid
+    num = 20;
+    num = "10"
+
+
+(2) More Union Types
+------------------------
+
+    let num: number | string | boolean;
+
+    // Valid
+    num = 20;
+    num = "10"
+    num = true
+
+
+(3) Type Annotations With Union
+---------------------------------
+
+    type Point = {
+        x: number,
+        y: number
+    }
+
+    type Loc = {
+        lat: number,
+        lon: number
+    }
+
+    let coords: Point | Loc;
+
+    // Valid
+    coords = { x: 10, y: 20 }
+    coords = { lat: 3.4, lon: 4.5 }

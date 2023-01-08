@@ -1,0 +1,33 @@
+(1) Truthiness Guards
+-----------------------
+==> Checking A Value For Being Truthy Or False Before Working With It
+
+EX1
+----
+
+    // Type of 'el' Can Be (Element Or null)
+    let el = document.querySelector('.btn');
+
+    // Use Truthiness Guards Here For Handle 'el' Type
+    if (el) {
+        console.log('el Type Is Element')
+    } else {
+        console.log('el Type Is Null')
+    }
+
+EX2
+----
+
+    function printLetters(word?: string) {
+        if (word) {
+            for (let x of word) {
+                console.log(x)
+            }
+        } else {
+            console.log("You Not Pass Any Thing")
+        }
+    }
+
+    printLetters("Magdy") // Will Print Characters
+    printLetters("") // You Not Pass Any Thing
+    printLetters() // You Not Pass Any Thing

@@ -1,0 +1,37 @@
+(1) Infinite Queries Used To Make Logic Like Load More Data
+--------------------------------------------------------------
+
+
+    import axios from 'axios';
+import { useInfiniteQuery } from 'react-query'
+
+export default function InfiniteQueries() {
+
+    // 1- pageParam Must Be Destructured For Working Fine
+    const getColors = ({ pageParam = 1 }) => {
+        return axios.get(`http://localhost:4000/colors?_limit=2&_page=${pageParam}`)
+    }
+
+    const { data, isError, error, hasNextPage, fetchNextPage } = useInfiniteQuery(['colors'], getColors, {
+        getNextPageParam: (_lastPage, pages) => {
+            if (pages.length < 3) {
+                return pages.length + 1
+            } else {
+                return undefined
+            }
+        }
+    })
+
+    if (isError) return <h1>{ error.message } < /h1>;
+
+    return (
+        <div>
+        {
+            data && data?.pages?.map(segmentColors => {
+                return segmentColors.data.map(color => <div>{ color.name } < /div>)
+                    })
+                }
+<button disabled={ !hasNextPage } onClick = {() => fetchNextPage()}> Load More < /button>
+    < /div>
+        )
+    }

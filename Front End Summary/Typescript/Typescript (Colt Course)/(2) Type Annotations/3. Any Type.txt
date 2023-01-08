@@ -1,0 +1,28 @@
+(1) 'Any' Type Used To Escape Type Checking
+-----------------------------------------------
+
+    let x: any = 10;
+
+    // All Of This Is Valid
+    x = "Magdy";
+    x = false;
+    x = null;
+    x = undefined;
+
+
+(2) Implicit 'any'
+-------------------
+
+
+    let movies = ["movie1" , "movie2" , "movie3"]
+
+    let foundMovue;
+
+    for(let movie of movies){
+        if(movie == "movie1") foundMovue = movie
+    }
+
+    // Valid
+    foundMovue = 10;
+    foundMovue()
+    foundMovue = false;

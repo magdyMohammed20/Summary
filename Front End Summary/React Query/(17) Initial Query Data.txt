@@ -1,0 +1,97 @@
+(1) Problem Want To Solve
+----------------------------
+==> If Have Page Which List Products And Have Details Button We Can Use Data Which In List Product In Product Details Page 
+    Without Make Additional Request 
+==> Problem In UI When We ReEntered To Details Page We See 'Loading' Text
+
+
+
+(2) Solve Problem Using [useQueryClient]
+------------------------------------------
+
+
+    Components/RQsuperHeros.js [List All Heros With View Details Button]
+    ---------------------------
+
+    import { useQueryHeros } from '../hooks/useQueryHeros';
+    import axios from 'axios';
+    import { useNavigate } from 'react-router-dom';
+
+    function RQsuperHeros() {
+        const navigate = useNavigate()
+        const onSuccess = data => { console.log('Data Fetching Success', data) }
+        const onError = error => { console.log('Data Fetching Error', error) }
+
+        const getHeros = () => {
+            return axios.get('http://localhost:4000/superHeros')
+        }
+        const { data, isError, error } = useQueryHeros(onSuccess, onError, getHeros)
+
+        if (isError) return <h1>{error.message}</h1>;
+
+        return (
+            <div>
+                {
+                    data && data.data.map(hero => <div key={hero.id} className="hero">
+                        {hero.name}
+                        <button onClick={() => navigate(`/hero-details/${hero.id}`)}>View Details</button>
+                    </div>)
+                }
+            </div>
+        )
+    }
+
+    export default RQsuperHeros
+
+
+
+    hooks/useQueryHero.js [Custom Query Hook For Making Logic Of Fetch Current Hero Data From All Heros]
+    ------------------------
+
+    import axios from 'axios';
+    // 1- Import useQueryClient
+    import { useQuery, useQueryClient } from 'react-query';
+
+    const fetchHeroDetails = ({ queryKey }) => {
+        const id = queryKey[1]
+        return axios.get(`http://localhost:4000/superHeros/${id}`)
+    }
+    export const useQueryHero = (heroId) => {
+        // 2- Make Instance From useQueryClient
+        const queryClient = useQueryClient()
+
+        return useQuery(['super-hero', heroId], fetchHeroDetails, {
+            initialData: () => {
+                // 3- Filter Hero Depending On Hero Details Page Id
+                const hero = queryClient.getQueryData('get-heros')?.data?.find(hero => hero.id == heroId);
+                if (hero) {
+                    return { data: hero }
+                } else {
+                    return undefined;
+                }
+            }
+        })
+    }
+
+
+    Components/heroPageDetails.js [Details Page Where We Can Display Fetched Single Hero Data]
+    -------------------------------
+
+    import { useQueryHero } from '../hooks/useQueryHero';
+    import { useParams } from 'react-router-dom';
+
+    function HeroPageDetails() {
+        const { id } = useParams()
+        const { data, isLoading } = useQueryHero(id)
+
+        if (isLoading) {
+            return <h1>Loading...</h1>
+        }
+        return (
+            <div className='page-details'>
+                <h3>{data?.data?.name}</h3>
+            </div>
+        )
+    }
+
+    export default HeroPageDetails

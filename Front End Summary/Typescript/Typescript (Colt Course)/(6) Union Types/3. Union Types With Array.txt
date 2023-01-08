@@ -1,0 +1,37 @@
+(1) Basic
+------------
+
+    // First Syntax 
+
+    // This Array Can Be Array Of Numbers Only Or Array Of Strings Only
+    let arr: (number | string)[];
+    arr = [1, 2, 3]
+    arr = ["One", "Two"]
+
+
+    // Second Syntax
+
+    let arr: number[] | string[];
+    arr = [1, 2, 3]
+    arr = ["One", "Two"]
+
+
+(2) Array With Type Annotations And Union Types
+-------------------------------------------------
+
+    type axis = {
+        x: number;
+        y: number;
+    }
+
+    type Loc = {
+        lat: number;
+        lon: number
+    }
+
+    let arr: axis[] | Loc[]; // Syntax 1
+    let arr2: (axis | Loc)[]; // Syntax 2
+
+    arr = [{ x: 10, y: 20 }]
+    arr2 = [{ lat: 1.34, lon: 4.56 }]
+

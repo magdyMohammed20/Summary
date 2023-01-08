@@ -1,0 +1,55 @@
+(1) Type Predicates
+----------------------
+==> Creating Custom Function That Can Narrow The Type Of The Value And Have A Very Special Return Type Called A Type Predicate
+
+==> Problem
+--------------
+
+    interface Cat {
+        name: string;
+        numLives: number;
+    }
+
+    interface Dog {
+        name: string;
+        breed: string;
+    }
+
+    function isCat(animal: Cat | Dog) {
+        return (animal as Cat).numLives !== undefined
+    }
+
+
+    function makeNoise(animal: Cat | Dog): string {
+        if (isCat(animal)) {
+            animal // Problem Here As TS Infered That 'animal' Type Is (Cat Or Dog)
+        }
+    }
+
+
+==> Solve
+------------
+
+    interface Cat {
+        name: string;
+        numLives: number;
+    }
+
+    interface Dog {
+        name: string;
+        breed: string;
+    }
+
+    // Now Here We Say That If isCat Return Anything This Thing Will Be Of Type 'Cat'
+    function isCat(animal: Cat | Dog): animal is Cat {
+        return (animal as Cat).numLives !== undefined
+    }
+
+
+    function makeNoise(animal: Cat | Dog): any {
+        if (isCat(animal)) {
+            return animal.numLives // Now 'animal' Type Is (Cat)
+        } else {
+            return animal.breed // Now 'animal' Type Is (Dog)
+        }
+    }

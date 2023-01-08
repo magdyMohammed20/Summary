@@ -1,0 +1,16 @@
+(1) Generics
+--------------
+==> Allows Us To Define Reusable Functions And Classes That Work With Multiple Types Rather Than A Single Type
+
+
+(2) Problem 
+----------------
+
+    // Here We Don't Know What Type 'doThing' Function Will Return 
+    function doThing(thing: number | string): number | string {}
+
+
+(3) Bulit In Generics
+--------------------------
+
+    const arr: Array<number> = [];

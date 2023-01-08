@@ -1,0 +1,14 @@
+(1) Annotating Class
+-----------------------
+
+    class Player {
+        first: string;
+        last: string;
+        
+        constructor(first: string, last: string) {
+            this.first = first;
+            this.last = last;
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");

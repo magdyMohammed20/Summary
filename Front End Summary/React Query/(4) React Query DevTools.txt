@@ -1,0 +1,22 @@
+(1) React Query Devtool
+------------------------
+
+    import { QueryClient, QueryClientProvider } from 'react-query';
+    import { ReactQueryDevtools } from 'react-query/devtools'; // 1- Import React Query Devtools
+    import SuperHeros from './SuperHeros';
+
+    function App() {
+
+    const queryClient = new QueryClient();
+        return (
+            <QueryClientProvider client={queryClient}>
+                <div className="App">
+                    <SuperHeros />
+                </div>
+                <ReactQueryDevtools initialIsOpen={false} position="top-right" />
+            </QueryClientProvider>
+
+        );
+    }
+
+    export default App;

@@ -1,0 +1,7 @@
+
+/* Access Array Element With Different Way */
+const arr = ["First Element",10,true]
+
+// Append Array Second Element To Price Variable
+const {1 : price} = arr
+console.log(price) // 10

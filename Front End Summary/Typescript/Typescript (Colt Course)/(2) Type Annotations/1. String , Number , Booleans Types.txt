@@ -1,0 +1,23 @@
+(1) String Type Annotations
+-----------------------------
+
+    let course_title: string = "Title1";
+    course_title = "Title2";
+    console.log(course_title.toUpperCase());
+    course_title = 10; // Error: Type 'number' is not assignable to type 'string'
+
+
+(2) Number Type Annotations
+-----------------------------
+
+    let catLives:number = 10;
+    catLives = 12;
+    catLives = "10" // Error : Type 'string' is not assignable to type 'number'
+
+
+(3) Boolean Type Annotations
+-----------------------------
+
+    let isOpen:boolean = false;
+    isOpen = true;
+    isOpen = null; // Error: Type 'null' is not assignable to type 'boolean'

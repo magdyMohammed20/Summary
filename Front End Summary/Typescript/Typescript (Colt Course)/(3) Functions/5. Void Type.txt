@@ -1,0 +1,9 @@
+(1) Void Type
+---------------
+==> Is A Type For Functions That Don't Return Anything
+
+    function print(msg: string): void {
+        console.log(msg);
+    }
+
+    print("Hellow World")

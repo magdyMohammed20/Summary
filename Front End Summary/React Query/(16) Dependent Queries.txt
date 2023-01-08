@@ -1,0 +1,66 @@
+(1) Dependent Queries
+------------------------
+==> We Want Run Queries Sequentially
+
+
+
+EX
+---------
+
+==> In Main Sample We Create "users" And "Channels" Objects In 'db.json' 
+
+    db.json
+    ----------
+
+    "users": [
+        {
+            "email": "magdy@yahoo.com",
+            "id": "magdy-channel"
+        }
+    ],
+    "channels": [
+        {
+            "id": "magdy-channel",
+            "courses": ["Reactjs" , "Vuejs" , "Angularjs" ]
+        }
+    ]
+
+
+==> Create Main View And Route
+
+    DependentQuery.js
+    ---------------------
+
+    import { useQuery } from 'react-query';
+    import axios from 'axios';
+
+    function DependentQuery() {
+
+        /* Logic Of Get User Data */
+        // This Logic Will Run First For Get Channel Id From User Data To Fetch Courses Using Channel Id
+        const email = "magdy@yahoo.com";
+        const getUser = (userEmail) => {
+            return axios.get(`http://localhost:4000/users/${userEmail}`)
+        }
+        const { data: user } = useQuery(['get-user', email], () => getUser(email))
+
+
+        /* Logic Of Get User Courses */
+        // This Logic Run After Get User Channel Id To Fetch Courses 
+        // Using 'enabled' Option For Conditionally Run After Ensure That Channel Id Is Successfully Fetched  
+        const channelId = user?.data?.channelId;
+        const getUserCourses = (channelId) => {
+            return axios.get(`http://localhost:4000/channels/${channelId}`)
+        }
+        const { data: courses } = useQuery(['get-courses', channelId], () => getUserCourses(channelId), {
+            enabled: !!channelId
+        })
+
+        return (
+            <div>
+                {courses?.data?.courses.map((course, index) => <div>{index + 1} - {course}</div>)}
+            </div>
+        )
+    }
+
+    export default DependentQuery

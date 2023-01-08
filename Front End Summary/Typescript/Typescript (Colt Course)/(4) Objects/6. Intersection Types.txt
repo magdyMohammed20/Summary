@@ -1,0 +1,10 @@
+(1) With Intersection Types You Can Combine Multi Types 
+--------------------------------------------------------
+
+    type FirstType = { name: string }
+
+    type SecondType = { age: number }
+
+    type Combine = FirstType & SecondType;
+
+    const obj: Combine = { name: "Magdy Mo", age: 20 }

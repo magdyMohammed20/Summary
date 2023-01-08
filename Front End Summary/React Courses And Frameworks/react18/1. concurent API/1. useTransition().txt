@@ -1,0 +1,118 @@
+(1) Problem
+------------
+==> If Render A Huge Size Of Data It Will Take More Time To Render Like This Sample
+
+==> When Use useTransition
+----------------------------
+--> When Rendering Is Too Big Than Normal
+
+EX
+---
+
+import { useState } from 'react'
+
+function App() {
+  const [input, setInput] = useState('')
+  const [list, setList] = useState([])
+  const SIZE = 20000
+
+  // Here When Change Input Value Will Update 'input' And And UI At Same Time
+  // And We Want To Give 'input' The Higher Periority  
+  const handleChange = (e) => {
+    setInput(e.target.value)
+    const l = []
+    // Here Will Takes Long Time To Push In 'l' Array
+    for (let x = 0; x < SIZE; x++) {
+      l.push(e.target.value)
+    }
+    setList(l)
+
+  }
+  return (
+    <div className="App">
+      <input type="text" onChange={e => handleChange(e)} value={input} />
+      {
+        list.map(item => <div key={Math.random()}>{item}</div>)
+      }
+    </div>
+  );
+}
+
+export default App;
+
+
+(2) Use 'useTransition()' For Fix Periority Issue
+---------------------------------------------------
+==> Will Note Here If Write In The Input Will Update Input Value First Then Update The UI
+
+
+    import { useState, useTransition } from 'react'
+
+    function App() {
+        const [input, setInput] = useState('')
+        const [list, setList] = useState([])
+        // 1- Get startTransition
+        const [isPending, startTransition] = useTransition()
+        const SIZE = 20000
+
+        const handleChange = (e) => {
+            // 3- This Is High Periority
+            setInput(e.target.value)
+
+            // 2- Warp Low Periority Code In useTransition
+            startTransition(() => {
+            const l = []
+            for (let x = 0; x < SIZE; x++) {
+                l.push(e.target.value)
+            }
+            setList(l)
+            })
+
+        }
+        return (
+            <div className="App">
+            <input type="text" onChange={e => handleChange(e)} value={input} />
+            {
+                list.map(item => <div key={Math.random()}>{item}</div>)
+            }
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Use 'isPending' To Show Text Loading Message While Update The UI
+-----------------------------------------------------------------------
+
+import { useState, useTransition } from 'react'
+
+function App() {
+  const [input, setInput] = useState('')
+  const [list, setList] = useState([])
+  const [isPending, startTransition] = useTransition()
+  const SIZE = 20000
+
+  const handleChange = (e) => {
+    setInput(e.target.value)
+
+    startTransition(() => {
+      const l = []
+      for (let x = 0; x < SIZE; x++) {
+        l.push(e.target.value)
+      }
+      setList(l)
+    })
+
+  }
+  return (
+    <div className="App">
+      <input type="text" onChange={e => handleChange(e)} value={input} />
+      {
+        isPending ? 'Loading' : list.map(item => <div key={Math.random()}>{item}</div>)
+      }
+    </div>
+  );
+}
+
+export default App;

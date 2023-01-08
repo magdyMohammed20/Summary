@@ -1,0 +1,17 @@
+(1) Problem
+----------------
+==> When Running [tsc] Command All TS Files Compiled To Js Files
+==> But We Want To Specify Some TS Files To Compiled Only So We Will Use "files" Option In [tsconfig.json]
+
+
+(2) 'files' Property In [tsconfig.json]
+-------------------------------------------
+==> Here We Want To Compile Only 'index.ts' File And Ignore Compiling Other TS Files
+
+
+    {
+        "compilerOptions": {},
+        "files": [
+            "index.ts"
+        ]
+    }

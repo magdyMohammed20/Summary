@@ -1,0 +1,17 @@
+(1) Link: https://www.typescriptlang.org/docs/handbook/2/type-declarations.html
+
+
+(2) TS File Extensions
+-------------------------
+==> TypeScript has two main kinds of files. '.ts' files 
+    are implementation files that contain types and 
+    executable code. These are the files that produce 
+    .js outputs, and are where you’d normally write your code.
+    And Second Kind Is '.d.ts'
+
+
+(3) (.d.ts) File Extension
+-----------------------------
+==> files are declaration files that contain only type information. 
+    These files don’t produce .js outputs; they are only used for 
+    typechecking. We’ll learn more about how to write our own declaration.

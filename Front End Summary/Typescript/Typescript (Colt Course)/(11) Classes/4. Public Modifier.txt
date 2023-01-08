@@ -1,0 +1,39 @@
+(1) Public Modifier
+-----------------------
+==> Public Modifier Only In Typescript Not In Js
+==> It Marks Class Property Which Can Use It Outside The Class
+==> By Default All Class Properties Is Public
+
+
+EX
+---
+
+    class Player {
+        readonly first: string; 
+        public last: string; // Mark Public Class Property
+
+        constructor(first: string, last: string) {
+            this.first = first;
+            this.last = last;
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");
+    p1.last = "Mo"; // Assign Value To Public Class Property
+
+
+(2) Public Modifier With 'readonly'
+------------------------------------
+
+    class Player {
+        readonly first: string;
+        public readonly last: string; // Mark Public And ReadOnly Class Property
+
+        constructor(first: string, last: string) {
+            this.first = first;
+            this.last = last;
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");
+    p1.last = "Mo"; // Error As We Assign To Read Only Field

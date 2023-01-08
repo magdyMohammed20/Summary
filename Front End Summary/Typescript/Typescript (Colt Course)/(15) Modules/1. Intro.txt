@@ -1,0 +1,23 @@
+(1) Modules
+--------------
+==> Typescript Support Modules Which Can Share Code Between Files
+==> TS Support Using ES6 Modules (import , export)
+
+
+(2) Working Without Modules
+------------------------------
+==> Here By Default TS Working With Modules In Background Without Import / Export
+    But There Are Problem
+
+    
+    utils.ts
+    ----------
+
+        function add(num1: number, num2: number) {
+            return num1 + num2;
+        }
+
+    index.ts
+    -------------
+
+        console.log(add(10, 20)) // Error add Not Defined

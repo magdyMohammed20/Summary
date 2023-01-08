@@ -1,0 +1,28 @@
+(1) useDebugValue() Hook
+---------------------------
+==> used to display a label for custom hooks in React DevTools
+
+    import { useState, useDebugValue } from 'react'
+
+    function useExampleHook() {
+        const [b, setB] = useState(true)
+
+        // 1- First Way
+        //useDebugValue("Rocket is Inactive")
+
+        // 2- Second Way
+        useDebugValue(b ? "Rocket Is Active" : "Rocket is Inactive")
+        return [b, setB]
+    }
+
+    function App() {
+        const [b, setB] = useExampleHook()
+
+        return (
+            <div className="App">
+            Hellow
+            </div>
+        );
+    }
+
+    export default App;

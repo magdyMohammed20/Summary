@@ -1,0 +1,18 @@
+const arr = [1, 2, 3, 4]
+const str = "Hellow World"
+const bool = true
+
+// First Way For Check If Array Or Not
+console.log(arr instanceof Array) // true
+console.log(str instanceof Array) // false
+console.log(bool instanceof Array) // false
+
+// Second Way For Check If Array Or Not
+console.log(Array.isArray(arr)) // true
+console.log(Array.isArray(str)) // false
+console.log(Array.isArray(bool)) // false
+
+// Third Way For Check If Array Or Not
+console.log({}.toString.call(arr)) // [object Array]
+console.log({}.toString.call(str)) // [object String]
+console.log({}.toString.call(bool)) // [object Boolean]

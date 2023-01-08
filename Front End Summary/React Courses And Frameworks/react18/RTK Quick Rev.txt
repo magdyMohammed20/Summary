@@ -1,0 +1,235 @@
+(1) Install
+------------
+==> npm i react - redux @reduxjs/toolkit
+
+    (2) Config index.js
+---------------------
+
+    import ReactDOM from 'react-dom/client';
+import App from './App';
+import { Provider } from 'react-redux'; // 1- Import Provider
+import { configureStore } from '@reduxjs/toolkit'; // 2- Import configureStore
+import { userReducer } from './features/user'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// 4- Create Provider Store
+const store = configureStore({
+    reducer: {
+        users: userReducer
+    }
+})
+
+// 3- Wrap App Using Provider
+root.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+);
+
+(3) Create Toolkit Features
+------------------------------
+
+    features / user.js
+------------------
+
+        import { createSlice } from '@reduxjs/toolkit'
+
+const initState = {
+    values: []
+}
+const userSlice = createSlice({
+    name: 'userSlice',
+    initialState: initState,
+    reducers: {
+        addUser: (state, action) => { },
+        deleteUser: (state, action) => { },
+        updateUser: (state, action) => { }
+    }
+})
+
+export const userReducer = userSlice.reducer
+export const { addUser, deleteUser, updateUser } = userSlice.actions
+
+
+    (4) Access Redux State And Actions
+-----------------------------------
+
+
+    index.js
+----------
+
+        import ReactDOM from 'react-dom/client';
+import App from './App';
+import { Provider } from 'react-redux'; // 1- Import Provider
+import { configureStore } from '@reduxjs/toolkit'; // 2- Import configureStore
+import { userReducer } from './features/user'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+// 4- Create Provider Store
+const store = configureStore({
+    reducer: {
+        users: userReducer
+    }
+})
+
+// 3- Wrap App Using Provider
+root.render(
+    <Provider store={store}>
+        <App />
+    </Provider>
+);
+
+
+features / user.js
+-------------------
+
+        import { createSlice } from '@reduxjs/toolkit'
+
+const initState = {
+    values: []
+}
+const userSlice = createSlice({
+    name: 'userSlice',
+    initialState: initState,
+    reducers: {
+        addUser: (state, action) => {
+            state.values.push(action.payload)
+        },
+        deleteUser: (state, action) => { },
+        updateUser: (state, action) => { }
+    }
+})
+
+export const userReducer = userSlice.reducer
+export const { addUser, deleteUser, updateUser } = userSlice.actions
+
+
+App.js[Access Actions And Redux State Here]
+--------
+
+        import { useSelector, useDispatch } from 'react-redux'
+import { addUser } from './features/user'
+
+function App() {
+    const allUsers = useSelector(state => state.users.values)
+    const dispatch = useDispatch()
+
+    return (
+        <div className="App">
+            <div className="add-user">
+                <input type="text" name="name" />
+                <input type="text" name="username" />
+                <button onClick={() => dispatch(addUser({ id: 1, name: 'Magdy' }))}>Add User</button>
+            </div>
+            <div className="display-useres">
+                {
+                    allUsers.length == 0 ? <div>No Users Founded</div> : allUsers.length
+                }
+            </div>
+        </div>
+    );
+}
+
+export default App;
+
+
+(5) Actions Payload And Delete, Update User
+-----------------------------------------------
+
+    features / user.js
+-----------------
+
+        import { createSlice } from '@reduxjs/toolkit'
+
+const initState = {
+    values: []
+}
+const userSlice = createSlice({
+    name: 'userSlice',
+    initialState: initState,
+    reducers: {
+        addUser: (state, action) => {
+            state.values.push(action.payload)
+        },
+        deleteUser: (state, action) => {
+            state.values = state.values.filter(user => user.id !== action.payload)
+        },
+        updateUser: (state, action) => {
+            const { id, name, age } = action.payload;
+            console.log(action.payload)
+            state.values.map(user => {
+                if (user.id == id) {
+                    // Before Update Check If Current Redux Value Not Equal To Updated Value
+                    // And If Updated Value Is Empty Or 0 Will Not Update
+                    if (name !== user.name && name !== '') {
+                        user.name = name
+                    }
+                    if (age !== user.age && age !== 0) {
+                        user.age = age
+                    }
+                }
+            })
+        }
+    }
+})
+
+export const userReducer = userSlice.reducer
+export const { addUser, deleteUser, updateUser } = userSlice.actions
+
+
+App.js
+--------
+
+        import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { addUser, deleteUser, updateUser } from './features/user'
+
+function App() {
+    const allUsers = useSelector(state => state.users.values)
+    const dispatch = useDispatch()
+    const [name, setName] = useState('')
+    const [age, setAge] = useState(0)
+    const [newName, setNewName] = useState('')
+    const [newAge, setNewAge] = useState(0)
+
+    return (
+        <div className="App">
+            <div className="add-user">
+                <input type="text" name="name"
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <input type="text" name="newAge"
+                    onChange={(e) => setAge(e.target.value)}
+                />
+                <button onClick={() => dispatch(addUser({ id: allUsers.length > 0 ? allUsers[allUsers.length - 1].id + 1 : 1, name, age }))}>Add User</button>
+            </div>
+            <div className="display-useres">
+                {
+                    allUsers && allUsers.map(user => (
+                        <div key={user.id}>
+                            <p>Id : {user.id}</p>
+                            <p>User Name : {user.name}</p>
+                            <p>Age Is : {user.age}</p>
+                            <button onClick={() => dispatch(deleteUser(user.id))}>Delete</button>
+
+                            <div>
+                                <input type="text" name="newName"
+                                    onChange={(e) => setNewName(e.target.value)}
+                                />
+                                <input type="text" name="newAge"
+                                    onChange={(e) => setNewAge(e.target.value)}
+                                />
+                                <button onClick={() => dispatch(updateUser({ id: user.id, name: newName, age: newAge }))}>Update</button>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    );
+}
+
+export default App;
+

@@ -1,0 +1,21 @@
+(1) Read Only Class Properties
+---------------------------------
+==> Is Property Which We Can't Assign Value Using Class Instance
+==> 'readonly' Exist Only In Typescript Not In JavaScript
+
+EX
+---
+
+    class Player {
+        readonly first: string; // Marked As Read Only Prop
+        last: string;
+
+        constructor(first: string, last: string) {
+            this.first = first;
+            this.last = last;
+        }
+    }
+
+    const p1 = new Player("Magdy", "Mohammed");
+    p1.first = "Mohammed"; // Error As first Is Read Only
+    p1.last = "Mo"; // No Error

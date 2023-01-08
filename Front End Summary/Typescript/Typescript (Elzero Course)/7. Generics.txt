@@ -1,0 +1,50 @@
+(1) Generics
+---------------
+==> There Is A Problem In Define Types And Return Value Of Function
+    And Types Of Variables If Want To Make It Scalable
+
+
+==> Problem
+---------------
+
+    // Here Define Types And Return Value Is Not Dynamic
+    function func1(msg: number | string | boolean): number | string | boolean {
+        return msg
+    }
+
+    console.log(func1(true))
+
+
+==> Solve Problem Using Generics
+---------------------------------
+
+    function func1<T>(msg: T): T {
+        return msg
+    }
+
+    // By Default TS Infered Generic Value Type
+    console.log(func1(true))  // Type Is Boolean
+    console.log(func1("Msg")) // Type Is String
+    console.log(func1(10))    // Type Is Number
+    console.log(func1(10.5))
+
+    // Assign Type To Generic
+    console.log(func1<boolean>(true))
+    console.log(func1<number>(10.5))
+
+
+(2) Object And Arrays With Generics
+-------------------------------------
+
+    function func1<T>(msg: T): T {
+        return msg
+    }
+
+    // Assign Object Type To Generic
+    type Custom = {
+        fName: string;
+        lName: string
+    }
+
+    console.log(func1<Custom>({ fName: 'Magdy', lName: 'Mohammed' })) // {fName: 'Magdy', lName: 'Mohammed'}
+    console.log(func1<number[]>([10, 20, 40])) // [10, 20, 40]

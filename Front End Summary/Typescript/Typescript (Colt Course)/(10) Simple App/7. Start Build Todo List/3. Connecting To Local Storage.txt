@@ -1,0 +1,52 @@
+(1) Connecting To LocalStorage And Function Refactor
+-------------------------------------------------------
+
+    index.ts
+    ------------
+
+    interface Todo {
+        text: string;
+        checked: boolean;
+    }
+
+    const btn = document.getElementById('todobtn')! as HTMLButtonElement;
+    const input = document.getElementById('todoinput') as HTMLInputElement;
+    const form = document.querySelector('form')!;
+    const todoList = document.getElementById('todolist')!;
+
+    // 2- Reading Todos From Local Storage
+    const todos: Todo[] = readTodos();
+
+    // 3 - Looping For Rendering Stored Todos
+    todos.forEach(createTodo)
+
+
+
+    // 1- Create Function For Reading From Local Storage
+    function readTodos(): Todo[] {
+        const jsonTodos = localStorage.getItem('todos');
+        if (jsonTodos == null) return [];
+        return JSON.parse(jsonTodos)
+    }
+
+
+    function createTodo(todo: Todo) {
+        const inputVal = todo.text;
+        const newLi = document.createElement('li');
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        newLi.append(inputVal);
+        newLi.prepend(checkbox);
+        todoList.append(newLi);
+    }
+
+    function submitCallback(e: SubmitEvent) {
+        e.preventDefault();
+        const todo: Todo = { text: input.value, checked: false }
+        createTodo(todo);
+        todos.push(todo);
+        localStorage.setItem('todos', JSON.stringify(todos));
+        input.value = ""
+    }
+
+    form.addEventListener('submit', submitCallback)

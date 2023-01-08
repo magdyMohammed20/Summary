@@ -1,0 +1,9 @@
+(1) Target Option
+---------------------
+==> Using 'target' Option To Specify Js Language Version
+
+    {
+        "compilerOptions": {
+            "target": "es6"
+        }
+    }

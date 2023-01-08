@@ -1,0 +1,27 @@
+(1) No Null Assertion Operator
+---------------------------------
+
+Problem
+-----------
+
+    // This Button Access TS Infered That btn Type Is 'HTMLElement' Or Null
+    const btn = document.getElementById("magdy")
+
+    // Error: Object is possibly 'null'
+    btn.addEventListener('click', function () {
+        console.log('Hellow')
+    })
+
+
+Solution1 (Add ? After btn)
+---------------------------
+
+    btn?.addEventListener('click', function () {
+        console.log('Hellow')
+    })
+
+
+Solution2 (Add ! After btn Access)
+------------------------------------
+
+    const btn = document.getElementById("magdy")!

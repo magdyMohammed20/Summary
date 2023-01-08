@@ -1,0 +1,23 @@
+(1) Different Between Interfaces And 'type' Annotation
+--------------------------------------------------------
+==> Interface Define Type Of Object But 'type' Define Type Of Object And Variables
+    ==> With Interface You Can Redeclare The Interface And There Is No Overrides It Append Only
+    With 'type' You Can't Redeclare The 'type'
+
+
+    ==> Inheritance Can Occur In Interfaces And In 'type' Too
+
+// Inheritance In 'type'
+
+type Person = {
+    name: string
+}
+
+type Employee = Person & {
+    job: string
+}
+
+const emp: Employee = {
+    name: 'Magdy',
+    job: 'FrontEnd'
+}

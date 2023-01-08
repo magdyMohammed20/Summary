@@ -1,0 +1,12 @@
+(1) "lib" Compiler Option
+---------------------------
+==> In 'tsconfig.json' There Are Property Called 'lib' Which We Can Specify Any Js Api We Want To Use
+
+EX
+---
+==> Here If "DOM" Included In "lib" And We Use "document" Element It Will Give Us An Error
+
+    tsconfig.json
+    ----------------
+
+    "lib": ["DOM" , "ES2021"]

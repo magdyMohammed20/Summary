@@ -1,0 +1,13 @@
+(1) We Want To Make Something Like : op("+" , 10 , 20) Will Produce [30]
+
+(2) Solution
+-------------
+
+    function op(operation , val1 , val2){
+        return eval(val1+operation+val2)
+    }
+
+    console.log(op('+' , 10,20)) // 30
+    console.log(op('-' , 10,20)) // -10
+    console.log(op('*' , 10,20)) // 200
+    console.log(op('/' , 10,20)) // 0.5 

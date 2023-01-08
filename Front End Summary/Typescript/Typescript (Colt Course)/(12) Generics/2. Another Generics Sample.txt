@@ -1,0 +1,16 @@
+(1) Another Generics Sample
+------------------------------
+
+    index.html
+    -------------
+
+        <input type="text" id="inputEl" />
+
+    generics.ts
+    --------------
+
+        // Here We Set 'HTMLInputElement' Generics
+        const inputEl = document.querySelector<HTMLInputElement>('#inputEl')!;
+
+        // If Generics Not Set It Produce (Property 'value' does not exist on type 'Element')
+        inputEl.value = 'Magdy'

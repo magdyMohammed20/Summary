@@ -1,0 +1,74 @@
+(1) Before useId Hook
+-----------------------
+==> When Using Math.random() While Rendering List It Generated Different Keys Between Server And Client
+
+(2) useId() Solve Problem
+-------------------------
+==> Make Keys Which Generated On Client And Server Same
+
+(3) Uses Of useId()
+---------------------
+[1] Can Use It With Label And Input
+
+EX1
+----
+
+    import { useId } from 'react'
+    function App() {
+        const id = useId()
+        return (
+            <div className="App">
+                <label htmlFor={id}>First Name</label>
+                <input id={id} type="text" />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+EX2 (Can Suffix Id With Input Name) (For Use Same Id With Multi Inputs)
+----
+
+    import { useId } from 'react'
+    function App() {
+        const id = useId()
+        return (
+            <div className="App">
+                <label htmlFor={'firstName-' + id}>First Name</label>
+                <input id={'firstName-' + id} type="text" />
+
+                <label htmlFor={'secondName-' + id}>Second Name</label>
+                <input id={'secondName-' + id} type="text" />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+Note : (Can Make Many Instances From useId But The Best Is To Use 'Suffix' Like EX2)
+
+[2] Can Use With Lists But The Best Is To Pass The Key From Your Data Not Depending On useId() When Render List
+
+EX
+----
+
+    import { useId } from 'react'
+    function App() {
+        const id = useId()
+        const list = [1, 2, 3]
+        return (
+            <div className="App">
+                {
+                    list.map((item, index) => (
+                        <p key={id + index}>
+                            {item}
+                        </p>
+                    ))
+                }
+            </div>
+        );
+    }
+
+    export default App;

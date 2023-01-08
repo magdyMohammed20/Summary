@@ -1,0 +1,47 @@
+(1) Basic React Query Data Fetching
+--------------------------------------
+
+==> Setup React Query In App.js
+--------------------------------
+
+    import { QueryClientProvider, QueryClient } from 'react-query';
+    import SuperHeros from './SuperHeros';
+    function App() {
+
+    const queryClient = new QueryClient();
+        return (
+            <QueryClientProvider client={queryClient}>
+                <div className="App">
+                    <SuperHeros />
+                </div>
+            </QueryClientProvider>
+        );
+    }
+
+    export default App;
+
+
+==> Setup Api Calls In SuperHeros Component
+---------------------------------------------
+
+    SuperHeros.js
+    ----------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    function SuperHeros() {
+        const { isLoading, data } = useQuery('get-supers', () => {
+            return axios.get('http://localhost:4000/superHeros')
+        })
+
+        if (isLoading) return "Loading...";
+
+        return (
+            <div>
+                {data && data.data.map(superHero => <div>{superHero.name}</div>)}
+            </div>
+        )
+    }
+
+    export default SuperHeros

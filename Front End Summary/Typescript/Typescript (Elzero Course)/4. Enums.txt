@@ -1,0 +1,110 @@
+(1) Enums
+------------
+
+EX (By Default Enum Values Starts From 0)
+----
+
+    enum Levels {
+        Kids,
+        easy,
+        normal,
+        medium,
+        hard
+    }
+
+    console.log(Levels.Kids)    // 0
+    console.log(Levels.easy)    // 1
+    console.log(Levels.normal)  // 2
+
+
+EX2 (If Give Value For First Enum Element The Rest Members Values Will Be Incremented Depending On First Member Value)
+--------
+
+    enum Levels {
+        Kids = 2,
+        easy,
+        normal,
+        medium,
+        hard
+    }
+
+    console.log(Levels.Kids)    // 2
+    console.log(Levels.easy)    // 3
+    console.log(Levels.normal)  // 4
+
+EX2.1
+-------
+
+    enum Levels {
+        Kids,
+        easy = 2,
+        normal,
+        medium,
+        hard
+    }
+
+    console.log(Levels.Kids)    // 0
+    console.log(Levels.easy)    // 2
+    console.log(Levels.normal)  // 3
+
+
+EX3
+----
+
+    enum Levels {
+        Kids = 15,
+        easy = 12,
+        normal = 10,
+        medium = 8,
+        hard = 5
+    }
+
+    let lvl: string = "Easy";
+
+    if (lvl == "Easy") {
+        console.log(`Your Level Is ${Levels.easy}`)
+    }
+
+
+(2) Enum Compilation
+-------------------------
+==> In Normal Case With Enum The Output Code Is Self Called Function With Big Syntax
+==> To Minimize This Output Syntax You Can Define Enum As Constant
+
+    const enum Levels {
+        Kids,
+        easy = 2,
+        normal,
+        medium,
+        hard
+    }
+
+
+(3) 'preserveConstEnums' In 'tsconfig.json'
+-----------------------------------------------
+==> If You Make Enums As Constant The Output Code Minimized But If Don't Want To Minimize It Set 'preserveConstEnums' In 'tsconfig.json' To True Value
+
+    "preserveConstEnums": true
+
+
+(4) Enums Relations
+-----------------------
+
+    enum Category {
+        id = 1,
+        name = 'User'
+    }
+
+    enum Product {
+        id = Category.id,
+        username = Category.name,
+        price = 10,
+        commition = price * 2.5,
+    }
+
+    // Access Enum Indexes
+    console.log(Product[0]) // id
+    console.log(Product[1]) // username
+
+    console.log(Product.id) // 1
+    console.log(Product.username) // 'User'

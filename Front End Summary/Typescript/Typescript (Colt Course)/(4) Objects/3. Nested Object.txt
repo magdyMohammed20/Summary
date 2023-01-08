@@ -1,0 +1,29 @@
+(1) Nested Object
+----------------------
+
+    type Lang = {
+        name: string,
+        start_year: number,
+        frameWorks: {
+            first_frame: string,
+            second_frame: string,
+            third_frame: string
+        }
+    }
+
+    function lang_frames(lang: Lang): void {
+        console.log(lang.frameWorks)
+    }
+
+    const js_lang:Lang = {
+        name: 'javascript',
+        start_year: 2002,
+        frameWorks: {
+            first_frame: 'Reactjs',
+            second_frame: 'AngularJs',
+            third_frame: 'VueJs'
+        }
+    }
+
+
+    lang_frames(js_lang)

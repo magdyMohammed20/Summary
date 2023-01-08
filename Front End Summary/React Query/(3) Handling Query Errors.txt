@@ -1,0 +1,26 @@
+(1) Handling Query Errors
+---------------------------
+
+    import axios from 'axios';
+    import { useQuery } from 'react-query';
+
+    const fetchHeros = () => {
+        return axios.get('http://localhost:4000/superHeros1')
+    }
+    function SuperHeros() {
+        const { isLoading, data, isError, error } = useQuery('get-supers', fetchHeros)
+
+        if (isLoading) return "Loading...";
+
+        if (isError) return error.message;
+
+        return (
+            <div>
+                {
+                    data && data.data.map(superHero => <div key={superHero.id}>{superHero.name}</div>)
+                }
+            </div>
+        )
+    }
+
+    export default SuperHeros
