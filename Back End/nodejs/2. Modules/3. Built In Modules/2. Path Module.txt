@@ -1,0 +1,87 @@
+(1) Path Module
+-------------------
+==> Provides Utility For Working With File And Directory Paths
+
+EX
+----
+
+    const path = require('node:path');
+
+    console.log(__dirname)  // /home
+    console.log(__filename) // /home/jdoodle.js
+    console.log(path.basename(__dirname)) // home
+    console.log(path.basename(__filename)) // jdoodle.js
+
+
+(2) Get Files Extensions
+----------------------------
+
+    const path = require('node:path');
+
+    console.log(path.extname(__dirname)) // Empty String
+    console.log(path.extname(__filename)) // .js
+
+
+(3) File Info
+-----------------
+
+    const path = require('node:path');
+
+    console.log(path.parse(__filename)) // { root: '/', dir: '/home', base: 'jdoodle.js', ext: '.js', name: 'jdoodle'}
+
+
+(4) Formatting Path
+----------------------
+
+    const path = require('node:path');
+
+    console.log(path.format(path.parse(__filename))) // /home/jdoodle.js
+
+
+(5) Is Absolute path
+------------------------
+
+    const path = require('node:path');
+
+    console.log(path.isAbsolute(__dirname)) // true
+    console.log(path.isAbsolute(__filename)) // true
+
+
+(6) Join Paths
+------------------
+
+    const path = require('node:path');
+
+    console.log(path.join("folder1" , "folder2" , "data.json")) // folder1/folder2/data.json
+
+
+(7) Join Tricks
+------------------
+
+    const path = require('node:path');
+
+    console.log(path.join("folder1" , "//folder2" , "data.json")) // folder1/folder2/data.json
+    console.log(path.join("folder1" , "//folder2" , "../data.json")) // folder1/data.json
+    console.log(__dirname) // /home
+    console.log(path.join(__dirname, "data.json")) // /home/data.json
+
+
+(8) Resolve
+-------------
+
+    const path = require('path');
+
+    // C:\Users\DigiFi\Desktop\nodejs\folder1\folder2\index.js
+    console.log(path.resolve('folder1', 'folder2', 'index.js'))
+
+    // C:\folder1\folder2\index.js 
+    console.log(path.resolve('/folder1', 'folder2', 'index.js'))
+
+    // C:\folder2\index.js
+    console.log(path.resolve('/folder1', '//folder2', 'index.js'))
+
+    // C:\index.js
+    console.log(path.resolve('/folder1', '//folder2', '../index.js'))
+
+    // C:\Users\DigiFi\Desktop\nodejs\data.json
+    console.log(path.resolve(__dirname, 'data.json'))

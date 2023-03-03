@@ -1,0 +1,26 @@
+(1) Module Scope
+-------------------
+
+    index.js
+    ------------
+
+    require('./batman') // Batman
+    require('./superman') // Superman
+
+    batman.js
+    -----------
+
+    const superHero = "Batman"
+    console.log(superHero)
+
+    superman.js
+    --------------
+
+    const superHero = "Superman"
+    console.log(superHero)
+
+
+(2) Module Scope
+-------------------
+==> Each Loaded Module In Nodejs Wrapped With An iife That Provides Private Scope Of Code
+==> IIFE Allows To Repeat Variable Or Function Names Without Any Conflicts

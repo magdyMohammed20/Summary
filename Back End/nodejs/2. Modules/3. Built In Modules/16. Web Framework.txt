@@ -1,0 +1,7 @@
+(1) Web Framework
+---------------------
+==> Simply Abstracts The Lower Level Code Allowing You To Focus On The Requirements Than The Code Itself
+
+EX:
+---
+==> React Help You To Build User Interface Without Having To Rely On The Lower Level DOM Api In Js 

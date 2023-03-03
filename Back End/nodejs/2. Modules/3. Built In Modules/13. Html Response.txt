@@ -1,0 +1,71 @@
+(1) Send HTML Response
+--------------------------
+
+    const http = require('http');
+
+
+    const server = http.createServer((req, res) => {
+        // Here We Specify 'text/html' To Show As Html
+        res.writeHead(200, { "Content-Type": "text/html" })
+        res.end("<h1>Hellow World</h1>")
+    })
+
+    server.listen(3000, () => {
+        console.log("Server Started At 3000 Port")
+    })
+
+
+(2) Read Html File
+------------------------
+
+    index.html
+    --------------
+
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <h1>Hellow From Html</h1>
+    </body>
+
+    </html>
+
+
+    index.js
+    -------------
+
+    const http = require('http');
+    const fs = require('fs');
+
+    const server = http.createServer((req, res) => {
+        res.writeHead(200, { "Content-Type": "text/html" })
+        const html = fs.readFileSync('./index.html', 'utf-8')
+        res.end(html)
+    })
+
+    server.listen(3000, () => {
+        console.log("Server Started At 3000 Port")
+    })
+
+
+(3) Read Html File Using Pipe
+---------------------------------
+
+    const http = require('http');
+    const fs = require('fs');
+
+    const server = http.createServer((req, res) => {
+        res.writeHead(200, { "Content-Type": "text/html" })
+        fs.createReadStream('./index.html').pipe(res)
+    })
+
+    server.listen(3000, () => {
+        console.log("Server Started At 3000 Port")
+    })

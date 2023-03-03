@@ -1,0 +1,8 @@
+(1) Remove Any Spaces From String
+----------------------------------
+
+    function noSpace(str){
+        return str.split(' ').join('')
+    }
+
+    console.log(noSpace("dd ff        gg")) // ddffgg

@@ -1,0 +1,9 @@
+(1) Count By X
+-----------------
+
+    function countByX(num , n){
+        return Array.from(Array(n + 1).keys()).slice(1).map(item => item * num)
+    }
+
+    // Means That Array Length Is 5 And Multiply Each Number By 2
+    console.log(countByX(2,5)) // [2,4,6,8,10]

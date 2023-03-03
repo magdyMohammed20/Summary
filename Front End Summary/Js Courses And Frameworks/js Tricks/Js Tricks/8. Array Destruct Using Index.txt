@@ -1,0 +1,7 @@
+const obj = [
+    10,
+   'Product'
+]
+
+const {1:name , 0: price} = obj
+console.log(name , price) // Product 10

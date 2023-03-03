@@ -1,0 +1,32 @@
+(1) Http Routing
+----------------------
+==> Create Routing Pages For (Home , About , 404 , etc...)
+
+    const http = require('http');
+
+    const server = http.createServer((req, res) => {
+        // Preparing Routing
+        if (req.url == "/") {
+            console.log(req.method) // Access Request Method (GET , POST , PUT , DELETE)
+            res.writeHead(200, { "Content-Type": "text/html" })
+            res.end("Home Page")
+        } else if (req.url == '/about') {
+            console.log(req.method) // Access Request Method (GET , POST , PUT , DELETE)
+            res.writeHead(200, { "Content-Type": "text/html" })
+            res.end("About Page")
+        } else if (req.url == '/api') {
+            res.writeHead(200, { "Content-Type": "application/json" })
+            res.end(JSON.stringify({
+                name: 'Magdy Mohammed',
+                age: 20,
+                address: 'Cairo'
+            }))
+        } else {
+            res.writeHead(404)
+            res.end('404 Not Found')
+        }
+    })
+
+    server.listen(3000, () => {
+        console.log("Server Started At 3000 Port")
+    })

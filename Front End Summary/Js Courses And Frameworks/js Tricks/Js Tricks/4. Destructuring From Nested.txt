@@ -1,0 +1,18 @@
+const locs = [
+    {name: 'india' , location: 'asia'},
+    {name: 'Egypt' , location: 'africa'}
+]
+
+// Destruct From Array Of Objects
+const [{location:loc1 , name: n1},{location : loc2, name: n2} ] = locs;
+console.log(loc1 , n1) // asia india
+console.log(loc2 , n2) // africa Egypt
+
+
+// Destruct From Array Which Inside Object
+const eclrex = {
+    locations: ['India' , 'UK']
+}
+
+const {locations : [loc3 , loc4]} = eclrex
+console.log(loc3 , loc4) // India UK

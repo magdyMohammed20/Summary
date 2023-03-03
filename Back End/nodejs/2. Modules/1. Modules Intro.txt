@@ -1,0 +1,29 @@
+(1) Modules
+-------------
+==> Modules Is Encapsulated And Reusable Chunk Of Code That Has It's Own Context
+==> In NodeJs Each Files Treated As A Seperate Module 
+
+(2) Types Of Module
+-----------------------
+==> Local Module : Modules That We Create In Our Application
+==> Built-in Module
+==> Third Party Module : Modules Written By Other Developers That We Can Use In Our Application
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

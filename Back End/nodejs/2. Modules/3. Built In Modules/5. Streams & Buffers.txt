@@ -1,0 +1,38 @@
+(1) Streams
+---------------
+==> Sequence Of Data That Is Being Moved From One Point To Another Over Time
+
+(2) Sample Of Streams
+-----------------------
+==> Stream Of Data Over Internet Moved From One Computer To Another
+==> Stream Of Data Being Transfered From One File To Another Within The Same Computer 
+
+(3) Process Streams Of Data Chunks As They Arrive Instead Of Waiting For Entire Data To Be Available Before Processing
+
+(4) Sample Of Data Chunks
+------------------------------
+==> While Watching Video On Youtube Data Arrives In Chunks While Rest Of Data Arrives Over Time 
+
+(5) Buffers
+-------------
+==> objects are used to represent a fixed-length sequence of bytes.
+
+EX
+----
+
+    const buf = new Buffer.from('Magdy');
+
+    console.log(buf); // <Buffer 4d 61 67 64 79>
+    console.log(buf.toJSON()) // { type: 'Buffer', data: [ 77, 97, 103, 100, 121 ] }
+    console.log(buf.toString()) // Magdy
+
+
+EX ( Write In Buffer)
+---
+
+    const buf = new Buffer.from('Magdy');
+
+    buf.write("CodeEvou")
+    console.log(buf); // <Buffer 43 6f 64 65 45 76 6f 75 61 6d 6d 65 64>
+    console.log(buf.toJSON()) // { type: 'Buffer', data: [ 67, 111, 100, 101,  69, 118, 111, 117,  97, 109, 109, 101, 100] }
+    console.log(buf.toString()) // CodeE

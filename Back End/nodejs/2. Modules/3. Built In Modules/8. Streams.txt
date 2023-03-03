@@ -1,0 +1,49 @@
+(1) Streams Types
+-------------------
+==> Readable Streams : From Which Data Can Be Read
+==> Writable Streams : To Which We Can Write Data
+==> Duplex Streams : That Are Both Readable and Writable
+==> Transform Streams : That Can Modify Or Transform The Data As It Is Written And Read
+
+(2) Read File Content From Another File
+-------------------------------------------
+
+    file.txt
+    ----------
+
+    Hellow
+
+
+    index.js
+    ------------
+
+    const fs = require('fs');
+
+    const readableStream = fs.createReadStream('./file.txt', {
+        encoding: 'utf-8'
+    });
+
+    const writeStream = fs.createWriteStream('./file2.txt')
+
+    readableStream.on('data', chunk => {
+        console.log(chunk)
+        writeStream.write(chunk)
+    })
+
+
+(3) Specify Chunk Size Using Bytes
+---------------------------------------
+
+    const fs = require('fs');
+
+    const readableStream = fs.createReadStream('./file.txt', {
+        encoding: 'utf-8',
+        highWaterMark: 2 // Every Chunk Will Be 2 Bytes
+    });
+
+    const writeStream = fs.createWriteStream('./file2.txt')
+
+    readableStream.on('data', chunk => {
+        console.log(chunk)
+        writeStream.write(chunk)
+    })

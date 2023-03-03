@@ -1,0 +1,80 @@
+(1) Synchronous Reading Files
+---------------------------
+
+    file.txt
+    -----------
+
+    Hellow Mego
+
+
+    const fs = require('fs');
+    console.log(fs.readFileSync('./file.txt')) // <Buffer 48 65 6c 6c 6f 77 20 4d 65 67 6f>
+    console.log(fs.readFileSync('./file.txt', 'utf-8')) // Hellow Mego
+
+
+(2) Asynchronous Reading Files
+--------------------------------
+
+    const fs = require('fs');
+
+    fs.readFile('./file.txt', 'utf-8', (error, data) => {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log(data) // Hellow Mego
+        }
+    })
+
+
+(3) Execution Order
+---------------------
+
+    const fs = require('fs');
+
+    console.log('First') // 1
+    console.log(fs.readFileSync('./file.txt')) // 2
+    console.log(fs.readFileSync('./file.txt', 'utf-8'))  // 3
+    console.log('Second') // 4
+
+
+    fs.readFile('./file.txt', 'utf-8', (error, data) => {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log(data) // 6
+        }
+    })
+
+    console.log('Third') // 5
+
+
+(4) Write To file
+----------------------
+
+    const fs = require('fs');
+
+    fs.writeFileSync('./file.txt', 'Hellow THis Is New Write')
+
+    fs.writeFile('./file.txt', 'THis Is New Write With Sync', (err) => {
+        if (err) {
+            console.log('There Are Error', err)
+        } else {
+            console.log('Write Done✅')
+        }
+    })
+
+
+(5) Append Write To File
+---------------------------
+
+    const fs = require('fs');
+    
+    // Adding 'flag' Option
+    fs.writeFile('./file.txt', 'THis Is New Write With Sync', { flag: 'a' }, (err) => {
+        if (err) {
+            console.log('There Are Error', err)
+        } else {
+            console.log('Write Done✅')
+        }
+    })
+

@@ -1,0 +1,94 @@
+(1) First Export Pattern (Export Single Element)
+---------------------------------------------------
+
+    addition.js
+    --------------
+
+    function sum(a, b) {
+        return a + b
+    }
+
+    module.exports = sum
+
+
+    index.js
+    ---------------
+
+    const add = require('./addition');
+    console.log(add(10, 20)) // 30
+
+
+(2) EXPORT AN ANONYMOUS FUNCTION
+------------------------------------
+
+    addition.js
+    --------------
+
+    module.exports = (a, b) => {
+        return a + b
+    }
+
+
+    index.js
+    ----------
+
+    const add = require('./addition');
+    console.log(add(10, 20)) // 30
+
+
+(3) Export Multiple Elements
+------------------------------
+
+    math.js
+    ----------
+
+    function add(a, b) { return a + b }
+    function subtract(a, b) { return a - b }
+
+    module.exports = { add, subtract }
+
+
+    index.js
+    -----------
+
+    const { add, subtract } = require('./math');
+
+    console.log(add(10, 20)) // 30
+    console.log(subtract(50, 30)) // 20
+
+
+(4) EXPORT A NAMED FUNCTION
+------------------------------
+
+    math.js
+    -----------
+
+    module.exports.add = function (a, b) { return a + b }
+    module.exports.subtract = function (a, b) { return a - b }
+
+
+    index.js
+    ----------
+
+    const { add, subtract } = require('./math');
+
+    console.log(add(10, 20)) // 30
+    console.log(subtract(50, 30)) // 20
+
+
+(5) Another Export Pattern
+----------------------------
+
+    math.js
+    ---------
+
+    exports.add = function (a, b) { return a + b }
+    exports.subtract = function (a, b) { return a - b }
+
+    index.js
+    ------------
+
+    const { add, subtract } = require('./math');
+
+    console.log(add(10, 20)) // 30
+    console.log(subtract(50, 30)) // 20

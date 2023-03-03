@@ -1,0 +1,32 @@
+(1) Extending From Event Emitter
+----------------------------------
+    
+    const EventEmitter = require('events');
+
+    const emitter = new EventEmitter();
+
+    class pizzaShop extends EventEmitter {
+        constructor() {
+            super()
+            this.orderNumber = 0;
+        }
+
+        order(size, topping) {
+            this.orderNumber++
+            // When Order Method Called Will Execute 'order' Action
+            this.emit('order', size, topping)
+        }
+
+        displayOrderNumber() {
+            console.log(`The Orders Is ${this.orderNumber} Pizza`)
+        }
+
+    }
+
+    const piz = new pizzaShop()
+
+    piz.on('order', (size, topping) => {
+        console.log(size, topping)
+    })
+
+    piz.order('Large', 'Mashroom') // Large Mashroom

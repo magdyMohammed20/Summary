@@ -1,0 +1,76 @@
+(1) Use Import And Export With .mjs File Modules
+--------------------------------------------------
+
+    math.mjs
+    ----------
+
+    export default function add(a, b) { return a + b }
+
+    index.mjs
+    ----------
+
+    import add from "./math.mjs";
+    console.log(add(100, 200))
+
+
+(2) Multiple Export
+----------------------
+
+    math.mjs
+    -----------
+
+    function add(a, b) { return a + b }
+    function sub(a, b) { return a - b }
+
+    export default { add, sub }
+
+
+    index.mjs
+    -----------
+
+    import math from "./math.mjs";
+
+    const { add, sub } = math;
+
+    console.log(add(100, 200)) // 300
+    console.log(sub(100, 200)) // -100
+
+
+(3) Single Export (First Way)
+-------------------
+
+    math.mjs
+    ----------
+
+    export function add(a, b) { return a + b }
+    export function sub(a, b) { return a - b }
+
+
+    index.mjs
+    ------------
+
+    import { add, sub } from "./math.mjs";
+
+    console.log(add(100, 200)) // 300
+    console.log(sub(100, 200)) // -100
+
+
+(4) Single Export (Second Way)
+-------------------
+
+    math.mjs
+    ----------
+
+    export function add(a, b) { return a + b }
+    export function sub(a, b) { return a - b }
+
+
+    index.mjs
+    ------------
+
+    import * as math from "./math.mjs";
+
+    const { add, sub } = math;
+
+    console.log(add(100, 200)) // 300
+    console.log(sub(100, 200)) // -100

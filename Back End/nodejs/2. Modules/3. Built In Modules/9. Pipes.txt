@@ -1,0 +1,43 @@
+(1) Pipes
+--------------
+==> It Connects Readable Stream With Writable Stream
+
+EX
+----
+
+    file.txt
+    -----------
+
+    Hellow
+
+
+    index.js
+    ------------
+
+    const fs = require('fs');
+
+    const readableStream = fs.createReadStream('./file.txt', {
+        encoding: 'utf-8',
+        highWaterMark: 2 // Every Chunk Will Be 2 Bytes
+    });
+
+    const writeStream = fs.createWriteStream('./file2.txt')
+
+    // Write Content Of file.txt Into file2.txt
+    readableStream.pipe(writeStream)
+
+
+(2) Compress Output File
+---------------------------
+
+    const fs = require('fs');
+    const zlib = require('zlib');
+    const gzip = zlib.createGzip();
+
+    const readableStream = fs.createReadStream('./file.txt', {
+        encoding: 'utf-8',
+        highWaterMark: 2
+    });
+
+
+    readableStream.pipe(gzip).pipe(fs.WriteStream('file2.gz'))

@@ -1,0 +1,19 @@
+(1) First Way
+----------------
+==> We Have Array Of Numbers And Want To Return Another Array Contains Square Root If Number Has Square Root Or Multiply Number By Self If Not Has Square Root
+
+    const arr = [4,3,2,7,5,16 , 3.2]
+
+    const map = arr.map(item =>  Math.sqrt(item) % 1 == 0 ? Math.sqrt(item) : item ** 2 ) 
+
+    console.log(map) // [2, 9, 4, 49, 25, 4, 10.240000000000002]
+
+
+(2) Second Way
+-----------------
+
+    const arr = [4,3,2,7,5,16 , 3.2]
+
+    const map2 = arr.map(item => Number.isInteger(Math.sqrt(item)) ? Math.sqrt(item) : item ** 2)
+
+    console.log(map2) // [2, 9, 4, 49, 25, 4, 10.240000000000002]

@@ -1,0 +1,25 @@
+(1) Import JSON File
+-----------------------
+
+    data.json
+    ------------
+
+    {
+        "name": "Magdy Mohammed",
+        "address": {
+            "street": "Happy Street",
+            "city": "Qanatir"
+        }
+    }
+
+    index.js
+    -----------
+
+    const data = require('./data.json')
+
+    console.log(data.address) // { street: 'Happy Street', city: 'Qanatir' }
+
+
+(2) Run Watch Mode
+--------------------
+==> For Watch File Run [node --watch index.js]

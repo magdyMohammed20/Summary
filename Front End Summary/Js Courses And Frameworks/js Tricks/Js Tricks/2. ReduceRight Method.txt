@@ -1,0 +1,9 @@
+const arr = [10,2,4,5,8]
+
+// ReduceRight Will Iterate On Array From Right To Left
+const sum = arr.reduceRight((acc , curr) => {
+    console.log(curr) // 8 , 5 , 4 , 2 , 10
+    return acc + curr
+}, 0)
+
+console.log(sum) // 29

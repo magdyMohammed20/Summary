@@ -1,0 +1,25 @@
+const name = "Rert"
+
+// First Way
+if (name.charAt(0) === 'R' || name.charAt(0) === 'r') {
+    console.log(true)
+} else {
+    console.log(false)
+}
+
+// Second Way
+if (name[0] === 'R' || name[0] === 'r') {
+    console.log(true)
+} else {
+    console.log(false)
+}
+
+// Third Way
+if (name.startsWith('R') || name.startsWith('r')) {
+    console.log(true)
+} else {
+    console.log(false)
+}
+
+// Fourth Way
+console.log(/^(r|R)/.test(name))

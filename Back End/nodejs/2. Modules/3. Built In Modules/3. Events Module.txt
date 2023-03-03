@@ -1,0 +1,39 @@
+(1) Events Module
+--------------------
+==> Allow Us To Work With Events In NodeJs
+
+EX
+----
+
+    // Event Module Return Class Called 'EventEmitter'
+    const EventEmitter = require('events');
+
+    const emitter = new EventEmitter();
+
+    emitter.on('order-pizza', (size, tobing) => {
+        console.log(`Order Pizza With ${size} Size And Tobing Is ${tobing}`)
+    })
+
+    // Execute The Event
+    emitter.emit('order-pizza', "Large", "Mashroom") // Order Pizza With Large Size And Tobing Is Mashroom
+
+
+(2) Event Module Execution Order
+----------------------------------
+
+    const EventEmitter = require('events');
+
+    const emitter = new EventEmitter();
+
+    emitter.on('order-pizza', (size, tobing) => {
+        console.log(`Order Pizza With ${size} Size And Tobing Is ${tobing}`) // Second Executed
+    })
+
+    emitter.on('order-pizza', (size) => {
+        console.log(`Pizza Size Is ${size}`) // Third Executed
+    })
+
+    console.log('Pizza Order Event') // First Excuted
+
+    // Execute The Event
+    emitter.emit('order-pizza', "Large", "Mashroom")

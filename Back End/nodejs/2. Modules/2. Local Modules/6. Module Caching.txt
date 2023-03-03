@@ -1,0 +1,68 @@
+(1) Module Cache
+---------------------
+==> Module Cache Exists In 'require' Argument Which In The IIFE Function That Wraps The Module
+
+EX
+----
+
+    super-hero.js
+    -----------------
+
+    class SuperHero {
+        constructor(name) { this.name = name; }
+        getName() { return this.name; }
+        setName(name) { this.name = name; }
+    }
+
+    module.exports = new SuperHero('Batman')
+
+
+    index.js
+    -----------------
+
+    const batman = require('./super-hero')
+
+    console.log(batman.getName()) // Batman
+    batman.setName('Batman V2')
+    console.log(batman.getName()) // Batman V2
+
+    const superMan = require('./super-hero')
+    // Value Here Is 'Batman V2' As Module Cache The Value
+    // Too , As We Exports The Same Instance From 'super-hero.js'
+    console.log(superMan.getName()) // Batman V2
+
+
+(2) Avoid Caching By Export Class Not Class Instance From 'super-hero.js'
+------------------------------------------------------------------------------
+
+
+    super-hero.js
+    ----------------
+
+   class SuperHero {
+        constructor(name) { this.name = name }
+
+        getName() { return this.name }
+
+        setName(name) { this.name = name }
+    }
+
+    module.exports = SuperHero 
+
+
+    index.js
+    -------------
+
+    const SuperHero = require('./super-hero')
+
+    const sup1 = new SuperHero('Batman')
+    console.log(sup1.getName()) // Batman
+    sup1.setName('Batman V2')
+    console.log(sup1.getName()) // Batman V2
+
+    // Look Here There Is No Caching So It Produce Undefined
+    const sup2 = new SuperHero()
+    console.log(sup2.getName()) // Undefined
+
+    const sup3 = new SuperHero("Hellow Super")
+    console.log(sup3.getName()) // Hellow Super

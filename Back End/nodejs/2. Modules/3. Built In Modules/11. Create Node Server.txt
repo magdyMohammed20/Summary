@@ -1,0 +1,29 @@
+(1) Create NodeJs Server
+--------------------------
+
+    const http = require('http');
+
+    const server = http.createServer((req, res) => {
+        res.writeHead(200)
+        res.end("Hellow World")
+    })
+
+    // After Execute This Run The Server On (http://localhost:3000)
+    server.listen(3000, () => {
+        console.log("Server Started At 3000 Port")
+    })
+
+
+(2) Specify Content-Type
+--------------------------
+
+    const http = require('http');
+
+    const server = http.createServer((req, res) => {
+        res.writeHead(200, { "Content-Type": "text/plain" })
+        res.end("Hellow World1")
+    })
+
+    server.listen(3000, () => {
+        console.log("Server Started At 3000 Port")
+    })

@@ -1,0 +1,6 @@
+(1) Js Run Time
+-----------------
+==> Environment Which Provides All Necessary Components In Order To Use And Run A Js Program
+
+(2) Js Engine Is One Component In Js Run Time
+

@@ -1,0 +1,8 @@
+const arr = [1,2,3,'3' , 'Apple'];
+
+const nums1 = arr.filter(Number)
+console.log(nums1) // [1,2,3,'3']
+
+const nums2 = arr.filter(Number.isInteger)
+console.log(nums2) // [1,2,3]
+

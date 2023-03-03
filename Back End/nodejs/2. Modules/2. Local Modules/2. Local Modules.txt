@@ -1,0 +1,18 @@
+(1) Local Modules
+----------------------
+
+    add.js
+    ---------
+
+    function sum(a, b) {
+        return a + b
+    }
+
+    console.log(sum(10, 20))
+
+
+    index.js
+    ------------
+
+    require('./add') // 30
+    console.log("Hellow World") // Hellow World

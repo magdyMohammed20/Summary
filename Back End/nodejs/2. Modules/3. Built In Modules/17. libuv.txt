@@ -1,0 +1,11 @@
+(1) libuv
+------------
+==> Cross Platform Open Source Library Written In C Language
+
+(2) Why libuv
+----------------
+==> Handle Asynchronous Non Blocking Operations In NodeJs
+
+(3) How libuv Handles Asynchronous Operations
+------------------------------------------------
+==> Using [Thread Pool - Event Loop]

@@ -1,0 +1,20 @@
+(1) Module Export
+----------------------
+
+    add.js
+    ----------
+
+    function sum(a, b) {
+        return a + b
+    }
+
+    module.exports = sum
+
+
+    index.js
+    -------------
+
+    const add = require('./add')
+
+    console.log("Hellow World") // Hellow World
+    console.log(add(20, 20)) // 40

@@ -1,0 +1,9 @@
+const arr = ['Magdy' ,2 , null , undefined];
+
+// First And Best Way
+const filtered = arr.filter(Boolean);
+console.log(filtered) // ['Magdy' ,2]
+
+// Second Way
+const filtered2 = arr.filter(item => !!item);
+console.log(filtered2)

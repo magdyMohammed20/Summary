@@ -1,0 +1,7 @@
+(1) Remove Last ! Mark From String
+-------------------------------------
+
+    "!Hi!!".replace(/!$/ , '') // !Hi!
+    "!Hi".replace(/!$/ , '') // !Hi
+    "!Hi!".replace(/!$/ , '') // !Hi
+
