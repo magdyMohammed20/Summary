@@ -1,0 +1,28 @@
+(1) Automated Test Types
+---------------------------
+==> Unit Tests
+==> Integration Tests
+==> E2E Tests
+
+(2) Unit Tests
+------------------
+==> Testing The Individual Building Blocks Of App (Class - Function - Component)
+==> Each Unit Or Building Blocks Tested In Isolation , Independent Of Other Units
+==> Run In Short Time , And Make It Very Easy To Pinpoint Failures
+==> Relatively Easy To Write And Maintain
+
+(3) Integration Test
+-----------------------
+==> Testing Combination Of Units And Ensuring They Work Together
+==> Take Longer Time Than Unit Test
+
+(4) E2E Test
+---------------
+==> Testing The Entire App Flow And Ensuring It Works As Designed From Start To Finish
+==> Involves (Real UI - Real Backend DB - Real Services , etc...)
+==> Take Longest As They Cover The Most Amount Of Code 
+==> Have Cost Implication As You Interact With Real API That May Charge Based On The Number  Of Requests
+
+(5) React Testing Lib Will Strikes The Balance Between Unit And E2E Tests
+
+

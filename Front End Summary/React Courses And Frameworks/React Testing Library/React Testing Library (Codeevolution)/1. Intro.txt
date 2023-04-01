@@ -1,0 +1,8 @@
+(1) Manual Testing
+--------------------
+==> Individual Open The Website And Interact With It And Ensure Everything Works As Intended
+
+(2) Automated Testing
+-----------------------
+==> Programs That Automate The Task Of Testing Your Software
+==> Write Code To Test Software Code 

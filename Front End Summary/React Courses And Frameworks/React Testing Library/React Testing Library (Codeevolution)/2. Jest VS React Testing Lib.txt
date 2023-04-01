@@ -1,0 +1,10 @@
+(1) Jest
+----------
+==> Is Js Testing Framework
+==> Test Runner That Finds Tests , Runs The Tests , Determines Whether The Tests Passes Or Failed And Reports It Back In A Human Readable Manner
+
+(2) React Testing Lib
+--------------------------
+==> Js Testing Utility That Provides Virtual DOM For Testing React Components
+==> Provides Virtual DOM Which We Can Use Interact With And Verify The Behavior Of React Component
+

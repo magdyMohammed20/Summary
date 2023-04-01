@@ -1,0 +1,7 @@
+(1) Test(name , fn , timeout)
+--------------------------------
+==> name : Test Name Used To Indentify The Test
+==> fn : Contains Expectations To Test
+==> timeout : Is Optional Arg For Specifying How Long To Wait Before Aborting The Test (Default Is 5 Seconds)
+
+(2) React Provides (Test , expect) Functions As Global Without Import It

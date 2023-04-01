@@ -1,0 +1,6 @@
+(1) By Default React Downloaded With Jest And React Testing Library
+
+(2) When Download React Files You Will Note That There Are (App.test.js) File Which Contains Test Cases For (App.js)
+
+(3) For Run All Tests Use (npm test) Then Press 'a' For Run All Tests Then You Can Press 'w' To Enter Watch Mode
+
