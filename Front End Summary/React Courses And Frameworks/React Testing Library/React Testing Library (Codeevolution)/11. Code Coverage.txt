@@ -1,0 +1,28 @@
+(1) Code Coverage
+------------------
+==> A Metric That Can Help You Understand How Much Of Your Software Code Is Tested
+
+(2) Statement Coverage
+--------------------------
+==> How Many Of The Statements In Software Code Have Been Executed 
+
+(3) Branches Coverage
+----------------------
+==> How Many Of Branches Of The Control structures have been executed
+
+(4) Function Coverage
+-----------------------
+==> How Many Of The Functions Defined Have Been Called And finally
+
+(5) line Coverage
+-------------------
+==> How Many Of Lines Of Source Code Have Been Tested
+
+
+(6) Steps Of Using Code Coverage
+----------------------------------
+==> Add ("coverage" : "npm test -- --coverage") Or (yarn test --coverage )Inside "scripts" Object In Package.json
+==> Or Use ("coverage" : "npm test -- --coverage --watchAll") For Make Coverage For Tests
+==> Or Use ("coverage" : "npm test -- --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'") For Coverage Tests From Specific Directory
+==> Or Use ("coverage" : "npm test -- --coverage --watchAll --collectCoverageFrom='!src/components/**/*.{types,spec,test,stories,constants}.{ts,tsx}'") For Coverage Tests With Except Specific Directory
+

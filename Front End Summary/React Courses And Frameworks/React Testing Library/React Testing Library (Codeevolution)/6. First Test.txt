@@ -1,0 +1,28 @@
+(1) Create First Test
+------------------------
+
+    components/greet.js
+    -------------------------
+
+    function Greet() {
+        return (
+            <div>Hello</div>
+        )
+    }
+
+    export default Greet
+
+
+    components/greet.test.js
+    ---------------------------
+
+
+    import Greet from './greet';
+    import { screen , render } from '@testing-library/react';
+
+
+    test('Show Hello On Screen', () => {
+        render(<Greet />)
+        const element = screen.getByText('Hello')
+        expect(element).toBeInTheDocument()
+    })

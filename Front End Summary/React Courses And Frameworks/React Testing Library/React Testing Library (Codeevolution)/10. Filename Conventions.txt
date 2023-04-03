@@ -1,0 +1,97 @@
+(1) Filename Conventions
+---------------------------
+==> When Run [npm test] React testing lib Search Fir Files That Has 
+    (.test.js) (.test.tsx) (.spec.js) (.spec.tsx) Suffix
+    Or Files With (.js) (.tsx) Suffix In __tests__ Folders
+
+==> Recommenditions Is To Always Put Your Tests next to the code they are testing so that relative imports are shorter
+
+
+(2) Put All Tests In __tests__ Folder 
+-----------------------------------------
+
+    src/__tests__/greet-test.js
+    -----------------------------
+
+    import Greet from '../components/greet';
+    import { screen , render } from '@testing-library/react';
+
+    // First Group
+    describe('Rendering', () => {
+        test('Test Renders Without Props', () => {
+            render(<Greet />)
+            const element = screen.getByText('Hello')
+            expect(element).toBeInTheDocument()
+        })
+
+        // Nested Group
+        describe('Nested', () => {
+            test('Test Render With Props', () => {
+                render(<Greet name="magdy" />)
+                const element = screen.getByText('Hello magdy')
+                expect(element).toBeInTheDocument()
+            })
+        })
+        
+    })
+
+
+(3) You Can Put Your Tests In File With Suffix '.spec.js'
+------------------------------------------------------------
+
+
+    components/greet.spec.js
+    ---------------------------
+
+
+    import Greet from './greet';
+    import { screen , render } from '@testing-library/react';
+
+    // First Group
+    describe('Rendering', () => {
+        test('Test Renders Without Props', () => {
+            render(<Greet />)
+            const element = screen.getByText('Hello')
+            expect(element).toBeInTheDocument()
+        })
+
+        // Nested Group
+        describe('Nested', () => {
+            test('Test Render With Props', () => {
+                render(<Greet name="magdy" />)
+                const element = screen.getByText('Hello magdy')
+                expect(element).toBeInTheDocument()
+            })
+        })
+        
+    })
+
+
+
+(4) it() And fit() And xit()
+------------------------------
+==> You Can Use it() Instead Of test()
+==> fit() Like test.only()
+==> xit() Like test.skip()
+
+EX
+---
+
+    import Greet from './greet';
+    import { screen , render } from '@testing-library/react';
+
+    describe('Rendering', () => {
+        // This Test Not Run
+        it('Test Renders Without Props', () => {
+            render(<Greet />)
+            const element = screen.getByText('Hello')
+            expect(element).toBeInTheDocument()
+        })
+
+        // This Test Will Run
+        fit('Test Renders Without Props2', () => {
+            render(<Greet />)
+            const element = screen.getByText('Hello')
+            expect(element).toBeInTheDocument()
+        })
+    })

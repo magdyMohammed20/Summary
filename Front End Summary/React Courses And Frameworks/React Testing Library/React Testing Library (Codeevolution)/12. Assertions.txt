@@ -1,0 +1,19 @@
+(1) Assertions
+-----------------
+==> When Write Tests We Need To Check That Values Meet Certain Conditions
+==> Assertions Decide If A Test Passes Or Fail
+
+(2) Assertions Executed Using execute(value) function
+-------------------------------------------------------
+==> Argument Should Be Value That Your Code Produces
+==> Use Expect Along With "Matcher" function to assert something about a value
+==> Matcher Can Optionally accept argument which is the correct expected value
+
+EX (toBeInTheDocument() Is The Matcher)
+---
+    expect(screen.getByText('Hello)).toBeInTheDocument()
+
+(3) In Package.json And By default with react there are lib called "@testing-library/jest-dom" Which Contains A Lot of matchers
+
+(4) By Default In ReactJs Project There Are File called 'setupTests.js' Which Exexuted Before All Tests
+

@@ -1,0 +1,69 @@
+(1) Grouping Tests
+--------------------
+==> Use 'describe()' Method For Grouping Tests
+
+EX
+---
+
+    import Greet from './greet';
+    import { screen , render } from '@testing-library/react';
+
+    // First Group
+    describe('Rendering', () => {
+        test('Test Renders Without Props', () => {
+            render(<Greet />)
+            const element = screen.getByText('Hello')
+            expect(element).toBeInTheDocument()
+        })
+
+        test('Test Render With Props', () => {
+            render(<Greet name="magdy" />)
+            const element = screen.getByText('Hello magdy')
+            expect(element).toBeInTheDocument()
+        })
+    })
+
+    // Second Group
+    describe('Rendering2', () => {
+        test('Test Renders Without Props', () => {
+            render(<Greet />)
+            const element = screen.getByText('Hello')
+            expect(element).toBeInTheDocument()
+        })
+
+        test('Test Render With Props', () => {
+            render(<Greet name="magdy" />)
+            const element = screen.getByText('Hello magdy')
+            expect(element).toBeInTheDocument()
+        })
+    })
+
+
+(2) You Can Use describe.only() And describe.skip() For Skipping Specific Tests
+
+
+(3) You Can Make Nested Grouping
+-------------------------------------
+
+
+    import Greet from './greet';
+    import { screen , render } from '@testing-library/react';
+
+    // First Group
+    describe('Rendering', () => {
+        test('Test Renders Without Props', () => {
+            render(<Greet />)
+            const element = screen.getByText('Hello')
+            expect(element).toBeInTheDocument()
+        })
+
+        // Nested Group
+        describe('Nested', () => {
+            test('Test Render With Props', () => {
+                render(<Greet name="magdy" />)
+                const element = screen.getByText('Hello magdy')
+                expect(element).toBeInTheDocument()
+            })
+        })
+        
+    })

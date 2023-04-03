@@ -1,0 +1,51 @@
+(1) Test Driven Development (TDD)
+------------------------------------
+==> Software Development Process Where You Write Tests Before Writing The Sofware Code
+==> Once The Tests Have Been Written You Then Write The Code To Ensure The Tests Pass
+
+
+EX
+----
+
+==> First Write Tests For The Component Before Create It
+----------------------------------------------------------
+
+    Components/greet.test.js
+    --------------------------
+
+    import Greet from './greet';
+    import { screen , render } from '@testing-library/react';
+
+
+    // First Test If There Is No Props Sended For The Component
+    test('Test Renders Without Props', () => {
+        render(<Greet />)
+        const element = screen.getByText('Hello')
+        expect(element).toBeInTheDocument()
+    })
+
+    // Second Test If There Are Props Sended For The Component
+    test('Test Render With Props', () => {
+        render(<Greet name="magdy" />)
+        const element = screen.getByText('Hello magdy')
+        expect(element).toBeInTheDocument()
+    })
+
+
+==> Second Step Is Creating The Component
+--------------------------------------------
+
+
+    Components/greet.js
+    -----------------------
+
+    function Greet({name}) {
+        return (
+            <div>Hello { name}</div>
+        )
+    }
+
+    export default Greet
+
+
+    

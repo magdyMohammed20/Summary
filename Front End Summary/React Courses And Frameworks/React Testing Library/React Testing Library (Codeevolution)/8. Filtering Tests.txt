@@ -1,0 +1,52 @@
+(1) Filtering Tests
+--------------------
+==> When Run [npm test] There Are More Options To Run Tests
+==> You Can Run Tests Using Regex Or Other Options
+
+(2) test.only()
+------------------
+==> When Use 'test.only()' All Tests Skipped And The Current Test Only Runs
+
+EX
+----
+
+    import Greet from './greet';
+    import { screen , render } from '@testing-library/react';
+
+    // This Test Not Run
+    test('Test Renders Without Props', () => {
+        render(<Greet />)
+        const element = screen.getByText('Hello')
+        expect(element).toBeInTheDocument()
+    })
+
+    // This Test Will Run
+    test.only('Test Render With Props', () => {
+        render(<Greet name="magdy" />)
+        const element = screen.getByText('Hello magdy')
+        expect(element).toBeInTheDocument()
+    })
+
+(3) test.skip()
+-----------------
+==> Use If Want To Skip Specific Test
+
+EX
+----
+
+    import Greet from './greet';
+    import { screen , render } from '@testing-library/react';
+
+    // This Test Will Skipped
+    test.skip('Test Renders Without Props', () => {
+        render(<Greet />)
+        const element = screen.getByText('Hello')
+        expect(element).toBeInTheDocument()
+    })
+
+    // This Test Will Run
+    test('Test Render With Props', () => {
+        render(<Greet name="magdy" />)
+        const element = screen.getByText('Hello magdy')
+        expect(element).toBeInTheDocument()
+    })
