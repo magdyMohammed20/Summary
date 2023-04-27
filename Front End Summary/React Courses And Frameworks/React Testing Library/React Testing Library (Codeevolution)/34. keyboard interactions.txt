@@ -1,0 +1,110 @@
+(1) keyboard interactions with number input
+---------------------------------------------
+
+    counter.js
+    -------------
+
+    import {useState} from 'react'
+
+    function Counter() {
+        const [counter, setCounter] = useState(0)
+        const [amount, setAmount] = useState(0)
+        
+        return (
+            <div>
+                <h1>{ counter }</h1>
+                <button onClick={() => setCounter(counter + 1)}>Increment</button>
+                <input
+                    type='number'
+                    onChange={(e) => setAmount(parseInt(e.target.value))}
+                />
+            </div>
+        )
+    }
+
+    export default Counter
+
+
+    counter.test.js
+    ------------------
+
+    import { render, screen } from '@testing-library/react';
+    import Counter from './counter';
+    import user from '@testing-library/user-event'
+
+    describe('Testing Events', () => {
+        test('Testing Keyboard', async() => {
+            user.setup()
+            render(<Counter />)
+            const numberInput = screen.getByRole('spinbutton');
+            await user.type(numberInput, '10')
+            expect(numberInput).toHaveValue(10) // Will Passed
+        })
+    })
+
+
+(2) Testing Current Focused Element
+--------------------------------------
+
+    counter.js
+    -------------
+
+    import {useState} from 'react'
+
+    function Counter() {
+        const [counter, setCounter] = useState(0)
+        const [amount, setAmount] = useState(0)
+        
+        return (
+            <div>
+                <h1>{ counter }</h1>
+                <button onClick={() => setCounter(counter + 1)}>Increment</button>
+                <input
+                    type='number'
+                    onChange={(e) => setAmount(parseInt(e.target.value))}
+                />
+                <button>Set</button>
+            </div>
+        )
+    }
+
+    export default Counter
+
+
+    counter.test.js
+    -----------------
+
+    import { render, screen } from '@testing-library/react';
+    import Counter from './counter';
+    import user from '@testing-library/user-event'
+
+    describe('Testing Pointer Events', () => {
+        test('Testing Tab', async() => {
+            user.setup()
+            render(<Counter />)
+            const numberInput = screen.getByRole('spinbutton');
+            const counterBtn = screen.getByRole('button', {
+                name: 'Increment'
+            });
+            await user.tab()
+            expect(counterBtn).toHaveFocus()
+            await user.tab()
+            expect(numberInput).toHaveFocus()
+        })
+    })
+
+(3) Tab And type
+-----------------
+==> tab() Is Utility API
+==> type() Is Conveience API
+
+
+(4) More Options
+------------------
+==> clear()
+==> selectOptions()
+==> deselectOptions()
+==> upload()
+==> copy()
+==> cut()
+==> paste()

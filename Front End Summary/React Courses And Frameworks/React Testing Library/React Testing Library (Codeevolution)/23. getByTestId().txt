@@ -1,0 +1,34 @@
+(1) getByTestId()
+-------------------
+==> return the element that has the matching data-testid attribute 
+
+EX
+---
+
+    Form.js
+    --------
+
+    function Form() {
+        return (
+            <div>
+                <p data-testid="magdy">This Is P</p>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    --------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Text', () => {
+            render(<Form />)
+            const para = screen.getByTestId('magdy');
+            expect(para).toBeInTheDocument() // Will Pass The Test
+        })
+    })

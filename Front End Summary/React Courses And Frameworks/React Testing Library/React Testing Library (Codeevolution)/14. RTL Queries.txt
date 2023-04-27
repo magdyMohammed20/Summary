@@ -1,0 +1,27 @@
+(1) RTL Queries (RTL : React Testing Lib)
+-------------------------------------------
+
+--> Steps That Included In Any Test
+------------------------------------
+    ==> Render The Component
+    ==> Find Element Rendered By The Component
+    ==> Assert Against The Element Found In Step 2 Which Will Pass Or Fail The Test
+
+
+(2) To Render The Component We Use Render Method From RTL
+
+(3) For Assertion We Use Expect Passing In A Value And Combine It With A Matcher Function From Jest Or jest-dom
+
+(4) Queries
+--------------
+==> Methods That Testing Lib Provides To Find Elements On The Page
+
+==> Find Single Element On The Page (getBy - queryBy - findBy)
+==> Find Multi Element On The Page (getAllBy - queryAllBy - findAllBy)
+
+==> all Previous Methods Like (getBy , ....) Takes Suffix Which Can Be [One Of Role - labelText - placeholderText - text - displayValue - altText - title - testId]
+
+(5) getBy() Queries
+-----------------------
+==> Class Of Queries Return The Matching Node For Query And Throw Descriptive Error If No Elements Match Or If More Than One Match Is Found
+

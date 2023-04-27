@@ -1,0 +1,10 @@
+(1) priority order for queries
+--------------------------------
+==> getByRole
+==> getByLabelText
+==> getByPlaceholderText
+==> getByText
+==> getByDisplayValue
+==> getByAltText
+==> getByTitle
+==> getByTestId

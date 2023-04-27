@@ -1,0 +1,49 @@
+(1) Testing Calling Functions And Simulate Function With Testing
+-------------------------------------------------------------------
+
+    counter2.js
+    --------------
+
+    import React from 'react'
+
+    function Counter2(props) {
+        return (
+            <div>
+                <h1>Counter {props.counter}</h1>
+                <button onClick={props.handleIncrement}>Increment</button>
+                <button onClick={props.handleDecrement}>Decrement</button>
+            </div>
+        )
+    }
+
+    export default Counter2
+
+
+    counter2.test.js
+    -------------------
+
+    import {render , screen} from '@testing-library/react';
+    import Counter2 from './counter2';
+    import user from '@testing-library/user-event';
+
+    describe('Test Function Call' , () => {
+        test('Function Mocking' , async() => {
+            const incrementHandler = jest.fn() // Simulate Function
+            const decrementHandler = jest.fn() // Simulate Function
+            user.setup()
+            render(<Counter2
+                counter={0}
+                handleIncrement={incrementHandler}
+                handleDecrement={decrementHandler}
+            />)
+
+            const incBtn = screen.getByRole('button',{name: 'Increment'})
+            const DecBtn = screen.getByRole('button',{name: 'Decrement'})
+
+            await user.click(incBtn)
+            await user.click(DecBtn)
+
+            expect(incrementHandler).toHaveBeenCalledTimes(1) // Passed
+            expect(decrementHandler).toHaveBeenCalledTimes(2) // Failed
+        })
+    })

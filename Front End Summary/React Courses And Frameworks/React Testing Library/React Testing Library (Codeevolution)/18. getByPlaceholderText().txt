@@ -1,0 +1,46 @@
+(1) getByPlaceholderText()
+----------------------------
+==> Search For All Elements With Placeholder Attribute And Find One That Matches The Given Text
+
+EX
+---
+
+    Form.js
+    ----------
+
+
+    function Form() {
+        return (
+            <div>
+                <div>
+                    <label htmlFor="fName">name</label>
+                    <input type="text" id="fName" placeholder="First Name"/>
+                </div>
+                
+                <div>
+                    <label htmlFor="lName">name</label>
+                    <select id="lName">
+                        <option>1</option>
+                    </select>
+                </div>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+
+    Form.test.js
+    --------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Input Field', () => {
+            render(<Form />)
+            const labelText = screen.getByPlaceholderText('First Name');
+            expect(labelText).toBeInTheDocument() // Will Pass The Test
+        })
+    })

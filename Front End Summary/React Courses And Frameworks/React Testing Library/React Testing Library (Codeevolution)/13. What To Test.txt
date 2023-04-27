@@ -1,0 +1,13 @@
+(1) What To Test In react
+---------------------------
+==> Testing Component Renders (Component Should Renders Without Errors)
+==> Testing Component Renders With Props
+==> Test Component Renders In Different States (EX: Login Button Should Renders If User Not Logged In And Must Me Disabled When User Logged In)
+==> Test Component Reacts To Events
+
+
+(2) What Not To Test
+------------------------
+==> Implementation Details
+==> Third Party Code (EX: Material UI Component)
+==> Code That Not Important From A User Point Of View 

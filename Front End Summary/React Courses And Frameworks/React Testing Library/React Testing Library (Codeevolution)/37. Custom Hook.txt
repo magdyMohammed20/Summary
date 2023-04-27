@@ -1,0 +1,62 @@
+(1) Testing Custom Hooks
+---------------------------
+
+    /src/hook/useCounter.js
+    -------------------------
+
+    import { useState } from "react";
+
+    export const useCounter = (initialCount = 0) => {
+        const [count, setCount] = useState(initialCount)
+        const increment = () => setCount(count + 1)
+        const decrement = () => setCount(count - 1)
+
+        return {count , increment , decrement}
+    }
+
+
+    /src/hook/useCounter.test.js
+    -------------------------------
+        
+    import { renderHook } from "@testing-library/react";
+    import {useCounter} from "./useCounter";
+    describe('Testing Custom Hook', () => {
+        test('useCounter Test', () => {
+            const { result } = renderHook(useCounter)
+            expect(result.current.count).toBe(1) // failed
+        })
+    })
+
+
+(2) Passing Initial Value To Custom Hook
+----------------------------------------
+
+
+    /src/hook/useCounter.js
+    -------------------------
+            
+    import { useState } from "react";
+
+    export const useCounter = ({initialCount = 0}) => {
+        const [count, setCount] = useState(initialCount)
+        const increment = () => setCount(count + 1)
+        const decrement = () => setCount(count - 1)
+
+        return {count , increment , decrement}
+    }
+
+    /src/hook/useCounter.test.js
+    -------------------------------
+
+    import { renderHook } from "@testing-library/react";
+    import {useCounter} from "./useCounter";
+    describe('Testing Custom Hook', () => {
+        test('useCounter Test', () => {
+            const { result } = renderHook(useCounter, {
+                initialProps: {
+                    initialCount: 10
+                }
+            })
+            expect(result.current.count).toBe(101) // failed
+        })
+    })

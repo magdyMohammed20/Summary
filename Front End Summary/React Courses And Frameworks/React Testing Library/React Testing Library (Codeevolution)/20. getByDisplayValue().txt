@@ -1,0 +1,42 @@
+## (1) getByDisplayValue()
+
+==> returns the input, textarea, or select element that has the matching display value
+
+## (2) input initial value problem
+
+==> if set initial value for input textField Testing Lib will give Error said (You provided a `value` prop to a form field without an `onChange` handler....)
+==> So We Will Set empty onChange Function for it to solve the Error
+
+## EX
+
+    <input type="text" value="magdy" onChange={() => {}}/>
+
+## (2) getByDisplayValue Sample
+
+    Form.js
+    -----------
+
+    function Form() {
+        return (
+            <div>
+                <input type="text" value="magdy" onChange={() => {}}/>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    --------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Text', () => {
+            render(<Form />)
+            const input = screen.getByDisplayValue('magdy');
+            expect(input).toBeInTheDocument() // Will Pass The Test
+        })
+    })

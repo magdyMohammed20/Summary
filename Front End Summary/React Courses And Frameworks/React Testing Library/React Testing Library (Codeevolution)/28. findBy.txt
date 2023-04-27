@@ -1,0 +1,56 @@
+(1) getBy and getAllBy class of queries to assert if elements are present in the DOM 
+
+(2) queryBy and queryAllBy class of queries to assert if elements are not present in the DOM 
+
+(3) findBy
+------------
+==> Returns a Promise which resolves when an element is found which matches the given query 
+==> The promise is rejected if no element is found or if more than one element is found after a default timeout of 1000ms 
+
+(4) findAllBy
+--------------
+==> Returns a promise which resolves to an array of elements when any elements are found which match the given query • The promise is rejected if no elements are found after a default timeout of 1000ms 
+
+(5) findBy Sample
+------------------
+
+    Skills.js (Here 'Start Learbing' Button Will Appear After 988ms)
+    --------------
+
+    import { useState , useEffect } from 'react';
+
+    function Skills() {
+        const [isLoggedIn , setIsLoggedIn] = useState(false)
+        
+        useEffect(() => {
+            setTimeout(() => {
+                setIsLoggedIn(true)
+            } , 988)
+            })
+        return (
+            <div>
+                {isLoggedIn ? <button>Start Learning</button> : <button onClick={() => setIsLoggedIn(true)}>login</button>}  
+            </div>
+        )
+    }
+
+    export default Skills
+
+
+    Skills.test.js (Here Searching For 'Start Learning' Button Will Begin After 1000ms)
+    ----------------
+
+    import { render, screen } from '@testing-library/react'
+    import Skills from './Skills'
+
+
+    describe('Test Ul', () => {
+    
+        test('Test Login Button', async () => {
+            render(<Skills  />)
+            const ele = await screen.findByRole('button', {
+                name: 'Start Learning'
+            })
+            expect(ele).toBeInTheDocument() // Will Pass As 'start learbing' Will Rendered After 988ms Which is less than 1000ms
+        })
+    })

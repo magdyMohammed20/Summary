@@ -1,0 +1,6 @@
+(1) Testing Playground
+------------------------
+==> Chrome Extension That Helps You To Find The Best Way To Access Elements In The DOM
+==> After Install It In Chrome You Can Open React App In The Browser Using (npm start) And Open The testing playground Tab In Devtools And Can Inspect Any Element In The Dom Then Will Give You The Selectors For It
+
+

@@ -1,0 +1,15 @@
+(1) RTL Queries
+-----------------
+==> getBy , getAllBy
+==> queryBy , queryAllBy
+==> findBy , findAllBy
+
+(2) Manual Queries
+--------------------
+==> Use querySelector DOM API To Find Elements
+
+EX
+---
+
+    const {container} = render(<MyComponent />) 
+    const foo = container.querySelector('[data-foo="bar"]')

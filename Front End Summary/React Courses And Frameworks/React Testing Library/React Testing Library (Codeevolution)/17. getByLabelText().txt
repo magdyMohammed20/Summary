@@ -1,0 +1,100 @@
+(1) getByLabelText()
+-------------------------
+
+EX
+---
+
+    Form.js
+    --------
+
+    <div>
+        <label htmlFor="name">label</label>
+        <input type="text" id="name"/>
+    </div>
+
+
+
+    Form.test.js
+    --------------
+
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const labelText = screen.getByLabelText('label');
+            expect(labelText).toBeInTheDocument() // Will Passed The Test
+        })
+    })
+
+
+EX (getByLabelText Works even if the input inside the label)
+---
+
+    Form.js
+    --------
+
+    <label>
+        label1
+        <input type="checkbox"  />
+    </label>
+
+
+    Form.test.js
+    --------------
+
+    describe('first', () => {
+        test('Test Input Field', () => {
+            render(<Form />)
+            const labelText = screen.getByLabelText('label1');
+            expect(labelText).toBeInTheDocument() // Will Passed The Test
+        })
+    })
+
+
+(2) getByLabelText() Duplicate Name Problem
+-----------------------------------------------
+
+    Form.js
+    ---------
+        
+    <div>
+          <div>
+              <label htmlFor="fName">name</label>
+              <input type="text" id="fName"/>
+          </div>
+          
+          <div>
+              <label htmlFor="lName">name</label>
+              <select id="lName">
+                <option>1</option>
+              </select>
+        </div>
+    </div>
+
+
+    Form.test.js
+    -------------
+
+    describe('first', () => {
+        test('Test Input Field', () => {
+            render(<Form />)
+            const labelText = screen.getByLabelText('name');
+            expect(labelText).toBeInTheDocument() // Will Fails The Test
+        })
+    })
+
+
+(3) Solve getByLabelText() Duplicate Name Problem Using 'Selector' Which Takes Element Tag Name
+---------------------------------------------------------------------------------------------------
+
+    Form.test.js
+    ---------------
+
+    describe('first', () => {
+        test('Test Input Field', () => {
+            render(<Form />)
+            const labelText = screen.getByLabelText('name', {
+                selector: 'select'
+            });
+            expect(labelText).toBeInTheDocument() // Will Pass The Test
+        })
+    })

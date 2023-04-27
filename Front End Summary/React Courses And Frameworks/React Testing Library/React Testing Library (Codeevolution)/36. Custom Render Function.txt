@@ -1,0 +1,35 @@
+(1) Testing Providers Using Custom Render Functions
+--------------------------------------------------------
+
+    /src/test-util.js
+    --------------------
+
+    import {render} from '@testing-library/react'
+    import { AppProviders } from './providers/app-providers'
+
+    const customRender = (ui, options) =>
+    render(ui, {wrapper: AppProviders, ...options})
+
+    // re-export everything
+    export * from '@testing-library/react'
+
+    // override render method
+    export {customRender as render}
+
+
+
+    /src/components/mui/MuiMode.test.js
+    -------------------------------------
+        
+    import { render, screen } from '../../test-util';
+    import { MuiMode } from './MuiMode';
+    import { AppProviders } from '../../providers/app-providers';
+
+    describe('Testing Providers', () => {
+        // Here We Don't Add Any Wrapper
+        test('Prov Test', () => {
+            render(<MuiMode />)
+            const heading = screen.getByRole('heading');
+            expect(heading).toHaveTextContent('dark Mode');
+        })
+    })

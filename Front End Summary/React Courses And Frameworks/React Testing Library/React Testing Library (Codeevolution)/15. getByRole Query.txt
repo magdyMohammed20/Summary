@@ -1,0 +1,148 @@
+(1) getByRole()
+------------------
+==> Role Refers To ARIA (Accessible Rich Internet Applications) Role Which Provides Semantic Meaning To Content To Ensure People Using Assestive Technologies Are Able To Use Them
+
+==> By default, many semantic elements in HTML have a role Button element has a button role, anchor element has a link role, h1 to h6 elements have a heading role, checkboxes have a checkbox role, radio buttons have a radio role and so on 
+
+==> If you're working with elements that do not have a default role or if you want to specify a different role, the role attribute can be used to add the desired role  (EX : To use an anchor element as a button in the navbar, you can add role='button')
+
+
+EX
+----
+
+    Form.js
+    ----------
+
+    function Form() {
+        return (
+            <div>
+                <form>
+                    <input type='text'/>        
+                </form>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    ---------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const newElement = screen.getByRole('textbox');
+            expect(newElement).toBeInTheDocument() // Will Passed The Test
+        })
+    })
+
+
+EX : (We Can Add Custom Role)
+---
+
+    Form.js
+    ----------
+
+    function Form() {
+        return (
+            <div>
+                <form>
+                    <input type='text' role="magdy"/>        
+                </form>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    ---------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const newElement = screen.getByRole('magdy');
+            expect(newElement).toBeInTheDocument() // Will Passed The Test
+        })
+    })
+
+
+EX (Select Box Role)
+---
+
+    Form.js
+    ----------
+
+    function Form() {
+        return (
+            <div>
+                <form>
+                    <input type='text' role="magdy" />     
+                    <select>
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                    </select>  
+                </form>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    ---------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const newElement = screen.getByRole('combobox');
+            expect(newElement).toBeInTheDocument() // Will Passed The Test
+        })
+    })
+
+
+EX: (Checkbox Role)
+---
+
+    Form.js
+    ----------
+
+    function Form() {
+        return (
+            <div>
+                <form>
+                    <input type="checkbox"/>
+                </form>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    ---------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const newElement = screen.getByRole('checkbox');
+            expect(newElement).toBeInTheDocument() // Will Passed The Test
+        })
+    })

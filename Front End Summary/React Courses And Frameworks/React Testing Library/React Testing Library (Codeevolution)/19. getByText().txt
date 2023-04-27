@@ -1,0 +1,36 @@
+(1) getByText()
+-------------------
+==> will search for all elements that have a text node with textContent matching the given text 
+==> Typically, you'd use this to find paragraph, div or span elements 
+
+
+EX
+---
+
+    Form.js
+    ---------
+
+    function Form() {
+        return (
+            <div>
+                <p>Hellow World</p>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    ---------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Text', () => {
+            render(<Form />)
+            const labelText = screen.getByText('Hellow World');
+            expect(labelText).toBeInTheDocument() // Will Pass The Test
+        })
+    })

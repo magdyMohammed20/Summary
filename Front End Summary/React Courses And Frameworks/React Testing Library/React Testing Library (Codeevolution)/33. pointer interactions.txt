@@ -1,0 +1,70 @@
+(1) Pointer interactions (Mouse Interactions)
+-------------------------------------------------
+
+EX
+---
+
+    counter.js
+    --------------
+
+    import {useState} from 'react'
+
+    function Counter() {
+        const [counter, setCounter] = useState(0)
+        
+        return (
+            <div>
+                <h1>{ counter }</h1>
+                <button onClick={() => setCounter(counter + 1)}>Increment</button>
+            </div>
+        )
+    }
+
+    export default Counter
+
+
+    counter.test.js
+    -----------------
+
+    import { render, screen } from '@testing-library/react';
+    import Counter from './counter';
+    import user from '@testing-library/user-event'
+
+    describe('Testing Pointer Events', () => {
+        test('First Test', () => {
+            render(<Counter/>)
+            const headingElement = screen.getByRole('heading')
+            expect(headingElement).toBeInTheDocument()
+            const btnElement = screen.getByRole('button', {
+                name: /increment/i
+            })
+            expect(btnElement).toBeInTheDocument()
+        })
+
+        test('Second Test', () => {
+            render(<Counter />)
+            const heading = screen.getByRole('heading')
+            expect(heading).toHaveTextContent(0)
+        })
+
+        // Test User Clicking
+        test('Testing Clicking', async() => {
+            user.setup()
+            render(<Counter/>)
+            const btnElement = screen.getByRole('button', {
+                name: /increment/i
+            })
+            await user.click(btnElement)
+            const contentElement = screen.getByRole('heading')
+            expect(contentElement).toHaveTextContent('1')
+        })
+    })
+
+
+(2) convenience Api's
+-----------------------
+==> click()
+==> dblClick()
+==> tripleClick()
+==> hover()
+==> unhover()

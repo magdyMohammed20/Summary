@@ -1,0 +1,58 @@
+(1) Query Multiple Elements
+------------------------------
+==> For Example If I Want To Query Multiple Element We Will Convert 'getBy' To 'getAllBy' (EX : getByRole -> getAllByRole)
+
+
+EX
+---
+
+    Skills.js
+    --------------
+
+    function Skills({skills}) {
+        return (
+            <div>
+                <ul>
+                    {
+                        skills.map((skill , index) => <li key={index}>
+                                {skill}
+                            </li>)
+                    }
+                </ul>
+            </div>
+        )
+    }
+
+    export default Skills
+
+
+
+    Skills.test.js
+    ----------------
+
+    import { render, screen } from '@testing-library/react'
+    import Skills from './Skills'
+
+
+    describe('Test Ul', () => {
+
+        const skills = ['Html' , 'Css']
+        test('Find ul', () => {
+            render(<Skills skills={skills} />)
+            const ulElement = screen.getByRole('list')
+            expect(ulElement).toBeInTheDocument() // This Test Will Pass
+        })
+
+        test('Find li', () => {
+            render(<Skills skills={skills} />)
+            const liElements = screen.getAllByRole('listitem')
+            expect(liElements).toHaveLength(3) // This Test Will Fails
+        })
+
+        // Here Is Query Multiple Elements
+        test('Find li 2', () => {
+            render(<Skills skills={skills} />)
+            const liElements = screen.getAllByRole('listitem')
+            expect(liElements).toHaveLength(2) // This Test Will Pass
+        })
+    })

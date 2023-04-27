@@ -1,0 +1,99 @@
+(1) Steps
+-----------
+==> Install Material UI [npm install @mui/material @emotion/react @emotion/styled]
+
+==> In src Folder create 'providers' folder that contains 'app-providers.js' File
+
+    src/providers/app-providers.js
+    ---------------------------------
+
+        import { createTheme, ThemeProvider } from '@mui/material/styles';
+        import CssBaseline from '@mui/material/CssBaseline';
+
+        const theme = createTheme({
+            palette: {
+                mode: 'dark'
+            }
+        })
+
+        export const AppProviders = ({ children }) => <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {children}
+        </ThemeProvider>
+
+
+==> Import App-providers in AppProviders.js And Create MuiMode Component
+
+
+        App.js
+        ---------
+
+            import './App.css';
+            import { MuiMode } from './components/mui/MuiMode';
+            import { AppProviders } from './providers/app-providers';
+            function App() {
+
+                return (
+                    <AppProviders>
+                        <div className="App">
+                            <MuiMode/>
+                        </div>
+                    </AppProviders>
+                );
+            }
+
+            export default App;
+
+
+    components/mui/MuiMode.js
+    ------------------------------
+        
+    import { useTheme } from "@mui/material/styles";
+    import { Typography } from "@mui/material";
+
+    export const MuiMode = () => {
+        const theme = useTheme();
+        return <Typography component='h1'>
+            {theme.palette.mode} Mode
+        </Typography>
+    }
+    
+
+(2) Write Test For Providers
+-------------------------------
+
+    /components/mui/MuiMode.test.js
+    -----------------------------------
+        
+    import { render, screen } from '@testing-library/react'
+    import { MuiMode } from './MuiMode'
+
+    describe('Testing Providers', () => {
+        test('Prov Test', () => {
+            render(<MuiMode />)
+            const heading = screen.getByRole('heading');
+            expect(heading).toHaveTextContent('dark Mode'); // This Test Will Fail Even If The Initial Theme Value Is dark
+        })
+    })
+
+        
+(3) Solve Testing Problem
+------------------------------
+
+    /components/mui/MuiMode.test.js
+    -----------------------------------
+       
+    import { render, screen } from '@testing-library/react'
+    import { MuiMode } from './MuiMode'
+    import { AppProviders } from '../../providers/app-providers';
+
+    describe('Testing Providers', () => {
+        // Here We Add Wrapper
+        test('Prov Test', () => {
+            render(<MuiMode />, {
+                wrapper: AppProviders
+            })
+            const heading = screen.getByRole('heading');
+            expect(heading).toHaveTextContent('dark Mode');
+        })
+    })

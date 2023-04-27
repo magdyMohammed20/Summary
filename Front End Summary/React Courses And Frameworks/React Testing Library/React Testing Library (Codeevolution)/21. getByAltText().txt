@@ -1,0 +1,35 @@
+(1) getByAltText()
+--------------------
+==> Return the element that have the given alt text
+==> elements that takes alt attribute is (<img/> , <input/> , <area> Or Custom html elements)
+
+EX
+---
+
+    Form.js
+    ---------
+
+    function Form() {
+        return (
+            <div>
+                <input type="text" value="magdy" onChange={() => {}} alt="first name input"/>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    ---------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Text', () => {
+            render(<Form />)
+            const input = screen.getByAltText('first name input');
+            expect(input).toBeInTheDocument() // Will Pass The Test
+        })
+    })

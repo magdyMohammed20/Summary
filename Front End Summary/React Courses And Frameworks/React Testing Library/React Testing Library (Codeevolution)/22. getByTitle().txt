@@ -1,0 +1,35 @@
+(1) getByTitle()
+-----------------
+==> Return the element that matching title attribute
+
+
+EX
+---
+
+    Form.js
+    ----------
+
+    function Form() {
+        return (
+            <div>
+                <p title="para">This Is P</p>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    --------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Text', () => {
+            render(<Form />)
+            const para = screen.getByTitle('para');
+            expect(para).toBeInTheDocument() // Will Pass The Test
+        })
+    })

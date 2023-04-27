@@ -1,0 +1,121 @@
+(1) TextMatch
+----------------
+==> Represents A Type Which Can Be either a (string - regex - function)
+
+
+(2) If I Want The Tested Text To Not Be Exactly (string)
+----------------------------------------------------------
+
+    Skills.js
+    --------------
+
+    function Skills() {
+        return (
+            <div>
+                <p>
+                    Hellow World Man
+                </p>
+            </div>
+        )
+    }
+
+    export default Skills
+
+
+
+    Skills.test.js
+    ------------------
+
+    import { render, screen } from '@testing-library/react'
+    import Skills from './Skills'
+
+
+    describe('Test Ul', () => {
+        test('Exact', () => {
+            render(<Skills  />)
+            const ele = screen.getByText('Hellow', { exact: false })
+            expect(ele).toBeInTheDocument() // Will Pass
+        })
+    })
+
+
+(3) If I Want The Tested Text To Not Be Exactly (Regex)
+----------------------------------------------------------
+
+    Skills.js
+    -----------
+        
+    function Skills() {
+        return (
+            <div>
+                <p>
+                    Hellow World Man
+                </p>
+            </div>
+        )
+    }
+
+    export default Skills
+
+
+    Skills.test.js
+    ----------------
+
+    import { render, screen } from '@testing-library/react'
+    import Skills from './Skills'
+
+
+    describe('Test Ul', () => {
+        test('Regex Substring', () => {
+            render(<Skills  />)
+            const ele = screen.getByText(/world/)
+            expect(ele).toBeInTheDocument() // Will Fails As It Search For 'world' And The Exist Is 'World'
+        })
+
+        test('Regex Substring With Ignore Cases', () => {
+            render(<Skills  />)
+            const ele = screen.getByText(/world/i)
+            expect(ele).toBeInTheDocument() // Will Pass
+        })
+
+        test('Regex Full String Match With Ignore Cases', () => {
+            render(<Skills  />)
+            const ele = screen.getByText(/Hellow World Man$/i)
+            expect(ele).toBeInTheDocument() // Will Pass
+        })
+    })
+
+
+(4) If I Want The Tested Text To Not Be Exactly (Custom Function)
+---------------------------------------------------------------------
+
+
+    Skills.js
+    ------------
+     
+    function Skills() {
+        return (
+            <div>
+                <p>
+                    Hellow World Man
+                </p>
+            </div>
+        )
+    }
+
+    export default Skills
+
+        
+    Skills.test.js
+    ------------------
+        
+    import { render, screen } from '@testing-library/react'
+    import Skills from './Skills'
+
+    describe('Test Ul', () => {
+        test('Regex Full String Match With Ignore Cases', () => {
+            render(<Skills  />)
+            const ele = screen.getByText((content) => content.startsWith('Hellow'))
+            expect(ele).toBeInTheDocument() // Will Pass
+        })
+    })

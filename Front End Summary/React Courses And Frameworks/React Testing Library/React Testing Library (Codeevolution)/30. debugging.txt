@@ -1,0 +1,105 @@
+(1) screen.debug()
+--------------------
+==> Used To Show Html Output Before And After Testing Query
+
+EX
+---
+
+    Skills.js
+    ------------
+
+    import { useState , useEffect } from 'react';
+
+    function Skills() {
+        const [isLoggedIn , setIsLoggedIn] = useState(false)
+        
+        useEffect(() => {
+            setTimeout(() => {
+                setIsLoggedIn(true)
+            } , 800)
+        })
+        return (
+            <div>
+                {isLoggedIn ? <button>Start Learning</button> : <button onClick={() => setIsLoggedIn(true)}>login</button>}  
+            </div>
+        )
+    }
+
+    export default Skills
+
+
+    Skills.test.js
+    ----------------
+
+    import { render, screen } from '@testing-library/react'
+    import Skills from './Skills'
+
+
+    describe('Test Ul', () => {
+        test('Test Login Button', async () => {
+            render(<Skills />)
+            screen.debug() // Will Show Skills Component Html Output Before Rendering Start Learning Button
+            const ele = await screen.findByRole('button', {
+                name: 'Start Learning'
+            })
+            screen.debug() // Will Show Skills Component Html Output After Rendering Start Learning Button
+            expect(ele).toBeInTheDocument() // Will Pass
+        })
+    })
+
+
+(2) logRoles
+--------------
+==> helper function can be used to print out a list of all the implicit ARIA roles within a tree of DOM nodes
+
+
+EX
+---
+
+    Skills.js
+    ------------
+        
+    import { useState , useEffect } from 'react';
+
+    function Skills({skills}) {
+        const [isLoggedIn , setIsLoggedIn] = useState(false)
+        
+        useEffect(() => {
+            setTimeout(() => {
+                setIsLoggedIn(true)
+            } , 800)
+        })
+        return (
+            <div>
+                <ul>
+                    {
+                        skills.map((skill, index) => <li key={index}>{skill}</li>)
+                    }
+                </ul>
+                {isLoggedIn ? <button>Start Learning</button> : <button onClick={() => setIsLoggedIn(true)}>login</button>}  
+            </div>
+        )
+    }
+
+    export default Skills
+
+
+    Skills.test.js
+    ---------------
+        
+    import { render, screen , logRoles} from '@testing-library/react'
+    import Skills from './Skills'
+
+
+    describe('Test Ul', () => {
+        test('Test Login Button', async () => {
+            const skills = ['Html' , 'Js']
+            const view = render(<Skills skills={skills}/>)
+            logRoles(view.container)
+            
+            const ele = await screen.findByRole('button', {
+                name: 'Start Learning'
+            })
+            expect(ele).toBeInTheDocument() // Will Pass
+        })
+    })

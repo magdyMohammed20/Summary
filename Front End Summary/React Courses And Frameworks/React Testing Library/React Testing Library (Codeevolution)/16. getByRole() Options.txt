@@ -1,0 +1,154 @@
+(1) getByRole() Exception
+--------------------------
+==> If I Have 2 Elements That Have The Same Role The Test Will Fails
+
+EX (textInput And textarea Have Same 'textbox' Role)
+----
+
+    Form.js
+    ---------
+
+    function Form() {
+        return (
+            <div>
+                <form>
+                    <input type="text" />
+                    <textarea>
+                    </textarea>
+                </form>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+    Form.test.js
+    --------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const newElement = screen.getByRole('textbox');
+            expect(newElement).toBeInTheDocument() // Give Error [Found multiple elements with the role "textbox"]
+        })
+    })
+
+        
+(2) For Solve The Previous Problem Conflict We Will Use getByRole() 'name' Option
+------------------------------------------------------------------------------------
+
+==> 'name' Can Be 
+-------------------
+--> Label Of Form Element
+--> Text Content Of Button
+--> Value Of aria-label Attribute
+
+EX (Label)
+----
+
+    Form.js
+    ---------
+        
+
+    function Form() {
+        return (
+            <div>
+                <form>
+                    <div>
+                        <label htmlFor="name1">name10</label>
+                        <input type="text" id="name1"/>
+                    </div>
+                    <textarea>
+                    </textarea>
+                </form>
+            </div>
+        )
+    }
+
+    export default Form
+
+
+
+    Form.test.js
+    --------------
+
+    import { render , screen } from '@testing-library/react';
+    import Form from "./Form"
+
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const newElement = screen.getByRole('textbox', {
+                name: 'name10'
+            });
+            expect(newElement).toBeInTheDocument() // Will Passed The Test
+        })
+    })
+
+
+EX (Text Content)
+---
+
+    Form.test.js
+    ---------------
+        
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const newElement = screen.getByRole('heading', {
+                name: 'app form'
+            });
+            expect(newElement).toBeInTheDocument() // Will Passed The Test
+        })
+    })
+
+
+    Form.js
+    -----------
+        
+    <div>
+          <h1>app form</h1>
+          <h2>Heading 2</h2>
+    < /div>
+    
+
+EX (Heading Level)
+----
+
+    Form.test.js
+    ---------------
+
+    describe('first', () => {
+        test('Test Input Field By Role', () => {
+            render(<Form />)
+            const heading1 = screen.getByRole('heading', {
+                level : 1
+            });
+            expect(heading1).toBeInTheDocument() // Will Passed The Test
+
+
+            const heading2 = screen.getByRole('heading', {
+                level : 2
+            });
+            expect(heading2).toBeInTheDocument() // Will Passed The Test
+
+
+            const heading6 = screen.getByRole('heading', {
+                level : 6
+            });
+            expect(heading6).toBeInTheDocument() // Will Fails The Test
+        })
+    })
+        
+        
+    Form.js
+    -----------
+        
+    <div>
+        <h1>app form</h1>
+        <h2>Heading 2</h2>
+    </div>

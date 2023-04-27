@@ -1,0 +1,67 @@
+(1) Problem And Solution
+---------------------------
+
+    Skills.js
+    -----------
+
+    import { useState } from 'react';
+
+    function Skills() {
+        const [isLoggedIn , setIsLoggedIn] = useState(false)
+        return (
+            <div>
+                {isLoggedIn ? <button>Start Learning</button> : <button onClick={() => setIsLoggedIn(true)}>login</button>}  
+            </div>
+        )
+    }
+
+    export default Skills
+
+
+    Skills.test.js
+    ----------------
+
+    import { render, screen } from '@testing-library/react'
+    import Skills from './Skills'
+
+    describe('Test Ul', () => {
+
+        test('Test Login Button', () => {
+            render(<Skills  />)
+            const ele = screen.getByRole('button', {
+                name: 'login'
+            })
+            expect(ele).toBeInTheDocument() // Will Pass
+        })
+
+        // This Will Give An Error As Start Learning Button Not Rendered In The DOM
+        test('Test Login Button', () => {
+            render(<Skills  />)
+            const ele = screen.getByRole('button', {
+                name: 'Start Learning'
+            })
+            expect(ele).not.toBeInTheDocument()
+        })
+
+    
+        // For Fix Problem Of Propability The Element To Be Not Rendered Uses 'queryByRole' Instead Of 'getByRole'
+        test('Test Login Button', () => {
+            render(<Skills  />)
+            const ele = screen.queryByRole('button', {
+                name: 'Start Learning'
+            })
+            expect(ele).toBeInTheDocument() // Will Pass
+        })
+    })
+
+
+(2) queryBy
+--------------
+==> Returns the matching node for a query, and return null if no elements match 
+==> Useful for asserting an element that is not present 
+==> Throws an error if more than one match is found 
+
+
+(3) queryAllBy
+----------------
+==> Returns an array of all matching nodes for a query, and return an empty array if no elements match \
