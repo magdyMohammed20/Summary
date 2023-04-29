@@ -1,0 +1,27 @@
+(1) Husky
+-- -- -- -- -- --
+==
+> Tool That Help To Improve Commits And more
+
+    (2) Husky Installation
+    -- -- -- -- -- -- -- -- -- -- -- -- -- -
+    ==
+    > Run[npx husky - init] Or[npx husky - init] ==
+    > Run[npm i]
+
+
+(3) After Installation Husky You Will Note That '.husky'
+Folder Created And There Are File Called 'pre-commit'
+In It
+Which You Can Set The Required Commands To Run Before Creating git commit
+And If Commands Has Warning Commit Will Not Done
+
+
+pre - commit
+    -- -- -- -- -- -
+
+    .
+"$(dirname -- "
+$0 ")/_/husky.sh"
+
+npm test && yarn lint && yarn format

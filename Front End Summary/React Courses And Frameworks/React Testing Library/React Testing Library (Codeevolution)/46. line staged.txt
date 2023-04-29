@@ -1,0 +1,13 @@
+(1) Installation
+--------------------
+
+==> Run [npm i --save-dev lint-staged]
+==> In Package.json Add 'lint-staged' Command
+
+    "lint-staged" : {
+        "*.{js , jsx}" : ["eslint"],
+        "*.{js , jsx , css , scss}": ["prettier --write"]
+    }
+
+==> in [pre-commit] Add [npx lint-staged] Command
+==> Try To Make Commit Without Format Will Give You Error

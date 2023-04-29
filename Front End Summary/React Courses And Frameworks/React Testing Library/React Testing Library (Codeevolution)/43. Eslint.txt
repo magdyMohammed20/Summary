@@ -1,0 +1,34 @@
+## (1) Use Eslint For Validate Tests
+
+==> Run [npm i eslint-plugin-jest-dom]
+==> Add ["plugin:jest-dom/recommended"] To Package.json
+
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest",
+            "plugin:jest-dom/recommended"
+        ]
+    },
+
+## (2) Sample On Use Eslint
+
+    import { render, screen } from "@testing-library/react";
+    import User from "./user";
+
+    describe("Btn Test", () => {
+        test("Btn Disabled", () => {
+            render(<User />);
+            const btn = screen.getByRole("button");
+            expect(btn).not.toBeEnabled(); // Eslint Will Give Warning Here To Use 'toBeDisabled()' Instead Of 'not.toBeEnabled'
+        });
+    });
+
+## (3) Can Add 'lint' Command In Package.json For Run Tests Linting
+
+==> After Add 'lint' Command Run [yarn lint] Or [npm run lint]
+
+    Package.json
+    ----------------
+
+    "lint" : "eslint --ignore-path .gitignore ."

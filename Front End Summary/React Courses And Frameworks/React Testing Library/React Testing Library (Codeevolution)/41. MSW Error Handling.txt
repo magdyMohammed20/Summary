@@ -1,0 +1,27 @@
+(1) MSW Error Handling
+--------------------------
+
+    user.test.js
+    --------------
+
+    import { render, screen } from "@testing-library/react";
+    import User from "./user";
+    import { server } from "../../mock/server";
+    import { rest } from "msw";
+
+    describe("Api Testing", () => {
+        test("Test Errors", async () => {
+            // This Code Will Reseted Before Each Test As We Specify In setupTests.js
+            server.use(
+                rest.get(
+                    "https://jsonplaceholder.typicode.com/users",
+                    (req, res, ctx) => {
+                    return res(ctx.status(500));
+                    }
+                )
+            );
+            render(<User />);
+            const error = await screen.findByText("Error!");
+            expect(error).toBeInTheDocument();
+        });
+    });

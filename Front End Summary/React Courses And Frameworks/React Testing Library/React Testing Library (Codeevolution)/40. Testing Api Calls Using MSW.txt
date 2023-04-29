@@ -1,0 +1,106 @@
+(1) MSW Setup
+----------------
+==> MSW Used For Testing Api Calls With React Testing Lib
+==> Use [npm install msw --save-dev] or [yarn add msw --dev] For Installation
+
+
+(2) Usage
+------------
+==> create 'user.js' That contains api Call
+==> create Folder called 'mock' Which Contains 'server.js'
+==> create file called 'handlers' Inside 'mock' Folder
+==> create 'user.test.js' For Write Api Tests
+==> Add Some Code to 'setupTests.js' For Using MSW
+
+
+    /components/user/user.js
+    ---------------------------
+
+    import { useState, useEffect } from "react";
+
+    function user() {
+    const [users, setUsers] = useState([]);
+    const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        fetch("https://jsonplaceholder.typicode.com/users")
+        .then((res) => res.json())
+        .then((data) => {
+            setUsers(data.map((user) => user.name));
+        })
+        .catch((err) => setErrors("Error!"));
+    }, []);
+    return (
+        <div>
+            <ul>
+                {errors ? errors : users.map((user) => <li key={user}>{user}</li>)}
+            </ul>
+        </div>
+    );
+    }
+
+    export default user;
+        
+        
+    
+    /src/mock/server.js
+    -----------------------
+
+    // src/mocks/server.js
+    import { setupServer } from "msw/node";
+    import { handlers } from "./handlers";
+
+    // This configures a request mocking server with the given request handlers.
+    export const server = setupServer(...handlers);
+
+        
+    /src/mock/handlers.js
+    -----------------------
+
+    import { rest } from "msw";
+
+    export const handlers = [
+    rest.get("https://jsonplaceholder.typicode.com/users", (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json([
+                {
+                    name: "Magdy",
+                },
+                {
+                    name: "Mohammed",
+                },
+                {
+                    name: "Ali",
+                },
+            ])
+        );
+    }),
+    ];
+        
+        
+    /components/user/user.test.js
+        ---------------------------------
+            
+    import { render, screen } from "@testing-library/react";
+    import User from "./user";
+
+    describe("Api Testing", () => {
+        test("Api", async () => {
+            render(<User />);
+            const users = await screen.findAllByRole("listitem");
+            expect(users).toHaveLength(3);
+        });
+    });
+
+        
+    /src/setupTests.js
+    --------------------
+
+    import "@testing-library/jest-dom";
+
+    // This Is The Additional Code
+    import { server } from "./mock/server.js";
+    beforeAll(() => server.listen());
+    afterEach(() => server.resetHandlers());
+    afterAll(() => server.close());

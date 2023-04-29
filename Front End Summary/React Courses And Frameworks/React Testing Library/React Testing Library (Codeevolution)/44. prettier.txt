@@ -1,0 +1,12 @@
+(1) Use Prettier In Tests
+----------------------------
+
+==> Add 'format' Command In Package.json scripts
+
+    "scripts": {
+        "format" : "prettier --ignore-path .gitignore --write \"**/*.{js,ts,jsx,tsx,scss,css}\""
+    }
+
+==> Run[yarn format]Or[npm run format]
+
+(2) Can Use Previous Way Or Install Prettier VScode Extension
