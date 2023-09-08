@@ -1,0 +1,19 @@
+(1) React Native
+------------------
+==> Open Source Framework For Building Native Android And ios Apps Using React
+
+(2) Why
+-----------
+==> With React Native You Can Create An App That Works Seamlessly On Android And ios
+
+
+(3) Expo VS React Native
+---------------------------
+==> React Native : Open Source Framework Maintained By Meta Designed For Building Cross Platform Apps
+==> Expo: Open Source Framework Maintained By Expo Designed For Building Cross Platform Apps
+==> Expo Has A Suite Of Tools And Services Built Around React Native Which Greately Simplifies Development Process 
+==> With React Native You Can't Build iOs Apps On Windows Or Linux Machine. Native iOS Apps Can Only Be Built On A MacOs Machine
+==> With Expo You Can Develop Your App On Windows Or Linux And Run Your App On Physical iPhone 
+
+
+

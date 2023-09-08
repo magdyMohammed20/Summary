@@ -1,0 +1,8 @@
+(1) Install Project Using Expo
+----------------------------------
+==> npx create-expo-app@latest (projectName) [npx create-expo-app@latest hellowWorld]
+
+(2) Running App On Phone
+----------------------------
+==> Run [npm start]
+== After Running Scan The QR Code Using Expo App On Android Phone
