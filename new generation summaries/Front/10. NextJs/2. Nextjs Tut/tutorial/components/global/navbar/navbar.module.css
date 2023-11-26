@@ -1,0 +1,16 @@
+.nav{
+    height: 60px;
+    background-color: #3f51b5;
+    line-height: 60px;
+    padding: 0 15px;
+}
+
+.ul{
+    list-style-type: none;
+    display: flex;
+}
+
+.ul a{
+   display: block;
+   margin: 0 10px;
+}

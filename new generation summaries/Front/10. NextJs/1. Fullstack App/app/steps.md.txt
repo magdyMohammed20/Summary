@@ -1,0 +1,3 @@
+(1) Create Next App (create-next-app fullstack-app)
+
+(2) 

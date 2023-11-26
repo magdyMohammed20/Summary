@@ -1,0 +1,29 @@
+.container {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 25px;
+}
+
+.links {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.link {
+  color: CCC;
+  font-size: 15px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

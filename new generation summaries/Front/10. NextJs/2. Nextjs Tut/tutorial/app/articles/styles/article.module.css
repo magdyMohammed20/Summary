@@ -1,0 +1,12 @@
+.art{
+    background-color: #1f2029;
+    color: #000;
+    padding: 20px;
+   
+    width: 25%;
+    height: 100vh ;
+}
+
+.flex{
+    display: flex;
+}
