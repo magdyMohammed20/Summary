@@ -1,0 +1,133 @@
+(1) Other Props Types
+-----------------------
+
+    /components/Greets/tsx
+    --------------------------
+
+    type greetProps = {
+        name: string, // String
+        messageCount: number, // Number
+        isLoggedIn: boolean // Boolean
+    }
+    function Greets({ name, messageCount, isLoggedIn }: greetProps) {
+        return (
+            <div>
+                Hellow {name} Welcome In React Typescript
+                <br />
+                Message Count Is {messageCount}
+                <br />
+                And Auth Status Is {isLoggedIn ? 'Logged In' : 'Logged Out'}
+            </div>
+        )
+    }
+
+    export default Greets
+
+
+    App.tsx
+    -----------
+
+    import Greets from "./components/Greets";
+    function App() {
+        return (
+            <div className="App">
+             <Greets name="Magdy" messageCount={10} isLoggedIn={false} />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(2) Object As Prop
+---------------------
+
+
+    /components/Person.tsx
+    ------------------------
+
+    type PersonProps = {
+        name: {
+            first: string,
+            last: string
+        }
+    }
+
+    function Person(props: PersonProps) {
+        return (
+            <div>
+                Hellow Guest Your Full Name Is {props.name.first} {props.name.last}
+            </div>
+        )
+    }
+
+    export default Person
+
+
+    App.tsx
+    ----------
+
+    import Person from "./components/Person";
+    function App() {
+        let fullName = { first: 'Magdy', last: 'Mohammed' };
+        return (
+            <div className="App">
+                <Person name={fullName} />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Array Of Objects As Prop
+-------------------------------
+
+
+    Person.tsx
+    --------------
+
+    type PersonProps = {
+        names: { first: string, last: string }[]
+    }
+
+    function Person(props: PersonProps) {
+        return (
+            <div>
+
+                {
+                    props.names.map(name => <div>
+                        {name.first} {name.last}
+                    </div>)
+                }
+            </div>
+        )
+    }
+
+    export default Person
+
+
+    App.tsx
+    -----------
+
+    import Person from "./components/Person";
+
+    function App() {
+        let names = [
+            {
+                first: 'Magdy',
+                last: 'Mohammed'
+            },
+            {
+                first: 'Ali',
+                last: 'Mohammed'
+            }
+        ]
+        return (
+            <div className="App">
+                <Person names={names} />
+            </div>
+        );
+    }
+
+    export default App;

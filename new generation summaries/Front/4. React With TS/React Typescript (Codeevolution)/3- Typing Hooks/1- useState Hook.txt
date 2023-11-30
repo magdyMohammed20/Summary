@@ -1,0 +1,131 @@
+(1) useState With Types
+-------------------------
+
+    Auth.tsx
+    -----------
+
+    import { useState } from 'react'
+
+    function Auth() {
+
+        // By Default Typescript Guess isLoggedIn Type From Initial Value (false => Boolean)
+        const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+        const handleLogIn = () => {
+            // If Pass 1 Here Typescript Through Error As 1 Is Number Not Boolean
+            setIsLoggedIn(1)
+        }
+
+        const handleLogOut = () => {
+            // If Pass 0 Here Typescript Through Error As 0 Is Number Not Boolean
+            setIsLoggedIn(0)
+        }
+
+        return (
+            <div>
+                <button onClick={handleLogIn}>LogIn</button>
+                <button onClick={handleLogOut}>LogOut</button>
+                <div>
+                    {
+                        isLoggedIn ? 'Logged In' : 'Not logged in'
+                    }
+                </div>
+            </div>
+        )
+    }
+
+    export default Auth
+
+
+(2) Specify Type For useState
+--------------------------------
+
+    Auth.tsx
+    ----------
+
+    import { useState } from 'react'
+
+    type userAuth = {
+        name: string,
+        email: string
+    }
+
+    function Auth() {
+        // Here Specify User Type Which Will Be Null Or Object With Specific Types
+        const [user, setUser] = useState<null | userAuth>(null)
+
+        const handleLogIn = () => {
+            setUser({
+                name: 'Magdy',
+                email: 'magdy@gmail.com'
+            })
+        }
+
+        const handleLogOut = () => {
+            setUser(null)
+        }
+
+        return (
+            <div>
+                <button onClick={handleLogIn}>LogIn</button>
+                <button onClick={handleLogOut}>LogOut</button>
+                <div>
+                    {
+                        user && <div>
+                            Name : {user.name} <br />
+                            Email : {user.email}
+                        </div>
+                    }
+                </div>
+            </div>
+        )
+    }
+
+    export default Auth
+
+
+(3) useState Type Assertions
+------------------------------
+==> If Not Want To Specify NULL In useState Will use 'as' Keyword
+
+    Auth.tsx
+    ------------
+
+
+    import { useState } from 'react'
+
+    type userAuth = {
+        name: string,
+        email: string
+    }
+
+    function Auth() {
+        // Look Here Using 'as'
+        const [user, setUser] = useState<userAuth>({} as userAuth)
+
+        const handleLogIn = () => {
+            setUser({
+                name: 'Magdy',
+                email: 'magdy@gmail.com'
+            })
+        }
+
+        const handleLogOut = () => {
+            setUser({} as userAuth)
+        }
+        return (
+            <div>
+                <button onClick={handleLogIn}>LogIn</button>
+                <button onClick={handleLogOut}>LogOut</button>
+
+                {
+                    user.name && <div>
+                        Name : {user.name} <br />
+                        Email : {user.email}
+                    </div>
+                }
+            </div>
+        )
+    }
+
+    export default Auth

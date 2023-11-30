@@ -1,0 +1,214 @@
+(1) Prop With Specific Values
+-------------------------------
+
+    Status.tsx
+    ------------
+
+    type statusProps = {
+        status: 'Loading' | 'Success' | 'Error' // Status Prop Can't Be Any Value Outside This Values
+    }
+
+    function Status(props: statusProps) {
+
+        return (
+            <div>
+                {props.status}
+            </div>
+        )
+    }
+
+    export default Status
+
+
+    App.tsx
+    ---------
+
+
+    import Status from "./components/Status";
+    function App() {
+
+        return (
+            <div className="App">
+             <Status status='Success' />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(2) String Children props
+---------------------------
+
+    Status.tsx
+    ---------------
+
+    type childrenProps = {
+        children: string
+    }
+
+    function Status(props: childrenProps) {
+
+        return (
+            <div>
+                {props.children}
+            </div>
+        )
+    }
+
+    export default Status
+
+
+    App.tsx
+    --------
+
+    import Status from "./components/Status";
+    
+    function App() {
+        return (
+            <div className="App">
+                <Status>
+                    Hellow World
+                </Status>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(2) React Component Or Html Element As Children props
+-------------------------------------------------------
+
+    Heading.tsx
+    --------------
+
+    function Heading() {
+        return (
+            <div>Hellow Heading</div>
+        )
+    }
+
+    export default Heading
+
+
+    Oscar.tsx
+    -------------
+
+    type oscarProps = {
+        children: React.ReactNode // Type Of Oscar Children Is React Node
+    }
+
+    function Oscar(props: oscarProps) {
+        return (
+            <div>
+                {props.children}
+            </div>
+        )
+    }
+
+    export default Oscar
+
+
+    App.tsx
+    ---------
+
+
+    import Heading from "./components/Heading";
+    import Oscar from "./components/Oscar";
+    function App() {
+        return (
+            <div className="App">
+                <Oscar>
+                    <Heading />
+                    <div>
+                        Hellow Div
+                    </div>
+                </Oscar>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Mark Specific Prop To Be Optional
+----------------------------------------
+
+
+    Greets.tsx
+    --------------
+
+    type greetProps = {
+        name: string,
+        messageCount?: number, // messageCount Is Optional
+        isLoggedIn: boolean
+    }
+    function Greets({ name, messageCount, isLoggedIn }: greetProps) {
+        return (
+            <div>
+                Hellow {name} Welcome In React Typescript
+                <br />
+                {messageCount && `Message Count Is ${messageCount}`}
+                <br />
+                And Auth Status Is {isLoggedIn ? 'Logged In' : 'Logged Out'}
+            </div>
+        )
+    }
+
+    export default Greets
+
+
+    App.tsx
+    ---------
+    
+    import Greets from "./components/Greets";
+
+    function App() {
+
+        return (
+            <div className="App">
+             <Greets name="Magdy" isLoggedIn={true} />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Mark Specific Prop To Be Optional And Set Default Value If Not Set
+-----------------------------------------------------------------------
+
+    Greets.tsx
+    ---------------
+
+    // First Approach
+    // Set Default Val In Props
+    function Greets({ name, messageCount = 0, isLoggedIn }: greetProps) {
+
+        return (
+            <div>
+                Hellow {name} Welcome In React Typescript
+                <br />
+                Message Count Is {messageCount}
+                <br />
+                And Auth Status Is {isLoggedIn ? 'Logged In' : 'Logged Out'}
+            </div>
+        )
+    }
+
+
+    // Second Approach
+    function Greets(props: greetProps) {
+        // Destruct messageCount And Set Default With 0
+        const { messageCount = 0 } = props
+        return (
+            <div>
+                Hellow {props.name} Welcome In React Typescript
+                <br />
+                Message Count Is {messageCount}
+                <br />
+                And Auth Status Is {props.isLoggedIn ? 'Logged In' : 'Logged Out'}
+            </div>
+        )
+    }

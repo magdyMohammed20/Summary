@@ -1,0 +1,36 @@
+(1) Typying Props
+------------------
+
+    /components/Greets.tsx
+    -----------------------
+
+    // 1- Using 'type' To Specify Type Of Props Of Greets Component  
+    type greetProps = {
+        name: string // 2- Greets Component Will Have 'name' Prop With String Type
+    }
+
+    // 3- Pass greetProps To Component Props
+    function Greets(props: greetProps) {
+        return (
+            <div>
+                Hellow {props.name} Welcome In React Typescript
+            </div>
+        )
+    }
+
+    export default Greets
+
+
+    App.tsx [The Passed name Value Here Must Be String If Any Thing Else Will Throw Error]
+    -----------
+
+    import Greets from "./components/Greets";
+    function App() {
+        return (
+            <div className="App">
+                <Greets name="Magdy" />
+            </div>
+        );
+    }
+
+    export default App;

@@ -1,0 +1,37 @@
+(1) Style Props
+------------------
+
+    Container.tsx
+    ----------------
+
+    import React from 'react'
+
+    type containerProps = {
+        styles: React.CSSProperties
+    }
+
+    function Container(props: containerProps) {
+        return (
+            <div style={props.styles}>
+                Hellow In Css Props
+            </div>
+        )
+    }
+
+    export default Container
+
+    App.tsx
+    -----------
+
+    import Container from './components/Container';
+
+    function App() {
+    
+        return (
+            <div className="App">
+                <Container styles={{ border: '1px solid black', boxShadow: '10px 10px 10px 10px red' }} />
+            </div>
+        );
+    }
+
+    export default App;

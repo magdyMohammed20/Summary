@@ -1,0 +1,147 @@
+(1) Basic Define Function Type Prop
+------------------------------------
+
+    Button.tsx
+    --------------
+
+    type buttonProps = {
+        children: string,
+        handleClick: () => void // Defin Button Function Prop As Function Which Not Return Anything
+    }
+
+    function Button(props: buttonProps) {
+        return (
+            <button onClick={() => props.handleClick()}>
+                {props.children}
+            </button>
+        )
+    }
+
+    export default 
+    
+
+    App.tsx
+    ---------
+
+    import Button from "./components/Button";
+
+    function App() {
+        const handleClick = () => {
+            console.log('Handle Click')
+        }
+        return (
+            <div className="App">
+                <Button handleClick={handleClick}>
+                    Click Me
+                </Button>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(2) Event Prop For Button
+-----------------------------
+
+    Button.tsx
+    --------------
+
+    type buttonProps = {
+        children: string,
+        handleClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+    }
+
+    function Button(props: buttonProps) {
+        return (
+            <button onClick={props.handleClick}>
+                {props.children}
+            </button>
+        )
+    }
+
+    export default Button
+
+
+    App.tsx [First Way]
+    ---------------------
+
+    import React from "react";
+    import Button from "./components/Button";
+
+    function App() {
+
+        const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+            console.log(e)
+            console.log('Handle Click')
+        }
+        return (
+            <div className="App">
+                <Button handleClick={handleClick}>
+                    Click Me
+                </Button>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+    App.tsx [Second Way]
+    ---------------------
+
+    import Button from "./components/Button";
+
+    function App() {
+        return (
+            <div className="App">
+                <Button handleClick={(e) => {
+                    console.log(e)
+                    console.log('Handle Click')
+                }}>
+                    Click Me
+                </Button>
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Event Prop For Input
+-----------------------------
+
+    Input.tsx
+    -----------
+
+    import React from 'react'
+
+    type inputProps = {
+        value: string,
+        handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    }
+
+    function Input(props: inputProps) {
+        return (
+            <input type="text" value={props.value} onChange={props.handleChange} />
+        )
+    }
+
+    export default Input
+
+
+    App.tsx
+    ---------
+
+    import Input from "./components/Input";
+
+    function App() {
+
+        return (
+            <div className="App">
+                <Input value='' handleChange={e => console.log(e.target.value)} />
+            </div>
+        );
+    }
+
+    export default App;

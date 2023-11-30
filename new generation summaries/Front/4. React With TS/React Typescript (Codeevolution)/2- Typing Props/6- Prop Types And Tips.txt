@@ -1,0 +1,128 @@
+(1) Props Destructuring
+-------------------------
+
+    Input.tsx
+    -------------
+
+    import React from 'react'
+
+    type inputProps = {
+        value: string,
+        handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    }
+
+    // Here We Destruct value , handleChange From Props
+    function Input({ value, handleChange }: inputProps) {
+        return (
+            <input type="text" value={value} onChange={handleChange} />
+        )
+    }
+
+    export default Input
+
+
+(2) Separate Props In Another File
+-------------------------------------
+
+
+    Person.tsx
+    -------------
+
+    import { PersonProps } from './Person.types'
+
+    function Person({ name: { first, last } }: PersonProps) {
+        return (
+            <div>
+                <div>
+                    {first} {last}
+                </div>
+            </div>
+        )
+    }
+
+    export default Person
+
+
+
+    Person.types.tsx
+    -------------------
+
+    export type PersonProps = {
+        name: { first: string, last: string }
+    }
+
+
+    App.tsx
+    -----------
+
+    import Person from "./components/Person";
+
+    function App() {
+        return (
+            <div className="App">
+                <Person name={{ first: 'Magdy', last: 'Mohammed' }} />
+            </div>
+        );
+    }
+
+    export default App;
+
+
+(3) Isolated Type Props With Array Of Objects As Prop
+----------------------------------------------------------
+
+
+    Person.types.tsx
+    -------------------
+
+    export type PersonList = {
+        id: number,
+        first: string,
+        last: string
+    }
+
+
+    Person.tsx
+    -------------
+
+    import { PersonList } from './Person.types'
+
+    type PersonProps = {
+        names: PersonList[] // Look Here 
+    }
+
+    function Person(props: PersonProps) {
+        return (
+            <div>
+
+                {
+                    props.names.map(name => <div key={name.id}>
+                        {name.first} {name.last}
+                    </div>)
+                }
+            </div>
+        )
+    }
+
+    export default Person
+
+
+    App.tsx
+    -----------
+
+    import Person from "./components/Person";
+
+    function App() {
+
+        let names = [
+            { id: 1, first: 'Magdy', last: 'Mohammed' }
+        ]
+        
+        return (
+            <div className="App">
+                <Person names={names} />
+            </div>
+        );
+    }
+
+    export default App;
