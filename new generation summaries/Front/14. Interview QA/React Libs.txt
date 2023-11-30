@@ -1,0 +1,5 @@
+https://fullcalendar.io/
+https://video-react.js.org/
+https://swiperjs.com/
+https://www.npmjs.com/package/react-toastify
+https://www.framer.com/?utm_source=google
