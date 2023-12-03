@@ -1,0 +1,61 @@
+(1) Want If Pass Specific Prop To DisAllow Pass Another Prop
+
+    components/RandomNumber.tsx
+    -----------------------------
+
+    type RandomType = {
+        value : number
+    }
+
+    type posType = RandomType & {
+        isPositive: boolean
+        isNegative?: never
+        isZero?:never
+    }
+
+    type ZeroType = RandomType & {
+        isZero: boolean,
+        isPositive?: never
+        isNegative?: never
+    }
+
+    type NegType = RandomType & {
+        isNegative: boolean
+        isZero?: never,
+        isPositive?: never
+    }
+
+    type finalTypes = posType | ZeroType | NegType
+    const RandomNumber = ({
+        value,
+        isPositive,
+        isZero,
+        isNegative
+    } : finalTypes) => {
+    return (
+        <div>
+            {value} <br />
+                {isPositive && 'Positive' || isZero && 'Zero' || isNegative && 'Negative'}
+        </div>
+    )
+    }
+
+    export default RandomNumber
+
+
+    App.tsx (Here If Pass isNegative Can't pass isPositive Or isZero)
+    -----------
+
+    import './App.css'
+    import RandomNumber from './components/RandomNumber'
+
+    function App() {
+    
+        return (
+            <>
+                <RandomNumber value={10} isNegative/>
+            </>
+        )
+    }
+
+    export default App

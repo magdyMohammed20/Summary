@@ -1,0 +1,91 @@
+(1) useReducer With Types
+-------------------------
+
+    import { useReducer } from 'react';
+    import './App.css'
+
+    // 1- Define Type For State
+    type counterState = { counter: number }
+
+    // 2- Define Type For Action
+    type actionType = { type: string, payload: number }
+
+    const initialState = { counter: 0 };
+
+    // 3- Use Types Here
+    const reducer = (state: counterState, action: actionType) => {
+        switch (action.type) {
+            case 'increment':
+                return { counter: state.counter + action.payload }
+            case 'decrement':
+                return { counter: state.counter - action.payload }
+            default:
+            return state
+        }
+    }
+
+    function App() {
+        const [state , dispatch] = useReducer(reducer , initialState)
+        return (
+            <>
+                <div>Counter : {state.counter}</div>
+                <button onClick={() => dispatch({ type: 'increment', payload: 1 })}>+</button>
+                <button onClick={() => dispatch({type : 'decrement' , payload: 1})}>-</button>
+            </>
+        )
+    }
+
+    export default App
+
+
+(2) Strict action type By Doing This
+----------------------------------------
+
+    // 2- Define Type For Action
+    // Specify 'increment' And 'decrement'
+    type actionType = { type: 'increment' | 'decrement', payload: number }
+
+
+(3) What if we add another action called 'reset' and it doesn't have payload
+---------------------------------------------------------------------------------
+
+    import { useReducer } from 'react';
+    import './App.css'
+
+    type counterState = { counter: number }
+
+    // 1- Create update action type if there are payload
+    type updateActionType = { type: 'increment' | 'decrement', payload: number }
+
+    // 2- Create reset action type if there is no payload
+    type resetAction = { type: 'reset' }
+
+    const initialState = { counter: 0 };
+
+    // 3- Make Intersect Between updateActionType and resetAction
+    const reducer = (state: counterState, action: updateActionType | resetAction) => {
+        switch (action.type) {
+            case 'increment':
+                return { counter: state.counter + action.payload }
+            case 'decrement':
+                return { counter: state.counter - action.payload }
+            case 'reset':
+                return {counter : 0}
+            default:
+                return state
+        }
+    }
+
+    function App() {
+        const [state , dispatch] = useReducer(reducer , initialState)
+        return (
+            <>
+                <div>Counter : {state.counter}</div>
+                <button onClick={() => dispatch({ type: 'increment', payload: 1 })}>+</button>
+                <button onClick={() => dispatch({ type: 'decrement', payload: 1 })}>-</button>
+                <button onClick={() => dispatch({type : 'reset' })}>0</button>
+            </>
+        )
+    }
+
+    export default App

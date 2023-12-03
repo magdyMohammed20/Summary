@@ -1,4 +1,11 @@
-(1) Create React App Using TypeScript Template
+(1) Create React App Using TypeScript Template (First Way)
 ------------------------------------------------
 ==> npx create-react-app [App-name] --template typescript
     [EX: npx create-react-app type-demo --template typescript]
+
+
+(2) Create React App Using Vite (Second Way)
+----------------------------------------------
+==> npm create vite@latest
+==> Write Project name And Select typescript
+==> Run (npm i)

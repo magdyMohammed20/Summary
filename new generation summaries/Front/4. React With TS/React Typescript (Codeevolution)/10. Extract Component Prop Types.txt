@@ -1,0 +1,58 @@
+(1) Component Can Extend The Prop Types Of Another Component
+----------------------------------------------------------------
+
+    components/Greet.tsx
+    -----------------------
+
+    type propTypes = {
+        name : string
+    }
+
+    const Greet = ({ name} : propTypes) => {
+        return (
+            <div>
+                {name}
+            </div>
+        )
+    }
+
+    export default Greet
+
+
+    components/sayHellow.tsx
+    -------------------------
+
+    import { ComponentProps } from 'react'
+    import Greet from './Greet'
+
+    // Use ComponentProps Here To Extends Prop Types Of <Greet> Component
+    const SayHellow = ({ name } : ComponentProps<typeof Greet>) => {
+        return (
+            <div>
+                { name}
+            </div>
+        )
+    }
+
+    export default SayHellow
+
+
+(2) Can Append On The Extended Prop Types
+------------------------------------------
+
+    components/sayHellow.tsx
+    -------------------------
+
+    import { ComponentProps } from 'react'
+    import Greet from './Greet'
+    type propTypes = {age : number} & ComponentProps<typeof Greet>
+    
+    const SayHellow = ({ name , age } : propTypes) => {
+        return (
+            <div>
+                { name} - {age}
+            </div>
+        )
+    }
+
+    export default SayHellow

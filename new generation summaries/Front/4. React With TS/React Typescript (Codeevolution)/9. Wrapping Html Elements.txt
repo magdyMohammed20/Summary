@@ -1,0 +1,114 @@
+(1) Problem
+---------------
+
+    components/CustomBtn.tsx
+    --------------------------
+
+    type btnProps = {
+        variant : 'primary' | 'secondary'
+    }
+
+    const CustomBtn = ({variant} : btnProps) => {
+        return (
+            <div>
+                <button className={`class-with-${variant}`}>Click Me</button>
+            </div>
+        )
+    }
+
+    export default CustomBtn
+
+
+    App.tsx (Problem Is Here Which children ('Click Me') And onClick Not Assigned In 'btnProps' )
+    ---------
+
+    import './App.css'
+    import CustomBtn from './components/CustomBtn'
+
+    function App() {
+    
+        return (
+            <>
+                <CustomBtn variant='secondary' onClick={ () => console.log('Clicked')}>Click Me</CustomBtn>
+            </>
+        )
+    }
+
+    export default App
+
+
+(2) Solution By Use [ComponentProps<"button">]
+-----------------------------------------------
+
+    components/CustomBtn.tsx
+    --------------------------
+
+    import { ComponentProps } from "react"
+
+    // For Allow When Use CustomBtn To Pass It Props Of Normal Html Button
+    type btnProps = {
+        variant : 'primary' | 'secondary'
+    } & ComponentProps<"button">
+
+    const CustomBtn = ({variant, children , ...rest} : btnProps) => {
+        return (
+            <div>
+                <button className={`class-with-${variant}`} {...rest}>{children}</button>
+            </div>
+        )
+    }
+
+    export default CustomBtn
+
+
+(3) If Want To Restrict Children Of 'CustomBtn' To Be String Only Like 'Click Me'
+------------------------------------------------------------------------------------
+
+    components/CustomBtn.tsx
+    --------------------------
+
+    type btnProps = {
+        variant: 'primary' | 'secondary',
+        children: string // Here
+    } & ComponentProps<"button">
+
+
+(4) Prevent Specific Prop That Belongs To 'button' To Passed To 'CustomBtn'
+----------------------------------------------------------------------------
+
+    components/CustomBtn.tsx
+    --------------------------
+
+    import { ComponentProps } from "react"
+
+    // For Allow When Use CustomBtn To Pass It Props Of Normal Html Button
+    type btnProps = {
+        variant: 'primary' | 'secondary',
+    } & Omit<ComponentProps<"button"> , "children"> // Here We Remove Children From btnProps
+
+    const CustomBtn = ({variant , ...rest} : btnProps) => {
+        return (
+            <div>
+                <button className={`class-with-${variant}`} {...rest}>Click Me</button>
+            </div>
+        )
+    }
+
+    export default CustomBtn
+
+    App.tsx
+    --------------------------
+
+    import './App.css'
+    import CustomBtn from './components/CustomBtn'
+
+    function App() {
+        return <CustomBtn variant='secondary' onClick={() => console.log('Clicked')}/>
+    }
+
+    export default App
+
+
+
+(5) Can Use [ComponentProps<ElementTagName>] With Any Html Element 
+    (EX : ComponentProps<"input"> ...etc)

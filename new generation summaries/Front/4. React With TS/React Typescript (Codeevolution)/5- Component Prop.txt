@@ -1,0 +1,45 @@
+(1) Send Component As Prop
+-----------------------------
+
+    import { ComponentType } from "react"
+    import Login from "./Login"
+
+    type componentProps = {
+        isLoggedIn : boolean,
+        Component : ComponentType
+    }
+
+    const privateAuth = ({isLoggedIn , Component} : componentProps) => {
+        if (isLoggedIn) {
+            return <Component/>
+        } else {
+            return <Login/>
+        }
+    }
+
+    export default privateAuth
+
+
+(2) Type Props
+------------------
+
+    import { ComponentType } from "react"
+    import Login from "./Login"
+
+    type propsType = { name: string } // This For Passing "name" As Prop To <Component name="magdy"/>
+
+    // Use propsType Here
+    type componentProps = {
+        isLoggedIn : boolean,
+        Component: ComponentType<propsType>
+    }
+
+    const privateAuth = ({isLoggedIn , Component} : componentProps) => {
+        if (isLoggedIn) {
+            return <Component name="magdy"/>
+        } else {
+            return <Login/>
+        }
+    }
+
+    export default privateAuth

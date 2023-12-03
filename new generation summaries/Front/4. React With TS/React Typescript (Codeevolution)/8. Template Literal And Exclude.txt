@@ -1,0 +1,65 @@
+(1) First Approach With Template Literal
+-------------------------------------------
+
+    components/Toast.tsx
+    ----------------------
+
+    type Horizontal = 'left' | 'center' | 'right'
+    type Vertical = 'top' | 'center' | 'bottom'
+
+    type ToastProps = {
+        position : `${Horizontal}-${Vertical}`
+    }
+
+    // Position Here Can Be
+    // left-top | left-center | left-bottom .....etc
+    const Toast = ({position} : ToastProps) => {
+        return (
+            <div>
+                {position}
+            </div>
+        )
+    }
+
+    export default Toast
+
+
+    App.tsx
+    -----------
+
+    import './App.css'
+    import Toast from './components/Toast'
+
+    function App() {
+        return (
+            <>
+                <Toast position='left-bottom'/>
+            </>
+        )
+    }
+
+    export default App
+
+
+(2) But Want To Prevent 'center-center' And Pust 'center' Only Instead
+-------------------------------------------------------------------------
+
+
+    type Horizontal = 'left' | 'center' | 'right'
+    type Vertical = 'top' | 'center' | 'bottom'
+
+    type ToastProps = {
+        position : Exclude<`${Horizontal}-${Vertical}` , 'center-center'> | 'center'
+    }
+
+    // Position Here Can Be
+    // Instead of 'center-center' Put 'center' Only
+    const Toast = ({position} : ToastProps) => {
+        return (
+            <div>
+            {position}
+            </div>
+        )
+    }
+
+    export default Toast

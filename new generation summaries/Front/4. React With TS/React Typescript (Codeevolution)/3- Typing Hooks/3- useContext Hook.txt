@@ -1,0 +1,211 @@
+(1) useContext With Types
+-----------------------------
+
+    context/theme.ts
+    ------------------
+
+    export const themes = {
+        primary: {
+            main: '#222',
+            color: '#EEE'
+        },
+        secondary: {
+            main: '#FFF',
+            color: '#222'
+        }
+    }
+
+
+    context/context.tsx
+    ----------------------
+
+    import { ReactNode, createContext } from 'react'
+    import { themes } from './theme'
+
+    // Define Types Here
+    type providerTypes = {
+        children : ReactNode
+    }
+    export const ThemeContext = createContext(themes)
+
+    export const ContextProvider = ({children}: providerTypes) => {
+        return (<ThemeContext.Provider value={ themes } > 
+                {children}
+            </ThemeContext.Provider>)
+    }
+
+
+    app.tsx
+    ------------
+
+    import './App.css'
+    import Box from './context/Box'
+    import { ContextProvider } from './context/context'
+    function App() {
+        return (
+            <ContextProvider>
+                <Box/>
+            </ContextProvider>
+        )
+    }
+
+    export default App
+
+    context/Box.tsx
+    -----------------
+
+    import { useContext } from "react"
+    import { ThemeContext } from "./context"
+    const Box = () => {
+
+        const theme = useContext(ThemeContext);
+        return (
+            <div>
+                <div style={{backgroundColor: theme.primary.main , color: theme.primary.color}}>
+                        Hellow
+                </div>
+            </div>
+        )
+    }
+
+    export default Box
+
+
+(2) userContext future value
+-------------------------------
+
+    context/user/User.tsx
+    --------------------------
+
+    import { useContext } from "react"
+    import { UserContext } from "./userContext"
+
+    const User = () => {
+
+        const userContext = useContext(UserContext)
+
+        const handleLogin = () => { 
+            if (userContext) {
+                userContext.setUser({
+                    name: 'magdy', 
+                    email : 'magdy@gmail.com'
+                })
+            }
+        }
+        const handleLogOut = () => {
+            if (userContext) {
+                userContext.setUser(null)
+            }
+        }
+        
+        return (
+            <div>
+                <button onClick={handleLogin}>Login</button>
+                <button onClick={handleLogOut}>LogOut</button>
+                {
+                    userContext?.user?.name
+                } / {
+                    userContext?.user?.email
+                }
+            </div>
+        )
+    }
+
+    export default User
+
+
+    context/user/userContext.tsx
+    -------------------------------
+
+    import { createContext , ReactNode , useState } from 'react'
+
+    type userAuth = {
+        name: string,
+        email : string
+    }
+
+    type UserContextType = {
+        user: userAuth | null,
+        setUser : React.Dispatch<React.SetStateAction<userAuth | null>>
+    }
+    type UserContextProviderProps = {
+        children : ReactNode
+    }
+    export const UserContext = createContext<UserContextType | null>(null)
+
+    const UserContextProvider = ({ children } : UserContextProviderProps) => {
+        const [user, setUser] = useState<userAuth | null>(null);
+
+        return <UserContext.Provider value={{user , setUser}}>
+            {children}
+        </UserContext.Provider>
+    }
+
+    export default UserContextProvider
+
+
+    App.tsx
+    -----------
+
+    import './App.css'
+    import  UserContextProvider from './context/User/userContext'
+    import User from './context/User/User'
+    function App() {
+    
+        return (
+            <UserContextProvider>
+                <User/>
+            </UserContextProvider>
+        )
+    }
+
+    export default App
+
+
+(3) Avoid Null Possibility By Doing This And Remove Is Conditions
+-------------------------------------------------------------------------
+
+    context/user/userContext.tsx
+    -------------------------------
+
+    // Remove Null Here
+    export const UserContext = createContext({} as UserContextType)
+
+
+    context/user/User.tsx
+    --------------------------
+
+    import { useContext } from "react"
+    import { UserContext } from "./userContext"
+
+    const User = () => {
+
+        const userContext = useContext(UserContext)
+
+        ///////////// Removed From Here /////////
+        const handleLogin = () => { 
+            userContext.setUser({
+                name: 'magdy', 
+                email : 'magdy@gmail.com'
+            })
+        }
+
+        ///////////// Removed From Here /////////
+        const handleLogOut = () => {
+            userContext.setUser(null)
+        }
+        
+        return (
+            <div>
+                <button onClick={handleLogin}>Login</button>
+                <button onClick={handleLogOut}>LogOut</button>
+                {
+                    userContext?.user?.name
+                } / {
+                    userContext?.user?.email
+                }
+            </div>
+        )
+    }
+
+    export default User

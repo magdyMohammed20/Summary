@@ -1,0 +1,60 @@
+(1) Basic Sample
+----------------------
+
+    import { useEffect, useRef } from "react"
+    const InputRef = () => {
+        // 1- Declaref Ref As HTMLInputElement
+        const ref = useRef<HTMLInputElement>(null)
+
+        useEffect(() => {
+            // 2- Use ? To Avoid Undefined
+            ref.current?.focus()
+        }, [])
+        return (
+            <div>
+                <input type="text" ref={ ref}/>
+            </div>
+        )
+    }
+
+    export default InputRef
+
+
+(2) I Don't Want To Use ?
+-----------------------------
+
+    const ref = useRef<HTMLInputElement>(null!)
+
+    useEffect(() => {
+        // Removed ? From Here
+        ref.current.focus()
+    }, [])
+
+
+(3) Another Sample
+----------------------
+
+    import { useEffect , useRef, useState } from "react"
+    const Timer = () => {
+        const timerRef = useRef<number | null>(null)
+        const [timer, setTimer] = useState(0)
+        
+        const stopTimer = () => {
+            if(timerRef.current) window.clearInterval(timerRef.current)
+        }
+        useEffect(() => {
+            timerRef.current = window.setInterval(() => {
+                setTimer(prev => prev + 1)
+            }, 1000)
+
+            return () => stopTimer()
+        }, [])
+        return (
+            <div>
+                Timer - {timer}
+                <button onClick={() => stopTimer()}>Stop</button>
+            </div>
+        )
+    }
+
+    export default Timer

@@ -1,0 +1,50 @@
+(1) Component With Generics The Take Array With Different Types
+
+    components/List.tsx
+    -----------------------
+
+    type TypeProps<T> = {
+    items: T[],
+    onClick: (value: T) => void
+    }
+
+    const ListOfItems = <T extends NonNullable<unknown>>({ items, onClick }: TypeProps<T>) => {
+        return (
+            <div>
+                <h1>List</h1>
+                <>
+                    {
+                        items.map((item, index) => {
+                            return (
+                            <div key={index} onClick={() => onClick(item)}>
+                                {String(item)}
+                            </div>
+                            )
+                        })
+                    }
+                </>
+            </div>
+        )
+    }
+
+    export default ListOfItems;
+
+
+    App.tsx
+    ----------
+
+    import './App.css'
+    import ListOfItems from './components/List'
+
+    function App() {
+    
+        return (
+            <>
+                <ListOfItems items={['String', 'String2', 30]} onClick={(val) => console.log(val)} />
+                <ListOfItems items={[10, 20, 30]} onClick={(val) => console.log(val)} />
+                <ListOfItems items={[{name : 'magdy'}]} onClick={(val) => console.log(val)} />
+            </>
+        )
+    }
+
+    export default App

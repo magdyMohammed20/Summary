@@ -1,0 +1,82 @@
+(1) Problem
+----------------
+==> Every Text Component Will Rendered In 'div' And This Is Not True
+
+    components/Text.tsx
+    ---------------------
+
+    type typeProps = {
+        size: 'lg' | 'md' | 'sm',
+        color?: 'primary' | 'secondary',
+        children : string
+    }
+
+    const Text = ({size , color , children}:typeProps) => {
+        return (
+            <div className={`class-with-${size}-${color}`} >
+                {children}
+            </div>
+        )
+    }
+
+    export default Text
+
+
+    App.tsx 
+    ------------
+
+    import './App.css'
+    import Text from './components/Text'
+
+    function App() {
+        return <div>
+            <Text size='md'>Hellow</Text>
+            <Text size='sm'>Hellow1</Text>
+        </div>
+    }
+
+    export default App
+
+
+(2) Solution
+---------------
+
+    components/Text.tsx
+    ---------------------
+
+    import { ElementType, ReactNode } from "react"
+
+    type typeProps = {
+        size: 'lg' | 'md' | 'sm',
+        color?: 'primary' | 'secondary',
+        children: ReactNode, 
+        as?:  ElementType
+    }
+
+    const Text = ({ size, color, children, as }: typeProps) => {
+        const Component = as || 'div'
+
+        return (
+            <Component className={`class-with-${size}-${color}`} >
+                {children}
+            </Component>
+        )
+    }
+
+    export default Text
+
+
+    App.tsx
+    -----------
+
+    import './App.css'
+    import Text from './components/Text'
+
+    function App() {
+        return <div>
+            <Text size='md' as='h1'>Hellow</Text>
+            <Text size='sm' as='h2'>Hellow1</Text>
+        </div>
+    }
+
+    export default App
