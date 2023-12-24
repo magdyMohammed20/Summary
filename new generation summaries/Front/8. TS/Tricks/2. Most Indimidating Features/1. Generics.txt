@@ -1,0 +1,65 @@
+(1) Generics Inheritance
+---------------------------
+
+    type MyGeneric<TData> = {
+        data: TData
+    }  
+
+    type sample1 = MyGeneric<{first : string}>
+
+    const s: sample1 = {
+        data: {
+            first : 'd'
+        }
+    } 
+
+    console.log(s)
+
+
+(2) Problem And Solution With Api Call
+----------------------------------------
+
+==> Problem
+
+  const makeFetch = (url: string) => {
+    return fetch(url).then((res) => res.json());
+  };
+
+  // Problem is Here as We Set { firstname: string, lastname: string } It's Not Generic
+  makeFetch("/api/v1").then((res: { firstname: string, lastname: string }) => console.log(res));
+  
+
+==> Solution With Generics
+
+    const makeFetch = <T>(url: string): Promise<T> => {
+        return fetch(url).then((res) => res.json());
+    };
+
+    makeFetch<{ firstname: string }>("/api/v1").then((res) => console.log(res));
+
+
+(3) Generics With Set
+------------------------
+
+    const set = new Set<number>();
+
+    set.add(10) // Valid
+    set.add('magdy') // Invalid
+
+
+(4) Inferred Types That Passed To Function
+----------------------------------------------
+
+    const addToObject = <T>(obj: T) => {
+        return {
+            ...obj,
+            id: Math.random()
+        }
+    }
+
+    // {id: number , firstname : string}
+    const res = addToObject({
+        firstname : 'magdy'
+    })
+
+    console.log(res)

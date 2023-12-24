@@ -1,6 +1,6 @@
 1 - NextJs
 2 - React Native
-3 - Typescript
+3 - Typescript ✅
 4 - NodeJs (Backend)
 5 - React Testing
 6 - GraphQl
