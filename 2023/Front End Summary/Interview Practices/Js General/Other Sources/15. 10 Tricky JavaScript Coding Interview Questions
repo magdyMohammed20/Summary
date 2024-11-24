@@ -1,0 +1,116 @@
+(1) Reverse Each Word In String
+--------------------------------
+
+	let str = 'Welcome Magdy Mohammed'
+
+	let split = str.split('').reverse().join('')
+
+	// demmahoM ydgaM emocleW
+	console.log(split)
+	
+	
+(2) empty an array
+-------------------
+
+// Method 1 (set the variable arrayList to a new empty array. This is recommended if you don't have references to the original array arrayList anywhere else because It will actually create a new empty array)
+
+let arr1 = [1, 2, 3]
+arr1 = []
+console.log(arr1)
+
+
+// Method 2 (will clear the existing array by setting its length to 0. This way of empty the array also updates all the reference variable which points to the original array)
+
+let arr2 = [1, 2, 3]
+arr2.length = 0
+console.log(arr2)
+
+
+// Method 3 (This way of empty the array will also update all the references of the original array)
+
+let arr3 = [1, 2, 3]
+arr3.splice(0, arr3.length)
+console.log(arr3)
+
+
+(3) check if a number is an integer
+------------------------------------
+==> see if there is a remainder left when you divide by 1
+
+	console.log(10 % 1 === 0) // True
+	console.log(10.4 % 1 === 0) // False
+	console.log(10.004 % 1 === 0) // False
+	
+	
+(4) Explain what a callback function is and provide a simple example
+---------------------------------------------------------------------
+==> is a function that is passed to another function as an argument and is executed after some operation has been completed
+
+	function pushToArray(arr, callback) {
+	    arr.push(1)
+	    console.log(arr)
+
+	    callback()
+	}
+
+	function callback() {
+	    console.log('Pushing Is Done..')
+	}
+	let arr = [2, 3]
+
+	pushToArray(arr, callback)
+	
+
+(5) What Output
+----------------
+==> If condition statement evaluate using eval so eval(function f() {}) which return function f() {} which is true so inside if statement code executes. typeof f return undefined because if statement code executes at run time, so statement inside if condition evaluated at run time.
+
+	var y = 1;
+	if (function f() {}) {
+	  y += typeof f;
+	}
+	console.log(y); // 1undefined
+	
+	
+(6) What will the following code output?
+-----------------------------------------
+==> The code above will output 5 even though it seems as if the variable was declared within a function and can't be accessed outside of it. This is because var a = b = 5; is interpreted the following way: var a = b; b = 5; But b is not declared anywhere in the function with var so it is set equal to 5 in the global scope
+
+	(function() {
+	  var a = b = 5;
+	})();
+
+	console.log(b);
+	
+	
+(7) What will the following code output?
+-----------------------------------------
+==> Output Is 4 For 4 Times
+
+	for (var i = 0; i < 4; i++) {
+	  setTimeout(() => console.log(i), 0)
+	}
+	
+	
+(8) Find Vowels In String
+--------------------------
+
+	function vowels(str) {
+
+	    let vowels = ['a', 'e', 'i', 'o', 'u'],
+		count = 0
+
+	    for (let char of str.toLowerCase()) {
+		vowels.includes(char) ? count++ : count
+	    }
+
+	    return count
+	}
+
+
+	console.log(vowels('Magdy')) // 1
+
+	console.log(vowels('Magdy Mohammed ai')) // 6
+	
+	
+(9) Source: https://medium.com/javascript-in-plain-english/10-tricky-javascript-coding-interview-question-with-solution-93ec265dd9ee

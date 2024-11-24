@@ -1,0 +1,149 @@
+(1) If Inherit Multi Traits You Can Write Them In 1 Line
+----------------------------------------------------------
+
+EX
+---
+
+    <?php
+
+        trait fingerPrintFeature{
+            public function fingerPrint(){
+                echo 'This Is Finger Print Feature <br>'; 
+            }
+        }
+
+        trait threeDFeature{
+            public function threed(){
+                echo 'This Is 3D Feature <br>'; 
+            }
+        }
+
+        class Iphone{
+
+            // Write Multi Traits In 1 Line
+            use fingerPrintFeature , threeDFeature;
+        }
+
+
+
+        $iphone = new Iphone();
+        $iphone->fingerPrint(); // This Is Finger Print Feature
+        $iphone->threed(); // This Is 3D Feature
+    
+    ?>
+
+
+(2) Traits Can Use Or Inherit Each Others
+-------------------------------------------
+
+EX
+---
+
+    <?php
+
+        trait fingerPrintFeature{
+            public function fingerPrint(){
+            echo 'This Is Finger Print Feature <br>'; 
+            }
+        }
+
+        trait threeDFeature{
+            public function threed(){
+            echo 'This Is 3D Feature <br>'; 
+            }
+        }
+
+        // Traits Can Use Each Others
+        trait allFeatures{
+            use fingerPrintFeature , threeDFeature;
+        }
+
+        class Iphone{
+            use allFeatures;
+        }
+
+
+
+        $iphone = new Iphone();
+        $iphone->fingerPrint(); // This Is Finger Print Feature
+        $iphone->threed(); // This Is 3D Feature
+    
+    ?>
+
+
+(3) You Can Implement [Chaining Method] Concept With Traits
+-------------------------------------------------------------
+
+EX
+---
+
+    <?php
+
+        trait fingerPrintFeature{
+            public function fingerPrint(){
+                echo 'This Is Finger Print Feature <br>'; 
+                return $this; // Must Return $this For Chaining Method
+            }
+        }
+
+        trait threeDFeature{
+            public function threed(){
+                echo 'This Is 3D Feature <br>'; 
+                return $this; // Must Return $this For Chaining Method
+            }
+        }
+
+        // Traits Can Use Each Others
+        trait allFeatures{
+            use fingerPrintFeature , threeDFeature;
+        }
+
+        class Iphone{
+            use allFeatures;
+
+            function sayHellow(){
+                echo 'Hellow From Iphone <br>';
+                return $this; // Must Return $this For Chaining Method
+            }
+        }
+
+
+        $iphone = new Iphone();
+        // Chaining Method With Traits
+        $iphone->fingerPrint()->threed()->sayHellow();  // This Is Finger Print Feature
+                                                        // This Is 3D Feature
+                                                        // Hellow From Iphone
+    
+    ?>
+
+
+(4) Priority Of Traits Over The Class 
+--------------------------------------
+
+EX
+---
+
+    <?php
+
+        trait feature{
+            public function sayHellow(){
+                echo 'Hellow From Traits <br>'; 
+            }
+        }
+
+        class phone{
+            public function sayHellow(){
+                echo 'Hellow From Phone <br>'; 
+            }
+        }
+
+        // This Class Inherit 'Class' And 'Trait' And Both Has Same Method But 'Traits' Has Priority Over The Class
+        class Iphone extends phone{
+            use feature;
+        }
+
+
+        $iphone = new Iphone();
+    
+        $iphone->sayHellow(); // Hellow From Traits
+    ?>

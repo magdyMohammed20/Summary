@@ -1,6 +1,0 @@
-(1) Control Flow Functions
----------------------------
-==> IF(Condition , True , False)
-
-EX: SELECT id , number , IF(number < 300 , 'Fail' , 'Success') FROM test;
-EX: UPDATE test SET number = IF(number < 300 , number + 10 , number);

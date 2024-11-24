@@ -1,0 +1,51 @@
+(1) Update Redirect Function
+----------------------------
+==> Update The 'redirect' Function That Inside 'functions.php' That In 'dashboard' Folder
+==> Use It In Any Place
+
+EX
+---
+
+    functions.php
+    --------------
+
+    // Redirect Function
+    function redirectHome($msg ,$url = null, $seconds = 3){
+        if($url === null){
+            $url = 'index.php';
+            $link = "Home Page";
+        }else{
+            // Check If User Coming From Page To Prevent Http Referer Error
+            if(isset($_SERVER['HTTP_REFERER']) && $_SERVER['HTTP_REFERER'] !== ''){
+                $url = $_SERVER['HTTP_REFERER'];
+                $link = "Previous Page";
+            }else{
+                $url = "index.php";
+                $link = "Home Page";
+            }
+        }
+
+        echo $msg;
+
+        echo '<div class="alert alert-info"> You Will Redirected To '. $link .' After ' .$seconds. ' Seconds</div>';
+        
+        header("refresh:$seconds;url=$url");
+        
+        exit();
+    }
+
+
+    members.php
+    ------------
+
+        // Within Insert User Page
+        else{
+            $errMsg = "<div class='alert alert-danger'>Sorry You Can't Access This Page Directly</div>";
+            // Redirect User To Previous Page After 5 Seconds If Access Insert Page Direct
+            redirectHome($errMsg ,'back', 5);
+        }
+
+        // Within Update User Page
+        $msg = "<div class='alert alert-success mt-4'>". $stmt->rowCount() . " Record Updated</div>";
+        // Redirect User To Previous Page Within 5 Seconds
+        redirectHome($msg ,'back', 5);

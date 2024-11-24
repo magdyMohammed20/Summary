@@ -1,0 +1,25 @@
+(1) Search
+-----------
+==> sets or returns the querystring part of a URL, including the question mark (?)
+
+==> The querystring part is the part of the URL after the question mark (?). This is often used for parameter passing.
+
+
+EX: Get Query Of [http://localhost:3000/?do=add]
+-----
+
+	window.location.search // "?do=add" 
+	
+	Or
+	
+	location.search // "?do=add" 
+	
+	
+EX: Set Query Of [http://localhost:3000]
+-----
+
+	window.location.search = "?do=update" // http://localhost:3000/?do=update
+	
+	Or
+	
+	location.search = "?do=update" // http://localhost:3000/?do=update

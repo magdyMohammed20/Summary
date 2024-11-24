@@ -1,0 +1,151 @@
+(1) assert Method
+------------------
+==> Display Message In Console If It's First Argument Is False
+
+	console.assert(document.getElementById('magdy'), "Sorry Element Not Found") // Assertion failed: Sorry Element Not Found
+
+
+(2) count Method
+-----------------
+==> Display The Number Of Code Execution
+
+	for(var x=1; x<=10; x++){ 
+		console.count() // default: 1 ...... default: 10
+	}
+
+
+	// If Want To Change 'Default' Word
+	for(var x=1; x<=10; x++){ 
+		console.count('Test') // Test: 1 ...... Test: 10
+	}	
+
+
+(3) error Method
+-----------------
+==> Display Error Message In Console
+
+
+	console.error('Sorry Not Allowed')
+
+
+(4) warn Method
+-----------------
+==> Display Warning Message In Console
+
+
+	console.warn('Sorry Not Allowed')
+
+
+(5) group Method
+----------------
+==> Will Group Set Of Console Statements In 1 Group
+
+	// Here Test1 , Test2 , Test3 Will Be Under 1 Group
+	console.group()
+        console.log('Test1')
+        console.error('Test2')
+        console.warn('Test3')
+	console.groupEnd() // For End The Group And Prevent The Nesting With Below Group
+
+
+	// You Can Give Name For The Group
+        console.group('First Group')
+        console.log('Test1')
+        console.error('Test2')
+        console.warn('Test3')
+	console.groupEnd() // For End The Group And Prevent The Nesting With Below Group
+
+
+	// Make Collapsed Group As Default
+        console.groupCollapsed('Nested Group') // use 'groupCollapsed' For Make The Group Collapsed By Default
+        console.log('Test1')
+        console.error('Test2')
+        console.warn('Test3')
+        console.groupEnd()
+
+
+
+(6) Table Method
+------------------
+
+	// Display Data In Table
+	console.table(['Magdy','Mohammed','Ali'])
+	console.table({name: 'Magdy' , age: 20})
+	
+
+(7) Time Method
+-----------------
+
+	// calculate The Code Execution Time
+	console.time()
+
+	for(var x = 0; x<1000000; x++){}
+
+	console.timeEnd()
+	
+
+
+(8) Dir Method
+-----------------
+
+	// Like console.log() But Produce More Info
+	console.dir([1,2,3]) // Array(3)
+	console.log([1,2,3]) // (3) [1, 2, 3]
+
+
+(9) Color The Console Message
+-------------------------------
+
+	// Write %c Before The Message And In The Other Console.log() Argument Write The Style You Want
+	console.log('%c This Is Colored Message' , 'font-size:50px;color: red')
+
+
+
+
+	// Multiple Messages With Different Colors
+	console.log('%c Blue Message %c Red Message' , 'color: blue' , 'color: red')
+
+
+
+(10) info Method
+-----------------
+==> Display Info Message For User [Some Browsers Put [i] Sign Beside The Message]
+
+	console.log('This Some Useful Info')
+
+
+(11) debug Method
+-------------------
+==> Used For Debug The Message
+
+	console.debug('Debug This Message')
+
+
+
+(12) trace Method
+-------------------
+==> Here Use [console.trace] For Follow The Code
+
+
+	    function func1(){
+	      console.trace()
+	      return 'Hellow am Func1'
+	    }
+
+	    function func2(){
+	      func1()
+	    }
+
+	    const x = func2()
+
+	    console.log(x)
+	    /*
+		    // anonymous: Is The Root
+		    // The Remaining Output Means That func2 Call func1
+		    
+		  console.trace
+		    func1 @ index.html:19
+		    func2 @ index.html:24
+		    (anonymous) @ index.html:27
+
+	    */

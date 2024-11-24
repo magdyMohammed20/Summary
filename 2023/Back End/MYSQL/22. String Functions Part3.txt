@@ -1,0 +1,13 @@
+(1) String Functions
+----------------------
+==> (UCASE) Or (UPPER) : Used To Convert String To Uppercase Characters
+==> (LCASE) Or (LOWER) : Used To Convert String To Lowercase Characters
+
+EX
+---
+
+    SELECT UPPER(text) FROM test;
+    SELECT UCASE(text) FROM test;
+
+    SELECT LOWER(text) FROM test;
+    SELECT LCASE(text) FROM test;

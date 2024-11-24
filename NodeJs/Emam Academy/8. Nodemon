@@ -1,5 +1,0 @@
-(1) If Change Any File Content You Should Re-Run The Server Again And We Want To Re-Run The Server When We Save The File And Show The New Content And Nodemon Solve This Problem
-
-
-(2) Install Nodemon By Write [npm install nodemon --save] In CMD After Install You Note In 'Package.json' File There Are New Object Called 'scripts' Create And Have This Values "start": "node ./bin/www" And For Run The Server At First Time You Should Write 'nodemon' In Project CMD
-(If 'nodemon' Not Work You Can Install It Globally [npm install nodemon -g]) And Now You Can Change The Files Content And Save And Refresh The Browser With Page 'localhost:3000' And See The Content Is Changed

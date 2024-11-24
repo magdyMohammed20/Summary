@@ -1,0 +1,99 @@
+(1) Conflicting In Names
+--------------------------
+
+    Apple.php
+    ----------
+
+    <?php
+
+        class createPhone{
+            public $name;
+
+            function sayHellow(){
+                echo 'Hellow From Apple Company';
+            }
+        }
+    ?>
+
+
+    Sony.php
+    ---------
+
+    <?php
+
+        class createPhone{
+            public $name;
+
+            function sayHellow(){
+                echo 'Hellow From Sony Company';
+            }
+        }
+    ?>
+
+
+    index.php (Error Here)
+    ----------
+
+    <?php
+
+        require "Apple.php";
+        require "Sony.php";
+
+        // Fatal error: Cannot redeclare class createPhone
+    ?>
+
+
+(2) Solving The Conflict By Using Namespace
+---------------------------------------------
+
+    Apple.php
+    ----------
+
+    <?php
+        // Create Namespace Called Apple
+        namespace Apple;
+
+        class createPhone{
+            public $name;
+
+            function sayHellow(){
+                echo 'Hellow From Apple Company';
+            }
+        }
+    ?>
+
+
+    Sony.php
+    ---------
+
+    <?php
+
+        // Create Namespace Called Sony
+        namespace Sony;
+
+        class createPhone{
+            public $name;
+
+            function sayHellow(){
+                echo 'Hellow From Sony Company';
+            }
+        }
+    ?>
+
+
+    index.php (Error Here)
+    ----------
+
+    <?php
+
+        require "Apple.php";
+        require "Sony.php";
+
+        // Use [\] For Creating Object From The [Apple , Sony] Classes 
+        $iPhone = new Apple\createPhone();
+        $sonyPhone = new Sony\createPhone();
+
+        print_r($iPhone); // Apple\createPhone Object ( [name] => )
+
+        print_r($sonyPhone); // Sony\createPhone Object ( [name] => )
+    ?>

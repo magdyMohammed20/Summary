@@ -1,0 +1,17 @@
+(1) Product
+------------
+==> returns the engine (product) name of the browser.
+
+==> This property may not work as expected: All browsers returns "Gecko".
+
+==> This property is read-only.
+
+
+EX
+----
+
+	window.navigator.product // "Gecko"
+	
+	Or
+	
+	navigator.product // "Gecko"

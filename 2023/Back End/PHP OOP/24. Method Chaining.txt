@@ -1,0 +1,34 @@
+(1) Method Chaining
+--------------------
+
+EX
+---
+
+    <?php
+
+        class Phone{
+            // All Methods Here Must Return $this To Enable Use Chaining Methods
+            public function pressPower(){
+                echo 'You Have Pressed Power Button <br>';
+                return $this;
+            }
+
+            public function bootHome(){
+                echo 'Home Booting Now <br>';
+                return $this;
+            }
+
+            public function sayHellow(){
+                echo 'Hellow <br>';
+                return $this;
+            }
+        }
+
+        $child = new Phone();
+
+        // Chaining Methods
+        $child->pressPower()->bootHome()->sayHellow();  // You Have Pressed Power Button
+                                                        // Home Booting Now
+                                                        // Hellow
+        
+    ?>

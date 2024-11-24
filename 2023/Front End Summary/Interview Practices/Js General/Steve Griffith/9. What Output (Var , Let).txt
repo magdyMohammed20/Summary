@@ -1,0 +1,17 @@
+//var hoisting vs let hoisting
+        //WHAT will be the output from this code and why?
+        function f() {
+            console.log(area); // Undefined [as Hoisted And var Has Default Value Called 'Undefined']
+            console.log(name); // Reference Error [TDZ][As Hoisted But Not Has Default Value So It Through Reference Error]
+        
+            let name = 'Bert';
+            var area = 'Geology';
+        }
+        f();
+
+/*
+Notes:
+------
+==> const And let Has TDZ
+==> var Not Has TDZ But Have Default Value 'Undefined'
+*/

@@ -1,0 +1,26 @@
+(1) Higher Order Function
+--------------------------
+==> is a function that takes a function as an argument, or returns a function.
+==> .map() and .filter(). Both of them take a function as an argument. They're both higher order functions.
+
+
+EX: (Higher Order And Not Higher Order Functions)
+---
+
+	const arr = ['Building', 'car', 'bicycle', 'automobile', 'Tree', 'house']
+
+	// But This Not I Want To Get [Sort Here Isn't Higher Order Function]
+	console.log(arr.sort()) // ["Building", "Tree", "automobile", "bicycle", "car", "house"]
+
+
+	// This Is Accurate Sort [Sort Here Is Higher Order Function]
+	let sorted = arr.sort(function (a, b) {
+	  let first = a.toLocaleLowerCase(),
+	    second = b.toLocaleLowerCase()
+
+	  if (first < second) return -1
+	  if (first > second) return 1
+	  return 0
+	})
+
+	console.log(sorted)  // ["automobile", "bicycle", "Building", "car", "house", "Tree"]

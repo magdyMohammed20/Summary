@@ -1,0 +1,83 @@
+(1) Pseudo Variable ($this)
+-----------------------------
+==> Refers To Object Properties
+
+
+EX
+---
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            // Define Class Properties (You Can Use 'var' Instead Of 'public')
+            public $memory;
+            public $inch;
+            public $space;
+
+            // Define Class Method
+            public function phoneInfo(){
+
+                // Access Class Properties Using $this
+                echo 'iPhone Memory Capacity Is : ' . $this->memory . '<br>';
+                echo 'iPhone Screen Size Is : ' . $this->inch . '<br>';
+                echo 'iPhone Storage Capacity Is : ' . $this->space . '<br>';
+            }
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        // Set Class Properties Values
+        $iPhone6Plus->memory = '2GB';
+        $iPhone6Plus->inch = '6Inch';
+        $iPhone6Plus->space = '32GB';
+
+        // Set Undefined Properties
+        $iPhone6Plus->color = 'Gold';
+
+        // Call Class Method
+        $iPhone6Plus->phoneInfo(); // iPhone Memory Capacity Is : 2GB
+                                // iPhone Screen Size Is : 6Inch
+                                // iPhone Storage Capacity Is : 32GB
+    ?>
+
+
+EX
+---
+
+    <?php
+
+        // Create Class Called "appleDevice"
+        class appleDevice{
+
+            // Define Class Properties (You Can Use 'var' Instead Of 'public')
+            public $memory;
+            public $inch;
+            public $space;
+            public $ownerName;
+
+            // If Owner Name Length Less Than 3 Characters It Print Error
+            // Else It Print Success Message
+            public function checkOwner(){
+                if(strlen($this->ownerName) < 3){
+                    echo 'Sorry Owner Name Can\'t Be Less Than 3 Characters';
+                }else{
+                    echo 'Owner Name Set Success';
+                }
+            }
+        }
+
+        // Create Object From "appleDevice" Class
+        $iPhone6Plus = new appleDevice();
+
+        // Set Class Properties Values
+        $iPhone6Plus->memory = '2GB';
+        $iPhone6Plus->inch = '6Inch';
+        $iPhone6Plus->space = '32GB';
+        $iPhone6Plus->ownerName = 'Os';
+
+        // Call Class Method
+        $iPhone6Plus->checkOwner(); // Sorry Owner Name Can't Be Less Than 3 Characters
+    ?>

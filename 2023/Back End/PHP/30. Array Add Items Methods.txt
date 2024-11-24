@@ -1,0 +1,78 @@
+(1) array_push() Method
+-------------------------
+==> Add Items At End Of Array
+
+==> Syntax
+
+    array_push(Array[Mandatory] , Value1[Mandatory] , Value2[Optional] , ....)
+
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            10,
+            20,
+            30,
+            40
+        );
+
+        print_r($langs); // Array ( [0] => 10 [1] => 20 [2] => 30 [3] => 40 )
+        array_push($langs , 50 , 60 , 70);
+        echo '<br><br>';
+        print_r($langs); // Array ( [0] => 10 [1] => 20 [2] => 30 [3] => 40 [4] => 50 [5] => 60 [6] => 70 )
+ 
+    ?>
+
+
+EX (Push Items To Associative Array)
+---
+
+    <?php 
+
+        $langs = array(
+            'first' => 10,
+            'second' => 20,
+            'third' => 30,
+            'fourth' => 40
+        );
+
+        print_r($langs); // Array ( [first] => 10 [second] => 20 [third] => 30 [fourth] => 40 )
+        $langs['fifth'] = 50;
+        echo '<br><br>';
+        print_r($langs); // Array ( [first] => 10 [second] => 20 [third] => 30 [fourth] => 40 [fifth] => 50 )
+
+        
+    ?>
+
+
+(2) array_unshift() Method
+----------------------------
+==> Add Items At Front Of Array
+
+==> Syntax
+
+    array_unshift(Array[Mandatory] , Value1[Mandatory] , Value2[Optional] , ....)
+
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            10,
+            20,
+            30,
+            40
+        );
+
+        print_r($langs); // Array ( [0] => 10 [1] => 20 [2] => 30 [3] => 40 )
+        array_unshift($langs , 50 , 60 , 70);
+        echo '<br><br>';
+        print_r($langs); // Array ( [0] => 50 [1] => 60 [2] => 70 [3] => 10 [4] => 20 [5] => 30 [6] => 40 )
+
+        
+    ?>

@@ -1,0 +1,11 @@
+let log = console.log;
+
+// ! Symbol Will Convert The Value To Boolean Value
+log(!!true); // True
+log(!!""); // False
+log(!!1); // True
+log(!!-1); // True
+log(!!NaN); // False
+log(!!undefined); // False
+log(!!"false"); // True
+log(!!null); // False

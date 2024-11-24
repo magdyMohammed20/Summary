@@ -1,0 +1,8 @@
+(1) MongoDB Is No Sql Database
+
+(2) Deal With MongoDB By Using 2 Ways First Is Work On MongoDB Cloud Online
+
+(3) Installation
+------------------
+==> Download MongoDB From Official Site And Install It Normally But When Install UnCheck The MongoDB Compass Installation
+==> For Sure MongoDB Installed Go To Windows Services And Search For 'MongoDB Server' And Sure That Status Is 'Started'

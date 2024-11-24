@@ -1,0 +1,39 @@
+(1) $_SERVER
+--------------
+==> Is Built In Super Global For Give Some Information
+
+==> Syntax
+
+    $_SERVER[Option]
+
+
+EX (Direct Me To Same Current Page)
+---
+
+    <a href="<?php echo $_SERVER['PHP_SELF']?>">Click</a>
+
+
+EX
+---
+
+    <?php 
+
+        // Get Server Address
+        echo $_SERVER['SERVER_ADDR']; // ::1
+
+        // Get Server Name
+        echo $_SERVER['SERVER_NAME']; // localhost
+
+        // Get Query String
+        echo $_SERVER['QUERY_STRING']; // If Link = (http://localhost/php_Elzero/index.php?name=Magdy&age=20) It Produce (name=Magdy&age=20)
+
+
+        // If Create 'test.php' File And Has Link That Redirect Me To 'index.php' And Click On The Link The Referer Is Full Path Of 'test.php'
+        echo $_SERVER['HTTP_REFERER']; // http://localhost/php_Elzero/test.php
+
+        // Get Server Port
+        echo $_SERVER['SERVER_PORT']; // 80
+
+        // Get Server Root Path
+        echo $_SERVER['DOCUMENT_ROOT']; // C:/Xampp/htdocs
+    ?> 

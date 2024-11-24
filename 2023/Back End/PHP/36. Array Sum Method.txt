@@ -1,0 +1,67 @@
+(1) array_sum() Method
+-------------------------
+==> Used To Get Sum Of Array Elements
+
+==> Syntax
+
+    array_sum(Array_Name)
+
+EX
+---
+
+    <?php 
+
+        $nums = array(
+            10,
+            20,
+            30,
+            40
+        );
+
+        $sum = array_sum($nums);
+
+        echo $sum; // 100
+    
+    ?>
+
+
+EX (If Array Contains String Values It Ignores It And Execute The Sum Of Numbers Only)
+---
+
+    <?php 
+
+        $nums = array(
+            10,
+            20,
+            'Magdy',
+            30,
+            'Mohammed',
+            40
+        );
+
+        $sum = array_sum($nums);
+
+        echo $sum; // 100
+    
+    ?>
+
+
+EX (array_sum With Associative Array Will Sum The Integer Values Only)
+---
+
+    <?php 
+
+        $nums = array(
+            0 => 10,
+            1 => 20,
+            2 => 'Magdy',
+            3 => 30,
+            4 => 'Mohammed',
+            5 => 40
+        );
+
+        $sum = array_sum($nums);
+
+        echo $sum; // 100
+    
+    ?>

@@ -1,0 +1,42 @@
+(1) uniqid() Function
+-----------------------
+==> Means "Unique Identifier"
+==> Used To Generate Unique Random Id's With Length = 13
+==> Default Value Of [More_Entropy] Is 'False' And If True It Will Increase Id Complexity
+
+==> Syntax
+-------------
+
+    uniqid(Prefix[Optional] , More_Entropy[Optional])
+
+EX
+---
+
+    <?php
+        
+        $rand = uniqid();
+
+        echo $rand; // Get Different Random Id After Each Page Reload
+    ?>
+
+
+EX (Set Prefix)
+---
+
+    <?php
+        
+        $rand = uniqid('Script1');
+
+        echo $rand; // Get Different Random Id After Each Page Reload That Prefixed With "Script1" (EX: Script15fe3aa69e640b)
+    ?>
+
+
+EX (Set More_Entropy Will Increase To Id Length To 23 Character)
+---
+
+    <?php
+        
+        $rand = uniqid('' , true);
+
+        echo $rand; // EX (5fe3abb73709c9.48469347)
+    ?>

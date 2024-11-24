@@ -1,5 +1,0 @@
-(1) Create Items DB Table
---------------------------------
-==> In phpmyadmin Create 'items' Table That Contains 7 Fields
-==> id(Primary) , name , description , price , Add_date(DATE) , country , image(VARCHAR) , status(VARCHAR) , rating(SMALLINT) , catId , memberId  
-

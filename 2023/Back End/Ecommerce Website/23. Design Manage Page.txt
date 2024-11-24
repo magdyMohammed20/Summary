@@ -1,0 +1,276 @@
+(1) Code Manage Members Page
+-------------------------------
+==> Add Table That Contains All Users From DB
+==> Redirect To Edit User Data
+==> Edit Code To Update User Data With Id Instead Of Session Id
+
+
+    members.php
+    ------------
+
+    <style>
+        body{
+            background: none !important;
+        }
+    </style>
+    <?php
+        // Must Start Session Before Anything 
+        session_start();
+        $pageTitle = 'Members';
+        // If User Comming From Entering Login Data Correctly
+        // Else Redirect To Login Page Again
+        if(isset($_SESSION['username'])){
+            include 'init.php';
+
+            // Fetch $do Variable Value From Page Link
+            $do = isset($_GET['do']) ? $_GET['do'] : 'manage';
+
+            // Display Content Depending On $do Variable
+            if($do == 'manage'){ 
+                // Select All Users Except Admin
+                $stmt = $connect->prepare("SELECT * FROM users WHERE group_id = 0");
+                $stmt->execute();
+                $row = $stmt->fetchAll();
+
+            ?>
+                <div class="container mt-5">
+                    <h2 class="mb-3">Manage Members</h2>
+                    <table class="table">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">UserName</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">FullName</th>
+                                <th scope="col">Control</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                                <?php
+                                    foreach($row as $member){
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $member['id'];?></td>
+                                            <td><?php echo $member['user_name'];?></td>
+                                            <td><?php echo $member['email'];?></td>
+                                            <td><?php echo $member['full_name'];?></td>
+                                            <td>
+                                                <a href="?do=edit&userid=<?php echo $member['id'];?>" class="btn btn-primary">Edit</a>
+                                                <a href="#" class="btn btn-danger">Delete</a>
+                                            </td>
+                                        </tr>
+                                <?php
+                                    }
+                                ?>
+                            
+                        </tbody>
+                    </table>
+                    <a href="?do=add" class="btn btn-primary"><i class="fa fa-plus mr-1"></i>Add New Member </a>
+                </div>
+            <?php }
+            elseif($do == 'add'){
+                ?>
+
+                    <div class="container mt-5">
+                        <h2>Add New Member</h2>
+                        <form class="mt-4" action="?do=insert" method="POST">
+                            <div class="row">
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="username">User Name</label>
+                                    <input type="text" name='username' class="form-control" id="username" autocomplete="off" required="required" placeholder="Enter User Name">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="pass">Password</label>
+                                    <input type="password" name='pass' class="form-control" id="pass" autocomplete="new-password" required="required" placeholder="Enter User Password">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="fullname">Full Name</label>
+                                    <input type="text" name='fullname' class="form-control" id="fullname" required="required" placeholder="Enter User Full Name">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="email">Email</label>
+                                    <input type="email" name='email' class="form-control" id="email" required="required" placeholder="Enter User Email">
+                                </div>
+                                <div class="form-group col-12">
+                                    <input type="submit" value="Add +" class="btn btn-primary px-5 py-2 mt-2"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+
+
+                <?php
+            }
+            elseif($do == 'insert'){
+                
+                echo "<div class='container mt-5'>";
+                // If User Coming Through POST Request Fetch Data
+                // Then Insert It To DB
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    
+                    $username  = $_POST['username'];
+                    $userpass  = sha1($_POST['pass']);
+                    $fullname  = $_POST['fullname'];
+                    $useremail = $_POST['email'];
+
+                    // Validate Updated Data
+                    $formErrors = array();
+                    if(empty($username)){
+                        $formErrors[] = "User Name Can't Be <strong>Empty</strong>";
+                    }
+                    if(strlen($username) < 4){
+                        $formErrors[] = "User Name Can't Less Than <strong>4 Characters</strong>";
+                    }
+                    // Check For Non Hashed Pass As The Hashed  Pass Has A Value
+                    if(empty($_POST['pass'])){
+                        $formErrors[] = "User Password Can't Be <strong>Empty</strong>";
+                    }
+                    if(empty($fullname)){
+                        $formErrors[] = "Full Name Can't Be <strong>Empty</strong>";
+                    }
+                    if(empty($useremail)){
+                        $formErrors[] = "User Email Can't Be <strong>Empty</strong>";
+                    }
+
+                    // If There Are Errors Display It
+                    // Else Update The Data
+                    foreach($formErrors as $error){
+                        echo '<div class="alert alert-danger w-75 mx-auto mt-3">' . $error .'</div>';
+                    }
+
+                    // If There Is No Errors Insert The Data To DB
+                    if(empty($formErrors)){
+                        $stmt = $connect->prepare("
+                            INSERT INTO 
+                            users(user_name , password , email , full_name)
+                            VALUES(:zuser , :zpass , :zemail , :zname);     
+                        ");
+
+                        $stmt->execute(array(
+                            "zuser"  => $username , 
+                            "zpass"  => $userpass , 
+                            "zemail" => $useremail , 
+                            "zname"  => $fullname)
+                        );
+
+                        echo "<div class='alert alert-success w-75 mx-auto mt-4'>". $stmt->rowCount() . " Member Added Successfully". "</div>";
+                    }            
+                }else{
+                    echo "<div class='alert alert-danger w-75 mx-auto mt-4'>Sorry You Can't Access This Page Directly</div>";
+                }
+
+                echo "</div>";
+        
+            }
+            elseif($do == 'edit'){
+                // Fetch 'userid' From Page Link
+                $userId = $_GET['userid'];
+                // Check For 'userid' In The Link
+                $id = isset($userId) && is_numeric($userId) ? intval($userId) : 0;
+                // Select User Depending On 'userid'
+                $stmt = $connect->prepare("SELECT * FROM users WHERE id=?");
+                $stmt->execute(array($id));
+                $row = $stmt->fetch();
+                $count = $stmt->rowCount();
+                
+                // If 'userid' Exist In DB
+                if($count > 0){?>
+                    <div class="container mt-5">
+                        <h2>Edit Member</h2>
+                        <form class="mt-4" action="?do=update" method="POST">
+                        <input type="hidden" name='userid' value="<?php echo $userId;?>">
+                            <div class="row">
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="username">User Name</label>
+                                    <input type="text" name='username' class="form-control" id="username" autocomplete="off" value="<?php echo $row['user_name'];?>" required="required">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="pass">Password</label>
+                                    <input type="password" name='pass' class="form-control" id="pass" autocomplete="new-password">
+                                    <input type="hidden" name='oldpass' value="<?php echo $row['password']; ?>">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="fullname">Full Name</label>
+                                    <input type="text" name='fullname' class="form-control" id="fullname" value="<?php echo $row['full_name'];?>" required="required">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="email">Email</label>
+                                    <input type="email" name='email' class="form-control" id="email" value="<?php echo $row['email'];?>" required="required">
+                                </div>
+                                <div class="form-group col-12">
+                                    <input type="submit" value="Save" class="btn btn-primary px-5 py-2 mt-2"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                <?php
+                    
+                }else{
+                    echo "<div class='alert alert-danger w-75 mt-5 mx-auto'>There Is No Such Id</div>";
+                }
+            
+            
+            
+            }
+            elseif($do == 'update'){
+                
+                echo "<div class='container mt-5'>";
+                // If User Coming Through POST Request Fetch Changed Data
+                // Then Update It
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    $id        = $_POST['userid'];
+                    $username  = $_POST['username'];
+                    // If Pass Empty Set It To Old Pass Else Set It To New Pass
+                    $userpass  = empty($_POST['pass']) ? $_POST['oldpass'] : sha1($_POST['pass']);
+                    $fullname  = $_POST['fullname'];
+                    $useremail = $_POST['email'];
+
+                    // Validate Updated Data
+                    $formErrors = array();
+                    if(empty($username)){
+                        $formErrors[] = "User Name Can't Be <strong>Empty</strong>";
+                    }
+                    if(strlen($username) < 4){
+                        $formErrors[] = "User Name Can't Less Than <strong>4 Characters</strong>";
+                    }
+                    if(empty($fullname)){
+                        $formErrors[] = "Full Name Can't Be <strong>Empty</strong>";
+                    }
+                    if(empty($useremail)){
+                        $formErrors[] = "User Email Can't Be <strong>Empty</strong>";
+                    }
+
+                    // If There Are Errors Display It
+                    // Else Update The Data
+                    foreach($formErrors as $error){
+                        echo '<div class="alert alert-danger w-75 mx-auto mt-3">' . $error .'</div>';
+                    }
+
+                    // If There Is No Errors Update The Data
+                    if(empty($formErrors)){
+                        $stmt = $connect->prepare("
+                            UPDATE users 
+                            SET user_name=? , password=?, email=?, full_name=?
+                            WHERE id = ?    
+                        ");
+
+                        $stmt->execute(array($username , $userpass , $useremail , $fullname , $id));
+
+                        echo "<div class='alert alert-success w-75 mx-auto mt-4'>". $stmt->rowCount() . " Record Updated". "</div>";
+                    }            
+                }else{
+                    echo "<div class='alert alert-danger w-75 mx-auto mt-4'>Sorry You Can't Access This Page Directly</div>";
+                }
+
+                echo "</div>";
+            }
+            else{
+                echo 'Sorry Page Not Found';
+            }
+            include $tpl . 'footer.php';
+        }else{
+            header('Location: index.php');
+            exit();
+        }
+    ?>

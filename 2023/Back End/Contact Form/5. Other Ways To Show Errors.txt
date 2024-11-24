@@ -1,0 +1,91 @@
+(1) Display Each Error Under It's Own Input Field
+--------------------------------------------------
+
+index.php
+----------
+
+    <?php
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $message = $_POST['message'];
+
+        $userError = '';
+        $phoneError = '';
+        $messageError = '';
+        if (strlen($username) <= 3) {
+            $userError = '<div class="alert alert-danger">User Name Must Be Greater Than 3 Characters</div>';
+        }
+
+        if (strlen($phone) < 11) {
+            $phoneError = '<div class="alert alert-danger">Phone Must 11 Digits</div>';
+        }
+
+        if (strlen($message) <= 14) {
+            $messageError = '<div class="alert alert-danger">Message Must Be Greater Than 15 Characters</div>';
+        }
+    }
+    ?>
+
+    <!DOCTYPE html>
+    <html>
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta name='viewport' content="width=device-width , initial-scale=1" />
+        <title> Contact Form </title>
+        <link rel='stylesheet' href="./css/bootstrap.min.css" />
+        <link rel='stylesheet' href='./css/all.min.css' />
+        <link rel='stylesheet' href='./css/contact.css' />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div class="container mt-5 w-50">
+            <h2 class="fw-bold">Contact Form</h2>
+            <p class='text-muted'>
+                Please Send Message For Us For Knowing You And Your Opinions
+            </p>
+
+            <form class="contact-form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <input type="text" name="username" class="form-control my-3" placeholder="Enter Your Name" />
+                <i class="fas fa-user fa-fw position-relative fa-sm"></i>
+                <?php
+                if (isset($userError)) {
+                    echo $userError;
+                }
+                ?>
+                <input type="email" name="email" class="form-control my-3" placeholder="Enter Valid Email" />
+                <i class="fas fa-envelope fa-fw position-relative fa-sm"></i>
+                <input type="text" name="phone" class="form-control my-3" placeholder="Enter Your Phone" />
+                <i class="fas fa-phone fa-fw position-relative fa-sm"></i>
+                <?php
+                if (isset($phoneError)) {
+                    echo $phoneError;
+                }
+                ?>
+                <textarea class="form-control my-t" name='message' placeholder="Enter Your Message"></textarea>
+                <?php
+                if (isset($messageError)) {
+                    echo $messageError;
+                }
+                ?>
+                <input type="submit" value='Send Message' class="btn btn-success mt-3 shadow-sm" />
+                <i class="fas fa-paper-plane fa-fw position-relative send d-block float-none text-white fa-sm"></i>
+            </form>
+        </div>
+        <script src='./js/bootstrap.min.js'></script>
+    </body>
+
+    </html>

@@ -1,0 +1,101 @@
+(1) OOCSS [Object Oriented CSS]
+-------------------------------
+==> purpose of OOCSS is to encourage code reuse and, ultimately, faster and more efficient stylesheets that are easier to add to and maintain.
+
+
+(2) The Benefits Of OOCSS
+--------------------------
+==> Faster Websites [Small Style Files]
+==> Maintainable Stylesheets [As We Make Comine For The Style And Clear]
+
+(3) OOCSS Disadvantages
+-----------------------
+==> Increases the number of classes added to an element
+==> May be overkill for small projects
+
+
+(3) OOCSS Two Main Principles
+-----------------------------
+==> Separation of Structure From Skin
+==> Separation of Containers and Content
+
+
+
+(4) Separation of Structure From Skin
+---------------------------------------
+
+	/* Before applying OOCSS principles */
+
+	#button {
+	  width: 100px;
+	  border: solid 1px #ccc;
+	  background: linear-gradient(#ccc, #222);
+	  box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+	}
+
+	#box {
+	  width: 400px;
+	  border: solid 1px #ccc;
+	  background: linear-gradient(#ccc, #222);
+	  box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+	}
+
+	#widget {
+	  width: 500px;
+	  border: solid 1px #ccc;
+	  background: linear-gradient(#ccc, #222);
+	  box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+	}
+
+
+	/* After applying OOCSS principles [ Use Classes Instead Of Id's And combine common styles into a reusable “skin” Then apply the “skin” class to all the elements ]*/
+
+	.button { width: 100px }
+
+	.box { width: 400px }
+
+	.widget { width: 500px }
+
+	.skin {
+	  border: solid 1px #ccc;
+	  background: linear-gradient(#ccc, #222);
+	  box-shadow: rgba(0, 0, 0, .5) 2px 2px 5px;
+	}
+
+
+
+(5) Separation of Containers and Content
+---------------------------------------- 
+
+	/* Before applying OOCSS principles */
+	.header-inside {
+	  width: 980px;
+	  height: 260px;
+	  padding: 20px;
+	  margin: 0 auto;
+	  position: relative;
+	  overflow: hidden;
+	}
+
+
+
+	/* After applying OOCSS principles */
+	/* With OOCSS, we’re encouraged to give more forethought to what is common among different elements, then separate those common features into modules, or objects, that can be reused anywhere , When we use OOCSS’s class-based module building, we ensure that our styles are not dependent on any container element , This means they can then be reused anywhere in the document*/
+
+
+	/* Now we’re free to use these styles on any elements that require these same characteristics by simply adding that class to the desired element – without writing a single extra line of CSS */
+	
+	.globalwidth {
+	  width: 980px;
+	  margin: 0 auto;
+	  position: relative;
+	  padding-left: 20px;
+	  padding-right: 20px;
+	  overflow: hidden;
+	}
+
+	.header-inside {
+	  padding-top: 20px;
+	  padding-bottom: 20px;
+	  height: 260px;
+	}

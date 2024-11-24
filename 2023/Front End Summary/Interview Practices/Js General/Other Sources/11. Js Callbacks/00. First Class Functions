@@ -1,0 +1,75 @@
+(1) First Class Functions
+--------------------------
+==> when functions treated like any other variable. For example, a function can be passed as an argument to other functions, can be returned by another function and can be assigned as a value to a variable.
+
+
+EX (Assign Function To Variable)
+---------------------------------
+	
+	// func Called Anonymous Function
+	let func = function () {
+	  console.log('Hellow')
+	}
+
+	func() // 'Hellow'
+	
+	
+EX (Function As Value)
+-----------------------
+
+	// Function As Array Value
+	let arr = [1, function () { return 'Hellow' }]
+	console.log(arr[1]()) // Hellow
+	
+	
+	// Function As Object Value
+	let obj = {
+	  num: 20,
+	  func: function () {
+	    return 'Hellow'
+	  }
+	}
+
+	console.log(obj.func()) // Hellow
+	
+	
+	// Function With Value Process
+	console.log(10 + (function () { return 10 })()) // 20
+
+
+EX (Passing Function As Parameter To Another Function)
+------------------------------------------------------
+
+	let add = function (first, second) {
+	  return first + second()
+	}
+
+	let second = function () { return 10 }
+
+	console.log(add(30, second)) // 40
+
+
+
+EX (Function Return Another Function)
+-------------------------------------
+
+	// First Sample
+	let func = function () {
+	  return function () {
+	    console.log('Hellow')
+	  }
+	}
+
+	let f = func()
+
+	f()  // Hellow
+
+
+	// Second Sample With Doubled parentheses
+	let func = function () {
+	  return function () {
+	    console.log('Hellow')
+	  }
+	}
+
+	func()() // Hellow

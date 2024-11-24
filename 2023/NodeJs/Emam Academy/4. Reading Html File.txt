@@ -1,0 +1,296 @@
+(1) Read Html File With NodeJs And Send It With The Response
+-------------------------------------------------------------
+
+
+	index.html
+	------------
+	
+	<!DOCTYPE html>
+	<html>
+
+		<head>
+		    <title>Document</title>
+		</head>
+
+		<body>
+		    <h1>
+			Hellow World
+		    </h1>
+		</body>
+
+	</html>
+	
+	
+	App.js
+	---------
+	
+	let http = require('http')
+	let fs = require('fs') // First Import 'fs' Module To Deal With Files
+
+	http.createServer((req, res) => {
+	    // Read The Html File If File Has Problems Will Display Error Else Will Display File Content
+	    fs.readFile('./index.html', null, (err, data) => {
+		if (err) {
+		    res.end('File Has Error!!!')
+		} else {
+		    res.end(data)
+		}
+	    })
+	}).listen(3000, "127.0.0.1", () => {
+	    console.log('Running...')
+	})
+
+
+
+(2) In The Previous Code If Write '127.0.0.1:3000/user' It Still Display The 'index.html' File And This Is A Problem
+---------------------------------------------------------------------------------------------------------------------
+==> This Code Is Called 'Routing'
+
+	App.js
+	-------
+	
+	let http = require('http')
+	let fs = require('fs')
+	let url = require('url')
+
+	http.createServer((req, res) => {
+
+	    // Get The Route That After '127.0.0.1:3000/user' It Get '/user'
+	    console.log(url.parse(req.url).pathname)
+
+	    // If The Path Equal To 'http://127.0.0.1:3000/' Will Import Home Page
+	    // Else (http://127.0.0.1:3000/any) Will Import Error Page
+	    if (url.parse(req.url).pathname === '/') {
+		fs.readFile('./index.html', null, (err, data) => {
+		    if (err) {
+		        res.end('File Has Error!!!')
+		    } else {
+		        res.end(data)
+		    }
+		})
+	    } else {
+		fs.readFile('./error.html', null, (err, data) => {
+		    if (err) {
+		        res.end('File Has Error!!!')
+		    } else {
+		        res.end(data)
+		    }
+		})
+	    }
+
+
+	}).listen(3000, "127.0.0.1", () => {
+	    console.log('Running...')
+	})
+
+
+	index.html
+	-----------
+	
+	<!DOCTYPE>
+	<html>
+
+		<head>
+		    <title>Document</title>
+		</head>
+
+		<body>
+		    <h1>
+			Hellow World
+		    </h1>
+		</body>
+
+	</html>
+	
+	
+	
+	error.html
+	-----------
+	
+	<!DOCTYPE>
+	<html>
+
+		<head>
+		    <title>Document</title>
+		</head>
+
+		<body>
+		    <h1>
+			Sorry Page Not Found
+		    </h1>
+		</body>
+
+	</html>
+	
+	
+	
+(3) Optimize Routing
+---------------------
+
+
+	App.js
+	--------
+	
+	let http = require('http')
+	let fs = require('fs')
+	let url = require('url')
+
+	http.createServer((req, res) => {
+
+	    // Get The Route That After '127.0.0.1:3000/user' It Get '/user'
+	    console.log(url.parse(req.url).pathname)
+
+	    // If The Path Equal To 'http://127.0.0.1:3000/' Will Import Home Page
+	    // Else (http://127.0.0.1:3000/any) Will Import Error Page
+	    if (url.parse(req.url).pathname === '/') {
+		handleRouting('./index.html', res)
+	    } else {
+		handleRouting('./error.html', res)
+	    }
+
+
+	}).listen(3000, "127.0.0.1", () => {
+	    console.log('Running...')
+	})
+
+	// Create Function That Accept File Path And Response As Argument And Handle Reading Routing Files
+	function handleRouting(filePath, res) {
+	    fs.readFile(filePath, null, (err, data) => {
+		if (err) {
+		    res.end('File Has Error!!!')
+		} else {
+		    res.end(data)
+		}
+	    })
+	}
+	
+	
+	index.html
+	-----------
+	
+	<!DOCTYPE>
+	<html>
+
+		<head>
+		    <title>Document</title>
+		</head>
+
+		<body>
+		    <h1>
+			Hellow World
+		    </h1>
+		</body>
+
+	</html>
+	
+	
+	
+	error.html
+	-----------
+	
+	<!DOCTYPE>
+	<html>
+
+		<head>
+		    <title>Document</title>
+		</head>
+
+		<body>
+		    <h1>
+			Sorry Page Not Found
+		    </h1>
+		</body>
+
+	</html>	
+	
+	
+	
+(4) More Optimize Routing
+---------------------------
+
+
+	App.js
+	-------
+	
+	let http = require('http')
+	let routing = require('./routing.js') // Import Routing Module
+
+
+	http.createServer(routing).listen(3000, "127.0.0.1", () => {
+	    console.log('Running...')
+	})
+
+
+	routing.js
+	-----------
+	
+	let fs = require('fs')
+	let url = require('url')
+
+	// Create Function That Accept File Path And Response As Argument And Handle Reading Routing Files
+	function handleRouting(filePath, res) {
+	    fs.readFile(filePath, null, (err, data) => {
+		if (err) {
+		    res.end('File Has Error!!!')
+		} else {
+		    res.end(data)
+		}
+	    })
+	}
+
+
+	let routing = (req, res) => {
+
+	    // Get The Route That After '127.0.0.1:3000/user' It Get '/user'
+	    console.log(url.parse(req.url).pathname)
+
+	    // If The Path Equal To 'http://127.0.0.1:3000/' Will Import Home Page
+	    // Else (http://127.0.0.1:3000/any) Will Import Error Page
+	    if (url.parse(req.url).pathname === '/') {
+		handleRouting('./index.html', res)
+	    } else {
+		handleRouting('./error.html', res)
+	    }
+	}
+
+	module.exports = routing
+	
+	
+	
+	index.html
+	-----------
+	
+	<!DOCTYPE>
+	<html>
+
+		<head>
+		    <title>Document</title>
+		</head>
+
+		<body>
+		    <h1>
+			Hellow World
+		    </h1>
+		</body>
+
+	</html>
+	
+	
+	
+	error.html
+	-----------
+	
+	<!DOCTYPE>
+	<html>
+
+		<head>
+		    <title>Document</title>
+		</head>
+
+		<body>
+		    <h1>
+			Sorry Page Not Found
+		    </h1>
+		</body>
+
+	</html>

@@ -1,0 +1,31 @@
+(1) closed Property
+-------------------
+==> returns a Boolean value indicating whether a window has been closed or not
+
+
+EX
+----
+
+	html
+	------
+	
+		<button id="open">Open Window</button>
+	    	<button id="close">Close Window</button>
+	  
+	    	
+	Js
+	------
+	
+	var myWindow;
+
+	document.getElementById('open').onclick = () => {
+	    myWindow = window.open("", "myWindow", "width=400, height=200")
+	    console.log(myWindow.closed) // False
+	}
+
+	document.getElementById('close').onclick = () => {
+	    if (myWindow) {
+		myWindow.close()
+		console.log(myWindow.closed) // True
+	    }
+	}

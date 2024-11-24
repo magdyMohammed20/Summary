@@ -1,5 +1,0 @@
-// Filter Array Unique Values
-var arr = [1,2,3,1,5,2]
-var uniqueArr = [...new Set(arr)]
-
-console.log(uniqueArr) // [1,2,3,5]

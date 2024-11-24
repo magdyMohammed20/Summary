@@ -1,0 +1,16 @@
+(1) appVersion
+--------------
+==> returns the version information of the browser
+
+==> This property is read-only.
+
+EX:
+----
+
+	window.navigator.appVersion  // 5.0 (X11)
+	
+	Or
+	
+	navigator.appVersion  // 5.0 (X11)
+	
+	

@@ -1,0 +1,85 @@
+(1) Code Edit Members Page
+----------------------------
+==> Fetch Edit User From DB
+==> Fetch User Data Inside The Form Values
+
+    members.php
+    ------------
+
+    <style>
+        body{
+            background: none !important;
+        }
+    </style>
+    <?php
+        // Must Start Session Before Anything 
+        session_start();
+        $pageTitle = 'Members';
+        // If User Comming From Entering Login Data Correctly
+        // Else Redirect To Login Page Again
+        if(isset($_SESSION['username'])){
+            include 'init.php';
+
+            // Fetch $do Variable Value From Page Link
+            $do = isset($_GET['do']) ? $_GET['do'] : 'manage';
+
+            // Display Content Depending On $do Variable
+            if($do == 'manage'){
+                echo 'Manage Members';
+            }elseif($do == 'edit'){
+                // Fetch 'userid' From Page Link
+                $userId = $_GET['userid'];
+                // Check For 'userid' In The Link
+                $id = isset($userId) && is_numeric($userId) ? intval($userId) : 0;
+                // Select User Depending On 'userid'
+                $stmt = $connect->prepare("SELECT * FROM users WHERE id=?");
+                $stmt->execute(array($id));
+                $row = $stmt->fetch();
+                $count = $stmt->rowCount();
+                
+                // If 'userid' Exist In DB
+                if($count > 0){?>
+                    <div class="container mt-5">
+                        <h2>Edit Member</h2>
+                        <form class="mt-4">
+                            <div class="row">
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="username">User Name</label>
+                                    <input type="text" name='username' class="form-control" id="username" autocomplete="off" value="<?php echo $row['user_name'];?>">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="pass">Password</label>
+                                    <input type="password" name='pass' class="form-control" id="pass" autocomplete="new-password">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="fullname">Full Name</label>
+                                    <input type="text" name='fullname' class="form-control" id="fullname" value="<?php echo $row['full_name'];?>">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="email">Email</label>
+                                    <input type="email" name='email' class="form-control" id="email" value="<?php echo $row['email'];?>">
+                                </div>
+                                <div class="form-group col-12">
+                                    <input type="submit" value="Save" class="btn btn-primary px-5 py-2 mt-2"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                <?php
+                    
+                }else{
+                    echo "<div class='alert alert-danger w-75 mt-5 mx-auto'>There Is No Such Id</div>";
+                }
+            
+            
+            
+            }else{
+                echo 'Sorry Page Not Found';
+            }
+            include $tpl . 'footer.php';
+        }else{
+            header('Location: index.php');
+            exit();
+        }
+    ?>
+    

@@ -1,0 +1,48 @@
+(1) Activate Pending Member
+----------------------------
+==> Set Activate Member Link Inside The Pending Table 'members.php'
+==> Add Activate Condition Inside 'members.php'
+
+
+    members.php
+    ------------
+
+    <?php
+        if($member['reg_status'] == 0){
+            echo '<a href="?do=activate&userid='. $member['id'] .'"class="btn btn-info text-white">Activate<i class="fas fa-check ml-1"></i></a>';
+        }
+    ?>
+
+
+    members.php
+    ------------
+
+    elseif($do == 'activate'){
+        $userid = (isset($_GET['userid']) && is_numeric($_GET['userid'])) ? intval($_GET['userid']) : 0;
+
+        $checkUser = checkItem('id' , 'users' , $userid);
+
+        if($checkUser >= 1){
+
+            $stmt = $connect->prepare("
+                UPDATE users
+                SET reg_status=1
+                WHERE id = :zid    
+            ");
+
+            $stmt->bindParam(":zid" , $userid);
+
+            $stmt->execute();
+            echo "<div class='container mt-5'>";
+                $msg = "<div class='alert alert-success mx-auto mt-4'>Congrates User Be Actual Member Now</div>";
+                // Redirect User To Previous Page After 5 Seconds After Delete
+                redirectHome($msg , 5);
+            echo "</div>";
+
+        }else{
+            $errMsg = "<div class='alert alert-danger mt-4'>Sorry User Not Exist</div>";
+            echo '<div class="container">';
+            redirectHome($errMsg ,'back', 5);
+            echo '</div>';
+        }
+    }

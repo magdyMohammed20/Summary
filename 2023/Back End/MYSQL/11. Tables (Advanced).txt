@@ -1,0 +1,15 @@
+(1) Rename Table Using (ALTER)
+-------------------------------
+==> ALTER TABLE emps RENAME employees; // Change 'emps' Table Name To 'employees'
+
+(2) Merge (CHANGE) And (MODIFY)
+--------------------------------
+==> ALTER TABLE employees CHANGE name userName VARCHAR(255), MODIFY address VARCHAR(30);
+
+(3) Change Character Set Of Table
+----------------------------------
+==> ALTER TABLE employees CONVERT TO CHARACTER SET utf8;
+
+Or
+
+==> ALTER TABLE employees CONVERT TO CHARACTER SET latin1;

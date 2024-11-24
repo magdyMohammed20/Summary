@@ -1,0 +1,70 @@
+(1) Steps To Insert Data Into MongoDB
+---------------------------------------
+==> Inside [index.js] Create '/insert' Route
+==> Inside 'user.js' In 'model' Folder Use mongoose.model 
+
+EX
+-------
+
+==> Inside [index.js] Create '/insert' Route
+
+    index.js
+    -----------
+
+    var express = require('express');
+    var router = express.Router();
+    // Step1: Import User Schema
+    var User = require('../model/user')
+
+    /* GET home page. */
+    router.get('/', function (req, res, next) {
+    res.render('index', { title: 'Express' });
+    });
+
+    router.post('/insert', (req, res, next) => {
+
+    // Step2: Fetch Data From Request And Save It In User Schema
+    // userName , userEmail Keys Here Must Be Same As User Schema Keys
+    const user = new User({
+        userName: req.body.userName,
+        userEmail: req.body.userEmail
+    })
+
+    // Step3: Save Data To MongoDB And User Schema
+    user.save((err, result) => {
+        if (err) {
+        console.log('Error!!')
+        res.redirect('/')
+        return
+        }
+        console.log(result)
+    })
+
+    })
+    module.exports = router;
+
+
+==> Inside 'user.js' In 'model' Folder Use mongoose.model 
+
+    user.js
+    ------------
+
+    // Import Mongoose Module
+    const mongoose = require('mongoose')
+
+    // Create User Schema
+    const UserSchema = mongoose.Schema({
+        userName: {
+            type: String,
+            required: true
+        },
+        userEmail: {
+            type: String,
+            required: true
+        }
+    })
+
+    // Export User Schema
+    // Step4: User mongoose.model Instead Of Direct Export To Prevent 'User is not a constructor' Error
+    // 'User' Is Capitalize As In 'index.js' We Import UserSchema As 'User'
+    module.exports = mongoose.model('User', UserSchema)

@@ -1,0 +1,7 @@
+(1) Visibility Markers
+------------------------
+==> public : It Can Be Called In Any Scope , If Class Property Don't Have Visibility Marker It Can Be Considered As Public Property
+==> protected : Can Be Accessed From Inside The Class They Are Declared Or In Any Class That Extends Them
+==> private : Can't Be Accessed By A SubClass Of The Class It's Defined In  
+
+Note: If I Have Class With protected And private Property And Then Extend This Class In SubClass You Can Access The Protected Property But Not The private Property

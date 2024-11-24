@@ -1,0 +1,99 @@
+(1) BEM (Block Element Modifier)
+---------------------------------
+==> aiming to reduce the CSS footprint, organize cooperation among programmers and maintain large CSS codebases
+==> [Block] Is The Container Or Parent Of Some Elements
+==> [Element] Is The Child Of The Parent
+==> [Modifier] More Specifiying Of The Element
+
+
+(1) First Example (Block And Element)
+--------------------------------------
+
+	Html
+	------
+
+	      <ul class="list">
+		<li class="list__item">List Item</li>
+		<li class="list__item">List Item</li>
+		<li class="list__item">List Item</li>
+	      </ul>
+
+
+	Css
+	------
+
+	/* Block */
+	.list{
+	  list-style: none
+	}
+
+	/* Element : Note That We Don't Use Nesting */
+	.list__item{
+	  color: red
+	}
+
+
+(2) Second Example (Block And Element And Modifier)
+----------------------------------------------------
+
+
+	Html 
+	------
+		
+	      <ul class="list">
+		<li class="list__item list__item--firstItem">List Item</li>
+		<li class="list__item list__item--secondItem">List Item</li>
+		<li class="list__item list__item--lastItem">List Item</li>
+	      </ul>
+
+
+	Css
+	------
+
+	/* Block */
+	.list{
+	  list-style: none
+	}
+
+	/* Element : Note That We Don't Use Nesting */
+	.list__item{
+	  color: red
+	}
+
+	
+	// Modifier
+	.list__item--firstItem{
+	  color: green
+	}
+
+
+
+(3) How To Use BEM With Sass
+------------------------------
+
+
+	Html 
+	------
+		
+	      <ul class="list">
+		<li class="list__item list__item--firstItem">List Item</li>
+		<li class="list__item list__item--secondItem">List Item</li>
+		<li class="list__item list__item--lastItem">List Item</li>
+	      </ul>
+
+
+	Sass
+	------
+
+	.list{
+	  list-style: none;
+
+	  &__item{
+		color: red
+	  }
+
+	  &__item--secondItem{
+		color: blue
+	  }
+	}
+		

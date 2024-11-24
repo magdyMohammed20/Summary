@@ -1,0 +1,124 @@
+(1) strstr() Method
+---------------------
+==> Search For Specific String In String
+
+==> Syntax
+
+    strstr(String[Required] , Search[Required] , Before_Search[Optional])
+
+==> [Before_Search] Default Value Is [False] 
+
+==> [Search] Is Case-Senistive ['PHP' Not As 'php']
+
+EX
+---
+
+    <?php 
+            
+        $str = "Hellow Php Friends We Love Php So Much";
+
+        $search = strstr($str , "Love");
+
+        // Search For "Love" And Cut From It's Index To End Of String
+        echo $search; // Love Php So Much
+    ?> 
+
+
+EX [Set Before_Search]
+---
+
+    <?php 
+            
+        $str = "Hellow Php Friends We Love Php So Much";
+
+        $search = strstr($str , "Love" , true); 
+
+        // Search For "Love" And Ignore It And Any Characters After It Then Cut All Characters Before It
+        echo $search; // Hellow Php Friends We
+    ?> 
+
+
+EX [Extract Domains From Emails]
+---
+
+    <?php 
+            
+        $str = "magdymohammed@yahoo.com";
+
+        // Extract Doamins From Emails
+        $search = strstr($str , "@" , true); 
+
+        // Search For @ And Ignore It And Any Characters After It Then Cut All Characters Before It
+        echo $search; // magdymohammed
+    ?>  
+
+
+(2) stristr() Method
+---------------------
+==> Search For Specific String In String
+
+==> Syntax
+
+    stristr(String[Required] , Search[Required] , Before_Search[Optional])
+
+==> [Search] Is Not Case-Senistive ['PHP' As 'php']
+
+EX
+---
+
+    <?php 
+            
+        $str = "Hellow Php Friends We Love Php So Much";
+
+        $search = stristr($str , "LOVE" ); 
+
+        echo var_dump($search); // string(16) "Love Php So Much"
+    ?>  
+
+
+EX [Set Before_Search]
+---
+
+    <?php 
+            
+        $str = "Hellow Php Friends We Love Php So Much";
+
+        $search = stristr($str , "LOVE" , true); 
+
+        echo var_dump($search); // string(22) "Hellow Php Friends We "
+    ?>  
+
+
+(3) strchr() Method
+---------------------
+==> Like strstr() Method
+
+==> Syntax
+
+    strchr(String[Required] , Search[Required] , Before_Search[Optional])
+
+
+EX
+---
+
+    <?php 
+            
+        $str = "Hellow Php Friends We Love Php So Much";
+
+        $search = strchr($str , "Love"); 
+
+        echo var_dump($search); // string(16) "Love Php So Much"
+    ?>  
+
+
+EX [Set Before_Search]
+---
+
+    <?php 
+            
+        $str = "Hellow Php Friends We Love Php So Much";
+
+        $search = strchr($str , "Love" , true); 
+
+        echo var_dump($search); // string(22) "Hellow Php Friends We "
+    ?>  

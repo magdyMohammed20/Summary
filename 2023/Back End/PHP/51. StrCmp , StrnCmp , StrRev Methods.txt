@@ -1,0 +1,119 @@
+(1) strcmp() Method
+---------------------
+==> Used To Compare Strings
+
+==> Syntax
+
+    strcmp(String1 , String2)
+
+
+==> If [String1] Length And [String2] Length Equal It Will Return 0
+==> If [String1] Length Greater Than [String2] Length It Will Return Positive Number That's Length Of Extra Characters
+==> If [String2] Length Greater Than [String1] Length It Will Return Negative Number That's Length Of Extra Characters
+
+
+EX
+---
+
+    <?php 
+            
+        $str1 = 'Magdy';
+        $str2 = 'Magdy';
+
+        echo strcmp($str1 , $str2); // 0
+    ?>  
+
+
+EX [String1 Length Greater Than String2 Length]
+---
+
+    <?php 
+            
+        $str1 = 'MagdyPHP';
+        $str2 = 'Magdy';
+
+        echo strcmp($str1 , $str2); // 3
+    ?>  
+
+
+EX [String2 Length Greater Than String1 Length]
+---
+
+    <?php 
+            
+        $str1 = 'Magdy';
+        $str2 = 'MagdyPHP';
+
+        echo strcmp($str1 , $str2); // -3
+    ?> 
+
+
+(2) strncmp() Method
+---------------------
+==> Used To Compare Strings
+
+==> Syntax
+
+    strncmp(String1 , String2 , Length)
+
+==> [Length] Is Number Of Characters That Want To Compare From [String1] And [String2]
+
+
+EX
+---
+
+    <?php 
+            
+        $str1 = 'Magdy';
+        $str2 = 'MagdyPHP';
+
+        // Compare First 5 Characters From $str1 With First 5 Characters From $str2
+        echo strncmp($str1 , $str2 , 5); // 0
+
+        // Compare First 6 Characters From $str1 With First 6 Characters From $str2
+        echo strncmp($str1 , $str2 , 6); // -1
+
+        // Compare First 7 Characters From $str1 With First 7 Characters From $str2
+        echo strncmp($str1 , $str2 , 7); // -2
+
+        // Compare First 8 Characters From $str1 With First 8 Characters From $str2
+        echo strncmp($str1 , $str2 , 8); // -3
+        
+        // Compare First 9 Characters From $str1 With First 9 Characters From $str2
+        echo strncmp($str1 , $str2 , 9); // -3
+
+        // Compare First 5 Characters From $str1 With First 5 Characters From $str2
+        echo strncmp($str2 , $str1 , 5); // 0
+
+        // Compare First 6 Characters From $str1 With First 6 Characters From $str2
+        echo strncmp($str2 , $str1 , 6); // 1
+
+        // Compare First 7 Characters From $str1 With First 7 Characters From $str2
+        echo strncmp($str2 , $str1 , 7); // 2
+
+        // Compare First 8 Characters From $str1 With First 8 Characters From $str2
+        echo strncmp($str2 , $str1 , 8); // 3
+        
+        // Compare First 9 Characters From $str1 With First 9 Characters From $str2
+        echo strncmp($str2 , $str1 , 9); // 3
+    ?>  
+
+
+(3) strrev() Method
+---------------------
+==> Used To Reverse String Characters
+
+==> Syntax
+
+    strrev(String)
+
+EX
+---
+
+    <?php 
+            
+        $str = 'Magdy';
+        
+        echo strrev($str); // ydgaM
+
+    ?>  

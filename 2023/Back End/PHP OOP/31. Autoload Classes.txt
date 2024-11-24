@@ -1,0 +1,87 @@
+(1) Bad Way To Call Classes
+----------------------------
+
+    Apple.class.php
+    -----------------
+
+    <?php
+
+        class Apple{
+            public $name;
+        }
+
+    ?>
+
+
+    Sony.class.php
+    ----------------
+
+    <?php
+
+        class Sony{
+            public $generation;
+        }
+    ?>
+
+
+    index.php
+    -----------
+
+    <?php
+        // This Is Bad
+        require "Apple.class.php";
+        require "Sony.class.php";
+
+        $apple = new Apple();
+        $sony = new Sony();
+
+        print_r($apple); // Apple Object ( [name] => )
+        print_r($sony); // Sony Object ( [generation] => )
+
+    ?>
+
+
+(2) Best Way To Load Classes That In Separate Files
+----------------------------------------------------
+
+    Apple.class.php
+    -----------------
+
+    <?php
+
+        class Apple{
+            public $name;
+        }
+
+    ?>
+
+
+    Sony.class.php
+    ----------------
+
+    <?php
+
+        class Sony{
+            public $generation;
+        }
+    ?>
+
+
+    index.php
+    -----------
+
+    <?php
+
+        // Use 'spl_autoload_register' To Load Files That Contains The Classes
+        // But The Class That Inside The File Must Have Same Name Of The File [EX: 'Apple.class.php' Contains Class Called 'Apple']
+        spl_autoload_register(function($class){
+            require $class . '.class.php';
+        });
+
+        $apple = new Apple();
+        $sony = new Sony();
+
+        print_r($apple); // Apple Object ( [name] => )
+        print_r($sony); // Sony Object ( [generation] => )
+
+    ?>

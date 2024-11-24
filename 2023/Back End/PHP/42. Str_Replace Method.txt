@@ -1,0 +1,104 @@
+(1) str_replace() Method
+--------------------------
+==> Used To Replace Specific String With Another String And Get Number Of Replacements
+
+==> Syntax
+
+    str_replace(Search[Mandatory] , Replace[Mandatory] , String[Mandatory] , Count[Optional])
+
+==> [Search] Can Be An Array For Replace Multi Strings With 1 String
+==> [Replace] Can Be An Array For Replace Multi Strings With Multi String
+
+EX
+---
+
+    <?php 
+            $str = 'I Love PHP As PHP Is Powerfull Language And PHP Strong';
+
+            // Search For "PHP" In $str Variable Then Replace "PHP" With "Javascript" And Store The Number Of Replacements in $i
+            $str2 = str_replace("PHP" , "Javascript" , $str , $i);
+
+            echo $str2 . '<br>'; // I Love Javascript As Javascript Is Powerfull Language And Javascript Strong
+            echo $i; // 3
+        
+    ?>
+
+
+EX (Use str_replace() With Arrays)
+---
+
+    <?php 
+            $str = 'I Love PHP As PHP Is Powerfull Language And PHP Strong';
+
+            $arr = explode(" " , $str);
+
+            echo '<pre>';
+                print_r($arr);
+            echo '</pre>';
+
+            $arr2 = str_replace("PHP" , "Javascript" , $arr);
+
+            echo '<pre>';
+                print_r($arr2);
+            echo '</pre>';
+
+    ?>
+
+
+EX ([Search] Can Be Array For Replace Multi Strings)
+---
+
+    <?php 
+            $str = 'I Love PHP And Js As PHP And Js Is Powerfull Languages And PHP , javascript Are Strong';
+
+            // Replace "javascript" And "Js" With "Javascript"
+            $str2 = str_replace(array("javascript" , "Js") , "Javascript" , $str); // I Love PHP And Javascript As PHP And Javascript Is Powerfull Languages And PHP , Javascript Are Strong
+
+            echo $str2;
+    ?>
+
+
+EX ( [Replace] Can Be An Array For Replace Multi Strings With Multi String)
+---
+
+    <?php 
+            $str = 'I Love PHP And Js As PHP And Js Is Powerfull Languages And PHP , js Are Strong';
+
+
+            // Replace "Js" With "Javascript" And Replace "js" With "javascript"
+            $str2 = str_replace(array("js" , "Js") , array("javascript" , "Javascript") , $str); // I Love PHP And Javascript As PHP And Javascript Is Powerfull Languages And PHP , javascript Are Strong
+
+            echo $str2;
+    ?>
+
+
+EX (If Length Of Search Array Not Equal Length Of Replace Array)
+---
+
+    <?php 
+            $str = 'I Love PHP And Js As PHP And Js Is Powerfull Languages And PHP , js Are Strong';
+
+
+            // "Powerfull" Not Have Replacement In Replace Array So It Will Replace It In The String With Empty String ""
+            // So It Will Replace "js" With "javascript" And Replace "Js" With "Javascript" And Replace "Powerfull" With ""
+            $str2 = str_replace(array("js" , "Js" , "Powerfull") , array("javascript" , "Javascript") , $str); // I Love PHP And Javascript As PHP And Javascript Is Languages And PHP , javascript Are Strong
+
+            echo $str2;
+    ?>
+
+
+EX (Excercise: Replace Break Lines In String)
+---
+
+    <?php 
+            $str = "I\n Love\n Php And\r jQuery\n And Js\n";
+
+            $array_replace = array("\n" , "\r" , "\n\r");
+
+            echo $str . '<br>';
+
+            // Replace \n , \r , \n\r With ""
+            $str2 = str_replace($array_replace , "" , $str);
+
+            echo trim($str2);
+    ?>

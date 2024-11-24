@@ -1,0 +1,20 @@
+(1) Comparison Functions
+--------------------------
+==> IN : Used To Select Specified Records 
+==> NOT IN : Used To Select Outside Specified Records 
+
+
+(2) IN
+-------
+
+EX: SELECT * FROM test WHERE number IN (100 , 225); /* Select Records That 'number' Field Is 100 Or 225 */
+EX: SELECT * FROM test WHERE number IN (100 , 225 , 500 , 600);
+EX: SELECT * FROM test WHERE regDate IN ( '2020-02-02', '2020-05-01');
+
+
+(3) NOT IN
+------------
+
+EX: SELECT * FROM test WHERE number NOT IN (100 , 225); /* Select Records That 'number' Field Not Equal 100 Or 225 */
+EX: SELECT * FROM test WHERE number NOT IN (100 , 225 , 500 , 600);
+EX: SELECT * FROM test WHERE regDate NOT IN ( '2020-02-02', '2020-05-01');

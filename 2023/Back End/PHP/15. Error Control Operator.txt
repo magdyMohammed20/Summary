@@ -1,0 +1,46 @@
+(1) Error Control Operator (@)
+-------------------------------
+==> If An Error Occured The File Path Will Displayed And User Can See The Path And This Is Not Legal So We User Error Control Operator For Hide The Error
+
+EX: (Hide Error Only)
+---
+
+    <?php 
+        // If 'magdy1.txt' Not Exist The Error Displayed 
+        // If Want To Hide The Error Use @ Operator Before 'fopen'
+        $file = @fopen('magdy1.txt' , 'r');
+
+    ?>
+
+
+EX: (Hide Error And Display Alternative Message)
+---
+
+    <?php 
+        // If 'magdy1.txt' Not Exist Die Messahe Will Displayed 
+        $file = @fopen('magdy1.txt' , 'r') or die('<div style="color: red">File To Open Not Exist</div>');
+
+    ?>
+
+
+EX: (Hide Error When Include Php File And Display Alternative Message)
+---
+
+    <?php 
+        // When Include External Php File If File Exist Will Import It Else Will Display Die Error Message
+        (@include('magdy.php')) or die('File Not Exist');
+    ?>
+
+
+EX: (Hide Error When Connect To Database And Display Alternative Message)
+---
+
+    <?php 
+        $server = 'localhost';
+        $user = 'root';
+        $pass = 'root';
+        $db = 'shop';
+
+        // If DB Not Found Will Display Die Error Message
+        (@mysqli_connect($server , $user , $pass , $db)) or die('Can\'t Coonnect To DB');
+    ?>

@@ -1,0 +1,128 @@
+(1) strpos() Method
+---------------------
+==> Search For Position Of Specific String
+
+==> Syntax
+
+    strpos(String[Required] , Find[Required] , Offset[Optional])
+
+==> [Offset] Used To Start Search From Specific Index
+==> [Find] Is Case-sensitive ['PHP' Not As 'php']
+
+EX
+---
+
+    <?php 
+            
+        $str = "Hellow Friends We Love Php";
+
+        // Search For "Fri" Index
+        $pos = strpos($str , "Fri");
+        
+        echo $pos; // 7
+    ?>  
+
+
+EX [Set Offset]
+---
+
+    <?php 
+            
+        $str = "Hellow Friends We Love Php";
+
+        // Search For "Fri" Index And Start Search From Index = 8
+        $pos = strpos($str , "Fri" , 8);
+        
+        echo var_dump($pos); // bool(false)
+    ?>  
+
+
+(2) stripos() Method
+---------------------
+==> Search For Position Of Specific String
+
+==> Syntax
+
+    stripos(String[Required] , Find[Required] , Offset[Optional])
+
+==> [Find] Isn't Case-sensitive ['PHP' as 'php']
+
+
+EX
+---
+
+    <?php 
+            
+        $str = "Hellow Friends We Love Php";
+
+        // Search For "frI" Index
+        $pos = stripos($str , "frI");
+        
+        echo var_dump($pos); // int(7)
+    ?>  
+
+
+EX [Set Offset]
+---
+
+    <?php 
+            
+        $str = "Hellow Friends We Love Php";
+
+        // Search For "frI" Index
+        $pos = stripos($str , "frI" , 8);
+        
+        echo var_dump($pos); // bool(false)
+    ?>  
+
+
+(3) strrpos() Method
+---------------------
+==> Search For Position Of Specific String But Start Search From Right
+
+==> Syntax
+
+    strrpos(String[Required] , Find[Required] , Offset[Optional])
+
+==> [Find] Is Case-sensitive ['PHP' Not As 'php']
+
+EX
+---
+
+    <?php 
+            
+        $str = "Hellow Php Friends We Love Php So Much";
+
+        // Search For "Php" Index From Right
+        $pos = strrpos($str , "Php");
+        
+        echo var_dump($pos); // int(27)
+    ?> 
+
+
+EX (Set Offset)
+---
+
+<?php 
+        
+       $str = "Hellow Php Friends We Love Php So Much";
+
+       // Start Search For "Php" Index From Index = 28 From Left
+       $pos = strrpos($str , "Php" , 28);
+       
+       echo var_dump($pos); // bool(false)
+?>  
+
+
+EX (Set Offset)
+---
+
+    <?php 
+            
+        $str = "Hellow Php Friends We Love Php So Much";
+
+        // Search For "Php" Index After 12 Characters From The Right
+        $pos = strrpos($str , "Php" , -12);
+        
+        echo var_dump($pos); // int(7)
+    ?>

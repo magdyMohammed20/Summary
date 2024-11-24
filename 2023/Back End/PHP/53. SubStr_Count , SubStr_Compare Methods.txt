@@ -1,0 +1,146 @@
+(1) substr_count() Method
+---------------------------
+==> Search For String And Get Number Of Occurences In String
+
+==> Syntax
+
+    substr_count(String[Required] , SubString[Required] , Start[Optional] , Length[Optional])
+
+
+EX
+---
+
+    <?php 
+
+        $str = 'I Love Php , Js , Ruby , Php , Html , Php';
+
+        // Search For 'Php' And Get Number Of Occurences Of It
+        echo substr_count($str , "Php"); // 3
+
+    ?>  
+
+
+EX (Set Start)
+---
+
+    <?php 
+
+        $str = 'I Love Php , Js , Ruby , Php , Html , Php';
+
+        // Start Search For 'Php' From Index 8 And Get Number Of Occurences Of It
+        echo substr_count($str , "Php" , 8); // 2
+
+    ?>  
+
+
+EX (Set Length)
+---
+
+    <?php 
+
+        $str = 'I Love Php , Js , Ruby , Php , Html , Php';
+
+        echo substr_count($str , "Php" , 9 , 19); // 1
+
+    ?>  
+
+
+
+(2) substr_compare() Method
+-----------------------------
+==> Compare Between 2 Sub Strings
+
+==> Syntax
+
+    substr_compare(String1[Required] , String2[Required] , Start_Position_String1[Required] , Length[Optional] , Case[Optional])
+
+==> [Case] Default Value Is False ['PHP' Not As 'Php']
+
+EX
+---
+
+    <?php 
+
+        $str1 = 'Hellow Magdy';
+        $str2 = 'Magdy';
+        
+        // Means $str2 Greater Than Substr Of $str1
+        echo substr_compare($str1 , $str2 , 0); // -1
+
+    ?>  
+
+
+EX
+---
+
+    <?php 
+
+        $str1 = 'zellow Magdy';
+        $str2 = 'Magdy';
+        
+        // Means Substr Of $str1 Greater Than $str2
+        echo substr_compare($str1 , $str2 , 0); // 1
+
+    ?>  
+
+
+EX
+---
+
+    <?php 
+
+        $str1 = 'zellow Magdy';
+        $str2 = 'Magdy';
+        
+        // Means Substr Of $str1 Equal With $str2
+        echo substr_compare($str1 , $str2 , 7); // 0
+
+    ?>  
+
+EX
+---
+
+    <?php 
+
+        $str1 = 'Hellow MagdyZero';
+        $str2 = 'Magdy';
+        
+        // Means Substr Of $str1 Greater Than $str2 With 4 Letters
+        echo substr_compare($str1 , $str2 , 7); // 4
+
+    ?>  
+
+
+EX (Set Length)
+---
+
+    <?php 
+
+        $str1 = 'Hellow MagdyZero';
+        $str2 = 'Magdy';
+        
+        // Means Substr Of $str1 Equal To $str2 
+        echo substr_compare($str1 , $str2 , 7 , 3); // 0
+
+        // Means Substr Of $str1 Equal To $str2 
+        echo substr_compare($str1 , $str2 , 7 , 5); // 0
+
+        // Means Substr Of $str1 Greater Than $str2 With 1 Letter
+        echo substr_compare($str1 , $str2 , 7 , 6); // 1
+
+        // Means Substr Of $str1 Greater Than $str2 With 2 Letters
+        echo substr_compare($str1 , $str2 , 7 , 7); // 2
+    ?> 
+
+
+EX (Set Case)
+---
+
+    <?php 
+
+        $str1 = 'Hellow magdyZero';
+        $str2 = 'Magdy';
+        
+        // Means Substr Of $str1 Equal With $str2 With With Ignore Case Senseitive
+        echo substr_compare($str1 , $str2 , 7 , 5 ,true); // 0
+    ?>  

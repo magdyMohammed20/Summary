@@ -1,0 +1,24 @@
+(1) php.ini
+------------
+==> File That Responsible For Configuration Of The Php
+
+EX
+---
+
+    <?php
+
+        error_reporting(0); // This Line Will Hide All Errors
+        echo $num; // No Errors Appear
+    ?>
+
+
+(2) Disable Error Display From php.ini File
+--------------------------------------------
+==> Go To C => Xampp => php => php.ini
+==> open php.ini file and search for 'display_errors=On' And Change 'On' To 'Off' Then Restart Xampp Apache
+
+
+(3) In php.ini Can Change 'max_execution_time' To Any Number Then Restart Xampp Apache
+
+(4) In php.ini Can Enable Use Of asp.net Tags By Search For 'asp_tags=Off' And Change 'Off' To 'On' Then Restart Xampp Apache
+

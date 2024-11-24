@@ -1,0 +1,19 @@
+(1) Add Foreign Key Constraint To Existing Table
+-------------------------------------------------
+
+EX
+---
+
+    /* Create Orders Table */
+    CREATE TABLE orders2(
+        id INT PRIMARY KEY NOT NULL,
+        name VARCHAR(50) NOT NULL UNIQUE,
+        client_id INT NOT NULL
+    );
+
+
+    ALTER TABLE orders2 
+    ADD CONSTRAINT ordering
+    FOREIGN KEY(client_id) REFERENCES clients(id)
+    ON UPDATE CASCADE /* For Listen To Updates When Update client id In client Table */
+    ON DELETE CASCADE;/* For Listen To Delete When Delete client From client Table */

@@ -1,0 +1,43 @@
+(1) Create 'Members' And 'Categories' Select Box Inside Add Items Page
+-----------------------------------------------------------------------
+
+    items.php
+    ----------
+
+        <div class="form-group col-12 ">
+            <label class="font-weight-bold">Member</label>
+            <select name="status" class="form-control">
+                <option value="0">...</option>
+                <?php
+
+                    $stmt = $connect->prepare("SELECT * from users");
+                    $stmt->execute();
+                    
+                    $allUsers = $stmt->fetchAll();
+
+                    foreach($allUsers as $user){
+                        echo "<option value='". $user['id'] ."'>" . $user["user_name"] . "</option>";
+                    }
+                
+                ?>
+            </select>
+        </div>
+
+        <div class="form-group col-12 ">
+            <label class="font-weight-bold">Category</label>
+            <select name="status" class="form-control">
+                <option value="0">...</option>
+                <?php
+
+                    $stmt = $connect->prepare("SELECT * from categories");
+                    $stmt->execute();
+                    
+                    $allCats = $stmt->fetchAll();
+
+                    foreach($allCats as $cat){
+                        echo "<option value='". $cat['id'] ."'>" . $cat["name"] . "</option>";
+                    }
+                
+                ?>
+            </select>
+        </div>

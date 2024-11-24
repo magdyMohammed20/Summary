@@ -1,5 +1,0 @@
-(1) Create Categories DB Table
---------------------------------
-==> In phpmyadmin Create 'categories' Table That Contains 7 Fields
-==> id(Primary) , name(Unique) , description , ordering , visibility(0 Or 1) , allow_comment(0 Or 1) , allow_ads(0 Or 1)  
-

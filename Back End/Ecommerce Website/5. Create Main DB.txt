@@ -1,4 +1,0 @@
-(1) Steps To Create DB
------------------------
-==> In [phpmyadmin] Create Database Called [shop] With [utf8_general_ci] Collation
-==> Inside [shop] DB Create [users] Table Which Contains [id(Primary Key) - userName - password - email - fullName - groupId (0 Or 1 : Default = 0) - trustStatus (0 Or 1 : Default = 0) - regStatus (0 Or 1 : Default = 0)]

@@ -1,0 +1,118 @@
+(1) Create Add Category Page
+------------------------------
+==> Inside Navbar File In dashboard Folder Set Categories Link
+==> Create 'Categories.php' File Inside dashboard Folder
+
+
+EX
+---
+
+    navbar.php
+    -----------
+
+    <li class="nav-item">
+        <a class="nav-link" href="categories.php">Categories</a>
+    </li>
+
+
+    categories.php
+    ---------------
+
+    <style>
+        body{
+            background: none !important;
+        }
+    </style>
+    <?php
+        ob_start();
+        // Must Start Session Before Anything 
+        session_start();
+        $pageTitle = 'Categories';
+        // If User Comming From Entering Login Data Correctly
+        // Else Redirect To Login Page Again
+        if(isset($_SESSION['username'])){
+            include 'init.php';
+
+            // Fetch $do Variable Value From Page Link
+            $do = isset($_GET['do']) ? $_GET['do'] : 'manage';
+
+            // Display Content Depending On $do Variable
+            if($do == 'manage'){ 
+                
+            }
+            elseif($do == 'add'){
+            ?>
+                <div class="container mt-5">
+                        <h2>Add New Category</h2>
+                        <form class="mt-4" action="?do=insert" method="POST">
+                            <div class="row">
+                                <div class="form-group col-12 ">
+                                    <label for="catName" class="font-weight-bold">Category Name</label>
+                                    <input type="text" name='catName' class="form-control" id="catName" autocomplete="off" required="required" placeholder="Enter Category Name">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="catDesc" class="font-weight-bold">Category Description</label>
+                                    <input type="text" name='catDesc' class="form-control" id="catDesc" required="required" placeholder="Enter Category Description">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="ordering" class="font-weight-bold">Ordering</label>
+                                    <input type="text" name='ordering' class="form-control" id="ordering" required="required" placeholder="Enter Category Order">
+                                </div>
+                                <div class="form-group col-12 col-md-4">
+                                    <label class="font-weight-bold">Visibility</label>
+                                    <div>
+                                        <input type='radio' value='0' name="visible" id="vis-yes" checked/>
+                                        <label for="vis-yes">Yes</label>
+                                        <input type='radio' value='1' name="visible" id="vis-no" />
+                                        <label for="vis-no">No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-md-4">
+                                    <label class="font-weight-bold">Commenting</label>
+                                    <div>
+                                        <input type='radio' value='0' name="commenting" id="com-yes" checked/>
+                                        <label for="com-yes">Yes</label>
+                                        <input type='radio' value='1' name="commenting" id="com-no" />
+                                        <label for="com-no">No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-md-4">
+                                    <label class="font-weight-bold">Allow Ads</label>
+                                    <div>
+                                        <input type='radio' value='0' name="ads" id="ads-yes" checked/>
+                                        <label for="ads-yes">Yes</label>
+                                        <input type='radio' value='1' name="ads" id="ads-no" />
+                                        <label for="ads-no">No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <input type="submit" value="Add +" class="btn btn-primary px-5 py-2 mt-2"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+            <?php
+            }
+            elseif($do == 'insert'){
+
+            }
+            elseif($do == 'edit'){
+            
+            }
+            elseif($do == 'update'){
+
+            }
+            elseif($do == 'delete'){
+        
+            }
+            else{
+                echo 'Sorry Page Not Found';
+            }
+            include $tpl . 'footer.php';
+        }else{
+            header('Location: index.php');
+            exit();
+        }
+
+        ob_end_flush();
+    ?>

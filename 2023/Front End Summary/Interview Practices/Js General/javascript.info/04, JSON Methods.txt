@@ -1,0 +1,241 @@
+(1) JSON methods, toJSON
+------------------------
+==> we have a complex object, and we’d like to convert it into a string, to send it over a network, or just to output it for logging purposes.
+
+EX (Poor Object Conversion To String)
+-----
+
+	let obj = {
+	  name : 'Magdy',
+	  age : 20,
+	  toString(){
+	    return `{name : ${this.name} , age : ${this.age}}`
+	  }
+	}
+
+	console.log(obj.toString()) // If I Have Complex Object This Way Is Poor
+
+
+(2) JSON.stringify 
+--------------------
+==> to convert objects into JSON. 
+==> The resulting json string is called a JSON-encoded or serialized or stringified or marshalled object. We are ready to send it over the wire or put into a plain data store
+
+EX (Note Here The Output Is Double Quoted With "" Not '')
+-----
+
+	let obj = {
+	  name : 'Magdy',
+	  age : 20,
+	}
+
+	const string = JSON.stringify(obj)
+
+	console.log(typeof string) // string
+	console.log(string) // "{"name":"Magdy","age":20}"
+
+
+
+
+(3) note that a JSON-encoded object has several important differences from the object literal
+----------------------------------------------------------------------------------------------
+==> Strings use double quotes. No single quotes or backticks in JSON. So 'Magdy' becomes "Magdy"
+==> Object property names are double-quoted also. That’s obligatory. So age:20 becomes "age":20
+
+
+(4) JSON.stringify Can Convert These Types To String
+-----------------------------------------------------
+==> Objects { ... }
+==> Arrays [ ... ]
+==> Primitives: strings, numbers, boolean, null.
+
+	// array
+	let arr = [1,2,3,4]
+	const arrstring = JSON.stringify(arr)
+	console.log(arrstring) // "[1,2,3,4]"
+
+	// Numbers
+	let num = 10
+	const numString = JSON.stringify(num)
+	console.log(numString + 10) // "1010"
+
+	// Boolean
+	let bool = true
+	const boolString = JSON.stringify(bool)
+	console.log(boolString + 10) // "true10"
+
+	// Null
+	let nu = null
+	const nullString = JSON.stringify(nu)
+	console.log(nullString + 10) // "null10"
+
+
+(5) JSON is data-only language-independent specification, so some JavaScript-specific object properties are skipped by JSON.stringify
+-------------------------------------------------------------------------------------------------------------------------------------
+==> Function properties (methods).
+==> Symbolic properties.
+==> Properties that store undefined.
+
+EX
+----
+
+	let obj = {
+	  magdy(){
+	    console.log('Hellow')
+	  },
+	  [Symbol('id')] : 100,
+	  salary : undefined
+	}
+
+	const string = JSON.stringify(obj)
+
+	console.log(string) // "{}"
+
+
+(6) JSON.stringify With Nested Object
+-------------------------------------
+
+	let obj = {
+	  name : 'magdy',
+	  language:{
+	    js : '100%',
+	    react : '50%'
+	  }
+	}
+
+	const nested = JSON.stringify(obj)
+
+	console.log(nested) // "{"name":"magdy","language":{"js":"100%","react":"50%"}}"
+
+
+
+(7) JSON.stringify limitation That Is must be no circular references
+----------------------------------------------------------------------
+
+	let obj1 = {
+	  address : 'Cairo'
+	}
+
+	let obj2 = {
+	  name : 'magdy',
+	  language:['Html','Css']
+	}
+
+	// After This 2 Statements The 2 Objects Have Infinite Nested Object
+	obj2.additionData = obj1
+	obj1.all = obj2
+
+
+	const nested = JSON.stringify(obj1)
+
+	console.log(nested) // TypeError: cyclic object value
+
+
+(8) Convert Specific Properties In The Object To String
+--------------------------------------------------------
+
+	let obj2 = {
+	  name : 'magdy',
+	  age : 20,
+	  language:['Html','Css']
+	}
+
+	// ['name' , 'age'] Is Called Replacer
+	// 3 Is Number Of Space To Format
+	const nested = JSON.stringify(obj2 , ['name' , 'age'] , 3)
+
+	/*
+		{
+			  "name": "magdy",
+			  "age": 20
+		}
+
+	*/
+	console.log(nested) 
+
+
+-------------------------------------------------------------------------------------------------------------------
+Note : object may provide method toJSON for to-JSON conversion. JSON.stringify automatically calls it if available
+-------------------------------------------------------------------------------------------------------------------
+
+
+(9) Custom toJSON Method
+-------------------------
+
+	// Custom toJSON Method
+	let obj1 = {
+	  name : 'magdy',
+	  toJSON(){
+	    return this.name
+	  }
+	}
+
+	let obj2 = {
+	  title : 'Front End',
+	  obj1
+	}
+
+	const toJson = JSON.stringify(obj2)
+	console.log(toJson) // {"title":"Front End","obj1":"magdy"}
+
+
+(10) JSON.parse Used To decode a JSON-string [Convert stringified Object To Object]
+-------------------------------------------------------------------------------------
+==> Syntax : JSON.parse(str, [reviver])
+
+EX
+----
+
+	let obj1 = {
+	  name : 'magdy'
+	}
+
+	const toJson = JSON.stringify(obj1)
+	console.log(toJson) // "{"name":"magdy"}"
+
+	const toObject = JSON.parse(toJson)
+	console.log(toObject) // Object { name: "magdy" }
+
+
+(11) Using reviver
+------------------
+
+	// This Code Display Error
+	let str = '{"title":"Conference","date":"2017-11-30 2017-11-30 12:00:00.000Z"}';
+
+	let meetup = JSON.parse(str);
+
+	alert( meetup.date.getDate() ); // Error! 
+
+
+
+	// reviver Fix The Issue
+
+	let str = '{"title":"Conference","date":"2017-11-30 12:00:00.000Z"}';
+
+	let meetup = JSON.parse(str , function(key , value){
+	  if(key == 'date') return new Date(value)
+
+	  return value
+	});
+
+	console.log( meetup.date.getDate() ); // 30
+
+(12) Some JSON Mistakes
+-----------------------
+
+==>    let json = `{
+	  name: "John",                     // mistake: property name without quotes
+	  "surname": 'Smith',               // mistake: single quotes in value (must be double)
+	  'isAdmin': false                  // mistake: single quotes in key (must be double)
+	  "birthday": new Date(2000, 2, 3), // mistake: no "new" is allowed, only bare values
+	  "friends": [0,1,2,3]              // here all fine
+	}`;
+
+==> JSON does not support comments. Adding a comment to JSON makes it invalid
+
+==> There’s another format named JSON5, which allows unquoted keys, comments etc. But this is a standalone library, not in the specification of the language.
+
+
+
+

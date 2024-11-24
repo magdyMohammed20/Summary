@@ -1,0 +1,100 @@
+/*
+    using Object.keys() and two ES8 methods, Object.values() and Object.entries(). 
+    The main idea is the convert the object into an array and use array looping methods
+    to loop through that array
+*/
+
+
+// Object.keys
+let obj = {
+    id: 1,
+    name: 'Magdy',
+    age: 23,
+    address: 'Cairo'
+}
+
+console.log(Object.keys(obj)) // [ "id", "name", "age", "address" ]
+
+Object.keys(obj).forEach((key , index) => {
+    console.log(key , index , obj[key])
+})
+
+
+// Object.values
+let obj = {
+    id: 1,
+    name: 'Magdy',
+    age: 23,
+    address: 'Cairo'
+}
+
+console.log(Object.values(obj)) // [ 1, "Magdy", 23, "Cairo" ]
+
+Object.values(obj).forEach(element => {
+    console.log(element)
+});
+
+
+// Object.entries
+let obj = {
+    id: 1,
+    name: 'Magdy',
+    age: 23,
+    address: 'Cairo'
+}
+
+// Produce Array In Each Time Contains Key And Value
+Object.entries(obj).forEach(keyAndVal => {
+    console.log(keyAndVal)
+});
+
+
+// For...in
+let obj = {
+    id: 1,
+    name: 'Magdy',
+    age: 23,
+    address: 'Cairo'
+}
+
+for(var key in obj){
+    console.log(key , obj[key])
+}
+
+
+// getOwnPropertyNames
+let obj = {
+    id: 1,
+    name: 'Magdy',
+    age: 23,
+    address: 'Cairo'
+}
+
+Object.getOwnPropertyNames(obj).forEach(key => {
+    console.log(key , obj[key])
+})
+
+
+// Measure Loop Performance
+let start = performance.now(); // Look Here
+
+let obj = {
+    id: 1,
+    name: 'Magdy',
+    age: 23,
+    address: 'Cairo'
+}
+
+
+Object.keys(obj).forEach((key , index) => {
+    console.log(key , index , obj[key])
+})
+
+// Look Here
+let duration = performance.now() - start;
+console.log(duration); 
+
+
+-----------------------------------------------
+Note: For....in Is The Faster Than Other Loops 
+-----------------------------------------------

@@ -1,0 +1,143 @@
+(1) Create Edit , Update , Delete , Approve Comments Page
+----------------------------------------------------------
+
+    Comments.php
+    -------------
+
+            elseif($do == 'edit'){
+                // Fetch 'userid' From Page Link
+                $commentId = $_GET['commentid'];
+                // Check For 'userid' In The Link
+                $id = isset($commentId) && is_numeric($commentId) ? intval($commentId) : 0;
+                // Select User Depending On 'userid'
+                $stmt = $connect->prepare("SELECT * FROM comments WHERE id=?");
+                $stmt->execute(array($id));
+                $row = $stmt->fetch();
+                $count = $stmt->rowCount();
+                
+                // If 'userid' Exist In DB
+                if($count > 0){?>
+                    <div class="container mt-5">
+                        <h2>Edit Comment</h2>
+                        <form class="mt-4" action="?do=update" method="POST">
+                        <input type="hidden" name='commentid' value="<?php echo $commentId;?>">
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <label for="comment">Comment</label>
+                                    <textarea name='comment' class="form-control" id="comment" autocomplete="off" required="required"><?php echo $row['comment'];?></textarea>
+                                </div>
+                        
+                                
+                                <div class="form-group col-12">
+                                    <input type="submit" value="Save" class="btn btn-primary px-5 py-2 mt-2"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                <?php
+                    
+                }else{
+                    $errMsg = "<div class='alert alert-danger'>There Is No Such Id</div>";
+                    echo '<div class="container mt-4">';
+                    redirectHome($errMsg ,null, 5);
+                    echo '</div>';
+                }
+            
+            
+            
+            }
+            elseif($do == 'update'){
+                
+                echo "<div class='container mt-5'>";
+                // If User Coming Through POST Request Fetch Changed Data
+                // Then Update It
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    $id        = $_POST['commentid'];
+                    $comment   = $_POST['comment'];
+
+                    // Validate Updated Data
+                    if(empty($comment)){
+                        echo '<div class="alert alert-danger w-75 mx-auto mt-3">Sorry Comment Can\'t Be Empty </div>';
+                    }
+                    else{
+                        $stmt = $connect->prepare("
+                            UPDATE comments 
+                            SET comment=?
+                            WHERE id = ?    
+                        ");
+
+                        $stmt->execute(array($comment , $id));
+                        
+                        $msg = "<div class='alert alert-success mt-4'>". $stmt->rowCount() . " Record Updated</div>";
+
+                        // Redirect User To Previous Page Within 5 Seconds
+                        redirectHome($msg ,'back', 5);
+                    }
+                            
+                }else{
+                    $errMsg = "<div class='alert alert-danger mt-4'>Sorry You Can't Access This Page Directly</div>";
+                    redirectHome($errMsg ,'back', 5);
+                }
+
+                echo "</div>";
+            }
+            elseif($do == 'delete'){
+                $commentid = (isset($_GET['commentid']) && is_numeric($_GET['commentid'])) ? intval($_GET['commentid']) : 0;
+
+                $checComment = checkItem('id' , 'comments' , $commentid);
+
+                if($checComment >= 1){
+
+                    $stmt = $connect->prepare("
+                        DELETE FROM comments
+                        WHERE id = :zid    
+                    ");
+
+                    $stmt->bindParam(":zid" , $commentid);
+
+                    $stmt->execute();
+                    echo "<div class='container mt-5'>";
+                        $msg = "<div class='alert alert-success mx-auto mt-4'>".$stmt->rowCount()." Record Deleted</div>";
+                        // Redirect User To Previous Page After 5 Seconds After Delete
+                        redirectHome($msg ,'back', 5);
+                    echo "</div>";
+
+                }else{
+                    $errMsg = "<div class='alert alert-danger mt-4'>Sorry User Not Exist</div>";
+                    echo '<div class="container">';
+                    redirectHome($errMsg ,'back', 5);
+                    echo '</div>';
+                }
+
+                
+                
+            }
+            elseif($do == 'approve'){
+                $commentid = (isset($_GET['commentid']) && is_numeric($_GET['commentid'])) ? intval($_GET['commentid']) : 0;
+
+                $checkComment = checkItem('id' , 'comments' , $commentid);
+
+                if($checkComment >= 1){
+
+                    $stmt = $connect->prepare("
+                        UPDATE comments
+                        SET status=1
+                        WHERE id = :zid    
+                    ");
+
+                    $stmt->bindParam(":zid" , $commentid);
+
+                    $stmt->execute();
+                    echo "<div class='container mt-5'>";
+                        $msg = "<div class='alert alert-success mx-auto mt-4'>Congrates Comment Approved Now</div>";
+                        // Redirect User To Previous Page After 5 Seconds After Delete
+                        redirectHome($msg , 5);
+                    echo "</div>";
+
+                }else{
+                    $errMsg = "<div class='alert alert-danger mt-4'>Sorry User Not Exist</div>";
+                    echo '<div class="container">';
+                    redirectHome($errMsg ,'back', 5);
+                    echo '</div>';
+                }
+            }

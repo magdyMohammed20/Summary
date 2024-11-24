@@ -1,0 +1,55 @@
+(1) Problem
+-------------
+==> When Click On Button The Output Will Be Undefined As This Keyword Here Refers To The Button Not The obj
+
+
+	let obj = {
+	  data: 'Hellow My Name Is Magdy',
+	  init: function () {
+	    let btn = document.getElementById('btn')
+	    btn.addEventListener('click', function (e) {
+	      console.log(this.data) // Undefined
+	      console.log(this == e.target) // true [Means this Keyword Refer To The Clicked Button]
+	    })
+	  }
+	}
+	obj.init() 
+
+
+
+(2) First Solution 
+-------------------
+==> Fetch 'this' Before The Event Listener
+
+
+	let obj = {
+	  data: 'Hellow My Name Is Magdy',
+	  init: function () {
+	    let btn = document.getElementById('btn'),
+	      that = this  // Fetching 'this' Here
+	    btn.addEventListener('click', function (e) {
+	      console.log(that.data) // Hellow My Name Is Magdy
+	      console.log(that == e.target) // False [Means this Keyword Refer To The obj]
+	    })
+	  }
+	}
+	obj.init() 
+
+
+(3)Second Solution 
+-------------------
+==> Using Arrow Function As Callback For Event Listener
+
+
+	let obj = {
+	  data: 'Hellow My Name Is Magdy',
+	  init: function () {
+	    let btn = document.getElementById('btn')
+
+	    btn.addEventListener('click', e => {
+	      console.log(this.data) // Hellow My Name Is Magdy
+	      console.log(this == e.target) // False [Means this Keyword Refer To The obj]
+	    })
+	  }
+	}
+	obj.init() 

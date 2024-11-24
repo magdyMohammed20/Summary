@@ -1,9 +1,0 @@
-let arr = [1,2,5,4,7,9,10,3]
-    
-    // Get The Max And Min Number From Array using apply Method
-    console.log(Math.max.apply(Math , arr)) // 10
-    console.log(Math.min.apply(Math , arr)) // 1
-    
-    // Get The Max And Min Number From Array using Spread Operator
-    console.log(Math.max(...arr)) // 10
-    console.log(Math.min(...arr)) // 1

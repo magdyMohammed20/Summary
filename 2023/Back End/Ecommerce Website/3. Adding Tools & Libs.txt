@@ -1,0 +1,51 @@
+(1) Include Libraries In [dashboard] Folder And Own Files
+-----------------------------------------------------------
+==> Bootstrap4
+==> FontAwesome5
+==> jQuery
+
+    dashboard
+    |
+    layout
+        |
+        - js
+            - bootstrap.min.js
+            - jquery.min.js
+            - popper.min.js
+            - backend.js (Own Js File)
+        - css
+            - bootstrap.min.css
+            - all.min.css
+            - backend.css (Own Css File)
+        - fonts
+            - fontawesome.min.css
+        - webfonts (Of FontAwesome5)
+
+
+    dashboard/includes/templates/header.php
+    ----------------------------------------
+
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset='UTF-8'/>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <title>Ecommerce</title>
+            <link rel='stylesheet' href='layout/css/bootstrap.min.css'/> 
+            <link rel='stylesheet' href='layout/css/all.min.css'/> 
+            <link rel='stylesheet' href='layout/css/backend.css'/> 
+        </head>
+        <body>
+
+    dashboard/includes/templates/footer.php
+    ----------------------------------------
+
+            <div>
+                Main Content
+            </div>
+            <script src='./layout/js/jquery-3.3.1.slim.min.js'></script>
+            <script src='./layout/js/popper.min.js'></script>
+            <script src='./layout/js/bootstrap.min.js'></script>
+            <script src='./layout/js/backend.js'></script>
+        </body>
+    </html>

@@ -1,0 +1,26 @@
+(1) Protocol
+-------------
+==> sets or returns the protocol of the current URL, including the colon (:)
+==> Protocol Values : file: , ftp: , http: , https: , mailto:
+
+
+EX: Get Protocol Of [localhost:3000]
+----
+
+	window.location.protocol // "http:"
+	
+	Or
+	
+	location.protocol // "http:"
+	
+
+
+
+EX: Set Protocol Of [localhost:3000]
+----
+
+	window.location.protocol = "https:" // https://localhost:3000/
+	
+	Or
+	
+	location.protocol = "https:"  // https://localhost:3000/

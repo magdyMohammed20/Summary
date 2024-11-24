@@ -1,0 +1,49 @@
+(1) $_SERVER['REQUEST_METHOD']
+---------------------------------
+==> Used To Get And Check Method Of Sended Data
+
+
+EX (Processing Data In Same Page)
+---
+
+    <?php 
+
+        // If Form Submitted Print Form Data
+        // Else Show Form To User For Enter And Send Data
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            echo $_POST['user'] . '<br>';
+
+            echo $_POST['pass'] . '<br>';
+        }
+
+        else{
+    ?> 
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='post'>
+        <input type='text' name='user'/>
+        <input type='password' name='pass'/>
+        <input type='submit' value='login'/>
+    </form>
+
+
+        <?php }?>
+
+
+EX (Processing Data In Same Page)
+---
+
+    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='post'>
+        <input type='text' name='user'/>
+        <input type='password' name='pass'/>
+        <input type='submit' value='login'/>
+    </form>
+
+    <?php 
+
+        // If Form Submitted Print Form Data
+        // Else Show Form To User For Enter And Send Data
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            echo $_POST['user'] . '<br>';
+
+            echo $_POST['pass'] . '<br>';
+
+    }?>

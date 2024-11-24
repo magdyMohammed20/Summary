@@ -1,0 +1,12 @@
+(1) DATEDIFF()
+---------------
+==> Get Different Of Days Between 2 Days
+
+---------------------------------
+Syntax: DATEDIFF(Date1 , Date2)
+---------------------------------
+
+EX: SELECT DATEDIFF('2020-07-03' , '2020-08-03'); /* -31 */
+EX: SELECT DATEDIFF('2020-08-03' , '2020-07-03' ) /* 31 */
+EX: SELECT DATEDIFF(CURDATE() , '2020-07-03' ) /* 194 */
+EX: SELECT CONCAT('Posted ' , DATEDIFF(CURDATE() , '2020-10-31' ) , ' Days Ago'); /* Posted 74 Days Ago */

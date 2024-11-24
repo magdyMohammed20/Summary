@@ -1,0 +1,27 @@
+(1) Name
+-----------
+==> sets or returns the name of the window.
+
+==> used to modify the name of a window, after the window has been created.
+
+==> The name of the window is often used for setting targets for hyperlinks and forms. However, this is not required, as windows do not need to have names
+
+
+
+EX: Get Window Name
+---------------------
+	
+	document.getElementById('btn').onclick = () => {
+	    var win = window.open("", "mego") // Create Window With Name "mego"
+	    win.document.write(win.name) // Write Window Name In The Created Window Document
+	}
+	
+	
+EX: Set Window Name
+--------------------
+
+	window.name = "mego"
+	
+	Or
+	
+	name = "mego"

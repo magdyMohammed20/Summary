@@ -1,8 +1,0 @@
-(1) By Default NodeJs Uses 'jade' As Template Engine But You Can Use Any Template Engine Instead As 'PugJs' or 'Hbs'(Handlebars) Or 'eJs' ...
-
-(2) Create NodeJs Project And Use 'Hbs' Or 'pugJs'
----------------------------------------------------
-==> express HbsProject --hbs  Or express PugProject --pug // Will Create Node Project But With 'PugJs' Or 'hbs' Instead Of 'Jade'
-==> cd HbsProject Or cd PugProject
-==> npm install // For Download node_modules Folder
-==> nodemon // For Run The Project Then Open 'localhost:3000' In Browser

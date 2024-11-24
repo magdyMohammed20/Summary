@@ -1,0 +1,54 @@
+(1) copy() Method
+-------------------
+==> Used To Copy File From Path To Another
+
+==> Syntax
+
+    copy(oldFile , newFile)
+
+
+EX
+---
+
+    <?php 
+
+        // Copy 'magdy.txt' File And Set Copy Name To 'magdy_new.txt' 
+        copy('magdy.txt' , 'magdy_new.txt')
+    ?>
+
+EX
+---
+
+    <?php 
+
+        // Copy File From Directory To Another Directory With Different Name
+        // Note: PHP Folder Must Be Exist
+        copy('test.txt' , __DIR__ . '/PHP/test1.txt')
+    ?>
+
+
+(2) rename() Method
+-------------------
+==> Used To [Rename File Or Folder] Or [Rename File Or Folder And Move It To Different Path]
+
+==> Syntax
+
+    rename(oldName , newName , Context[Optional])
+
+EX
+---
+
+    <?php 
+
+        // Rename 'magdy_new.txt' To 'test.txt' 
+        rename('magdy_new.txt' , 'test.txt')
+    ?> 
+
+EX
+---
+
+    <?php 
+
+        // Rename 'magdy.txt' To 'test2.txt' And Move It To 'PHP' Folder Then Remove 'magdy.txt' From Current Directory
+        rename('magdy.txt' , __DIR__ . '/PHP/test2.txt')
+    ?> 

@@ -1,0 +1,37 @@
+(1) PageXOffset
+-----------------
+==> returns the pixels the current document has been scrolled from the upper left corner of the window, horizontally.
+
+==> pageXOffset and pageYOffset properties are equal to the scrollX and scrollY properties.
+
+==> These properties are read-only.
+
+
+
+EX
+----
+
+	window.onscroll = () => {
+	  console.log(pageXOffset)
+	}
+
+
+(2) PageYOffset
+---------------
+==> returns the pixels the current document has been scrolled from the upper left corner of the window, horizontally.
+
+
+EX
+-----
+
+	var nav = document.getElementById('nav')
+
+	window.onscroll = () => {
+	    // For Split The Nav Height Within "50px"
+	    if(pageYOffset > +nav.style.height.split('p')[0]){
+	      nav.classList.add('sticky')
+	    }else{
+	      nav.classList.remove('sticky')
+	    }
+	}
+

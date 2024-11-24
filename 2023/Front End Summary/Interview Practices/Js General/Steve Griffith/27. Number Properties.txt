@@ -1,0 +1,15 @@
+/**
+ * What will the value of the three log statements be?
+*/
+
+
+// Primitive Not Has Object So Any Properties Will Added To It Will Outputed 'Undefined'
+let n1 = 111; // Primitive
+let n2 = new Number(123); // Non Primitive
+let n3 = Number(123); // Primitive
+n1.prop = true;
+n2.prop = true;
+n3.prop = true;
+console.log(n1.prop); // undefined
+console.log(n2.prop);  // True
+console.log(n3.prop); // undefined

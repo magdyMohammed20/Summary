@@ -1,0 +1,33 @@
+(1) Session Used To Save Data About User When Go From Page To Another Pages
+
+(2) Session Start Must Be Included Before Any Output In The Php File
+
+(3) EX
+--------
+
+    index.php
+    ----------
+
+    <?php
+        // Start Or Resume Session
+        session_start();
+
+        $_SESSION['username'] = 'Magdy';
+        $_SESSION['password'] = '12345';
+
+        echo "<a href='page2.php'>Go To</a>";
+    ?>
+
+
+    page2.php
+    ----------
+
+    <?php
+
+        // Resume The Session
+        session_start();
+
+        echo 'Hellow Master ' . $_SESSION['username'] . '<br>'; // Hellow Master Magdy
+        echo 'Your Password Is ' . $_SESSION['password']; // Your Password Is 12345
+
+    ?>

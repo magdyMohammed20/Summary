@@ -1,0 +1,63 @@
+(1) When Go To Any Page In NodeJs It Makes A GET Request Depending On The Url Is Valid Or Not
+
+(2) Use GET With Router
+------------------------
+
+	index.js [Create Person Router For Open Person Page When Url Is 'localhost:3000/person']
+	---------
+	
+	var express = require('express');
+	var router = express.Router();
+
+	router.get('/', function (req, res, next) {
+	  res.render('index', { title: 'Express' });
+	});
+
+	// Create Person Router Here
+	// next: Here If The 'res' And 'req' Not Valid It Trigger The Express Error
+	router.get('/person', (req, res, next) => {
+	  res.render('person')
+	})
+
+	module.exports = router;
+	
+	
+	views/person.pug [Create 'person.pug' File For Use It With Person Router]
+	-----------------
+	
+		extends layout
+
+		block content
+		    h1 Hellow Person
+		    
+		    
+		    
+(3) Use GET With Nested Router
+-------------------------------
+
+	users.js
+	---------
+	
+	var express = require('express');
+	var router = express.Router();
+
+	/* GET users listing. */
+	router.get('/', function (req, res, next) {
+	  res.send('respond with a resource');
+	});
+
+	// person Is Nested Router When Url Is 'localhost:3000/users/person'
+	router.get('/person', function (req, res, next) {
+	  res.render('person');
+	});
+
+	module.exports = router;
+	
+	
+	views/person.pug [Create 'person.pug' File For Use It With Person Router]
+	-----------------
+	
+		extends layout
+
+		block content
+		    h1 Hellow Person

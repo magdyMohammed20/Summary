@@ -1,0 +1,29 @@
+(1) What Is Image Sprites
+-------------------------
+==> is a collection of images put into a single image.
+==> A web page with many images can take a long time to load and generates multiple server requests.
+    Using image sprites will reduce the number of server requests and save bandwidth
+
+(2) Steps
+-----------
+==> Merge All Images In 1 Image By Using Photoshop Or Any Tool , There Are A Website Help You Called [https://spritegen.website-performance.org/]
+
+==> Use The Css Sprites
+-------------------------
+
+	html
+	---------
+		<div></div>
+
+
+	Css
+	---------
+
+	div{
+	    width: 200px;
+	    height: 220px;
+	    border: 1px solid red;
+	    background: url(./img.png) 49% 0; /* Control On Image With background-position */
+	}
+
+

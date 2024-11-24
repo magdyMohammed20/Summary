@@ -1,0 +1,20 @@
+(1) Cookies
+-------------
+==> Used To Identify The User On Server
+
+
+EX (Check If Cookies Enabled)
+---
+
+    <?php 
+
+        if(count($_COOKIE) > 0){
+            echo 'Yes Cookies Enabled';
+        }else{
+            echo 'No';
+        }
+
+
+    ?>
+
+

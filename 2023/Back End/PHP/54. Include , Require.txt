@@ -1,0 +1,126 @@
+(1) include() Method
+-----------------------
+==> Used To Include Another Php Script Inside Current Script
+
+==> Syntax
+
+    include "pageName.php"
+
+
+EX
+---
+
+    vars.php
+    ----------
+
+        <?php
+            $pageName = 'Home Page';
+        ?>
+
+    index.php
+    ----------
+
+        <?php 
+            include "vars.php";
+
+            echo $pageName; // Home Page
+        ?>  
+
+
+(2) include_once() Method
+---------------------------
+==> Used To Check If File Included Before If File Already Included It Will Not Include It Again Else It Will Include It
+
+==> Syntax
+
+    include_once "pageName.php"
+
+EX
+---
+
+    vars.php
+    ----------
+
+        <?php
+            $pageName = 'Home Page';
+        ?>
+
+    index.php
+    ----------
+
+        <?php 
+            include "vars.php";
+
+            echo $pageName; // Home Page
+
+            // Check If 'vars.php' Included Before If Included This Include Stoped Else It Will Include It Normally
+            include_once "vars.php";
+        ?> 
+
+
+(3) require() Method
+-----------------------
+==> Used To Include Another Php Script Inside Current Script
+
+==> Syntax
+
+    require "pageName.php"
+
+EX
+---
+
+    vars.php
+    ---------
+
+        <?php
+            $pageName = 'Home Page';
+        ?> 
+
+
+    index.php
+    -----------
+
+        <?php 
+            require "vars.php";
+
+            echo $pageName; // Home Page
+        ?>  
+
+
+(4) require_once() Method
+-----------------------
+==> Used To Check If File Included Before If File Already Included It Will Not Include It Again Else It Will Include It
+
+==> Syntax
+
+    require_once "pageName.php"
+
+EX
+---
+
+    vars.php
+    ---------
+
+        <?php
+            $pageName = 'Home Page';
+        ?>
+
+
+    index.php
+    ----------
+
+        <?php 
+            require "vars.php";
+
+            echo $pageName; // Home Page
+
+            // Check If 'vars.php' Included Before If Included This Include Stoped Else It Will Include It Normally
+            require_once "vars.php";
+        ?>  
+
+
+(5) Different Between (include) And (require)
+----------------------------------------------
+==> include : If Included File Not Exist It Will Produce (Warning) But Script Work Normal
+==> require : If Included File Not Exist It Will Produce (Fatal Error) And Script Stopped
+

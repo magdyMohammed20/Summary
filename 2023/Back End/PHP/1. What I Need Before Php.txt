@@ -1,0 +1,26 @@
+(1) Download Any Web Server And Install It
+--------------------------------------------
+==> Lamp : Linux Apache , Mysql , Php
+==> Wamp : Windows Apache , Mysql , Php
+==> Mamp : Mac Apache , Mysql , Php
+==> Xampp: All Os Apache , Mysql , Php And Perl
+
+==> When Install It Select [Apache , MYSQL , PHP , Perl , PhpMyAdmin]
+==> After Install Must Start The Apache And MYSQL Services And If Want To Work Automatic Click On 'Config' Button In Xampp And Check 'Start Control Panel Minimized'
+
+(2) Use Any Web Browser [Chrome , Mozilla , Opera , ...]
+
+(3) Use Any Text Editor [VScode , Atom , Sublime , ...]
+
+(4) Create Php Project
+------------------------
+==> After Install Xampp Go To [Xampp] Folder And In [htdocs] Folder And Create Project Folder [phpProject]
+==> Create Php File Inside Php [phpProject] Called [index.php]
+==> And Write Start Code In [index.php]
+
+    <?php 
+    
+        echo 'Hellow Php';
+        
+    ?>
+==> Run Php Project In Browser By Type [localhost/phpProject/index.php]

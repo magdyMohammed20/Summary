@@ -1,9 +1,0 @@
-(1) Logical Operators
-----------------------
-==> (AND) (&&) 
-==> (NOT) (!)
-==> (OR) (||)
-==> (XOR) : 1 Condition Is True And Other Is False
-
-EX: SELECT * FROM `users` WHERE NOT first_name LIKE 'Magdy'; /* Select All Records Except Record That First Name Is 'Magdy' */
-

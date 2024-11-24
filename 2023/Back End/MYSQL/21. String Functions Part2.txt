@@ -1,0 +1,15 @@
+(1) String Functions
+----------------------
+==> LENGTH: Used To Count Number Of Characters Of The String (Get Number Of Bytes)
+==> CHAR_LENGTH: Used To Count Number Of Characters Of The String (Get Number Of Characters)
+
+(2) LENGTH() Syntax
+--------------------
+    
+    SELECT text , LENGTH(text) FROM test;
+
+(3) CHAR_LENGTH() Syntax
+-------------------------
+==> Same As LENGTH() But If Field Contains Specific Signs Like (Euro Sign) The Result Will Be Different
+
+    SELECT text , CHAR_LENGTH(text) FROM test;

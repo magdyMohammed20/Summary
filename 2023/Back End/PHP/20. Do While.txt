@@ -1,0 +1,27 @@
+(1) Do While Syntax
+---------------------
+
+    do{
+
+        // Code Here
+
+    } while(Expression);
+
+
+EX
+---
+
+    <?php 
+        
+        $x = 1; // Initial Value
+
+        do{
+            
+            // Print Numbers From 1 To 20
+            echo $x . '<br>';
+        
+            $x++; // Increment
+            
+        } while($x <= 20);
+
+    ?>

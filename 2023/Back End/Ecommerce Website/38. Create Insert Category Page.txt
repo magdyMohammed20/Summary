@@ -1,0 +1,161 @@
+(1) Create Insert Category Page
+--------------------------------
+
+    categories.php
+    ---------------
+
+    <style>
+        body{
+            background: none !important;
+        }
+    </style>
+            <?php
+                ob_start();
+                // Must Start Session Before Anything 
+                session_start();
+                $pageTitle = 'Categories';
+                // If User Comming From Entering Login Data Correctly
+                // Else Redirect To Login Page Again
+                if(isset($_SESSION['username'])) {
+                    include 'init.php';
+
+                    // Fetch $do Variable Value From Page Link
+                    $do = isset($_GET['do']) ? $_GET['do'] : 'manage';
+
+                    // Display Content Depending On $do Variable
+                    if($do == 'manage'){ 
+                        
+                    }
+                    elseif($do == 'add'){ ?>
+
+
+                <div class="container mt-5">
+                        <h2>Add New Category</h2>
+                        <form class="mt-4" action="?do=insert" method="POST">
+                            <div class="row">
+                                <div class="form-group col-12 ">
+                                    <label for="catName" class="font-weight-bold">Category Name</label>
+                                    <input type="text" name='catName' class="form-control" id="catName" autocomplete="off" required="required" placeholder="Enter Category Name">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="catDesc" class="font-weight-bold">Category Description</label>
+                                    <input type="text" name='catDesc' class="form-control" id="catDesc" required="required" placeholder="Enter Category Description">
+                                </div>
+                                <div class="form-group col-12 col-md-6">
+                                    <label for="ordering" class="font-weight-bold">Ordering</label>
+                                    <input type="text" name='ordering' class="form-control" id="ordering" required="required" placeholder="Enter Category Order">
+                                </div>
+                                <div class="form-group col-12 col-md-4">
+                                    <label class="font-weight-bold">Visibility</label>
+                                    <div>
+                                        <input type='radio' value='0' name="visible" id="vis-yes" checked/>
+                                        <label for="vis-yes">Yes</label>
+                                        <input type='radio' value='1' name="visible" id="vis-no" />
+                                        <label for="vis-no">No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-md-4">
+                                    <label class="font-weight-bold">Commenting</label>
+                                    <div>
+                                        <input type='radio' value='0' name="commenting" id="com-yes" checked/>
+                                        <label for="com-yes">Yes</label>
+                                        <input type='radio' value='1' name="commenting" id="com-no" />
+                                        <label for="com-no">No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-md-4">
+                                    <label class="font-weight-bold">Allow Ads</label>
+                                    <div>
+                                        <input type='radio' value='0' name="ads" id="ads-yes" checked/>
+                                        <label for="ads-yes">Yes</label>
+                                        <input type='radio' value='1' name="ads" id="ads-no" />
+                                        <label for="ads-no">No</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12">
+                                    <input type="submit" value="Add +" class="btn btn-primary px-5 py-2 mt-2"/>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+
+            <?php }
+            elseif($do == 'insert'){
+
+                echo "<div class='container mt-5'>";
+                // If User Coming Through POST Request Fetch Data
+                // Then Insert It To DB
+                if($_SERVER['REQUEST_METHOD'] == 'POST'){
+                    
+                    $catName  = $_POST['catName'];
+                    $catDesc  = $_POST['catDesc'];
+                    $ordering  = $_POST['ordering'];
+                    $visible = $_POST['visible'];
+                    $commenting = $_POST['commenting'];
+                    $ads = $_POST['ads'];
+
+                    // If There Is No Errors Insert The Data To DB
+                    $checkCat = checkItem('name' , 'categories' , $catName);
+                    
+                    // Check If User Already Exist In DB Before Insert It
+                    if($checkCat == 1){
+                        $errMsg = "<div class='alert alert-danger mt-4'> Sorry <b>". $catName . "</b> Already Exists</div>";
+                        redirectHome($errMsg ,'back', 5);
+                    }
+
+                    else{
+                    
+                        $stmt = $connect->prepare("
+                            INSERT INTO 
+                            categories(name , description , ordering , visibility, allow_comment ,allow_ads)
+                            VALUES(:zcat , :zdesc , :zorder , :zvis , :zcom , :zads)     
+                        ");
+
+                        $stmt->execute(
+                            array(
+                                "zcat"  => $catName , 
+                                "zdesc"  => $catDesc , 
+                                "zorder" => $ordering , 
+                                "zvis"  => $visible,
+                                "zcom"  => $commenting,
+                                "zads"  => $ads
+                            )
+                        );
+
+                        
+                        $msg = "<div class='alert alert-success mx-auto mt-4'>". $stmt->rowCount() . " Category Added Successfully". "</div>";
+                        // Redirect User To Previous Page After 5 Seconds If Access Insert Page Direct
+                        redirectHome($msg ,'back', 5);
+                    }
+
+            }
+
+            else{
+                $errMsg = "<div class='alert alert-danger'>Sorry You Can't Access This Page Directly</div>";
+                // Redirect User To Previous Page After 5 Seconds If Access Insert Page Direct
+                redirectHome($errMsg ,'back', 5);
+            }
+
+            echo "</div>";
+        }
+            elseif($do == 'edit'){
+            
+            }
+            elseif($do == 'update'){
+
+            }
+            elseif($do == 'delete'){
+        
+            }
+            else{
+                echo 'Sorry Page Not Found';
+            }
+            include $tpl . 'footer.php';
+        }else{
+            header('Location: index.php');
+            exit();
+        }
+
+        ob_end_flush(); 
+                
+    ?>

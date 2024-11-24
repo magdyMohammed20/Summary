@@ -1,0 +1,104 @@
+(1) MoveBy
+------------
+==> moves a window a specified number of pixels relative to its current coordinates. 
+==> Syntax:  window.moveBy(x, y)
+
+EX
+----
+
+	var openbtn = document.getElementById('open'),
+	    movebtn = document.getElementById('move'),
+	    myWin;
+
+	openbtn.onclick = () => {
+	  myWin = window.open("", "New Window", "height=100 , width=200")
+	}
+
+	movebtn.onclick = () => {
+	  myWin.moveBy(100 , 100)
+	  myWin.focus()
+	}
+	
+
+(2) MoveTo
+----------
+==> moves a window's left and top edge to the specified coordinates.
+==> Syntax:  window.moveTo(x, y)
+
+EX
+----
+
+	var openbtn = document.getElementById('open'),
+	    movebtn = document.getElementById('move'),
+	    myWin;
+
+	openbtn.onclick = () => {
+	  myWin = window.open("", "New Window", "height=100 , width=200")
+	}
+
+	movebtn.onclick = () => {
+	  myWin.moveTo(100, 100)
+	  myWin.focus()
+	}
+	
+	
+(3) resizeBy
+------------
+==> resizes a window by the specified amount, relative to its current size
+==> This method moves the bottom right corner of the window by the specified number of pixels defined. The top left corner will not be moved (it stays in its original coordinates).
+
+==> Syntax:  resizeBy(width, height)
+
+
+EX
+----
+
+	var openbtn = document.getElementById('open'),
+	    resizebtn = document.getElementById('resize'),
+	    myWin;
+
+	openbtn.onclick = () => {
+	  myWin = window.open("", "New Window", "height=100 , width=200")
+	}
+
+	resizebtn.onclick = () => {
+
+	  if (myWin.innerWidth > 1000 || myWin.innerHeight > 1000) {
+	    alert('Not Allowed')
+	    myWin.resizeTo(100, 100)
+	  } else {
+	    myWin.resizeBy(100, 100)
+	  }
+	  myWin.focus()
+	}
+	
+
+
+(4) resizeTo
+-------------
+==> resizes a window to the specified width and height.
+==> Syntax: resizeTo(width, height)
+
+
+EX
+----
+
+	var openbtn = document.getElementById('open'),
+	    resizebtn = document.getElementById('resize'),
+	    myWin;
+
+	openbtn.onclick = () => {
+	  myWin = window.open("", "New Window", "height=100 , width=200")
+	}
+
+	resizebtn.onclick = () => {
+
+	  if (myWin.innerWidth > 1000 || myWin.innerHeight > 1000) {
+	    alert('Not Allowed')
+	    myWin.resizeTo(100, 100)
+	  } else {
+	    myWin.resizeBy(100, 100)
+	  }
+	  myWin.focus()
+	}
+	

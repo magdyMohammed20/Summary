@@ -1,0 +1,52 @@
+(1) Start Php Syntax
+----------------------
+
+    <?php 
+        // Write Code Here
+    ?>
+
+
+(2) Mix Php And Html Inside Php File
+--------------------------------------
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title><?php echo 'Hellow Php , Mego'; ?></title>
+    </head>
+    <body>
+        
+    </body>
+    </html>
+
+
+(3) SimiColon Is Required At End Of Each Line
+------------------------------------------------
+
+    <?php 
+        echo 'Hellow' // Produce Error As ; Is Required
+    ?>
+
+
+(4) Php Not Case Sensitive
+-----------------------------
+
+    <?php 
+
+        // Valid Syntax
+        ECHO 'Hellow'; 
+        Echo 'Hellow';
+        eCHO 'Hellow';
+    
+    ?>
+
+
+(5) You Can Ignore Closing Php Tag If There Is No Content After It
+---------------------------------------------------------------------
+
+    <?php 
+
+        echo 'Hellow';
+
+        // There Is No Content After 'echo'

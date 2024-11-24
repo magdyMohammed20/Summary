@@ -1,0 +1,118 @@
+// Note: Make user_name As UNIQUE In Mysql
+
+(1) Use Session
+-----------------
+
+    index.php
+    -----------
+
+    <?php
+        // Must Start Session Before Anything
+        session_start();
+
+        // If Already User Login Redirect To Dashboard
+        if(isset($_SESSION['username'])){
+            header('Location: dashboard.php');
+        }
+
+        include "init.php";
+        include $tpl . "header.php";
+
+        // If User Enter Username And Password And Click Login 
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            // Fetch User Inputs Data
+            $username  = $_POST['user'];
+            $password  = $_POST['pass'];
+            $hasedPass = sha1($password); // Encrypt User Password As It Encrypted In Mysql
+
+            // Search In DB If User Exist As Admin
+            $stmt = $connect->prepare('SELECT user_name , password FROM users WHERE user_name=? AND password=? AND group_id=1');
+            $stmt->execute(array($username , $hasedPass));
+
+            // If User Exist It Return 1 Else 0
+            $count = $stmt->rowCount();
+
+            // If Admin Exist Register Session By It's Name
+            // Else Show Error Message
+            if($count >= 1){
+                // Register Session By User Name
+                $_SESSION['username'] = $username;
+                // Redirect User To Dashboard
+                header('Location: dashboard.php');
+                exit();
+
+            }else{
+                echo '<div class="alert alert-danger position-absolute not-found-message"><i class="fas fa-exclamation-circle mr-2"></i>Sorry User Not Founded</div>';
+            }
+        }
+    ?>
+    <div class='login d-flex justify-content-center'>
+        <form class='w-50' action='<?php echo $_SERVER['PHP_SELF'];?>' method='POST'>
+            <h2 class='text-white text-center mt-5 mb-4'>Admin Login</h2>
+            <input type='text' class='form-control my-3 text-white w-75 mx-auto p-4' name='user' placeholder='Enter username' autocomplete='off'/>
+            <input type='password' class='form-control my-3 text-white w-75 mx-auto p-4' name='pass' placeholder='Enter password' autocomplete='new-password'/>
+            <input type='submit' class='btn btn-primary btn-block w-75 mx-auto' value='Login'/>
+        </form>
+    </div>
+    <?php
+        include $tpl . "footer.php";
+    ?>
+
+
+(2) Create [dashoboard.php] Inside [dashoboard] Folder
+-------------------------------------------------------
+
+    dashboard.php
+    ---------------
+
+    <?php
+        // Must Start Session Before Anything 
+        session_start();
+
+        // If User Comming From Entering Login Data Correctly
+        // Else Redirect To Login Page Again
+        if(isset($_SESSION['username'])){
+            echo 'Hellow ' . $_SESSION['username'];
+        }else{
+            header('Location: index.php');
+            exit();
+        }
+    ?>
+
+
+(3) Add Error Message Style To [backend.css]
+---------------------------------------------
+
+    *,body{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body{
+        height: 100vh;
+        background-color: #212529;
+        background-image: url('../images/login.png');
+        background-repeat: no-repeat;
+        background-position: bottom;
+    }
+
+    .login,
+    .login-container{
+        height: 100%;
+    }
+
+    .login form{
+        margin-top: 125px;
+    }
+    .login form input:not([type='submit']){
+        background-color:#2c2f33;
+        border: none;
+    }
+
+    .not-found-message{
+        top: 65%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 416px;
+    }

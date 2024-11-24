@@ -1,0 +1,6 @@
+(1) INSERT() Syntax
+--------------------
+==> Is String Function That Used To Add New String In Specific Position In String And Replace The Characters Of The Position
+==> INSERT(String , Position , Length , New_String)
+
+EX: SELECT text , INSERT(text , 3 , 2 , 'Magdy') FROM test; /* Start From Third Character Then Remove 2 Characters And Set 'Magdy' Instead Of The 2 Characters */

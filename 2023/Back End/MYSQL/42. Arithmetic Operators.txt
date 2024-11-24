@@ -1,0 +1,11 @@
+(1) Arithmetic Operators
+-------------------------
+==> +
+==> (/) Or (DIV)
+==> *
+==> %
+==> -
+
+EX: SELECT 10 DIV 2; /* 5 */
+EX: SELECT id , number , number * 0.6 FROM test 
+EX: SELECT id , number , (number * 0.6) + 100 FROM test 

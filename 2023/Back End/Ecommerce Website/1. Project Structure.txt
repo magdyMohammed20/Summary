@@ -1,0 +1,18 @@
+(1) Steps Of Creating Project Structure
+-----------------------------------------
+    ecommerce
+    |
+    layout 
+        - css
+        - images
+        - js 
+        - fonts
+    |
+    includes
+        - templates (EX: Header , Footer , Navbar)
+        - functions
+        - languages
+        - libs (EX: phpmailer)
+    data
+        - uploads (EX: Uploaded Images)
+        

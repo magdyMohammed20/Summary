@@ -1,0 +1,15 @@
+(1) TaintEnabled
+-------------------
+==> method returns a Boolean value that specifies whether the browser has data tainting enabled.
+
+==> The taintEnabled() method was removed in JavaScript version 1.2, and should be avoided to prevent run-time errors in the future.
+
+
+EX
+----
+
+	window.navigator.taintEnabled()  // False
+	
+	Or
+	
+	navigator.taintEnabled()  // False

@@ -1,6 +1,0 @@
-// Escape Specific Element In Destructuring
-            let arr = ['Ali','Hos','Magdy'];
-
-            let[fName,,lName] = arr; // Here I Escape 'Hos'
-
-            console.log(`${fName} , ${lName}`) // Ali , Magdy

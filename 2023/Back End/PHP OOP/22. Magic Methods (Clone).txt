@@ -1,0 +1,120 @@
+(1) Clone Method
+-----------------
+==> Typical Copy Of Object In Php Works By Reference
+==> Means Both (Main And Copied) Object Will Be Interlinked
+
+EX (Copy Object Class)
+---
+
+    <?php
+
+        class Main{
+
+            public $name;
+            public $email;
+            
+            public function __construct($n , $e){
+                $this->name = $n;
+                $this->email = $e;
+            }
+            
+        }
+
+        $main = new Main("Magdy" , "magdy@yahoo.com");
+        echo '<pre>'; print_r($main); echo '</pre>'; // Main Object ( [name] => Magdy [email] => magdy@yahoo.com )
+
+        // Copy By Reference
+        $copy = $main;
+        echo '<pre>'; print_r($copy); echo '</pre>'; // Main Object( [name] => Magdy [email] => magdy@yahoo.com )
+
+    ?>
+
+
+EX (Change In Main Object Will Change The Copy Of Object)
+---
+
+    <?php
+
+        class Main{
+
+            public $name;
+            public $email;
+            
+            public function __construct($n , $e){
+                $this->name = $n;
+                $this->email = $e;
+            }
+            
+        }
+
+        $main = new Main("Magdy" , "magdy@yahoo.com");
+        // Copy By Reference
+        $copy = $main;
+
+        // Change Main Object Property Value
+        $main->name = 'Hossam';
+
+        echo '<pre>'; print_r($main); echo '</pre>'; // Main Object ( [name] => Hossam [email] => magdy@yahoo.com )
+        echo '<pre>'; print_r($copy); echo '</pre>'; // Main Object( [name] => Hossam [email] => magdy@yahoo.com )
+
+    ?>
+
+
+EX (Change In Copy Object Will Change The Both Of Objects)
+---
+
+    <?php
+
+        class Main{
+
+            public $name;
+            public $email;
+            
+            public function __construct($n , $e){
+                $this->name = $n;
+                $this->email = $e;
+            }
+            
+        }
+
+        $main = new Main("Magdy" , "magdy@yahoo.com");
+        // Copy By Reference
+        $copy = $main;
+
+        // Change Copy Object Property Value
+        $copy->name = 'Ali';
+
+        echo '<pre>'; print_r($main); echo '</pre>'; // Main Object ( [name] => Ali [email] => magdy@yahoo.com )
+        echo '<pre>'; print_r($copy); echo '</pre>'; // Main Object( [name] => Ali [email] => magdy@yahoo.com )
+
+    ?>
+
+
+EX (Prevent Effectivness Between Objects By Using 'clone' keyword)
+---
+
+    <?php
+
+        class Main{
+
+            public $name;
+            public $email;
+            
+            public function __construct($n , $e){
+                $this->name = $n;
+                $this->email = $e;
+            }
+            
+        }
+
+        $main = new Main("Magdy" , "magdy@yahoo.com");
+        // Use Clone Here
+        $copy = clone $main;
+
+        // Change Copy Object Property Value
+        $copy->name = 'Ali';
+
+        echo '<pre>'; print_r($main); echo '</pre>'; // Main Object ( [name] => Magdy [email] => magdy@yahoo.com )
+        echo '<pre>'; print_r($copy); echo '</pre>'; // Main Object( [name] => Ali [email] => magdy@yahoo.com )
+
+    ?>

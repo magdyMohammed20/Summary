@@ -1,0 +1,35 @@
+(1) Function Syntax
+----------------------
+==> function_name Has Same Rules Of Naming Variables 
+
+    function function_name(Parameters){
+        // Code Here
+    }
+
+
+EX
+---
+
+    <?php 
+    
+        function greetings(){
+            echo 'Hellow Sir';
+        }
+
+        // Calling Function
+        greetings();
+    ?>
+
+
+EX (Function Name Not Case Sensitive)
+----
+
+    <?php 
+        
+        function greetings(){
+            echo 'Hellow Sir';
+        }
+
+        // Calling Function
+        greetinGS();
+    ?>

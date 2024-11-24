@@ -1,0 +1,62 @@
+(1) Multidiminsional Indexed Array
+-----------------------------------
+==> Syntax
+
+    array(
+        array(Element1 , Element2 , ....),
+        array(Element1 , Element2 , ....),
+        array(Element1 , Element2 , ....)
+    )
+
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            array('html' , 'Css' , 'Js'),
+            array('jQuery' , 'Sass' , 'PugJs'),
+            array('React' , 'Vue' , 'Angular')
+        );
+
+        print_r($langs[0]); // Array ( [0] => html [1] => Css [2] => Js )
+        echo $langs[1][1]; // Sass
+
+
+    ?>
+
+
+(2) Multidiminsional Associative Array
+----------------------------------------
+==> Syntax
+
+    array(
+        'Key1' => array(Element1 , Element2 , ....),
+        'Key2' => array(Element1 , Element2 , ....),
+        'Key3' => array(Element1 , Element2 , ....)
+    )
+
+
+EX
+---
+
+    <?php 
+
+        $langs = array(
+            'Begginer'  => array('html' , 'Css' , 'Js'),
+            'Mid'       => array('jQuery' , 'Sass' , 'PugJs'),
+            'Advanced'  => array('React' , 'Vue' , 'Angular')
+        );
+
+        print_r($langs['Begginer']); // Array ( [0] => html [1] => Css [2] => Js )
+        echo $langs['Advanced'][1]; // Vue
+
+        foreach($langs as $lang){
+            foreach($lang as $ln){
+                echo $ln . '<br>'; // html Css Js jQuery Sass PugJs React Vue Angular
+            }
+        }
+
+        
+    ?>

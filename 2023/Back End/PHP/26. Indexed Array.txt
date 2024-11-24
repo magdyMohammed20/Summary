@@ -1,0 +1,113 @@
+(1) Array Types
+-----------------
+==> Indexed Array
+==> Associative Array
+==> Multi Diminsional Array
+
+
+(2) Indexed Array
+---------------------
+
+==> Syntax
+
+    array(Element1 , Element2 , Element3 , ....)
+
+
+EX: (Define Array And Print It's Elements )
+---
+
+    <?php 
+            
+        $arr = array('Magdy' , 'Mohammed' , 'Ali');
+
+        echo '<pre>';
+            print_r($arr);
+        echo '</pre>';
+    ?>
+
+
+EX: (Access Array Elements)
+---
+
+    <?php 
+            
+        $arr = array('Magdy' , 'Mohammed' , 'Ali');
+
+        echo $arr[2] . '<br>'; // Can Use Square Brackets []
+        echo $arr{2};  // Can Use Curley Braces {}
+    ?>
+
+
+EX: (Push Items To Array)
+---
+
+    <?php 
+            
+        $arr = array();
+
+        $arr[] = 'Magdy';
+        $arr[] = 'Mohammed';
+
+        print_r($arr); // Array ( [0] => Magdy [1] => Mohammed )
+    ?>
+
+    <?php 
+            
+        $arr = array();
+
+        $arr[4] = 'Magdy';
+        $arr[3] = 'Mohammed';
+        $arr[2] = 'Hossam';
+        $arr[1] = 'Ali';
+
+        print_r($arr); // Array ( [4] => Magdy [3] => Mohammed [2] => Hossam [1] => Ali )
+    ?>
+
+
+EX (Nested Arrays)
+---
+
+    <?php 
+            
+        $arr = array('html' , array('Css' , 'Sass' , 'Scss'));
+
+        print_r($arr[1]); // Array ( [0] => Css [1] => Sass [2] => Scss )
+        echo $arr[1][0]; // Css
+    ?>
+
+
+EX (Loop Through Array)
+---
+
+    <?php 
+            
+        $arr = array('html' , 'Css' , 'Sass' , 'Scss');
+
+        foreach($arr as $lang){
+            echo $lang . '<br>';
+        }
+    ?>
+
+
+EX (Get Array Length)
+---
+
+    <?php 
+            
+        $arr = array('html' , 'Css' , 'Sass' , 'Scss');
+
+        echo count($arr); // 4
+    ?>
+
+
+EX (Loop Through Array Using Length)
+---
+
+    <?php 
+            
+        $arr = array('html' , 'Css' , 'Sass' , 'Scss');
+
+        for($x = 0; $x < count($arr); $x++){
+            echo $arr[$x] . '<br>';
+        }
+    ?>

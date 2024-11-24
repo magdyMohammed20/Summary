@@ -1,0 +1,71 @@
+(1) array_fill() Method
+------------------------
+==> Used To Fill Array With Specific Number
+
+==> Syntax
+
+    array_fill(Index , Number_Of_Array_Elements , Value)
+
+==> [Index , Number_Of_Array_Elements , Value] Is Mandatory
+
+
+EX
+---
+
+    <?php 
+
+        // Start Fill The Array From Index 0 With 10 Elements It's Value Is 'Magdy'
+        $arr = array_fill(0 , 10 , 'Magdy');
+
+        // Start Fill The Array From Index 2 With 10 Elements It's Value Is 'Magdy'
+        $arr2 = array_fill(2 , 10 , 'Magdy');
+
+        print_r($arr); // Array ( [0] => Magdy [1] => Magdy [2] => Magdy [3] => Magdy [4] => Magdy [5] => Magdy [6] => Magdy [7] => Magdy [8] => Magdy [9] => Magdy )
+
+        echo '<br><br>';
+        print_r($arr2); // Array ( [2] => Magdy [3] => Magdy [4] => Magdy [5] => Magdy [6] => Magdy [7] => Magdy [8] => Magdy [9] => Magdy [10] => Magdy [11] => Magdy )
+        
+    ?>
+
+
+EX (Negative Index)
+---
+
+    <?php 
+
+        // Start Fill The Array From Index -3 With 10 Elements It's Value Is 'Magdy' But Next Elements Start From 0 To Greater
+        $arr = array_fill(-3 , 10 , 'Magdy');
+
+        print_r($arr); // Array ( [-3] => Magdy [0] => Magdy [1] => Magdy [2] => Magdy [3] => Magdy [4] => Magdy [5] => Magdy [6] => Magdy [7] => Magdy [8] => Magdy )
+    
+    ?>
+
+
+EX (Fill Array Value With Array)
+---
+
+    <?php 
+
+        // Fill Array With Array
+        $arr = array_fill(0 , 5 , array('Magdy' , 'Mohammed'));
+
+        echo '<pre>';
+        print_r($arr); // Array ([0] => Array ( [0] => Magdy [1] => Mohammed ) [1] => Array ( [0] => Magdy [1] => Mohammed ) [2] => Array ( [0] => Magdy [1] => Mohammed) [3] => Array ( [0] => Magdy [1] => Mohammed ) [4] => Array ( [0] => Magdy [1] => Mohammed ) )
+        echo '</pre>';
+    
+    ?>
+
+
+EX (Nested Fill)
+---
+
+    <?php 
+
+        // Create Array With 3 Elements Each Element Is Array With 3 Elements It's Value Is 'Mohammed' 
+        $arr = array_fill(0 , 3 , array_fill(0 , 3 , 'Mohammed'));
+
+        echo '<pre>';
+        print_r($arr); // Array( [0] => Array ( [0] => Mohammed [1] => Mohammed [2] => Mohammed ) [1] => Array ( [0] => Mohammed [1] => Mohammed [2] => Mohammed ) [2] => Array ( [0] => Mohammed [1] => Mohammed [2] => Mohammed ) )
+        echo '</pre>';
+    
+    ?>

@@ -1,0 +1,29 @@
+(1) outerWidth
+---------------
+==> returns the outer width of the browser window, including all interface elements (like toolbars/scrollbars).
+
+
+EX
+-------
+
+	window.outerWidth  // Get Window Outer Width
+	
+	Or
+	
+	outerWidth   // Get Window Outer Width
+	
+	
+(2) outerHeight
+---------------
+==> returns the outer height of the browser window, including all interface elements (like toolbars/scrollbars).
+
+
+EX
+-------
+
+	window.outerHeight  // Get Window Outer Height
+	
+	Or
+	
+	outerHeight   // Get Window Outer Height
+	

@@ -1,0 +1,19 @@
+(1) Assign
+----------
+==> loads a new document
+
+
+==> The difference between this method and replace(), is that replace() removes the URL of the current document from the document history, meaning that it is not possible to use the "back" button to navigate back to the original document.
+
+
+==> Syntax:  location.assign(URL)
+
+
+EX: Go To Google Page
+----
+
+	window.location.assign('https://www.google.com')
+	
+	Or
+	
+	location.assign('https://www.google.com')

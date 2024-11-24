@@ -1,0 +1,16 @@
+(1) Pure Function
+-------------------
+==> The return value of the pure func­tions depends on its arguments
+==> if you call the pure func­tions with the same set of argu­ments, you will always get the same return values
+==> They do not have any side effects like net­work or data­base calls They do not mod­ify the argu­ments which are passed to them
+==> takes place in Call by Value
+==> it doesn't modify the external variable/data outside the scope and results the same output given in the same input
+
+
+(2) Impure function
+--------------------
+==> The return value of the impure func­tions does not depend on its arguments
+==> if you call the impure func­tions with the same set of argu­ments, you might get the dif­fer­ent return values [EX: Math.random(), Date.now()]
+==> They may have any side effects like net­work or data­base callsThey may mod­ify the argu­ments which are passed to them 
+==> takes place in Call by Reference
+==> it mutates data/variable outside it's lexical scope

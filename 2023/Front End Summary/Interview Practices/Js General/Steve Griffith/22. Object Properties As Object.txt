@@ -1,0 +1,12 @@
+// If Object Property Not String And It's Object Js Will Set It To The Type
+// Of This Object
+let o = {}
+
+let obj = {
+    a:5,
+    b:6,
+}
+
+o[obj] = 'magdy'
+
+console.log(o) // { '[object Object]': 'magdy' }

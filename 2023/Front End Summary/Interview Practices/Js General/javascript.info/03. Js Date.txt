@@ -1,0 +1,88 @@
+// Date Creation Or Get Current Date
+const date = new Date()
+console.log(date) // Tue May 19 2020 07:02:41
+
+// Creating Date With Milliseconds (TimeStamp)
+// 1000 Here Called TimeStamp
+const milliDate = new Date(1000)
+console.log(milliDate) // Thu Jan 01 1970 02:00:01
+
+// Creating Date With String Argument
+const stringDate = new Date("2019-01-01")
+console.log(stringDate) // Date Tue Jan 01 2019 02:00:00
+
+// Create the date with the given components
+// Syntax : new Date(year, month, date[day], hours, minutes, seconds, ms)
+const componentDate = new Date(2011 , 12 , 2 , 02 , 20 , 10 , 1000)
+console.log(componentDate) // Mon Jan 02 2012 02:20:11
+
+
+// Access Date Components
+
+// Get The Year Number
+// Note : Use getFullYear() Instead Of getYear() As getYear() Is Deprecated
+console.log(new Date().getFullYear()) // 2020
+console.log(new Date("2018-02-01").getFullYear()) // 18
+
+// Get The Month Number [Note: 0 => 11]
+console.log(new Date().getMonth())
+console.log(new Date("2019-12-12").getMonth()) // 11
+
+// Get The Day Number
+console.log(new Date().getDate())
+console.log(new Date("2018-11-15").getDate()) // 15
+
+// Get The Hours
+console.log(new Date().getHours())
+console.log(new Date("2018-01-02 10:15:30").getHours()) // 10
+
+// Get The Minutes
+console.log(new Date().getMinutes())
+console.log(new Date("2018-01-02 10:15:30").getMinutes()) // 15
+
+
+// Get The Seconds
+console.log(new Date().getSeconds())
+console.log(new Date("2018-01-02 10:15:30").getSeconds()) // 30
+
+
+// Get Milliseconds
+console.log(new Date().getMilliseconds())
+console.log(new Date("2018-01-02 10:15:30.500").getMilliseconds()) // 500
+
+// Get Day Of Week Number [from 0 To 6]
+// Note : 0 is Sunday
+console.log(new Date().getDay())
+console.log(new Date("2019-03-15").getDay()) // 5 [Is Friday]
+
+
+// Get Number Of Milliseconds from  1970 To The Current Date
+console.log(new Date().getTime())
+
+// difference between UTC and the local time zone, in minutes
+console.log(new Date().getTimezoneOffset())
+
+
+// Set Year And Month And Day
+// Syntax : setFullYear(Year , [Month] , [day])
+const setYear = new Date()
+setYear.setFullYear('2019','1','14')
+console.log(setYear)
+
+
+// [Benchmarking] Get Difference Between 2 Dates With Milliseconds But second Function Is Faster Than first because there’s no type conversion
+function first (date1 , date2){
+  return date1 - date2
+}
+
+function second(date1 , date2){
+  return date1.getTime() - date2.getTime()
+}
+
+console.time()
+console.log(first(new Date("2020-04-12") , new Date("2019-04-12")))
+console.timeEnd()
+
+console.time()
+console.log(second(new Date("2020-04-12") , new Date("2019-04-12")))
+console.timeEnd()

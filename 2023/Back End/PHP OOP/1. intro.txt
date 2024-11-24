@@ -1,0 +1,12 @@
+(1) OOP (Object Oriented Programming)
+--------------------------------------
+==> A Style Of Coding That Allows Developers To Group Similar Tasks Into Classes
+==> Use Classes To Organize The Data And Structure Of An Application
+==> Is Programming Paradigm Based On The Concept Of "Objects"
+==> Everything Is Object (User , Car , ...)
+
+
+(2) Some Information
+---------------------
+==> Languages Can't Be Object Oriented Only Code Can Be 
+==> Php Support Object Orientation For Code

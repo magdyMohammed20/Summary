@@ -1,0 +1,208 @@
+(1) SMACSS [Scalable And Modular Architecture For Css]
+--------------------------------------------------------
+==> Make Css Code Better , Cleaner , Easy To Read , Modular & Scalable
+
+(2) In Thing In The Website Called Module (Navbar , Header , Sidebar , Footer , Card , Modal....)
+
+(3) Naming Selectors
+----------------------
+
+	/* Add Prefix To The Header Class For Make Css More Readable */
+	.c-header{
+		color: red
+	}
+
+	.box--label{
+		color: red
+	}
+
+	/* SMACSS Rules With Sass */
+	@mixin t-header {
+		.....
+	}
+
+
+(4) Styling The Card Module
+-----------------------------
+
+	<div class='card'>
+		<h1 class='card-title'>Title</h1>
+		<div class='card-body'>
+			<h2 class='card-body-title'></h2>
+		</div>
+	</div>
+
+
+(5) Every SMACSS project structure uses five categories
+---------------------------------------------------------
+==> Base 
+==> Layout
+==> Modules
+==> State
+==> Theme
+
+
+(6) Base
+---------
+==> define what an element should look like anywhere on the page. They are the defaults. If you’re using a reset stylesheet, this ensures that your resulting styles are the same 
+
+==> should include default sizes, margins, colors, borders, and any other default values you plan to use across your website
+    And Include The Reset Css Elements Style [EX: margin: 0]
+
+==> you should only include bare element selectors, or those with pseudo-classes, but not with class or ID selectors
+
+	/* Here Is Base File Structure */
+
+	html {
+	    margin: 0;
+	    font-family: sans-serif;
+	}
+
+	a {
+	    color: #000;
+	}
+
+	button {
+	    color: #ababab;
+	    border: 1px solid #f2f2f2;
+	}
+
+
+==> the place where you should include The 'Base' File Is The Top Of The File When Using Sass
+
+
+(7) Layout
+-----------
+==> Layout styles will divide the page into major sections [Header - Sidebar - Content Or main - Footer]
+==> These layouts will hold multiple CSS modules like boxes, cards, unordered lists, galleries, and the like
+==> We usually give layouts an ID selector, as they don’t repeat on the page and they are unique
+==> Also you should prefix rules for layout styles with the letter l to distinguish them from module styles
+
+
+	/* Here Is Layout File Structure */
+
+	#header {  
+	    background: #fcfcfc;
+	}
+
+	#header .l-right {
+	    float: right;
+	}
+
+	#header .l-align-center {
+	    text-align: center;
+	}
+
+	#footer{
+		....
+	}
+
+(8) Modules
+-------------
+==> Containing The Style Of Project Module [header , nav ....]
+==> thus improving speed. But it also helps us avoid using the unwanted !important which are a sign of poorly structured CSS projects
+
+
+	/* using two hyphens Here As module names have two words or their own prefixes like big-article [big-article-title] */
+	.article {
+	    background: #f32;
+	}
+
+	.article--title {
+	    font-size: 16px;
+	}
+
+	.article--text {
+	    font-size: 12px;
+	}
+
+
+
+	/*  nest modules inside modules */
+
+	<div class="box">
+	    <div class="box--label">This is box label</div>
+	    <ul class="box--list list">
+		<li class="list--li">Box list element</li>
+	    </ul>
+	</div>
+
+
+
+
+	/* Good Style */
+
+	.red--box {
+	    background: #fafcfe;
+	}
+
+	.red-box--list {
+	    color: #000;
+	}
+
+
+
+	/* Bad Style */
+
+	.red .box {
+	    background: #fafcfe;
+	}
+
+	.red .box .list {
+	    color: #000;
+	}
+
+	.box ul {
+	    color: #fafafa;
+	}
+
+
+(9) State
+----------
+==> is a way to describe how our modules look in different dynamic situations. So this part is really for interactivity: We want different behavior if an element is considered to be hidden, expanded, or modified. For example, a jQuery accordion will need help defining when you can or can’t see an element’s content. It helps us to define an element’s style at a specific time
+
+
+==> States are applied to the same element as layout so we are adding an additional rule which will override previous ones, if any. The state rule is given precedence, as it’s the last one in the chain of rules
+
+
+
+
+	<header id="header">
+	    <ul class="nav">
+		<li class="nav--item is-selected">Contact</li>
+		<li class="nav--item">About</li>
+	    </ul>
+	</header>
+
+
+	/* we tend to use prefixes here. This helps us to recognize them and to give them priority. Here we use the is prefix, as in is-hidden or is-selected */
+
+	.nav--item.is-selected {
+	    color: #fff;
+	}
+
+
+	/* In Some Cases You Can Use !important Keyword */
+
+	/* The Main Style Of The Element */
+	.box .element {
+	    display: none;
+	}
+
+
+	/* The Style Want To Give After Click On Button With Js */
+	/* As The Css Specificity Is Higher In [.box .element] So We Use !important For Force Evaluate The Style */
+	.is-shown {
+	    display: block !important;
+	}
+
+
+(10) Theme
+--------------
+==> it’s used to contain the rules of the primary colors, shapes, borders, shadows, and such. Mostly these are elements which repeat across a whole website. We don’t want to redefine them each time we create them. Instead we want to define a unique class which we only add on later to a default element
+
+
+	.button-large {
+	    width: 60px;
+	    height: 60px;
+	}

@@ -1,0 +1,13 @@
+(1) Join
+----------
+==> Used To Merge Data From Different Tables That Connected Using Forign Key 
+
+
+EX: SELECT * FROM users JOIN langs; /* Merge 2 Tables Without Condition */
+
+EX: 
+----
+    /* Merge 2 Tables With Condition */
+    SELECT user_name , lang_name 
+    FROM users,langs
+    WHERE langs.lang_id = users.lang_id;

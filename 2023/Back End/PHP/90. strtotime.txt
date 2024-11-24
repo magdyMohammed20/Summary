@@ -1,0 +1,142 @@
+(1) strtotime() 
+----------------
+==> Convert String To Time
+
+==> Syntax
+
+    strtotime(date[mandatory] , timestamp[now][optional])
+
+EX
+---
+
+    <?php
+
+        $time = strtotime('now');
+
+        echo $time; // 1608806586
+
+        $da = date('Y-m-d h:i:s' , $time); // 2020-12-24 11:43:06
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Remove 1 Hour From Current Time
+        $time = strtotime('now' , time() - 3600);
+
+        echo $time; // 1608803092
+
+        $da = date('Y-m-d h:i:s' , $time); // 2020-12-24 10:45:08
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Add 1 Day To Current Time
+        $time = strtotime('+1 day');
+
+        echo $time; // 1608893254
+
+        $da = date('Y-m-d h:i:s' , $time); // 2020-12-25 11:47:34
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Add 1 Week To Current Time
+        $time = strtotime('+1 week');
+
+        $da = date('Y-m-d h:i:s' , $time); // 2020-12-31 11:51:30
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Add 1 Month To Current Time
+        $time = strtotime('+1 month');
+
+        $da = date('Y-m-d h:i:s' , $time); // 2021-01-24 11:52:24
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Add 1 Year To Current Time
+        $time = strtotime('+1 year');
+
+        $da = date('Y-m-d h:i:s' , $time); // 2021-12-24 11:53:01
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Add 1 Year And 2 days To Current Time
+        $time = strtotime('+1 year 2 day');
+
+        $da = date('Y-m-d h:i:s' , $time); // 2021-12-26 11:54:36
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Add 1 Year And 2 days And 6 Hours To Current Time
+        $time = strtotime('+1 year 2 day 6 hours');
+
+        $da = date('Y-m-d h:i:s' , $time); // 2021-12-26 05:55:53
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Get Date And Time Of Next Monday
+        $time = strtotime('next monday');
+
+        $da = date('Y-m-d h:i:s' , $time); // 2020-12-28 12:00:00
+
+        echo $da;
+    ?>
+
+EX
+---
+
+    <?php
+
+        // Get Date And Time Of Last Monday
+        $time = strtotime('last monday');
+
+        $da = date('Y-m-d h:i:s' , $time); // 2020-12-21 12:00:00
+
+        echo $da;
+    ?>

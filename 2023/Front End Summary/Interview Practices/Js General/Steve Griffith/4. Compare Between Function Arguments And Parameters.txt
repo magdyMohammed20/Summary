@@ -1,0 +1,27 @@
+        // How To Check If Function Passed Parameters Equal To 
+        // Function Arguments
+
+/////////////////////////////////////////////
+// First Way
+/////////////////////////////////////////////
+
+        function magdy(a , b){
+            console.log(arguments.length) // 3 // Length Of Passed [1,2,3]
+            console.log(magdy.length) // 2 // Length Of [a,b]
+        }
+        magdy(1,2,3)
+        console.log('-------------------------------')
+
+///////////////////////////////////////////////////
+// Second Way : If Function Is Assigned To Variable
+///////////////////////////////////////////////////
+        let fun = function magdy2(a,b,c){
+            if(arguments.length === fun.length){
+                console.log('Yes Equal')
+            }else{
+                console.log('Not Equal')
+            }
+        }
+
+        fun(1,2,3) // Yes Equal
+        fun(1) // Not Equal

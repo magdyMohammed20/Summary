@@ -1,0 +1,125 @@
+(1) Connect Php With MYSQL Using [PDO]
+---------------------------------------
+==> Create Database Called [mego] In [phpmyadmin]
+==> Write [PDO] Code To Connect Php With MYSQL
+
+    <?php
+
+        // Data Source Name
+        $dsn  = "mysql:host=localhost;dbname=mego";
+        $user = "root";
+        $pass = "";
+
+        // Connect Code
+        try{
+            $connect = new PDO($dsn , $user , $pass);
+
+            // Set PDO Attributes
+            $connect->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+            
+            echo "Connected";
+        }catch(PDOException $e){
+      
+            echo "Failed " . $e->getMessage();
+      
+        }
+    ?>
+
+
+(2) Insert Data From Php Into Database
+----------------------------------------
+
+    <?php
+
+        // Data Source Name
+        $dsn  = "mysql:host=localhost;dbname=mego";
+        $user = "root";
+        $pass = "";
+
+        // Connect Code
+        try{
+            $connect = new PDO($dsn , $user , $pass);
+            // Set PDO Attributes
+            $connect->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+
+            // Insert 'Storage' Into 'features' Table
+            $sql = "INSERT INTO features (name) VALUES ('Storage')";
+            $connect->exec($sql); // For Execute The Query
+
+            echo "Connected";
+        }catch(PDOException $e){
+            echo "Failed " . $e->getMessage();
+        }
+    ?>
+
+
+(3) If Want To Insert Arabic Letters In DB Without Corruption You Must Set PDO Options
+----------------------------------------------------------------------------------------
+
+    <?php
+
+        // Data Source Name
+        $dsn  = "mysql:host=localhost;dbname=mego";
+        $user = "root";
+        $pass = "";
+        // Create Options Array
+        $options = array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+        );
+        // Connect Code
+        try{
+            $connect = new PDO($dsn , $user , $pass , $options);
+            // Set PDO Attributes
+            $connect->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+
+            // Insert Arabic Letters Into 'features' Table
+            $sql = "INSERT INTO features (name) VALUES ('موج')";
+            $connect->exec($sql); // For Execute The Query
+
+            echo "Connected";
+        }catch(PDOException $e){
+            echo "Failed " . $e->getMessage();
+        }
+    ?>
+
+
+(4) Insert Data Into Mysql Using Input Field
+-----------------------------------------------
+
+    index.php
+    ----------
+
+        <form action="insert.php" method="POST">
+            <input type='text' name='user'/>
+            <input type='submit'/>
+        </form>
+
+
+    insert.php
+    -----------
+
+        <?php
+
+            // Data Source Name
+            $dsn  = "mysql:host=localhost;dbname=mego";
+            $user = "root";
+            $pass = "";
+            $options = array(
+                PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"
+            );
+            // Connect Code
+            try{
+                $connect = new PDO($dsn , $user , $pass , $options);
+                // Set PDO Attributes
+                $connect->setAttribute(PDO::ATTR_ERRMODE , PDO::ERRMODE_EXCEPTION);
+
+                if($_SERVER['REQUEST_METHOD'] === 'POST'){
+                    $sql = "INSERT INTO features (name) VALUES ('$_POST[user]')";
+                    $connect->exec($sql); // For Execute The Query
+                    echo $_POST['user'] . ' Feature Inserted Successfully';
+                }
+
+            }catch(PDOException $e){
+                echo "Failed " . $e->getMessage();
+            }
+        ?>

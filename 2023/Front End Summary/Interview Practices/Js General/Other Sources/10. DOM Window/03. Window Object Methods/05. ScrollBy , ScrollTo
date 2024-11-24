@@ -1,0 +1,62 @@
+(1) scrollBy
+-------------
+==> scrolls the document by the specified number of pixels.
+==> For this method to work, the visible property of the window's scrollbar must be set to true!
+==> Syntax: window.scrollBy(xnum, ynum)
+
+
+EX
+---
+
+	document.getElementById('btn').onclick = () => {
+	  scrollBy(0, 100)
+	}
+	
+(2) scrollTo
+------------
+==> scrolls the document to the specified coordinates.
+==> For this method to work, the visible property of the window's scrollbar must be set to true!
+==> Syntax: window.scrollTo(xpos, ypos)
+
+
+
+EX
+-----
+
+	Html
+	-----
+	
+	<nav style="position: fixed; left: 0; top: 0; width: 100%;">
+		<button id="oneBtn">One</button>
+		<button id="twoBtn">Two</button>
+		<button id="threeBtn">Three</button>
+	</nav>
+	
+    	<div id='one' style="color: #FFF; height: 700px; background-color: red">1</div>
+    	<div id='two' style="color: #FFF; height: 700px; background-color: blue">2</div>
+    	<div id='three' style="color: #FFF; height: 700px; background-color: green">3</div>
+
+
+
+
+	Js
+	----
+	
+	var oneBtn = document.getElementById('oneBtn'),
+	  twoBtn = document.getElementById('twoBtn'),
+	  threeBtn = document.getElementById('threeBtn'),
+	  one = document.getElementById('one'),
+	  two = document.getElementById('two'),
+	  three = document.getElementById('three')
+
+	oneBtn.onclick = () => {
+	  scrollTo(0, one.offsetTop)
+	}
+
+	twoBtn.onclick = () => {
+	  scrollTo(0, two.offsetTop)
+	}
+
+	threeBtn.onclick = () => {
+	  scrollTo(0, three.offsetTop)
+	}

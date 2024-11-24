@@ -1,0 +1,17 @@
+(1) UserAgent
+--------------
+==> returns the value of the user-agent header sent by the browser to the server.
+
+==> The value returned, contains information about the name, version and platform of the browser
+
+==> This property is read-only.
+
+
+EX
+----
+
+	window.navigator.userAgent  // "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0"
+	
+	Or
+	
+	navigator.userAgent  // "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:77.0) Gecko/20100101 Firefox/77.0"

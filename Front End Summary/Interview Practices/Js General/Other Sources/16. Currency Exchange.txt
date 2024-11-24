@@ -1,3 +1,0 @@
-let price = 123.23;
-
-console.log( price.toLocaleString('ar-EG' , {style: 'currency',currency: 'EGP'}) )
