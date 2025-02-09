@@ -1,0 +1,126 @@
+(1) Local Or User Defined Module
+--------------------------------------
+
+    index.js
+    -----------
+
+    const logger = require('./modules/logger')
+
+    logger()
+    
+
+    modules/logger.js
+    -----------------------
+    
+    function logger() {
+        console.log('Log Me')
+    }
+
+    module.exports = logger
+
+
+(2) Multi Export
+-------------------------
+
+    index.js
+    -----------
+
+    const logger = require('./modules/logger')
+
+    logger.log()
+
+    
+    modules/logger.js
+    -----------------------
+    
+    function log() {
+        console.log('Log Me')
+    }
+
+    module.exports = {
+        log
+    }
+
+
+(3) Export Single
+--------------------------
+
+    index.js
+    -----------
+
+    const logger = require('./modules/logger')
+
+    logger.log()
+
+    
+    modules/logger.js
+    -----------------------
+    
+    exports.log = () => {
+        console.log('Log Me')
+    }
+
+(4) Each User Defined Module Created Nodejs Wrap It With Something Called 'module wrapper' Which Is 'IIFE' Function
+
+(5) 'exports' Experssion Is Reference For 'module.exports'
+
+(6) Module Caching
+-------------------------
+==> Here We Import 'logger' Three Times But Note That [console.log('import me')] Executed Only 1 Time Because Of Caching
+
+    index.js
+    -----------
+
+    const logger1 = require('./modules/logger')
+    const logger2 = require('./modules/logger')
+    const logger3 = require('./modules/logger')
+
+    logger1() 
+
+    // Output
+
+    /*
+        import me
+        Log Me
+    */
+
+    
+    modules/logger.js
+    -----------------------
+    
+    console.log('import me')
+
+    function logger() {
+        console.log('Log Me')
+    }
+
+    module.exports = logger
+
+
+(7) EcmaScript Modules
+---------------------------
+==> For Enable ES Modules You must Have package.json File And Set "type" To "module"
+
+
+
+    package.json
+    -----------------------
+
+    {
+        "type": "module"
+    }
+
+
+    modules/logger.js
+    -------------------
+
+    export function logger() {
+        console.log('Log Me')
+    }
+
+    index.js
+    -----------
+
+    import { logger } from './modules/logger.js'
+
+    logger() // Log Me

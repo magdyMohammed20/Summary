@@ -1,0 +1,18 @@
+(1) Use NPM
+---------------
+==> Initialize npm project (npm init -y)
+
+
+(2) Install (Nodemon) For Watch Files Changes
+----------------------------------------------
+==> npm i --save-dev nodemon
+
+    package.json
+    ---------------
+
+        scripts: {
+            "dev" : "nodemon index.js"
+        }
+
+
+    ==> For Run Write (npm run dev) in cmd

@@ -1,0 +1,115 @@
+
+(1) Basic Read And Write
+-----------------------------
+
+    const fs = require('fs')
+
+    // Read File Sync
+    // So If Read Process Takes 10min All Lines After This Will Pending Untill This Executed
+    const textIn = fs.readFileSync('./files/input.txt', 'utf8')
+
+    // Write File Sync
+    const newContent = `My Output That Readed From input.txt At ${new Date()}\n ${textIn}`
+    fs.writeFileSync('./files/output.txt', newContent)
+
+
+(2) Blocking & Non Blocking
+--------------------------------
+==> Blocking : Like Sample Above It Blockes The Line After It Untill Blocking Code Executed
+==> Non Blocking
+
+(3) 'Sync Code' Is The Code That Make Blocking
+
+(4) Non Blocking Code In ES Modules
+----------------------------------------
+
+    import fs from 'fs';
+    import path from 'path';
+    import { fileURLToPath } from 'url';
+
+    // Get the directory name of the current module file
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    export function readFile() {
+        // Resolve the file path relative to the module's location
+        const filePath = path.join(__dirname, '../files/text.txt');
+
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err) {
+                console.log('Error In Read File', err);
+            } else {
+                console.log('Read File Content:', data);
+            }
+        });
+    }
+
+
+(5) Write Content To File (Non Blocking)
+-------------------------------------------
+
+    import fs from 'fs';
+    import path from 'path';
+    import { fileURLToPath } from 'url';
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    export function writeFile() {
+        const filePath = path.join(__dirname, '../files/users.json');
+
+        fs.writeFile(filePath,JSON.stringify([{id: 1, username: "magdy"}]) ,'utf8', (err) => {
+            if (err) {
+                console.log('Error In Read File', err);
+            } else {
+                console.log('Write To File');
+            }
+        });
+    }
+
+(6) Delete File
+-------------------
+
+    import fs from 'fs';
+    import path from 'path';
+    import { fileURLToPath } from 'url';
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    export function deleteFile() { 
+
+        const filePath = path.join(__dirname, '../files/users.json');
+
+        fs.unlink(filePath, (err) => {
+            if (err) {
+                console.log('Error In Delete File' , err)
+            } else {
+                console.log('File Deleted Successfully')
+            }
+        });
+    }
+
+(7) Read And Write Streams
+-----------------------------
+==> Each Chunk In Stream Is (64KB)
+
+
+    import fs from 'fs';
+    import path from 'path';
+    import { fileURLToPath } from 'url';
+
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+
+    export function readAndWriteStream() {
+        const readFilePath = path.join(__dirname, '../files/text.txt');
+        const writeFilePath = path.join(__dirname, '../files/stream-output.txt');
+
+        const rstream = fs.createReadStream(readFilePath , 'utf8')
+        const wstream = fs.createWriteStream(writeFilePath , 'utf8')
+        rstream.on('data', chunk => {
+            wstream.write('\n=== Chunk ===\n')
+            wstream.write(chunk)
+        })
+    }

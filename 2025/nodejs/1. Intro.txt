@@ -1,0 +1,28 @@
+(1) Runtime Environment: The Environment That Can Enable Run Js Outside The Browser
+
+(2) Nodejs Adv
+-----------------
+==> Any Dev Works With Js Can Work With It
+==> Create Backend Services
+==> Create Realtime Apps
+
+(3) REPL Concept (REPL Is Node Shell Which Can Open It By Type 'node' in cmd)
+-------------------
+==> (Read-Eval-Print Loop) is an interactive programming environment that takes user input, evaluates it, and returns the result to the user. It's like a conversation with your computer where you:
+
+Read: Takes input from the user
+Eval: Evaluates/executes the input
+Print: Shows the result of the evaluation
+Loop: Returns to the beginning, ready for more input
+
+
+(4) Any Js Core Can Used It In Nodejs Except Web Apis Like (window - document,....)
+
+(5) Nodejs Depends On C++ As Js Not Designed To Be Low Level Language So Used C++ To Deal With Operating System
+
+(6) Modules Types
+---------------------
+==> Built in
+==> Local Or User Defined
+==> npm modules
+
