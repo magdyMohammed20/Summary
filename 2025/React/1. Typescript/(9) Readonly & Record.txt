@@ -1,0 +1,59 @@
+(1) readonly prop
+--------------------
+
+    interface IUser {
+    id: number;
+    name: string;
+    age: number;
+    hobbies: string[],
+
+    }
+
+// Extends Here
+interface INewUser extends IUser {
+    readonly address: string
+}
+
+
+var { id, age }: IUser = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming', 'Football', 'Food Review']
+}
+
+
+
+const userData: IUser = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming', 'Football', 'Food Review']
+}
+
+const userProfile: INewUser = { ...userData, address: '10 main street' }
+
+userProfile.address = '20 second street'
+console.log(userProfile) // Cannot assign to 'address' because it is a read-only property.
+
+
+(2) Record
+---------------
+
+
+// Here We Specify That Key Type Will Be String And Value Can Be One Of (string | number | object)
+
+var userData: Record<string, string | number | object> = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming', 'Football', 'Food Review']
+}
+
+
+// When Add New Key TS Will Not Produce Any Error
+userData.friends = ['Hossam']
+
+// Type 'boolean' is not assignable to type 'string | number | object'
+userData.loggedIn = false
+

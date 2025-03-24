@@ -1,0 +1,22 @@
+(1) Var : (Current Execution Context)
+---------
+
+EX1: 
+
+    var x = 10;
+
+    function callMe() {
+        console.log(x)
+    }
+    
+    callMe() // 10
+    
+EX2: 
+
+    var isLoggedIn = true
+
+    if (isLoggedIn) {
+        var x = 10;
+    }
+
+    console.log(x) // 10

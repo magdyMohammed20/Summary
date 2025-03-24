@@ -1,0 +1,15 @@
+(1) If I Have Interface That Can Includes Multi Props And Need To Enhance We Use 'Index Signature'
+
+EX
+---
+
+    interface CityDictionary {
+        [city: string]: string; // Index Signature
+    }
+
+    const cities: CityDictionary = {
+        cairo: 'Egypt',
+        paris: 'France'
+    }
+
+    console.log(cities.cairo)

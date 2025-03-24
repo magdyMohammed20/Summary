@@ -1,0 +1,7 @@
+(1) JSX Rules
+----------------
+==> Should Only Have 1 Top Level Element
+==> Element Must Have Closing Tag
+==> Component Name Must Be Capitalized
+==> Wrap Any Expression Inside Curly Praces {}
+==> Use 'className' Instead Of 'class' To Give Class For Element

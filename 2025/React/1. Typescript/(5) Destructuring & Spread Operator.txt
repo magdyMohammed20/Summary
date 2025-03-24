@@ -1,0 +1,19 @@
+// Destructuring (We Destruct id , age)
+var { id , age }: { id: number, name: string, age: number, hobbies: string[] } = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming' , 'Football' , 'Food Review']    
+}
+
+
+
+// Spread Operator
+const userData: { id: number, name: string, age: number, hobbies: string[] } = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming', 'Football', 'Food Review']
+}
+
+const userProfile: {id: number , name : string , age: number , address: string} = { ...userData , address: '10 main street' }

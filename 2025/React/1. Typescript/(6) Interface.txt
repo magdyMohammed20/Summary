@@ -1,0 +1,33 @@
+(1) Interface 
+--------------
+==> define the structure of objects by specifying property types and method signatures, ensuring consistent shapes and enhancing code clarity
+
+
+interface IUser {
+    id: number;
+    name: string;
+    age: number;
+    hobbies: string[],
+    address?: string
+}
+
+
+// Destructuring (We Destruct id , age)
+var { id , age }: IUser = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming' , 'Football' , 'Food Review']    
+}
+
+
+
+// Spread Operator
+const userData: IUser = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming', 'Football', 'Food Review']
+}
+
+const userProfile: IUser = { ...userData , address: '10 main street' }

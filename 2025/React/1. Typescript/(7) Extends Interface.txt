@@ -1,0 +1,31 @@
+interface IUser {
+    id: number;
+    name: string;
+    age: number;
+    hobbies: string[],
+    
+}
+
+// Extends Here
+interface INewUser extends IUser{
+    address: string
+}
+
+
+var { id , age }: IUser = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming' , 'Football' , 'Food Review']    
+}
+
+
+
+const userData: IUser = {
+    id: 1,
+    name: 'Magdy',
+    age: 20,
+    hobbies: ['Swimming', 'Football', 'Food Review']
+}
+
+const userProfile: INewUser = { ...userData , address: '10 main street' }

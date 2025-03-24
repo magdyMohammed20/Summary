@@ -1,0 +1,18 @@
+interface IUser {
+    username: string;
+    address: string;
+    age: number
+}
+
+// updateUser Not Can Extend All Props Of 'IUser' Or Some Props Of It
+function updateUser(user: IUser , updateUser: Partial<IUser>) {
+    return { ...user , ...updateUser }
+}
+
+const user:IUser = {
+    username: 'magdy',
+    address: '10 main street',
+    age: 27
+}
+
+console.log(updateUser(user, { username: 'naga' })) // {username: 'naga',address: '10 main street',age: 27}

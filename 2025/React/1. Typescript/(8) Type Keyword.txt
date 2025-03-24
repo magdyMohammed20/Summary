@@ -1,0 +1,12 @@
+(1) Type Keyword
+--------------------
+==> Used With Aliases
+
+type PI = number; // PI Called Alias
+    
+
+==> Used With Unions
+
+type Status = 'online' | 'offline'
+
+

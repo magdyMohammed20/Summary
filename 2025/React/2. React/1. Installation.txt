@@ -1,0 +1,10 @@
+(1) yarn create vite project-name
+
+(2) Follow The Steps Then [yarn] Then [yarn run dev]
+
+(3) Component
+----------------
+==> Biece Of UI That Have Own Logic And Design
+
+
+

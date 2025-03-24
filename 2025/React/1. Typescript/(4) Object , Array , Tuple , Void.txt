@@ -1,0 +1,34 @@
+(1) Object
+--------------
+    
+    
+    var x: object = {} // First Way
+    var y: {} = {} // Second Way
+
+    // Third Way
+    var user: { id: number, name: string, age: number, hobbies: string[] } = {
+      id: 1,
+      name: 'Magdy',
+      age: 20,
+      hobbies: ['Swimming', 'Football', 'Food Review']
+    }
+
+
+(2) Array
+-------------
+
+    const nums: number[] = [1, 2, 3, 4, 5]
+
+(3) Tuple
+-------------
+
+    var tuple: [number, { name: string }, string, boolean] = [1, { name: 'magdy' }, 'Working', true]
+
+
+(4) void
+-----------
+
+            // Void Means The Function Not Return Anything
+            function logMsg(msg: string): void {
+                console.log(msg)
+            }

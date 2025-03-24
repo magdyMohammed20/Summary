@@ -1,0 +1,13 @@
+(1) Null
+------------
+==> Refer To Absence Of Value (Like User Not Logged In So I Don't Know The Data Of Him)
+
+    var x = null;
+
+    
+(2) Undefined
+-----------------
+==> Default Value For UnIntialized Variable
+
+    var x;
+

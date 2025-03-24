@@ -1,0 +1,28 @@
+(1) keyof
+----------
+
+interface IUser {
+    id: number;
+    username: string;
+    age: number
+}
+
+// Means That 'AVkeys' Must Be One Of 'id' Or 'username' Or 'age'
+type AVkeys = keyof IUser
+
+const userData: IUser = {
+    id: 1,
+    username: 'magdy',
+    age: 20
+}
+
+
+const getValue = (obj: IUser, key: AVkeys) => {
+    return obj[key]
+}
+
+
+getValue(userData, 'username')
+getValue(userData, 'age')
+getValue(userData, 'id')
+getValue(userData, 'address') // Error : '"address"' is not assignable to parameter of type 'keyof IUser'

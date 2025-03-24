@@ -1,0 +1,22 @@
+(1) Swap Using Generics
+--------------------------
+
+function swap<T>(arg1: T, arg2:T) {
+    return [arg2 , arg1]
+}
+
+
+// Swap Numbers
+let num1 = 10;
+let num2 = 20;
+[num1, num2] = swap(num1, num2)
+console.log(num1) // 20
+console.log(num2) // 10
+
+
+// Swap Strings
+let str1 = 'Str1';
+let str2 = 'Str2';
+[str1, str2] = swap(str1, str2)
+console.log(str1) // Str2
+console.log(str2) // Str1

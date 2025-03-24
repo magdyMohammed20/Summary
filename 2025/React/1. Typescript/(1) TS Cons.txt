@@ -1,0 +1,21 @@
+(1) TS Cons
+----------------
+==> Help To Catch Errors In Dev Mode
+==> Provide Type Checking
+==> Compatibility : TS Is Super Set For Js (Any Js Code Is Valid In TS Code)
+==> Error Detection
+==> Ecmascript Compatibility
+==> Transpilation : Once Type Checking Complete TS Transpile The TS Code Into Js Code
+
+(2) TS Install
+--------------------
+==> npm i -g typescript ts-node
+
+(3) Compile TS File : [tsc index.ts]
+
+(4) Compile With Watch : [tsc index.ts -w]
+
+(5) Generate 'tsconfig.json' [tsc --init]
+
+
+

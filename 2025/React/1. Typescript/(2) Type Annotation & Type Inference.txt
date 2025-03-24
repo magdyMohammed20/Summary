@@ -1,0 +1,16 @@
+(1) Type Annotation
+-------------------------
+==> Tell TS The Variable Type
+
+var x: number;
+x = 10
+
+var str: string;
+str = 'magdy'
+
+
+    (2) Type Inference
+-----------------------
+==> Don't Need To Tell Variable Type Which Is Infered From TS
+
+var x = "magdy" // TS Infered That Type Of X Is String Because Of It Have String Value

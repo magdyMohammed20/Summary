@@ -1,0 +1,46 @@
+(1) enum
+-----------
+==> First Sample
+
+    enum Direction {
+        up, // 0
+        right, // 1
+        bottom, // 2
+        left // 3
+    }
+
+    const direction = Direction.up;
+
+    console.log(direction) // 0
+    
+
+==> Second Sample
+
+
+    enum StatusCodes {
+        Success = 200,
+        NotFound = 404,
+        ServerError = 500
+    }
+
+    function handleErrors(statusCode: StatusCodes) {
+        switch (statusCode) {
+            case StatusCodes.Success:
+                console.log('Success')
+                break;
+            case StatusCodes.NotFound:
+                console.log('Not Found')
+                break;
+            case StatusCodes.ServerError:
+                console.log('Server Error')
+                break;
+            default:
+                console.log('Not Defined')
+                break;
+        }
+    }
+
+    handleErrors(200) // Success
+    handleErrors(404) // Not Found
+    handleErrors(500) // Server Error
+    handleErrors(201) // '201' is not assignable to parameter of type 'StatusCodes'
