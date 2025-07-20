@@ -1,0 +1,42 @@
+(1) First Way To Define Component Props Types
+-----------------------------------------------
+
+    import { FC } from "react";
+
+interface IProps {
+    title: string;
+    description: string;
+}
+
+
+
+const Alert: FC<IProps> = ({ title }) => {
+    return <div>
+        { title }
+        </div>
+}
+
+export default Alert
+
+
+
+    (2) Second Way To Define Component Props Types
+-----------------------------------------------
+
+    import { FC } from "react";
+
+interface IProps {
+    title: string;
+    description: string;
+}
+
+
+const Alert = ({ title }: IProps) => {
+    return <div>
+        { title }
+        </div>
+}
+
+export default Alert
+
+
