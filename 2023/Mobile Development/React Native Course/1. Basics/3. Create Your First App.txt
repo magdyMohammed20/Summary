@@ -1,8 +1,27 @@
-(1) Create App Using Expo  Cli
--------------------------------
+(1) First Install These Extensions For Vscode
+-------------------------------------------------
+==> react native snippet
+==> react native Tools
+==> ES7+ React/Redux/React-Native snippets
+==> React-Native/React/Redux snippets for es6/es7
+
+
+
+(2) First Way For : Create App Using Expo Cli
+------------------------------------------------
 ==> Install NodeJs
 ==> Run [npm install -g expo-cli]
 ==> Create Project [expo init rn-my-app]
 ==> Select 'Blank' 
 ==> Set Project Name In The Object [rn-my-app]
 ==> Starting Development Server [expo start] Or [npm start]
+
+
+(3) Second Way For : Create App Using React Native Cli
+------------------------------------------------------------
+==> npx create-expo-app@latest app-name
+==> Select 'Blank With TS'
+==> cd app-name
+==> npm start
+
+

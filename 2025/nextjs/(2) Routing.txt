@@ -1,0 +1,187 @@
+(1) Routing
+----------------
+==> In Src/app Can Create The Page By Making Own Folder That Contains 'page.tsx'
+==> And Can Make Nested Routes Like '/dashboard/settings'
+
+    src
+        - app
+            - dashboard
+                - page.tsx
+                - settings
+                    - page.tsx
+
+
+(2) Nested Layout
+--------------------
+==> If I Need To Make Customize Layout For Specific Route 'Dashboard'
+
+    src
+        - app
+            - dashboard
+                - layout.tsx
+                - page.tsx
+                - settings
+                    - page.tsx
+
+
+    src/app/dashboard/layout.tsx
+    ------------------------------
+
+    import "../globals.css";
+
+    export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+        return (
+            <div lang="en">
+                
+                    <h1>Inner Layout</h1>
+                    {children}
+            </div>
+        );
+    }
+
+(3) Ignore Folder (Prefix With Underscore)
+--------------------------------------------
+==> Make 'private' Folder Like In This Path 'src/app/_private' To Not Considered As Route
+
+(4) Grouping Routes
+----------------------
+
+    src
+        - app
+
+            - layout.tsx
+            - (dashboard)         // Group
+                - page.tsx
+                - layout.tsx      // Layout For This Group Only
+                - settings
+                    - page.tsx
+
+            - (marketing)         // Group
+                - page.tsx
+                - layout.tsx      // Layout For This Group Only
+
+                
+(5) Dynamic Route Segments
+----------------------------
+==> For Create Routes Like '/blog/10'
+
+    src
+        - app
+            - blog
+                - [id]
+                    - page.tsx
+
+
+
+    src/app/blog/9
+    -------------------
+
+    
+    interface ParamsProps{
+        params: Promise<{id: string}>
+    }
+
+    async function Settings({ params }: ParamsProps) {
+
+        const { id } = await params
+        
+        return (
+            <div>
+                {JSON.stringify(id)}
+            </div>
+        )
+    }
+
+    export default Settings
+
+
+(6) Multiple Dynamic Route Segments
+---------------------------------------
+==> For Create Routes Like '/blog/file/x/y'
+
+
+    (main)/file/[[...slug]]/page.tsx
+    ----------------------------------
+
+    interface PageProps {
+        params: { slug: string[] };
+    }
+
+    export default async function Page({ params }: PageProps) {
+    
+        const a = await params
+
+        // http://localhost:3000/file/hello/test
+        console.log("slug:", a?.slug); // ['hello', 'test']
+
+        return (
+            <div>ddd</div>
+        );
+    }
+
+
+(7) Parallel Routes
+----------------------
+==> Feature That Don't Be A Route But Will Be Considered As Props For Parent Layout Which Is Exist Even If The Url Changed
+
+
+    app/(main)/dashboard/@analytics/page.tsx
+    -------------------------------------------
+
+    // This Will Rendered In '/dashboard' Route
+    function page() {
+        return (
+            <div>Analytics</div>
+        )
+    }
+
+    export default page
+
+
+
+    app/(main)/dashboard/@analytics/default.tsx
+    ---------------------------------------------
+
+    // This Will Rendered In '/dashboard/settings' Route As They Will Be In Same Level Of File Structure
+    export default function DefaultAnalytics() {
+        return <div className="p-4 text-gray-500">
+            Analytics sidebar
+        </div>; // or fallback UI
+    }
+
+
+    app/(main)/dashboard/layout.tsx (For Render The Slot In Dashboard Layout)
+    ---------------------------------------
+
+    import "../../globals.css";
+
+
+    export default function DashboardLayout({
+        children,
+        analytics
+    }: {
+            children: React.ReactNode,
+            analytics: React.ReactNode
+    }) {
+        return (
+            <div>
+                <h1>Inner Layout111</h1>
+                {children}
+                {analytics}
+            </div>
+        );
+    }
+
+
+(8) ⛔⛔ If Need The Parallel Route To Be Rendered For Inner Route Will Create Same Folder Inside The Parallel Route (Parallel and Intercepted Routes)
+----------------------------------------------------------------------------------------------------------------
+
+    - app
+        - src
+            - dashboard
+                - settings
+                    -page.tsx
+                - @analytics      // Inside Here We Create 'settings' Route Again To Make 'page.tsx' Here Rendered Inside The 'settings'
+                    - page.tsx
+                    - settings
+                        - pages.tsx

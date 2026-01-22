@@ -1,8 +1,0 @@
-- HOC
-- Event Loop
-- Evtent Bubbling
-- Redux VS Context
-- Psueudo Element VS Psueudo Class
-- Promises 
-- Diff Between (await and then)
-- Callback Hell

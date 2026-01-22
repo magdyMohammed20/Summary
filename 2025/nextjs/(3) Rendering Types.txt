@@ -1,0 +1,116 @@
+(1) Static Rendering
+----------------------
+==> routes are rendered at build time or in the background after data revalidation. The result is cached and can be reused across requests. Static routes are fully cached in the Full Route Cache.
+
+(2) Dynamic Rendering
+----------------------
+==> With Dynamic Rendering, routes are rendered at request time. This happens when your route uses request-specific information like cookies, headers, or search params.
+
+
+(3) Caching Route VS Caching Request
+---------------------------------------
+
+    src/app/(marketing)/marketing/page.tsx
+    -----------------------------------------
+
+    export const revalidate = 3600 // This Is Revalidate Time For Cache The Whole Route
+
+    async function Marketing() {
+
+        const data = await fetch('https://random-word-api.herokuapp.com/word', {
+            next: {
+                revalidate: 10 // This Is Revalidate Time For Cache The Fetch Request & This Will Override Over The Revalidate Of The Route
+            }
+        })
+
+        const word = await data.json()
+
+        return (
+            <div>{word}</div>
+        )
+    }
+
+    export default Marketing
+
+
+(4) Programtic Revalidate The Path And Using Tags
+-------------------------------------------------------
+
+    
+    import { revalidatePath, revalidateTag } from "next/cache";
+
+    export const revalidate = 3600 // This Is Revalidte Time For Cache The Whole Route
+
+    async function Marketing() {
+
+        const data = await fetch('https://random-word-api.herokuapp.com/word', {
+            next: { tags: ["word"] }
+        })
+
+        const word = await data.json()
+
+
+        async function revalidate() {
+            "use server";
+
+            revalidatePath('/')
+        }
+
+        async function revalidate2() {
+            "use server";
+
+            revalidateTag('word', 'max')
+            
+        }
+
+        return (
+            <div>
+                {word}
+                <button className="bg-white p-2 px-4 text-gray-500 rounded-lg mx-3" onClick={revalidate}>Revalidate Path</button>
+                <button className="bg-white p-2 px-4 text-gray-500 rounded-lg mx-3" onClick={revalidate2}>Revalidate Tag</button>
+            </div>
+        )
+    }
+
+    export default Marketing
+    
+
+(5) Sample Of Dynamic Rendering Which When Refresh The Page The Fetch Request Will Cached But Whole Page Will Rebuild Again
+----------------------------------------------------------------------------------------------------------------------------
+
+    import { revalidatePath, revalidateTag } from "next/cache";
+
+    async function Marketing() {
+
+        const data = await fetch('https://random-word-api.herokuapp.com/word', {
+            cache: "force-cache",
+            next: {
+                tags: ["word"]
+            }
+        })
+
+        const word = await data.json()
+
+
+        async function revalidate() {
+            "use server";
+            revalidatePath('/')
+        }
+
+        async function revalidate2() {
+            "use server";
+            revalidateTag('word', 'max')
+
+        }
+        
+
+        return (
+            <div>
+                { word }
+                <button className = "bg-white p-2 px-4 text-gray-500 rounded-lg mx-3" onClick = { revalidate } > Revalidate Path </button>
+                <button className = "bg-white p-2 px-4 text-gray-500 rounded-lg mx-3" onClick = { revalidate2 } > Revalidate Tag </button>
+            </div>
+    )
+    }
+
+    export default Marketing

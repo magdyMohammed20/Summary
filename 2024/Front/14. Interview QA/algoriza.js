@@ -1,6 +1,6 @@
-1 - cohersion
+
 2 - Vuejs Teleport
-3 - UseEffect Can Be Async 
+3 - 
 
 
 

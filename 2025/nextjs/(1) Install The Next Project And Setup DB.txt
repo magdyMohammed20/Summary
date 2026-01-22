@@ -1,0 +1,187 @@
+(1) Install The Next Project
+-------------------------------
+==> npx create-next-app@latest
+==> Choose The Right Options To Install 
+
+
+(2) Setup 'Neon' For DB By Create Neon Account Thnn 'Create New Project' Then Make Connect And Will Get The 'Database Url' And Set It In Project '.env' File
+
+
+    .env
+    --------
+
+    DATABASE_URL=postgresql://neondb_owner:npg_OafGXkW3s2qv@ep-ancient-poetry-a48v6c5l-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+
+
+(3) Install The Required Libs For Neon
+-----------------------------------------
+==> npm i drizzle-orm @neondatabase/serverless dotenv
+
+(4) In Root Folder Create 'drizzle.config.ts' And In 'src' Folder create 'db' Folder 
+    And Inside It Create 'schema.ts' , 'drizzle.ts' , 'seed.ts'
+
+
+(5) Install 'drizzle-kit' : npm i - D drizzle - kit
+    
+        
+(6) Handle Drizzle Config And Schema
+----------------------------------------
+
+    drizzle.config.ts
+    --------------------
+
+    import { config } from 'dotenv';
+    import { defineConfig } from "drizzle-kit";
+
+    config({ path: '.env' })
+
+
+    export default defineConfig({
+        dialect: "postgresql",
+        schema: "./src/db/schema.ts",
+        out: "./migrations",
+        dbCredentials: {
+            url: process.env.DATABASE_URL!,
+        },
+    });
+
+
+    src/db/schema.ts
+    -------------------
+
+    import {
+        pgTable,
+        text,
+        timestamp,
+        varchar,
+        pgEnum,
+        uuid,
+        primaryKey,
+    } from "drizzle-orm/pg-core";
+
+    // Define role enum
+    export const roleEnum = pgEnum("role", ["admin", "editor", "viewer"]);
+
+    export const users = pgTable("users", {
+        id: uuid("id").primaryKey().defaultRandom(),
+        name: varchar("name", { length: 100 }).notNull(),
+        email: varchar("email", { length: 100 }).notNull().unique(),
+        role: roleEnum("role").default("viewer").notNull(),
+        createdAt: timestamp("created_at").notNull().defaultNow(),
+        updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    });
+
+    export const posts = pgTable("posts", {
+        id: uuid("id").primaryKey().defaultRandom(),
+        title: varchar("title", { length: 200 }).notNull(),
+        content: text("content").notNull(),
+        author: uuid("author")
+            .references(() => users.id, { onDelete: "cascade" })
+            .notNull(),
+        createdAt: timestamp("created_at").notNull().defaultNow(),
+        updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    });
+
+    export const postLikes = pgTable(
+        "post_likes",
+        {
+            postId: uuid("post_id")
+                .notNull()
+                .references(() => posts.id, { onDelete: "cascade" }),
+            userId: uuid("user_id")
+                .notNull()
+                .references(() => users.id, { onDelete: "cascade" }),
+        },
+        (table) => [primaryKey({ columns: [table.postId, table.userId] })]
+    );
+
+    export const comments = pgTable("comments", {
+        id: uuid("id").primaryKey().defaultRandom(),
+        postId: uuid("post_id")
+            .notNull()
+            .references(() => posts.id, { onDelete: "cascade" }),
+        userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
+        content: text("content").notNull(),
+        createdAt: timestamp("created_at").notNull().defaultNow(),
+        updatedAt: timestamp("updated_at").notNull().defaultNow(),
+    });
+
+
+(7) In 'package.json' Add Following Scripts For DB
+-----------------------------------------------------
+
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "eslint",
+        "db:generate": "drizzle-kit generate",
+        "db:migrate": "drizzle-kit migrate",
+        "db:studio": "drizzle-kit studio",
+        "db:seed": "npx tsx ./src/db/seed.ts"
+    }
+    
+(8) In Console Run The Following To Create The Tables On 'Neon'
+------------------------------------------------------------------
+==> npm run db: generate
+==> npm run db:migrate
+==> Then Will See That The Tables Created On 'Neon'
+
+
+(9) In Console Run The Following To Open The Neon Studio Locally With Clear Interface
+--------------------------------------------------------------------------------------
+==> npm run db: studio
+==> Will Generates Url Can Navigate It And Open The Studio
+
+    
+(10) Install [npm i drizzle-seed pg] And In 'src/db/seed.ts' Fill This
+--------------------------------------------------------------------------------------
+    
+    src/db/seed.ts
+    -----------------
+    
+    import "dotenv/config";
+    import { reset, seed } from "drizzle-seed";
+    import * as schema from "./schema";
+    import { drizzle } from "drizzle-orm/node-postgres";
+
+    async function main() {
+        const db = drizzle(process.env.DATABASE_URL!);
+        await reset(db, schema);
+
+        await seed(db, schema).refine((f) => ({
+            users: {
+                count: 100,
+                columns: {
+                    name: f.fullName(),
+                    email: f.email(),
+                },
+            },
+            posts: {
+                count: 20,
+                columns: {
+                        title: f.loremIpsum({ sentencesCount: 1 }),
+                        content: f.loremIpsum({
+                        sentencesCount: 5,
+                    }),
+                },
+            },
+            postLikes: {
+                count: 20,
+            },
+            comments: {
+                count: 100,
+                columns: {
+                        content: f.loremIpsum({
+                            sentencesCount: 3,
+                        }),
+                },
+            },
+        }));
+    }
+
+    main();
+    
+
+(11) Run The Seeder Command: [npm run db:seed] Then See The Studio Will See That Data Filled Success
+
