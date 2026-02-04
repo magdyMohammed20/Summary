@@ -1,0 +1,7 @@
+(1) Conditional Style
+-----------------------
+
+    <View style={[
+        styles.card,
+        isSelected && styles.activePaymentMethod
+    ]}>

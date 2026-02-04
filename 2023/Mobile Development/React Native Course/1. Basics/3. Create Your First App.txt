@@ -19,7 +19,7 @@
 
 (3) Second Way For : Create App Using React Native Cli
 ------------------------------------------------------------
-==> npx create-expo-app@latest app-name
+==> npx create-expo-app@latest --template
 ==> Select 'Blank With TS'
 ==> cd app-name
 ==> npm start
