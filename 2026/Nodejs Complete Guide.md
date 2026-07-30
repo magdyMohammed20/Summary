@@ -3755,6 +3755,115 @@ export class ProductsController {
 }
 ```
 
+## 9.10 Middlewares in NestJS
+
+### Middleware Intro
+
+A function which is called before the route handler. Middleware functions have access to the request and response objects, and the `next()` middleware function in the application's request-response cycle. The next middleware function is commonly denoted by a variable named `next`. Middleware is executed in sequence one after another.
+
+**Middleware functions can perform the following tasks:**
+- Execute any code
+- Make changes to the request and the response objects
+- End the request-response cycle
+- Call the next middleware function in the stack
+- If the current middleware function does not end the request-response cycle, it must call `next()` to pass control to the next middleware function. Otherwise, the request will be left hanging
+
+**Middleware use cases:**
+- **Logging**: Recording requests and responses details
+- **Authorization**: Checking if the authenticated user has permission to perform certain action
+- **Authentication**: Verifying user credentials before allowing access to protected routes
+- **Error handling**: Capturing and handling errors that occur during request processing
+- **Request parsing**: Parsing and validating request data before passing it to app logic
+
+### Create and Apply First Middleware
+
+```bash
+nest g mi [module_name] # (ex: nest g mi auth)
+```
+
+> If module name already exists, Nest will create middleware in that module folder.
+
+```typescript
+// src/users/users.middleware.ts
+import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Request, Response } from 'express';
+
+@Injectable()
+export class UsersMiddleware implements NestMiddleware {
+    use(req: Request, res: Response, next: () => void) {
+        console.log("Users Middleware")
+        next();
+    }
+}
+```
+
+**Apply and usage of middleware:**
+
+```typescript
+// src/users/users.module.ts
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { UsersMiddleware } from './users.middleware';
+
+@Module({})
+export class UsersModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        // can pass multiple middlewares here
+        consumer.apply(UsersMiddleware).forRoutes('users')
+    }
+}
+```
+
+### forRoutes Options
+
+- **String option**: Passing the route that we need the middleware to work on it (e.g., `.forRoutes("/users")`)
+- **Route Info**: Can pass object that contains the route path and HTTP method
+
+```typescript
+// src/users/users.module.ts
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { UsersMiddleware } from './users.middleware';
+
+@Module({})
+export class UsersModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+
+        // Here we specify the '/users' endpoint with GET method to apply the middleware
+        consumer.apply(UsersMiddleware).forRoutes({
+            method: RequestMethod.GET,
+            path:'/users'
+        })
+    }
+}
+```
+
+### Middleware Exclude
+
+If we need to exclude a specific route or endpoint to prevent middleware from working with it.
+
+> For exclude to work, must use `forRoutes()` with it.
+
+```typescript
+// src/users/users.module.ts
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { UsersMiddleware } from './users.middleware';
+
+@Module({})
+export class UsersModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+
+        // Prevent middleware from working on /users/2 endpoint with GET action
+        // and on /users/2 with DELETE action
+        consumer.apply(UsersMiddleware).exclude({
+            method: RequestMethod.GET,
+            path: 'users/:id'
+        }, {
+            path: "users/:id",
+            method: RequestMethod.DELETE
+        }).forRoutes('users')
+    }
+}
+```
+
 ---
 
 # Quick Reference
