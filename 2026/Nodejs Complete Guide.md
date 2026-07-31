@@ -3864,6 +3864,151 @@ export class UsersModule implements NestModule {
 }
 ```
 
+### Global Middleware
+
+Global middleware for checking if a user is authenticated:
+
+```typescript
+// src/users/middlewares/auth.middleware.ts
+import { HttpStatus, Injectable, NestMiddleware } from "@nestjs/common";
+import { Request, Response } from "express";
+
+@Injectable()
+export class AuthMiddleware implements NestMiddleware {
+    use(req: Request, res: Response, next: () => void) {
+        if (!req.headers.authorization) {
+            return res.status(HttpStatus.UNAUTHORIZED).json({
+                message: "Unauthorized"
+            })
+        }
+        next();
+    }
+}
+```
+
+Apply globally in `app.module.ts`:
+
+```typescript
+// app.module.ts
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UsersController } from './users/users.controller';
+import { UsersService } from './users/users.service';
+import { ProductsModule } from './products/products.module';
+import { UsersModule } from './users/users.module';
+import { AuthMiddleware } from './users/middlewares/auth.middleware';
+
+@Module({
+    imports: [ProductsModule, UsersModule],
+    controllers: [AppController, UsersController],
+    providers: [AppService, UsersService],
+    exports: [],
+})
+export class AppModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(AuthMiddleware).forRoutes('*');
+    }
+}
+```
+
+## 9.11 Guards
+
+### Guards Intro
+
+A class annotated with the `@Injectable()` decorator, which implements the `CanActivate` interface. Guards return `true` or `false` to decide if a request can be moved to the controller or not (like permissions, roles, etc.). This is often referred to as authorization.
+
+Guards are executed after all middleware, but before any interceptor or pipe.
+
+### Guards vs Middlewares
+
+- **Middleware**: Runs before everything, doesn't know about NestJS context
+- **Guard**: Runs after middleware, knows about NestJS context (route, handler, roles)
+
+### NestJS Execution Order
+
+```
+Request
+    ↓
+Middleware     → logging, cors, body parsing
+    ↓
+Guard          → auth, roles, permissions
+    ↓
+Interceptor    → transform request
+    ↓
+Pipe           → validate input
+    ↓
+Controller     → handle request
+    ↓
+Interceptor    → transform response
+    ↓
+Response
+```
+
+### Create First Guard
+
+```bash
+nest g gu [name] # (EX: nest g gu auth)
+# if need to create 'auth' guard inside 'guards' folder:
+nest g gu guards/auth
+```
+
+```typescript
+// src/auth/auth.guards.ts
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { Observable } from 'rxjs';
+
+@Injectable()
+export class AuthGuard implements CanActivate {
+    canActivate(
+        context: ExecutionContext,
+    ): boolean | Promise<boolean> | Observable<boolean> {
+        const req = context.switchToHttp().getRequest();
+        const customHeader = req.headers['x-custom-header'];
+
+        // return true | false
+        return customHeader === 'allowed'
+    }
+}
+```
+
+### Apply the Guard to Controller
+
+Inside any controller and before any route call `UseGuards(guard_name)`. The request will not be completed without passing `x-custom-header: allowed` in the header.
+
+```typescript
+// users/users.controller.ts
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { AuthGuard } from '../guards/auth/auth.guard';
+
+@Controller('users')
+export class UsersController {
+
+    constructor(private readonly UsersService: UsersService) { }
+
+    // Get all users
+    @Get()
+    @UseGuards(AuthGuard)
+    getUsers() {
+        return this.UsersService.getUsers();
+    }
+}
+```
+
+### Apply Guard to Whole Controller
+
+You can also apply the guard at the controller level instead of per route:
+
+```typescript
+@Controller('users')
+@UseGuards(AuthGuard) // applies to all routes in this controller
+export class UsersController {
+
+    constructor(private readonly UsersService: UsersService) { }
+}
+```
+
 ---
 
 # Quick Reference
