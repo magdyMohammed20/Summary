@@ -1,6 +1,7 @@
 (1) create first guard
 ------------------------
 ==> nest g gu [name] (EX: nest g gu auth)
+==> nest g gu [file_path] (EX: nest g gu guards/auth/roles)
 ==> if need to create 'auth' guard inside 'guards' folder (nest g gu guards/auth)
 
     src/auth/auth.guards.ts
