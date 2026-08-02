@@ -3945,6 +3945,23 @@ Interceptor    → transform response
 Response
 ```
 
+### Request Lifecycle Chart
+
+```mermaid
+flowchart TD
+    A[Incoming Request] --> B[Middleware]
+    B -->|logging, cors, body parsing| C[Guard]
+    C -->|auth, roles, permissions| D[Interceptor pre-handler]
+    D -->|transform request| E[Pipe]
+    E -->|validate input| F[Controller / Route Handler]
+    F --> G[Service]
+    G --> H[Exception Filter zone]
+    H --> I[Interceptor post-handler]
+    I -->|transform response| J[Response]
+    H -->|exception thrown| K[Return error response]
+    K --> I
+```
+
 ### Create First Guard
 
 ```bash
@@ -4007,6 +4024,697 @@ export class UsersController {
 
     constructor(private readonly UsersService: UsersService) { }
 }
+```
+
+### Real Auth Middleware with Token and Guard (JWT)
+
+Steps:
+1. `npm install jsonwebtoken`
+2. `npm i --save @nestjs/config` (instead of dotenv)
+3. Handle NestJS config in `app.module.ts`, create `.env` in root, add `.env` to `.gitignore`
+4. Auth middleware validates the token then appends user data to the request to pass to the guard
+5. Auth guard reads user data from the request and checks if the user exists
+6. Finally add `AuthGuard` on the users controller
+
+```bash
+# .env
+JWT_SECRET="MAGDY_JWT_SECRET"
+```
+
+```typescript
+// app.module.ts
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { UsersController } from './users/users.controller';
+import { UsersService } from './users/users.service';
+import { ProductsModule } from './products/products.module';
+import { UsersModule } from './users/users.module';
+import { AuthMiddleware } from './users/middlewares/auth.middleware';
+import { ConfigModule } from '@nestjs/config';
+
+@Module({
+    imports: [ProductsModule, UsersModule, ConfigModule.forRoot()],
+    controllers: [AppController, UsersController],
+    providers: [AppService, UsersService],
+    exports: [],
+})
+export class AppModule implements NestModule {
+    configure(consumer: MiddlewareConsumer) {
+        consumer.apply(AuthMiddleware).forRoutes('*');
+    }
+}
+```
+
+```typescript
+// middlewares/auth.middleware.ts
+import { HttpStatus, Injectable, NestMiddleware } from '@nestjs/common';
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+
+@Injectable()
+export class AuthMiddleware implements NestMiddleware {
+    use(req: Request, res: Response, next: NextFunction) {
+        // 1- access the auth token from header
+        const authHeader = req.headers.authorization;
+
+        // 2- check if the token exists
+        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+            return res.status(HttpStatus.BAD_REQUEST).json({
+                message: 'Missing or malformed Authorization header',
+            });
+        }
+
+        const token = authHeader.slice(7).trim(); // strip "Bearer "
+
+        try {
+            // if jwt can verify the token, then the user is authenticated
+            const decoded = jwt.verify(token, process.env.JWT_SECRET as string);
+            console.log(decoded);
+
+            // add the decoded data to request for passing to guard
+            req['user'] = decoded;
+            next(); // only reached on success
+        } catch (err) {
+            // if jwt can't verify the token, then the user is not authenticated
+            return res.status(HttpStatus.UNAUTHORIZED).json({
+                message: 'invalid token',
+            });
+        }
+    }
+}
+```
+
+```typescript
+// guards/auth/auth.guard.ts
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { Observable } from 'rxjs';
+
+@Injectable()
+export class AuthGuard implements CanActivate {
+    canActivate(
+        context: ExecutionContext,
+    ): boolean | Promise<boolean> | Observable<boolean> {
+        const req = context.switchToHttp().getRequest();
+
+        console.log('From Guard', req.user);
+
+        return req.user;
+    }
+}
+```
+
+```typescript
+// users.controller.ts
+import { AuthGuard } from '../guards/auth/auth.guard';
+
+@Controller('users')
+@UseGuards(AuthGuard)
+export class UsersController {
+    // ..
+}
+```
+
+### Global Guard and Module Guard
+
+Global guards run across the whole application for every controller and every route handler.
+
+> Note: global guards registered from outside of any module (with `useGlobalGuards()`) cannot inject dependencies, since this is done outside the context of any module.
+
+```typescript
+// main.ts - global guard
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { AuthGuard } from './guards/auth/auth.guard';
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+    app.useGlobalGuards(new AuthGuard());
+    await app.listen(3000);
+}
+bootstrap();
+```
+
+```typescript
+// users.module.ts - guard local for a specific module
+import { AuthGuard } from 'src/guards/auth/auth.guard';
+import { APP_GUARD } from '@nestjs/core';
+
+@Module({
+    providers: [
+        {
+            provide: APP_GUARD,
+            useClass: AuthGuard,
+        },
+    ],
+})
+export class UsersModule {}
+```
+
+### Roles Decorator and Roles Guard
+
+Generate the custom decorator:
+
+```bash
+nest g d decorators/roles
+```
+
+```typescript
+// decorators/roles/roles.decorator.ts
+import { SetMetadata } from '@nestjs/common';
+
+export const Roles = (...args: string[]) => SetMetadata('roles', args);
+```
+
+Use the roles decorator with multiple guards:
+
+```typescript
+// users/users.controller.ts
+import { AuthGuard } from '../guards/auth/auth.guard';
+import { Roles } from 'src/decorators/roles/roles.decorator';
+import { RolesGuard } from 'src/guards/auth/roles/roles.guard';
+
+@Controller('users')
+@UseGuards(AuthGuard, RolesGuard) // multiple guards
+@Roles('user', 'manager')
+export class UsersController {}
+```
+
+Full roles guard implementation:
+
+```typescript
+// guards/auth/roles/roles.guard.ts
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+
+@Injectable()
+export class RolesGuard implements CanActivate {
+    constructor(private reflector: Reflector) {}
+
+    canActivate(context: ExecutionContext): boolean {
+        // check if the route has the @Roles decorator
+        // 'roles' is the key we used in the Roles decorator setMetadata function
+        const requiredRoles: string[] = this.reflector.get('roles', context.getHandler());
+
+        // if the route doesn't have the @Roles decorator, allow access
+        if (!requiredRoles || requiredRoles.length === 0) {
+            return true;
+        }
+
+        const request = context.switchToHttp().getRequest();
+        const user = request.user;
+
+        if (!user || !user.role) {
+            return false;
+        }
+
+        // normalize user.role to an array regardless of whether it's a string or array
+        const userRoles: string[] = Array.isArray(user.role) ? user.role : [user.role];
+
+        // allow access if the user has at least one of the required roles
+        return requiredRoles.some((role) => userRoles.includes(role));
+    }
+}
+```
+
+```typescript
+// users/users.controller.ts
+import { Controller, Get, UseGuards } from '@nestjs/common';
+import { UsersService } from './users.service';
+import { AuthGuard } from '../guards/auth/auth.guard';
+import { Roles } from 'src/decorators/roles/roles.decorator';
+import { RolesGuard } from 'src/guards/auth/roles/roles.guard';
+
+@Controller('users')
+@UseGuards(AuthGuard, RolesGuard)
+export class UsersController {
+
+    constructor(private readonly UsersService: UsersService) {}
+
+    @Get()
+    // Note: role of user comes from the passed user object from the auth middleware, which is added to the request object
+    @Roles('user', 'manager') // specify the roles that can access this route
+    getUsers() {
+        console.log('From Controller', this.UsersService.getUsers());
+        return this.UsersService.getUsers();
+    }
+}
+```
+
+### Roles Decorator Enhancements and Custom Exception
+
+Enhancements:
+- Create a `SystemsRoles` enum
+- Replace the `args` type with the fixed enum in `roles.decorator.ts`
+- Set the specified roles in the controller method using the new enum
+- Add the `SystemsRoles` enum in `roles.guard.ts`
+
+```typescript
+// interfaces/roles.enum.ts
+export enum SystemsRoles {
+    admin = 'admin',
+    manager = 'manager',
+    user = 'user',
+}
+```
+
+```typescript
+// decorators/roles/roles.decorator.ts
+import { SetMetadata } from '@nestjs/common';
+import { SystemsRoles } from 'src/interfaces/roles.enum';
+
+export const Roles = (...args: SystemsRoles[]) => SetMetadata('roles', args);
+```
+
+```typescript
+// users/users.controller.ts
+import { SystemsRoles } from 'src/interfaces/roles.enum';
+
+export class UsersController {
+    @Get()
+    @Roles(SystemsRoles.admin, SystemsRoles.manager)
+    getUsers() {
+        console.log('From Controller', this.UsersService.getUsers());
+        return this.UsersService.getUsers();
+    }
+}
+```
+
+```typescript
+// guards/auth/roles/roles.guard.ts
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { SystemsRoles } from 'src/interfaces/roles.enum';
+
+@Injectable()
+export class RolesGuard implements CanActivate {
+    constructor(private reflector: Reflector) {}
+
+    canActivate(context: ExecutionContext): boolean {
+        const requiredRoles: SystemsRoles[] = this.reflector.get('roles', context.getHandler());
+
+        if (!requiredRoles || requiredRoles.length === 0) {
+            return true;
+        }
+
+        const request = context.switchToHttp().getRequest();
+        const user = request.user;
+
+        if (!user || !user.role) {
+            return false;
+        }
+
+        const userRoles: SystemsRoles[] = Array.isArray(user.role) ? user.role : [user.role];
+
+        return requiredRoles.some((role) => userRoles.includes(role));
+    }
+}
+```
+
+Create a custom exception when user data is not passed to the guard from the middleware:
+
+```typescript
+// exceptions/ForbiddenException.ts
+import { HttpException, HttpStatus } from '@nestjs/common';
+
+export class ForbiddenException extends HttpException {
+    constructor() {
+        super('Forbidden', HttpStatus.FORBIDDEN);
+    }
+}
+```
+
+```typescript
+// guards/auth/roles/roles.guard.ts
+import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
+import { SystemsRoles } from '../../../interfaces/roles.enum';
+import { ForbiddenException } from '../../../exceptions/ForbiddenException';
+
+@Injectable()
+export class RolesGuard implements CanActivate {
+    constructor(private reflector: Reflector) {}
+
+    canActivate(context: ExecutionContext): boolean {
+        const requiredRoles: SystemsRoles[] = this.reflector.get('roles', context.getHandler());
+
+        if (!requiredRoles || requiredRoles.length === 0) {
+            return true;
+        }
+
+        const request = context.switchToHttp().getRequest();
+        const user = request.user;
+
+        if (!user || !user.role) {
+            throw new ForbiddenException(); // User is not authenticated or does not have a role
+        }
+
+        const userRoles: SystemsRoles[] = Array.isArray(user.role) ? user.role : [user.role];
+
+        return requiredRoles.some((role) => userRoles.includes(role));
+    }
+}
+```
+
+---
+
+## 9.12 Filters and Pipes
+
+### Pipes Intro
+
+- Pipes work **after** middlewares and guards and **before** exception filters and route handlers.
+- Exception filters work **after** route handlers.
+- Pipes run inside the exception filters zone. When a Pipe throws an exception it is handled by the exceptions layer.
+- A pipe is a class annotated with the `@Injectable()` decorator which implements the `PipeTransform` interface.
+
+Use cases:
+- **Transformation**: transform input data to the desired form (e.g., from string to integer)
+- **Validation**: evaluate input data and if valid, pass it through unchanged; otherwise, throw an exception
+
+### Create Custom Pipe
+
+```bash
+nest g pi pipes/uppercase
+```
+
+```typescript
+// pipes/uppercase/uppercase.pipe.ts
+import { ArgumentMetadata, BadRequestException, Injectable, PipeTransform } from '@nestjs/common';
+
+@Injectable()
+export class UppercasePipe implements PipeTransform {
+    transform(value: any, metadata: ArgumentMetadata) {
+        if (!value || typeof value.name !== 'string') {
+            throw new BadRequestException('Invalid input: name must be a string');
+        }
+
+        return typeof value.name === 'string' ? value.name.toUpperCase() : false;
+    }
+}
+```
+
+```typescript
+// products/dto/create-product.dto.ts
+import { IsNotEmpty, IsString } from 'class-validator';
+
+export class CreateProductDto {
+    @IsString()
+    @IsNotEmpty()
+    name: string;
+}
+```
+
+```typescript
+// products/products.controller.ts
+import { Controller, Post } from '@nestjs/common';
+import { ProductsService } from './products.service';
+import { CreateProductDto } from './dto/create-product.dto';
+import { UppercasePipe } from 'src/pipes/uppercase/uppercase.pipe';
+
+@Controller('products')
+export class ProductsController {
+    constructor(private readonly productsService: ProductsService) {}
+
+    @Post()
+    // pipe usage in controller
+    create(@Body(UppercasePipe) createProductDto: CreateProductDto) {
+        return this.productsService.create(createProductDto);
+    }
+}
+```
+
+### Global Pipes
+
+```typescript
+// main.ts
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+
+    app.useGlobalPipes(
+        new ValidationPipe({
+            transform: true, // for nested DTOs
+            whitelist: true, // strip properties not in the DTO
+            forbidNonWhitelisted: true, // reject requests with extra properties
+        }),
+    );
+
+    await app.listen(3000);
+}
+bootstrap();
+```
+
+Global pipe to trim spaces from string properties in the request body:
+
+```typescript
+// src/pipes/trim.pipe.ts
+import { ArgumentMetadata, Injectable, PipeTransform } from '@nestjs/common';
+
+@Injectable()
+export class TrimPipe implements PipeTransform {
+    transform(value: any, metadata: ArgumentMetadata) {
+        return this.trimValue(value);
+    }
+
+    private trimValue(value: any): any {
+        if (typeof value === 'string') {
+            return value.trim();
+        }
+
+        if (Array.isArray(value)) {
+            return value.map((item) => this.trimValue(item));
+        }
+
+        if (value && typeof value === 'object') {
+            const result: any = {};
+            for (const key in value) {
+                result[key] = this.trimValue(value[key]);
+            }
+            return result;
+        }
+
+        return value; // numbers, booleans, null, undefined — untouched
+    }
+}
+```
+
+```typescript
+// main.ts
+import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { TrimPipe } from './pipes/trim/trim.pipe';
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+
+    app.useGlobalPipes(
+        new TrimPipe(),
+        new ValidationPipe({
+            whitelist: true, // strip properties not in the DTO
+            forbidNonWhitelisted: true, // reject requests with extra properties
+            transform: true, // auto-convert payloads to DTO class instances
+        }),
+    );
+
+    await app.listen(3000);
+}
+bootstrap();
+```
+
+Consistent error response shaping:
+
+```typescript
+// main.ts
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { TrimPipe } from './pipes/trim/trim.pipe';
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+
+    app.useGlobalPipes(
+        new TrimPipe(),
+        new ValidationPipe({
+            exceptionFactory: (errors) =>
+                new BadRequestException(
+                    errors.map((e) => ({ field: e.property, errors: Object.values(e.constraints || {}) })),
+                ),
+            whitelist: true,
+            forbidNonWhitelisted: true,
+            transform: true,
+        }),
+    );
+
+    await app.listen(3000);
+}
+bootstrap();
+```
+
+Produce validation messages for nested DTOs:
+
+```typescript
+// main.ts
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { ValidationError } from 'class-validator';
+import { AppModule } from './app.module';
+import { TrimPipe } from './pipes/trim/trim.pipe';
+
+// produce validation messages for nested DTOs
+function flattenErrors(errors: ValidationError[], parentPath = ''): { field: string; errors: string[] }[] {
+    return errors.flatMap((err) => {
+        const path = parentPath ? `${parentPath}.${err.property}` : err.property;
+        const ownErrors = err.constraints ? Object.values(err.constraints) : [];
+        const childErrors = err.children?.length ? flattenErrors(err.children, path) : [];
+
+        const result: { field: string; errors: string[] }[] = [];
+        if (ownErrors.length) {
+            result.push({ field: path, errors: ownErrors });
+        }
+        return [...result, ...childErrors];
+    });
+}
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+
+    app.useGlobalPipes(
+        new TrimPipe(),
+        new ValidationPipe({
+            transform: true,
+            whitelist: true,
+            forbidNonWhitelisted: true,
+            exceptionFactory: (errors) => new BadRequestException(flattenErrors(errors)),
+        }),
+    );
+
+    await app.listen(3000);
+}
+bootstrap();
+```
+
+### Custom Filter Exception
+
+> Note: the DTO error message is produced **before** the custom exception message, because the validation pipe is executed before the service method is called. The validation pipe checks the DTO and throws an error if validation fails, which happens before the service method executes.
+
+```typescript
+// products/dto/create-product.dto.ts
+import { IsInt, IsNotEmpty, IsString, Max } from 'class-validator';
+
+export class CreateProductDto {
+    @IsString()
+    @IsNotEmpty()
+    name: string;
+
+    @IsInt()
+    @IsNotEmpty()
+    @Max(500, { message: 'price must be greater than or equal to 500' })
+    price: number;
+}
+```
+
+```typescript
+// exceptions/CustomException.ts
+import { HttpException, HttpStatus } from '@nestjs/common';
+
+export default class CustomException extends HttpException {
+    constructor(msg: string = 'Error In Creating', statusCode: number = HttpStatus.INTERNAL_SERVER_ERROR) {
+        super(msg, statusCode);
+    }
+}
+```
+
+```typescript
+// products/products.service.ts
+import { Injectable } from '@nestjs/common';
+import { CreateProductDto } from './dto/create-product.dto';
+import CustomException from 'src/exceptions/CustomException';
+
+@Injectable()
+export class ProductsService {
+    create(createProductDto: CreateProductDto) {
+        if (createProductDto.price > 500) {
+            throw new CustomException('Price must be less than or equal to 500', 400);
+        }
+        return 'This action adds a new product';
+    }
+}
+```
+
+---
+
+## 9.13 Interceptors
+
+### Interceptors Intro
+
+- Interceptors in NestJS implement the `NestInterceptor` interface and let you run logic **before and after** a route handler executes — useful for logging, transforming responses, caching, timing execution, or wrapping responses in a consistent shape.
+- Interceptors, like controllers, providers, guards, etc., can inject dependencies through their constructor.
+
+### Generate First Interceptor
+
+```bash
+nest g itc interceptors/products
+```
+
+```typescript
+// interceptors/products.interceptor.ts
+import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+
+@Injectable()
+export class ResponseInterceptor implements NestInterceptor {
+    intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
+        const request = context.switchToHttp().getRequest();
+        const now = Date.now();
+
+        return next.handle().pipe(
+            tap(() =>
+                console.log(`[${request.method}] ${request.url} - ${Date.now() - now}ms`),
+            ),
+            map((data) => ({
+                success: true,
+                statusCode: context.switchToHttp().getResponse().statusCode,
+                timestamp: new Date().toISOString(),
+                path: request.url,
+                data,
+            })),
+        );
+    }
+}
+```
+
+```typescript
+// products.controller.ts
+import { ResponseInterceptor } from 'src/interceptors/products/products.interceptor';
+
+@Controller('products')
+@UseInterceptors(ResponseInterceptor)
+export class ProductsController {
+    // ...
+}
+```
+
+### Use the Interceptors Globally
+
+```typescript
+// main.ts
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { ResponseInterceptor } from './interceptors/products/products.interceptor';
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+
+    app.useGlobalInterceptors(new ResponseInterceptor());
+    await app.listen(3000);
+}
+bootstrap();
 ```
 
 ---
