@@ -13,7 +13,6 @@
     const app = await NestFactory.create(AppModule);
 
     app.useGlobalPipes(new ValidationPipe({
-        transform: true, // for nested DTOs
         whitelist: true, // strip properties not in the DTO
         forbidNonWhitelisted: true, // reject requests with extra properties
         transform: true, // auto-convert payloads to DTO class instances
